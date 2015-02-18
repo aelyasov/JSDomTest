@@ -1,0 +1,26 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="iframe">IFrame</div>
+    <div id="node">Node</div>
+    <button type="button" onclick="safeAdd('aiframe')">Run</button>
+    <script>
+      function safeAdd(frameid) {
+        console.log(this)
+        var iframe = document.createElement("iframe");
+        var anchor = document.getElementById("node");
+        var frame = document.getElementById(frameid);
+        iframe.setAttribute("id", frameid);
+	//iframe.setAttribute(frameid, "id");	
+        if (frame) { 
+          //iframe.removeChild(frame.childNodes[0]);
+          frame.parentNode.removeChild(frame); 
+        } else {
+          //anchor.appendChild(iframe)
+	  iframe.appendChild(anchor);
+      }
+    }
+    </script>
+  </body>
+</html>
