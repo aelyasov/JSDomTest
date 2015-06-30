@@ -15,8 +15,8 @@ function sortrows(table, n, comparator) {
   rows.sort(function(row1,row2) {
     var cell1 = row1.getElementsByTagName("td")[n];
     var cell2 = row2.getElementsByTagName("td")[n];
-    var val1 = cell1.textContent || cell1.innerText;
-    var val2 = cell2.textContent || cell2.innerText;
+    var val1  = cell1.textContent || cell1.innerText;
+    var val2  = cell2.textContent || cell2.innerText;
     if (comparator) return comparator(val1, val2);
 
     if (val1 < val2) return -1;

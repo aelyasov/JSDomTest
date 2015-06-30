@@ -37,7 +37,7 @@ jsdom.env(
         //["http://code.jquery.com/jquery.js"],
         function (err, win) {
           var doc_ = win.document;
-          console.log("========================================")
+          console.log("========================================");
           console.log("old_doc size:", contrLib.countDomElements(doc_));
           var oldLen = contrLib.countDomElements(doc_);
           console.log("old_doc:", jsdom.serializeDocument(doc_));
@@ -45,20 +45,20 @@ jsdom.env(
           var selRec = testUtil.mkFunTarget(doc_, oRec);
           var selArgs = testUtil.mkFunTarget(doc_, fArgs);
           // fun.call($(selRec), $(selArgs));
-          fun.call($(this)).call($(selRec), $(selArgs))
+          fun.call($(this)).call($(selRec), $(selArgs));
           //$("#0").wrap($("#0"));
           // fun.call($(this)).call($("#0"), $("#0"));
           //console.log("test done");
           console.log( "new_doc size:", contrLib.countDomElements(doc_));
           var newLen = contrLib.countDomElements(doc_);
           console.log("new_doc:", jsdom.serializeDocument(doc_));
-          assert(oldLen < newLen, "New DOM is smaller than the old one.")
+          assert(oldLen < newLen, "New DOM is smaller than the old one.");
         }
       );
     };
     arguments.map(
       function(args){
         return receivers.map(function(ids) { return mkTest(function() {return this.wrap}, ids, args)})}
-    )
+    );
   }
 );

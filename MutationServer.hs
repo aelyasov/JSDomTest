@@ -96,6 +96,9 @@ genKillingArgs jsFun jsSig (jsMFun, mpos) = do
         showDoc = T.pack . show . prettyPrint
 
 
+
+
+
 data MAInput = MAInput 
     { funJS    :: Text
     , funSigJS :: Text

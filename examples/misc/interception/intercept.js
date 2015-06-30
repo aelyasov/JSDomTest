@@ -1,25 +1,27 @@
+
+var environment = {tags:[], names:[], ids:[], classes:[], selector:[]};
+
 $(document).ready(function () {
-    var loggable = function(obj, logger) {
-	return Proxy.create({
-	    get: function get(receiver, prop) {
-		if (prop == 'getElementById') {
-		    logger.info('Getting ' + prop);
-		}
-		return prop.call(obj, arguments);
-	    }
-	});
-    };
+    // var loggable = function(obj, logger) {
+    // 	return Proxy.create({
+    // 	    get: function get(receiver, prop) {
+    // 		if (prop == 'getElementById') {
+    // 		    logger.info('Getting ' + prop);
+    // 		}
+    // 		return prop.call(obj, arguments);
+    // 	    }
+    // 	});
+    // };
     
-    var doc = document;
-    doc = loggable(doc, {
-	info: function info(str) {
-	    console.log(str);  
-	}
-    });
+    // var doc = document;
+    // doc = loggable(doc, {
+    // 	info: function info(str) {
+    // 	    console.log(str);  
+    // 	}
+    // });
     
     // doc.getElementById(1);
     
-    var environment = {tags:[], names:[], ids:[], classes:[], selector:[]}
     
     _getElementById = Document.prototype.getElementById;
     Document.prototype.getElementById = function() {
@@ -66,6 +68,6 @@ $(document).ready(function () {
     // console.log("getElementsByName", document.getElementsByName("div1"));
     // console.log("getElementsByTagName", document.getElementsByTagName("div"));
     // console.log("getElementsByTagNameNS", document.getElementsByTagNameNS("", "div"));
-    $("#a");
+    // $("#a");
     console.log(environment);
 });

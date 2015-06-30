@@ -7,15 +7,19 @@ module Genetic.Instance where
 import Genetic.DataJS
 import Genetic.RandomJS
 import Genetic.CrossoverJS
+import Genetic.ScoreJS
+
+import Html5C.Tags
 
 import Control.Monad
 import System.Random
 -- import qualified Data.ByteString as BS
 
-import GA (Entity(..))
+import GA
 
 
-
+-- | sig = [JS_DOM,JS_STRING]
+-- | pool = ([], ["node"], ([TAG_IFRAME], ["node"], [], []))
 instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
     -- genRandom :: (JSSig, JSCPool) -> Int -> IO [JSArg]
     genRandom pool@(sig, env) seed = mapM (genRandomVal env) sig 
@@ -48,6 +52,21 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
     mutation pool p seed e = undefined
 
     -- score :: d -> e -> m (Maybe s)
-    score _ e = undefined
+    score = fitnessScore 
 
+
+runGenetic :: Target -> (JSSig, JSCPool) -> IO [JSArg]
+runGenetic targ pool@(sig, (intP, stringP, (tagP, idP, nameP, classP))) = do
+  let conf = GAConfig 100   -- population size
+                      25    -- archive size (best entities to keep track of)
+                      300   -- maximum number of generations
+                      0.8   -- crossover rate (% of entities by crossover)
+                      0.2   -- mutation rate (% of entities by mutation)
+                      0.0   -- parameter for crossover (not used here)
+                      0.2   -- parameter for mutation (% of replaced letters)
+                      False -- whether or not to use checkpointing
+                      False -- don't rescore archive in each generation
+      g = mkStdGen 0 -- random generator            
+  es <- evolveVerbose g conf pool targ
+  return $ snd $ head es -- :: [JSArg]
 
