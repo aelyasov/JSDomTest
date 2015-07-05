@@ -658,8 +658,8 @@ intrumentTest fp = do
   print $ JSP.prettyPrint (stmtInstr :: [Statement (SourcePos, SLab)])   
 
 
--- instance Default (SourcePos, SLab) where
---   def = (def :: SourcePos, 0)
+instance Default (SourcePos, SLab) where
+  def = (def :: SourcePos, 0)
 
 
 -- VarDeclStmt def [VarDecl def (Id def "_trace_") (Just (ArrayLit def []))]

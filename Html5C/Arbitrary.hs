@@ -14,6 +14,7 @@ import Html5C.Generators
 import Test.QuickCheck.Arbitrary
 import Test.QuickCheck.Gen
 import Html5C.QuickCheck.Gen
+import Test.QuickCheck
 import qualified Text.Blaze.Html.Renderer.Pretty as PP
 import qualified Text.Blaze.Html.Renderer.Utf8  as Utf
 

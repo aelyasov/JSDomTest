@@ -14,8 +14,8 @@ module Text.Blaze.Html5Extra
     , menuitemT
     -- | Attributes
     , itemid
-    , itemtype  
-    , itemscope
+    -- , itemtype  
+    -- , itemscope
     ) where
 
 import Text.Blaze
