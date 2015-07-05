@@ -82,7 +82,37 @@ http.createServer(function(request, response){
 			environment.ids = environment.ids.concat(arguments[0]);
 			return _getElementById.apply(this, arguments);
 		    };
+
+		    _getElementsByClassName = document.getElementsByClassName;
+		    document.getElementsByClassName = function() {
+			console.log("class", arguments[0]);
+			environment.classes = environment.classes.concat(arguments[0].split(" "));
+			return _getElementsByClassName.apply(this, arguments);
+		    };
 		    
+		    _getElementsByName =  document.getElementsByName;
+		    document.getElementsByName = function() {
+			console.log("name", arguments[0]);
+			environment.names = environment.names.concat(arguments[0]);
+			return _getElementsByName.apply(this, arguments);
+		    };
+		    
+		    _getElementsByTagName = document.getElementsByTagName;
+		    document.getElementsByTagName = function() {
+			console.log("tag", arguments[0]);
+			environment.tags = environment.tags.concat(arguments[0]);
+			return _getElementsByTagName.apply(this, arguments);
+		    };
+		    
+
+		    // the hook for getElementsByTagNameNS ignores information about namespace
+		    _getElementsByTagNameNS = document.getElementsByTagNameNS;
+		    document.getElementsByTagNameNS = function() {
+			console.log("tag", arguments[1]);
+			environment.tags = environment.tags.concat(arguments[1]);
+			return _getElementsByTagNameNS.apply(this, arguments);
+		    };
+
 		    // eval(JSON.parse(data_).jsFun);
 		    console.log("jsMutFun", jsMutFun);
 		    eval(jsMutFun);
@@ -114,5 +144,5 @@ http.createServer(function(request, response){
 	response.end();    
     }
     
-}).listen(8888);
-console.log("Server Running on 8888");
+}).listen(7777);
+console.log("Server Running on 7777");

@@ -63,8 +63,8 @@ main = do
       jsDefClasses = []
       jsDefDoms    = (jsDefTags, jsDefIds, jsDefNames, jsDefClasses)
       jsDefPool    = (jsDefInts, jsDefStrings, jsDefDoms) :: JSCPool
-
-  request <- parseUrl "http://localhost:8888"
+  print $ "*** The number of generated mutations: " ++ show (length jsLabMutFuns)
+  request <- parseUrl "http://localhost:7777"
   man <- liftIO $ newManager conduitManagerSettings
 
   let reqInit = request { method = "POST"
@@ -87,7 +87,7 @@ main = do
 
 killJSMutationGenetic :: Manager -> Int -> String -> Target -> (JSSig, JSCPool) -> IO ()
 killJSMutationGenetic man mutN jsMutFun target pool = do
-  request <- parseUrl "http://localhost:8888"
+  request <- parseUrl "http://localhost:7777"
   let reqMut = request { method = "POST"
                        , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                        , queryString = "mutation=true"
@@ -96,10 +96,10 @@ killJSMutationGenetic man mutN jsMutFun target pool = do
   mutResp <- httpLbs reqMut man
   print $ responseBody mutResp
 
-  -- jsArgs <- runGenetic target pool
+  jsArgs <- runGenetic target pool
   -- for the integration testing purpose runGenetic has been replaced with fitnessScore
-  mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
-  let jsArgs = [DomJS test_html, StringJS "iframe"]
+  -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
+  -- let jsArgs = [DomJS test_html, StringJS "iframe"]
   putStrLn $ "best entity (GA): " ++ (show jsArgs)
 
   let reqExec = request { method = "POST"

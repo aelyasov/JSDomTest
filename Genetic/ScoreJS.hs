@@ -28,7 +28,7 @@ import Debug.Trace
 fitnessScore :: Target -> [JSArg] -> IO (Maybe Double)
 fitnessScore (Target cfg loc)  jargs = do
   man <- liftIO $ newManager conduitManagerSettings
-  initReq <- parseUrl "http://localhost:8888"
+  initReq <- parseUrl "http://localhost:7777"
   let req = initReq { method = "POST"
                     , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                     , queryString = "genetic=true"
