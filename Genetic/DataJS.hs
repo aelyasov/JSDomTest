@@ -10,6 +10,7 @@ import Data.Text.Encoding
 
 import Analysis.CFG.Data (NLab, ELab, SLab)
 import Data.Graph.Inductive.PatriciaTree
+import Data.Graph.Inductive.Graph (LEdge)
 
 import Html5C.Tags
 
@@ -25,7 +26,7 @@ instance Show JSArg where
   show (BoolJS b)   = show b
   show (DomJS s)    = show s
   
-data Target = Target { jsCFG :: Gr NLab ELab, murSrc :: SLab } deriving Show
+data Target = Target { jsCFG :: Gr NLab ELab, mutSrc :: LEdge ELab } deriving Show
 
 
 data JSType = JS_INT | JS_FLOAT | JS_STRING | JS_BOOL | JS_DOM deriving Show

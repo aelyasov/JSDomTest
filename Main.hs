@@ -24,7 +24,7 @@ import Control.Monad.State hiding (mapM)
 -- | My imports
 import Util.ParseJSSignature
 import Analysis.CFG.Instrument (instrScript)
-import Analysis.CFG.Build (enrichCollectedEdges)
+import Analysis.CFG.Build (enrichCollectedEdges, getAllBranches)
 import Analysis.CFG.Label (assignUniqueIdsSt)
 import Analysis.Static
 
@@ -72,7 +72,7 @@ setCommonFormatter x =
 main :: IO ()    
 main = do
   (algType, logLevel) <- readMainConfig
-  -- Configuring logger
+  -- Logger Configuration
   myStreamHandler <- streamHandler stdout logLevel
   let myStreamHandler' = setCommonFormatter myStreamHandler
   let logger = rootLoggerName
@@ -85,9 +85,9 @@ main = do
   jsSig <- parseJSSignature jsFile
   print jsSig
   let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt  jsFun
-      jsLabMutFuns = generateJSMutations jsLabFun
-      jsFunCFG     = enrichCollectedEdges jsLabStms
-  infoM logger $ "The number of generated mutations: " ++ show (length jsLabMutFuns)
+      jsFunCFG = uncurry mkGraph $ enrichCollectedEdges jsLabStms
+      branches = getAllBranches jsFunCFG
+  infoM logger $ "There are following branches to cover: " ++ (show branches)
   request <- parseUrl "http://localhost:7777"
   man <- liftIO $ newManager tlsManagerSettings
 
@@ -99,22 +99,22 @@ main = do
   initResp <- httpLbs reqInit man
   infoM logger $ show initResp 
 
-  mapM_  (\(i, Mutation jsMutType jsLabMutFun jsMutLoc) ->
+  mapM_  (\(i, branch) ->
            killJSMutationGenetic algType
                                  man
                                  i
                                  jsMutType
-                                 (show $ JSP.prettyPrint $ (instrScript jsLabMutFun :: JavaScript SourcePosLab))
-                                 (Target (uncurry mkGraph jsFunCFG) (snd jsMutLoc)) 
-                                 (jsSig, collectConstantInfoJS jsLabMutFun)
-         ) jsLabMutFuns
+                                 (show $ JSP.prettyPrint $ (instrScript jsLabFun :: JavaScript SourcePosLab))
+                                 (Target jsFunCFG branch) 
+                                 (jsSig, collectConstantInfoJS jsLabFun)
+         ) $ zip branches [1..]
 
 
 killJSMutationGenetic :: Algorithm -> Manager -> Int -> MutationType -> String -> Target -> (JSSig, JSCPool) -> IO ()
 killJSMutationGenetic alg man mutN mutType jsMutFun target pool = do
   let logger = rootLoggerName
   putStrLn $ replicate 70 '-'
-  infoM logger $ "Mutation number: #" ++ (show mutN)
+  infoM logger $ "Branch number: #" ++ (show mutN)
   infoM logger $ "Mutation type: " ++ mutType
   infoM logger $ "Mutated program:\n" ++ jsMutFun
   infoM logger $ "Initial pool data: " ++ (show pool)

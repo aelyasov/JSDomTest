@@ -20,8 +20,8 @@ import Debug.Trace (trace)
 
 
 
-getAllBranches :: Gr NLab ELab -> [[LEdge ELab]]
-getAllBranches gr = foldr (\nd edges -> if (outdeg gr nd > 1) then (out gr nd):edges else edges ) [] [minNode .. maxNode]
+getAllBranches :: Gr NLab ELab -> [LEdge ELab]
+getAllBranches gr = foldr (\nd edges -> if (outdeg gr nd > 1) then (out gr nd) ++ edges else edges ) [] [minNode .. maxNode]
   where
     (minNode, maxNode) = nodeRange gr
 
