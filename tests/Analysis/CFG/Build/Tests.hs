@@ -10,6 +10,7 @@ import Test.HUnit (Assertion, (@?=), runTestTT, Test(..))
 import Data.Graph.Inductive 
 
 
+-- | Run whole test suite: defaultMain tests
 tests :: TestTree
 tests = testGroup "Analysis.CFG.Build"
         [ testCase "testFindSourceBranch01" testFindSourceBranch01
@@ -38,17 +39,19 @@ testFindSourceBranch01 :: Assertion
 testFindSourceBranch01 = findSourceBranch testGr1 1 [0, -1] @?= []
 
 testApproachLevel01 :: Assertion
-testApproachLevel01 = approachLevel testGr2 2 [0, 1, 3, -1] @?= (0, 1)
+testApproachLevel01 = approachLevel testGr2 2 [0, 1, 3, -1] @?= (0, 1, 1)
 
 testApproachLevel02 :: Assertion
-testApproachLevel02 = approachLevel testGr2 4 [0, 1, 3, -1] @?= (1, 1)
+testApproachLevel02 = approachLevel testGr2 4 [0, 1, 3, -1] @?= (1, 2, 1)
 
 testApproachLevel03 :: Assertion
-testApproachLevel03 = approachLevel testGr2 3 [0, 1, 2, 4, -1] @?= (0, 1)
+testApproachLevel03 = approachLevel testGr2 3 [0, 1, 2, 4, -1] @?= (0, 1, 1)
 
 testApproachLevel04 :: Assertion
-testApproachLevel04 = approachLevel testGr1 2 [0, 1, 2, -1] @?= (0, 2)
+testApproachLevel04 = approachLevel testGr1 2 [0, 1, 2, -1] @?= (0, 0, 2)
 
+
+-- | Example how to verify assertion: runTestTT $ TestCase testMkTestCFG01
 testMkTestCFG01 :: Assertion 
 testMkTestCFG01 = do
   graph <- mkTestCFG "./tests/Analysis/CFG/Build/resources/test1.js"

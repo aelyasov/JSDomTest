@@ -62,12 +62,12 @@ type JSTestArgs = [String]
 
 -- | The generateJSMutations function given a function produces all possible mutations out of existing. It returns mutated programs together with the source position to which the mutation operators were applied.
 generateJSMutations :: [Statement SourcePos] -> [([Statement SourcePos], SourcePos)]
-generateJSMutations = undefined
+generateJSMutations = error "generateJSMutations"
 
 
 -- | The parseJSSignature function extracts the type signature of the given JS function from the comment.
 parseJSSignature :: [Statement SourcePos] ->  SignJS
-parseJSSignature = undefined
+parseJSSignature = error "parseJSSignature"
 
 -- | The genKillingArgs function takes the original JS function, its mutated version and the signature, and it returns argument substitutions that exposes the mutation.
 -- | TODO: we should somewhere store the intermediate values of the generated arguments to check if they can kill other mutations

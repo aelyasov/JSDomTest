@@ -11,7 +11,8 @@ import Control.Monad.IO.Class (liftIO)
 import Control.Applicative
 import Control.Monad
 
-import Analysis.CFG.Build
+-- import Analysis.CFG.Build
+import Analysis.CFG.Fitness (approachLevel, )
 import Data.Graph.Inductive.PatriciaTree
 import qualified Data.Graph.Inductive.Graph as G
 
@@ -23,11 +24,14 @@ import Data.List
 import Data.Aeson
 
 import Debug.Trace
+import System.Log.Logger (rootLoggerName, infoM)
 
 
 fitnessScore :: Target -> [JSArg] -> IO (Maybe Double)
-fitnessScore (Target cfg loc)  jargs = do
-  man <- liftIO $ newManager conduitManagerSettings
+fitnessScore tg@(Target cfg loc)  jargs = do
+  let logger = rootLoggerName
+  infoM logger $ "Compute fitness score for the target: " ++ (show tg)
+  man <- liftIO $ newManager tlsManagerSettings
   initReq <- parseUrl "http://localhost:7777"
   let req = initReq { method = "POST"
                     , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
@@ -35,10 +39,18 @@ fitnessScore (Target cfg loc)  jargs = do
                     , requestBody = RequestBodyLBS $ encode (GAInput (jsargs2bstrs jargs))
                     }
   (JSExecution trace_ distances_) <- liftM (fromMaybe (error "fitnessScore in response") . decode . responseBody) $ httpLbs req man
-  let (aprLevel, branch) = approachLevel cfg loc trace_
-      brLevel = trace ("branch: " ++ show branch ++ "; distances_: " ++ show distances_) $ maybe (error "branch label isn't found") getBrDist $ find ((branch==) . getBrLab) distances_
+  let logger = rootLoggerName
+  infoM logger $ "Execution trace: " ++ (show trace_)
+  infoM logger $ "Branch distances: " ++ (show distances_)
+  infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_) 
+  let (aprLevel, pathDistance, branch) = approachLevel cfg loc trace_
+  infoM logger $ "Approach level is equal to: " ++ (show aprLevel) ++ " for the branch: " ++ (show branch)
+  let brLevel     = maybe 0 getBrDist $ find ((branch==) . getBrLab) distances_
       normBrLevel = branchDistNormalize brLevel
-      fitnessVal  = fromIntegral aprLevel + normBrLevel              
+      fitnessVal  = fromIntegral aprLevel + normBrLevel + fromIntegral pathDistance
+  infoM logger $ "Path distance is equal to: " ++ (show pathDistance)    
+  infoM logger $ "Branch distance is equal to: " ++ (show brLevel)    
+  infoM logger $ "Fitness value is equal to: " ++ (show fitnessVal)    
   return $ Just fitnessVal
   -- return $ Just $ (read $ C.unpack $ responseBody response :: Double)
 

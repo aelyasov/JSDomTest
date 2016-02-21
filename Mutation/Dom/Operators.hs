@@ -15,13 +15,14 @@ import Data.Data
 import Data.Generics.Uniplate.Data
 import Data.Generics.Uniplate.Operations
 
-import Data.Default.Class
+-- import Data.Default.Class
+import Data.Default
 import Text.Parsec.Pos
 import Data.Either
 
 import Control.Monad
 
-import Analysis.CFG.Build
+import Analysis.CFG.Data (SLab)
 
 -- ---------------------------------------------------------------------
 -- Experimentation code. Remove after
@@ -37,7 +38,7 @@ mutants x = [c (Val j) | (Val i, c) <- contexts x, j <- [i-1, i+1]]
 variables :: Biplate b Expr => b -> [String]
 variables x = [y | Var y <- universeBi x]
 
--- ---------------------------------------------------------------------
+-- -------------------------------------------------------------------
 
 -- | ===================================================================
 -- | Mirshokraie DOM mutation operators
@@ -46,6 +47,17 @@ variables x = [y | Var y <- universeBi x]
 type FunctionName = String
 
 type SourcePosLab = (SourcePos, SLab)
+
+type MutationType = String
+data Mutation a = Mutation { getMutationType     :: MutationType
+                           , getMutationProgram  :: JavaScript a
+                           , getMutationLocation :: a
+                           }
+                deriving Show
+
+assignMutationType :: String -> [(JavaScript a, a)] -> [Mutation a]
+assignMutationType mtype mutations = [ Mutation mtype prog loc | (prog, loc) <- mutations]
+
 
 -- | Change the order of arguments in insertBefore/replaceChild methods
 -- | TODO: make sure that the function can handle more than two arguments
@@ -56,39 +68,41 @@ swapArguments fn x =
     , fn == fn'
     ]
 
-insertSwapArguments :: Data a => JavaScript a -> [(JavaScript a, a)]
-insertSwapArguments = swapArguments "insertBefore"
-
-replaceSwapArguments :: Data a => JavaScript a -> [(JavaScript a, a)]
-replaceSwapArguments = swapArguments "replaceChild"
+insertSwapArguments :: Data a => JavaScript a -> [Mutation a]
+insertSwapArguments = assignMutationType "insertSwapArguments" . swapArguments "insertBefore"
 
 
--- | Change the name of the id/tag used in getElementById and getElementByTagName methods
+replaceSwapArguments :: Data a => JavaScript a -> [Mutation a]
+replaceSwapArguments = assignMutationType "replaceSwapArguments" . swapArguments "replaceChild"
+
+
+-- | Change the name of the id/tag used in getElementById and getElementByTagName methods by dropping the last character
 changeArgument :: forall b a. (Data b, Data a, Default a) => FunctionName -> b -> [(b, a)]
 changeArgument fn x = 
     [ (c (CallExpr l1 (DotRef l2 ref (Id l3 fn)) [v1']), l1) 
-    | (CallExpr l1 (DotRef l2 ref (Id l3 fn')) [v1], c :: (Expression a -> b)) <- contextsBi x
+    | (CallExpr l1 (DotRef l2 ref (Id l3 fn')) [StringLit l4 v1], c :: (Expression a -> b)) <- contextsBi x
     , fn' == fn
-    , let v1' = InfixExpr def OpAdd (InfixExpr def OpAdd (StringLit def "_") v1) (StringLit def "_")
+    , let v1' = StringLit l4 (take (length v1 - 1) v1)  
+    -- , let v1' = InfixExpr def OpAdd (InfixExpr def OpAdd (StringLit def "_") v1) (StringLit def "_")
     ]
 
-idChangeArgument :: (Data a, Default a) => JavaScript a -> [(JavaScript a, a)]
-idChangeArgument = changeArgument "getElementById"
+idChangeArgument :: (Data a, Default a) => JavaScript a -> [Mutation a]
+idChangeArgument = assignMutationType "idChangeArgument" . changeArgument "getElementById"
 
 
-tagChangeArgument :: (Data a, Default a) => JavaScript a -> [(JavaScript a, a)]
-tagChangeArgument = changeArgument "getElementByTagName"
+tagChangeArgument :: (Data a, Default a) => JavaScript a -> [Mutation a]
+tagChangeArgument = assignMutationType "tagChangeArgument" . changeArgument "getElementByTagName"
 
 -- | TODO
 changeSetAttribute' :: forall b a. (Data b, Data a) => b -> [(b, a)]
-changeSetAttribute' = undefined
+changeSetAttribute' = error "changeSetAttribute'"
 
 changeSetAttribute :: Data a => JavaScript a -> [(JavaScript a, a)]
 changeSetAttribute = changeSetAttribute'
 
 -- | TODO
 changeGetAttribute' :: forall b a. (Data b, Data a) => b -> [(b, a)]
-changeGetAttribute' = undefined
+changeGetAttribute' = error "changeGetAttribute'"
 
 changeGetAttribute :: Data a => JavaScript a -> [(JavaScript a, a)]
 changeGetAttribute = changeGetAttribute
@@ -96,7 +110,7 @@ changeGetAttribute = changeGetAttribute
 
 -- | TODO
 changeRemoveAttribute' :: forall b a. (Data b, Data a) => b -> [(b, a)]
-changeRemoveAttribute' = undefined
+changeRemoveAttribute' = error "changeRemoveAttribute'"
 
 changeRemoveAttribute :: Data a => JavaScript a -> [(JavaScript a, a)]
 changeRemoveAttribute = changeRemoveAttribute
@@ -110,14 +124,14 @@ swapInnerHtmlAndText' x =
     , let prop' = if (prop == "innerHTML") then "innerText" else "innerHTML"
     ]
 
-swapInnerHtmlAndText :: Data a => JavaScript a -> [(JavaScript a, a)]
-swapInnerHtmlAndText = swapInnerHtmlAndText'
+swapInnerHtmlAndText :: Data a => JavaScript a -> [Mutation a]
+swapInnerHtmlAndText = assignMutationType "swapInnerHtmlAndText" . swapInnerHtmlAndText'
 
 -- testMutation :: Data a => JavaScript a -> [(JavaScript a, a)]
-testMutation =  map (show . JSP.prettyPrint . fst) $ swapInnerHtmlAndText $ either (const (Script (initialPos "") [])) id $ parseFromString "p.innerHTML" 
+testMutation =  map (show . JSP.prettyPrint . getMutationProgram) $ swapInnerHtmlAndText $ either (const (Script (initialPos "") [])) id $ parseFromString "p.innerHTML" 
 
 
-domMutations :: (Data a, Default a) => [JavaScript a -> [(JavaScript a, a)]]
+domMutations :: (Data a, Default a) => [JavaScript a -> [Mutation a]]
 domMutations = [ insertSwapArguments
                , replaceSwapArguments
                , idChangeArgument
@@ -133,4 +147,4 @@ domMutations = [ insertSwapArguments
 
 
 renameMutatedFunction :: JavaScript a -> JavaScript a
-renameMutatedFunction = undefined
+renameMutatedFunction = error "renameMutatedFunction"

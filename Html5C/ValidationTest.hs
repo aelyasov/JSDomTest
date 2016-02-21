@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, TypeSynonymInstances, FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings, TypeSynonymInstances, FlexibleInstances, StandaloneDeriving #-}
 
 module Html5C.ValidationTest where
 
@@ -6,18 +6,21 @@ import Html5C.Validation (checkErrorsInResponse)
 import Html5C.Arbitrary
 import Html5C.Tags
 import Html5C.QuickCheck.Gen
+import Html5C.Attributes
 
 import Network.HTTP.Types
 import qualified Data.CaseInsensitive as CI
 import Network.HTTP.Conduit
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Trans.State
+import Control.Monad
 
 import Text.Blaze.Html5 (Html)
 import Text.Blaze.Internal
 import Text.Blaze.Html.Renderer.Utf8
 import qualified Text.Blaze.Html.Renderer.Pretty as PP
 import qualified Text.Blaze.Html.Renderer.String as PS
+import qualified Text.Blaze.Html.Renderer.Text as PT
 
 import Data.Text (Text)
 import qualified Data.Text as T
@@ -29,13 +32,23 @@ import Test.QuickCheck
 import Test.QuickCheck.Monadic
 
 import Genetic.DataJS
+import Debug.Trace
 
 -- import Text.HTML.DOM
 
 
 runTests :: IO ()
 -- main = quickCheckWith (stdArgs {maxSuccess = 1000}) prop_ValidHtml
-runTests = verboseCheckWith (stdArgs {maxSuccess = 100}) prop_ValidHtml
+runTests = verboseCheckWith (stdArgs {maxSuccess = 10}) prop_ValidHtml
+
+
+runTestsWithTags :: JSTags -> IO ()
+runTestsWithTags tags = verboseCheckWith (stdArgs {maxSuccess = 10}) property
+-- runTestsWithTags tags = quickCheckWith (stdArgs {maxSuccess = 100}) property
+  where property = monadicIO $ do
+          h <- run $ genValidHtml (tags,[],[],[])
+          assert True
+
 
 prop_ValidHtml :: Html -> Property
 prop_ValidHtml html = monadicIO $ (run $ validatorCheck html) >>= assert'
@@ -47,23 +60,21 @@ genValidHtml env@(tags, ids, names, classes) = do
                           , htmlNames   = names
                           , htmlIds     = ids
                           , htmlClasses = classes}
-  html    <- (generate $ evalStateT htmlGenState state) :: IO Html
-  print html
-  response <- validatorCheck html
+  html <- (generate $ evalStateT htmlGenState state :: IO Html) >>= assignIds2HtmlRandomly (htmlIds state) . PT.renderHtml 
+  response <- askValidator html
   case response  of
     Just _  -> do print "Generated html document is invalid"
                   genValidHtml env
-    Nothing -> return $ renderHtml html
+    Nothing -> return html
+
 
 validatorCheck :: Html -> IO (Maybe Text)
-validatorCheck html = askValidator (renderHtml html)
+validatorCheck = askValidator . renderHtml
 
 
 askValidator :: ByteString -> IO (Maybe Text)
 askValidator html_str = do
-  -- putStrLn $ "HTML consists of tags: " ++ show (nub $ retriveTags html)
-  -- putStrLn "*** Start new test"
-  man <- liftIO $ newManager conduitManagerSettings
+  man <- liftIO $ newManager tlsManagerSettings
   -- initReq <- parseUrl "http://html5.validator.nu" 
   initReq <- parseUrl "http://localhost:8888"
   let req = initReq { method = "POST"
@@ -75,16 +86,15 @@ askValidator html_str = do
   return $ checkErrorsInResponse $ responseBody response
 
 
-
 instance Show Html where
-    show = PP.renderHtml
+  show = PP.renderHtml    
     
 
 assert' :: Monad m => Maybe Text -> PropertyM m ()
 assert' Nothing = return ()
 assert' (Just str) = fail $ T.unpack str
 
-test_genValidHtml = genValidHtml ([TAG_DIV],[],[],[])
+test_genValidHtml = genValidHtml ([TAG_H1],[],[],[])
 
 -- | parseLBS $ C.pack test_html
 test_html = "<!DOCTYPE HTML>\n<html><head><title>Title</title><base href=\".\" target=\"_blank\"></head><body itemscope=\"\" itemtype=\"http://schema.org/WebPage\"><h1><a></a>A2A2</h1><h1></h1></body></html>"

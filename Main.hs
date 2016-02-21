@@ -23,7 +23,9 @@ import Control.Monad.State hiding (mapM)
 
 -- | My imports
 import Util.ParseJSSignature
-import Analysis.CFG.Build
+import Analysis.CFG.Instrument (instrScript)
+import Analysis.CFG.Build (enrichCollectedEdges)
+import Analysis.CFG.Label (assignUniqueIdsSt)
 import Analysis.Static
 
 -- | Networking
@@ -82,7 +84,7 @@ main = do
   jsFun <- parseFromFile jsFile
   jsSig <- parseJSSignature jsFile
   print jsSig
-  let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt_  jsFun
+  let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt  jsFun
       jsLabMutFuns = generateJSMutations jsLabFun
       jsFunCFG     = enrichCollectedEdges jsLabStms
   infoM logger $ "The number of generated mutations: " ++ show (length jsLabMutFuns)

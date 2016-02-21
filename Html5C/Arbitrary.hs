@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeSynonymInstances, FlexibleInstances #-}
+{-# LANGUAGE TypeSynonymInstances, FlexibleInstances, StandaloneDeriving #-}
 
 module Html5C.Arbitrary where
 
@@ -25,7 +25,7 @@ import Debug.Trace
 
 
 instance Arbitrary Html where
-    arbitrary = evalStateT htmlGenState defaultState
+  arbitrary = evalStateT htmlGenState defaultState
 
 
 htmlGenState :: GenHtmlState

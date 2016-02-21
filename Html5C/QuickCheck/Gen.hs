@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Html5C.QuickCheck.Gen where
 
 import Text.Blaze.Html5
@@ -13,22 +15,40 @@ import Util.Stack
 import Config.Default
 import Config.DefaultTest
 import Config.DefaultReal
+import Data.Configurator (load, Worth(..), require)
+import System.IO.Unsafe (unsafePerformIO)
 
-import Debug.Trace    
+import Debug.Trace
+import Data.List (sortBy)
 
 type HasMain = Bool
 
+{-# NOINLINE readRandomConfig #-}
+readRandomConfig :: (Int, Int, Int, Bool)
+readRandomConfig = unsafePerformIO $ do
+  config   <- load [ Required "jsdomtest.cfg"]
+  depth    <- require config "generate_html_tree.depth"
+  degree   <- require config "generate_html_tree.degree"
+  topN     <- require config "generate_html_tree.frequency-table.top"
+  equalize <- require config "generate_html_tree.frequency-table.equalize"
+  return (depth, degree, topN, equalize)
+
 defaultState :: HtmlState
-defaultState = HtmlState { hasMain     = False
-                         , getDepth    = 5
-                         , getNodeDegr = 3   
-                         , getCtx      = empty
-                         , tagFreqTbl  = normFreqTblReal defTagFreqTblReal
-                         , htmlTags    = []
-                         , htmlNames   = []
-                         , htmlIds     = []
-                         , htmlClasses = []
-                         } 
+defaultState =
+  let (depth, degree, topN, equalize) = readRandomConfig
+      filter = if equalize then univFreqTbl else id
+  in  HtmlState { hasMain     = False
+                , getDepth    = depth
+                , getNodeDegr = degree   
+                , getCtx      = empty
+                                -- , tagFreqTbl  = normFreqTblReal defTagFreqTblReal
+                , tagFreqTbl  = filter $ take topN $ sortBy (\i j -> fst j `compare` fst i) defTagFreqTblReal
+                , htmlTags    = []
+                , htmlNames   = []
+                , htmlIds     = []
+                , htmlClasses = []
+                , hasDefHead  = True
+                } 
 
 data HtmlState = HtmlState { hasMain     :: Bool
                            , getDepth    :: Int 
@@ -39,6 +59,7 @@ data HtmlState = HtmlState { hasMain     :: Bool
                            , htmlNames   :: [String]
                            , htmlIds     :: [String]
                            , htmlClasses :: [String]
+                           , hasDefHead  :: Bool
                            }
                  deriving Show
 

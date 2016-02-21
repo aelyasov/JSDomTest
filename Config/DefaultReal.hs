@@ -4,6 +4,10 @@ import Html5C.Tags
 import Config.Data
 
 
+-- | Below we present several heuristics that can facilitate the generation of the right-shaped html:
+-- | - take only first N most frequest tag of the defTagFreqTblReal table
+-- | - in the simplest version of the experiment we can include in the defTagFreqTblReal table only one tag, namely TAG_DIV
+
 -- | http://webmasters.stackexchange.com/questions/11406/recent-statistics-on-html-usage-in-the-wild
 defTagFreqTblReal :: [(Int, HTML_TAG)]
 defTagFreqTblReal = 
@@ -120,6 +124,9 @@ defTagFreqTblReal =
      (0, TAG_VIDEO),
      (36995, TAG_WBR)]
 
+
+univFreqTbl :: [(Int, HTML_TAG)] -> [(Int, HTML_TAG)]
+univFreqTbl tbl = map (\(_, tag) -> (1, tag)) tbl
 
 normFreqTblReal :: [(Int, HTML_TAG)] -> [(Int, HTML_TAG)]
 normFreqTblReal tbl = map (\(i, tag) -> (round ( toRational i / toRational mFreq), tag)) tbl

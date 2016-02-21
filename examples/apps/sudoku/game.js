@@ -11,20 +11,20 @@ function shuffleBoard()
 		var number2 = Math.ceil(Math.random()*9);
 		while(number2==number1){
 			number2 = Math.ceil(Math.random()*9);
-		}	
+		}
 
 		var tmpObjects1 = new Array();
 		var tmpObjects2 = new Array();
 
-		for(var no=0;no<squareObjects.length;no++){					
-			var txtObj = squareObjects[no].getElementsByTagName('SPAN')[0];						
-			if(txtObj.innerHTML == number1)tmpObjects1.push(txtObj);	
+		for(var no=0;no<squareObjects.length;no++){
+			var txtObj = squareObjects[no].getElementsByTagName('SPAN')[0];
+			if(txtObj.innerHTML == number1)tmpObjects1.push(txtObj);
 			if(txtObj.innerHTML == number2)tmpObjects2.push(txtObj);
 		}
 
 		for(var no=0;no<tmpObjects1.length;no++){
-			tmpObjects1[no].innerHTML = number2;	
-			tmpObjects2[no].innerHTML = number1;	
+			tmpObjects1[no].innerHTML = number2;
+			tmpObjects2[no].innerHTML = number1;
 		}
 	}
 	resetVisibleNumberArray();
@@ -36,31 +36,33 @@ function resetVisibleNumberArray()
 {
 	for(var no=0;no<=9;no++){
 		visibleNumberArray[no] = 0;
-	}		
+	}
 }
 
 //DDF
+//done
 function newGame()
 {
 	var obj = document.getElementById('sudoku');
 	var subObjects = obj.getElementsByTagName('DIV');
 	for(var no=0;no<subObjects.length;no++){
 		if(subObjects[no].className=='sudokuSquare'){
-			subObjects[no].style.backgroundColor='';	
+			subObjects[no].style.backgroundColor='';
 			var spans = subObjects[no].getElementsByTagName('SPAN');
 			spans[0].style.display='none';
 			spans[1].innerHTML = '';
 		}
-	}	
+	}
 
 }
 
 var visibleNumberArray = new Array();
 
 //DDF
+//done
 function showCell(inputDiv)
 {
-	
+
 	if (inputDiv == 'generateDOMInput')
 		inputDiv = document.getElementById('ConfixDummyNode1');
 
@@ -69,12 +71,12 @@ function showCell(inputDiv)
 	inputDiv.style.backgroundColor='#DDD';
 	span.style.color='#317082';
 	var typingSpan = inputDiv.getElementsByTagName('SPAN')[1];
-	typingSpan.style.display='none';			
+	typingSpan.style.display='none';
 
 }
 
 //DDF
-function showColumnsInGroup(){		
+function showColumnsInGroup(){
 	var object = document.getElementById('sudoku');
 	var cellsRevealed = new Array();
 	var numberArray = new Array();
@@ -82,13 +84,13 @@ function showColumnsInGroup(){
 	var maxInGroup=5;
 	if(level<=0)level=1;
 	if(level==1)maxInGroup=4;
-	for(var no=0;no<countSquares[level];no++){			
+	for(var no=0;no<countSquares[level];no++){
 		do{
 			var row = Math.floor(Math.random()*9);
 			var col = Math.floor(Math.random()*9);
 			var obj = document.getElementById('square_' + row + '_' + col);
 			var parentID = obj.parentNode.id;
-			var span = obj.getElementsByTagName('SPAN')[0];	
+			var span = obj.getElementsByTagName('SPAN')[0];
 			if(!numberArray[span.innerHTML])numberArray[span.innerHTML]=0;
 			if(!groupCountArray[parentID])groupCountArray[parentID]=0;
 		}while(cellsRevealed[row + '_' + col] || numberArray[span.innerHTML]>(3+Math.ceil(level/2)) || groupCountArray[parentID]>=maxInGroup);
@@ -131,7 +133,7 @@ function isGameFinished()
 				allOk=false;
 				break;
 			}
-		}	
+		}
 	}
 
 	if(allOk)alert('Congratulations! You did it');
@@ -150,8 +152,8 @@ function initSudoku()
 			var number = colCounter/1 + 1 + (rowCounter*3) + Math.floor(rowCounter/3)%3;
 			if(number>9)number = number % 9;
 			if(number==0)number=9;
-			matrix[rowCounter][colCounter] = number;				
-		}			
+			matrix[rowCounter][colCounter] = number;
+		}
 	}
 
 	// Switching rows
@@ -159,59 +161,59 @@ function initSudoku()
 	for(var no=0;no<9;no+=3){
 
 		for(var no2=0;no2<3;no2++){
-			row1 = Math.floor(Math.random()*3);	
-			row2 = Math.floor(Math.random()*3);	
+			row1 = Math.floor(Math.random()*3);
+			row2 = Math.floor(Math.random()*3);
 			while(row2==row1){
-				row2 = Math.floor(Math.random()*3);	
+				row2 = Math.floor(Math.random()*3);
 			}
 			row1 = row1 + no;
-			row2 = row2 + no;			
+			row2 = row2 + no;
 			var tmpMatrix = new Array();
 			tmpMatrix = matrix[row1];
 			matrix[row1] = matrix[row2];
-			matrix[row2] = tmpMatrix; 				
-		}			
+			matrix[row2] = tmpMatrix;
+		}
 	}
 
 	// Switching columns
 
 	for(var no=0;no<9;no+=3){
 		for(var no2=0;no2<3;no2++){
-			col1 = Math.floor(Math.random()*3);	
-			col2 = Math.floor(Math.random()*3);	
+			col1 = Math.floor(Math.random()*3);
+			col2 = Math.floor(Math.random()*3);
 			while(col2==col1){
-				col2 = Math.floor(Math.random()*3);	
+				col2 = Math.floor(Math.random()*3);
 			}
 			col1 = col1 + no;
-			col2 = col2 + no;			
+			col2 = col2 + no;
 
 			var tmpMatrix = new Array();
 			for(var no3=0;no3<matrix.length;no3++){
 				tmpMatrixValue = matrix[no3][col1];
-				matrix[no3][col1] = matrix[no3][col2];				
-				matrix[no3][col2] = tmpMatrixValue;				
+				matrix[no3][col1] = matrix[no3][col2];
+				matrix[no3][col2] = tmpMatrixValue;
 			}
-		}	
+		}
 	}
 
 
 	for(var no=0;no<matrix.length;no++){
-		for(var no2=0;no2<matrix[no].length;no2++){				
+		for(var no2=0;no2<matrix[no].length;no2++){
 			var obj = document.getElementById('square_' + no + '_' + no2);
 			var spanObjects = obj.getElementsByTagName('SPAN');
 
 			var span = spanObjects[0];
-			span.innerHTML = matrix[no][no2];		
-			span.style.display='none';	
+			span.innerHTML = matrix[no][no2];
+			span.style.display='none';
 
 			spanObjects[1].innerHTML = '';
 			spanObjects[1].style.display = '';
-			spanObjects[1].style.color='#000';	
+			spanObjects[1].style.color='#000';
 
 			obj.onclick = highlightSquare;
 
-			squareObjects.push(obj);						
-		}			
+			squareObjects.push(obj);
+		}
 	}
 	if(document.all){
 		document.body.onkeydown = insertNumber;
@@ -249,7 +251,7 @@ function insertNumber(e)
 					col = col+1;
 					nextObject = document.getElementById('square_' + row + '_' + col);
 				}
-			}				
+			}
 		}
 	}
 	if(code==37){ // Left arrow
@@ -272,9 +274,9 @@ function insertNumber(e)
 					row = row-1;
 					nextObject = document.getElementById('square_' + row + '_' + col);
 				}
-			}				
+			}
 		}
-	}		
+	}
 	if(code==40){
 		if(row<8){
 			nextObject = document.getElementById('square_' + (row+1) + '_' + col);
@@ -283,7 +285,7 @@ function insertNumber(e)
 					row = row+1;
 					nextObject = document.getElementById('square_' + row + '_' + col);
 				}
-			}	
+			}
 		}
 	}
 
@@ -296,13 +298,13 @@ function insertNumber(e)
 		if(code==8)return false;
 	}
 	if(code>96 && code<=105)code-=48;
-	if(code>48 && code<=57){				
+	if(code>48 && code<=57){
 		var theChar = String.fromCharCode(code);
 		span.innerHTML = theChar;
-	}		
+	}
 
 	isGameFinished();
-}	
+}
 
 //DDF
 function helpMe()
@@ -316,17 +318,17 @@ function helpMe()
 			var row = Math.floor(Math.random()*9);
 			var col = Math.floor(Math.random()*9);
 
-			var el = document.getElementById('square_'+row+'_'+col);	
+			var el = document.getElementById('square_'+row+'_'+col);
 
 			var spans = el.getElementsByTagName('SPAN');
 				if(spans[1].innerHTML.length==0){
 				spans[1].innerHTML = spans[0].innerHTML;
 				spans[1].style.color='#FF0000';
-				allreadyRevealed =  false;					
-			}	
+				allreadyRevealed =  false;
+			}
 			if(el.style.backgroundColor)allreadyRevealed=true;
 			counter++
-		}while(allreadyRevealed && counter<500);		
+		}while(allreadyRevealed && counter<500);
 	}
 
 	isGameFinished();
@@ -339,10 +341,10 @@ function isCorrect(divObj)
 	if (divObj == 'generateDOMInput')
 		divObj = document.getElementByID('ConfixDummyNode1');
 
-	
+
 	var spans = divObj.getElementsByTagName('SPAN');
 	if(spans[0].innerHTML==spans[1].innerHTML || spans[1].innerHTML.length==0)return true;
-	return false;		
+	return false;
 }
 
 //NonDDF
@@ -369,7 +371,7 @@ function getPossibleNumbers(inputObj)
 {
 	if (inputObj == 'generateDOMInput')
 		inputObj = document.getElementByID('ConfixDummyNode1');
-	
+
 	var noArray = new Array();
 	var countNumbers = 0;
 	var spans = inputObj.getElementsByTagName('SPAN');
@@ -382,41 +384,41 @@ function getPossibleNumbers(inputObj)
 			var spans = subDivs[no].getElementsByTagName('SPAN');
 			if(spans[0].innerHTML == spans[1].innerHTML || subDivs[no].style.backgroundColor.length>1){
 				if(!noArray[spans[0].innerHTML]){
-					noArray[spans[0].innerHTML] = true;		
+					noArray[spans[0].innerHTML] = true;
 					countNumbers++;
-				}		
+				}
 			}
-		}	
+		}
 	}
 
 	var numbers = inputObj.id.split('_');
 	var row = numbers[1];
 	var col = numbers[2];
 
-	for(var no=0;no<9;no++){			
+	for(var no=0;no<9;no++){
 
 		var obj = document.getElementById('square_' + row + '_' + no);
 		if(obj!=inputObj){
-			var spans = obj.getElementsByTagName('SPAN');	
+			var spans = obj.getElementsByTagName('SPAN');
 			if(spans[0].innerHTML == spans[1].innerHTML || !spans[0].style.display){
 				if(!noArray[spans[0].innerHTML]){
-					noArray[spans[0].innerHTML] = true;		
+					noArray[spans[0].innerHTML] = true;
 					countNumbers++;
-				}			
+				}
 			}
 		}
 
 		var obj = document.getElementById('square_' + no + '_' + col);
 		if(obj!=inputObj){
-			var spans = obj.getElementsByTagName('SPAN');	
+			var spans = obj.getElementsByTagName('SPAN');
 			if(spans[0].innerHTML == spans[1].innerHTML || !spans[0].style.display){
 				if(!noArray[spans[0].innerHTML]){
-					noArray[spans[0].innerHTML] = true;	
+					noArray[spans[0].innerHTML] = true;
 					countNumbers++;
-				}				
+				}
 			}
 		}
-	}	
+	}
 
 	return countNumbers;
 }
@@ -426,8 +428,8 @@ function showHint()
 {
 	var hintDiv = document.getElementById('hintDiv');
 	var hintDivInner = hintDiv.getElementsByTagName('DIV')[0];
-	var maxExistingNo = 0;	
-	var objectToTry =false;	
+	var maxExistingNo = 0;
+	var objectToTry =false;
 	for(var row=0;row<9;row++){
 		for(var col=0;col<9;col++){
 			var obj = document.getElementById('square_' + row + '_' + col);
@@ -436,15 +438,15 @@ function showHint()
 				hintDivInner.innerHTML = 'This one is wrong';
 				hintDiv.style.left = getLeftPos(obj) + 'px';
 				hintDiv.style.top = getTopPos(obj) - 50 + 'px';
-				hintDiv.style.display='block';		
-				return;			
-			}	
+				hintDiv.style.display='block';
+				return;
+			}
 
-			var existingNumbers = getPossibleNumbers(obj);	
+			var existingNumbers = getPossibleNumbers(obj);
 			if(existingNumbers>maxExistingNo){
 				maxExistingNo = existingNumbers;
-				objectToTry = obj;					
-			}	
+				objectToTry = obj;
+			}
 		}
 	}
 
@@ -452,7 +454,7 @@ function showHint()
 		hintDivInner.innerHTML = 'Try this one ';
 		hintDiv.style.left = getLeftPos(objectToTry) + 'px';
 		hintDiv.style.top = getTopPos(objectToTry) - 50 + 'px';
-		hintDiv.style.display='block';				
+		hintDiv.style.display='block';
 
 	}
 
@@ -461,6 +463,7 @@ function showHint()
 
 
 //DDF
+//done
 function revealAll()
 {
 	for(var row=0;row<9;row++){
@@ -468,8 +471,8 @@ function revealAll()
 			var obj =document.getElementById('square_'+row+'_'+col);
 			var spans = obj.getElementsByTagName('SPAN');
 			spans[0].style.display='';
-			spans[1].style.display='none';	
-			spans[1].style.color='#000000';	
+			spans[1].style.display='none';
+			spans[1].style.color='#000000';
 		}
 	}
 	gameFinished=true;
@@ -481,7 +484,7 @@ function switchLevel(initLevel,linkObj)
 	if (linkObj == 'generateDOMInput')
 		linkObj = document.getElementByID('ConfixDummyNode1');
 
-	
+
 	var confirmSwitch = gameFinished;
 	if(!confirmSwitch)confirmSwitch = confirm('Click OK to finish the current game');
 	if(confirmSwitch){
@@ -492,7 +495,7 @@ function switchLevel(initLevel,linkObj)
 		}
 		linkObj.style.fontWeight = 'bold';
 		level = initLevel;
-		setTimeout('initSudoku()',20);		
+		setTimeout('initSudoku()',20);
 	}
 }
 

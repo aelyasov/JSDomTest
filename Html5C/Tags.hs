@@ -115,7 +115,7 @@ data HTML_TAG = TAG_A
               | TAG_VAR
               | TAG_VIDEO
               | TAG_WBR
-                deriving (Show, Read, Eq)
+              deriving (Show, Read, Eq)
 
 
 str2HtmlTag :: String -> HTML_TAG

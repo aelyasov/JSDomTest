@@ -1,17 +1,22 @@
+// location of node4: /usr/local/bin/node
+// /usr/local/bin/node geneticServer1.js
+
 var fs         = require('fs'),
     url        = require("url") ,
     http       = require("http"),
     path       = require("path"),
     jsdom      = require("jsdom"),
-    instrument = require("./instrumentLib.js");
-    // istanbul = require('istanbul'),
-    // vm       = require('vm');
+    instrument = require("./instrumentLib.js"),
+    winston    = require('winston');
+    // logger     = require('./logger.js');    
+    
 
 var jsFun, jsMutFun, jsFunArgs;
+winston.level = 'info';
 
 http.createServer(function(request, response){
     
-    console.log("I got kicked");
+    winston.log("info", "I got kicked");
     
     var data_ = '{ "jsFun":"function safeAdd(frameid) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {instrument._trace_.push(6);instrument._branchDistance_.push([6,Number(instrument._K_)]);instrument._trace_.push(7);frame.parentNode.removeChild(frame);} else {instrument._trace_.push(6);instrument._branchDistance_.push([6,_Number(K_)]);instrument._trace_.push(9);iframe.appendChild(anchor);}}", "jsMutFun":"var _K_ = 0;var _branchDistance_ = [];var _trace_ = [];function safeAdd(frameid,document) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {_branchDistance_.push([6,!_K_]);_trace_.push(7);frame.parentNode.removeChild(frame);} else {_branchDistance_.push([6,_K_]);_trace_.push(9);iframe.appendChild(anchor);}}"}';   
 
@@ -19,15 +24,15 @@ http.createServer(function(request, response){
     
     // var my_url = url.parse(request.url);
     var queryObject = url.parse(request.url,true).query;
-    console.log("queryObject: ", queryObject);
+    winston.log("info", "queryObject:", queryObject);
 
     if (queryObject.init == "true") {
 	request.on('data', function(data) {
-	    console.log("Received the initial function:", data.toString());
+	    winston.log("info", "Received the initial function:", data.toString());
 	    
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
-	    console.log("jsFun before eval: ", JSON.parse(data).jsFun);
+	    winston.log("info", "jsFun before eval:\n", JSON.parse(data).jsFun);
 	    eval(JSON.parse(data).jsFun);
 	    // jsMutFun = eval(JSON.parse(data).jsMutFun);	    
 	    
@@ -40,11 +45,12 @@ http.createServer(function(request, response){
 
     if (queryObject.mutation == "true") {
 	request.on('data', function(data) {
-	    console.log("Received the mutated function:", data.toString());
-	    console.log("# New mutation iteration: ", JSON.parse(data).mutN);
-	    console.log("jsMutFun before eval:", JSON.parse(data).jsMutFun);
+	    winston.log("info", "Received the mutated function:\n", data.toString());
+	    var library = "var instrument = require(\"./instrumentLib.js\");\n"
+	    winston.log("info", "# New mutation iteration: ", JSON.parse(data).mutN);
+	    winston.log("info", "jsMutFun before eval:\n", JSON.parse(data).jsMutFun);
 	    //eval(JSON.parse(data).jsMutFun);
-	    jsMutFun = JSON.parse(data).jsMutFun;
+	    jsMutFun = library + JSON.parse(data).jsMutFun;
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
 	response.write("mutation response");
@@ -54,14 +60,14 @@ http.createServer(function(request, response){
 
     if (queryObject.genetic == "true") {
 	request.on('data', function(data) {
-	    console.log("Received arguments which are new population:", data.toString());
-	    
+	    winston.log("Received arguments which are new population:", data.toString());
+
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
 	    jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>"),	    
-	    console.log("jsFunArgs: ", jsFunArgs);
+	    winston.log("jsFunArgs: ", jsFunArgs);
 
-	    var intercept = fs.readFileSync("/home/alex/PROJECTS/FITTEST/Software/UtrechtUniv/tools/JSDomTest/js/interceptTest.js", "utf-8");
+	    //var intercept = fs.readFileSync("/home/alex/PROJECTS/FITTEST/Software/UtrechtUniv/tools/JSDomTest/js/interceptTest.js", "utf-8");
 
  	    jsdom.env({
 		html: jsFunArgs[0],
@@ -70,7 +76,7 @@ http.createServer(function(request, response){
 		// features: { 
 		//     FetchExternalResources: ["script"], 
 		//     ProcessExternalResources: ["script"]
-		// },
+		// },\
 		done: function (error, window){
 		    
 		    var document = window.document;
@@ -78,28 +84,28 @@ http.createServer(function(request, response){
 		    
 		    var _getElementById = document.getElementById;
 		    document.getElementById = function() {
-			console.log("id", arguments[0]);
+			winston.log("info", "id", arguments[0]);
 			environment.ids = environment.ids.concat(arguments[0]);
 			return _getElementById.apply(this, arguments);
 		    };
 
 		    _getElementsByClassName = document.getElementsByClassName;
 		    document.getElementsByClassName = function() {
-			console.log("class", arguments[0]);
+			winston.log("info", "class", arguments[0]);
 			environment.classes = environment.classes.concat(arguments[0].split(" "));
 			return _getElementsByClassName.apply(this, arguments);
 		    };
 		    
 		    _getElementsByName =  document.getElementsByName;
 		    document.getElementsByName = function() {
-			console.log("name", arguments[0]);
+			winston.log("info", "name", arguments[0]);
 			environment.names = environment.names.concat(arguments[0]);
 			return _getElementsByName.apply(this, arguments);
 		    };
 		    
 		    _getElementsByTagName = document.getElementsByTagName;
 		    document.getElementsByTagName = function() {
-			console.log("tag", arguments[0]);
+			winston.log("info", "tag", arguments[0]);
 			environment.tags = environment.tags.concat(arguments[0]);
 			return _getElementsByTagName.apply(this, arguments);
 		    };
@@ -108,25 +114,33 @@ http.createServer(function(request, response){
 		    // the hook for getElementsByTagNameNS ignores information about namespace
 		    _getElementsByTagNameNS = document.getElementsByTagNameNS;
 		    document.getElementsByTagNameNS = function() {
-			console.log("tag", arguments[1]);
+			winston.log("info", "tag", arguments[1]);
 			environment.tags = environment.tags.concat(arguments[1]);
 			return _getElementsByTagNameNS.apply(this, arguments);
 		    };
 
 		    // eval(JSON.parse(data_).jsFun);
-		    console.log("jsMutFun", jsMutFun);
+		    var _K_ = 1;
+		    var _branchDistance_ = [];
+		    var _trace_ = [1];
+
+		    winston.log("jsMutFun:\n", jsMutFun);
 		    eval(jsMutFun);
 
 		    var old_doc = window.document;
-		    console.log("old_doc: ", jsdom.serializeDocument(old_doc));
-		    safeAdd.call(window, jsFunArgs[1], window, document);
-		    console.log("_trace_", instrument._trace_);
-		    console.log(" _branchDistance_",  instrument._branchDistance_);
+		    winston.log("info", "old_doc:\n", jsdom.serializeDocument(old_doc));
+		    try {
+			test.call(window, jsFunArgs[1], window, document);
+		    } catch (e) {
+			winston.log("info", "Test function is exceptionally terminated with the message: %s", e.stack)
+		    }
+		    winston.log("info", "_trace_", _trace_);
+		    winston.log("info", " _branchDistance_",  _branchDistance_);
 		    var new_doc = window.document;
-		    console.log("new_doc: ", jsdom.serializeDocument(new_doc));
-		    console.log("environment: ", environment);
+		    winston.log("info", "new_doc:\n", jsdom.serializeDocument(new_doc));
+		    winston.log("info", "environment: ", environment);
 		    response.writeHeader(200, {"Content-Type": "text/plain"});
-		    response.write(JSON.stringify({_trace_:instrument._trace_,  _branchDistance_: instrument._branchDistance_}));
+		    response.write(JSON.stringify({_trace_:_trace_,  _branchDistance_: _branchDistance_}));
 		    response.end();    
 		}
 	    });
@@ -135,9 +149,9 @@ http.createServer(function(request, response){
 
     if (queryObject.execute == "true") {
 	request.on('data', function(data) {
-	    console.log("Received genetically approved arguments", data.toString()); 
+	    winston.log("info", "Received genetically approved arguments", data.toString()); 
 	    jsFunArgs = JSON.parse(data).jsArgs.split("<|>"),	    
-	    console.log("jsFunArgs: ", jsFunArgs);
+	    winston.log("info", "jsFunArgs: ", jsFunArgs);
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
 	response.write("execution response");
@@ -145,4 +159,4 @@ http.createServer(function(request, response){
     }
     
 }).listen(7777);
-console.log("Server Running on 7777");
+winston.log("info", "Server Running on 7777");

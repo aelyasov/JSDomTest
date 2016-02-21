@@ -1,3 +1,5 @@
+{-# LANGUAGE DoAndIfThenElse #-}
+
 module Html5C.Generators where
 
 import Prelude
@@ -31,6 +33,7 @@ import Html5C.QuickCheck.Gen
 
 import Util.Debug
 import Debug.Trace
+import Safe (fromJustNote)
 
 
 fromTag2Gen :: HTML_TAG -> GenHtmlState
@@ -159,25 +162,32 @@ context2gens freqTbl tags ctx =
         ctxUni  = (foldl (\\) (foldr1 intersect posCtx) negCtx) ++ concat passCtx
         ctxUniLikely = let ctxUniLikely' = ctxUni `intersect` tags
                        in  if P.null ctxUniLikely'
-                           then ctxUni
+                           -- then ctxUni
+                           then ctxUniLikely'     
                            else ctxUniLikely'
-        findTag ts x = fromJust $ find (\(i, h) -> x == h) ts
-        tagsFreq     = P.map (findTag freqTbl) $ nub ctxUniLikely 
+        findTag ts x = find (\(i, h) -> x == h) ts
+        tagsFreq     = mapMaybe (findTag freqTbl) $ nub ctxUniLikely 
         
     in  if P.null tagsFreq 
         then trace ("*** Warning: the context is empty " ++ show ctx) $ 
              P.map (\(i, t) -> (i, fromTag2Gen t)) tagsFreq
         else P.map (\(i, t) -> (i, fromTag2Gen t)) tagsFreq   
 
-
+arbHtmlDefaultHead :: GenHtmlState
+arbHtmlDefaultHead = return $ H.head $ H.title $ toHtml "Test Title"
 
 arbHtmlHTML :: GenHtmlState
 arbHtmlHTML = do
   st <- get
-  let n   = getDepth st
-      ctx = getCtx st
-      main_ = hasMain st
-  head_ <- put st{ getDepth = iter n, getCtx = push CMetadata ctx} >> arbHtmlHEAD
+  let n       = getDepth st
+      ctx     = getCtx st
+      main_   = hasMain st
+      hasHead = hasDefHead st    
+  head_ <- put st{ getDepth = iter n, getCtx = push CMetadata ctx}
+           >>
+           if hasHead
+           then arbHtmlDefaultHead
+           else arbHtmlHEAD
   body_ <- put st{ getDepth = iter n, getCtx = push CFlow ctx} >> arbHtmlBODY
   if n == 0
   then lift $ return $ toHtml "HTML"
@@ -308,7 +318,6 @@ arbFlowContent = debug "arbFlowContent" $ do
                    do st' <- get
                       let main_ = hasMain st'                         
                       if not main_ 
-                   -- if main_          
                       then do put st'{getCtx = ctx} 
                               frequencyState $ context2gens freqTbl tags ctx
                       else 

@@ -8,7 +8,7 @@ import qualified Data.Text as T
 import Data.Text (Text)
 import Data.Text.Encoding
 
-import Analysis.CFG.Build
+import Analysis.CFG.Data (NLab, ELab, SLab)
 import Data.Graph.Inductive.PatriciaTree
 
 import Html5C.Tags
@@ -17,14 +17,18 @@ data JSArg = IntJS Int
            | StringJS String
            | BoolJS Bool
            | DomJS ByteString
-             deriving (Show, Read, Ord, Eq)
+             deriving (Read, Ord, Eq)
+
+instance Show JSArg where
+  show (IntJS i)    = show i
+  show (StringJS s) = s
+  show (BoolJS b)   = show b
+  show (DomJS s)    = show s
+  
+data Target = Target { jsCFG :: Gr NLab ELab, murSrc :: SLab } deriving Show
 
 
-data Target = Target { jsCFG :: Gr NLab ELab, murSrc :: SLab }
-
-
-data JSType = JS_INT | JS_FLOAT | JS_STRING | JS_BOOL | JS_DOM
-            deriving Show
+data JSType = JS_INT | JS_FLOAT | JS_STRING | JS_BOOL | JS_DOM deriving Show
 
 type JSSig = [JSType]
 

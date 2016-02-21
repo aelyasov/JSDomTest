@@ -7,13 +7,20 @@ import Language.ECMAScript3.Syntax
 import Language.ECMAScript3.Parser
 import Data.Monoid
 import Html5C.Tags
+import Data.List (nub)
+-- import Data.Data
+import Mutation.Dom.Operators
 
-collectStaticRefs :: JavaScript SourcePos -> JSDoms
+import Debug.Trace
+
+
+collectStaticRefs :: JavaScript SourcePosLab -> JSDoms
 collectStaticRefs = everything mappend (mempty `mkQ` foldExpr)
 
-foldExpr :: Expression SourcePos -> JSDoms
+foldExpr :: Expression SourcePosLab -> JSDoms
 foldExpr (CallExpr _ (DotRef _ _ (Id _ fun)) [StringLit _ arg]) =
   case fun of
+   "createElement"          -> ([str2HtmlTag arg], mempty, mempty, mempty) 
    "getElementById"         -> (mempty,            [arg],  mempty, mempty)
    "getElementsByClassName" -> (mempty,            mempty, mempty, [arg])
    "getElementsByName"      -> (mempty,            mempty, [arg],  mempty)
@@ -21,3 +28,10 @@ foldExpr (CallExpr _ (DotRef _ _ (Id _ fun)) [StringLit _ arg]) =
    _                        -> mempty
 foldExpr _ = mempty
 
+
+-- | TODO: implement integer and string collection
+collectConstantInfoJS :: JavaScript SourcePosLab -> JSCPool
+collectConstantInfoJS js = ([], [], removeDuplicates $ collectStaticRefs js)
+
+removeDuplicates :: JSDoms -> JSDoms
+removeDuplicates (tags, ids, names, classes) = (nub tags, nub ids, nub names, nub classes)

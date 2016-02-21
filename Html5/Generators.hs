@@ -446,7 +446,7 @@ genTAG_data cm n = debug "genTAG_data" $
 
  
 genTAG_date :: Context -> Int -> GenState HasMain Html
-genTAG_date = undefined
+genTAG_date = error "genTAG_date"
  
 genTAG_datalist :: Context -> Int -> GenState HasMain Html
 genTAG_datalist _ 0  = lift $ return $ toHtml "DATALIST1"

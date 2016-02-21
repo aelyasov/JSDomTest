@@ -1,10 +1,10 @@
-if (k1) {
-    a++;
-    if (k2) {
-	b++;
-    } else {
-	c++;
-    }
+if (a) {
+  if (b) {
+    return 1;
+  } else {
+    return 2;
+  }
 } else {
-    d++;
+x
 }
+return 4;

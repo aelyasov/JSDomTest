@@ -28,12 +28,13 @@ import Data.Monoid
 -- import Data.List
 
 import Test.QuickCheck
-import Test.QuickCheck.Monadic 
+import Test.QuickCheck.Monadic
+import Safe (fromJustNote)
 
 
 checkErrorsInResponse :: ByteString -> Maybe Text
 checkErrorsInResponse response = 
-    let err_mess = filter isMError $ unVMessage $ fromJust 
+    let err_mess = filter isMError $ unVMessage $ fromJustNote "checkErrorsInResponse" 
                    (decode response :: Maybe ValidMessage)
         mkErrMessage = mconcat $ map (("*** Error Message: "<>) . (<>"\n") . unEText) err_mess
     in  if null err_mess
