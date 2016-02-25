@@ -43,6 +43,8 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
                [DomJS d1, DomJS d2] -> liftM DomJS $ crossoverHTML g d1 d2
+               [IntJS i1, IntJS i2] -> liftM (IntJS . ([i1,i2]!!)) $ randomRIO (0, 1)
+               [StringJS i1, StringJS i2] -> liftM (StringJS . ([i1,i2]!!)) $ randomRIO (0, 1)
                otherwise -> error "crossover of non-DOM elements isn't defined"
                -- otherwise            -> return $ arg!!(a `mod` 2) 
         args' <- crossAllArgs g' args
@@ -57,6 +59,8 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
               DomJS d1  -> liftM DomJS $ mutateHtml g d1
+              IntJS i1  -> liftM IntJS $ return i1
+              StringJS i1  -> liftM StringJS $ return i1
               otherwise ->  error "mutation of non-DOM elements isn't defined"
         args' <- mutateAllArgs g' args
         return (d:args')      

@@ -1,37 +1,37 @@
 module Analysis.Static where
 
-import Data.Generics.Aliases
-import Data.Generics.Schemes
-import Genetic.DataJS
+import Data.Generics.Aliases (mkQ)
+import Data.Generics.Schemes (everything)
+import Genetic.DataJS (JSCPool)
 import Language.ECMAScript3.Syntax
 import Language.ECMAScript3.Parser
 import Data.Monoid
-import Html5C.Tags
+import Html5C.Tags 
 import Data.List (nub)
--- import Data.Data
 import Mutation.Dom.Operators
-
 import Debug.Trace
 
 
-collectStaticRefs :: JavaScript SourcePosLab -> JSDoms
+collectStaticRefs :: JavaScript SourcePosLab -> JSCPool
 collectStaticRefs = everything mappend (mempty `mkQ` foldExpr)
 
-foldExpr :: Expression SourcePosLab -> JSDoms
+foldExpr :: Expression SourcePosLab -> JSCPool
 foldExpr (CallExpr _ (DotRef _ _ (Id _ fun)) [StringLit _ arg]) =
   case fun of
-   "createElement"          -> ([str2HtmlTag arg], mempty, mempty, mempty) 
-   "getElementById"         -> (mempty,            [arg],  mempty, mempty)
-   "getElementsByClassName" -> (mempty,            mempty, mempty, [arg])
-   "getElementsByName"      -> (mempty,            mempty, [arg],  mempty)
-   "getElementsByTagName"   -> ([str2HtmlTag arg], mempty, mempty, mempty)
+   "createElement"          -> (mempty, mempty, ([str2HtmlTag arg], mempty, mempty, mempty)) 
+   "getElementById"         -> (mempty, mempty, (mempty,            [arg],  mempty, mempty))
+   "getElementsByClassName" -> (mempty, mempty, (mempty,            mempty, mempty, [arg]))
+   "getElementsByName"      -> (mempty, mempty, (mempty,            mempty, [arg],  mempty))
+   "getElementsByTagName"   -> (mempty, mempty, ([str2HtmlTag arg], mempty, mempty, mempty))
    _                        -> mempty
+foldExpr (StringLit _ str) = (mempty, [str], (mempty, mempty, mempty, mempty))
+foldExpr (IntLit _ int)    = ([int], mempty, (mempty, mempty, mempty, mempty))   
 foldExpr _ = mempty
 
 
 -- | TODO: implement integer and string collection
 collectConstantInfoJS :: JavaScript SourcePosLab -> JSCPool
-collectConstantInfoJS js = ([], [], removeDuplicates $ collectStaticRefs js)
+collectConstantInfoJS = removeDuplicates . collectStaticRefs
 
-removeDuplicates :: JSDoms -> JSDoms
-removeDuplicates (tags, ids, names, classes) = (nub tags, nub ids, nub names, nub classes)
+removeDuplicates :: JSCPool -> JSCPool
+removeDuplicates (ints, strings, (tags, ids, names, classes)) = (nub ints, nub strings, (nub tags, nub ids, nub names, nub classes))

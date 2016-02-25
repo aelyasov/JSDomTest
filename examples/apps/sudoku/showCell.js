@@ -1,7 +1,8 @@
 /*t dom : string */
-function showCell(inputDiv) {
-  if (inputDiv == 'generateDOMInput')
+function test(inputDiv) {
+  if (inputDiv == 'generateDOMInput') {
     inputDiv = document.getElementById('ConfixDummyNode1');
+  }
 
   var span = inputDiv.getElementsByTagName('SPAN')[0];
   span.style.display='';

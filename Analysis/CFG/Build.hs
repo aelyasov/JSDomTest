@@ -50,7 +50,7 @@ mkTestCFG fp = do
   stms <- liftM (unJavaScript . fst . flip runState 0 . assignUniqueIdsSt) $ parseFromFile fp
   -- print stms
   let coll@(nodes', edges') = collectEdges stms (0,-1,[]) (-1)
-      nodes = (0, "entry"):(-1, "exit"):nodes'
+      nodes = (0, "0: entry"):(-1, "-1: exit"):nodes'
       edges = (0, 1, ""):edges'
       graph = mkGraph nodes edges :: Gr NLab ELab
   return graph
@@ -58,7 +58,7 @@ mkTestCFG fp = do
 enrichCollectedEdges :: [Statement (SourcePos, SLab)] -> ([LNode NLab], [LEdge ELab])
 enrichCollectedEdges stms = 
     let (nodes', edges') = collectEdges stms (0,-1,[]) (-1)
-    in  ((0, "entry"):(-1, "exit"):nodes', (0, 1, ""):edges')
+    in  ((0, "0: entry"):(-1, "-1: exit"):nodes', (0, 1, ""):edges')
 
 
 -- | the function collectEdges takes the list of statements, pair of labels (block entry and exit), end label and returns edges together with the nodes of the CFG graph

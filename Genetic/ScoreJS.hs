@@ -28,9 +28,10 @@ import System.Log.Logger (rootLoggerName, infoM)
 
 
 fitnessScore :: Target -> [JSArg] -> IO (Maybe Double)
-fitnessScore tg@(Target cfg loc)  jargs = do
+fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   let logger = rootLoggerName
   infoM logger $ "Compute fitness score for the target: " ++ (show tg)
+  infoM logger $ "Compute fitness score for the JS arguments:\n" ++ (show jargs)
   man <- liftIO $ newManager tlsManagerSettings
   initReq <- parseUrl "http://localhost:7777"
   let req = initReq { method = "POST"
@@ -43,14 +44,14 @@ fitnessScore tg@(Target cfg loc)  jargs = do
   infoM logger $ "Execution trace: " ++ (show trace_)
   infoM logger $ "Branch distances: " ++ (show distances_)
   infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_) 
-  let (aprLevel, pathDistance, branch) = approachLevel cfg loc trace_
+  let (aprLevel, pathDistance, branch) = approachLevel cfg to trace_
   infoM logger $ "Approach level is equal to: " ++ (show aprLevel) ++ " for the branch: " ++ (show branch)
   let brLevel     = maybe 0 getBrDist $ find ((branch==) . getBrLab) distances_
       normBrLevel = branchDistNormalize brLevel
       fitnessVal  = fromIntegral aprLevel + normBrLevel + fromIntegral pathDistance
   infoM logger $ "Path distance is equal to: " ++ (show pathDistance)    
   infoM logger $ "Branch distance is equal to: " ++ (show brLevel)    
-  infoM logger $ "Fitness value is equal to: " ++ (show fitnessVal)    
+  infoM logger $ "Fitness value is equal to: " ++ (show fitnessVal)
   return $ Just fitnessVal
   -- return $ Just $ (read $ C.unpack $ responseBody response :: Double)
 
@@ -59,7 +60,7 @@ branchDistNormalize b = fromIntegral b / fromIntegral (b+1)
 
 
 -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
-test_fitnessScore = fitnessScore (Target G.empty 9) [DomJS test_html, StringJS "iframe"]
+-- test_fitnessScore = fitnessScore (Target G.empty 9) [DomJS test_html, StringJS "iframe"]
 
 -- test_html = "<!DOCTYPE HTML>\n<html><head><title>Title</title><base href=\".\" target=\"_blank\"></head><body itemscope=\"\" itemtype=\"http://schema.org/WebPage\"><h1><a></a>A2A2</h1><h1></h1></body></html>"
 

@@ -14,7 +14,9 @@ import Control.Monad.Trans.Class
 genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
   infoM rootLoggerName $ "Generating random value for a type: " ++ (show tp)
-  genRandomVal' pool tp
+  val <- genRandomVal' pool tp
+  infoM rootLoggerName $ "Generated random value is: " ++ (show val)
+  return val
 
 genRandomVal' :: JSCPool -> JSType -> IO JSArg
 genRandomVal' (ints, _, _)    JS_INT    = liftM IntJS    $ genRandomInt ints
@@ -35,7 +37,7 @@ genRandomString :: JSStrings -> IO String
 genRandomString strs = do gstr <- arbitraryMy
                           generate $ case strs of
                             [] -> return gstr
-                            _  -> oneof [return gstr, elements strs]
+                            _  -> oneof [elements strs]
   where
     arbitraryMy :: IO String
     arbitraryMy = do g <- newStdGen

@@ -9,6 +9,7 @@ import System.Environment (getArgs) -- pass arguments to the program
 import Language.ECMAScript3.Parser
 import Language.ECMAScript3.Syntax
 import qualified Language.ECMAScript3.PrettyPrint as JSP
+import Data.Graph.Inductive.Dot (fglToDotString, showDot)
 --import Data.Default.Class (def) -- create default value of the SourcePos datatype
 import Data.Default
 import qualified Data.ByteString.Lazy.Char8 as C
@@ -53,6 +54,7 @@ import System.Log.Handler.Simple (streamHandler, GenericHandler)
 import System.Log.Handler (setFormatter)
 import System.Log.Formatter
 import Data.Configurator (load, Worth(..), require)
+import System.Process (system)
 
 
 readMainConfig :: IO (Algorithm, Priority)
@@ -85,44 +87,41 @@ main = do
   jsSig <- parseJSSignature jsFile
   print jsSig
   let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt  jsFun
-      jsFunCFG = uncurry mkGraph $ enrichCollectedEdges jsLabStms
-      branches = getAllBranches jsFunCFG
-  infoM logger $ "There are following branches to cover: " ++ (show branches)
+      jsFunCFG      = uncurry mkGraph $ enrichCollectedEdges jsLabStms
+      branches      = getAllBranches jsFunCFG
+      constPool     = collectConstantInfoJS jsLabFun
+      jsLabFunInstr = instrScript jsLabFun
+  infoM logger "Function given for analysis has the following CFG:\n"
+  system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii"
+  infoM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
+  infoM logger $ "The following branches have to be covered: " ++ (show branches)
+  infoM logger $ "Initial pool data: " ++ (show constPool)
+  getLine
   request <- parseUrl "http://localhost:7777"
   man <- liftIO $ newManager tlsManagerSettings
 
   let reqInit = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                         , queryString = "init=true"
-                        , requestBody = RequestBodyLBS $ encode (InitData (T.pack $ show $ JSP.prettyPrint jsFun))
+                        , requestBody = RequestBodyLBS $ encode (InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr))
                         }
   initResp <- httpLbs reqInit man
   infoM logger $ show initResp 
 
-  mapM_  (\(i, branch) ->
-           killJSMutationGenetic algType
-                                 man
-                                 i
-                                 jsMutType
-                                 (show $ JSP.prettyPrint $ (instrScript jsLabFun :: JavaScript SourcePosLab))
-                                 (Target jsFunCFG branch) 
-                                 (jsSig, collectConstantInfoJS jsLabFun)
-         ) $ zip branches [1..]
+  mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target jsFunCFG branch)  (jsSig, constPool)) $ zip [1..] branches
 
 
-killJSMutationGenetic :: Algorithm -> Manager -> Int -> MutationType -> String -> Target -> (JSSig, JSCPool) -> IO ()
-killJSMutationGenetic alg man mutN mutType jsMutFun target pool = do
+killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
+killJSMutationGenetic alg man mutN target pool = do
   let logger = rootLoggerName
   putStrLn $ replicate 70 '-'
-  infoM logger $ "Branch number: #" ++ (show mutN)
-  infoM logger $ "Mutation type: " ++ mutType
-  infoM logger $ "Mutated program:\n" ++ jsMutFun
+  infoM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
   infoM logger $ "Initial pool data: " ++ (show pool)
   request <- parseUrl "http://localhost:7777"
   let reqMut = request { method = "POST"
                        , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                        , queryString = "mutation=true"
-                       , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN) (T.pack jsMutFun))
+                       , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
                        }
   mutResp <- httpLbs reqMut man
   infoM logger $ show mutResp
@@ -138,7 +137,8 @@ killJSMutationGenetic alg man mutN mutType jsMutFun target pool = do
                         , requestBody = RequestBodyLBS $ encode (ArgData $ jsargs2bstrs jsArgs)
                         }
   execResp <- httpLbs reqExec man
-  infoM logger $ show execResp         
+  infoM logger $ show execResp
+  getLine
   return ()
 
 
@@ -153,10 +153,10 @@ data InitData = InitData { jsFun :: Text }
 instance ToJSON InitData where
     toJSON (InitData jsFun) = object [ "jsFun" .= jsFun ]
 
-data MutData = MutData { mutN :: Text, jsMutFun :: Text }
+data MutData = MutData { mutN :: Text }
 
 instance ToJSON MutData where
-    toJSON (MutData mutN jsMutFun) = object [ "mutN" .= mutN, "jsMutFun" .= jsMutFun ]
+    toJSON (MutData mutN) = object [ "mutN" .= mutN ]
 
 
 data ArgData = ArgData { jsArgs :: Text }

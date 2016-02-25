@@ -33,8 +33,8 @@ http.createServer(function(request, response){
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
 	    winston.log("info", "jsFun before eval:\n", JSON.parse(data).jsFun);
-	    eval(JSON.parse(data).jsFun);
-	    // jsMutFun = eval(JSON.parse(data).jsMutFun);	    
+	    var library = "var instrument = require(\"./instrumentLib.js\");\n"
+	    jsFun = library + JSON.parse(data).jsFun;
 	    
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
@@ -46,11 +46,7 @@ http.createServer(function(request, response){
     if (queryObject.mutation == "true") {
 	request.on('data', function(data) {
 	    winston.log("info", "Received the mutated function:\n", data.toString());
-	    var library = "var instrument = require(\"./instrumentLib.js\");\n"
 	    winston.log("info", "# New mutation iteration: ", JSON.parse(data).mutN);
-	    winston.log("info", "jsMutFun before eval:\n", JSON.parse(data).jsMutFun);
-	    //eval(JSON.parse(data).jsMutFun);
-	    jsMutFun = library + JSON.parse(data).jsMutFun;
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
 	response.write("mutation response");
@@ -72,11 +68,6 @@ http.createServer(function(request, response){
  	    jsdom.env({
 		html: jsFunArgs[0],
 		scripts: ["http://code.jquery.com/jquery.js"], 
-		// __dirname + '/intercept.js'
-		// features: { 
-		//     FetchExternalResources: ["script"], 
-		//     ProcessExternalResources: ["script"]
-		// },\
 		done: function (error, window){
 		    
 		    var document = window.document;
@@ -119,25 +110,21 @@ http.createServer(function(request, response){
 			return _getElementsByTagNameNS.apply(this, arguments);
 		    };
 
-		    // eval(JSON.parse(data_).jsFun);
 		    var _K_ = 1;
 		    var _branchDistance_ = [];
 		    var _trace_ = [1];
 
-		    winston.log("jsMutFun:\n", jsMutFun);
-		    eval(jsMutFun);
+		    winston.log("jsFun:\n", jsFun);
+		    eval(jsFun);
 
-		    var old_doc = window.document;
-		    winston.log("info", "old_doc:\n", jsdom.serializeDocument(old_doc));
 		    try {
 			test.call(window, jsFunArgs[1], window, document);
 		    } catch (e) {
 			winston.log("info", "Test function is exceptionally terminated with the message: %s", e.stack)
 		    }
+		    
 		    winston.log("info", "_trace_", _trace_);
 		    winston.log("info", " _branchDistance_",  _branchDistance_);
-		    var new_doc = window.document;
-		    winston.log("info", "new_doc:\n", jsdom.serializeDocument(new_doc));
 		    winston.log("info", "environment: ", environment);
 		    response.writeHeader(200, {"Content-Type": "text/plain"});
 		    response.write(JSON.stringify({_trace_:_trace_,  _branchDistance_: _branchDistance_}));
