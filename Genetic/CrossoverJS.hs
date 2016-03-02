@@ -6,7 +6,7 @@ import qualified Data.ByteString.Lazy as B
 import Data.ByteString.Lazy (ByteString)
 import Text.XML.Label (findElementInDocumentByLabel, insertElementInDocumentByLabel, removeLabelsFromDocument)
 import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document)
-import System.Log.Logger (rootLoggerName, infoM)
+import System.Log.Logger (rootLoggerName, infoM, debugM)
 import Text.XML (Document(..))
 import System.Random (StdGen, randomR, mkStdGen)
 import Text.Blaze.Html.Renderer.Pretty (renderHtml)
@@ -19,7 +19,7 @@ import Debug.Trace
 crossoverHTML :: StdGen -> ByteString -> ByteString -> IO ByteString
 crossoverHTML gen html1 html2 = do
   let logger = rootLoggerName
-  infoM logger $ "Crossing over two html document:\n"
+  debugM logger $ "Crossing over two html document:\n"
     ++ (prettyHtmlByteString html1)
     ++ "\n" ++ "with" ++ "\n"
     ++ (prettyHtmlByteString html2)
@@ -39,7 +39,7 @@ crossoverIterate gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
       (whereLabel, gen2) = randomR (4, docDepth2 - 1) gen1
       crossoveredDocument = crossoverDocuments fromLabel whereLabel fromDoc whereDoc
       crossoveredDocumentNoLabel = fmap removeLabelsFromDocument crossoveredDocument
-  infoM logger $ "Crossover is applied at the node #" ++
+  debugM logger $ "Crossover is applied at the node #" ++
     (show fromLabel) ++ " (" ++ (show docDepth1) ++ ") " ++
     " and #" ++
     (show whereLabel) ++  " (" ++ (show docDepth2) ++ ") "        
@@ -48,9 +48,9 @@ crossoverIterate gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
                            result = BR.renderHtml html 
                        response <- askValidator result
                        case response of
-                        Just _  -> do infoM logger $ "The Offsprint is inconsistent html"
+                        Just _  -> do debugM logger $ "The Offsprint is inconsistent html"
                                       crossoverIterate gen2 doc1 doc2
-                        Nothing -> do infoM logger $ "Crossover result:\n" ++ (renderHtml html)
+                        Nothing -> do debugM logger $ "Crossover result:\n" ++ (renderHtml html)
                                       return result              
    Nothing       -> crossoverIterate gen2 doc1 doc2
 

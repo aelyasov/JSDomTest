@@ -6,16 +6,16 @@ import Test.QuickCheck.Gen
 import Control.Monad
 import Html5C.ValidationTest
 import Data.ByteString.Lazy (ByteString)
-import System.Log.Logger (rootLoggerName, infoM)
+import System.Log.Logger (rootLoggerName, infoM, debugM)
 import System.Random
 import Control.Monad.Trans.Class
 
 
 genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
-  infoM rootLoggerName $ "Generating random value for a type: " ++ (show tp)
+  debugM rootLoggerName $ "Generating random value for a type: " ++ (show tp)
   val <- genRandomVal' pool tp
-  infoM rootLoggerName $ "Generated random value is: " ++ (show val)
+  debugM rootLoggerName $ "Generated random value is: " ++ "'" ++ (show val) ++ "'"
   return val
 
 genRandomVal' :: JSCPool -> JSType -> IO JSArg

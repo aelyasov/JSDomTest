@@ -27,6 +27,7 @@ import Util.ParseJSSignature
 import Analysis.CFG.Instrument (instrScript)
 import Analysis.CFG.Build (enrichCollectedEdges, getAllBranches)
 import Analysis.CFG.Label (assignUniqueIdsSt)
+import Analysis.CFG.Transform (transfromJS)
 import Analysis.Static
 
 -- | Networking
@@ -49,7 +50,7 @@ import Data.Graph.Inductive
 -- | Debug
 import Debug.Trace
 import System.IO (stdout, Handle)
-import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), infoM, setLevel)
+import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, setLevel)
 import System.Log.Handler.Simple (streamHandler, GenericHandler)
 import System.Log.Handler (setFormatter)
 import System.Log.Formatter
@@ -82,8 +83,8 @@ main = do
   updateGlobalLogger logger (setHandlers [myStreamHandler'])
 
   (jsFile:_) <- getArgs
-  infoM logger $ "The following JS file is given for analysis: " ++ (show jsFile)
-  jsFun <- parseFromFile jsFile
+  debugM logger $ "The following JS file is given for analysis: " ++ (show jsFile)
+  jsFun <- liftM transfromJS $ parseFromFile jsFile
   jsSig <- parseJSSignature jsFile
   print jsSig
   let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt  jsFun
@@ -91,7 +92,7 @@ main = do
       branches      = getAllBranches jsFunCFG
       constPool     = collectConstantInfoJS jsLabFun
       jsLabFunInstr = instrScript jsLabFun
-  infoM logger "Function given for analysis has the following CFG:\n"
+  debugM logger "Function given for analysis has the following CFG:\n"
   system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii"
   infoM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
   infoM logger $ "The following branches have to be covered: " ++ (show branches)
@@ -106,7 +107,7 @@ main = do
                         , requestBody = RequestBodyLBS $ encode (InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr))
                         }
   initResp <- httpLbs reqInit man
-  infoM logger $ show initResp 
+  debugM logger $ show initResp 
 
   mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target jsFunCFG branch)  (jsSig, constPool)) $ zip [1..] branches
 
@@ -124,12 +125,12 @@ killJSMutationGenetic alg man mutN target pool = do
                        , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
                        }
   mutResp <- httpLbs reqMut man
-  infoM logger $ show mutResp
+  debugM logger $ show mutResp
   jsArgs <- runAlgorithm alg target pool
   -- for the integration testing purpose runGenetic has been replaced with fitnessScore
   -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
   -- let jsArgs = [DomJS test_html, StringJS "iframe"]
-  putStrLn $ "best entity (GA): " ++ (show jsArgs)
+  infoM logger $ "Best entity (GA): " ++ (show jsArgs)
 
   let reqExec = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
@@ -137,7 +138,7 @@ killJSMutationGenetic alg man mutN target pool = do
                         , requestBody = RequestBodyLBS $ encode (ArgData $ jsargs2bstrs jsArgs)
                         }
   execResp <- httpLbs reqExec man
-  infoM logger $ show execResp
+  debugM logger $ show execResp
   getLine
   return ()
 

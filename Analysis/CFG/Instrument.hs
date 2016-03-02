@@ -26,24 +26,31 @@ instrStatement st@(EmptyStmt    l)            = [traceStmt traceVar $ getStmtLab
 instrStatement st@(ExprStmt     l ex)         = [traceStmt traceVar $ getStmtLab st, st]
 instrStatement st@(IfStmt l ex thenBl elseBl) = let BlockStmt l1 sts1 = thenBl
                                                     BlockStmt l2 sts2 = elseBl
-                                                    branchLab         = getStmtLab st
-                                                    logStmt           = traceStmt traceVar branchLab
-                                                    thenBrDist        = traceBranchDistance branchLab (PrefixExpr def PrefixLNot ex)
-                                                    elseBrDist        = traceBranchDistance branchLab ex
+                                                    ifLab             = getStmtLab st          
+                                                    thenLab           = getStmtLab thenBl
+                                                    elseLab           = getStmtLab elseBl
+                                                    ifLogStmt         = traceStmt traceVar ifLab
+                                                    thenLogStmt       = traceStmt traceVar thenLab
+                                                    elseLogStmt       = traceStmt traceVar elseLab
+                                                    thenBrDist        = traceBranchDistance ifLab (PrefixExpr def PrefixLNot ex)
+                                                    elseBrDist        = traceBranchDistance ifLab ex
                                                     sts1'             = instrStatements sts1 
                                                     sts2'             = instrStatements sts2 
-                                                    thenBl'           = BlockStmt l1 (thenBrDist:sts1')
-                                                    elseBl'           = BlockStmt l2 (elseBrDist:sts2')
-                                                in  [logStmt, IfStmt l ex thenBl' elseBl']
-instrStatement st@(IfSingleStmt l ex thenBl) = let BlockStmt l1 sts1 = thenBl
-                                                   ifLab             = getStmtLab st
-                                                   blockLab          = getStmtLab thenBl
-                                                   ifLogStmt         = traceStmt traceVar ifLab
-                                                   blLogStmt         = traceStmt traceVar blockLab
-                                                   thenBrDist        = traceBranchDistance ifLab (PrefixExpr def PrefixLNot ex)
-                                                   sts1'             = instrStatements sts1
-                                                   thenBl'           = BlockStmt l1 (blLogStmt:thenBrDist:sts1')
-                                               in  [ifLogStmt, IfSingleStmt l ex thenBl']
+                                                    thenBl'           = BlockStmt l1 (thenLogStmt:thenBrDist:sts1')
+                                                    elseBl'           = BlockStmt l2 (elseLogStmt:elseBrDist:sts2')
+                                                in  [ifLogStmt, IfStmt l ex thenBl' elseBl']
+-- instrStatement st@(IfSingleStmt l ex thenBl) = let ifBlockLab        = getStmtLab st 
+--                                                    elseBl            = BlockStmt (def, ifBlockLab + 100) [] 
+--                                                in  instrStatement (IfStmt l ex thenBl elseBl)     
+-- instrStatement st@(IfSingleStmt l ex thenBl) = let BlockStmt l1 sts1 = thenBl
+--                                                    ifLab             = getStmtLab st
+--                                                    blockLab          = getStmtLab thenBl
+--                                                    ifLogStmt         = traceStmt traceVar ifLab
+--                                                    blLogStmt         = traceStmt traceVar blockLab
+--                                                    thenBrDist        = traceBranchDistance ifLab (PrefixExpr def PrefixLNot ex)
+--                                                    sts1'             = instrStatements sts1
+--                                                    thenBl'           = BlockStmt l1 (blLogStmt:thenBrDist:sts1')
+                                               -- in  [ifLogStmt, IfSingleStmt l ex thenBl']
 instrStatement st@(SwitchStmt   l ex ccs)   = let ccs' = map instrumentCaseClause ccs
                                               in  [SwitchStmt   l ex ccs']           
 instrStatement st@(WhileStmt    l ex whileBl) = let BlockStmt l1 sts1 = whileBl
@@ -83,8 +90,8 @@ instrStatement st@(TryStmt      l tryBl catchBl finallyBl) = let BlockStmt l1 st
                                                                  finallyBl' = maybe Nothing (Just . head . instrStatement) finallyBl
                                                              in  [TryStmt l tryBl' catchBl' finallyBl']
 instrStatement st@(ThrowStmt    l ex)       = [st]
-instrStatement st@(ReturnStmt   l ex)       = [traceStmt traceVar $ getStmtLab st, st]
-instrStatement st@(WithStmt     l ex st1)    = [WithStmt     l ex (head $ instrStatement st1)]
+instrStatement st@(ReturnStmt   l ex)       = [traceStmt traceVar $ getStmtLab st, traceStmt traceVar (-1), st]
+instrStatement st@(WithStmt     l ex st1)   = [WithStmt     l ex (head $ instrStatement st1)]
 instrStatement st@(VarDeclStmt  l vs)       = [traceStmt traceVar $ getStmtLab st, st]
 instrStatement st@(FunctionStmt l id ids sts) = [FunctionStmt l id ids $ (instrStatements sts ++ [traceStmt traceVar (-1)])]
 

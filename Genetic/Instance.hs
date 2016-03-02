@@ -9,14 +9,14 @@ import Genetic.DataJS
 import Genetic.RandomJS
 import Genetic.CrossoverJS
 import Genetic.ScoreJS
-import Genetic.MutationJS (mutateHtml)
+import Genetic.MutationJS (mutateHtml, mutateJSInt, mutateJSString)
 
 import Html5C.Tags
 
 import Control.Monad
 import System.Random
 -- import qualified Data.ByteString as BS
-import System.Log.Logger (rootLoggerName, infoM)
+import System.Log.Logger (rootLoggerName, infoM, debugM)
 import Data.Configurator (load, Worth(..), require)
 
 import GA.GA
@@ -27,7 +27,7 @@ import GA.GA
 instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
 
   genRandom pool@(sig, env) seed = do
-    infoM rootLoggerName $ "Generating random population for a signature: " ++ (show sig) ++ "\n" ++ (show env)
+    debugM rootLoggerName $ "Generating random population for a signature: " ++ (show sig) ++ "\n" ++ (show env)
     args <- mapM (genRandomVal env) sig
     return args
 
@@ -50,7 +50,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
         args' <- crossAllArgs g' args
         return (d:args')
           
-  mutation pool p seed e = liftM Just $ mutateAllArgs gen e
+  mutation (sig, pool) p seed e = liftM Just $ mutateAllArgs gen e
     where
       gen = mkStdGen seed
       mutateAllArgs :: StdGen -> [JSArg] -> IO [JSArg]
@@ -58,10 +58,10 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       mutateAllArgs g (arg:args) = do
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
-              DomJS d1  -> liftM DomJS $ mutateHtml g d1
-              IntJS i1  -> liftM IntJS $ return i1
-              StringJS i1  -> liftM StringJS $ return i1
-              otherwise ->  error "mutation of non-DOM elements isn't defined"
+              DomJS d1   -> liftM DomJS $ mutateHtml g d1
+              IntJS _    -> mutateJSInt pool
+              StringJS _ -> mutateJSString pool
+              otherwise  ->  error "mutation of non-DOM elements isn't defined"
         args' <- mutateAllArgs g' args
         return (d:args')      
 

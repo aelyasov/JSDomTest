@@ -10,11 +10,12 @@ import Network.HTTP.Conduit
 import Control.Monad.IO.Class (liftIO)
 import Control.Applicative
 import Control.Monad
+import Analysis.CFG.Data (NLab, ELab, GPath)
 
 -- import Analysis.CFG.Build
-import Analysis.CFG.Fitness (approachLevel, )
+import Analysis.CFG.Fitness (computeCfgLevel)
 import Data.Graph.Inductive.PatriciaTree
-import qualified Data.Graph.Inductive.Graph as G
+import Data.Graph.Inductive.Graph (LEdge)
 
 import qualified Data.ByteString.Lazy.Char8 as C
 import qualified Data.Text as T
@@ -22,16 +23,17 @@ import Data.Text (Text)
 import Data.Maybe
 import Data.List
 import Data.Aeson
+import qualified Control.Exception as E
 
 import Debug.Trace
-import System.Log.Logger (rootLoggerName, infoM)
+import System.Log.Logger (rootLoggerName, infoM, debugM)
 
 
 fitnessScore :: Target -> [JSArg] -> IO (Maybe Double)
 fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   let logger = rootLoggerName
-  infoM logger $ "Compute fitness score for the target: " ++ (show tg)
-  infoM logger $ "Compute fitness score for the JS arguments:\n" ++ (show jargs)
+  debugM logger $ "Compute fitness score for the target: " ++ (show tg)
+  debugM logger $ "Compute fitness score for the JS arguments:\n" ++ (show jargs)
   man <- liftIO $ newManager tlsManagerSettings
   initReq <- parseUrl "http://localhost:7777"
   let req = initReq { method = "POST"
@@ -39,24 +41,40 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
                     , queryString = "genetic=true"
                     , requestBody = RequestBodyLBS $ encode (GAInput (jsargs2bstrs jargs))
                     }
-  (JSExecution trace_ distances_) <- liftM (fromMaybe (error "fitnessScore in response") . decode . responseBody) $ httpLbs req man
-  let logger = rootLoggerName
-  infoM logger $ "Execution trace: " ++ (show trace_)
-  infoM logger $ "Branch distances: " ++ (show distances_)
-  infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_) 
-  let (aprLevel, pathDistance, branch) = approachLevel cfg to trace_
-  infoM logger $ "Approach level is equal to: " ++ (show aprLevel) ++ " for the branch: " ++ (show branch)
-  let brLevel     = maybe 0 getBrDist $ find ((branch==) . getBrLab) distances_
-      normBrLevel = branchDistNormalize brLevel
-      fitnessVal  = fromIntegral aprLevel + normBrLevel + fromIntegral pathDistance
-  infoM logger $ "Path distance is equal to: " ++ (show pathDistance)    
-  infoM logger $ "Branch distance is equal to: " ++ (show brLevel)    
-  infoM logger $ "Fitness value is equal to: " ++ (show fitnessVal)
-  return $ Just fitnessVal
-  -- return $ Just $ (read $ C.unpack $ responseBody response :: Double)
+      logger = rootLoggerName
+      exitLoc = (-1, -1, "")      
+  response <- (liftM responseBody $ httpLbs req man) `E.catch` \e -> putStrLn ("Caught " ++ show (e :: HttpException)) >> return "Foo"
+  (JSExecution trace_ distances_) <- return $ (fromMaybe (error "fitnessScore in response") . decode) $ response 
 
+  infoM logger $ "Execution trace: " ++ (show trace_)
+  debugM logger $ "Branch distances: " ++ (show distances_)
+  
+  debugM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
+  fitnessVal1 <- computeFitness cfg loc trace_ distances_
+  debugM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
+  fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
+  let fitnessVal = fitnessVal1 + fitnessVal2
+  infoM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
+  return $ Just fitnessVal 
+  
 branchDistNormalize :: Int -> Double
 branchDistNormalize b = fromIntegral b / fromIntegral (b+1)
+
+
+computeFitness :: Gr NLab ELab -> LEdge ELab -> GPath -> [BranchDist] -> IO Double
+computeFitness cfg (from, to, _) path disatnces = do
+  let (cfgLevel, problemNode, isException) = computeCfgLevel cfg from path
+      branchLevel      = maybe 0 getBrDist $ find ((problemNode==) . getBrLab) disatnces
+      normBrLevel      = branchDistNormalize branchLevel
+      problemNodeLevel = if trace (show $ to `elem` path) (to `elem` path) then 0 else (if isException then 1 else (0.5 * normBrLevel))
+      fitnessVal       = fromIntegral cfgLevel + problemNodeLevel
+      logger           = rootLoggerName
+  infoM logger $ "CFG level is equal to "           ++ (show cfgLevel) ++ " for the problemNode " ++ (show problemNode)
+  infoM logger $ "The problem node is exceptional " ++ (show isException)
+  infoM logger $ "Problem Node Level is equal to "  ++ (show problemNodeLevel)    
+  infoM logger $ "Fitness value is equal to "       ++ (show fitnessVal) ++ " for the location " ++ (show to)
+  -- getLine
+  return fitnessVal   
 
 
 -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
@@ -81,7 +99,7 @@ instance ToJSON GAInput where
         object ["jsFunArgs" .= jsFunArgs]
 
 
-data JSExecution = JSExecution { traceJS      :: [Int]
+data JSExecution = JSExecution { traceJS      :: GPath
                                , branchDistJS :: [BranchDist]
                                } deriving Show
 

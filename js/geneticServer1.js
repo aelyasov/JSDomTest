@@ -56,12 +56,12 @@ http.createServer(function(request, response){
 
     if (queryObject.genetic == "true") {
 	request.on('data', function(data) {
-	    winston.log("Received arguments which are new population:", data.toString());
+	    winston.log("info", "Received arguments which are new population:", data.toString());
 
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
 	    jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>"),	    
-	    winston.log("jsFunArgs: ", jsFunArgs);
+	    winston.log("info", "jsFunArgs: ", jsFunArgs);
 
 	    //var intercept = fs.readFileSync("/home/alex/PROJECTS/FITTEST/Software/UtrechtUniv/tools/JSDomTest/js/interceptTest.js", "utf-8");
 
@@ -114,12 +114,13 @@ http.createServer(function(request, response){
 		    var _branchDistance_ = [];
 		    var _trace_ = [1];
 
-		    winston.log("jsFun:\n", jsFun);
+		    winston.log("info", "jsFun:\n", jsFun);
 		    eval(jsFun);
 
 		    try {
 			test.call(window, jsFunArgs[1], window, document);
 		    } catch (e) {
+			_trace_.push(-100); // label -100 indicates exceptional termination
 			winston.log("info", "Test function is exceptionally terminated with the message: %s", e.stack)
 		    }
 		    

@@ -43,6 +43,12 @@ type JSDoms    = (JSTags, JSIds, JSNames, JSClasses)
 
 type JSCPool = (JSInts, JSStrings, JSDoms)
 
+getJSInts :: JSCPool -> JSInts
+getJSInts (ints, _, _) = ints
+
+getJSStrings :: JSCPool -> JSStrings
+getJSStrings (_, strings, _) = strings
+
 isPrimJSArg :: JSArg -> Bool
 isPrimJSArg (DomJS _ ) = False
 isPrimJSArg _           = True
