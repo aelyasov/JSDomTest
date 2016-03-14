@@ -13,19 +13,26 @@ import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 import qualified Text.Blaze.Html.Renderer.Utf8 as BR
 import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
-import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings)
+import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms)
 import Control.Monad (liftM)
-import Genetic.RandomJS (genRandomInt, genRandomString)
+import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
 
 
-mutateHtml :: StdGen -> ByteString -> IO ByteString
-mutateHtml gen html = do
+mutateHtml_dropSubtree :: StdGen -> ByteString -> IO ByteString
+mutateHtml_dropSubtree gen html = do
   let logger = rootLoggerName
   debugM logger $ "Mutate the html document:\n" ++ (prettyHtmlByteString html)
   let parent = bytestring2document html
   if (snd parent <= 4)
     then return html
     else mutateIterate gen parent
+
+mutateHtml_newRandom :: JSCPool -> IO ByteString
+mutateHtml_newRandom pool = do
+  let logger = rootLoggerName
+  debugM logger $ "Mutate the html document:\n"
+  genRandomDom $ getJSDoms pool
+
 
 
 mutateIterate :: StdGen -> (Document, Int) -> IO ByteString  

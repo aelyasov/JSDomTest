@@ -9,7 +9,7 @@ import Genetic.DataJS
 import Genetic.RandomJS
 import Genetic.CrossoverJS
 import Genetic.ScoreJS
-import Genetic.MutationJS (mutateHtml, mutateJSInt, mutateJSString)
+import Genetic.MutationJS (mutateHtml_dropSubtree, mutateHtml_newRandom, mutateJSInt, mutateJSString)
 
 import Html5C.Tags
 
@@ -29,6 +29,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
   genRandom pool@(sig, env) seed = do
     debugM rootLoggerName $ "Generating random population for a signature: " ++ (show sig) ++ "\n" ++ (show env)
     args <- mapM (genRandomVal env) sig
+    -- getLine
     return args
 
   crossover pool _ seed e1 e2 = do
@@ -58,7 +59,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       mutateAllArgs g (arg:args) = do
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
-              DomJS d1   -> liftM DomJS $ mutateHtml g d1
+              DomJS d1   -> liftM DomJS $ mutateHtml_newRandom pool   -- mutateHtml_dropSubtree g d1
               IntJS _    -> mutateJSInt pool
               StringJS _ -> mutateJSString pool
               otherwise  ->  error "mutation of non-DOM elements isn't defined"
@@ -68,6 +69,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
   score = fitnessScore
 
   isPerfect (_,s) = s == 0.0
+  -- isPerfect (_,s) = s < 1.0
 
 
 readGenetcAlgConfig :: IO (Int, Int, Int, Float, Float, Float, Float, Bool, Bool)

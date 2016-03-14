@@ -50,7 +50,7 @@ import Data.Graph.Inductive
 -- | Debug
 import Debug.Trace
 import System.IO (stdout, Handle)
-import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, setLevel)
+import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, noticeM, setLevel)
 import System.Log.Handler.Simple (streamHandler, GenericHandler)
 import System.Log.Handler (setFormatter)
 import System.Log.Formatter
@@ -92,12 +92,12 @@ main = do
       branches      = getAllBranches jsFunCFG
       constPool     = collectConstantInfoJS jsLabFun
       jsLabFunInstr = instrScript jsLabFun
-  debugM logger "Function given for analysis has the following CFG:\n"
+  noticeM logger "Function given for analysis has the following CFG:\n"
   system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii"
-  infoM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
-  infoM logger $ "The following branches have to be covered: " ++ (show branches)
-  infoM logger $ "Initial pool data: " ++ (show constPool)
-  getLine
+  noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
+  noticeM logger $ "The following branches have to be covered: " ++ (show branches)
+  noticeM logger $ "Initial pool data: " ++ (show constPool)
+  -- getLine
   request <- parseUrl "http://localhost:7777"
   man <- liftIO $ newManager tlsManagerSettings
 
@@ -116,8 +116,8 @@ killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPoo
 killJSMutationGenetic alg man mutN target pool = do
   let logger = rootLoggerName
   putStrLn $ replicate 70 '-'
-  infoM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
-  infoM logger $ "Initial pool data: " ++ (show pool)
+  noticeM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
+  noticeM logger $ "Initial pool data: " ++ (show pool)
   request <- parseUrl "http://localhost:7777"
   let reqMut = request { method = "POST"
                        , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
@@ -130,7 +130,7 @@ killJSMutationGenetic alg man mutN target pool = do
   -- for the integration testing purpose runGenetic has been replaced with fitnessScore
   -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
   -- let jsArgs = [DomJS test_html, StringJS "iframe"]
-  infoM logger $ "Best entity (GA): " ++ (show jsArgs)
+  noticeM logger $ "Best entity (GA): " ++ (show jsArgs)
 
   let reqExec = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]

@@ -26,7 +26,7 @@ import Data.Aeson
 import qualified Control.Exception as E
 
 import Debug.Trace
-import System.Log.Logger (rootLoggerName, infoM, debugM)
+import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
 
 fitnessScore :: Target -> [JSArg] -> IO (Maybe Double)
@@ -50,11 +50,11 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   debugM logger $ "Branch distances: " ++ (show distances_)
   
   debugM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
-  fitnessVal1 <- computeFitness cfg loc trace_ distances_
+  fitnessVal1 <- if (loc == exitLoc) then return 0 else computeFitness cfg loc trace_ distances_
   debugM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
   fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
   let fitnessVal = fitnessVal1 + fitnessVal2
-  infoM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
+  noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
   return $ Just fitnessVal 
   
 branchDistNormalize :: Int -> Double
@@ -66,7 +66,7 @@ computeFitness cfg (from, to, _) path disatnces = do
   let (cfgLevel, problemNode, isException) = computeCfgLevel cfg from path
       branchLevel      = maybe 0 getBrDist $ find ((problemNode==) . getBrLab) disatnces
       normBrLevel      = branchDistNormalize branchLevel
-      problemNodeLevel = if trace (show $ to `elem` path) (to `elem` path) then 0 else (if isException then 1 else (0.5 * normBrLevel))
+      problemNodeLevel = if (to `elem` path) then 0 else (if isException then 1 else (0.5 * normBrLevel))
       fitnessVal       = fromIntegral cfgLevel + problemNodeLevel
       logger           = rootLoggerName
   infoM logger $ "CFG level is equal to "           ++ (show cfgLevel) ++ " for the problemNode " ++ (show problemNode)
