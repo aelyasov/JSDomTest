@@ -16,6 +16,7 @@ import Html5C.ValidationTest (askValidator)
 import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms)
 import Control.Monad (liftM)
 import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
+import Analysis.Static (removeDuplicates)
 
 
 mutateHtml_dropSubtree :: StdGen -> ByteString -> IO ByteString
@@ -31,7 +32,8 @@ mutateHtml_newRandom :: JSCPool -> IO ByteString
 mutateHtml_newRandom pool = do
   let logger = rootLoggerName
   debugM logger $ "Mutate the html document:\n"
-  genRandomDom $ getJSDoms pool
+  print $ removeDuplicates pool
+  genRandomDom $ getJSDoms $ removeDuplicates pool
 
 
 

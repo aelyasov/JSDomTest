@@ -155,13 +155,16 @@ module GA.GA (Entity(..),
            evolveVerbose,
            randomSearch) where
 
-import Control.Monad (zipWithM)
+import Control.Monad (zipWithM, foldM)
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import Data.List (sortBy, nub, nubBy)
 import Data.Maybe (catMaybes, fromJust, isJust)
 import Data.Ord (comparing)
+import Data.Monoid ((<>), mempty, mconcat)
 import System.Directory (createDirectoryIfMissing, doesFileExist)
 import System.Random (StdGen, mkStdGen, random, randoms)
+
+import Debug.Trace
 
 -- |Currify a list of elements into tuples.
 currify :: [a] -- ^ list
@@ -234,8 +237,8 @@ data GAConfig = GAConfig {
 -- The 'isPerfect', 'showGeneration' and 'hasConverged' functions are optional.
 --
 class (Eq e, Ord e, Read e, Show e, 
-       Ord s, Read s, Show s, 
-       Monad m)
+       Ord s, Read s, Show s, Show p, 
+       Monad m, Monoid p)
    => Entity e s d p m 
     | e -> s, e -> d, e -> p, e -> m where
 
@@ -264,7 +267,7 @@ class (Eq e, Ord e, Read e, Show e,
   -- Overridden if score or scorePop are implemented.
   score' :: d -- ^ dataset for scoring entities
          -> e -- ^ entity to score
-         -> (Maybe s) -- ^ entity score
+         -> (Maybe s, p) -- ^ entity score
   score' _ _ = error $ "(GA) score' is not defined, "
                     ++ "nor is score or scorePop!"
 
@@ -274,7 +277,7 @@ class (Eq e, Ord e, Read e, Show e,
   -- overriden if scorePop is implemented.
   score :: d -- ^ dataset for scoring entities
         -> e -- ^ entity to score
-        -> m (Maybe s) -- ^ entity score
+        -> m (Maybe s, p) -- ^ entity score
   score d e = do 
                  return $ score' d e
 
@@ -285,8 +288,8 @@ class (Eq e, Ord e, Read e, Show e,
   scorePop :: d -- ^ dataset to score entities
            -> [e] -- ^ universe of known entities
            -> [e] -- ^ population of entities to score
-           -> m (Maybe [Maybe s]) -- ^ scores for population entities
-  scorePop _ _ _ = return Nothing
+           -> m (Maybe [Maybe s], p) -- ^ scores for population entities
+  scorePop _ _ _ = return (Nothing, mempty)
 
   -- |Determines whether a score indicates a perfect entity. [optional]
   --
@@ -376,13 +379,16 @@ performMutation p n seed pool es = do
 scoreAll :: (Entity e s d p m) => d -- ^ dataset for scoring entities
                                -> [e] -- ^ universe of known entities
                                -> [e] -- ^ set of entities to score
-                               -> m [Maybe s]
+                               -> m ([Maybe s], p)
 scoreAll dataset univEnts ents = do
-  scores <- scorePop dataset univEnts ents
+  (scores, pool) <- scorePop dataset univEnts ents
   case scores of
-    (Just ss) -> return ss
+    (Just ss) -> return (ss, pool)
     -- score one by one if scorePop failed
-    Nothing   -> mapM (score dataset) ents
+    Nothing   -> do r <- mapM (score dataset) ents
+                    let (scores, pools) = unzip r
+                    return (scores, mconcat pools)
+    -- foldM (\(pool, scrs) ent -> score dataset ent >>= \(sc, pool1) ->  return (sc:scrs, pool1 <> pool)) ([], mempty) ents
  
 -- |Function to perform a single evolution step:
 --
@@ -415,12 +421,12 @@ evolutionStep pool
               seed = do 
     -- score population
     -- try to score in a single go first
-    scores <- scoreAll dataset universe pop
+    (scores, poolNew) <- scoreAll dataset universe pop
     archive' <- if rescoreArchive
       then return archive
       else do
         let as = map snd archive
-        scores' <- scoreAll dataset universe as
+        (scores', _) <- scoreAll dataset universe as
         return $ zip scores' as
     let scoredPop = zip scores pop
         -- combine with archive for selection
@@ -428,9 +434,10 @@ evolutionStep pool
         -- split seeds for crossover/mutation selection/seeds
         g = mkStdGen seed
         [crossSeed,mutSeed] = take 2 $ randoms g
+        pool' = pool <> poolNew
     -- apply crossover and mutation
-    crossEnts <- performCrossover crossPar cn crossSeed pool combo
-    mutEnts <- performMutation mutPar mn mutSeed pool combo
+    crossEnts <- performCrossover crossPar cn crossSeed pool' combo
+    mutEnts <- performMutation mutPar mn mutSeed pool' combo
     let -- new population: crossovered + mutated entities
         newPop = crossEnts ++ mutEnts
         -- new archive: best entities so far
@@ -651,7 +658,7 @@ randomSearch :: (Entity e s d p m) => StdGen -- ^ random generator
 randomSearch g n pool dataset = do
     let seed = fst $ random g :: Int
     es <- initPop pool n seed
-    scores <- scoreAll dataset [] es
+    (scores, _) <- scoreAll dataset [] es
     return $ nubBy (\x y -> comparing snd x y == EQ) 
            $ sortBy (comparing fst)
            $ zip scores es

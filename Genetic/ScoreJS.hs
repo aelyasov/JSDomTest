@@ -29,7 +29,7 @@ import Debug.Trace
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
 
-fitnessScore :: Target -> [JSArg] -> IO (Maybe Double)
+fitnessScore :: Target -> [JSArg] -> IO (Maybe Double, (JSSig, JSCPool))
 fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   let logger = rootLoggerName
   debugM logger $ "Compute fitness score for the target: " ++ (show tg)
@@ -44,7 +44,7 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
       logger = rootLoggerName
       exitLoc = (-1, -1, "")      
   response <- (liftM responseBody $ httpLbs req man) `E.catch` \e -> putStrLn ("Caught " ++ show (e :: HttpException)) >> return "Foo"
-  (JSExecution trace_ distances_) <- return $ (fromMaybe (error "fitnessScore in response") . decode) $ response 
+  (JSExecution trace_ distances_ enviroment_) <- return $ (fromMaybe (error "fitnessScore in response") . decode) $ response 
 
   infoM logger $ "Execution trace: " ++ (show trace_)
   debugM logger $ "Branch distances: " ++ (show distances_)
@@ -55,7 +55,7 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
   let fitnessVal = fitnessVal1 + fitnessVal2
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
-  return $ Just fitnessVal 
+  return (Just fitnessVal, ([], ([], [], ([], getIdsJS enviroment_, getNamesJS enviroment_, getClassesJS enviroment_)))) 
   
 branchDistNormalize :: Int -> Double
 branchDistNormalize b = fromIntegral b / fromIntegral (b+1)
@@ -99,9 +99,20 @@ instance ToJSON GAInput where
         object ["jsFunArgs" .= jsFunArgs]
 
 
-data JSExecution = JSExecution { traceJS      :: GPath
-                               , branchDistJS :: [BranchDist]
-                               } deriving Show
+data JSExecution =
+  JSExecution { traceJS       :: GPath
+              , branchDistJS  :: [BranchDist]
+              , environmentJS :: JSEnviroment  
+              } deriving Show
+                         
+
+data JSEnviroment =
+  JSEnviroment { getTagsJS    :: [String]
+               , getNamesJS   :: [String]
+               , getIdsJS     :: [String]  
+               , getClassesJS :: [String]
+               , getSelectors :: [String]
+               } deriving Show
 
 data BranchDist = BranchDist { getBrLab  :: Int 
                              , getBrDist :: Int} deriving Show
@@ -113,8 +124,11 @@ instance FromJSON BranchDist where
        return $ BranchDist x y
 
 
+instance FromJSON JSEnviroment where
+  parseJSON (Object v) = JSEnviroment <$> (v .: "tags") <*> (v .: "names") <*> (v .: "ids") <*> (v .: "classes") <*> (v .: "selector")
+
 instance FromJSON JSExecution where
-    parseJSON (Object v) = JSExecution <$> (v .: "_trace_") <*> (v .: "_branchDistance_" >>= parseJSON)
+    parseJSON (Object v) = JSExecution <$> (v .: "_trace_") <*> (v .: "_branchDistance_" >>= parseJSON) <*> (v .: "_environment_" >>= parseJSON)
     parseJSON x = fail $ "unexpected json: " ++ show x
 
 

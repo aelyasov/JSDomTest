@@ -16,6 +16,7 @@ import Html5C.ValidationTest (askValidator)
 
 import Debug.Trace
 
+
 crossoverHTML :: StdGen -> ByteString -> ByteString -> IO ByteString
 crossoverHTML gen html1 html2 = do
   let logger = rootLoggerName

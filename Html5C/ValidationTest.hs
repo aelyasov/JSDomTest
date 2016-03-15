@@ -21,6 +21,7 @@ import Text.Blaze.Html.Renderer.Utf8
 import qualified Text.Blaze.Html.Renderer.Pretty as PP
 import qualified Text.Blaze.Html.Renderer.String as PS
 import qualified Text.Blaze.Html.Renderer.Text as PT
+import Text.XML.Pretty (prettyHtmlByteString)
 
 import Data.Text (Text)
 import qualified Data.Text as T
@@ -33,6 +34,7 @@ import Test.QuickCheck.Monadic
 
 import Genetic.DataJS
 import Debug.Trace
+import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
 -- import Text.HTML.DOM
 
@@ -60,13 +62,19 @@ genValidHtml env@(tags, ids, names, classes) = do
                           , htmlNames   = names
                           , htmlIds     = ids
                           , htmlClasses = classes}
-  html <- (generate $ evalStateT htmlGenState state :: IO Html) >>= assignIds2HtmlRandomly (htmlIds state) . PT.renderHtml 
-  response <- askValidator html
+      logger = rootLoggerName
+  htmlNoIds <- generate $ evalStateT htmlGenState state -- :: IO Html
+  debugM logger $ "First step of html generation (no ids): "
+    ++ (prettyHtmlByteString $ renderHtml htmlNoIds)
+  html      <- assignIds2HtmlRandomly (htmlIds state) $ PT.renderHtml htmlNoIds
+  debugM logger $ "Second step of html generation (withids): "
+    ++ (prettyHtmlByteString html)
+  response  <- askValidator html
   case response  of
-    Just _  -> do print "Generated html document is invalid"
+    Just _  -> do debugM logger "Generated html document is invalid"
                   genValidHtml env
     Nothing -> return html
-
+  
 
 validatorCheck :: Html -> IO (Maybe Text)
 validatorCheck = askValidator . renderHtml

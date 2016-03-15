@@ -18,6 +18,7 @@ import System.Random
 -- import qualified Data.ByteString as BS
 import System.Log.Logger (rootLoggerName, infoM, debugM)
 import Data.Configurator (load, Worth(..), require)
+import Analysis.Static (removeDuplicates)
 
 import GA.GA
 
@@ -28,7 +29,8 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
 
   genRandom pool@(sig, env) seed = do
     debugM rootLoggerName $ "Generating random population for a signature: " ++ (show sig) ++ "\n" ++ (show env)
-    args <- mapM (genRandomVal env) sig
+    let uniqueEnv = removeDuplicates env
+    args <- mapM (genRandomVal uniqueEnv) sig
     -- getLine
     return args
 

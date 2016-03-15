@@ -43,6 +43,7 @@ type JSDoms    = (JSTags, JSIds, JSNames, JSClasses)
 
 type JSCPool = (JSInts, JSStrings, JSDoms)
 
+
 getJSDoms :: JSCPool -> JSDoms
 getJSDoms (_, _, doms) = doms
 

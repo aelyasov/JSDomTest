@@ -16,7 +16,7 @@ winston.level = 'info';
 
 http.createServer(function(request, response){
     
-    winston.info("I got kicked");
+    winston.debug("I got kicked");
     
     var data_ = '{ "jsFun":"function safeAdd(frameid) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {instrument._trace_.push(6);instrument._branchDistance_.push([6,Number(instrument._K_)]);instrument._trace_.push(7);frame.parentNode.removeChild(frame);} else {instrument._trace_.push(6);instrument._branchDistance_.push([6,_Number(K_)]);instrument._trace_.push(9);iframe.appendChild(anchor);}}", "jsMutFun":"var _K_ = 0;var _branchDistance_ = [];var _trace_ = [];function safeAdd(frameid,document) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {_branchDistance_.push([6,!_K_]);_trace_.push(7);frame.parentNode.removeChild(frame);} else {_branchDistance_.push([6,_K_]);_trace_.push(9);iframe.appendChild(anchor);}}"}';   
 
@@ -114,21 +114,21 @@ http.createServer(function(request, response){
 		    var _branchDistance_ = [];
 		    var _trace_ = [1];
 
-		    winston.info("jsFun:\n", jsFun);
+		    winston.debug("jsFun:\n", jsFun);
 		    eval(jsFun);
 
 		    try {
 			test.call(window, jsFunArgs[1], window, document);
 		    } catch (e) {
 			_trace_.push(-100); // label -100 indicates exceptional termination
-			winston.log("info", "Test function is exceptionally terminated with the message: %s", e.stack)
+			winston.debug("Test function is exceptionally terminated with the message: %s", e.stack)
 		    }
 		    
-		    winston.info("_trace_", _trace_);
+		    winston.debug("_trace_", _trace_);
 		    winston.debug(" _branchDistance_",  _branchDistance_);
 		    winston.debug("environment: ", environment);
 		    response.writeHeader(200, {"Content-Type": "text/plain"});
-		    response.write(JSON.stringify({_trace_:_trace_,  _branchDistance_: _branchDistance_}));
+		    response.write(JSON.stringify({_trace_:_trace_,  _branchDistance_: _branchDistance_, _environment_:environment}));
 		    response.end();    
 		}
 	    });
@@ -147,4 +147,4 @@ http.createServer(function(request, response){
     }
     
 }).listen(7777);
-winston.info("Server Running on 7777");
+winston.debug("Server Running on 7777");
