@@ -62,7 +62,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
               DomJS d1   -> liftM DomJS $ mutateHtml_newRandom pool   -- mutateHtml_dropSubtree g d1
-              IntJS _    -> mutateJSInt pool
+              IntJS i1   -> mutateJSInt i1 pool
               StringJS _ -> mutateJSString pool
               otherwise  ->  error "mutation of non-DOM elements isn't defined"
         args' <- mutateAllArgs g' args

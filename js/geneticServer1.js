@@ -6,13 +6,15 @@ var fs         = require('fs'),
     http       = require("http"),
     path       = require("path"),
     jsdom      = require("jsdom"),
+    _          = require('underscore'),
     instrument = require("./instrumentLib.js"),
     winston    = require('winston');
     // logger     = require('./logger.js');    
     
 
-var jsFun, jsMutFun, jsFunArgs;
+var jsFun, jsMutFun, jsFunArgs, jsSig, jsFunDom, realJSFunArgs;
 winston.level = 'info';
+// winston.level = 'debug';
 
 http.createServer(function(request, response){
     
@@ -33,9 +35,10 @@ http.createServer(function(request, response){
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
 	    winston.debug("jsFun before eval:\n", JSON.parse(data).jsFun);
+	    jsSig = JSON.parse(data).jsSig.slice(1);
+	    winston.debug("test function signature:\n", jsSig);
 	    var library = "var instrument = require(\"./instrumentLib.js\");\n"
 	    jsFun = library + JSON.parse(data).jsFun;
-	    
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
 	response.write("init response");
@@ -60,13 +63,15 @@ http.createServer(function(request, response){
 
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
-	    jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>"),	    
+	    jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>");
+	    jsFunDom = jsFunArgs[0];
+	    realJSFunArgs = _.zip(jsSig, jsFunArgs.slice(1)).map(function(arg) { return instrument.convertArg(arg[0], arg[1])} )
 	    winston.debug("jsFunArgs: ", jsFunArgs);
 
 	    //var intercept = fs.readFileSync("/home/alex/PROJECTS/FITTEST/Software/UtrechtUniv/tools/JSDomTest/js/interceptTest.js", "utf-8");
 
  	    jsdom.env({
-		html: jsFunArgs[0],
+		html: jsFunDom,
 		scripts: ["http://code.jquery.com/jquery.js"], 
 		done: function (error, window){
 		    
@@ -118,7 +123,8 @@ http.createServer(function(request, response){
 		    eval(jsFun);
 
 		    try {
-			test.call(window, jsFunArgs[1], window, document);
+			// test.call(window, jsFunArgs[1], window, document);
+			test.apply(window, realJSFunArgs, window, document);
 		    } catch (e) {
 			_trace_.push(-100); // label -100 indicates exceptional termination
 			winston.debug("Test function is exceptionally terminated with the message: %s", e.stack)

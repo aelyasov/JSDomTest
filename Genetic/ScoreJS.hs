@@ -13,7 +13,7 @@ import Control.Monad
 import Analysis.CFG.Data (NLab, ELab, GPath)
 
 -- import Analysis.CFG.Build
-import Analysis.CFG.Fitness (computeCfgLevel)
+import Analysis.CFG.Fitness (computeCfgLevel, distanceToExit)
 import Data.Graph.Inductive.PatriciaTree
 import Data.Graph.Inductive.Graph (LEdge)
 
@@ -46,14 +46,17 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   response <- (liftM responseBody $ httpLbs req man) `E.catch` \e -> putStrLn ("Caught " ++ show (e :: HttpException)) >> return "Foo"
   (JSExecution trace_ distances_ enviroment_) <- return $ (fromMaybe (error "fitnessScore in response") . decode) $ response 
 
-  infoM logger $ "Execution trace: " ++ (show trace_)
-  debugM logger $ "Branch distances: " ++ (show distances_)
+  noticeM logger $ "Execution trace: " ++ (show trace_)
+  infoM logger $ "Branch distances: " ++ (show distances_)
+  infoM logger $ "New Enviroment: " ++ (show enviroment_)
   
-  debugM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
+  infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
   fitnessVal1 <- if (loc == exitLoc) then return 0 else computeFitness cfg loc trace_ distances_
-  debugM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
-  fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
-  let fitnessVal = fitnessVal1 + fitnessVal2
+  infoM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
+  -- fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
+  fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
+  infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
+  let fitnessVal = fitnessVal1 + 0.001 * fitnessVal2
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
   return (Just fitnessVal, ([], ([], [], ([], getIdsJS enviroment_, getNamesJS enviroment_, getClassesJS enviroment_)))) 
   
@@ -71,7 +74,7 @@ computeFitness cfg (from, to, _) path disatnces = do
       logger           = rootLoggerName
   infoM logger $ "CFG level is equal to "           ++ (show cfgLevel) ++ " for the problemNode " ++ (show problemNode)
   infoM logger $ "The problem node is exceptional " ++ (show isException)
-  infoM logger $ "Problem Node Level is equal to "  ++ (show problemNodeLevel)    
+  infoM logger $ "Problem Node Level is equal to "  ++ (show problemNodeLevel) ++ " before normalization " ++ (show branchLevel)    
   infoM logger $ "Fitness value is equal to "       ++ (show fitnessVal) ++ " for the location " ++ (show to)
   -- getLine
   return fitnessVal   

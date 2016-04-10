@@ -23,7 +23,6 @@ import Debug.Trace
 assignIds2HtmlRandomly :: [String] -> L.Text -> IO ByteString
 assignIds2HtmlRandomly ids html = do doc <- assignIds2DocumentRandomly ids $ parseLT html
                                      let markup = toMarkup doc
-                                     putStr $ PP.renderHtml markup
                                      return $ renderHtml markup
 
 

@@ -4,6 +4,7 @@ import Language.ECMAScript3.Syntax (JavaScript(..), Statement(..), Expression(..
 import Analysis.CFG.Data (SLab)
 import Analysis.CFG.Util (getStmtLab, traceStmt, traceVar, getStmtLab, traceBranchDistance, getCCLab)
 import Data.Default (def)
+import Data.Maybe (fromJust)
 import Debug.Trace (trace)
 
 
@@ -54,11 +55,15 @@ instrStatement st@(IfStmt l ex thenBl elseBl) = let BlockStmt l1 sts1 = thenBl
 instrStatement st@(SwitchStmt   l ex ccs)   = let ccs' = map instrumentCaseClause ccs
                                               in  [SwitchStmt   l ex ccs']           
 instrStatement st@(WhileStmt    l ex whileBl) = let BlockStmt l1 sts1 = whileBl
-                                                    branchLab         = getStmtLab st
-                                                    logStmt           = traceStmt traceVar branchLab
+                                                    whileLab          = getStmtLab st
+                                                    whileLogStmt      = traceStmt traceVar whileLab
+                                                    whileBlLab        = getStmtLab whileBl
+                                                    blockLogStmt      = traceStmt traceVar whileBlLab
+                                                    whileInBrDist     = traceBranchDistance whileLab (PrefixExpr def PrefixLNot ex)
+                                                    whileOutBrDist    = traceBranchDistance whileLab ex
                                                     sts1'             = instrStatements sts1 
-                                                    whileBl'          = BlockStmt l1 (logStmt:sts1')
-                                                in  [WhileStmt    l ex whileBl', logStmt]                                                   
+                                                    whileBl'          = BlockStmt l1 (whileLogStmt:blockLogStmt:whileInBrDist:sts1')
+                                                in  [WhileStmt    l ex whileBl', whileLogStmt, whileOutBrDist]                                                   
 instrStatement st@(DoWhileStmt  l dowhileBl ex)    = let BlockStmt l1 sts1 = dowhileBl
                                                          branchLab         = getStmtLab st
                                                          logStmt           = traceStmt traceVar branchLab
@@ -75,14 +80,18 @@ instrStatement st@(ForInStmt    l v ex forBl) = let BlockStmt l1 sts1 = forBl
                                                     branchLab         = getStmtLab st
                                                     logStmt           = traceStmt traceVar branchLab
                                                     sts1'             = instrStatements sts1 
-                                                    forBl'          = BlockStmt l1 sts1'
+                                                    forBl'            = BlockStmt l1 sts1'
                                                 in  [logStmt, ForInStmt    l v ex forBl'] 
 instrStatement st@(ForStmt    l i t inc forBl) = let BlockStmt l1 sts1 = forBl
-                                                     branchLab         = getStmtLab st
-                                                     logStmt           = traceStmt traceVar branchLab
+                                                     forBlLab          = getStmtLab forBl                    
+                                                     forLab            = getStmtLab st
+                                                     forBlStmt         = traceStmt traceVar forBlLab
+                                                     forLogStmt        = traceStmt traceVar forLab
+                                                     forInBrDist       = traceBranchDistance forLab (PrefixExpr def PrefixLNot (fromJust t))
+                                                     forOutBrDist      = traceBranchDistance forLab (fromJust t)
                                                      sts1'             = instrStatements sts1 
-                                                     forBl'            = BlockStmt l1 sts1'
-                                                 in  [logStmt, ForStmt    l i t inc forBl']   
+                                                     forBl'            = BlockStmt l1 (forLogStmt:forBlStmt:forInBrDist:sts1')
+                                                 in  [ForStmt  l i t inc forBl', forLogStmt, forOutBrDist]   
 instrStatement st@(TryStmt      l tryBl catchBl finallyBl) = let BlockStmt l1 sts1 = tryBl
                                                                  sts1'     = instrStatements sts1 
                                                                  tryBl'     = BlockStmt l1 sts1'

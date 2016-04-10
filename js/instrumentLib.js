@@ -108,10 +108,19 @@ function getEditDistance(a, b) {
   return matrix[b.length][a.length];
 };
 
+
+function convertArg(type, arg) {
+    switch(type) {
+    case "JS_INT": return parseInt(arg); break;
+    default: return arg;    
+    }
+}
+
+
 // module.exports._K_ = _K_;
 // module.exports._branchDistance_ = _branchDistance_;
 // module.exports._trace_ = _trace_;
 module.exports.abs = abs;
 module.exports.absZero = absZero;
 module.exports.absNegZero = absNegZero;
-
+module.exports.convertArg = convertArg;

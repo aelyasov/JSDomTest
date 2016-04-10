@@ -162,8 +162,8 @@ context2gens freqTbl tags ctx =
         ctxUni  = (foldl (\\) (foldr1 intersect posCtx) negCtx) ++ concat passCtx
         ctxUniLikely = let ctxUniLikely' = ctxUni `intersect` tags
                        in  if P.null ctxUniLikely'
-                           -- then ctxUni
-                           then ctxUniLikely'     
+                           then ctxUni
+                           -- then ctxUniLikely'     
                            else ctxUniLikely'
         findTag ts x = find (\(i, h) -> x == h) ts
         tagsFreq     = mapMaybe (findTag freqTbl) $ nub ctxUniLikely 

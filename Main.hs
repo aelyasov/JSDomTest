@@ -104,11 +104,13 @@ main = do
   let reqInit = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                         , queryString = "init=true"
-                        , requestBody = RequestBodyLBS $ encode (InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr))
+                        , requestBody = RequestBodyLBS $ encode (InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr) (map (T.pack . show) jsSig))
                         }
   initResp <- httpLbs reqInit man
   debugM logger $ show initResp 
 
+  -- getLine
+  
   mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target jsFunCFG branch)  (jsSig, constPool)) $ zip [1..] branches
 
 
@@ -139,7 +141,7 @@ killJSMutationGenetic alg man mutN target pool = do
                         }
   execResp <- httpLbs reqExec man
   debugM logger $ show execResp
-  getLine
+  -- getLine
   return ()
 
 
@@ -149,10 +151,10 @@ generateJSMutations :: JavaScript SourcePosLab -> [(Int, Mutation SourcePosLab)]
 generateJSMutations js = zip [1..] $ concatMap (\m -> m js) domMutations
 
 
-data InitData = InitData { jsFun :: Text }
+data InitData = InitData { jsFun :: Text , jsSig :: [Text]}
 
 instance ToJSON InitData where
-    toJSON (InitData jsFun) = object [ "jsFun" .= jsFun ]
+    toJSON (InitData jsFun jsSig) = object [ "jsFun" .= jsFun , "jsSig" .= jsSig]
 
 data MutData = MutData { mutN :: Text }
 

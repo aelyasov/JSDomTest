@@ -6,7 +6,7 @@ import Data.ByteString.Lazy (ByteString)
 import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document)
 import Text.XML.Label (removeLabelsFromDocument, deleteNodeInDocumentByLabel)
 import Text.XML (Document(..))
-import System.Log.Logger (rootLoggerName, infoM, debugM)
+import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 -- import System.Random (mkStdGen, StdGen, randomR)
 import System.Random
 import Text.Blaze.Html.Renderer.Pretty (renderHtml)
@@ -17,7 +17,7 @@ import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms)
 import Control.Monad (liftM)
 import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
 import Analysis.Static (removeDuplicates)
-
+import Test.QuickCheck.Gen (elements, generate)
 
 mutateHtml_dropSubtree :: StdGen -> ByteString -> IO ByteString
 mutateHtml_dropSubtree gen html = do
@@ -30,10 +30,11 @@ mutateHtml_dropSubtree gen html = do
 
 mutateHtml_newRandom :: JSCPool -> IO ByteString
 mutateHtml_newRandom pool = do
-  let logger = rootLoggerName
+  let logger  = rootLoggerName
+      setPool = removeDuplicates pool 
   debugM logger $ "Mutate the html document:\n"
-  print $ removeDuplicates pool
-  genRandomDom $ getJSDoms $ removeDuplicates pool
+  noticeM logger $ "Constant pool data: " ++ (show setPool)
+  genRandomDom $ getJSDoms $ removeDuplicates setPool
 
 
 
@@ -60,11 +61,19 @@ mutateDocument :: Int -> Document -> Maybe Document
 mutateDocument = deleteNodeInDocumentByLabel
 
 
-mutateJSInt :: JSCPool -> IO JSArg
-mutateJSInt pool = do
-  i <- genRandomInt $ getJSInts pool
-  debugM rootLoggerName $ "Mutate by generating a new int arg" ++ (show i)
-  return $ IntJS i 
+mutateJSInt :: Int -> JSCPool -> IO JSArg
+mutateJSInt int pool = do
+  r <- genRandomInt $ getJSInts pool
+  let ints = map (\f -> f int) [(+1), (+(-1))]
+  int' <- generate $ elements (r:ints)
+  debugM rootLoggerName $ "Mutation of the integer value: " ++ (show int) ++ " replaced by: " ++ (show int')
+  return $ IntJS int'
+
+-- mutateJSInt :: JSCPool -> IO JSArg
+-- mutateJSInt pool = do
+--   i <- genRandomInt $ getJSInts pool
+--   debugM rootLoggerName $ "Mutate by generating a new int arg" ++ (show i)
+--   return $ IntJS i 
 
 mutateJSString :: JSCPool -> IO JSArg
 mutateJSString pool = do

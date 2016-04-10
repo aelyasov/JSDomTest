@@ -401,21 +401,21 @@ scoreAll dataset univEnts ents = do
 -- * create new population using crossover/mutation
 --
 -- * retain best scoring entities in the archive
-evolutionStep :: (Entity e s d p m) => p -- ^ pool for crossover/mutation
-                                  -> d -- ^ dataset for scoring entities
+evolutionStep :: (Entity e s d p m) => d -- ^ dataset for scoring entities
                                   -> (Int,Int,Int) -- ^ # of c/m/a entities
                                   -> (Float,Float) -- ^ c/m parameters
                                   -> Bool -- ^ rescore archive in each step?
+                                  -> p -- ^ pool for crossover/mutation
                                   -> Universe e -- ^ known entities
                                   -> Generation e s -- ^ current generation
                                   -> Int -- ^ seed for next generation
-                                  -> m (Universe e, Generation e s) 
+                                  -> m (Universe e, Generation e s, p) 
                                      -- ^ renewed universe, next generation
-evolutionStep pool
-              dataset
+evolutionStep dataset
               (cn,mn,an)
               (crossPar,mutPar)
               rescoreArchive
+              pool
               universe
               (pop,archive)
               seed = do 
@@ -445,29 +445,31 @@ evolutionStep pool
                    $ nubBy (\x y -> comparing snd x y == EQ) 
                    $ sortBy (comparing fst) combo
         newUniverse = nub $ universe ++ pop
-    return (newUniverse, (newPop,newArchive))
+    return (newUniverse, (newPop,newArchive), pool')
 
 -- |Evolution: evaluate generation and continue.
 evolution :: (Entity e s d p m) => GAConfig -- ^ configuration for GA
+                                -> p
                                 -> Universe e -- ^ known entities 
                                 -> [Archive e s] -- ^ previous archives
                                 -> Generation e s -- ^ current generation
-                                -> (   Universe e
+                                -> ( p
+                                    -> Universe e
                                     -> Generation e s 
                                     -> Int 
-                                    -> m (Universe e, Generation e s)
+                                    -> m (Universe e, Generation e s, p)
                                    ) -- ^ function that evolves a generation
                                 -> [(Int,Int)] -- ^ gen indicies and seeds
                                 -> m (Generation e s) -- ^evolved generation
-evolution cfg universe pastArchives gen step ((_,seed):gss) = do
-    (universe',nextGen) <- step universe gen seed 
+evolution cfg pool universe pastArchives gen step ((_,seed):gss) = do
+    (universe',nextGen, pool') <- step pool universe gen seed 
     let (Just fitness, e) = (head $ snd nextGen)
         newArchive = snd nextGen
     if hasConverged pastArchives || isPerfect (e,fitness)
       then return nextGen
-      else evolution cfg universe' (newArchive:pastArchives) nextGen step gss
+      else evolution cfg pool' universe' (newArchive:pastArchives) nextGen step gss
 -- no more gen. indices/seeds => quit
-evolution _ _ _ gen _ [] = return gen
+evolution _ _ _ _ gen _ [] = return gen
 
 -- |Generate file name for checkpoint.
 chkptFileName :: GAConfig -- ^ configuration for generation algorithm
@@ -502,18 +504,20 @@ checkpointGen cfg index seed (pop,archive) = do
 -- |Evolution: evaluate generation, (maybe) checkpoint, continue.
 evolutionVerbose :: (Entity e s d p m, 
                    MonadIO m) => GAConfig -- ^ configuration for GA
+                              -> p
                               -> Universe e -- ^ universe of known entities
                               -> [Archive e s] -- ^ previous archives
                               -> Generation e s -- ^ current generation
-                              -> (   Universe e 
+                              -> ( p
+                                  -> Universe e 
                                   -> Generation e s 
                                   -> Int 
-                                  -> m (Universe e, Generation e s)
+                                  -> m (Universe e, Generation e s, p)
                                  ) -- ^ function that evolves a generation
                               -> [(Int,Int)] -- ^ gen indicies and seeds
                               -> m (Generation e s) -- ^ evolved generation
-evolutionVerbose cfg universe pastArchives gen step ((gi,seed):gss) = do
-    (universe',newPa@(_,archive')) <- step universe gen seed
+evolutionVerbose cfg pool universe pastArchives gen step ((gi,seed):gss) = do
+    (universe',newPa@(_,archive'), pool') <- step pool universe gen seed
     let (Just fitness, e) = head archive'
     -- checkpoint generation if desired
     liftIO $ if (getWithCheckpointing cfg)
@@ -531,10 +535,10 @@ evolutionVerbose cfg universe pastArchives gen step ((gi,seed):gss) = do
                                           ++ "stopping after " ++ show gi
                                           ++ " generations!"
                return newPa
-       else evolutionVerbose cfg universe' (archive':pastArchives) newPa step gss
+       else evolutionVerbose cfg pool' universe' (archive':pastArchives) newPa step gss
 
 -- no more gen. indices/seeds => quit
-evolutionVerbose _ _ _ gen _ [] = do 
+evolutionVerbose _ _ _ _ gen _ [] = do 
     liftIO $ putStrLn $ "done evolving!"
     return gen
 
@@ -581,8 +585,8 @@ evolve g cfg pool dataset = do
     -- do the evolution
     let rescoreArchive = getRescoreArchive cfg
     (_,resArchive) <- evolution 
-                       cfg [] [] (pop,[]) 
-                       (evolutionStep pool dataset 
+                       cfg pool [] [] (pop,[]) 
+                       (evolutionStep dataset 
                                       (cCnt,mCnt,aSize) 
                                       (crossPar,mutPar) 
                                       rescoreArchive   )
@@ -638,12 +642,13 @@ evolveVerbose g cfg pool dataset = do
         rescoreArchive = getRescoreArchive cfg
     -- do the evolution
     (_,resArchive) <- evolutionVerbose 
-                        cfg [] [] gen 
-                        (evolutionStep pool dataset 
+                        cfg pool [] [] gen 
+                        (evolutionStep dataset 
                                        (cCnt,mCnt,aSize) 
                                        (crossPar,mutPar) 
-                                       rescoreArchive)
-                                       genSeeds'
+                                       rescoreArchive
+                        )
+                        genSeeds'
     -- return best entity 
     return resArchive
 
