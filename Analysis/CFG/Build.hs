@@ -19,6 +19,10 @@ import System.FilePath.Posix (takeDirectory, (</>))
 import Debug.Trace (trace)
 
 
+-- import Analysis.CFG.Fitness -- remove import after tests
+-- import Data.Graph.Analysis.Algorithms.Common
+
+
 
 getAllBranches :: Gr NLab ELab -> [LEdge ELab]
 getAllBranches gr = if null branches then [(-1, -1, "")] else branches
