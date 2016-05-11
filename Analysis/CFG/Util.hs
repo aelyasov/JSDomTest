@@ -2,12 +2,18 @@ module Analysis.CFG.Util where
 
 import Safe (headMay)
 import Data.Maybe (maybe, fromJust)
-import Data.List (find)
+import Data.List (find, groupBy, nub)
+import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap
 import Language.ECMAScript3.Syntax (Statement(..), Expression(..), CaseClause(..), Id(..), SourcePos, InfixOp(..), PrefixOp(..))
 import qualified Language.ECMAScript3.PrettyPrint as JSP
 import qualified Text.PrettyPrint.Leijen as PPL
 import Analysis.CFG.Data (SLab)
 import Data.Default (Default, def)
+import Data.Graph.Analysis.Algorithms.Common (cyclesIn')
+import Data.Graph.Inductive.PatriciaTree
+import Analysis.CFG.Data
+import Data.Function (on)
 
 
 getNextStLab :: SLab -> [Statement (SourcePos, SLab)] -> SLab
@@ -166,3 +172,124 @@ propogateNeg ex = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(ListExpr l exs)               = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(CallExpr l  exs1 exs2)        = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(FuncExpr l fName fArgs sts)   = PrefixExpr def PrefixLNot ex
+
+
+type LoopSizeMap = IntMap Int
+type LoopIterationMap = IntMap Int
+type LoopMaxSizeMap = IntMap Int
+
+data LoopRoot = Root Int LoopTree
+              deriving Show
+data LoopTree = Node { getLoopIter :: Int,
+                       getLoopHead :: Int,
+                       getLoopBody :: [LoopTree] }
+              | Leaf { getLoopNode :: Int }
+              deriving (Show, Eq)
+
+
+evalLoopTree :: LoopTree -> Int
+evalLoopTree (Node iter head body) = iter * (1 + (sum $ map evalLoopTree body))
+evalLoopTree (Leaf _) = 1
+
+
+list2LoopTree ::  LoopIterationMap -> GPath -> LoopTree
+list2LoopTree _ [] = error "list2LoopTree: loop can't be empty"
+list2LoopTree iterMap (head:body) =
+  case (IntMap.lookup head iterMap) of
+   Just iterN -> Node iterN head (map Leaf body)
+   Nothing    -> error "list2LoopTree: there is no info about max iteration number for given loop"
+
+testLoopIterationMap :: LoopIterationMap
+testLoopIterationMap = IntMap.fromList [(2,2), (5, 2), (14, 1)]
+
+
+buildLoopMaxSizeMap :: Gr NLab ELab -> LoopIterationMap -> LoopMaxSizeMap
+buildLoopMaxSizeMap gr iterMap =
+  let allLoopTrees = findAllLoopTreesInGraph gr iterMap
+  in  foldr (\loops loopMap ->
+              let loopHead = getLoopHead $ head loops
+                  maxLoopPath = maximum $ map evalLoopTree loops  
+              in  IntMap.insert loopHead maxLoopPath loopMap
+            ) IntMap.empty allLoopTrees 
+
+findAllLoopTreesInGraph :: Gr NLab ELab -> LoopIterationMap -> [[LoopTree]]
+findAllLoopTreesInGraph gr iterMap =
+  let allLoops          = cyclesIn' gr
+      groupAllLoops     = groupBy ((==) `on` head) $ reverse allLoops
+      groupAllLoopTrees = map (map $ list2LoopTree iterMap) groupAllLoops
+  in  insertAllLoopsInAllLoops groupAllLoopTrees
+
+insertOneLoopTreeInAnother :: LoopTree -> LoopTree -> (LoopTree, Bool)
+insertOneLoopTreeInAnother oneTree (Node iter headAnother body) =
+  let (body', flags) = unzip $ map (insertOneLoopTreeInAnother oneTree) body
+  in  (Node iter headAnother body', or flags)
+insertOneLoopTreeInAnother oneTree (Leaf node) | getLoopHead oneTree == node = (oneTree, True)
+                                               | otherwise                   = (Leaf node, False)
+
+insertOneLoopInLoops :: LoopTree -> [LoopTree] -> ([LoopTree], Bool)
+insertOneLoopInLoops loop loops =
+  let (loops', flags) = unzip $ map (insertOneLoopTreeInAnother loop) loops
+  in  (loops', or flags)
+     
+
+insertLoopsInLoops :: [LoopTree] -> [LoopTree] -> ([LoopTree], Bool)       
+insertLoopsInLoops loops1 loops2 =
+  let (loops', flags) = unzip $ map (flip insertOneLoopInLoops loops2) loops1
+  in  (nub $ concat loops', or flags)
+
+insertLoopsInAllLoops :: [LoopTree] -> [[LoopTree]] -> [[LoopTree]]
+insertLoopsInAllLoops _ [] = []
+insertLoopsInAllLoops loops1 (loops2:allLoops) =
+  let (loops, flag) = insertLoopsInLoops loops1 loops2
+  in  if  flag
+      then loops:allLoops
+      else loops2:insertLoopsInAllLoops loops1 allLoops
+
+insertAllLoopsInAllLoops :: [[LoopTree]] -> [[LoopTree]]
+insertAllLoopsInAllLoops [loops] = [loops]
+insertAllLoopsInAllLoops (loops:allLoops) = loops : insertAllLoopsInAllLoops (insertLoopsInAllLoops loops allLoops)
+
+
+findLoopIteration :: Int -> LoopIterationMap -> Int
+findLoopIteration i mp  = IntMap.findWithDefault 1 i mp
+
+buildLoopSizeMap :: Gr NLab ELab -> LoopSizeMap
+buildLoopSizeMap gr =
+  let cycles      = cyclesIn' gr
+      cycleGroups = groupBy ((==) `on` head) cycles
+      foldCycleGroup cycleGr resultMap =
+        let groupLead = head $ head cycleGr
+            maxLength = maximum $ map length cycleGr
+        in  IntMap.insert groupLead maxLength resultMap    
+  in  foldr foldCycleGroup IntMap.empty cycleGroups
+
+
+mkLoopTransitiveClosure :: [[GPath]] -> [[GPath]]
+mkLoopTransitiveClosure [loop]       = [loop]
+mkLoopTransitiveClosure (loop:loops) = mkLoopTransitiveClosure (injectLoopsInGroups loop loops)
+
+
+injectLoopsInPath :: [GPath] -> GPath -> ([GPath], Bool) 
+injectLoopsInPath loops path =
+  let leadElem = head $ head loops
+      (pref, suff) = break (==leadElem) path
+  in  if (null suff)
+      then ([path], False)
+      else (map (\l -> pref ++ l ++ tail suff) loops, True)
+
+injectLoopsInGroup :: [GPath] -> [GPath] -> ([GPath], Bool)
+injectLoopsInGroup loops group =
+  let (group' , cond) = unzip $ map (injectLoopsInPath loops) group
+  in  (concat group', or cond)
+
+injectLoopsInGroups :: [GPath] -> [[GPath]] -> [[GPath]]       
+injectLoopsInGroups _ [] = []
+injectLoopsInGroups loops (group:groups) =
+  let (group', cond) =  injectLoopsInGroup loops group
+  in  if cond
+      then group':groups
+      else group:injectLoopsInGroups loops groups
+
+
+
+-- estimateMaxLoopComplexity :: 

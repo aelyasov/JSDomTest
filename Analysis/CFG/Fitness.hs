@@ -5,17 +5,32 @@ import Data.Graph.Inductive.Graph (LNode, LEdge, match, outdeg, mkGraph)
 import Data.Graph.Inductive.PatriciaTree
 import Data.Graph.Inductive.Basic (grev)
 import Data.Graph.Analysis.Algorithms.Common (pathTree, cyclesIn')
-import Analysis.CFG.Data (GPath, NLab, SLab, ELab)
+import Analysis.CFG.Data
 import Safe (maximumByNote, headNote, at)
-import Data.List (nub, groupBy)
+import Data.List (nub, groupBy, find, findIndex)
 import Data.Maybe (mapMaybe)
+import Control.Applicative ((<|>))
 import Data.Function (on)
 import Debug.Trace
 
-
+import Analysis.CFG.Util 
 import Analysis.CFG.Build
 import Control.Monad
 
+
+
+-- | Given CFG, reversed execution path an target node the function returns distanses from problem node to target
+findPathToTarget :: Gr NLab ELab -> GPath -> SLab -> Maybe [GPath]
+findPathToTarget graph path target = find (not . null) $  map (findAllPathsBetweenTwoNodes graph target) path
+
+
+findAllPathsBetweenTwoNodes :: Gr NLab ELab -> SLab -> SLab -> [GPath]
+findAllPathsBetweenTwoNodes graph target start = filterLoopsAndFullPaths target $ pathTree $ match start graph
+
+
+filterLoopsAndFullPaths :: SLab -> [GPath] -> [GPath]
+filterLoopsAndFullPaths target paths = filter (\path -> target == last path) paths
+-- (last path `elem` init path || last path == -1) &&
 
 allCompletePaths2Target :: Gr NLab ELab -> SLab -> [GPath]
 allCompletePaths2Target graph target =
@@ -23,8 +38,8 @@ allCompletePaths2Target graph target =
       paths2Target         = pathTree $ match target reverseGraph
       completePaths2Target = filter ((0==) . last) paths2Target
       cycles               = cyclesIn' graph
-      cycleGroups          = groupBy ((==) `on` last) $ map reverse $ trace (show cycles) cycles  
-      result = mkLoopTransitiveClosure $ reverse ((trace (show completePaths2Target) completePaths2Target):(trace (show cycleGroups) cycleGroups))
+      cycleGroups          = groupBy ((==) `on` last) $ map reverse  cycles  
+      result = mkLoopTransitiveClosure $ reverse (completePaths2Target:cycleGroups)
   in -- completePaths2Target
    concat result
 
@@ -60,34 +75,7 @@ distanceToExit graph run =
   in  if (last run == -1)
       then 0
       else (length maxPath2Exit) - 1
-
-
-mkLoopTransitiveClosure :: [[GPath]] -> [[GPath]]
-mkLoopTransitiveClosure [loop]       = [loop]
-mkLoopTransitiveClosure (loop:loops) = mkLoopTransitiveClosure (injectLoopsInGroups loop loops)
-
-injectLoopsInPath :: [GPath] -> GPath -> ([GPath], Bool) 
-injectLoopsInPath loops path =
-  let leadElem = last $ head loops
-      (pref, suff) = break (==leadElem) path
-  in  if (null suff)
-      then ([path], False)
-      else (map (\l -> pref ++ [head suff] ++ l ++ tail suff) loops, True)
-
-injectLoopsInGroup :: [GPath] -> [GPath] -> ([GPath], Bool)
-injectLoopsInGroup loops group =
-  let (group' , cond) = unzip $ map (injectLoopsInPath loops) group
-  in  (concat group', or cond)
-
-injectLoopsInGroups :: [GPath] -> [[GPath]] -> [[GPath]]       
-injectLoopsInGroups _ [] = []
-injectLoopsInGroups loops (group:groups) =
-  let (group', cond) =  injectLoopsInGroup loops group
-  in  if cond
-      then group':groups
-      else group:injectLoopsInGroups loops groups
            
-
 
 testGr :: Gr NLab ELab
 testGr = mkGraph grNodes grEdges  
@@ -97,3 +85,4 @@ grEdges = [(0,1,""),(1,2,""),(2,3,""),(2,5,""),(3,4,""),(4,-1,""),(5,6,""),(5,8,
 test = liftM
        (mkLoopTransitiveClosure . reverse . groupBy ((==) `on` head) . cyclesIn')
        $ mkTestCFG  "./examples/apps/sudoku/revealAll.js"
+

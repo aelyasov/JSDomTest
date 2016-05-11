@@ -1,11 +1,18 @@
 /*t dom */
 function test() {
-  for(var row=0;row<2;row++) {
-    if (true) {
-      var obj = document.getElementById('square_'+row+'_'+col);
+  while (a) {
+    x++;
+    while (b) {
+      if (c) {
+        y++;
       } else {
-        var spans = obj.getElementsByTagName('SPAN');
+        z++;
       }
+    }
+    k++
   }
-  gameFinished=true;
+  w++;
+  while (true) {
+    v++;
+  }
 }
