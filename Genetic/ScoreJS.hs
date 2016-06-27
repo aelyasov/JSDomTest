@@ -10,7 +10,7 @@ import Network.HTTP.Conduit
 import Control.Monad.IO.Class (liftIO)
 import Control.Applicative
 import Control.Monad
-import Analysis.CFG.Data (NLab, ELab, GPath)
+import Analysis.CFG.Data
 
 -- import Analysis.CFG.Build
 import Analysis.CFG.Fitness (computeCfgLevel, distanceToExit)
@@ -19,11 +19,13 @@ import Data.Graph.Inductive.Graph (LEdge)
 
 import qualified Data.ByteString.Lazy.Char8 as C
 import qualified Data.Text as T
+import Data.Map
 import Data.Text (Text)
 import Data.Maybe
 import Data.List
 import Data.Aeson
 import qualified Control.Exception as E
+
 
 import Debug.Trace
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
@@ -35,20 +37,22 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   debugM logger $ "Compute fitness score for the target: " ++ (show tg)
   debugM logger $ "Compute fitness score for the JS arguments:\n" ++ (show jargs)
   man <- liftIO $ newManager tlsManagerSettings
-  initReq <- parseUrl "http://localhost:7777"
+  initReq <- parseUrl "http://localhost:7777/genetic"
   let req = initReq { method = "POST"
-                    , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
-                    , queryString = "genetic=true"
+                    -- , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
+                    , requestHeaders = [(CI.mk "Content-Type", "application/json;charset=UTF-8")]
+                    -- , queryString = "genetic=true"
                     , requestBody = RequestBodyLBS $ encode (GAInput (jsargs2bstrs jargs))
                     }
       logger = rootLoggerName
       exitLoc = (-1, -1, "")      
   response <- (liftM responseBody $ httpLbs req man) `E.catch` \e -> putStrLn ("Caught " ++ show (e :: HttpException)) >> return "Foo"
-  (JSExecution trace_ distances_ enviroment_) <- return $ (fromMaybe (error "fitnessScore in response") . decode) $ response 
+  (JSExecution trace_ distances_ loops_ enviroment_) <- return $ (fromMaybe (error $ "fitnessScore in response" ++ (show response)) . decode) $ response 
 
-  noticeM logger $ "Execution trace: " ++ (show trace_)
-  infoM logger $ "Branch distances: " ++ (show distances_)
-  infoM logger $ "New Enviroment: " ++ (show enviroment_)
+  noticeM logger $ "Execution trace: "    ++ (show trace_)
+  infoM logger   $ "Branch distances: "   ++ (show distances_)
+  infoM logger   $ "Loop iteration map: " ++ (show loops_)
+  infoM logger   $ "New Enviroment: "     ++ (show enviroment_)
   
   infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
   fitnessVal1 <- if (loc == exitLoc) then return 0 else computeFitness cfg loc trace_ distances_
@@ -91,47 +95,6 @@ test_fun = "function safeAdd(frameid) {\n    console.log(this);\n    var iframe 
 
 test_html = "<!DOCTYPE HTML><html><head></head><body><div id=\"iframe\">IFrame</div><div id=\"node\">Node</div></body></html>"
 
-data GAInput = GAInput 
-    { jsFunArgs :: Text
-    } deriving Show
 
-
-instance ToJSON GAInput where
-    -- to invoke the 'encode' function apply this flag ":set -XOverloadedStrings"
-    toJSON (GAInput jsFunArgs) = 
-        object ["jsFunArgs" .= jsFunArgs]
-
-
-data JSExecution =
-  JSExecution { traceJS       :: GPath
-              , branchDistJS  :: [BranchDist]
-              , environmentJS :: JSEnviroment  
-              } deriving Show
-                         
-
-data JSEnviroment =
-  JSEnviroment { getTagsJS    :: [String]
-               , getNamesJS   :: [String]
-               , getIdsJS     :: [String]  
-               , getClassesJS :: [String]
-               , getSelectors :: [String]
-               } deriving Show
-
-data BranchDist = BranchDist { getBrLab  :: Int 
-                             , getBrDist :: Int} deriving Show
-
-
-instance FromJSON BranchDist where
-    parseJSON jsn = do
-       [x,y] <- parseJSON jsn
-       return $ BranchDist x y
-
-
-instance FromJSON JSEnviroment where
-  parseJSON (Object v) = JSEnviroment <$> (v .: "tags") <*> (v .: "names") <*> (v .: "ids") <*> (v .: "classes") <*> (v .: "selector")
-
-instance FromJSON JSExecution where
-    parseJSON (Object v) = JSExecution <$> (v .: "_trace_") <*> (v .: "_branchDistance_" >>= parseJSON) <*> (v .: "_environment_" >>= parseJSON)
-    parseJSON x = fail $ "unexpected json: " ++ show x
 
 

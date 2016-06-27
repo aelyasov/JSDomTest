@@ -3,14 +3,13 @@ module Analysis.CFG.Util where
 import Safe (headMay)
 import Data.Maybe (maybe, fromJust)
 import Data.List (find, groupBy, nub)
-import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
-import Language.ECMAScript3.Syntax (Statement(..), Expression(..), CaseClause(..), Id(..), SourcePos, InfixOp(..), PrefixOp(..))
+import Language.ECMAScript3.Syntax 
 import qualified Language.ECMAScript3.PrettyPrint as JSP
 import qualified Text.PrettyPrint.Leijen as PPL
 import Analysis.CFG.Data (SLab)
 import Data.Default (Default, def)
-import Data.Graph.Analysis.Algorithms.Common (cyclesIn')
+import Data.Graph.Analysis.Algorithms.Commons (cyclesIn')
 import Data.Graph.Inductive.PatriciaTree
 import Analysis.CFG.Data
 import Data.Function (on)
@@ -75,9 +74,13 @@ traceStmt varName lab = ExprStmt def (CallExpr def (DotRef def (VarRef def (Id d
 traceBranchDistance :: Default a => SLab -> Expression a -> Statement a
 traceBranchDistance lab ex = ExprStmt def (CallExpr def (DotRef def (VarRef def (Id def branchDistance)) (Id def "push")) [ArrayLit def [IntLit def lab, expr2objFun ex]])
 
+traceLoopMap :: Default a => SLab -> Expression a -> Statement a
+traceLoopMap loopLabel loopExpr = ExprStmt def (AssignExpr def OpAssign (LBracket def (VarRef def (Id def loopMap)) (IntLit def loopLabel)) (expr2objFun loopExpr))
+
 importVar       = "instrument."
 traceVar        = "_trace_"
 branchDistance  = "_branchDistance_"
+loopMap         = "_loopMap_" 
 failureConst    = "_K_"
 distanceFun     = importVar ++ "abs"
 distanceZero    = importVar ++ "absZero"
@@ -172,19 +175,6 @@ propogateNeg ex = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(ListExpr l exs)               = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(CallExpr l  exs1 exs2)        = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(FuncExpr l fName fArgs sts)   = PrefixExpr def PrefixLNot ex
-
-
-type LoopSizeMap = IntMap Int
-type LoopIterationMap = IntMap Int
-type LoopMaxSizeMap = IntMap Int
-
-data LoopRoot = Root Int LoopTree
-              deriving Show
-data LoopTree = Node { getLoopIter :: Int,
-                       getLoopHead :: Int,
-                       getLoopBody :: [LoopTree] }
-              | Leaf { getLoopNode :: Int }
-              deriving (Show, Eq)
 
 
 evalLoopTree :: LoopTree -> Int

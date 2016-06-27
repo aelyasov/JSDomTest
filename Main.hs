@@ -97,7 +97,7 @@ main = do
   noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
   noticeM logger $ "The following branches have to be covered: " ++ (show branches)
   noticeM logger $ "Initial pool data: " ++ (show constPool)
-  -- getLine
+  getLine
   request <- parseUrl "http://localhost:7777"
   man <- liftIO $ newManager tlsManagerSettings
 

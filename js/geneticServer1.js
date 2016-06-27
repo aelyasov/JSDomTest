@@ -76,7 +76,7 @@ http.createServer(function(request, response){
 		done: function (error, window){
 		    
 		    var document = window.document;
-		    var environment = {tags:[], names:[], ids:[], classes:[], selector:[]};
+		    var environment = {tags:[], names:[], ids:[], classes:[], selectors:[]};
 		    
 		    var _getElementById = document.getElementById;
 		    document.getElementById = function() {
@@ -116,8 +116,9 @@ http.createServer(function(request, response){
 		    };
 
 		    var _K_ = 1;
-		    var _branchDistance_ = [];
-		    var _trace_ = [1];
+		    var branchDistance = [];
+		    var trace = [1];
+		    var loopMap = {};
 
 		    winston.debug("jsFun:\n", jsFun);
 		    eval(jsFun);
@@ -130,11 +131,12 @@ http.createServer(function(request, response){
 			winston.debug("Test function is exceptionally terminated with the message: %s", e.stack)
 		    }
 		    
-		    winston.debug("_trace_", _trace_);
-		    winston.debug(" _branchDistance_",  _branchDistance_);
+		    winston.debug("trace", trace);
+		    winston.debug("branchDistance", branchDistance);
+		    winston.debug("loopMap", loopMap);
 		    winston.debug("environment: ", environment);
 		    response.writeHeader(200, {"Content-Type": "text/plain"});
-		    response.write(JSON.stringify({_trace_:_trace_,  _branchDistance_: _branchDistance_, _environment_:environment}));
+		    response.write(JSON.stringify({trace:trace, branchDistance: branchDistance, loopMap: loopMap, environment: environment}));
 		    response.end();    
 		}
 	    });

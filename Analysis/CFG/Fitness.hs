@@ -4,7 +4,7 @@ module Analysis.CFG.Fitness where
 import Data.Graph.Inductive.Graph (LNode, LEdge, match, outdeg, mkGraph)
 import Data.Graph.Inductive.PatriciaTree
 import Data.Graph.Inductive.Basic (grev)
-import Data.Graph.Analysis.Algorithms.Common (pathTree, cyclesIn')
+import Data.Graph.Analysis.Algorithms.Commons (pathTree, cyclesIn')
 import Analysis.CFG.Data
 import Safe (maximumByNote, headNote, at)
 import Data.List (nub, groupBy, find, findIndex)
@@ -25,12 +25,9 @@ findPathToTarget graph path target = find (not . null) $  map (findAllPathsBetwe
 
 
 findAllPathsBetweenTwoNodes :: Gr NLab ELab -> SLab -> SLab -> [GPath]
-findAllPathsBetweenTwoNodes graph target start = filterLoopsAndFullPaths target $ pathTree $ match start graph
+findAllPathsBetweenTwoNodes graph target start = filter (\path -> target == last path) $ pathTree $ match start graph
 
 
-filterLoopsAndFullPaths :: SLab -> [GPath] -> [GPath]
-filterLoopsAndFullPaths target paths = filter (\path -> target == last path) paths
--- (last path `elem` init path || last path == -1) &&
 
 allCompletePaths2Target :: Gr NLab ELab -> SLab -> [GPath]
 allCompletePaths2Target graph target =
