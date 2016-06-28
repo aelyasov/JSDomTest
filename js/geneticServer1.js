@@ -13,8 +13,8 @@ var fs         = require('fs'),
     
 
 var jsFun, jsMutFun, jsFunArgs, jsSig, jsFunDom, realJSFunArgs;
-winston.level = 'info';
-// winston.level = 'debug';
+//winston.level = 'info';
+winston.level = 'debug';
 
 http.createServer(function(request, response){
     
@@ -22,13 +22,12 @@ http.createServer(function(request, response){
     
     var data_ = '{ "jsFun":"function safeAdd(frameid) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {instrument._trace_.push(6);instrument._branchDistance_.push([6,Number(instrument._K_)]);instrument._trace_.push(7);frame.parentNode.removeChild(frame);} else {instrument._trace_.push(6);instrument._branchDistance_.push([6,_Number(K_)]);instrument._trace_.push(9);iframe.appendChild(anchor);}}", "jsMutFun":"var _K_ = 0;var _branchDistance_ = [];var _trace_ = [];function safeAdd(frameid,document) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {_branchDistance_.push([6,!_K_]);_trace_.push(7);frame.parentNode.removeChild(frame);} else {_branchDistance_.push([6,_K_]);_trace_.push(9);iframe.appendChild(anchor);}}"}';   
 
-    // console.log("data_", JSON.parse(data_));
-    
-    // var my_url = url.parse(request.url);
-    var queryObject = url.parse(request.url,true).query;
-    winston.debug("queryObject:", queryObject);
 
-    if (queryObject.init == "true") {
+    var pathname = url.parse(request.url,true).pathname;
+
+    winston.debug("pathname: ", pathname);
+
+    if (pathname == "/init") {
 	request.on('data', function(data) {
 	    winston.debug("Received the initial function:", data.toString());
 	    
@@ -46,7 +45,7 @@ http.createServer(function(request, response){
     }
 
 
-    if (queryObject.mutation == "true") {
+    if (pathname == "/mutation") {
 	request.on('data', function(data) {
 	    winston.debug("Received the mutated function:\n", data.toString());
 	    winston.debug("# New mutation iteration: ", JSON.parse(data).mutN);
@@ -57,7 +56,7 @@ http.createServer(function(request, response){
     }
     
 
-    if (queryObject.genetic == "true") {
+    if (pathname == "/genetic") {
 	request.on('data', function(data) {
 	    winston.debug("Received arguments which are new population:", data.toString());
 
@@ -143,7 +142,7 @@ http.createServer(function(request, response){
 	});
     };
 
-    if (queryObject.execute == "true") {
+    if (pathname == "/execute") {
 	request.on('data', function(data) {
 	    winston.debug("Received genetically approved arguments", data.toString()); 
 	    jsFunArgs = JSON.parse(data).jsArgs.split("<|>"),	    

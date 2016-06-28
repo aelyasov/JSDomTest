@@ -72,15 +72,19 @@ traceStmt :: Default a => String -> Int -> Statement a
 traceStmt varName lab = ExprStmt def (CallExpr def (DotRef def (VarRef def (Id def varName)) (Id def "push")) [IntLit def lab])
 
 traceBranchDistance :: Default a => SLab -> Expression a -> Statement a
-traceBranchDistance lab ex = ExprStmt def (CallExpr def (DotRef def (VarRef def (Id def branchDistance)) (Id def "push")) [ArrayLit def [IntLit def lab, expr2objFun ex]])
+traceBranchDistance lab ex = ExprStmt def (CallExpr def (DotRef def (VarRef def (Id def branchDistance)) (Id def "push")) [ObjectLit def [(PropId def (Id def "label"), IntLit def lab), (PropId def (Id def "distance"), expr2objFun ex)]])
+
+-- ExprStmt def (CallExpr def (DotRef def (VarRef def (Id def branchDistance)) (Id def "push")) [ArrayLit def [IntLit def lab, expr2objFun ex]])
+
 
 traceLoopMap :: Default a => SLab -> Expression a -> Statement a
 traceLoopMap loopLabel loopExpr = ExprStmt def (AssignExpr def OpAssign (LBracket def (VarRef def (Id def loopMap)) (IntLit def loopLabel)) (expr2objFun loopExpr))
 
+
 importVar       = "instrument."
-traceVar        = "_trace_"
-branchDistance  = "_branchDistance_"
-loopMap         = "_loopMap_" 
+traceVar        = "trace"
+branchDistance  = "branchDistance"
+loopMap         = "loopMap" 
 failureConst    = "_K_"
 distanceFun     = importVar ++ "abs"
 distanceZero    = importVar ++ "absZero"

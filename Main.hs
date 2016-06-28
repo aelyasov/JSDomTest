@@ -98,12 +98,12 @@ main = do
   noticeM logger $ "The following branches have to be covered: " ++ (show branches)
   noticeM logger $ "Initial pool data: " ++ (show constPool)
   getLine
-  request <- parseUrl "http://localhost:7777"
+  request <- parseUrl "http://localhost:7777/init"
   man <- liftIO $ newManager tlsManagerSettings
 
   let reqInit = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
-                        , queryString = "init=true"
+                        -- , queryString = "init=true"
                         , requestBody = RequestBodyLBS $ encode (InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr) (map (T.pack . show) jsSig))
                         }
   initResp <- httpLbs reqInit man
@@ -120,10 +120,10 @@ killJSMutationGenetic alg man mutN target pool = do
   putStrLn $ replicate 70 '-'
   noticeM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
   noticeM logger $ "Initial pool data: " ++ (show pool)
-  request <- parseUrl "http://localhost:7777"
+  request <- parseUrl "http://localhost:7777/mutation"
   let reqMut = request { method = "POST"
                        , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
-                       , queryString = "mutation=true"
+                       -- , queryString = "mutation=true"
                        , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
                        }
   mutResp <- httpLbs reqMut man
