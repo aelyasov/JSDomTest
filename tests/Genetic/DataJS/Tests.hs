@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Genetic.DataJS.Tests (tests) where
 
 import Test.Tasty (TestTree, testGroup, defaultMain)

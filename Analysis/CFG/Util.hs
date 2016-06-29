@@ -1,6 +1,6 @@
 module Analysis.CFG.Util where
 
-import Safe (headMay)
+import Safe (headMay, headNote)
 import Data.Maybe (maybe, fromJust)
 import Data.List (find, groupBy, nub)
 import qualified Data.IntMap as IntMap
@@ -265,16 +265,20 @@ mkLoopTransitiveClosure (loop:loops) = mkLoopTransitiveClosure (injectLoopsInGro
 
 injectLoopsInPath :: [GPath] -> GPath -> ([GPath], Bool) 
 injectLoopsInPath loops path =
-  let leadElem = head $ head loops
+  let leadElem = headNote "injectLoopsInPath: no loops to inject"
+               $ headNote "injectLoopsInPath: first loop has no elements"
+               loops
       (pref, suff) = break (==leadElem) path
   in  if (null suff)
       then ([path], False)
       else (map (\l -> pref ++ l ++ tail suff) loops, True)
 
+
 injectLoopsInGroup :: [GPath] -> [GPath] -> ([GPath], Bool)
 injectLoopsInGroup loops group =
   let (group' , cond) = unzip $ map (injectLoopsInPath loops) group
   in  (concat group', or cond)
+
 
 injectLoopsInGroups :: [GPath] -> [[GPath]] -> [[GPath]]       
 injectLoopsInGroups _ [] = []
@@ -284,6 +288,3 @@ injectLoopsInGroups loops (group:groups) =
       then group':groups
       else group:injectLoopsInGroups loops groups
 
-
-
--- estimateMaxLoopComplexity :: 

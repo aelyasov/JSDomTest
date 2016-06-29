@@ -126,7 +126,7 @@ http.createServer(function(request, response){
 			// test.call(window, jsFunArgs[1], window, document);
 			test.apply(window, realJSFunArgs, window, document);
 		    } catch (e) {
-			_trace_.push(-100); // label -100 indicates exceptional termination
+			trace.push(-100); // label -100 indicates exceptional termination
 			winston.debug("Test function is exceptionally terminated with the message: %s", e.stack)
 		    }
 		    

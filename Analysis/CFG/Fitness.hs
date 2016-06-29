@@ -28,7 +28,6 @@ findAllPathsBetweenTwoNodes :: Gr NLab ELab -> SLab -> SLab -> [GPath]
 findAllPathsBetweenTwoNodes graph target start = filter (\path -> target == last path) $ pathTree $ match start graph
 
 
-
 allCompletePaths2Target :: Gr NLab ELab -> SLab -> [GPath]
 allCompletePaths2Target graph target =
   let reverseGraph         = grev graph
