@@ -193,9 +193,6 @@ list2LoopTree iterMap (head:body) =
    Just iterN -> Node iterN head (map Leaf body)
    Nothing    -> error "list2LoopTree: there is no info about max iteration number for given loop"
 
-testLoopIterationMap :: LoopIterationMap
-testLoopIterationMap = IntMap.fromList [(2,2), (5, 2), (14, 1)]
-
 
 buildLoopMaxSizeMap :: Gr NLab ELab -> LoopIterationMap -> LoopMaxSizeMap
 buildLoopMaxSizeMap gr iterMap =
@@ -231,6 +228,7 @@ insertLoopsInLoops loops1 loops2 =
   let (loops', flags) = unzip $ map (flip insertOneLoopInLoops loops2) loops1
   in  (nub $ concat loops', or flags)
 
+
 insertLoopsInAllLoops :: [LoopTree] -> [[LoopTree]] -> [[LoopTree]]
 insertLoopsInAllLoops _ [] = []
 insertLoopsInAllLoops loops1 (loops2:allLoops) =
@@ -238,6 +236,7 @@ insertLoopsInAllLoops loops1 (loops2:allLoops) =
   in  if  flag
       then loops:allLoops
       else loops2:insertLoopsInAllLoops loops1 allLoops
+
 
 insertAllLoopsInAllLoops :: [[LoopTree]] -> [[LoopTree]]
 insertAllLoopsInAllLoops [loops] = [loops]

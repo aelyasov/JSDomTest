@@ -34,10 +34,9 @@ allCompletePaths2Target graph target =
       paths2Target         = pathTree $ match target reverseGraph
       completePaths2Target = filter ((0==) . last) paths2Target
       cycles               = cyclesIn' graph
-      cycleGroups          = groupBy ((==) `on` last) $ map reverse  cycles  
-      result = mkLoopTransitiveClosure $ reverse (completePaths2Target:cycleGroups)
-  in -- completePaths2Target
-   concat result
+      cycleGroups          = groupBy ((==) `on` head) cycles  
+      result = mkLoopTransitiveClosure $ reverse (map reverse (trace (show completePaths2Target) completePaths2Target):(trace (show cycleGroups) cycleGroups))
+  in concat result
 
 
 findPathFromProblemNode2Target :: GPath -> GPath -> Maybe GPath
