@@ -6,6 +6,11 @@ import Test.HUnit (Assertion, (@?=), runTestTT, Test(..), assertFailure)
 import Analysis.CFG.Util
 import Analysis.CFG.Data
 import qualified Data.IntMap as IntMap
+import Analysis.CFG.Build
+
+-- | Test import
+import Data.Graph.Analysis.Algorithms.Commons (cyclesIn')
+import Control.Monad (liftM)
 
 
 tests :: TestTree
@@ -26,7 +31,19 @@ tests = testGroup "Analysis.CFG.Util"
         , testCase "insertOneLoopInLoops02"       insertOneLoopInLoops02
         , testCase "insertLoopsInLoops01"         insertLoopsInLoops01
         , testCase "insertLoopsInAllLoops01"      insertLoopsInAllLoops01
-        , testCase "insertAllLoopsInAllLoops01"   insertAllLoopsInAllLoops01  
+        , testCase "insertAllLoopsInAllLoops01"   insertAllLoopsInAllLoops01
+        , testCase "findAllLoopTreesInGraph01"    findAllLoopTreesInGraph01
+        , testCase "findAllLoopTreesInGraph02"    findAllLoopTreesInGraph02
+        , testCase "findAllLoopTreesInGraph03"    findAllLoopTreesInGraph03
+        , testCase "findAllLoopTreesInGraph04"    findAllLoopTreesInGraph04
+        , testCase "findAllLoopTreesInGraph05"    findAllLoopTreesInGraph05
+        , testCase "buildLoopMaxSizeMap01"        buildLoopMaxSizeMap01
+        , testCase "buildLoopMaxSizeMap02"        buildLoopMaxSizeMap02
+        , testCase "buildLoopMaxSizeMap03"        buildLoopMaxSizeMap03
+        , testCase "buildLoopMaxSizeMap04"        buildLoopMaxSizeMap04
+        , testCase "buildLoopMaxSizeMap05"        buildLoopMaxSizeMap05
+        , testCase "estimatePath01"               estimatePath01
+        , testCase "updateLoopIterMap01"          updateLoopIterMap01
         ]
 
 
@@ -171,15 +188,104 @@ insertLoopsInAllLoops01 = insertLoopsInAllLoops loopsToInsert allLoops @?= resul
     allLoops         = [[Node 11 2 [Leaf 0, Leaf 5]], [Node 12 2 [Leaf 5, Node 13 6 [Leaf 1, Leaf 7]]]]
     resultLoops      = [ [Node 11 2 [Leaf 0, Leaf 5]]
                        , [ Node 12 2 [Leaf 5, Node 13 6 [loopsToInsert !! 0, Leaf 7]]
-                         , Node 12 2 [Leaf 5, Node 13 6 [loopsToInsert !! 1, Leaf 7]]]]
-
+                         , Node 12 2 [Leaf 5, Node 13 6 [loopsToInsert !! 1, Leaf 7]]
+                         ]
+                       ]
+    
 
 insertAllLoopsInAllLoops01 :: Assertion
 insertAllLoopsInAllLoops01 = insertAllLoopsInAllLoops allLoops @?= resultLoops
   where
     allLoops    = [[Node 11 1 [Leaf 0, Leaf 5]], [Node 12 2 [Leaf 5, Node 13 6 [Leaf 1, Leaf 7]]]]
     resultLoops = [[Node 11 1 [Leaf 0, Leaf 5]], [Node 12 2 [Leaf 5, Node 13 6 [Node 11 1 [Leaf 0, Leaf 5], Leaf 7]]]]
-
+    
 
 findAllLoopTreesInGraph01 :: Assertion
-findAllLoopTreesInGraph01 = findAllLoopTreesInGraph
+findAllLoopTreesInGraph01 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test1.js"
+  let loopIterationMap = IntMap.fromList []
+  findAllLoopTreesInGraph graph loopIterationMap @?= []
+
+
+findAllLoopTreesInGraph02 :: Assertion
+findAllLoopTreesInGraph02 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test2.js"
+  let loopIterationMap = IntMap.fromList [(3, 10)]
+  findAllLoopTreesInGraph graph loopIterationMap @?= [[Node 10 3 [Leaf 4]]]
+
+
+findAllLoopTreesInGraph03 :: Assertion
+findAllLoopTreesInGraph03 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test3.js"
+  let loopIterationMap = IntMap.fromList [(1, 10), (3, 11)]
+  findAllLoopTreesInGraph graph loopIterationMap @?= [[Node 11 3 [Leaf 4]],[Node 10 1 [Leaf 2,Node 11 3 [Leaf 4]]]]
+
+
+findAllLoopTreesInGraph04 :: Assertion
+findAllLoopTreesInGraph04 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test4.js"
+  let loopIterationMap = IntMap.fromList [(1, 10), (5, 11), (8, 12)]
+  findAllLoopTreesInGraph graph loopIterationMap @?=
+    [ [ Node 12 8 [Leaf 9] ]
+    , [ Node 11 5 [Leaf 6] ]
+    , [Node 10 1 [Leaf 2,Leaf 3,Leaf 7,Node 12 8 [Leaf 9]],Node 10 1 [Leaf 2,Leaf 3,Leaf 4,Node 11 5 [Leaf 6]]]]
+
+
+findAllLoopTreesInGraph05 :: Assertion
+findAllLoopTreesInGraph05 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test5.js"
+  let loopIterationMap = IntMap.fromList [(1, 10), (5, 11), (7, 12), (10, 13), (14, 14), (17, 15)]
+  findAllLoopTreesInGraph graph loopIterationMap @?=
+    [[ Node 15 17 [Leaf 18] ],
+     [ Node 14 14 [Leaf 15] ],
+     [ Node 13 10 [Leaf 11,Leaf 12,Leaf 16,Node 15 17 [Leaf 18] ]
+     , Node 13 10 [Leaf 11,Leaf 12,Leaf 13,Node 14 14 [Leaf 15]] ],
+     [ Node 12 7 [Leaf 8] ],
+     [ Node 11 5 [Leaf 6,Node 12 7 [Leaf 8]] ],
+     [ Node 10 1 [Leaf 2,Leaf 3,Leaf 9,Node 13 10 [Leaf 11,Leaf 12,Leaf 16,Node 15 17 [Leaf 18]]]
+     , Node 10 1 [Leaf 2,Leaf 3,Leaf 4,Node 11 5 [Leaf 6,Node 12 7 [Leaf 8]]]
+     , Node 10 1 [Leaf 2,Leaf 3,Leaf 9,Node 13 10 [Leaf 11,Leaf 12,Leaf 13,Node 14 14 [Leaf 15]]]]
+    ]
+
+
+buildLoopMaxSizeMap01 :: Assertion
+buildLoopMaxSizeMap01 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test1.js"
+  let loopIterationMap = IntMap.fromList []
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList []
+
+
+buildLoopMaxSizeMap02 :: Assertion
+buildLoopMaxSizeMap02 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test2.js"
+  let loopIterationMap = IntMap.fromList [(3, 10)]
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(3,20)]
+
+
+buildLoopMaxSizeMap03 :: Assertion
+buildLoopMaxSizeMap03 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test3.js"
+  let loopIterationMap = IntMap.fromList [(1, 10), (3, 11)]
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,240),(3,22)]
+
+
+buildLoopMaxSizeMap04 :: Assertion
+buildLoopMaxSizeMap04 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test4.js"
+  let loopIterationMap = IntMap.fromList [(1, 10), (5, 11), (8, 12)]
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,280),(5,22),(8,24)]
+
+
+buildLoopMaxSizeMap05 :: Assertion
+buildLoopMaxSizeMap05 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test5.js"
+  let loopIterationMap = IntMap.fromList [(1, 10), (5, 11), (7, 12), (10, 13), (14, 14), (17, 15)]
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,4460),(5,286),(7,24),(10,442),(14,28),(17,30)]
+
+
+estimatePath01 :: Assertion
+estimatePath01 = estimatePath [0,1,2] (IntMap.fromList [(1,5)]) @?= 7
+
+
+updateLoopIterMap01 :: Assertion
+updateLoopIterMap01 = updateLoopIterMap (IntMap.fromList [(1,5),(2,10)]) [0,1,3,1,3] @?= (IntMap.fromList [(1,5),(2,10)])

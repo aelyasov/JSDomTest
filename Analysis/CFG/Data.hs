@@ -1,6 +1,6 @@
 module Analysis.CFG.Data where
 
-import Data.IntMap
+import Data.IntMap (IntMap)
 
 type SLab = Int
 type NLab = String
@@ -15,4 +15,10 @@ data LoopTree = Node { getLoopIter :: Int,
                        getLoopHead :: Int,
                        getLoopBody :: [LoopTree] }
               | Leaf { getLoopNode :: Int }
-              deriving (Show, Eq)
+              deriving Eq
+
+
+instance Show LoopTree where
+  show (Node iter head body) = "Node " ++ (show iter) ++ " " ++ (show head) ++ " " ++ (show body)
+  show (Leaf node)           = "Leaf " ++ (show node)
+

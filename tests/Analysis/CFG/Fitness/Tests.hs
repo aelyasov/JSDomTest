@@ -6,6 +6,7 @@ import Test.HUnit (Assertion, (@?=), runTestTT, Test(..), assertFailure)
 import Analysis.CFG.Fitness
 import Analysis.CFG.Data
 import Analysis.CFG.Build
+import qualified Data.IntMap as IntMap
 
 
 -- | Importr required for interanl module testing
@@ -21,9 +22,15 @@ import Analysis.CFG.Util
 
 tests :: TestTree
 tests = testGroup "Analysis.CFG.Fitness"
-        [ testCase "allCompletePaths2Target01" allCompletePaths2Target01
-        , testCase "allCompletePaths2Target02" allCompletePaths2Target02
-        , testCase "allCompletePaths2Target03" allCompletePaths2Target03
+        [-- testCase "allCompletePaths2Target01"     allCompletePaths2Target01
+        -- , testCase "allCompletePaths2Target02"     allCompletePaths2Target02
+        -- , testCase "allCompletePaths2Target03"     allCompletePaths2Target03
+          testCase "findAllPathsBetweenTwoNodes01" findAllPathsBetweenTwoNodes01
+        , testCase "findAllPathsBetweenTwoNodes02" findAllPathsBetweenTwoNodes02
+        , testCase "findAllPathsBetweenTwoNodes03" findAllPathsBetweenTwoNodes03
+        , testCase "findAllPathsBetweenTwoNodes04" findAllPathsBetweenTwoNodes04
+        , testCase "findAllPathToTarget01"         findAllPathToTarget01
+        , testCase "estimateAllPath01"             estimateAllPath01  
         ]
 
 
@@ -41,3 +48,51 @@ allCompletePaths2Target03 :: Assertion
 allCompletePaths2Target03 = do
     graph <- mkTestCFG "./tests/Analysis/CFG/Fitness/resources/test2.js"
     allCompletePaths2Target graph (2) @?= []    
+
+
+findAllPathsBetweenTwoNodes01 :: Assertion
+findAllPathsBetweenTwoNodes01 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test2.js"
+  let startNode  = 1
+      targetNode = -1
+  findAllPathsBetweenTwoNodes graph targetNode startNode @?= [[1,10,-1]]
+
+findAllPathsBetweenTwoNodes02 :: Assertion
+findAllPathsBetweenTwoNodes02 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test2.js"
+  let startNode  = 1
+      targetNode = 7
+  findAllPathsBetweenTwoNodes graph targetNode startNode @?= [[1,2,3,4,5,6,7]]
+
+
+findAllPathsBetweenTwoNodes03 :: Assertion
+findAllPathsBetweenTwoNodes03 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test2.js"
+  let startNode  = 7
+      targetNode = -1
+  findAllPathsBetweenTwoNodes graph targetNode startNode @?= [[7,5,1,10,-1]]
+
+
+findAllPathsBetweenTwoNodes04 :: Assertion
+findAllPathsBetweenTwoNodes04 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test2.js"
+  let startNode  = 7
+      targetNode = 9
+  findAllPathsBetweenTwoNodes graph targetNode startNode @?= [[7,5,1,2,3,8,9]]
+
+
+findAllPathToTarget01 :: Assertion
+findAllPathToTarget01 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test2.js"
+  let path       = [0,1,2]
+      targetNode = -1 
+  findAllPathToTarget graph path targetNode @?= [([0,1,10,-1],[0]),([1,10,-1],[0,1]),([2,3,4,5,1,10,-1],[0,1,2]),([2,3,8,9,1,10,-1],[0,1,2])]
+
+
+estimateAllPath01 :: Assertion 
+estimateAllPath01 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test3.js"
+  let loopIterMap = IntMap.fromList [(1,1),(3,1)]
+      path        = [0,1,2,3,4,5,6]
+      target      = -1
+  estimateAllPath graph loopIterMap path target @?= []

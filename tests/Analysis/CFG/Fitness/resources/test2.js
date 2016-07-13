@@ -3,6 +3,8 @@ if (true) {
   for (var j = 1; j < 5; j++) {
     a;
   }
+} else {
+  c;
 }
 }
 b;

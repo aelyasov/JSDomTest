@@ -5,21 +5,35 @@ import Data.Graph.Inductive.Graph (LNode, LEdge, match, outdeg, mkGraph)
 import Data.Graph.Inductive.PatriciaTree
 import Data.Graph.Inductive.Basic (grev)
 import Data.Graph.Analysis.Algorithms.Commons (pathTree, cyclesIn')
+import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap
 import Analysis.CFG.Data
-import Safe (maximumByNote, headNote, at)
-import Data.List (nub, groupBy, find, findIndex)
+import Safe (maximumByNote, headNote, at, tailNote)
+import Data.List (nub, groupBy, find, findIndex, inits)
 import Data.Maybe (mapMaybe)
 import Control.Applicative ((<|>))
 import Data.Function (on)
 import Debug.Trace
+
 
 import Analysis.CFG.Util 
 import Analysis.CFG.Build
 import Control.Monad
 
 
+estimateAllPath :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
+estimateAllPath graph initIterMap path target =
+  map (\(pathToTarget, partialPath) -> (pathToTarget, estimatePath pathToTarget $ buildLoopMaxSizeMap graph $ updateLoopIterMap initIterMap partialPath)) $ findAllPathToTarget graph path target
 
--- | Given CFG, reversed execution path an target node the function returns distanses from problem node to target
+
+findAllPathToTarget :: Gr NLab ELab -> GPath -> SLab -> [(GPath, GPath)]
+findAllPathToTarget graph path target =
+  filter (not . null . fst)
+  $ concatMap (\p -> zip (findAllPathsBetweenTwoNodes graph target $ last p) (repeat p))
+  $ tailNote "findPathToTarget"
+  $ inits path
+
+
 findPathToTarget :: Gr NLab ELab -> GPath -> SLab -> Maybe [GPath]
 findPathToTarget graph path target = find (not . null) $  map (findAllPathsBetweenTwoNodes graph target) path
 

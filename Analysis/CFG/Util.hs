@@ -186,6 +186,12 @@ evalLoopTree (Node iter head body) = iter * (1 + (sum $ map evalLoopTree body))
 evalLoopTree (Leaf _) = 1
 
 
+updateLoopIterMap ::  LoopIterationMap -> GPath -> LoopIterationMap
+updateLoopIterMap iterMap path = foldr (IntMap.adjust (flip (-) 1)) iterMap path
+
+estimatePath :: GPath -> LoopMaxSizeMap -> Int
+estimatePath path loopMap = sum $ map (\n -> IntMap.findWithDefault 1 n loopMap) path
+
 list2LoopTree ::  LoopIterationMap -> GPath -> LoopTree
 list2LoopTree _ [] = error "list2LoopTree: loop can't be empty"
 list2LoopTree iterMap (head:body) =
@@ -202,6 +208,7 @@ buildLoopMaxSizeMap gr iterMap =
                   maxLoopPath = maximum $ map evalLoopTree loops  
               in  IntMap.insert loopHead maxLoopPath loopMap
             ) IntMap.empty allLoopTrees 
+
 
 findAllLoopTreesInGraph :: Gr NLab ELab -> LoopIterationMap -> [[LoopTree]]
 findAllLoopTreesInGraph gr iterMap =
@@ -239,7 +246,7 @@ insertLoopsInAllLoops loops1 (loops2:allLoops) =
 
 
 insertAllLoopsInAllLoops :: [[LoopTree]] -> [[LoopTree]]
-insertAllLoopsInAllLoops [loops] = [loops]
+insertAllLoopsInAllLoops []      = []
 insertAllLoopsInAllLoops (loops:allLoops) = loops : insertAllLoopsInAllLoops (insertLoopsInAllLoops loops allLoops)
 
 
