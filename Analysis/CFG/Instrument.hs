@@ -1,4 +1,4 @@
-module Analysis.CFG.Instrument (instrScript) where
+module Analysis.CFG.Instrument where
 
 import Language.ECMAScript3.Syntax (JavaScript(..), Statement(..), Expression(..), CatchClause(..), CaseClause(..), SourcePos, PrefixOp(..))
 import Analysis.CFG.Data (SLab)

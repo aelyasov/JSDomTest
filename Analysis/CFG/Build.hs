@@ -17,7 +17,7 @@ import Analysis.CFG.Label (assignUniqueIdsSt)
 import System.Process (system)
 import System.FilePath.Posix (takeDirectory, (</>))
 import Debug.Trace (trace)
-
+import Data.Either (either)
 
 -- import Analysis.CFG.Fitness -- remove import after tests
 -- import Data.Graph.Analysis.Algorithms.Common

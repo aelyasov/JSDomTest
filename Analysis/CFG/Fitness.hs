@@ -1,4 +1,3 @@
--- module Analysis.CFG.Fitness (computeCfgLevel, distanceToExit) where
 module Analysis.CFG.Fitness where
 
 import Data.Graph.Inductive.Graph (LNode, LEdge, match, outdeg, mkGraph)
@@ -9,8 +8,9 @@ import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
 import Analysis.CFG.Data
 import Safe (maximumByNote, headNote, at, tailNote)
-import Data.List (nub, groupBy, find, findIndex, inits)
+import Data.List (nub, groupBy, find, findIndex, inits, minimumBy, sortBy)
 import Data.Maybe (mapMaybe)
+import Data.Ord 
 import Control.Applicative ((<|>))
 import Data.Function (on)
 import Debug.Trace
@@ -21,9 +21,28 @@ import Analysis.CFG.Build
 import Control.Monad
 
 
+computeRealCfgLevelOne :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> (Int, SLab)
+computeRealCfgLevelOne graph initIterMap path target = head $ computeRealCfgLevel graph initIterMap path target
+
+  
+computeRealCfgLevel :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(Int, SLab)]
+computeRealCfgLevel graph initIterMap path target = map return (trace ("shortestsPathsToTarget: " ++ (show shortestPathsToTarget)) shortestPathsToTarget)
+  where
+    shortestPathsToTarget = getShortestsPathsToTarget graph initIterMap path target
+    return (pToTarget, sz) = (sz, head pToTarget)
+    
+
+getShortestsPathsToTarget :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
+getShortestsPathsToTarget graph initIterMap path target = head $ groupBy ((==) `on` snd) $ sortBy (comparing snd) allPaths  where
+  allPaths = estimateAllPath graph initIterMap path target
+
+
+
 estimateAllPath :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
 estimateAllPath graph initIterMap path target =
-  map (\(pathToTarget, partialPath) -> (pathToTarget, estimatePath pathToTarget $ buildLoopMaxSizeMap graph $ updateLoopIterMap initIterMap partialPath)) $ findAllPathToTarget graph path target
+  map (\(pathToTarget, partialPath) -> (pathToTarget, estimatePath pathToTarget $ loopMaxSizeMap  partialPath)) allPathsToTarget where
+    allPathsToTarget = findAllPathToTarget graph path target
+    loopMaxSizeMap ppath = buildLoopMaxSizeMap graph $ updateLoopIterMap initIterMap (init ppath)
 
 
 findAllPathToTarget :: Gr NLab ELab -> GPath -> SLab -> [(GPath, GPath)]
