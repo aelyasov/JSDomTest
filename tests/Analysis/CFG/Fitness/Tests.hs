@@ -36,7 +36,8 @@ tests = testGroup "Analysis.CFG.Fitness"
         , testCase "estimateAllPath04"             estimateAllPath04
         , testCase "getShortestPathsToTarget01"    getShortestPathsToTarget01
         , testCase "computeRealCfgLevel01"         computeRealCfgLevel01
-        , testCase "estimateAllPathSingleLoop"     estimateAllPathSingleLoop  
+        , testCase "estimateAllPathSingleLoop01"   estimateAllPathSingleLoop01
+        , testCase "estimateAllPathSingleLoop02"   estimateAllPathSingleLoop02  
         ]
 
 
@@ -98,22 +99,29 @@ findAllPathToTarget01 = do
 
 estimateAllPath01 :: Assertion 
 estimateAllPath01 = do
-  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test3.js"
-  let loopIterMap = IntMap.fromList [(1,2),(3,2)]
-      path        = [0,1,2,3,4,5,6]
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test5.js"
+  let loopIterMap = IntMap.fromList [(1,2)]
+      path        = [0,1,2,3,1,2,3,1,-1]
       target      = -1
-  estimateAllPath graph loopIterMap path target @?=
-    [([0,1,-1],26),([1,-1],25),([2,3,1,-1],24),([3,1,-1],23),([4,5,6,7,3,1,-1],17),([5,6,7,3,1,-1],16),([6,7,3,1,-1],15)]
+  estimateAllPath graph loopIterMap path target @?= [([0,1,-1],9),([1,-1],8),([2,3,1,-1],7),([3,1,-1],6),([1,-1],5),([2,3,1,-1],4),([3,1,-1],3),([1,-1],2),([-1],1)]
     
 
 estimateAllPath02 :: Assertion 
 estimateAllPath02 = do
   graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test3.js"
-  let loopIterMap = IntMap.fromList [(1,2),(3,2)]
-      path        = [0,1,2,3,4,5,6,7,1,-1]
+  let loopIterMap = IntMap.fromList [(1,1),(3,1)]
+      path        = [0,1,2,3,4,5,3,1,-1]
       target      = -1
-  estimateAllPath graph loopIterMap path target @?=
-    [([0,1,-1],26),([1,-1],25),([2,3,1,-1],24),([3,1,-1],23),([4,5,6,7,3,1,-1],17),([5,6,7,3,1,-1],16),([6,7,3,1,-1],15),([7,3,1,-1],14),([1,-1],8),([-1],1)]
+  estimateAllPath graph loopIterMap path target @?= [([0,1,-1],9),([1,-1],8),([2,3,1,-1],7),([3,1,-1],6),([4,5,3,1,-1],5),([5,3,1,-1],4),([3,1,-1],3),([1,-1],2),([-1],1)]
+    
+
+estimateAllPath01_ :: Assertion 
+estimateAllPath01_ = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test3.js"
+  let loopIterMap = IntMap.fromList [(1,2),(3,2)]
+      path        = [0,1,2,3,4,5,3,4,5,3,1,2,3,4,5,3,4,5,3,1,-1]
+      target      = -1
+  estimateAllPath graph loopIterMap path target @?= []
 
 
 estimateAllPath03 :: Assertion 
@@ -152,10 +160,19 @@ computeRealCfgLevel01 = do
   computeRealCfgLevel graph loopIterMap path target @?= [(3, 5)]
   
 
-estimateAllPathSingleLoop :: Assertion 
-estimateAllPathSingleLoop = do
+estimateAllPathSingleLoop01 :: Assertion 
+estimateAllPathSingleLoop01 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test5.js"
+  let loopIterMap = IntMap.fromList [(1,1)]
+      path        = [0,1,2,3]
+      target      = -1
+  estimateAllPath graph loopIterMap path target @?= [([0,1,-1],6),([1,-1],5),([2,3,1,-1],4),([3,1,-1],3)]
+
+
+estimateAllPathSingleLoop02 :: Assertion 
+estimateAllPathSingleLoop02 = do
   graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test5.js"
   let loopIterMap = IntMap.fromList [(1,1)]
       path        = [0,1,2,3,1]
       target      = -1
-  estimateAllPath graph loopIterMap path target @?= []
+  estimateAllPath graph loopIterMap path target @?= [([0,1,-1],6),([1,-1],5),([2,3,1,-1],4),([3,1,-1],3),([1,-1],2)]

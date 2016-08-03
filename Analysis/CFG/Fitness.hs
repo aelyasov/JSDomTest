@@ -37,12 +37,13 @@ getShortestsPathsToTarget graph initIterMap path target = head $ groupBy ((==) `
   allPaths = estimateAllPath graph initIterMap path target
 
 
-
 estimateAllPath :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
-estimateAllPath graph initIterMap path target =
-  map (\(pathToTarget, partialPath) -> (pathToTarget, estimatePath pathToTarget $ loopMaxSizeMap  partialPath)) allPathsToTarget where
-    allPathsToTarget = findAllPathToTarget graph path target
-    loopMaxSizeMap ppath = buildLoopMaxSizeMap graph $ updateLoopIterMap initIterMap (init ppath)
+estimateAllPath graph initIterMap path target = map (\(pathToTarget, partialPath) -> (pathToTarget, estimatePath pathToTarget $ trace ("loopMaxSizeMap: " ++ (show $ loopMaxSizeMap  partialPath)) $ loopMaxSizeMap  partialPath)) allPathsToTarget
+  where
+    allPathsToTarget     = findAllPathToTarget graph path target
+    loopIterMap          = countLoopIterations graph initIterMap
+    loopMaxSizeMap ppath = computeLoopMaxSizeMap graph  initIterMap $ trace ("updatedLoopIterMap: " ++ (show updatedLoopIterMap) ++ " ppath: " ++ (show ppath)) updatedLoopIterMap
+      where updatedLoopIterMap = updateLoopIterMap initIterMap loopIterMap $ init ppath
 
 
 findAllPathToTarget :: Gr NLab ELab -> GPath -> SLab -> [(GPath, GPath)]

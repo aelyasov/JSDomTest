@@ -3,16 +3,22 @@ module Analysis.CFG.Util where
 import Safe (headMay, headNote)
 import Data.Maybe (maybe, fromJust)
 import Data.List (find, groupBy, nub)
+import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
 import Language.ECMAScript3.Syntax 
 import qualified Language.ECMAScript3.PrettyPrint as JSP
 import qualified Text.PrettyPrint.Leijen as PPL
 import Analysis.CFG.Data (SLab)
 import Data.Default (Default, def)
-import Data.Graph.Analysis.Algorithms.Commons (cyclesIn')
+import Data.Graph.Analysis.Algorithms.Commons (cyclesIn', pathTree', chainsIn)
 import Data.Graph.Inductive.PatriciaTree
+import Data.Graph.Inductive.Query.Dominators (iDom, dom)
+import Data.Graph.Inductive.Graph (match, mkGraph, LNode, LEdge, labNodes)
+import Data.Graph.Inductive.Example (labUEdges)
+
 import Analysis.CFG.Data
 import Data.Function (on)
+import Debug.Trace
 
 
 getNextStLab :: SLab -> [Statement (SourcePos, SLab)] -> SLab
@@ -180,18 +186,51 @@ propogateNeg ex = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(CallExpr l  exs1 exs2)        = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(FuncExpr l fName fArgs sts)   = PrefixExpr def PrefixLNot ex
 
+-- -----------------------------------------------------------------------------------------------
 
-evalLoopTree :: LoopTree -> Int
-evalLoopTree (Node iter head body) = iter * (1 + (sum $ map evalLoopTree body))
-evalLoopTree (Leaf _) = 1
+-- updateLoopIterMap ::  LoopIterationMap -> GPath -> LoopIterationMap
+-- updateLoopIterMap iterMap path =
+--   let pathMap = foldr (\key mp -> IntMap.insertWith (+) key 1 mp) IntMap.empty path
+--       updateValue x d = let r = x `rem` (d+1) in if (r == 0) then 0 else (d-r) 
+--   in  IntMap.mapWithKey (\k v -> maybe v (\pv -> updateValue pv v) (IntMap.lookup k $ trace ("pathMap: " ++ (show pathMap)) pathMap)) iterMap
 
+                  
+updateLoopIterMap ::  LoopIterationMap -> LoopIterCount -> GPath -> LoopIterationMap
+updateLoopIterMap iterMap iterCountMap path =
+  let pathMap = foldr (\key mp -> IntMap.insertWith (flip (-)) key 1 mp) iterCountMap path
+      updateValue x d = let r = x `mod` (d + 1) in if (x == 0 || x == 1) then 0 else (if (r == 0) then d else r - 1) 
+  in  IntMap.mapWithKey (\k v -> maybe v (\pv -> updateValue pv v) (IntMap.lookup k $ trace ("pathMap: " ++ (show pathMap)) pathMap)) iterMap    
+      
 
-updateLoopIterMap ::  LoopIterationMap -> GPath -> LoopIterationMap
-updateLoopIterMap iterMap path = foldr (IntMap.adjust (flip (-) 1)) iterMap path
+computeLoopMaxSizeMap :: Gr NLab ELab -> LoopIterationMap -> LoopIterationMap -> LoopMaxSizeMap
+computeLoopMaxSizeMap graph initIterMap actualIterMap =
+  IntMap.mapWithKey (\key value ->
+                      IntMap.findWithDefault value key
+                      $ buildLoopMaxSizeMap graph
+                      $ IntMap.updateWithKey (\k v -> IntMap.lookup k actualIterMap) key initIterMap
+                    ) initIterMap
 
 
 estimatePath :: GPath -> LoopMaxSizeMap -> Int
-estimatePath path loopMap = sum $ map (\n -> 1 + IntMap.findWithDefault 0 n loopMap) path
+estimatePath path loopMap = sum $ map (\n -> IntMap.findWithDefault 1 n (trace ("loopMap: " ++ (show loopMap)) loopMap)) path
+
+
+-- -----------------------------------------------------------------------------------------------
+type LoopIterCount = IntMap Int
+
+countLoopIterations :: Gr NLab ELab -> LoopIterationMap -> LoopIterCount
+countLoopIterations graph loopIterMap = IntMap.mapWithKey mapFun loopIterMap
+  where
+    mapFun loopN counter =
+      case IntMap.lookup loopN domsMap of
+       Just doms -> (counter + 1) * (foldr (\dom acc -> acc * IntMap.findWithDefault 1 dom loopIterMap) 1 $ tail doms)
+       Nothing   -> error $ "mapFun.countLoopIterations: loop #" ++ (show loopN) ++ " is not found among dominators\n" ++ (show domsMap)   
+    domsMap = IntMap.fromList $ dom graph 0
+-- -----------------------------------------------------------------------------------------------
+
+evalLoopTree :: LoopTree -> Int
+evalLoopTree (Node iter head body) = iter * (1 + (sum $ map evalLoopTree body)) + 1
+evalLoopTree (Leaf _) = 1
 
 
 list2LoopTree ::  LoopIterationMap -> GPath -> LoopTree
@@ -200,7 +239,6 @@ list2LoopTree iterMap (head:body) =
   case (IntMap.lookup head iterMap) of
    Just iterN -> Node iterN head (map Leaf body)
    Nothing    -> error "list2LoopTree: there is no info about max iteration number for given loop"
-
 
 buildLoopMaxSizeMap :: Gr NLab ELab -> LoopIterationMap -> LoopMaxSizeMap
 buildLoopMaxSizeMap gr iterMap =
@@ -251,6 +289,7 @@ insertAllLoopsInAllLoops :: [[LoopTree]] -> [[LoopTree]]
 insertAllLoopsInAllLoops []      = []
 insertAllLoopsInAllLoops (loops:allLoops) = loops : insertAllLoopsInAllLoops (insertLoopsInAllLoops loops allLoops)
 
+-- -----------------------------------------------------------------------------------------------
 
 findLoopIteration :: Int -> LoopIterationMap -> Int
 findLoopIteration i mp  = IntMap.findWithDefault 1 i mp

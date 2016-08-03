@@ -7,11 +7,13 @@ import Analysis.CFG.Util
 import Analysis.CFG.Data
 import qualified Data.IntMap as IntMap
 import Analysis.CFG.Build
+import Data.Graph.Inductive
 
 -- | Test import
-import Data.Graph.Analysis.Algorithms.Commons (cyclesIn')
+import Data.Graph.Analysis.Algorithms.Commons 
 import Control.Monad (liftM)
-
+import Data.Graph.Inductive.Query
+import Data.Tree (drawTree, drawForest)
 
 tests :: TestTree
 tests = testGroup "Analysis.CFG.Util"
@@ -43,7 +45,21 @@ tests = testGroup "Analysis.CFG.Util"
         , testCase "buildLoopMaxSizeMap04"        buildLoopMaxSizeMap04
         , testCase "buildLoopMaxSizeMap05"        buildLoopMaxSizeMap05
         , testCase "estimatePath01"               estimatePath01
+        , testCase "estimatePath02"               estimatePath02
         , testCase "updateLoopIterMap01"          updateLoopIterMap01
+        , testCase "updateLoopIterMap02"          updateLoopIterMap02
+        , testCase "updateLoopIterMap03"          updateLoopIterMap03
+        , testCase "updateLoopIterMap04"          updateLoopIterMap04
+        , testCase "updateLoopIterMap05"          updateLoopIterMap05
+        , testCase "updateLoopIterMap06"          updateLoopIterMap06
+        , testCase "updateLoopIterMap07"          updateLoopIterMap07
+        , testCase "updateLoopIterMap08"          updateLoopIterMap08
+        , testCase "updateLoopIterMap09"          updateLoopIterMap09
+        , testCase "updateLoopIterMap10"          updateLoopIterMap10
+        , testCase "updateLoopIterMap11"          updateLoopIterMap11
+        , testCase "updateLoopIterMap12"          updateLoopIterMap12
+        , testCase "countLoopIterations01"        countLoopIterations01
+        , testCase "countLoopIterations02"        countLoopIterations02
         ]
 
 
@@ -120,7 +136,7 @@ evalLoopTreeNode :: Assertion
 evalLoopTreeNode = evalLoopTree loopTree @?= result
   where
     loopTree = Node 2 5 [Leaf 10, Node 3 6 [Leaf 100]]    
-    result   = 16 
+    result   = 19 
 
 testLoopIterationMap :: LoopIterationMap
 testLoopIterationMap = IntMap.fromList [(1,11), (2, 12), (3, 13)]
@@ -259,33 +275,163 @@ buildLoopMaxSizeMap02 :: Assertion
 buildLoopMaxSizeMap02 = do
   graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test2.js"
   let loopIterationMap = IntMap.fromList [(3, 10)]
-  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(3,20)]
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(3,21)]
 
 
 buildLoopMaxSizeMap03 :: Assertion
 buildLoopMaxSizeMap03 = do
   graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test3.js"
   let loopIterationMap = IntMap.fromList [(1, 10), (3, 11)]
-  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,240),(3,22)]
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,251),(3,23)]
 
 
 buildLoopMaxSizeMap04 :: Assertion
 buildLoopMaxSizeMap04 = do
   graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test4.js"
   let loopIterationMap = IntMap.fromList [(1, 10), (5, 11), (8, 12)]
-  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,280),(5,22),(8,24)]
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,291),(5,23),(8,25)]
 
 
 buildLoopMaxSizeMap05 :: Assertion
 buildLoopMaxSizeMap05 = do
   graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test5.js"
   let loopIterationMap = IntMap.fromList [(1, 10), (5, 11), (7, 12), (10, 13), (14, 14), (17, 15)]
-  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,4460),(5,286),(7,24),(10,442),(14,28),(17,30)]
-
+  buildLoopMaxSizeMap graph loopIterationMap @?= IntMap.fromList [(1,4601),(5,298),(7,25),(10,456),(14,29),(17,31)] 
 
 estimatePath01 :: Assertion
-estimatePath01 = estimatePath [0,1,2] (IntMap.fromList [(1,5)]) @?= 7
+estimatePath01 =
+  let path    = [0,1,2]
+      loopMap = IntMap.fromList [(1,5)]
+  in  estimatePath path loopMap @?= 7
+
+
+estimatePath02 :: Assertion
+estimatePath02 =
+  let path    = [0,1,2,3,4]
+      loopMap = IntMap.fromList [(1,5), (3, 2)]
+  in  estimatePath path loopMap @?= 10
 
 
 updateLoopIterMap01 :: Assertion
-updateLoopIterMap01 = updateLoopIterMap (IntMap.fromList [(1,5),(2,10)]) [0,1,3,1,3] @?= (IntMap.fromList [(1,5),(2,10)])
+updateLoopIterMap01 =
+  let iterMap      = IntMap.fromList [(1,5),(2,10)]
+      iterCountMap = IntMap.fromList [(1,6),(2,11)]
+      path         = [0,1,3,1,3]
+      newIterMap   = IntMap.fromList [(1,3),(2,10)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap02 :: Assertion
+updateLoopIterMap02 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,4,3,4,3,1,3,4,3,4,3,1,5,6]
+      newIterMap = IntMap.fromList [(1,0),(3,0)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap      
+
+
+updateLoopIterMap03 :: Assertion
+updateLoopIterMap03 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0]
+      newIterMap = IntMap.fromList [(1,2),(3,2),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap04 :: Assertion
+updateLoopIterMap04 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1]
+      newIterMap = IntMap.fromList [(1,1),(3,2),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap05 :: Assertion
+updateLoopIterMap05 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3]
+      newIterMap = IntMap.fromList [(1,1),(3,1),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap06 :: Assertion
+updateLoopIterMap06 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,3]
+      newIterMap = IntMap.fromList [(1,1),(3,0),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap07 :: Assertion
+updateLoopIterMap07 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,3,3]
+      newIterMap = IntMap.fromList [(1,1),(3,2),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap08 :: Assertion
+updateLoopIterMap08 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,3,3,1]
+      newIterMap = IntMap.fromList [(1,0),(3,2),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap09 :: Assertion
+updateLoopIterMap09 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,3,3,1,3]
+      newIterMap = IntMap.fromList [(1,0),(3,1),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap10 :: Assertion
+updateLoopIterMap10 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,3,3,1,3,3]
+      newIterMap = IntMap.fromList [(1,0),(3,0),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap11 :: Assertion
+updateLoopIterMap11 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,3,3,1,3,3,3]
+      newIterMap = IntMap.fromList [(1,0),(3,0),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+updateLoopIterMap12 :: Assertion
+updateLoopIterMap12 =
+  let iterMap    = IntMap.fromList [(1,2),(3,2),(7,2)]
+      iterCountMap = IntMap.fromList [(1,3),(3,6)]
+      path       = [0,1,3,3,3,1,3,3,3,1]
+      newIterMap = IntMap.fromList [(1,0),(3,0),(7,2)]
+  in  updateLoopIterMap iterMap iterCountMap path @?= newIterMap
+
+
+countLoopIterations01 :: Assertion
+countLoopIterations01 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test2.js"
+  let iterMap      = IntMap.fromList [(3, 5)]
+      iterCountMap = IntMap.fromList [(3, 6)]
+  countLoopIterations graph iterMap @?= iterCountMap
+
+
+countLoopIterations02 :: Assertion
+countLoopIterations02 = do
+  graph <- mkTestCFG "./tests/Analysis/CFG/Util/resources/test3.js"
+  let iterMap      = IntMap.fromList [(1, 4), (3, 5)]
+      iterCountMap = IntMap.fromList [(1, 5), (3, 24)]
+  countLoopIterations graph iterMap @?= iterCountMap  
+

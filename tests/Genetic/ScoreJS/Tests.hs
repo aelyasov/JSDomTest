@@ -15,22 +15,25 @@ import qualified Data.IntMap as IntMap
 tests :: TestTree
 tests = withResource runMockServer stopMockServer
         (\_ -> testGroup "Genetic.ScoreJS"
-               [ testCase "testFitnessScore01"   testFitnessScore01
-               , testCase "testFitnessScore02"   testFitnessScore02
-               , testCase "testComputeFitnessSequence01" testComputeFitnessSequence01
-               , testCase "testComputeFitnessSequence02" testComputeFitnessSequence02
-               , testCase "testComputeFitnessSequence03" testComputeFitnessSequence03
-               , testCase "testComputeFitnessSequence04" testComputeFitnessSequence04
-               , testCase "testComputeFitnessBranch01"   testComputeFitnessBranch01
-               , testCase "testComputeFitnessBranch02"   testComputeFitnessBranch02
-               , testCase "testComputeFitnessBranch03"   testComputeFitnessBranch03
-               , testCase "testComputeFitnessBranch04"   testComputeFitnessBranch04
-               , testCase "testComputeFitnessBranch05"   testComputeFitnessBranch05
-               , testCase "testComputeFitnessBranch06"   testComputeFitnessBranch06
-               , testCase "testComputeFitnessBranch07"   testComputeFitnessBranch07
-               , testCase "testComputeFitnessBranch08"   testComputeFitnessBranch08
-               , testCase "testComputeFitnessBranch09"   testComputeFitnessBranch09
-               , testCase "testComputeFitnessLoop01"     testComputeFitnessLoop01  
+               [ testCase "testFitnessScore01"             testFitnessScore01
+               , testCase "testFitnessScore02"             testFitnessScore02
+               , testCase "testComputeFitnessSequence01"   testComputeFitnessSequence01
+               , testCase "testComputeFitnessSequence02"   testComputeFitnessSequence02
+               , testCase "testComputeFitnessSequence03"   testComputeFitnessSequence03
+               , testCase "testComputeFitnessSequence04"   testComputeFitnessSequence04
+               , testCase "testComputeFitnessBranch01"     testComputeFitnessBranch01
+               , testCase "testComputeFitnessBranch02"     testComputeFitnessBranch02
+               , testCase "testComputeFitnessBranch03"     testComputeFitnessBranch03
+               , testCase "testComputeFitnessBranch04"     testComputeFitnessBranch04
+               , testCase "testComputeFitnessBranch05"     testComputeFitnessBranch05
+               , testCase "testComputeFitnessBranch06"     testComputeFitnessBranch06
+               , testCase "testComputeFitnessBranch07"     testComputeFitnessBranch07
+               , testCase "testComputeFitnessBranch08"     testComputeFitnessBranch08
+               , testCase "testComputeFitnessBranch09"     testComputeFitnessBranch09
+               , testCase "testComputeFitnessSingleLoop01" testComputeFitnessSingleLoop01
+               , testCase "testComputeFitnessSingleLoop02" testComputeFitnessSingleLoop02
+               , testCase "testComputeFitnessSingleLoop03" testComputeFitnessSingleLoop03
+               , testCase "testComputeFitnessNestedLoop01" testComputeFitnessNestedLoop01  
                ]
         )
 
@@ -177,11 +180,61 @@ testComputeFitnessBranch09 = do
   computeFitness1 graph loopIterMap target path branchDists @?= 2
 
 
-testComputeFitnessLoop01 :: Assertion
-testComputeFitnessLoop01 = do
+testComputeFitnessSingleLoop01 :: Assertion
+testComputeFitnessSingleLoop01 = do
   graph <- mkTestCFG "tests/Genetic/ScoreJS/resources/test3.js"
   let loopIterMap = IntMap.fromList [(1,1)]
       path        = [0,1,2,3,-100]
       target      = -1
       branchDists = []
+  computeFitness1 graph loopIterMap target path branchDists @?= 3
+
+
+testComputeFitnessSingleLoop02 :: Assertion
+testComputeFitnessSingleLoop02 = do
+  graph <- mkTestCFG "tests/Genetic/ScoreJS/resources/test3.js"
+  let loopIterMap = IntMap.fromList [(1,1)]
+      path        = [0,1,2,3,1,-100]
+      target      = -1
+      branchDists = []
   computeFitness1 graph loopIterMap target path branchDists @?= 2
+
+
+testComputeFitnessSingleLoop03 :: Assertion
+testComputeFitnessSingleLoop03 = do
+  graph <- mkTestCFG "tests/Genetic/ScoreJS/resources/test3.js"
+  let loopIterMap = IntMap.fromList [(1,1)]
+      path        = [0,1,2,3,1,-1]
+      target      = -1
+      branchDists = []
+  computeFitness1 graph loopIterMap target path branchDists @?= 0
+
+
+testComputeFitnessNestedLoop01 :: Assertion
+testComputeFitnessNestedLoop01 = do
+  graph <- mkTestCFG "tests/Genetic/ScoreJS/resources/test4.js"
+  let loopIterMap = IntMap.fromList [(1,2),(3,2)]
+      path        = [0,1,2,3,4,5,6,7,-100]
+      target      = -1
+      branchDists = []
+  computeFitness1 graph loopIterMap target path branchDists @?= 16
+
+
+testComputeFitnessNestedLoop02 :: Assertion
+testComputeFitnessNestedLoop02 = do
+  graph <- mkTestCFG "tests/Genetic/ScoreJS/resources/test4.js"
+  let loopIterMap = IntMap.fromList [(1,2),(3,2)]
+      path        = [0,1,2,3,4,5,6,7,3,-100]
+      target      = -1
+      branchDists = []
+  computeFitness1 graph loopIterMap target path branchDists @?= 15
+
+
+testComputeFitnessNestedLoop03 :: Assertion
+testComputeFitnessNestedLoop03 = do
+  graph <- mkTestCFG "tests/Genetic/ScoreJS/resources/test4.js"
+  let loopIterMap = IntMap.fromList [(1,2),(3,2)]
+      path        = [0,1,2,3,4,5,3,4,5,3,1,2,-100]
+      target      = -1
+      branchDists = []
+  computeFitness1 graph loopIterMap target path branchDists @?= 0
