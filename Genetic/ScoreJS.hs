@@ -25,7 +25,8 @@ import Data.Maybe
 import Data.List
 import Data.Aeson
 import qualified Control.Exception as E
-
+import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap
 
 import Debug.Trace
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
@@ -55,7 +56,9 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   infoM logger   $ "New Enviroment: "     ++ (show enviroment_)
   
   infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
-  fitnessVal1 <- if (loc == exitLoc) then return 0 else computeFitness cfg loc trace_ distances_
+  let fitnessVal1 = if (loc == exitLoc)
+                    then 0
+                    else computeFitness cfg (IntMap.fromList []) to trace_ distances_
   infoM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
   -- fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
   fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
@@ -69,8 +72,8 @@ branchDistNormalize :: Int -> Double
 branchDistNormalize b = fromIntegral b / fromIntegral (b+1)
 
 
-computeFitness :: Gr NLab ELab -> LEdge ELab -> GPath -> [BranchDist] -> IO Double
-computeFitness cfg (from, to, _) path disatnces = do
+computeFitness1 :: Gr NLab ELab -> LEdge ELab -> GPath -> [BranchDist] -> IO Double
+computeFitness1 cfg (from, to, _) path disatnces = do
   let (cfgLevel, problemNode, isException) = computeCfgLevel cfg from path
       branchLevel      = maybe 0 getBrDist $ find ((problemNode==) . getBrLab) disatnces
       normBrLevel      = branchDistNormalize branchLevel
@@ -85,8 +88,8 @@ computeFitness cfg (from, to, _) path disatnces = do
   return fitnessVal   
 
 
-computeFitness1 :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> Double
-computeFitness1 cfg loopIterMap target path disatnces = 
+computeFitness :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> Double
+computeFitness cfg loopIterMap target path disatnces = 
   let (cfgLevel, problemNode) = computeRealCfgLevelOne cfg loopIterMap path target
       branchLevel      = maybe 0 getBrDist $ find ((problemNode==) . getBrLab) disatnces
       normBrLevel      = branchDistNormalize branchLevel

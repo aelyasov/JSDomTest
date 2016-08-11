@@ -34,6 +34,7 @@ tests = testGroup "Analysis.CFG.Fitness"
         , testCase "estimateAllPath02"             estimateAllPath02
         , testCase "estimateAllPath03"             estimateAllPath03
         , testCase "estimateAllPath04"             estimateAllPath04
+        , testCase "estimateAllPath05"             estimateAllPath05
         , testCase "getShortestPathsToTarget01"    getShortestPathsToTarget01
         , testCase "computeRealCfgLevel01"         computeRealCfgLevel01
         , testCase "estimateAllPathSingleLoop01"   estimateAllPathSingleLoop01
@@ -115,15 +116,6 @@ estimateAllPath02 = do
   estimateAllPath graph loopIterMap path target @?= [([0,1,-1],9),([1,-1],8),([2,3,1,-1],7),([3,1,-1],6),([4,5,3,1,-1],5),([5,3,1,-1],4),([3,1,-1],3),([1,-1],2),([-1],1)]
     
 
-estimateAllPath01_ :: Assertion 
-estimateAllPath01_ = do
-  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test3.js"
-  let loopIterMap = IntMap.fromList [(1,2),(3,2)]
-      path        = [0,1,2,3,4,5,3,4,5,3,1,2,3,4,5,3,4,5,3,1,-1]
-      target      = -1
-  estimateAllPath graph loopIterMap path target @?= []
-
-
 estimateAllPath03 :: Assertion 
 estimateAllPath03 = do
   graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test4.js"
@@ -140,6 +132,15 @@ estimateAllPath04 = do
       path        = [0,1,4,5,6,7]
       target      = 9
   estimateAllPath graph loopIterMap path target @?= [([0,1,4,5,8,9],6),([1,4,5,8,9],5),([4,5,8,9],4),([5,8,9],3)]
+
+
+estimateAllPath05 :: Assertion 
+estimateAllPath05 = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test3.js"
+  let loopIterMap = IntMap.fromList [(1,1),(3,1)]
+      path        = [0,1,2,3,4,5,3,1,-1]
+      target      = -1
+  estimateAllPath graph loopIterMap path target @?= [([0,1,-1],9),([1,-1],8),([2,3,1,-1],7),([3,1,-1],6),([4,5,3,1,-1],5),([5,3,1,-1],4),([3,1,-1],3),([1,-1],2),([-1],1)]
   
 
 getShortestPathsToTarget01 :: Assertion
