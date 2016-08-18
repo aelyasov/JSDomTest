@@ -56,15 +56,18 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   infoM logger   $ "New Enviroment: "     ++ (show enviroment_)
   
   infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
-  let fitnessVal1 = if (loc == exitLoc)
-                    then 0
-                    else computeFitness cfg (IntMap.fromList []) to trace_ distances_
+  fitnessVal1 <- if (loc == exitLoc)
+                 then return 0
+                 else computeFitness cfg (map2IntMap loops_ ) to trace_ distances_
   infoM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
   -- fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
-  fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
-  infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
-  let fitnessVal = fitnessVal1 + 0.001 * fitnessVal2
+  -- fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
+  -- infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
+  -- let fitnessVal = fitnessVal1 + 0.001 * fitnessVal2
+  let fitnessVal = fitnessVal1
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
+
+  getLine
   return (Just fitnessVal, ([], ([], [], ([], getIdsJS enviroment_, getNamesJS enviroment_, getClassesJS enviroment_)))) 
 
   
@@ -84,12 +87,12 @@ computeFitness1 cfg (from, to, _) path disatnces = do
   infoM logger $ "The problem node is exceptional " ++ (show isException)
   infoM logger $ "Problem Node Level is equal to "  ++ (show problemNodeLevel) ++ " before normalization " ++ (show branchLevel)    
   infoM logger $ "Fitness value is equal to "       ++ (show fitnessVal) ++ " for the location " ++ (show to)
-  -- getLine
+  getLine
   return fitnessVal   
 
 
-computeFitness :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> Double
-computeFitness cfg loopIterMap target path disatnces = 
+computeFitness :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> IO Double
+computeFitness cfg loopIterMap target path disatnces = do
   let (cfgLevel, problemNode) = computeRealCfgLevelOne cfg loopIterMap path target
       branchLevel      = maybe 0 getBrDist $ find ((problemNode==) . getBrLab) disatnces
       normBrLevel      = branchDistNormalize branchLevel
@@ -97,7 +100,10 @@ computeFitness cfg loopIterMap target path disatnces =
       problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
       fitnessVal       = fromIntegral (cfgLevel - 1) + problemNodeLevel
       logger           = rootLoggerName
-  in  trace ("problemNode: " ++ (show problemNode) ++ " cfgLevel: " ++ (show cfgLevel) ++ " problemNodeLevel: " ++ (show problemNodeLevel)) fitnessVal
+  infoM logger $ "ProblemNode: " ++ (show problemNode)
+  infoM logger $ "CfgLevel: " ++ (show cfgLevel)
+  infoM logger $ "ProblemNodeLevel: " ++ (show problemNodeLevel)
+  return fitnessVal
 
 
 -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]

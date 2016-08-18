@@ -87,7 +87,7 @@ data GAInput = GAInput
 data JSExecution =
   JSExecution { traceJS       :: GPath
               , branchDistJS  :: [BranchDist]
-              , loopMapJS     :: Map String Float
+              , loopMapJS     :: Map String Int
               , environmentJS :: JSEnviroment  
               } deriving (Eq, Show, Generic)
                          

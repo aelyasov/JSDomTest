@@ -21,29 +21,50 @@ import Analysis.CFG.Build
 import Control.Monad
 
 
+pluz :: Int -> Int -> Int
+pluz = (+)
+
 computeRealCfgLevelOne :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> (Int, SLab)
-computeRealCfgLevelOne graph initIterMap path target = head $ computeRealCfgLevel graph initIterMap path target
+computeRealCfgLevelOne graph initIterMap path target =
+  headNote "computeRealCfgLevelOne" $ computeRealCfgLevel graph initIterMap path target
 
   
 computeRealCfgLevel :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(Int, SLab)]
 computeRealCfgLevel graph initIterMap path target = map return shortestPathsToTarget
   where
     shortestPathsToTarget = getShortestsPathsToTarget graph initIterMap path target
-    return (pToTarget, sz) = (sz, head pToTarget)
+    return (pToTarget, sz) = (sz, headNote "computeRealCfgLevel" pToTarget)
     
 
 getShortestsPathsToTarget :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
-getShortestsPathsToTarget graph initIterMap path target = head $ groupBy ((==) `on` snd) $ sortBy (comparing snd) allPaths  where
-  allPaths = estimateAllPath graph initIterMap path target
+getShortestsPathsToTarget graph initIterMap path target =
+  headNote "getShortestsPathsToTarget" $ groupBy ((==) `on` snd) $ sortBy (comparing snd) allPaths
+  where
+    allPaths = estimateAllPath graph initIterMap path target
 
 
 estimateAllPath :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
-estimateAllPath graph initIterMap path target = map (\(pathToTarget, partialPath) -> (pathToTarget, estimatePath pathToTarget $ loopMaxSizeMap partialPath)) allPathsToTarget
+estimateAllPath graph initIterMap path target = trace ("\ninitIterMap: " ++ (show initIterMap)) $ map estimatePathToTaget allPathsToTarget
   where
-    allPathsToTarget     = findAllPathToTarget graph path target
-    loopIterMap          = countLoopIterations graph initIterMap
-    loopMaxSizeMap ppath = computeLoopMaxSizeMap graph  initIterMap updatedLoopIterMap
-      where updatedLoopIterMap = updateLoopIterMap initIterMap loopIterMap $ init ppath
+    allPathsToTarget         = findAllPathToTarget graph path target
+    loopIterMap              = countLoopIterations graph initIterMap
+    updatedLoopIterMap ppath = updateLoopIterMap initIterMap loopIterMap ppath
+    loopMaxSizeMap     ppath =
+      trace ("\nactualLoopMap: " ++ (show actualLoopMap))
+      computeLoopMaxSizeMap graph initIterMap actualLoopMap
+      where
+        actualLoopMap = updatedLoopIterMap $ init ppath
+    estimatePathToTaget (pathToTg, ppath) =
+      trace ("\n-------------------------\n" ++
+             "pathToTg: " ++ (show pathToTg) ++ "\n" ++
+             "ppath: "    ++ (show ppath)    ++ "\n" ++
+             "loopMaxSizeMp: " ++ (show loopMaxSizeMp) ++ "\n" ++
+             "pathToTgEstim: " ++ (show pathToTgEstim) 
+            )
+      (pathToTg, pathToTgEstim)
+      where
+        loopMaxSizeMp = loopMaxSizeMap ppath
+        pathToTgEstim = estimatePath pathToTg loopMaxSizeMp
 
 
 findAllPathToTarget :: Gr NLab ELab -> GPath -> SLab -> [(GPath, GPath)]
@@ -59,7 +80,8 @@ findPathToTarget graph path target = find (not . null) $  map (findAllPathsBetwe
 
 
 findAllPathsBetweenTwoNodes :: Gr NLab ELab -> SLab -> SLab -> [GPath]
-findAllPathsBetweenTwoNodes graph target start = filter (\path -> target == last path) $ pathTree $ match start graph
+findAllPathsBetweenTwoNodes graph target start =
+  filter (\path -> target == last path) $ pathTree $ match start graph
 
 
 allCompletePaths2Target :: Gr NLab ELab -> SLab -> [GPath]

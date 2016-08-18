@@ -1,6 +1,9 @@
 module Analysis.CFG.Data where
 
 import Data.IntMap (IntMap)
+import qualified Data.IntMap as IntMap
+import Data.Map (Map)
+import qualified Data.Map as Map
 
 type SLab = Int
 type NLab = String
@@ -22,3 +25,6 @@ instance Show LoopTree where
   show (Node iter head body) = "Node " ++ (show iter) ++ " " ++ (show head) ++ " " ++ (show body)
   show (Leaf node)           = "Leaf " ++ (show node)
 
+
+map2IntMap :: Map String Int -> IntMap Int
+map2IntMap mp = IntMap.fromList $ map (\(s, i) -> (read s :: Int, i)) $ Map.toList mp 

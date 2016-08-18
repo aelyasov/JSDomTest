@@ -82,6 +82,7 @@ main = do
   updateGlobalLogger logger (setLevel logLevel)
   updateGlobalLogger logger (setHandlers [myStreamHandler'])
 
+  -- | Instrument and statically analize JS program
   (jsFile:_) <- getArgs
   debugM logger $ "The following JS file is given for analysis: " ++ (show jsFile)
   jsFun <- liftM transfromJS $ parseFromFile jsFile
@@ -97,7 +98,9 @@ main = do
   noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
   noticeM logger $ "The following branches have to be covered: " ++ (show branches)
   noticeM logger $ "Initial pool data: " ++ (show constPool)
+
   getLine
+  -- | Send initial data to the client
   request <- parseUrl "http://localhost:7777/init"
   man <- liftIO $ newManager tlsManagerSettings
 
@@ -109,9 +112,10 @@ main = do
   initResp <- httpLbs reqInit man
   debugM logger $ show initResp 
 
-  -- getLine
-  
-  mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target jsFunCFG branch)  (jsSig, constPool)) $ zip [1..] branches
+  getLine
+  -- | Start test generation
+  mapM_  (\(i, branch) ->
+           killJSMutationGenetic algType man i (Target jsFunCFG branch)  (jsSig, constPool)) $ zip [1..] branches
 
 
 killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
@@ -141,7 +145,9 @@ killJSMutationGenetic alg man mutN target pool = do
                         }
   execResp <- httpLbs reqExec man
   debugM logger $ show execResp
-  -- getLine
+
+  -- | End of test generation 
+  getLine
   return ()
 
 

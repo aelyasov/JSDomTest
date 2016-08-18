@@ -21,12 +21,50 @@ import Data.Function (on)
 import Debug.Trace
 
 
+traceForLoopSize :: Default a => SLab -> ForInit a -> Expression a -> Statement a
+traceForLoopSize forLab forInit forTest =
+  let initStmt    = mkForInitStmt forInit
+      testStmt    = mkForTestStmt $ mkForTestExpr forTest
+      loopEstStmt = mkJSForLoopEstimate initStmt testStmt
+  in  traceForLoopSizeHelp forLab loopEstStmt
+      
+
+traceForLoopSizeHelp :: Default a => SLab -> Expression a -> Statement a
+traceForLoopSizeHelp loopLab loopSizeExpr = ExprStmt def (AssignExpr def OpAssign (LBracket def (VarRef def (Id def loopMap)) (IntLit def loopLab)) loopSizeExpr)    
+
+
+mkForInitStmt :: Default a => ForInit a -> Statement a
+mkForInitStmt (VarInit [varDecl]) = VarDeclStmt def [varDecl]
+mkForInitStmt _ = error "getForInitExpr: the expression is not a loop"
+
+absJS :: Default a => Expression a -> Expression a
+absJS expr = CallExpr def (DotRef def (VarRef def (Id def "Math")) (Id def "abs")) [expr]
+
+minusJS :: Default a => Expression a -> Expression a -> Expression a
+minusJS expr1 expr2 = InfixExpr def OpSub expr1 expr2
+
+plusOne :: Default a => Expression a -> Expression a
+plusOne expr = InfixExpr def OpAdd expr (IntLit def 1)
+                   
+mkForTestExpr :: Default a => Expression a -> Expression a
+mkForTestExpr (InfixExpr _ infixOp expr1 expr2) =
+  let absDiff = absJS $ expr1 `minusJS` expr2
+  in  case infixOp of
+       OpLT  -> absDiff
+       OpLEq -> plusOne absDiff
+       _     -> error $ "getForTestStmt: unknown infix operator " ++ (show infixOp)
+
+mkForTestStmt :: Default a => Expression a -> Statement a
+mkForTestStmt expr = ReturnStmt def (Just expr)
+
+mkJSForLoopEstimate :: Default a => Statement a -> Statement a -> Expression a
+mkJSForLoopEstimate stmt1 stmt2 = CallExpr def (FuncExpr def Nothing [] [stmt1, stmt2]) []
+
 getNextStLab :: SLab -> [Statement (SourcePos, SLab)] -> SLab
 getNextStLab defL sts = maybe defL (getStmtLab . upwrapDoWhileStmt) $ headMay sts
     where upwrapDoWhileStmt :: Statement (SourcePos, SLab) -> Statement (SourcePos, SLab)
           upwrapDoWhileStmt (DoWhileStmt _ st _) = st
           upwrapDoWhileStmt st = st
-
 
 getStmtLab :: Statement (SourcePos, SLab) -> SLab
 getStmtLab = snd . getStmtData
@@ -63,7 +101,6 @@ getStmtData (WithStmt     sd _ _)     = sd
 getStmtData (VarDeclStmt  sd _)       = sd
 getStmtData (FunctionStmt sd _ _ _)   = sd
 
-
 prettyNodeCFG :: SLab -> String -> Maybe (Expression a) -> String
 prettyNodeCFG l info expr = show l ++ ": " ++ info ++  maybe "" (show . JSP.prettyPrint) expr
 
@@ -79,9 +116,6 @@ traceStmt varName lab = ExprStmt def (CallExpr def (DotRef def (VarRef def (Id d
 
 traceBranchDistance :: Default a => SLab -> Expression a -> Statement a
 traceBranchDistance lab ex = ExprStmt def (CallExpr def (DotRef def (VarRef def (Id def branchDistance)) (Id def "push")) [ObjectLit def [(PropId def (Id def "label"), IntLit def lab), (PropId def (Id def "distance"), expr2objFun ex)]])
-
--- ExprStmt def (CallExpr def (DotRef def (VarRef def (Id def branchDistance)) (Id def "push")) [ArrayLit def [IntLit def lab, expr2objFun ex]])
-
 
 traceLoopMap :: Default a => SLab -> Expression a -> Statement a
 traceLoopMap loopLabel loopExpr = ExprStmt def (AssignExpr def OpAssign (LBracket def (VarRef def (Id def loopMap)) (IntLit def loopLabel)) (expr2objFun loopExpr))
@@ -187,19 +221,12 @@ propogateNeg ex = PrefixExpr def PrefixLNot ex
 -- propogateNeg ex@(FuncExpr l fName fArgs sts)   = PrefixExpr def PrefixLNot ex
 
 -- -----------------------------------------------------------------------------------------------
-
--- updateLoopIterMap ::  LoopIterationMap -> GPath -> LoopIterationMap
--- updateLoopIterMap iterMap path =
---   let pathMap = foldr (\key mp -> IntMap.insertWith (+) key 1 mp) IntMap.empty path
---       updateValue x d = let r = x `rem` (d+1) in if (r == 0) then 0 else (d-r) 
---   in  IntMap.mapWithKey (\k v -> maybe v (\pv -> updateValue pv v) (IntMap.lookup k $ trace ("pathMap: " ++ (show pathMap)) pathMap)) iterMap
-
                   
 updateLoopIterMap ::  LoopIterationMap -> LoopIterCount -> GPath -> LoopIterationMap
 updateLoopIterMap iterMap iterCountMap path =
   let pathMap = foldr (\key mp -> IntMap.insertWith (flip (-)) key 1 mp) iterCountMap path
       updateValue x d = let r = x `mod` (d + 1) in if (x == 0 || x == 1) then 0 else (if (r == 0) then d else r - 1) 
-  in  IntMap.mapWithKey (\k v -> maybe v (\pv -> updateValue pv v) (IntMap.lookup k $ trace ("pathMap: " ++ (show pathMap)) pathMap)) iterMap    
+  in  IntMap.mapWithKey (\k v -> maybe v (\pv -> updateValue pv v) (IntMap.lookup k pathMap)) iterMap    
       
 
 computeLoopMaxSizeMap :: Gr NLab ELab -> LoopIterationMap -> LoopIterationMap -> LoopMaxSizeMap
@@ -212,7 +239,7 @@ computeLoopMaxSizeMap graph initIterMap actualIterMap =
 
 
 estimatePath :: GPath -> LoopMaxSizeMap -> Int
-estimatePath path loopMap = sum $ map (\n -> IntMap.findWithDefault 1 n (trace ("loopMap: " ++ (show loopMap)) loopMap)) path
+estimatePath path loopMap = sum $ map (\n -> IntMap.findWithDefault 1 n loopMap) path
 
 
 -- -----------------------------------------------------------------------------------------------

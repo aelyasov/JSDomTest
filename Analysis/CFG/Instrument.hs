@@ -2,7 +2,7 @@ module Analysis.CFG.Instrument where
 
 import Language.ECMAScript3.Syntax (JavaScript(..), Statement(..), Expression(..), CatchClause(..), CaseClause(..), SourcePos, PrefixOp(..))
 import Analysis.CFG.Data (SLab)
-import Analysis.CFG.Util (getStmtLab, traceStmt, traceVar, getStmtLab, traceBranchDistance, traceLoopMap, getCCLab)
+import Analysis.CFG.Util (getStmtLab, traceStmt, traceVar, getStmtLab, traceBranchDistance, traceLoopMap, traceForLoopSize, getCCLab)
 import Data.Default (def)
 import Data.Maybe (fromJust)
 import Debug.Trace (trace)
@@ -82,16 +82,16 @@ instrStatement st@(ForInStmt    l v ex forBl) = let BlockStmt l1 sts1 = forBl
                                                     sts1'             = instrStatements sts1 
                                                     forBl'            = BlockStmt l1 sts1'
                                                 in  [logStmt, ForInStmt    l v ex forBl'] 
-instrStatement st@(ForStmt    l i t inc forBl) = let BlockStmt l1 sts1 = forBl
-                                                     forBlLab          = getStmtLab forBl                    
-                                                     forLab            = getStmtLab st
-                                                     forBlStmt         = traceStmt traceVar forBlLab
-                                                     forLogStmt        = traceStmt traceVar forLab
-                                                     forInBrDist       = traceLoopMap forLab (PrefixExpr def PrefixLNot (fromJust t))
-                                                     forOutBrDist      = traceBranchDistance forLab (fromJust t)
-                                                     sts1'             = instrStatements sts1 
-                                                     forBl'            = BlockStmt l1 (forLogStmt:forBlStmt:forInBrDist:sts1')
-                                                 in  [ForStmt  l i t inc forBl', forLogStmt, forOutBrDist]   
+instrStatement st@(ForStmt l forInit t@(Just forTest) inc forBl) =
+  let BlockStmt l1 sts1 = forBl
+      forBlLab          = getStmtLab forBl                    
+      forLab            = getStmtLab st
+      forBlStmt         = traceStmt traceVar forBlLab
+      forLogStmt        = traceStmt traceVar forLab
+      forLoopSize       = traceForLoopSize forLab forInit forTest
+      sts1'             = instrStatements sts1 
+      forBl'            = BlockStmt l1 (forLogStmt:forBlStmt:sts1')
+  in  [forLoopSize, ForStmt  l forInit t inc forBl', forLogStmt]   
 instrStatement st@(TryStmt      l tryBl catchBl finallyBl) = let BlockStmt l1 sts1 = tryBl
                                                                  sts1'     = instrStatements sts1 
                                                                  tryBl'     = BlockStmt l1 sts1'
