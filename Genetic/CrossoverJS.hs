@@ -15,6 +15,7 @@ import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
 
 import Debug.Trace
+import Util.Debug (setCondBreakPoint)
 
 
 crossoverHTML :: StdGen -> ByteString -> ByteString -> IO ByteString
@@ -27,9 +28,8 @@ crossoverHTML gen html1 html2 = do
   let parent1 = bytestring2document html1
       parent2 = bytestring2document html2
   if (snd parent1 <= 4)
-    then do
-    getLine
-    return html2      
+    then do setCondBreakPoint
+            return html2      
     else if (snd parent2 <= 4)
          then return html1
          else crossoverIterate gen parent1 parent2

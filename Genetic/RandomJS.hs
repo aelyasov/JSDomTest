@@ -9,6 +9,7 @@ import Data.ByteString.Lazy (ByteString)
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 import System.Random
 import Control.Monad.Trans.Class
+import Util.Debug (setCondBreakPoint)
 
 
 genRandomVal :: JSCPool -> JSType -> IO JSArg
@@ -17,7 +18,7 @@ genRandomVal pool tp = do
   noticeM rootLoggerName $ "Constant pool data: " ++ (show pool)
   val <- genRandomVal' pool tp
   -- noticeM rootLoggerName $ "Generated random value is: " ++ "'" ++ (show val) ++ "'"
-  getLine
+  setCondBreakPoint
   return val
 
 genRandomVal' :: JSCPool -> JSType -> IO JSArg

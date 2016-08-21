@@ -26,7 +26,7 @@ type HasMain = Bool
 {-# NOINLINE readRandomConfig #-}
 readRandomConfig :: (Int, Int, Int, Bool)
 readRandomConfig = unsafePerformIO $ do
-  config   <- load [ Required "jsdomtest.cfg"]
+  config   <- load [Required "jsdomtest.cfg"]
   depth    <- require config "generate_html_tree.depth"
   degree   <- require config "generate_html_tree.degree"
   topN     <- require config "generate_html_tree.frequency-table.top"

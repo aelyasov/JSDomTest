@@ -50,20 +50,21 @@ import Data.Graph.Inductive
 
 -- | Debug
 import Debug.Trace
+import Util.Debug (setCondBreakPoint)
 import System.IO (stdout, Handle)
 import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, noticeM, setLevel)
 import System.Log.Handler.Simple (streamHandler, GenericHandler)
 import System.Log.Handler (setFormatter)
 import System.Log.Formatter
-import Data.Configurator (load, Worth(..), require)
+import Data.Configurator (load, Worth(..), require, display)
 import System.Process (system)
 
 
 readMainConfig :: IO (Algorithm, Priority)
 readMainConfig = do
-  config   <- load [ Required "jsdomtest.cfg"]
-  algType  <- liftM read $ require config "algorithm.type"
-  logLevel <- liftM read $ require config "logging.level"
+  config      <- load [ Required "jsdomtest.cfg"]
+  algType        <- liftM read $ require config "algorithm.type"
+  logLevel       <- liftM read $ require config "logging.level"
   return (algType, logLevel)
 
 
@@ -100,7 +101,8 @@ main = do
   noticeM logger $ "The following branches have to be covered: " ++ (show branches)
   noticeM logger $ "Initial constant pool data: " ++ (show constPool)
 
-  getLine
+  setCondBreakPoint
+  
   -- | Send initial data to the client
   request <- parseUrl "http://localhost:7777/init"
   man     <- liftIO $ newManager tlsManagerSettings
@@ -152,7 +154,7 @@ killJSMutationGenetic alg man mutN target pool = do
   debugM logger $ prettyPrintResponse execResp
 
   -- | End of test generation 
-  getLine
+  setCondBreakPoint
   return ()
 
 

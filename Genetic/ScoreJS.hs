@@ -29,6 +29,7 @@ import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
 
 import Debug.Trace
+import Util.Debug (setCondBreakPoint)
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
 
@@ -67,7 +68,8 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   let fitnessVal = fitnessVal1
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
 
-  getLine
+  setCondBreakPoint
+  
   return (Just fitnessVal, ([], ([], [], ([], getIdsJS enviroment_, getNamesJS enviroment_, getClassesJS enviroment_)))) 
 
   
