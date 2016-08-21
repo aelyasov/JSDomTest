@@ -165,6 +165,7 @@ import System.Directory (createDirectoryIfMissing, doesFileExist)
 import System.Random (StdGen, mkStdGen, random, randoms)
 
 import Debug.Trace
+import Safe (headNote)
 
 -- |Currify a list of elements into tuples.
 currify :: [a] -- ^ list
@@ -179,7 +180,7 @@ takeAndDrop :: Int -- ^ number of elements to take/drop
             -> ([a],[a]) -- ^ result: taken list element and rest of list
 takeAndDrop n xs
     | n > 0     = let (hs,ts) = takeAndDrop (n-1) (tail xs) 
-                   in (head xs:hs, ts)
+                   in (headNote "takeAndDrop" xs:hs, ts)
     | otherwise = ([],xs)
 
 -- |A scored entity.
@@ -308,7 +309,7 @@ class (Eq e, Ord e, Read e, Show e,
                                 ++ show gi ++ "): " ++ (show e) 
                                 ++ " [fitness: " ++ show fitness ++ "]"
     where
-      (Just fitness, e) = head archive
+      (Just fitness, e) = headNote "showGeneration" archive
 
   -- |Determine whether evolution should continue or not, 
   --  based on lists of archive fitnesses of previous generations.
@@ -409,7 +410,7 @@ evolutionStep :: (Entity e s d p m) => d -- ^ dataset for scoring entities
                                   -> Universe e -- ^ known entities
                                   -> Generation e s -- ^ current generation
                                   -> Int -- ^ seed for next generation
-                                  -> m (Universe e, Generation e s, p) 
+                                  -> m (Universe e, Generation e s, p, Bool) 
                                      -- ^ renewed universe, next generation
 evolutionStep dataset
               (cn,mn,an)
@@ -417,7 +418,7 @@ evolutionStep dataset
               rescoreArchive
               pool
               universe
-              (pop,archive)
+              gen@(pop,archive)
               seed = do 
     -- score population
     -- try to score in a single go first
@@ -435,17 +436,23 @@ evolutionStep dataset
         g = mkStdGen seed
         [crossSeed,mutSeed] = take 2 $ randoms g
         pool' = pool <> poolNew
-    -- apply crossover and mutation
-    crossEnts <- performCrossover crossPar cn crossSeed pool' combo
-    mutEnts <- performMutation mutPar mn mutSeed pool' combo
-    let -- new population: crossovered + mutated entities
-        newPop = crossEnts ++ mutEnts
         -- new archive: best entities so far
         newArchive = take an 
-                   $ nubBy (\x y -> comparing snd x y == EQ) 
-                   $ sortBy (comparing fst) combo
+                     $ nubBy (\x y -> comparing snd x y == EQ) 
+                     $ sortBy (comparing fst) combo
         newUniverse = nub $ universe ++ pop
-    return (newUniverse, (newPop,newArchive), pool')
+        (Just fitness, e) = headNote "evolutionStep" combo
+
+    -- check if perfect entry is found
+    if (isPerfect (e,fitness))
+      then return (universe, (pop, newArchive), pool, True)
+      else do
+      -- apply crossover and mutation
+      crossEnts <- performCrossover crossPar cn crossSeed pool' combo
+      mutEnts   <- performMutation mutPar mn mutSeed pool' combo
+      let -- new population: crossovered + mutated entities
+        newPop = crossEnts ++ mutEnts
+      return (newUniverse, (newPop,newArchive), pool', False)
 
 -- |Evolution: evaluate generation and continue.
 evolution :: (Entity e s d p m) => GAConfig -- ^ configuration for GA
@@ -457,13 +464,13 @@ evolution :: (Entity e s d p m) => GAConfig -- ^ configuration for GA
                                     -> Universe e
                                     -> Generation e s 
                                     -> Int 
-                                    -> m (Universe e, Generation e s, p)
+                                    -> m (Universe e, Generation e s, p, Bool)
                                    ) -- ^ function that evolves a generation
                                 -> [(Int,Int)] -- ^ gen indicies and seeds
                                 -> m (Generation e s) -- ^evolved generation
 evolution cfg pool universe pastArchives gen step ((_,seed):gss) = do
-    (universe',nextGen, pool') <- step pool universe gen seed 
-    let (Just fitness, e) = (head $ snd nextGen)
+    (universe',nextGen, pool', isPerfect_) <- step pool universe gen seed 
+    let (Just fitness, e) = (headNote "evolution" $ snd nextGen)
         newArchive = snd nextGen
     if hasConverged pastArchives || isPerfect (e,fitness)
       then return nextGen
@@ -512,22 +519,20 @@ evolutionVerbose :: (Entity e s d p m,
                                   -> Universe e 
                                   -> Generation e s 
                                   -> Int 
-                                  -> m (Universe e, Generation e s, p)
+                                  -> m (Universe e, Generation e s, p, Bool)
                                  ) -- ^ function that evolves a generation
                               -> [(Int,Int)] -- ^ gen indicies and seeds
                               -> m (Generation e s) -- ^ evolved generation
 evolutionVerbose cfg pool universe pastArchives gen step ((gi,seed):gss) = do
-    (universe',newPa@(_,archive'), pool') <- step pool universe gen seed
-    let (Just fitness, e) = head archive'
-    -- checkpoint generation if desired
+    (universe',newPa@(_,archive'), pool', isPerfect_) <- step pool universe gen seed
     liftIO $ if (getWithCheckpointing cfg)
       then checkpointGen cfg gi seed newPa
       else return () -- skip checkpoint
     liftIO $ putStrLn $ showGeneration gi newPa
     -- check for perfect entity
-    if hasConverged pastArchives || isPerfect (e,fitness)
+    if hasConverged pastArchives || isPerfect_
        then do 
-               liftIO $ putStrLn $ if isPerfect (e,fitness)
+               liftIO $ putStrLn $ if isPerfect_
                                      then    "perfect entity found, "
                                           ++ "finished after " ++ show gi 
                                           ++ " generations!"

@@ -35,7 +35,7 @@ import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 fitnessScore :: Target -> [JSArg] -> IO (Maybe Double, (JSSig, JSCPool))
 fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   let logger = rootLoggerName
-  debugM logger $ "Compute fitness score for the target: " ++ (show tg)
+  debugM logger $ "Compute fitness score for the target: " ++ (show loc)
   debugM logger $ "Compute fitness score for the JS arguments:\n" ++ (show jargs)
   man <- liftIO $ newManager tlsManagerSettings
   initReq <- parseUrl "http://localhost:7777/genetic"
@@ -43,7 +43,7 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
                     -- , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                     , requestHeaders = [(CI.mk "Content-Type", "application/json;charset=UTF-8")]
                     -- , queryString = "genetic=true"
-                    , requestBody = RequestBodyLBS $ encode (GAInput (jsargs2bstrs jargs))
+                    , requestBody = RequestBodyLBS $ encode $ GAInput (jsargs2bstrs jargs)
                     }
       logger = rootLoggerName
       exitLoc = (-1, -1, "")      
@@ -58,8 +58,8 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
   fitnessVal1 <- if (loc == exitLoc)
                  then return 0
-                 else computeFitness cfg (map2IntMap loops_ ) to trace_ distances_
-  infoM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
+                 else computeFitness cfg (map2IntMap loops_) to trace_ distances_
+  -- infoM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
   -- fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
   -- fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
   -- infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
@@ -75,22 +75,6 @@ branchDistNormalize :: Int -> Double
 branchDistNormalize b = fromIntegral b / fromIntegral (b+1)
 
 
-computeFitness1 :: Gr NLab ELab -> LEdge ELab -> GPath -> [BranchDist] -> IO Double
-computeFitness1 cfg (from, to, _) path disatnces = do
-  let (cfgLevel, problemNode, isException) = computeCfgLevel cfg from path
-      branchLevel      = maybe 0 getBrDist $ find ((problemNode==) . getBrLab) disatnces
-      normBrLevel      = branchDistNormalize branchLevel
-      problemNodeLevel = if (to `elem` path) then 0 else (if isException then 1 else (0.5 * normBrLevel))
-      fitnessVal       = fromIntegral cfgLevel + problemNodeLevel
-      logger           = rootLoggerName
-  infoM logger $ "CFG level is equal to "           ++ (show cfgLevel) ++ " for the problemNode " ++ (show problemNode)
-  infoM logger $ "The problem node is exceptional " ++ (show isException)
-  infoM logger $ "Problem Node Level is equal to "  ++ (show problemNodeLevel) ++ " before normalization " ++ (show branchLevel)    
-  infoM logger $ "Fitness value is equal to "       ++ (show fitnessVal) ++ " for the location " ++ (show to)
-  getLine
-  return fitnessVal   
-
-
 computeFitness :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> IO Double
 computeFitness cfg loopIterMap target path disatnces = do
   let (cfgLevel, problemNode) = computeRealCfgLevelOne cfg loopIterMap path target
@@ -98,7 +82,7 @@ computeFitness cfg loopIterMap target path disatnces = do
       normBrLevel      = branchDistNormalize branchLevel
       isException      = last path == (-100) && ((last $ init path) == problemNode)
       problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
-      fitnessVal       = fromIntegral (cfgLevel - 1) + problemNodeLevel
+      fitnessVal       = if target `elem` path then 0 else fromIntegral (cfgLevel - 1) + problemNodeLevel
       logger           = rootLoggerName
   infoM logger $ "ProblemNode: " ++ (show problemNode)
   infoM logger $ "CfgLevel: " ++ (show cfgLevel)

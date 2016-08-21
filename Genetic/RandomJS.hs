@@ -13,10 +13,11 @@ import Control.Monad.Trans.Class
 
 genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
-  debugM rootLoggerName $ "Generating random value for a type: " ++ (show tp)
+  debugM rootLoggerName  $ "Generating random value of type: " ++ (show tp)
   noticeM rootLoggerName $ "Constant pool data: " ++ (show pool)
   val <- genRandomVal' pool tp
-  noticeM rootLoggerName $ "Generated random value is: " ++ "'" ++ (show val) ++ "'"
+  -- noticeM rootLoggerName $ "Generated random value is: " ++ "'" ++ (show val) ++ "'"
+  getLine
   return val
 
 genRandomVal' :: JSCPool -> JSType -> IO JSArg

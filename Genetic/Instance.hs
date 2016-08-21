@@ -28,7 +28,7 @@ import GA.GA
 instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
 
   genRandom pool@(sig, env) seed = do
-    debugM rootLoggerName $ "Generating random population for a signature: " ++ (show sig) ++ "\n" ++ (show env)
+    debugM rootLoggerName $ "Generating random population for the signature: " ++ (show sig)
     let uniqueEnv = removeDuplicates env
     args <- mapM (genRandomVal uniqueEnv) sig
     -- getLine

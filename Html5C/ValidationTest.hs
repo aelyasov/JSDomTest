@@ -67,7 +67,7 @@ genValidHtml env@(tags, ids, names, classes) = do
   debugM logger $ "First step of html generation (no ids):\n"
     ++ (prettyHtmlByteString $ renderHtml htmlNoIds)
   html      <- assignIds2HtmlRandomly (htmlIds state) $ PT.renderHtml htmlNoIds
-  debugM logger $ "Second step of html generation (withi ds):\n"
+  debugM logger $ "Second step of html generation (with ids):\n"
     ++ (prettyHtmlByteString html)
   response  <- askValidator html
   case response  of

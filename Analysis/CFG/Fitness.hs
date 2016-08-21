@@ -44,23 +44,24 @@ getShortestsPathsToTarget graph initIterMap path target =
 
 
 estimateAllPath :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
-estimateAllPath graph initIterMap path target = trace ("\ninitIterMap: " ++ (show initIterMap)) $ map estimatePathToTaget allPathsToTarget
+estimateAllPath graph initIterMap path target = -- trace ("\ninitIterMap: " ++ (show initIterMap)) $
+                                                map estimatePathToTaget allPathsToTarget
   where
     allPathsToTarget         = findAllPathToTarget graph path target
     loopIterMap              = countLoopIterations graph initIterMap
     updatedLoopIterMap ppath = updateLoopIterMap initIterMap loopIterMap ppath
     loopMaxSizeMap     ppath =
-      trace ("\nactualLoopMap: " ++ (show actualLoopMap))
+      -- trace ("\nactualLoopMap: " ++ (show actualLoopMap))
       computeLoopMaxSizeMap graph initIterMap actualLoopMap
       where
         actualLoopMap = updatedLoopIterMap $ init ppath
     estimatePathToTaget (pathToTg, ppath) =
-      trace ("\n-------------------------\n" ++
-             "pathToTg: " ++ (show pathToTg) ++ "\n" ++
-             "ppath: "    ++ (show ppath)    ++ "\n" ++
-             "loopMaxSizeMp: " ++ (show loopMaxSizeMp) ++ "\n" ++
-             "pathToTgEstim: " ++ (show pathToTgEstim) 
-            )
+      -- trace ("\n-------------------------\n" ++
+      --        "pathToTg: " ++ (show pathToTg) ++ "\n" ++
+      --        "ppath: "    ++ (show ppath)    ++ "\n" ++
+      --        "loopMaxSizeMp: " ++ (show loopMaxSizeMp) ++ "\n" ++
+      --        "pathToTgEstim: " ++ (show pathToTgEstim) 
+      --       )
       (pathToTg, pathToTgEstim)
       where
         loopMaxSizeMp = loopMaxSizeMap ppath

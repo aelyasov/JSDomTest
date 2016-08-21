@@ -27,7 +27,9 @@ crossoverHTML gen html1 html2 = do
   let parent1 = bytestring2document html1
       parent2 = bytestring2document html2
   if (snd parent1 <= 4)
-    then return html2      
+    then do
+    getLine
+    return html2      
     else if (snd parent2 <= 4)
          then return html1
          else crossoverIterate gen parent1 parent2

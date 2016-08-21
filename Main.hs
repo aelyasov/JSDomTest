@@ -32,6 +32,7 @@ import Analysis.Static
 
 -- | Networking
 import Network.HTTP.Conduit
+import Network.HTTP.Types.Status (statusMessage)
 import qualified Data.CaseInsensitive as CI
 
 
@@ -84,39 +85,43 @@ main = do
 
   -- | Instrument and statically analize JS program
   (jsFile:_) <- getArgs
-  debugM logger $ "The following JS file is given for analysis: " ++ (show jsFile)
+  debugM logger $ "JavaScript file given for the analysis: " ++ (show jsFile)
   jsFun <- liftM transfromJS $ parseFromFile jsFile
   jsSig <- parseJSSignature jsFile
-  print jsSig
+  debugM logger $ "JS function signature: " ++ (show jsSig)
   let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt  jsFun
       jsFunCFG      = uncurry mkGraph $ enrichCollectedEdges jsLabStms
       branches      = getAllBranches jsFunCFG
       constPool     = collectConstantInfoJS jsLabFun
       jsLabFunInstr = instrScript jsLabFun
-  noticeM logger "Function given for analysis has the following CFG:\n"
+  noticeM logger "The function has the following CFG:\n"
   system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii"
   noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
   noticeM logger $ "The following branches have to be covered: " ++ (show branches)
-  noticeM logger $ "Initial pool data: " ++ (show constPool)
+  noticeM logger $ "Initial constant pool data: " ++ (show constPool)
 
   getLine
   -- | Send initial data to the client
   request <- parseUrl "http://localhost:7777/init"
-  man <- liftIO $ newManager tlsManagerSettings
-
+  man     <- liftIO $ newManager tlsManagerSettings
   let reqInit = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                         -- , queryString = "init=true"
-                        , requestBody = RequestBodyLBS $ encode (InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr) (map (T.pack . show) jsSig))
+                        , requestBody = RequestBodyLBS
+                                        $ encode
+                                        $ InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr)
+                                        $ map (T.pack . show) jsSig
                         }
   initResp <- httpLbs reqInit man
-  debugM logger $ show initResp 
+  debugM logger $ prettyPrintResponse initResp
 
-  getLine
   -- | Start test generation
   mapM_  (\(i, branch) ->
            killJSMutationGenetic algType man i (Target jsFunCFG branch)  (jsSig, constPool)) $ zip [1..] branches
 
+
+prettyPrintResponse :: Response C.ByteString -> String
+prettyPrintResponse response = "Status: " ++ (show $ statusMessage $ responseStatus response) ++ ", Body: " ++ (show $ responseBody response)
 
 killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
 killJSMutationGenetic alg man mutN target pool = do
@@ -131,7 +136,7 @@ killJSMutationGenetic alg man mutN target pool = do
                        , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
                        }
   mutResp <- httpLbs reqMut man
-  debugM logger $ show mutResp
+  debugM logger $ prettyPrintResponse mutResp
   jsArgs <- runAlgorithm alg target pool
   -- for the integration testing purpose runGenetic has been replaced with fitnessScore
   -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
@@ -144,7 +149,7 @@ killJSMutationGenetic alg man mutN target pool = do
                         , requestBody = RequestBodyLBS $ encode (ArgData $ jsargs2bstrs jsArgs)
                         }
   execResp <- httpLbs reqExec man
-  debugM logger $ show execResp
+  debugM logger $ prettyPrintResponse execResp
 
   -- | End of test generation 
   getLine
