@@ -10,6 +10,7 @@ import qualified Data.Text as T
 import qualified Data.Text.Lazy as L
 import System.Random
 import Data.List hiding (delete, insert)
+import Data.Function (on)
 import Text.Blaze hiding  ((!))
 import Text.Blaze.Html.Renderer.Utf8
 import qualified Text.Blaze.Html.Renderer.Pretty as PP
@@ -32,9 +33,9 @@ assignIds2DocumentRandomly strs (Document prologue (Element html html_attrs [hea
   where
     limit = length strs
     (labeledElement, maxLabel) = labelXMLElement body
-    randomLabeles  = newStdGen     >>= return . sort . take (maxLabel - 1) .  nub . if (maxLabel == 1) then const [] else randomRs (1, maxLabel - 1)
-    labsAndIds     = randomLabeles >>= return . flip zip strs 
-    elementWithIds = labsAndIds    >>= return . evalState (everywhereM' (return `extM` assignNewIds) labeledElement)
+    randomLabeles  = newStdGen     >>= (return . take (maxLabel - 1) .  nub . if (maxLabel == 1) then const [] else randomRs (1, maxLabel - 1))
+    labsAndIds     = randomLabeles >>= return . sortBy (compare `on` fst) . flip zip strs
+    elementWithIds = labsAndIds    >>= return . evalState (everywhereM' (return `extM` assignNewIds) labeledElement) 
 
     assignNewIds :: Element -> State [(Int, String)] Element
     assignNewIds el = do
@@ -49,11 +50,11 @@ assignIds2DocumentRandomly strs (Document prologue (Element html html_attrs [hea
       return el{elementAttributes = attrsWithoutLabel}
       
 test_html :: L.Text
-test_html = "<!DOCTYPE HTML><html><head><title>Title</title></head><body><h1><a></a></h1><h1></h1></body></html>"
+test_html = "<!DOCTYPE HTML><html><head><title>Title</title></head><body><h1><a></a></h1><h1><a><h2></h2></a></h1></body></html>"
 
-test_span :: L.Text
+-- test_span :: L.Text
 test_span = "<!DOCTYPE HTML><html><head><title>Title</title></head><body><span></span></body></html>"
 
 
--- label_test = (assignIds2DocumentRandomly ["foo", "bar"] $ parseLT test_html) >>= putStr . renderHtml . toMarkup
+label_test = (assignIds2DocumentRandomly ["foo", "bar"] $ parseLT test_html) >>= putStr . PP.renderHtml . toMarkup
 

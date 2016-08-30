@@ -17,6 +17,7 @@ import GHC.Generics
 import Analysis.CFG.Data
 import Data.Graph.Inductive.PatriciaTree
 import Data.Graph.Inductive.Graph (LEdge)
+import Text.XML.Pretty (prettyHtmlByteString)
 
 import Html5C.Tags
 
@@ -30,7 +31,7 @@ instance Show JSArg where
   show (IntJS i)    = show i
   show (StringJS s) = s
   show (BoolJS b)   = show b
-  show (DomJS s)    = show s
+  show (DomJS s)    = prettyHtmlByteString s
   
 data Target = Target { jsCFG :: Gr NLab ELab, mutSrc :: LEdge ELab } deriving Show
 

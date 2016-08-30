@@ -28,6 +28,7 @@ import Analysis.CFG.Instrument (instrScript)
 import Analysis.CFG.Build (enrichCollectedEdges, getAllBranches)
 import Analysis.CFG.Label (assignUniqueIdsSt)
 import Analysis.CFG.Transform (transfromJS)
+import Analysis.CFG.Data (ELab, NLab)
 import Analysis.Static
 
 -- | Networking
@@ -62,9 +63,10 @@ import System.Process (system)
 
 readMainConfig :: IO (Algorithm, Priority)
 readMainConfig = do
-  config      <- load [ Required "jsdomtest.cfg"]
-  algType        <- liftM read $ require config "algorithm.type"
-  logLevel       <- liftM read $ require config "logging.level"
+  config   <- load [ Required "jsdomtest.cfg"]
+  display config 
+  algType  <- liftM read $ require config "algorithm.type"
+  logLevel <- liftM read $ require config "logging.level"
   return (algType, logLevel)
 
 
@@ -93,6 +95,7 @@ main = do
   let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt  jsFun
       jsFunCFG      = uncurry mkGraph $ enrichCollectedEdges jsLabStms
       branches      = getAllBranches jsFunCFG
+      labBranches   = zip [1..] branches
       constPool     = collectConstantInfoJS jsLabFun
       jsLabFunInstr = instrScript jsLabFun
   noticeM logger "The function has the following CFG:\n"
@@ -117,45 +120,64 @@ main = do
   initResp <- httpLbs reqInit man
   debugM logger $ prettyPrintResponse initResp
 
-  -- | Start test generation
-  mapM_  (\(i, branch) ->
-           killJSMutationGenetic algType man i (Target jsFunCFG branch)  (jsSig, constPool)) $ zip [1..] branches
+  showAllBranches labBranches
+  askForBranchsToCover algType man jsFunCFG (jsSig, constPool) labBranches
+
+
+
+askForBranchsToCover :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO ()
+askForBranchsToCover algType man cfg (sig, constPool) branches = do
+  choice <- getLine
+  let choiceN = read choice :: Int
+      branchesToCover = if (null choice) || (choiceN == 0) then branches else [(branches!!(choiceN-1))]
+  killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover
+  
+
+showAllBranches :: [(Int, LEdge ELab)] -> IO ()
+showAllBranches branches = do
+  putStrLn "Choose the branch to cover:"
+  putStrLn "0: all branches"
+  mapM_ (\(brId, br) -> putStrLn $ (show brId) ++ ": " ++ (show br)) branches
 
 
 prettyPrintResponse :: Response C.ByteString -> String
 prettyPrintResponse response = "Status: " ++ (show $ statusMessage $ responseStatus response) ++ ", Body: " ++ (show $ responseBody response)
 
-killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
-killJSMutationGenetic alg man mutN target pool = do
-  let logger = rootLoggerName
-  putStrLn $ replicate 70 '-'
-  noticeM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
-  noticeM logger $ "Initial pool data: " ++ (show pool)
-  request <- parseUrl "http://localhost:7777/mutation"
-  let reqMut = request { method = "POST"
-                       , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
-                       -- , queryString = "mutation=true"
-                       , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
-                       }
-  mutResp <- httpLbs reqMut man
-  debugM logger $ prettyPrintResponse mutResp
-  jsArgs <- runAlgorithm alg target pool
-  -- for the integration testing purpose runGenetic has been replaced with fitnessScore
-  -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
-  -- let jsArgs = [DomJS test_html, StringJS "iframe"]
-  noticeM logger $ "Best entity (GA): " ++ (show jsArgs)
 
-  let reqExec = request { method = "POST"
-                        , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
-                        , queryString = "execute=true"
-                        , requestBody = RequestBodyLBS $ encode (ArgData $ jsargs2bstrs jsArgs)
-                        }
-  execResp <- httpLbs reqExec man
-  debugM logger $ prettyPrintResponse execResp
-
-  -- | End of test generation 
-  setCondBreakPoint
-  return ()
+killJSMutationGeneticAll :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO ()
+killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
+  mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target cfg branch) (sig, constPool)) branches
+  where
+    killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
+    killJSMutationGenetic alg man mutN target pool = do
+      let logger = rootLoggerName
+      putStrLn $ replicate 70 '-'
+      noticeM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
+      noticeM logger $ "Initial pool data: " ++ (show pool)
+      request <- parseUrl "http://localhost:7777/mutation"
+      let reqMut = request { method = "POST"
+                           , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
+                                              -- , queryString = "mutation=true"
+                           , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
+                           }
+      mutResp <- httpLbs reqMut man
+      debugM logger $ prettyPrintResponse mutResp
+      jsArgs <- runAlgorithm alg target pool
+      -- for the integration testing purpose runGenetic has been replaced with fitnessScore
+      -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
+      -- let jsArgs = [DomJS test_html, StringJS "iframe"]
+      noticeM logger $ "Best entity (GA): " ++ (show jsArgs)
+    
+      let reqExec = request { method = "POST"
+                            , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
+                            , queryString = "execute=true"
+                            , requestBody = RequestBodyLBS $ encode (ArgData $ jsargs2bstrs jsArgs)
+                            }
+      execResp <- httpLbs reqExec man
+      debugM logger $ prettyPrintResponse execResp
+      -- | End of test generation 
+      setCondBreakPoint
+      return ()
 
 
 

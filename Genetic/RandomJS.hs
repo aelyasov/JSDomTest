@@ -3,6 +3,7 @@ module Genetic.RandomJS where
 import Genetic.DataJS
 import Test.QuickCheck.Arbitrary
 import Test.QuickCheck.Gen
+import Text.XML.Pretty (prettyHtmlByteString)
 import Control.Monad
 import Html5C.ValidationTest
 import Data.ByteString.Lazy (ByteString)
@@ -16,10 +17,8 @@ genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
   debugM rootLoggerName  $ "Generating random value of type: " ++ (show tp)
   noticeM rootLoggerName $ "Constant pool data: " ++ (show pool)
-  val <- genRandomVal' pool tp
-  -- noticeM rootLoggerName $ "Generated random value is: " ++ "'" ++ (show val) ++ "'"
-  setCondBreakPoint
-  return val
+  debugM rootLoggerName $ "Generated random value is:"
+  genRandomVal' pool tp
 
 genRandomVal' :: JSCPool -> JSType -> IO JSArg
 genRandomVal' (ints, _, _)    JS_INT    = liftM IntJS    $ genRandomInt ints
@@ -53,5 +52,9 @@ genRandomBool = generate $ arbitrary
 
 
 genRandomDom :: JSDoms -> IO ByteString
-genRandomDom = genValidHtml
+genRandomDom doms = do
+  html <- genValidHtml doms 
+  debugM rootLoggerName (prettyHtmlByteString html)
+  setCondBreakPoint
+  return html
 

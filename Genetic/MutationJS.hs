@@ -18,6 +18,7 @@ import Control.Monad (liftM)
 import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
 import Analysis.Static (removeDuplicates)
 import Test.QuickCheck.Gen (elements, generate)
+import Util.Debug (setCondBreakPoint)
 
 mutateHtml_dropSubtree :: StdGen -> ByteString -> IO ByteString
 mutateHtml_dropSubtree gen html = do
@@ -25,16 +26,17 @@ mutateHtml_dropSubtree gen html = do
   debugM logger $ "Mutate the html document:\n" ++ (prettyHtmlByteString html)
   let parent = bytestring2document html
   if (snd parent <= 4)
-    then return html
+    then do setCondBreakPoint
+            return html
     else mutateIterate gen parent
 
 mutateHtml_newRandom :: JSCPool -> IO ByteString
 mutateHtml_newRandom pool = do
   let logger  = rootLoggerName
       setPool = removeDuplicates pool 
-  debugM logger $ "Mutate the html document:\n"
   noticeM logger $ "Constant pool data: " ++ (show setPool)
-  genRandomDom $ getJSDoms $ removeDuplicates setPool
+  debugM rootLoggerName $ "Mutation: newly generated html document:"
+  genRandomDom $ getJSDoms setPool
 
 
 
@@ -52,7 +54,8 @@ mutateIterate gen doc@(fromDoc, docDepth) = do
                        case response of
                         Just _  -> do debugM logger $ "The Mutant is inconsistent html:\n" ++ (renderHtml html)
                                       mutateIterate gen1 doc
-                        Nothing -> do debugM logger $ "Mutation result:\n" ++ (renderHtml html)
+                        Nothing -> do setCondBreakPoint
+                                      debugM logger $ "Mutation result:\n" ++ (renderHtml html)
                                       return result              
    Nothing       -> mutateIterate gen1 doc
 

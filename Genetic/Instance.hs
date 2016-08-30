@@ -96,6 +96,7 @@ runGenetic target pool@(sig, (intP, stringP, (tagP, idP, nameP, classP))) = do
   let conf = GAConfig population archive generations crossoverRate mutationRate crossoverParam mutationParam checkpointing rescorearchive 
       g = mkStdGen 0            
   es <- evolveVerbose g conf pool target
+  -- es <- evolve g conf pool target
   putStrLn $ "Best fitness value: " ++ (show $ fst $ head es)
   return $ snd $ head es
 

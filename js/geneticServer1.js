@@ -13,8 +13,8 @@ var fs         = require('fs'),
     
 
 var jsFun, jsMutFun, jsFunArgs, jsSig, jsFunDom, realJSFunArgs;
-//winston.level = 'info';
-winston.level = 'debug';
+winston.level = 'info';
+// winston.level = 'debug';
 
 http.createServer(function(request, response){
     

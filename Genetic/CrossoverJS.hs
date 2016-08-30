@@ -31,7 +31,8 @@ crossoverHTML gen html1 html2 = do
     then do setCondBreakPoint
             return html2      
     else if (snd parent2 <= 4)
-         then return html1
+         then do setCondBreakPoint
+                 return html1
          else crossoverIterate gen parent1 parent2
 
 
@@ -53,7 +54,8 @@ crossoverIterate gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
                        case response of
                         Just _  -> do debugM logger $ "The Offsprint is inconsistent html"
                                       crossoverIterate gen2 doc1 doc2
-                        Nothing -> do debugM logger $ "Crossover result:\n" ++ (renderHtml html)
+                        Nothing -> do setCondBreakPoint
+                                      debugM logger $ "Crossover result:\n" ++ (renderHtml html)
                                       return result              
    Nothing       -> crossoverIterate gen2 doc1 doc2
 
@@ -73,3 +75,7 @@ thtml2 = "<!DOCTYPE HTML><html><head><title>Title1</title></head><body><h1></h1>
 
 thtml3 :: ByteString
 thtml3 = "<!DOCTYPE HTML><html><head><title>Title2</title></head><body><h2></h2></body></html>"
+
+test4 :: ByteString
+test4 = "<!DOCTYPE HTML>\n<html><head><title>Test Title</title></head><body itemscope=\"\" itemtype=\"http://schema.org/WebPage\">SPAN2<div id=\"square_0_0\"><div id=\"square_1_0\"><span>PHRASING CONTENT</span><span></span></div><span></span><span id=\"square_0_1\"><span>SPAN2<span>PHRASING CONTENT</span><span>PHRASING CONTENT</span></span><span id=\"square_1_1\">PHRASING CONTENT</span>SPAN2</span></div>SPAN2</body></html>"
+
