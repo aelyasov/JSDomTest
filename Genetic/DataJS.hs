@@ -59,6 +59,10 @@ getJSInts (ints, _, _) = ints
 getJSStrings :: JSCPool -> JSStrings
 getJSStrings (_, strings, _) = strings
 
+getJSIds :: JSCPool -> JSIds
+getJSIds (_, _, (_, ids, _, _)) = ids
+
+
 isPrimJSArg :: JSArg -> Bool
 isPrimJSArg (DomJS _ ) = False
 isPrimJSArg _           = True

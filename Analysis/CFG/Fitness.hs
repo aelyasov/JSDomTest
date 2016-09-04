@@ -21,9 +21,6 @@ import Analysis.CFG.Build
 import Control.Monad
 
 
-pluz :: Int -> Int -> Int
-pluz = (+)
-
 computeRealCfgLevelOne :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> (Int, SLab)
 computeRealCfgLevelOne graph initIterMap path target =
   headNote "computeRealCfgLevelOne" $ computeRealCfgLevel graph initIterMap path target

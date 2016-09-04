@@ -37,3 +37,4 @@ collectConstantInfoJS = removeDuplicates . collectStaticRefs
 
 removeDuplicates :: JSCPool -> JSCPool
 removeDuplicates (ints, strings, (tags, ids, names, classes)) = (nub ints, nub strings, (nub (TAG_DIV:tags), nub ids, nub names, nub classes))
+-- removeDuplicates (ints, strings, (tags, ids, names, classes)) = (nub ints, nub strings, (nub (tags), nub ids, nub names, nub classes))

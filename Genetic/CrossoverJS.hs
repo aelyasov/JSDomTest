@@ -4,7 +4,7 @@ module Genetic.CrossoverJS where
 
 import qualified Data.ByteString.Lazy as B
 import Data.ByteString.Lazy (ByteString)
-import Text.XML.Label (findElementInDocumentByLabel, insertElementInDocumentByLabel, removeLabelsFromDocument)
+import Text.XML.Label (findElementInDocumentByLabel, insertElementInDocumentByLabel, removeAttributeFromDocument)
 import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document)
 import System.Log.Logger (rootLoggerName, infoM, debugM)
 import Text.XML (Document(..))
@@ -28,10 +28,12 @@ crossoverHTML gen html1 html2 = do
   let parent1 = bytestring2document html1
       parent2 = bytestring2document html2
   if (snd parent1 <= 4)
-    then do setCondBreakPoint
+    then do debugM logger $ "Crossover result:\n" ++ (prettyHtmlByteString html2)
+            setCondBreakPoint
             return html2      
     else if (snd parent2 <= 4)
-         then do setCondBreakPoint
+         then do debugM logger $ "Crossover result:\n" ++ (prettyHtmlByteString html1)
+                 setCondBreakPoint
                  return html1
          else crossoverIterate gen parent1 parent2
 
@@ -42,7 +44,7 @@ crossoverIterate gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
       (fromLabel, gen1) = randomR (4, docDepth1 - 1) gen
       (whereLabel, gen2) = randomR (4, docDepth2 - 1) gen1
       crossoveredDocument = crossoverDocuments fromLabel whereLabel fromDoc whereDoc
-      crossoveredDocumentNoLabel = fmap removeLabelsFromDocument crossoveredDocument
+      crossoveredDocumentNoLabel = fmap (removeAttributeFromDocument "label") crossoveredDocument
   debugM logger $ "Crossover is applied at the node #" ++
     (show fromLabel) ++ " (" ++ (show docDepth1) ++ ") " ++
     " and #" ++
@@ -54,8 +56,8 @@ crossoverIterate gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
                        case response of
                         Just _  -> do debugM logger $ "The Offsprint is inconsistent html"
                                       crossoverIterate gen2 doc1 doc2
-                        Nothing -> do setCondBreakPoint
-                                      debugM logger $ "Crossover result:\n" ++ (renderHtml html)
+                        Nothing -> do debugM logger $ "Crossover result:\n" ++ (renderHtml html)
+                                      setCondBreakPoint
                                       return result              
    Nothing       -> crossoverIterate gen2 doc1 doc2
 

@@ -305,9 +305,11 @@ class (Eq e, Ord e, Read e, Show e,
   showGeneration :: Int -- ^ generation index
                -> Generation e s -- ^ generation (population and archive)
                -> String -- ^ string describing this generation
-  showGeneration gi (_,archive) = "best entity (gen. " 
-                                ++ show gi ++ "): " ++ (show e) 
-                                ++ " [fitness: " ++ show fitness ++ "]"
+  -- showGeneration gi (_,archive) = "best entity (gen. " 
+  --                               ++ show gi ++ "): " ++ (show e) 
+  --                               ++ " [fitness: " ++ show fitness ++ "]"
+  showGeneration gi (_,archive) = "best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
+                                  
     where
       (Just fitness, e) = headNote "showGeneration" archive
 
@@ -402,7 +404,8 @@ scoreAll dataset univEnts ents = do
 -- * create new population using crossover/mutation
 --
 -- * retain best scoring entities in the archive
-evolutionStep :: (Entity e s d p m) => d -- ^ dataset for scoring entities
+evolutionStep :: (Entity e s d p m, MonadIO m)
+                                  => d -- ^ dataset for scoring entities
                                   -> (Int,Int,Int) -- ^ # of c/m/a entities
                                   -> (Float,Float) -- ^ c/m parameters
                                   -> Bool -- ^ rescore archive in each step?
@@ -441,18 +444,15 @@ evolutionStep dataset
                      $ nubBy (\x y -> comparing snd x y == EQ) 
                      $ sortBy (comparing fst) combo
         newUniverse = nub $ universe ++ pop
-        (Just fitness, e) = headNote "evolutionStep" combo
+        (Just fitness, e) = headNote "evolutionStep" newArchive
 
     -- check if perfect entry is found
     if (isPerfect (e,fitness))
       then return (universe, (pop, newArchive), pool, True)
-      else do
-      -- apply crossover and mutation
-      crossEnts <- performCrossover crossPar cn crossSeed pool' combo
-      mutEnts   <- performMutation mutPar mn mutSeed pool' combo
-      let -- new population: crossovered + mutated entities
-        newPop = crossEnts ++ mutEnts
-      return (newUniverse, (newPop,newArchive), pool', False)
+      else do crossEnts <- performCrossover crossPar cn crossSeed pool' combo
+              mutEnts   <- performMutation mutPar mn mutSeed pool' combo
+              let newPop = crossEnts ++ mutEnts -- new population: crossovered + mutated entities
+              return (newUniverse, (newPop,newArchive), pool', False)
 
 -- |Evolution: evaluate generation and continue.
 evolution :: (Entity e s d p m) => GAConfig -- ^ configuration for GA
@@ -575,7 +575,8 @@ initGA g cfg pool = do
     return (pop, cCnt, mCnt, aSize, crossPar, mutPar, genSeeds)
 
 -- |Do the evolution!
-evolve :: (Entity e s d p m) => StdGen -- ^ random generator
+evolve :: (Entity e s d p m, MonadIO m)
+                             => StdGen -- ^ random generator
                              -> GAConfig -- ^ configuration for GA
                              -> p -- ^ random entities pool
                              -> d -- ^ dataset required to score entities

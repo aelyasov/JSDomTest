@@ -53,7 +53,7 @@ import Data.Graph.Inductive
 import Debug.Trace
 import Util.Debug (setCondBreakPoint)
 import System.IO (stdout, Handle)
-import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, noticeM, setLevel)
+import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, noticeM, setLevel, errorM)
 import System.Log.Handler.Simple (streamHandler, GenericHandler)
 import System.Log.Handler (setFormatter)
 import System.Log.Formatter
@@ -166,7 +166,7 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
       -- for the integration testing purpose runGenetic has been replaced with fitnessScore
       -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
       -- let jsArgs = [DomJS test_html, StringJS "iframe"]
-      noticeM logger $ "Best entity (GA): " ++ (show jsArgs)
+      errorM logger $ "Best entity (GA): " ++ (show jsArgs)
     
       let reqExec = request { method = "POST"
                             , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]

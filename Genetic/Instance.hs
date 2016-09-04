@@ -9,14 +9,14 @@ import Genetic.DataJS
 import Genetic.RandomJS
 import Genetic.CrossoverJS
 import Genetic.ScoreJS
-import Genetic.MutationJS (mutateHtml_dropSubtree, mutateHtml_newRandom, mutateJSInt, mutateJSString)
+import Genetic.MutationJS (mutateHtml_reassignIds, mutateHtml_dropSubtree, mutateHtml_newRandom, mutateJSInt, mutateJSString)
 
 import Html5C.Tags
 
 import Control.Monad
 import System.Random
 -- import qualified Data.ByteString as BS
-import System.Log.Logger (rootLoggerName, infoM, debugM)
+import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 import Data.Configurator (load, Worth(..), require)
 import Analysis.Static (removeDuplicates)
 
@@ -45,8 +45,8 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       crossAllArgs g (arg:args) = do 
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
-               [DomJS d1, DomJS d2] -> liftM DomJS $ crossoverHTML g d1 d2
-               [IntJS i1, IntJS i2] -> liftM (IntJS . ([i1,i2]!!)) $ randomRIO (0, 1)
+               [DomJS d1, DomJS d2]       -> liftM DomJS $ crossoverHTML g d1 d2
+               [IntJS i1, IntJS i2]       -> liftM (IntJS . ([i1,i2]!!)) $ randomRIO (0, 1)
                [StringJS i1, StringJS i2] -> liftM (StringJS . ([i1,i2]!!)) $ randomRIO (0, 1)
                otherwise -> error "crossover of non-DOM elements isn't defined"
                -- otherwise            -> return $ arg!!(a `mod` 2) 
@@ -61,7 +61,10 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       mutateAllArgs g (arg:args) = do
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
-              DomJS d1   -> liftM DomJS $ mutateHtml_newRandom pool   -- mutateHtml_dropSubtree g d1
+              DomJS d1   -> liftM DomJS $ ([mutateHtml_dropSubtree g d1, mutateHtml_reassignIds pool d1]!!) =<< randomRIO (0, 1)
+              -- mutateHtml_reassignIds pool d1
+              -- mutateHtml_dropSubtree g d1
+              -- mutateHtml_newRandom pool
               IntJS i1   -> mutateJSInt i1 pool
               StringJS _ -> mutateJSString pool
               otherwise  ->  error "mutation of non-DOM elements isn't defined"
@@ -97,7 +100,7 @@ runGenetic target pool@(sig, (intP, stringP, (tagP, idP, nameP, classP))) = do
       g = mkStdGen 0            
   es <- evolveVerbose g conf pool target
   -- es <- evolve g conf pool target
-  putStrLn $ "Best fitness value: " ++ (show $ fst $ head es)
+  noticeM rootLoggerName $ "Best fitness value: " ++ (show $ fst $ head es)
   return $ snd $ head es
 
 
