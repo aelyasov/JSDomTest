@@ -166,6 +166,7 @@ import System.Random (StdGen, mkStdGen, random, randoms)
 
 import Debug.Trace
 import Safe (headNote)
+import Text.XML.Statistics
 
 -- |Currify a list of elements into tuples.
 currify :: [a] -- ^ list
@@ -302,7 +303,7 @@ class (Eq e, Ord e, Read e, Show e,
   -- |Show progress made in this generation.
   --
   -- Default implementation shows best entity.
-  showGeneration :: Int -- ^ generation index
+  showGeneration :: Statistics e => Int -- ^ generation index
                -> Generation e s -- ^ generation (population and archive)
                -> String -- ^ string describing this generation
   -- showGeneration gi (_,archive) = "best entity (gen. " 
@@ -509,8 +510,8 @@ checkpointGen cfg index seed (pop,archive) = do
     writeFile fn txt
 
 -- |Evolution: evaluate generation, (maybe) checkpoint, continue.
-evolutionVerbose :: (Entity e s d p m, 
-                   MonadIO m) => GAConfig -- ^ configuration for GA
+evolutionVerbose :: (Entity e s d p m, MonadIO m, Statistics e)
+                              => GAConfig -- ^ configuration for GA
                               -> p
                               -> Universe e -- ^ universe of known entities
                               -> [Archive e s] -- ^ previous archives
@@ -623,7 +624,7 @@ restoreFromChkpt _ [] = return Nothing
 -- Prints progress to stdout, and supports checkpointing. 
 --
 -- Note: requires support for liftIO in monad used.
-evolveVerbose :: (Entity e s d p m, MonadIO m) 
+evolveVerbose :: (Entity e s d p m, MonadIO m, Statistics e) 
                              => StdGen -- ^ random generator
                              -> GAConfig -- ^ configuration for GA
                              -> p -- ^ random entities pool

@@ -5,17 +5,16 @@ module Text.XML.Label ( labelXMLElement
                       , findElementInDocumentByLabel
                       , insertElementInDocumentByLabel
                       , deleteNodeInDocumentByLabel
-                      , removeAttributeFromDocument  
+                      , removeAttributeFromDocument
                       ) where
 
-import Data.Generics (extM, everywhere', everything, somewhere, orElse, mkQ, mkMp, mkT)
+import Data.Generics (extM, everywhere', everything, somewhere, orElse, mkQ, mkMp, mkT, gsize)
 import SYB.Data.Generics.Schemes (everywhereM')
 import Text.XML (Element(..), Document (..), Name(..), Node(..))
 import Control.Monad.State (State, runState, get, put)
 import Data.Map.Lazy (insert, lookup, delete, empty)
 import Data.Text (pack, Text)
 import Prelude hiding (lookup)
-
 
 labelXMLElement :: Element -> (Element, Int)
 labelXMLElement el = runState (labelXMLElementState el) 0
@@ -88,4 +87,7 @@ removeAttributeFromElement attrName element =
   let attrs = elementAttributes element
       attrsWithoutLabel = (Name attrName Nothing Nothing) `delete` attrs
   in  element{elementAttributes = attrsWithoutLabel}
+
+
+
 

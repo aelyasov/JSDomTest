@@ -5,6 +5,7 @@ module Genetic.MutationJS where
 import Data.ByteString.Lazy (ByteString)
 import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document)
 import Text.XML.Label (deleteNodeInDocumentByLabel, removeAttributeFromDocument)
+import Text.XML.Statistics (depthDocument, sizeDocument)
 import Text.XML (Document(..))
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 -- import System.Random (mkStdGen, StdGen, randomR)
@@ -106,3 +107,6 @@ thtml = "<!DOCTYPE HTML><html><head><title>Title1</title></head><body><h1><a></a
 
 thtml1 :: ByteString
 thtml1 = "<!DOCTYPE HTML><html><head><title>Title</title></head><body><div><div></div><div></div></div><div><div></div><div><div></div></div></div><div></div></body></html>"
+
+thtml2 :: ByteString
+thtml2 = "<!DOCTYPE HTML>"

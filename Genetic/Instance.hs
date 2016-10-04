@@ -19,6 +19,12 @@ import System.Random
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 import Data.Configurator (load, Worth(..), require)
 import Analysis.Static (removeDuplicates)
+import Text.XML.Statistics
+import Safe (headNote)
+import Data.Maybe (fromMaybe)
+import Data.List (intercalate)
+
+import Debug.Trace
 
 import GA.GA
 
@@ -61,7 +67,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       mutateAllArgs g (arg:args) = do
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
-              DomJS d1   -> liftM DomJS $ ([mutateHtml_dropSubtree g d1, mutateHtml_reassignIds pool d1]!!) =<< randomRIO (0, 1)
+              DomJS d1   -> liftM DomJS $ ([mutateHtml_reassignIds pool d1, mutateHtml_dropSubtree g d1]!!) =<< randomRIO (0, 1)
               -- mutateHtml_reassignIds pool d1
               -- mutateHtml_dropSubtree g d1
               -- mutateHtml_newRandom pool
@@ -75,6 +81,17 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
 
   isPerfect (_,s) = s == 0.0
   -- isPerfect (_,s) = s < 1.0
+
+  showGeneration gi (pop,archive) = "best entity (gen. "
+                                    ++ show gi
+                                    ++ ") fitness: "
+                                    ++ show fitness
+                                    ++ "\n"
+                                    ++ "Population Statistics:\n"
+                                    ++ (intercalate "\n" $ map (\(f, p) -> (showStatistics p)  ++ " fitness: " ++ (show $ fromMaybe (-1) f)) archive)
+    where
+      (Just fitness, e) = headNote "showGeneration" archive
+
 
 
 readGenetcAlgConfig :: IO (Int, Int, Int, Float, Float, Float, Float, Bool, Bool)
