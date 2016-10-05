@@ -10,19 +10,17 @@ var fs         = require('fs'),
     instrument = require("./instrumentLib.js"),
     winston    = require('winston');
     // logger     = require('./logger.js');    
-    
+
+var testContext = fs.readFileSync("./globalTestContext.js", "utf-8");
 
 var jsFun, jsMutFun, jsFunArgs, jsSig, jsFunDom, realJSFunArgs;
-winston.level = 'info';
-//winston.level = 'debug';
+// winston.level = 'info';
+winston.level = 'debug';
 
 http.createServer(function(request, response){
     
     winston.debug("I got kicked");
     
-    var data_ = '{ "jsFun":"function safeAdd(frameid) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {instrument._trace_.push(6);instrument._branchDistance_.push([6,Number(instrument._K_)]);instrument._trace_.push(7);frame.parentNode.removeChild(frame);} else {instrument._trace_.push(6);instrument._branchDistance_.push([6,_Number(K_)]);instrument._trace_.push(9);iframe.appendChild(anchor);}}", "jsMutFun":"var _K_ = 0;var _branchDistance_ = [];var _trace_ = [];function safeAdd(frameid,document) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {_branchDistance_.push([6,!_K_]);_trace_.push(7);frame.parentNode.removeChild(frame);} else {_branchDistance_.push([6,_K_]);_trace_.push(9);iframe.appendChild(anchor);}}"}';   
-
-
     var pathname = url.parse(request.url,true).pathname;
 
     winston.debug("pathname: ", pathname);
@@ -71,7 +69,7 @@ http.createServer(function(request, response){
 
  	    jsdom.env({
 		html: jsFunDom,
-		scripts: ["http://code.jquery.com/jquery.js"], 
+		scripts: ["http://code.jquery.com/jquery.js"],
 		done: function (error, window){
 		    
 		    var document = window.document;
@@ -122,6 +120,9 @@ http.createServer(function(request, response){
 		    winston.debug("jsFun:\n", jsFun);
 		    eval(jsFun);
 
+		    // Makes the global test context available for the tested code
+		    eval(testContext)
+		    
 		    try {
 			// test.call(window, jsFunArgs[1], window, document);
 			test.apply(window, realJSFunArgs, window, document);

@@ -87,8 +87,10 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
                                     ++ ") fitness: "
                                     ++ show fitness
                                     ++ "\n"
-                                    ++ "Population Statistics:\n"
+                                    ++ "Archive Statistics:\n"
                                     ++ (intercalate "\n" $ map (\(f, p) -> (showStatistics p)  ++ " fitness: " ++ (show $ fromMaybe (-1) f)) archive)
+                                    ++ "\nPopulation statistics:\n"
+                                    ++ showStatistics pop
     where
       (Just fitness, e) = headNote "showGeneration" archive
 

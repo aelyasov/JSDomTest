@@ -240,7 +240,7 @@ data GAConfig = GAConfig {
 --
 class (Eq e, Ord e, Read e, Show e, 
        Ord s, Read s, Show s, Show p, 
-       Monad m, Monoid p)
+       Monad m, Monoid p, Size e, Depth e)
    => Entity e s d p m 
     | e -> s, e -> d, e -> p, e -> m where
 
@@ -441,9 +441,17 @@ evolutionStep dataset
         [crossSeed,mutSeed] = take 2 $ randoms g
         pool' = pool <> poolNew
         -- new archive: best entities so far
+        compareArchive = comparing fst <> comparing (depth . snd) <> comparing (size . snd) 
+          -- comparing fst se1 se2
+          -- if (comparing fst se1 se2 == EQ)
+          -- then if (comparing (depth . snd) se1 se2 == EQ)
+          --      then comparing (size . snd) se1 se2
+          --      else comparing (depth . snd) se1 se2
+          -- else comparing fst se1 se2 
+    
         newArchive = take an 
                      $ nubBy (\x y -> comparing snd x y == EQ) 
-                     $ sortBy (comparing fst) combo
+                     $ sortBy compareArchive combo
         newUniverse = nub $ universe ++ pop
         (Just fitness, e) = headNote "evolutionStep" newArchive
 
