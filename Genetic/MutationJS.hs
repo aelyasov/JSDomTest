@@ -7,6 +7,7 @@ import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2documen
 import Text.XML.Label (deleteNodeInDocumentByLabel, removeAttributeFromDocument)
 import Text.XML.Statistics (depthDocument, sizeDocument)
 import Text.XML (Document(..))
+import Text.XML.Convert (document2bytestring)
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 -- import System.Random (mkStdGen, StdGen, randomR)
 import System.Random
@@ -15,7 +16,7 @@ import Data.Text.Lazy.Encoding (decodeUtf8)
 import qualified Text.Blaze.Html.Renderer.Utf8 as BR
 import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
-import Html5C.Attributes (assignIds2HtmlRandomly)
+import Html5C.Attributes (assignIdsToDocumentRandomly)
 import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms, getJSIds)
 import Control.Monad (liftM)
 import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
@@ -48,9 +49,9 @@ mutateHtml_reassignIds pool html = do
   let logger  = rootLoggerName
       setPool = removeDuplicates pool
       tagIds  = getJSIds setPool
-      plain_html = BR.renderHtml $ toHtml $ removeAttributeFromDocument "id" $ fst $ bytestring2document html
+      plain_html = removeAttributeFromDocument "id" $ fst $ bytestring2document html
   noticeM logger $ "Constant pool data: " ++ (show setPool)
-  new_html <- assignIds2HtmlRandomly tagIds $ decodeUtf8 plain_html
+  new_html <- liftM document2bytestring $ assignIdsToDocumentRandomly tagIds plain_html
   debugM rootLoggerName $ "Mutation: re-assign ids:\n" ++ (prettyHtmlByteString new_html)
   setCondBreakPoint
   return new_html

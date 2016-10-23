@@ -1,8 +1,7 @@
 {-# LANGUAGE RankNTypes, OverloadedStrings #-}
 
 module Html5C.Attributes
-  ( assignIds2HtmlRandomly
-  , assignIdsToDocumentRandomly
+  ( assignIdsToDocumentRandomly
   , assignClassesToDocumentRandomly)
 where
 
@@ -25,13 +24,6 @@ import SYB.Data.Generics.Schemes (everywhereM')
 import Data.Generics.Aliases (extM)
 import Debug.Trace
 import Control.Monad (liftM, foldM)
-
-
-assignIds2HtmlRandomly :: [String] -> L.Text -> IO ByteString
-assignIds2HtmlRandomly ids html = do doc <- assignAttributesToDocumentRandomly "id" ids $ parseLT html
-                                     let markup = toMarkup doc
-                                     return $ renderHtml markup
-
 
 assignIdsToDocumentRandomly :: [String] -> Document -> IO Document
 assignIdsToDocumentRandomly = assignAttributesToDocumentRandomly "id"

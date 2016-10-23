@@ -14,8 +14,8 @@ var fs         = require('fs'),
 var testContext = fs.readFileSync("./globalTestContext.js", "utf-8");
 
 var jsFun, jsMutFun, jsFunArgs, jsSig, jsFunDom, realJSFunArgs;
-// winston.level = 'info';
-winston.level = 'debug';
+ winston.level = 'info';
+//winston.level = 'debug';
 
 http.createServer(function(request, response){
     

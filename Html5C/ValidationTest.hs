@@ -65,12 +65,14 @@ genValidHtml env@(tags, ids, names, classes) = do
                           , htmlIds     = ids
                           , htmlClasses = classes}
       logger = rootLoggerName
-  htmlNoIds <- generate $ evalStateT htmlGenState state -- :: IO Html
-  -- debugM logger $ "First step of html generation (no ids):\n"
+  -- debugM logger $ "First step of html generation (no ids):\n"  
   --   ++ (prettyHtmlByteString $ renderHtml htmlNoIds)
-  html      <- liftM (renderHtml . toMarkup) $ assignIdsToDocumentRandomly (htmlIds state) $ parseLT $ PT.renderHtml htmlNoIds
   -- debugM logger $ "Second step of html generation (with ids):\n"
   --   ++ (prettyHtmlByteString html)
+  docPlain       <- liftM (parseLT . PT.renderHtml) $ generate $ evalStateT htmlGenState state
+  docWithIds     <- assignIdsToDocumentRandomly (htmlIds state) docPlain
+  docWithClasses <- assignClassesToDocumentRandomly (htmlClasses state) docWithIds
+  html <- return $ (renderHtml . toMarkup) docWithClasses
   response  <- askValidator  html
   case response  of
     Just _  -> do -- debugM logger "Generated html document is invalid"
