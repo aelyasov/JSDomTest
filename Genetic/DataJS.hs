@@ -29,7 +29,7 @@ data JSArg = IntJS Int
 
 instance Show JSArg where
   show (IntJS i)    = show i
-  show (StringJS s) = s
+  show (StringJS s) = show s
   show (BoolJS b)   = show b
   show (DomJS s)    = prettyHtmlByteString s
   

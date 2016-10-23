@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Analysis.Static where
 
 import Data.Generics.Aliases (mkQ)

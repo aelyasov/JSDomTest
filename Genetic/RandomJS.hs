@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Genetic.RandomJS where
 
 import Genetic.DataJS
@@ -7,6 +9,7 @@ import Text.XML.Pretty (prettyHtmlByteString)
 import Control.Monad
 import Html5C.ValidationTest
 import Data.ByteString.Lazy (ByteString)
+import Data.Text (Text, pack)
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 import System.Random
 import Control.Monad.Trans.Class

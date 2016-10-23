@@ -15,6 +15,8 @@ import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Trans.State
 import Control.Monad
 
+import Text.HTML.DOM (parseLT)
+import Text.Blaze 
 import Text.Blaze.Html5 (Html)
 import Text.Blaze.Internal
 import Text.Blaze.Html.Renderer.Utf8
@@ -66,10 +68,10 @@ genValidHtml env@(tags, ids, names, classes) = do
   htmlNoIds <- generate $ evalStateT htmlGenState state -- :: IO Html
   -- debugM logger $ "First step of html generation (no ids):\n"
   --   ++ (prettyHtmlByteString $ renderHtml htmlNoIds)
-  html      <- assignIds2HtmlRandomly (htmlIds state) $ PT.renderHtml htmlNoIds
+  html      <- liftM (renderHtml . toMarkup) $ assignIdsToDocumentRandomly (htmlIds state) $ parseLT $ PT.renderHtml htmlNoIds
   -- debugM logger $ "Second step of html generation (with ids):\n"
   --   ++ (prettyHtmlByteString html)
-  response  <- askValidator html
+  response  <- askValidator  html
   case response  of
     Just _  -> do -- debugM logger "Generated html document is invalid"
                   genValidHtml env

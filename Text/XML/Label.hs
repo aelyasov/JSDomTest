@@ -6,6 +6,8 @@ module Text.XML.Label ( labelXMLElement
                       , insertElementInDocumentByLabel
                       , deleteNodeInDocumentByLabel
                       , removeAttributeFromDocument
+                      , removeAttributeFromElementEverywhere
+                      , assignAttributeToElement
                       ) where
 
 import Data.Generics (extM, everywhere', everything, somewhere, orElse, mkQ, mkMp, mkT, gsize)
@@ -69,6 +71,7 @@ deleteNodeInDocumentByLabel :: Int -> Document -> Maybe Document
 deleteNodeInDocumentByLabel lab = somewhere (mkMp (deleteNodeByLabel lab))
 -- deleteNodeInDocumentByLabel lab doc = insertElementInDocumentByLabel lab (Element "br" empty []) doc  
 
+
 deleteNodeByLabel :: Int -> Node -> Maybe Node
 deleteNodeByLabel lab (NodeElement el) =
   case lookup (Name "label" Nothing Nothing) (elementAttributes el) of
@@ -78,16 +81,34 @@ deleteNodeByLabel lab (NodeElement el) =
 deleteNodeByLabel _ node = Nothing
 
 
-removeAttributeFromDocument :: Text -> Document -> Document
-removeAttributeFromDocument attrName doc = everywhere' (mkT (removeAttributeFromElement attrName)) doc
+removeAttributeFromDocument :: String -> Document -> Document
+removeAttributeFromDocument attrName = everywhere' (mkT (removeAttributeFromElement attrName))
 
 
-removeAttributeFromElement :: Text -> Element -> Element
+removeAttributeFromElementEverywhere :: String -> Element -> Element
+removeAttributeFromElementEverywhere attrName = everywhere' (mkT (removeAttributeFromElement attrName))
+
+
+removeAttributeFromElement :: String -> Element -> Element
 removeAttributeFromElement attrName element =
   let attrs = elementAttributes element
-      attrsWithoutLabel = (Name attrName Nothing Nothing) `delete` attrs
+      attrsWithoutLabel = (Name (pack attrName) Nothing Nothing) `delete` attrs
   in  element{elementAttributes = attrsWithoutLabel}
 
 
+assignAttributeToElement :: Int -> String -> String -> Element -> Element
+assignAttributeToElement label attrName attrValue element =
+  case somewhere (mkMp (assignAttrToElem label attrName attrValue)) element of
+    Just elem' -> elem'
+    Nothing    -> error $ "assignAttributeToElement: unable to find label# " ++ (show label) 
+  where
+    assignAttrToElem :: Int -> String -> String -> Element -> Maybe Element
+    assignAttrToElem lab aName aValue el =
+      let attrs = elementAttributes el
+      in  case lookup (Name "label" Nothing Nothing) attrs of
+        Just l | l ==  (pack $ show lab) -> Just el{elementAttributes = insert (Name (pack aName) Nothing Nothing) (pack aValue) attrs }
+        otherwise                        -> Nothing
+
+  
 
 

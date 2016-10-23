@@ -2,6 +2,7 @@
 
 module Html5C.QuickCheck.Gen where
 
+import Data.Text (Text)
 import Text.Blaze.Html5
 import Text.Blaze.Internal
 import Test.QuickCheck.Gen 
