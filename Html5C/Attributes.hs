@@ -39,8 +39,8 @@ assignAttributesToDocumentRandomly attrName attrValues (Document prologue (Eleme
   let (labeledElement, maxLabel) = labelXMLElement body
       randomLabeles              = take (maxLabel - 1) $ nub $ randomRs (1, maxLabel - 1) gen
       labsAndValues              = sortBy (compare `on` fst) $ zip randomLabeles attrValues
-      elementNewValues          = foldl (\el (lab, val) -> assignAttributeToElement lab attrName val el) labeledElement labsAndValues
-      elementNewValuesNoLabels  = removeAttributeFromElementEverywhere "label" elementNewValues
+      elementNewValues           = foldl (\el (lab, val) -> assignAttributeToElement lab attrName val el) labeledElement labsAndValues
+      elementNewValuesNoLabels   = removeAttributeFromElementEverywhere "label" elementNewValues
   return $ Document prologue (Element html html_attrs [header, NodeElement elementNewValuesNoLabels]) epilogue
 
       

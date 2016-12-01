@@ -18,5 +18,8 @@ prettyHtmlByteString = either show (renderHtml . toHtml) . parseLBS def
 prettyDocument :: ToMarkup a => a -> String
 prettyDocument = renderHtml . toHtml
 
-bytestring2document ::  ByteString -> (Document, Int)
-bytestring2document = labelXMLDocument . parseLT . decodeUtf8
+bytestring2LabeledDocument ::  ByteString -> (Document, Int)
+bytestring2LabeledDocument = labelXMLDocument . parseLT . decodeUtf8
+
+bytestring2document ::  ByteString -> Document
+bytestring2document = parseLT . decodeUtf8

@@ -3,7 +3,7 @@
 module Genetic.MutationJS where
 
 import Data.ByteString.Lazy (ByteString)
-import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document)
+import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document, bytestring2LabeledDocument)
 import Text.XML.Label (deleteNodeInDocumentByLabel, removeAttributeFromDocument)
 import Text.XML.Statistics (depthDocument, sizeDocument)
 import Text.XML (Document(..))
@@ -28,7 +28,7 @@ mutateHtml_dropSubtree :: StdGen -> ByteString -> IO ByteString
 mutateHtml_dropSubtree gen html = do
   let logger = rootLoggerName
   debugM logger $ "Mutation: drop subtree\n" ++ (prettyHtmlByteString html)
-  let parent = bytestring2document html
+  let parent = bytestring2LabeledDocument html
   if (snd parent <= 4)
     then do setCondBreakPoint
             return html
@@ -49,10 +49,11 @@ mutateHtml_reassignIds pool html = do
   let logger  = rootLoggerName
       setPool = removeDuplicates pool
       tagIds  = getJSIds setPool
-      plain_html = removeAttributeFromDocument "id" $ fst $ bytestring2document html
+      plain_html = removeAttributeFromDocument "id" $ bytestring2document html
+  debugM rootLoggerName $ "Mutate element:\n" ++ (prettyHtmlByteString html)    
   noticeM logger $ "Constant pool data: " ++ (show setPool)
   new_html <- liftM document2bytestring $ assignIdsToDocumentRandomly tagIds plain_html
-  debugM rootLoggerName $ "Mutation: re-assign ids:\n" ++ (prettyHtmlByteString new_html)
+  debugM rootLoggerName $ "Mutation result: re-assign ids:\n" ++ (prettyHtmlByteString new_html)
   setCondBreakPoint
   return new_html
 

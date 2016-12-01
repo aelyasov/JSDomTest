@@ -163,6 +163,7 @@ import Data.Ord (comparing)
 import Data.Monoid ((<>), mempty, mconcat)
 import System.Directory (createDirectoryIfMissing, doesFileExist)
 import System.Random (StdGen, mkStdGen, random, randoms)
+import System.Log.Logger (rootLoggerName, noticeM)
 
 import Debug.Trace
 import Safe (headNote)
@@ -537,7 +538,8 @@ evolutionVerbose cfg pool universe pastArchives gen step ((gi,seed):gss) = do
     liftIO $ if (getWithCheckpointing cfg)
       then checkpointGen cfg gi seed newPa
       else return () -- skip checkpoint
-    liftIO $ putStrLn $ showGeneration gi newPa
+    liftIO $ noticeM rootLoggerName $ showGeneration gi newPa  
+    -- liftIO $ putStrLn $ showGeneration gi newPa
     -- check for perfect entity
     if hasConverged pastArchives || isPerfect_
        then do 

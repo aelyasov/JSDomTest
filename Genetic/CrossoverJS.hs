@@ -5,7 +5,7 @@ module Genetic.CrossoverJS where
 import qualified Data.ByteString.Lazy as B
 import Data.ByteString.Lazy (ByteString)
 import Text.XML.Label (findElementInDocumentByLabel, insertElementInDocumentByLabel, removeAttributeFromDocument)
-import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document)
+import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2LabeledDocument)
 import System.Log.Logger (rootLoggerName, infoM, debugM)
 import Text.XML (Document(..))
 import System.Random (StdGen, randomR, mkStdGen)
@@ -25,8 +25,8 @@ crossoverHTML gen html1 html2 = do
     ++ (prettyHtmlByteString html1)
     ++ "\n" ++ "with" ++ "\n"
     ++ (prettyHtmlByteString html2)
-  let parent1 = bytestring2document html1
-      parent2 = bytestring2document html2
+  let parent1 = bytestring2LabeledDocument html1
+      parent2 = bytestring2LabeledDocument html2
   if (snd parent1 <= 4)
     then do debugM logger $ "Crossover result:\n" ++ (prettyHtmlByteString html2)
             setCondBreakPoint
