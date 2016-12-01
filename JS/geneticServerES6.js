@@ -9,16 +9,16 @@ const _          = require('underscore');
 const instrument = require("./instrumentLib.js");
 const winston    = require('winston');
 
-winston.level = 'info';
-//winston.level = 'debug';
+// winston.level = 'info';
+winston.level = 'debug';
 
 let jsSig, jsFun;
 
 http.createServer(function(request, response) {
-    winston.debug("I got kicked");
+    winston.debug("Send request");
     
     let pathname = url.parse(request.url, true).pathname;
-    winston.debug("pathname: ", pathname);
+    winston.debug("endpoint: ", pathname);
     
     if (pathname == "/init") {
 	request.on('data', function(data) {
@@ -27,13 +27,14 @@ http.createServer(function(request, response) {
 	    let rawJsFun = JSON.parse(data).jsFun;
 	    winston.debug("jsFun before eval:\n", rawJsFun);
 
+	    let fullJsSig = JSON.parse(data).jsSig;
 	    jsSig = JSON.parse(data).jsSig.slice(1);
-	    winston.debug("test function signature:\n", jsSig);
+	    winston.debug("test function signature:\n", fullJsSig);
 
 	    const library = "var instrument = require(\"./instrumentLib.js\");\n";
 	    jsFun = library + rawJsFun;
 	});
-	response.writeHeader(200, {"Content-Type": "text/plain"});
+	response.writeHead(200, {"Content-Type": "text/plain"});
 	response.write("init response");
 	response.end();    
     }
@@ -43,7 +44,7 @@ http.createServer(function(request, response) {
 	    //winston.debug("Received the mutated function:\n", data.toString());
 	    winston.debug("# New mutation iteration: ", JSON.parse(data).mutN);
 	});
-	response.writeHeader(200, {"Content-Type": "text/plain"});
+	response.writeHead(200, {"Content-Type": "text/plain"});
 	response.write("mutation response");
 	response.end();    
     }
@@ -61,16 +62,24 @@ http.createServer(function(request, response) {
 	    let doc = jsdom.jsdom(jsFunDom);
 	    let window = doc.defaultView;
 	    let document = window.document;
-	    let environment = {tags:[], names:[], ids:[], classes:[], selectors:[]};
-
+	    //let environment = {tags:[], names:[], ids:[], classes:[], selectors:[]};
+	    let environment = { tags: new Set(),
+				names: new Set(),
+				ids: new Set(),
+				classes: new Set(),
+				selectors: new Set()
+			      };
+	    
 	    require('./domIntercept.js')(doc, environment);
 
 	    let _K_ = 1;
 	    let branchDistance = [];
 	    let trace = [1];
 	    let loopMap = {};
-	    
-	    winston.debug("jsFun:\n", jsFun);
+
+	    // Commented out to disable excessive logging 
+	    // winston.debug("jsFun:\n", jsFun);
+
 	    eval(jsFun);
 
 	    try {
@@ -80,15 +89,27 @@ http.createServer(function(request, response) {
 		trace.push(-100); // label -100 indicates exceptional termination
 		winston.debug("Test function is exceptionally terminated with the message: %s", e.stack);
 	    }
+
+	    let envArray = Object.keys(environment).reduce(function(previous, current) {
+		previous[current] = Array.from(environment[current]);
+		return previous;
+	    }, {});
+
+	    // let envArray = { tags: Array.from(environment.tags),
+	    // 		     names: Array.from(environment.names),
+	    // 		     ids: Array.from(environment.ids),
+	    // 		     classes: Array.from(environment.classes),
+	    // 		     selectors: Array.from(environment.selectors)
+	    // 		   };
 		    
 	    winston.debug("trace", trace);
 	    winston.debug("branchDistance", branchDistance);
 	    winston.debug("loopMap", loopMap);
-	    winston.debug("environment: ", environment);
-	    response.writeHeader(200, {"Content-Type": "text/plain"});
-	    response.write(JSON.stringify({trace:trace, branchDistance: branchDistance, loopMap: loopMap, environment: environment}));
+	    winston.debug("environment: ", envArray);
+	    response.writeHead(200, {"Content-Type": "text/plain"});
+	    response.write(JSON.stringify({trace:trace, branchDistance: branchDistance, loopMap: loopMap, environment: envArray}));
 	    response.end();   
 	});
     };
 }).listen(7777);
-winston.debug("Server Running on 7777");
+winston.debug("Server Running on port: 7777");

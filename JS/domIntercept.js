@@ -2,7 +2,7 @@ module.exports = function(document, environment) {
     
     (getElementsByTagNameCopy => {
 	document.getElementsByTagName = tag => {
-	    environment.tags.push(tag);
+	    environment.tags.add(tag);
 	    return Reflect.apply(getElementsByTagNameCopy, document, [tag]);
 	};
     })(document.getElementsByTagName);
@@ -10,7 +10,7 @@ module.exports = function(document, environment) {
     
     (getElementsByTagNameCopy => {
 	document.defaultView.Element.prototype.getElementsByTagName = function(tag) {
-            environment.tags.push(tag);
+            environment.tags.add(tag);
             return Reflect.apply(getElementsByTagNameCopy, this, [tag]);
         };
     })(document.defaultView.Element.prototype.getElementsByTagName);
@@ -18,13 +18,17 @@ module.exports = function(document, environment) {
     
     (getAttributeCopy => {  
 	document.defaultView.Element.prototype.getAttribute = function(arg) {
-	    switch (arg) {
-            case "class":
-		environment.classes.push(Reflect.apply(getAttributeCopy, this, [arg]));
-        	break;
-            case "id": environment.ids.push(Reflect.apply(getAttributeCopy, this, [arg]));
-		break; 
-            }
+	    let attrValue = Reflect.apply(getAttributeCopy, this, [arg]);
+	    if (attrValue != null) {
+		switch (arg) {
+		case "class":
+		    environment.classes.add(attrValue);
+        	    break;
+		case "id":
+		    environment.ids.add(attrValue);
+		    break; 
+		}
+	    }
 	    return Reflect.apply(getAttributeCopy, this, [arg]);
 	};
     })(document.defaultView.Element.prototype.getAttribute);
@@ -32,7 +36,7 @@ module.exports = function(document, environment) {
     
     (getElementByIdCopy => {
 	document.getElementById = id => {
-        	    environment.ids.push(id);
+            environment.ids.add(id);
 	    return Reflect.apply(getElementByIdCopy, document, [id]);
 	};
     })(document.getElementById);
