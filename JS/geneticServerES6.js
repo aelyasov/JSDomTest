@@ -9,10 +9,25 @@ const _          = require('underscore');
 const instrument = require("./instrumentLib.js");
 const winston    = require('winston');
 
-// winston.level = 'info';
+//winston.level = 'info';
 winston.level = 'debug';
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, {'timestamp': () => (new Date()).toJSON()});
 
-let jsSig, jsFun;
+
+let jsSig, jsFun, environment, window, document;
+
+environment = { tags: new Set(),
+		names: new Set(),
+		ids: new Set(),
+		classes: new Set(),
+		selectors: new Set()
+	      };
+
+document = jsdom.jsdom();
+window = document.defaultView;
+require('./domIntercept.js')(window, environment, winston);
+
 
 http.createServer(function(request, response) {
     winston.debug("Send request");
@@ -32,7 +47,8 @@ http.createServer(function(request, response) {
 	    winston.debug("test function signature:\n", fullJsSig);
 
 	    const library = "var instrument = require(\"./instrumentLib.js\");\n";
-	    jsFun = library + rawJsFun;
+	    //jsFun = library + rawJsFun;
+	    jsFun = rawJsFun;	    
 	});
 	response.writeHead(200, {"Content-Type": "text/plain"});
 	response.write("init response");
@@ -51,7 +67,7 @@ http.createServer(function(request, response) {
 
     if (pathname == "/genetic") {
 	request.on('data', function(data) {
-	    //winston.debug("Received arguments which are new population:", data.toString());
+	    winston.debug("Received arguments which are new population:", data.toString());
 	    
 	    let jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>");
 	    winston.debug("jsFunArgs: ", jsFunArgs);
@@ -59,19 +75,9 @@ http.createServer(function(request, response) {
 	    let jsFunDom = jsFunArgs[0];
 	    let realJSFunArgs = _.zip(jsSig, jsFunArgs.slice(1)).map( arg => instrument.convertArg(arg[0], arg[1]) );
 
-	    let doc = jsdom.jsdom(jsFunDom);
-	    let window = doc.defaultView;
-	    let document = window.document;
-	    //let environment = {tags:[], names:[], ids:[], classes:[], selectors:[]};
-	    let environment = { tags: new Set(),
-				names: new Set(),
-				ids: new Set(),
-				classes: new Set(),
-				selectors: new Set()
-			      };
+	    document = jsdom.jsdom(jsFunDom);
+	    window = document.defaultView;
 	    
-	    require('./domIntercept.js')(doc, environment);
-
 	    let _K_ = 1;
 	    let branchDistance = [];
 	    let trace = [1];
@@ -79,9 +85,9 @@ http.createServer(function(request, response) {
 
 	    // Commented out to disable excessive logging 
 	    // winston.debug("jsFun:\n", jsFun);
-
+	    
 	    eval(jsFun);
-
+	    
 	    try {
 		Reflect.apply(test, this, []);
 		// test.apply(this, realJSFunArgs, window, document);
@@ -90,24 +96,26 @@ http.createServer(function(request, response) {
 		winston.debug("Test function is exceptionally terminated with the message: %s", e.stack);
 	    }
 
+	    winston.debug("trace", trace);
+	    winston.debug("branchDistance", branchDistance);
+	    winston.debug("loopMap", loopMap);
+
 	    let envArray = Object.keys(environment).reduce(function(previous, current) {
 		previous[current] = Array.from(environment[current]);
 		return previous;
 	    }, {});
-
-	    // let envArray = { tags: Array.from(environment.tags),
-	    // 		     names: Array.from(environment.names),
-	    // 		     ids: Array.from(environment.ids),
-	    // 		     classes: Array.from(environment.classes),
-	    // 		     selectors: Array.from(environment.selectors)
-	    // 		   };
-		    
-	    winston.debug("trace", trace);
-	    winston.debug("branchDistance", branchDistance);
-	    winston.debug("loopMap", loopMap);
+	    
 	    winston.debug("environment: ", envArray);
+
+	    let genetic_response = JSON.stringify({
+		trace: trace,
+		branchDistance: branchDistance,
+		loopMap: loopMap,
+		environment: envArray
+	    });
+	    winston.debug("genetic response: ", genetic_response);
 	    response.writeHead(200, {"Content-Type": "text/plain"});
-	    response.write(JSON.stringify({trace:trace, branchDistance: branchDistance, loopMap: loopMap, environment: envArray}));
+	    response.write(genetic_response);
 	    response.end();   
 	});
     };

@@ -298,7 +298,8 @@ arbHtmlBODY = debug "arbHtmlBODY" $ do
   if depth == 0
   then lift $ return $ toHtml "BODY"
   else do html_ <- put st{getDepth = iter depth, getCtx = push CFlow ctx} >> arbFlowContent
-          lift $ return $ (body html_) ! itemscope (toValue "") ! itemtype (toValue "http://schema.org/WebPage")
+          lift $ return $ (body html_)
+-- ! itemscope (toValue "") ! itemtype (toValue "http://schema.org/WebPage")
 
 
 arbFlowContent :: GenHtmlState

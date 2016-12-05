@@ -41,14 +41,13 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   man <- liftIO $ newManager tlsManagerSettings
   initReq <- parseUrl "http://localhost:7777/genetic"
   let req = initReq { method = "POST"
-                    -- , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                     , requestHeaders = [(CI.mk "Content-Type", "application/json;charset=UTF-8")]
-                    -- , queryString = "genetic=true"
                     , requestBody = RequestBodyLBS $ encode $ GAInput (jsargs2bstrs jargs)
                     }
       logger = rootLoggerName
       exitLoc = (-1, -1, "")      
-  response <- (liftM responseBody $ httpLbs req man) `E.catch` \e -> putStrLn ("Caught " ++ show (e :: HttpException)) >> return "Foo"
+  response <- (liftM responseBody $ httpLbs req man) `E.catch` \e -> putStrLn ("Caught " ++ show (e :: HttpException)) >> return "Fitness score calculation exception"
+
   (JSExecution trace_ distances_ loops_ enviroment_) <- return $ (fromMaybe (error $ "fitnessScore in response" ++ (show response)) . decode) $ response 
 
   noticeM logger $ "Execution trace: "    ++ (show trace_)

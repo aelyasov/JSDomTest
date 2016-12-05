@@ -92,7 +92,7 @@ main = do
   jsFun <- liftM transfromJS $ parseFromFile jsFile
   jsSig <- parseJSSignature jsFile
   debugM logger $ "JS function signature: " ++ (show jsSig)
-  let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt  jsFun
+  let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt jsFun
       jsFunCFG      = uncurry mkGraph $ enrichCollectedEdges jsLabStms
       branches      = getAllBranches jsFunCFG
       labBranches   = zip [1..] branches
