@@ -107,11 +107,11 @@ main = do
   setCondBreakPoint
   
   -- | Send initial data to the client
+  noticeM logger $ "Initialise first request to send instrumented function under test:"
   request <- parseUrl "http://localhost:7777/init"
   man     <- liftIO $ newManager tlsManagerSettings
   let reqInit = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
-                        -- , queryString = "init=true"
                         , requestBody = RequestBodyLBS
                                         $ encode
                                         $ InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr)

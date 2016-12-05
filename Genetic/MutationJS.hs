@@ -16,14 +16,34 @@ import Data.Text.Lazy.Encoding (decodeUtf8)
 import qualified Text.Blaze.Html.Renderer.Utf8 as BR
 import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
-import Html5C.Attributes (assignIdsToDocumentRandomly)
-import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms, getJSIds)
+import Html5C.Attributes (assignIdsToDocumentRandomly, assignClassesToDocumentRandomly)
+import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms, getJSIds, getJSClasses)
 import Control.Monad (liftM)
 import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
 import Analysis.Static (removeDuplicates)
 import Test.QuickCheck.Gen (elements, generate)
 import Util.Debug (setCondBreakPoint)
 
+
+data MutationType = DropSubtree
+                  | NewRandom
+                  | ReassignIds
+                  | ReassignClasses
+                  deriving (Show)
+
+mutateHtml :: [MutationType] -> StdGen -> JSCPool -> ByteString -> IO ByteString
+mutateHtml mutations gen pool html = do
+  mutN <- randomRIO (0, (length mutations) - 1)
+  mutateHtml' (mutations!!mutN) gen pool html
+    where
+      mutateHtml' :: MutationType -> StdGen -> JSCPool -> ByteString -> IO ByteString
+      mutateHtml' mutType gen pool html = case mutType of
+        DropSubtree     -> mutateHtml_dropSubtree gen html
+        NewRandom       -> mutateHtml_newRandom pool
+        ReassignIds     -> mutateHtml_reassignIds pool html
+        ReassignClasses -> mutateHtml_reassignClasses pool html
+
+    
 mutateHtml_dropSubtree :: StdGen -> ByteString -> IO ByteString
 mutateHtml_dropSubtree gen html = do
   let logger = rootLoggerName
@@ -57,6 +77,20 @@ mutateHtml_reassignIds pool html = do
   setCondBreakPoint
   return new_html
 
+
+mutateHtml_reassignClasses :: JSCPool -> ByteString -> IO ByteString
+mutateHtml_reassignClasses pool html = do
+  let logger     = rootLoggerName
+      setPool    = removeDuplicates pool
+      tagClasses = getJSClasses setPool
+      plain_html = removeAttributeFromDocument "class" $ bytestring2document html
+  debugM rootLoggerName $ "Mutate element:\n" ++ (prettyHtmlByteString html)    
+  noticeM logger $ "Constant pool data: " ++ (show setPool)
+  new_html <- liftM document2bytestring $ assignClassesToDocumentRandomly tagClasses plain_html
+  debugM rootLoggerName $ "Mutation result: re-assign classes:\n" ++ (prettyHtmlByteString new_html)
+  setCondBreakPoint
+  return new_html
+  
 
 mutateIterate :: StdGen -> (Document, Int) -> IO ByteString  
 mutateIterate gen doc@(fromDoc, docDepth) = do

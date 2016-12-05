@@ -9,7 +9,7 @@ const _          = require('underscore');
 const instrument = require("./instrumentLib.js");
 const winston    = require('winston');
 
-//winston.level = 'info';
+// winston.level = 'info';
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {'timestamp': () => (new Date()).toJSON()});
@@ -30,10 +30,8 @@ require('./domIntercept.js')(window, environment, winston);
 
 
 http.createServer(function(request, response) {
-    winston.debug("Send request");
-    
     let pathname = url.parse(request.url, true).pathname;
-    winston.debug("endpoint: ", pathname);
+    winston.debug("Received request: ", pathname);
     
     if (pathname == "/init") {
 	request.on('data', function(data) {
@@ -67,7 +65,7 @@ http.createServer(function(request, response) {
 
     if (pathname == "/genetic") {
 	request.on('data', function(data) {
-	    winston.debug("Received arguments which are new population:", data.toString());
+	    //winston.debug("Received arguments which are new population:", data.toString());
 	    
 	    let jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>");
 	    winston.debug("jsFunArgs: ", jsFunArgs);

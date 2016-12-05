@@ -9,7 +9,7 @@ import Genetic.DataJS
 import Genetic.RandomJS
 import Genetic.CrossoverJS
 import Genetic.ScoreJS
-import Genetic.MutationJS (mutateHtml_reassignIds, mutateHtml_dropSubtree, mutateHtml_newRandom, mutateJSInt, mutateJSString)
+import Genetic.MutationJS (mutateHtml, mutateJSInt, mutateJSString, MutationType(..))
 
 import Html5C.Tags
 
@@ -67,13 +67,10 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       mutateAllArgs g (arg:args) = do
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
-              DomJS d1   -> liftM DomJS $ ([mutateHtml_reassignIds pool d1, mutateHtml_dropSubtree g d1]!!) =<< randomRIO (0, 1)
-              -- mutateHtml_reassignIds pool d1
-              -- mutateHtml_dropSubtree g d1
-              -- mutateHtml_newRandom pool
+              DomJS d1   -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] g pool d1
               IntJS i1   -> mutateJSInt i1 pool
               StringJS _ -> mutateJSString pool
-              otherwise  ->  error "mutation of non-DOM elements isn't defined"
+              otherwise  -> error "mutation of non-DOM elements isn't defined"
         args' <- mutateAllArgs g' args
         return (d:args')      
 
