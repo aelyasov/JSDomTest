@@ -30,9 +30,24 @@ foldExpr (DotRef _ _ (Id _ fun)) | fun == "insertRow" = (mempty, mempty, ([TAG_T
                                  | otherwise          = mempty
 foldExpr (StringLit _ str) = (mempty, [str], (mempty, mempty, mempty, mempty))
 foldExpr (IntLit _ int)    = ([int], mempty, (mempty, mempty, mempty, mempty))   
+foldExpr (InfixExpr _ infixOp leftExpr rightExpr)
+  | infixOp `elem` [OpEq, OpNEq] = extractClassName leftExpr rightExpr <> extractClassName rightExpr leftExpr
 foldExpr _ = mempty
 
 
+extractClassName :: Expression SourcePosLab -> Expression SourcePosLab -> JSCPool
+extractClassName expr (StringLit _ className)
+  | isExprEndsWithClassName expr = (mempty, mempty, (mempty, mempty, mempty, [className]))
+  | otherwise                    = mempty
+extractClassName _ _ = mempty
+
+      
+isExprEndsWithClassName :: Expression SourcePosLab -> Bool    
+isExprEndsWithClassName (DotRef _ _ (Id _ "className")) = True
+isExprEndsWithClassName _                               = False
+
+
+                                                  
 -- | TODO: implement integer and string collection
 collectConstantInfoJS :: JavaScript SourcePosLab -> JSCPool
 collectConstantInfoJS = removeDuplicates . collectStaticRefs
