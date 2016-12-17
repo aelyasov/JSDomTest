@@ -6,8 +6,7 @@ function test() {
       var spans = obj.getElementsByTagName('SPAN');
       spans[0].style.display='';
       spans[1].style.display='none';
-      // spans[1].style.color='#000000';
+      spans[1].style.color='#000000';
     }
   }
-  gameFinished=true;
 }

@@ -59,7 +59,7 @@ mutateHtml_newRandom :: JSCPool -> IO ByteString
 mutateHtml_newRandom pool = do
   let logger  = rootLoggerName
       setPool = removeDuplicates pool
-  noticeM logger $ "Constant pool data: " ++ (show setPool)
+  debugM logger $ "Constant pool data: " ++ (show setPool)
   debugM rootLoggerName $ "Mutation: generate new html:"
   genRandomDom $ getJSDoms setPool
 
@@ -71,7 +71,7 @@ mutateHtml_reassignIds pool html = do
       tagIds  = getJSIds setPool
       plain_html = removeAttributeFromDocument "id" $ bytestring2document html
   debugM rootLoggerName $ "Mutate element:\n" ++ (prettyHtmlByteString html)    
-  noticeM logger $ "Constant pool data: " ++ (show setPool)
+  debugM logger $ "Constant pool data: " ++ (show setPool)
   new_html <- liftM document2bytestring $ assignIdsToDocumentRandomly tagIds plain_html
   debugM rootLoggerName $ "Mutation result: re-assign ids:\n" ++ (prettyHtmlByteString new_html)
   setCondBreakPoint
@@ -85,7 +85,7 @@ mutateHtml_reassignClasses pool html = do
       tagClasses = getJSClasses setPool
       plain_html = removeAttributeFromDocument "class" $ bytestring2document html
   debugM rootLoggerName $ "Mutate element:\n" ++ (prettyHtmlByteString html)    
-  noticeM logger $ "Constant pool data: " ++ (show setPool)
+  debugM logger $ "Constant pool data: " ++ (show setPool)
   new_html <- liftM document2bytestring $ assignClassesToDocumentRandomly tagClasses plain_html
   debugM rootLoggerName $ "Mutation result: re-assign classes:\n" ++ (prettyHtmlByteString new_html)
   setCondBreakPoint

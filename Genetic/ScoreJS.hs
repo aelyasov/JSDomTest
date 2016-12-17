@@ -60,11 +60,11 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
                  then return 0
                  else computeFitness cfg (map2IntMap loops_) to trace_ distances_
   -- infoM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
-  -- fitnessVal2 <- computeFitness cfg exitLoc trace_ distances_
+  fitnessVal2 <- computeFitness cfg (map2IntMap loops_) (-1) trace_ distances_
   -- fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
   -- infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
-  -- let fitnessVal = fitnessVal1 + 0.001 * fitnessVal2
-  let fitnessVal = fitnessVal1
+  let fitnessVal = fitnessVal1 + 0.001 * fitnessVal2
+  -- let fitnessVal = fitnessVal1
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
 
   setCondBreakPoint

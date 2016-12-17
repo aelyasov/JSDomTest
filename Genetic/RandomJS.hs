@@ -19,7 +19,7 @@ import Util.Debug (setCondBreakPoint)
 genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
   debugM rootLoggerName  $ "Generating random value of type: " ++ (show tp)
-  noticeM rootLoggerName $ "Constant pool data: " ++ (show pool)
+  debugM rootLoggerName $ "Constant pool data: " ++ (show pool)
   debugM rootLoggerName $ "Generated random value is:"
   genRandomVal' pool tp
 
