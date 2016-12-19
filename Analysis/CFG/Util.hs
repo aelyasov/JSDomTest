@@ -177,7 +177,8 @@ expr2objFun (PrefixExpr l prOp ex)         =
                       BoolLit _ _               -> expr2objFun $ propogateNeg ex
                       PrefixExpr _ PrefixLNot _ -> expr2objFun $ propogateNeg ex
                       InfixExpr _ _ _ _         -> expr2objFun $ propogateNeg ex
-                      _                         -> CallExpr def (VarRef def (Id def distanceNegZero)) [ex] 
+                      _                         -> CallExpr def (VarRef def (Id def distanceNegZero)) [ex]
+expr2objFun (CallExpr l  ex exs)           = VarRef def (Id def failureConst)
 -- expr2objFun (UnaryAssignExpr l unAsOp val) = undefined
 -- expr2objFun (CondExpr l ex1 ex2 ex3)       = undefined
 -- expr2objFun (AssignExpr l asOp val ex)     = undefined
@@ -262,10 +263,10 @@ evalLoopTree (Leaf _) = 1
 
 list2LoopTree ::  LoopIterationMap -> GPath -> LoopTree
 list2LoopTree _ [] = error "list2LoopTree: loop can't be empty"
-list2LoopTree iterMap (head:body) =
+list2LoopTree iterMap path@(head:body) =
   case (IntMap.lookup head iterMap) of
    Just iterN -> Node iterN head (map Leaf body)
-   Nothing    -> error "list2LoopTree: there is no info about max iteration number for given loop"
+   Nothing    -> trace ("no info about loop: " ++ (show head)) $ Node 10 head (map Leaf body)  
 
 buildLoopMaxSizeMap :: Gr NLab ELab -> LoopIterationMap -> LoopMaxSizeMap
 buildLoopMaxSizeMap gr iterMap =

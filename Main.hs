@@ -89,15 +89,18 @@ main = do
   -- | Instrument and statically analize JS program
   (jsFile:_) <- getArgs
   debugM logger $ "JavaScript file given for the analysis: " ++ (show jsFile)
-  jsFun <- liftM transfromJS $ parseFromFile jsFile
-  jsSig <- parseJSSignature jsFile
+  jsFileContent <- parseFromFile jsFile
+  jsSig <- parseJSSignature jsFile  
   debugM logger $ "JS function signature: " ++ (show jsSig)
-  let jsLabFun@(Script l jsLabStms) = fst $ flip runState 0 $ assignUniqueIdsSt jsFun
-      jsFunCFG      = uncurry mkGraph $ enrichCollectedEdges jsLabStms
+  let jsFun         = transfromJS jsFileContent               
+      (Script l (jsLabFun':jsLabStms)) = fst $ flip runState 0 $ assignUniqueIdsSt jsFun
+      jsLabFun      = Script l [jsLabFun'] 
+      jsFunCFG      = uncurry mkGraph $ enrichCollectedEdges [jsLabFun']
       branches      = getAllBranches jsFunCFG
       labBranches   = zip [1..] branches
       constPool     = collectConstantInfoJS jsLabFun
-      jsLabFunInstr = instrScript jsLabFun
+      jsLabFunInstr@(Script _ [jsLabFunInstrStmt]) = instrScript jsLabFun
+      jsLabFunInstrFile = Script l (jsLabFunInstrStmt:jsLabStms)
   noticeM logger "The function has the following CFG:\n"
   system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii"
   noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
@@ -114,7 +117,7 @@ main = do
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                         , requestBody = RequestBodyLBS
                                         $ encode
-                                        $ InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstr)
+                                        $ InitData (T.pack $ show $ JSP.prettyPrint jsLabFunInstrFile)
                                         $ map (T.pack . show) jsSig
                         }
   initResp <- httpLbs reqInit man
