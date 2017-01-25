@@ -160,7 +160,6 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
       request <- parseUrl "http://localhost:7777/mutation"
       let reqMut = request { method = "POST"
                            , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
-                                              -- , queryString = "mutation=true"
                            , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
                            }
       mutResp <- httpLbs reqMut man

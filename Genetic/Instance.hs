@@ -51,9 +51,13 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       crossAllArgs g (arg:args) = do 
         let (a, g')  = random g :: (Int, StdGen)
         d <- case arg of
-               [DomJS d1, DomJS d2]       -> liftM DomJS $ crossoverHTML g d1 d2
-               [IntJS i1, IntJS i2]       -> liftM (IntJS . ([i1,i2]!!)) $ randomRIO (0, 1)
-               [StringJS i1, StringJS i2] -> liftM (StringJS . ([i1,i2]!!)) $ randomRIO (0, 1)
+               [DomJS d1, DomJS d2]         -> liftM DomJS $ crossoverHTML g d1 d2
+               [IntJS i1, IntJS i2]         -> liftM (IntJS . ([i1,i2]!!)) $ randomRIO (0, 1)
+               [StringJS i1, StringJS i2]   -> liftM (StringJS . ([i1,i2]!!)) $ randomRIO (0, 1)
+               [ArrayJS arr1, ArrayJS arr2] -> do crossPoint <- randomRIO (0, max (length arr1) (length arr2))
+                                                  let crossArr1 = take crossPoint arr1 ++ drop crossPoint arr2
+                                                      crossArr2 = take crossPoint arr2 ++ drop crossPoint arr1
+                                                  liftM (ArrayJS . ([crossArr1, crossArr2]!!)) $ randomRIO (0, 1) 
                otherwise -> error "crossover of non-DOM elements isn't defined"
                -- otherwise            -> return $ arg!!(a `mod` 2) 
         args' <- crossAllArgs g' args

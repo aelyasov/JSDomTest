@@ -22,21 +22,30 @@ import Text.XML.Pretty (prettyHtmlByteString)
 import Html5C.Tags
 
 data JSArg = IntJS Int
+           | FloatJS Float
            | StringJS String
            | BoolJS Bool
            | DomJS ByteString
-             deriving (Read, Ord, Eq)
+           | ArrayJS [JSArg]
+           deriving (Read, Ord, Eq)
 
 instance Show JSArg where
   show (IntJS i)    = show i
+  show (FloatJS f)  = show f
   show (StringJS s) = show s
   show (BoolJS b)   = show b
   show (DomJS s)    = prettyHtmlByteString s
+  show (ArrayJS ar) = show ar
   
 data Target = Target { jsCFG :: Gr NLab ELab, mutSrc :: LEdge ELab } deriving Show
 
-
-data JSType = JS_INT | JS_FLOAT | JS_STRING | JS_BOOL | JS_DOM deriving Show
+data JSType = JS_INT
+            | JS_FLOAT
+            | JS_STRING
+            | JS_BOOL
+            | JS_DOM
+            | JSArray JSType
+            deriving Show
 
 type JSSig = [JSType]
 
@@ -80,7 +89,8 @@ jsarg2bstr (StringJS s) = T.pack s
 jsarg2bstr (BoolJS b)   = case b of
                             True  -> T.pack "true"
                             False -> T.pack "false"
-jsarg2bstr (DomJS bs)   = decodeUtf8 $ B.toStrict bs 
+jsarg2bstr (DomJS bs)   = decodeUtf8 $ B.toStrict bs
+jsarg2bstr (ArrayJS ar) = T.pack $ show ar
 
 
 jsargs2bstrs :: [JSArg] -> Text
@@ -150,7 +160,7 @@ instance FromJSON JSEnviroment where
 
 instance ToJSON JSEnviroment where
   toEncoding (JSEnviroment tags names ids classes selectors) =
-    pairs (   "tags"       .= tags
+    pairs (   "tags"      .= tags
            <> "names"     .= names
            <> "ids"       .= ids
            <> "classes"   .= classes
