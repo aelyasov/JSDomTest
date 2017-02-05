@@ -1,4 +1,18 @@
-function init() {
+function init(r, e, s, f) {
+
+    function R(a) {}
+    function S(a) {}
+    function T(a) {}
+    function U(a) {}
+    function V(a) {}
+    function W(a) {}
+    function K(a) {}
+    function d(a) {}
+    function h(a) {}
+    function x(a) {}
+    function M(a) {}
+    function K(a) {}
+
     var i = document.getElementById("world");
     var n = document.getElementById("background-canvas");
     var m = document.getElementById("panels");
@@ -19,7 +33,7 @@ function init() {
         Q.addEventListener("click", d, false);
         document.addEventListener("keydown", h, false);
         document.addEventListener("keyup", x, false);
-        var b = new Player;
+        // var b = new Player; // commented because b is not used
         K();
         if (r) {
             document.getElementById("panel").style.display = "none";
@@ -35,48 +49,10 @@ function init() {
     }
 }
 
-var R, S, T, U, V, W, d, h, x, r, M, s, e, f; 
 
-function K() {
-    e = r ? window.innerWidth : 900;
-    f = r ? window.innerHeight : 550;
-    b.position.x = e * 0.5;
-    b.position.y = f * 0.5;
-    i.width = e;
-    i.height = f;
-    n.width = e;
-    n.height = f;
-    var a = (window.innerWidth - e) * 0.5,
-        g = (window.innerHeight - f) * 0.5;
-    i.style.position = "absolute";
-    i.style.left = a + "px";
-    i.style.top = g + "px";
-    n.style.position = "absolute";
-    n.style.left = a + 6 + "px";
-    n.style.top = g + 6 + "px";
-    if (r) {
-        m.style.left = "0px";
-        m.style.top = "0px";
-        l.style.left = "0px";
-        l.style.top = "0px"
-    } else {
-        m.style.left = a + 6 + "px";
-        m.style.top = g + 200 + "px";
-        l.style.left = a + 6 + "px";
-        l.style.top = g + 6 + "px"
-    }
-}
-
-function Player() {
-    this.position = {
-        x: 0,
-        y: 0
-    };
-    this.length = 15;
-    this.energy = 30;
-    this.energyRadiusTarget = this.energyRadius = 0;
-    this.radius = 60;
-    this.angle = 0;
-    this.coreQuality = 16;
-    this.coreNodes = []
-}
+/*
+ * r: boolean
+ * e: int
+ * s: int
+ * f: int
+ */

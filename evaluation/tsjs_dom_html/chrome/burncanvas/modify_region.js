@@ -1,8 +1,8 @@
-function modify_region(i, centerx, centery) {
-    if (m.pressed) {
-        for (var y = i.height - 1; y >= 0; y--) {
-            for (var x = 0; x < i.width; x++) {
-                var pos = 4 * (i.width * y + x);
+function modify_region(mpressed, iheight, iwidth, idata, reach, centerx, centery) {
+    if (mpressed) {
+        for (var y = iheight - 1; y >= 0; y--) {
+            for (var x = 0; x < iwidth; x++) {
+                var pos = 4 * (iwidth * y + x);
                 var a = x - centerx;
                 var b = y - centery;
                 var v = 1 - (a * a + b * b) / (reach * reach);
@@ -11,9 +11,9 @@ function modify_region(i, centerx, centery) {
                 }
                 v = v * v;
                 if (y >= 1) {
-                    i.data[pos + 0] += v * (i.data[pos + 0 - i.width * 4] - i.data[pos + 0]);
-                    i.data[pos + 1] += v * (i.data[pos + 1 - i.width * 4] - i.data[pos + 1]);
-                    i.data[pos + 2] += v * (i.data[pos + 2 - i.width * 4] - i.data[pos + 2]);
+                    idata[pos + 0] += v * (idata[pos + 0 - iwidth * 4] - idata[pos + 0]);
+                    idata[pos + 1] += v * (idata[pos + 1 - iwidth * 4] - idata[pos + 1]);
+                    idata[pos + 2] += v * (idata[pos + 2 - iwidth * 4] - idata[pos + 2]);
                 }
             }
         }
@@ -21,13 +21,12 @@ function modify_region(i, centerx, centery) {
         // This part is more optimized for fast execution.
         var rr = 1 / (reach * reach);
         var pos = 0;
-        var w = i.width;
+        var w = iwidth;
         var t = 0;
         var v = 0;
         var a = 0;
         var vv = 0;
-        var idata = i.data;
-        for (var y = 0; y < i.height; y++) {
+        for (var y = 0; y < iheight; y++) {
             var b = y - centery;
             var bb = b * b;
             for (var x = 0; x < w; x++) {
@@ -59,4 +58,14 @@ function modify_region(i, centerx, centery) {
     }
 }
 
-var reach;
+/*
+ * Types:
+ * mpressed: boolean  
+ * iheight: int 
+ * iwidth: int 
+ * idata: [int] 
+ * reach: int 
+ * i 
+ * centerx: int 
+ * centery: int
+ */

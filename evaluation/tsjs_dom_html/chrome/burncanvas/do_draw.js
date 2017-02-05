@@ -1,20 +1,20 @@
-function do_draw() {
-    if (m.x < 0) {
+function do_draw(mx, my, lastmx, lastmy, reach, w, h) {
+    if (mx < 0) {
         return;
     }
-    if ((lastmx == m.x) && (lastmy == m.y)) {
+    if ((lastmx == mx) && (lastmy == my)) {
         if (reach < 100) {
             reach++;
         }
     } else {
-        lastmx = m.x;
-        lastmy = m.y;
+        lastmx = mx;
+        lastmy = my;
         reach = 50;
     }
-    var x1 = m.x - reach;
-    var x2 = m.x + reach;
-    var y1 = m.y - reach;
-    var y2 = m.y + reach;
+    var x1 = mx - reach;
+    var x2 = mx + reach;
+    var y1 = my - reach;
+    var y2 = my + reach;
     if (x1 < 0) {
         x1 = 0;
     }
@@ -39,10 +39,18 @@ function do_draw() {
     if (y2 < y1 + 1) {
         y2 = y1 + 1;
     }
-    var i = c.getImageData(x1, y1, x2 - x1, y2 - y1);
-    modify_region(i, m.x - x1, m.y - y1);
-    c.putImageData(i, x1, y1);
+    // Doesn't have any infludence on control flow
+    // var i = c.getImageData(x1, y1, x2 - x1, y2 - y1);
+    // modify_region(i, mx - x1, my - y1);
+    // c.putImageData(i, x1, y1);
 }
 
-var lastmx, lastmy, reach;
-var w, h, c;
+/*
+ * mx: int
+ * my: int
+ * reach: int
+ * lastmx: int
+ * lastmy: int
+ * w: int
+ * h: int
+ */

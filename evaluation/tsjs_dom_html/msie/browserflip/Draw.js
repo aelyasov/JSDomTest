@@ -1,6 +1,10 @@
 // Core drawing routine which animates the board
 
-function Draw() {
+function Draw(gameOver, images, imageCompleted, imageAnimating, imageZoomStage, zoomStages, imageBackground, warpSpeed, imageXCenter, imageYCenter, countZoomStages, imageBackgroundFinalTile, gameStarted, currentSecond, currentFPS, startTime) {
+
+    var defaultRadius = 29;
+    var fps = document.getElementById('fps');
+    var time = document.getElementById('time');
 
     if (gameOver == false) {
 
@@ -33,8 +37,7 @@ function Draw() {
 
                 if (warpSpeed == true) {
                     imageZoomStage[i] = imageZoomStage[i] + 10;
-                }
-                else {
+                } else {
                     imageZoomStage[i] = imageZoomStage[i] + 3;
                 }
 
@@ -55,17 +58,16 @@ function Draw() {
         if (gameStarted) {
 
             var rightNow = new Date().getTime();
-            if (Math.floor(rightNow/1000) == Math.floor(currentSecond/1000) ) {
+            if (Math.floor(rightNow / 1000) == Math.floor(currentSecond / 1000)) {
                 currentFPS++;
-            }
-            else {
+            } else {
                 currentSecond = rightNow;
                 fps.innerHTML = (currentFPS > 60) ? 60 : currentFPS;
                 currentFPS = 1;
             }
 
             var delta = rightNow - startTime;
-            time.innerHTML = Math.floor(delta/1000) + "." + Math.floor((delta % 1000) / 10);
+            time.innerHTML = Math.floor(delta / 1000) + "." + Math.floor((delta % 1000) / 10);
 
             if (!moreAnimation) {
                 GameOver();
@@ -73,3 +75,24 @@ function Draw() {
         }
     }
 }
+
+function GameOver() {}
+
+/*
+ * gameOver: boolean
+ * images: [HTMLelement]
+ * imageCompleted: [boolean]
+ * imageAnimating: [boolean]
+ * imageZoomStage: [int]
+ * zoomStages: [int]
+ * imageBackground: [string]
+ * warpSpeed: boolean
+ * imageXCenter: [int]
+ * imageYCenter: [int]
+ * countZoomStages: int
+ * finaTile: [string]
+ * gameStarted: boolean
+ * currentSecond: int
+ * currentFPS: int
+ * startTime: int
+ */

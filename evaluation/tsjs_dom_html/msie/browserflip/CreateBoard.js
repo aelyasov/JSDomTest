@@ -1,22 +1,38 @@
 // Create Board
 
-function CreateBoard() {
+function CreateBoard(xCount, defaultRadius, yCount, zoomStages) {
 
-    images = [];
-    imageBackground = [];
-    imageBackgroundFinalTile = [];
-    imageZoomStage = [];
-    imageAnimating = [];
-    imageCompleted = [];
-    imageXCenter = [];
-    imageYCenter = [];
-    startTime = 0;
-    gameOver = false;
-    gameStarted = false;
+    var board = document.getElementById('theboard');
+    var game = document.getElementById('game');
+    var playagain = document.getElementById('playagain');
+
+    var images = [];
+    var imageBackground = [];
+    var imageBackgroundFinalTile = [];
+    var imageZoomStage = [];
+    var imageAnimating = [];
+    var imageCompleted = [];
+    var imageXCenter = [];
+    var imageYCenter = [];
+    var startTime = 0;
+    var gameOver = false;
+    var gameStarted = false;
+    var TILE = "TileBlank.png";
+    var IELOGO = "IELogo.png";
+    var IELOGOWATERMARKTILE = "IELogoWatermarkTile.png";
+    var LOGO1WATERMARKTILE = "Logo1WatermarkTile.png";
+    var LOGO2WATERMARKTILE = "Logo2WatermarkTile.png";
+    var LOGO3WATERMARKTILE = "Logo3WatermarkTile.png";
+    var LOGO4WATERMARKTILE = "Logo4WatermarkTile.png";
+    var LOGO1 = "Logo1.png";
+    var LOGO2 = "Logo2.png";
+    var LOGO3 = "Logo3.png";
+    var LOGO4 = "Logo4.png";
+
 
     board.innerHTML = '';
 
-    countZoomStages = zoomStages.length - 5;
+    var countZoomStages = zoomStages.length - 5;
 
     var boardWidth = (xCount * defaultRadius * 2) - (xCount * 2);
     var boardHeight = (yCount * defaultRadius * 1.5) + (defaultRadius * 0.5) - (yCount * 2);
@@ -31,23 +47,30 @@ function CreateBoard() {
     playagain.style.visibility = "hidden";
 
 
-    var c = 1, n = 1;
+    var c = 1,
+        n = 1;
     for (var yLocation = 1; yLocation <= yCount; yLocation++) {
 
         var middleLine = Math.floor(yCount / 2) + 1;
+        var xDrawCount;
         if (yLocation < middleLine) {
             xDrawCount = xCount - (middleLine - yLocation);
-        }
-        else if (yLocation === middleLine) {
+        } else if (yLocation === middleLine) {
             xDrawCount = xCount;
-        }
-        else {
+        } else {
             xDrawCount = xCount - (yLocation - middleLine);
         }
 
-        if (n == 1) { c = 1; n = 2; }
-        else if (n == 2) { c = 3; n = 3; }
-        else { c = 5; n = 1; }
+        if (n == 1) {
+            c = 1;
+            n = 2;
+        } else if (n == 2) {
+            c = 3;
+            n = 3;
+        } else {
+            c = 5;
+            n = 1;
+        }
 
         for (var xLocation = 1; xLocation <= xDrawCount; xLocation++) {
 
@@ -90,8 +113,7 @@ function CreateBoard() {
 
             if ((yLocation % 2) > 0) {
                 xCenter = ((xLocation * defaultRadius * 2) - (xLocation * 2) + (((xCount - xDrawCount) / 2) * defaultRadius * 2) - defaultRadius);
-            }
-            else {
+            } else {
                 xCenter = ((xLocation * defaultRadius * 2) - (xLocation * 2) + (((xCount - xDrawCount) / 2) * defaultRadius * 2) - defaultRadius);
             }
 
@@ -104,8 +126,7 @@ function CreateBoard() {
 
             if (window.addEventListener) {
                 img.addEventListener("mouseover", MouseOverImage, false);
-            }
-            else if (window.attachEvent) {
+            } else if (window.attachEvent) {
                 img.attachEvent("onmouseover", MouseOverImage, false);
             }
 
@@ -124,3 +145,13 @@ function CreateBoard() {
 
 
 }
+
+function MouseOverImage(e) {}
+
+/*
+ * Types: 
+ * xCount: int
+ * defaultRadius: int
+ * yCount: int
+ * zoomStages: [int]
+ */

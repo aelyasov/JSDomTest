@@ -1,9 +1,13 @@
-function swim() {
+function swim(x, y, z, xAngle, yAngle, zAngle, velocity, zFar, zClose, fishW, scale, angle, WIDTH, flip, fishH, HEIGHT, zFarFactor, cell, cellCount, cellReverse, species, timeDeltaS, fish) {
+
+    var tempCtx = document.createElement("canvas");
+    var ctx = tempCtx.getContext("2d");
+    var imageStrip = document.getElementById('imageStrip');
 
     // Calculate next position of fish
-    var nextX = x + xAngle * velocity * fpsMeter.timeDeltaS;
-    var nextY = y + yAngle * velocity * fpsMeter.timeDeltaS;
-    var nextZ = z + zAngle * .1 * velocity * fpsMeter.timeDeltaS;
+    var nextX = x + xAngle * velocity * timeDeltaS;
+    var nextY = y + yAngle * velocity * timeDeltaS;
+    var nextZ = z + zAngle * .1 * velocity * timeDeltaS;
     var nextScale = Math.abs(nextZ) / (zFar - zClose);
 
     // If fish is going to move off right side of screen
@@ -105,3 +109,29 @@ function swim() {
     } //go through each cell in the animation
     cell = cell + 1 * cellReverse; //go back down once we hit the end of the animation
 }
+
+/*
+ * cell: int
+ * cellCount: int
+ * cellReverse: int
+ * species: int
+ * x: int 
+ * y: int 
+ * z: int 
+ * xAngle: int 
+ * yAngle: int 
+ * zAngle: int 
+ * velocity: int 
+ * zFar: int 
+ * zClose: int 
+ * fishW: int
+ * scale: float 
+ * angle: int 
+ * WIDTH: int 
+ * flip: int  
+ * fishH: int 
+ * HEIGHT: int 
+ * zFarFactor: float
+ * timeDeltaS: int
+ * fish: [*]
+ */
