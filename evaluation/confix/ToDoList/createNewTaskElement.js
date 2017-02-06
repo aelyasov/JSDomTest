@@ -31,3 +31,8 @@ function createNewTaskElement(taskString) {
   
   return listItem;
 };
+
+/*
+ * Types:
+ * taskString: string
+ */

@@ -1,5 +1,5 @@
   function validateEmail()
-  {
+{
   var x=document.forms["frm"]["email"].value;
   var atpos=x.indexOf("@");
   var dotpos=x.lastIndexOf(".");
