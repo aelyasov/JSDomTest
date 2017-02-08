@@ -1,5 +1,5 @@
  function RequiredField(felements) {
-     var i, field;
+     var i, field, value;
      for (i = 0; i < felements.length; i++) {
          field = felements[i];
          value = trim(felements[i]);

@@ -29,5 +29,4 @@ function binarySearch(items, value){
 
 /*
  * items: [int]
- * value: int
  */

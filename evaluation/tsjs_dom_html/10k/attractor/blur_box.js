@@ -1,9 +1,9 @@
 function blur_box(ids, idd, bx, by) {
-    var src = $(ids);
+    var src = document.getElementById(ids);
     var sc = cc(src);
     var width = src.width;
     var height = src.height;
-    var dst = $(idd);
+    var dst = document.getElementById(idd);
     var dc = cc(dst);
     var sd = sc.getImageData(0, 0, width, height);
     var dd = dc.getImageData(0, 0, width, height);

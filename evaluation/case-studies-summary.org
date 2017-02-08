@@ -1,0 +1,73 @@
+Case-studies journal:
+* TODO for each function in the list create tests that covers all branches 
+* TODO review sources of the "moodle" project
+
+
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| Case-Study             | Function              | Signature | #Args | ?Tested | CC | #Branches | String | Bool | Int | Float | Array | Dom |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| sudoku                 | getPossibleNumbers.js |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | helpMe.js             |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | highlightSquare.js    |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | initSudoku.js         |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | insertNumber.js       |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | isGameFinished.js     |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | newGame.js            |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | readme.txt            |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | revealAll.js          |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | showCell.js           |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | showColumnsInGroup.js |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | showHint.js           |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | shuffleBoard.js       |           |       |         |    |           |        |      |     |       |       |     |
+| sudoku                 | switchLevel.js        |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| phormer                | reshuffle             |           |       |         |    |           |        |      |     |       |       |     |
+| phormer                | toggleInfo            |           |       |         |    |           |        |      |     |       |       |     |
+| phormer                | update                |           |       |         |    |           |        |      |     |       |       |     |
+| phormer                | updateIndic           |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| HotelReservationSystem | RequiredField.js      |           |       |         |    |           |        |      |     |       |       |     |
+| HotelReservationSystem | checkPassConfirm.js   |           |       |         |    |           |        |      |     |       |       |     |
+| HotelReservationSystem | checkValid.js         |           |       |         |    |           |        |      |     |       |       |     |
+| HotelReservationSystem | isValidCard.js        |           |       |         |    |           |        |      |     |       |       |     |
+| HotelReservationSystem | isValidMasterCard.js  |           |       |         |    |           |        |      |     |       |       |     |
+| HotelReservationSystem | isValidVISA.js        |           |       |         |    |           |        |      |     |       |       |     |
+| HotelReservationSystem | validateEmail.js      |           |       |         |    |           |        |      |     |       |       |     |
+| HotelReservationSystem | validateNumber.js     |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| apophis                | doRain.js             |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | drawShields.js        |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | fireMeteor.js         |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | fireMissile.js        |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | getReady.js           |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | initShields.js        |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | maintainMeteor.js     |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | maintainMissile.js    |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | tankExplosion.js      |           |       |         |    |           |        |      |     |       |       |     |
+| apophis                | writeText.js          |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| bingbong               | brickJiggler.js       |           |       |         |    |           |        |      |     |       |       |     |
+| bingbong               | doPaddlePower.js      |           |       |         |    |           |        |      |     |       |       |     |
+| bingbong               | drawLevel.js          |           |       |         |    |           |        |      |     |       |       |     |
+| bingbong               | getWindowSize.js      |           |       |         |    |           |        |      |     |       |       |     |
+| bingbong               | goPing.js             |           |       |         |    |           |        |      |     |       |       |     |
+| bingbong               | initBricks.js         |           |       |         |    |           |        |      |     |       |       |     |
+| bingbong               | moveBall.js           |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| burncanvas             | do_draw.js            |           |       |         |    |           |        |      |     |       |       |     |
+| burncanvas             | modify_region.js      |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| CS-in-JS               | luhn-algorithm.js     |           |       |         |    |           |        |      |     |       |       |     |
+| CS-in-JS               | quicksort.js          |           |       |         |    |           |        |      |     |       |       |     |
+|                        | binary-search.js      |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| mathjs                 | probability_gamma     |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+| Tudu-Lists             | tabs_activateMenu.js  |           |       |         |    |           |        |      |     |       |       |     |
+| Tudu-Lists             | tabs_decorateMenu.js  |           |       |         |    |           |        |      |     |       |       |     |
+| Tudu-Lists             | tabs_initMenu.js      |           |       |         |    |           |        |      |     |       |       |     |
+|------------------------+-----------------------+-----------+-------+---------+----+-----------+--------+------+-----+-------+-------+-----|
+  
+
+
+
