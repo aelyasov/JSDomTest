@@ -18,9 +18,6 @@ function toggleInfo(wut) {
     }
 }
 
-function dg(x) {
-    return document.getElementById(x);
-}
 
 function setCookie(key, val) {
     var newd = new Date;

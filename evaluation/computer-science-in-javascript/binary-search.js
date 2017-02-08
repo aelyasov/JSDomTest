@@ -26,3 +26,8 @@ function binarySearch(items, value){
     //make sure it's the right value
     return (items[middle] != value) ? -1 : middle;
 }
+
+/*
+ * items: [int]
+ * value: int
+ */
