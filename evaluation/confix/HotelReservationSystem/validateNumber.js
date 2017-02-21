@@ -3,7 +3,7 @@
       if (input.match(number)) {
           return true;
       } else {
-          document.getElementById("error_phnum").innerHTML = "* " + field + " Enter Numbers Only";
+          document.getElementById("error_phnum").innerHTML = "* " + " Enter Numbers Only";
           return false;
       }
   }
