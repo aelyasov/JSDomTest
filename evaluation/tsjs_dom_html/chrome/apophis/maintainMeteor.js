@@ -1,5 +1,5 @@
 //Maintain and track meteor
-function maintainMeteor(meteorNo, isPaused, meteorLive, meteorY, meteorVelocityY, meteorX, meteorVelocityX, mWidth, mHeight, meteorStatus, meteorIteration, meteorType, shieldStat) {
+function maintainMeteor(meteorNo, isPaused, meteorLive, meteorY, meteorVelocityY, meteorX, meteorVelocityX, mWidth, mHeight, meteorStatus, meteorIteration, meteorType, shieldStat, allDead) {
     if (isPaused == 1 || meteorLive == 0) {
         window.setTimeout("maintainMeteor(" + meteorNo + ");", 200);
     } else {

@@ -44,15 +44,14 @@ Case-studies journal:
 | apophis                | tankExplosion.js      |                                                                   |    |     |      |       |         |
 | apophis                | writeText.js          |                                                                   |    |     |      |       |         |
 |------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| bingbong               | brickJiggler.js       |                                                                   |    |     |      |       |         |
-| bingbong               | doPaddlePower.js      |                                                                   |    |     |      |       |         |
-| bingbong               | drawLevel.js          |                                                                   |    |     |      |       |         |
-| bingbong               | getWindowSize.js      |                                                                   |    |     |      |       |         |
-| bingbong               | goPing.js             |                                                                   |    |     |      |       |         |
-| bingbong               | initBricks.js         |                                                                   |    |     |      |       |         |
-| bingbong               | moveBall.js           |                                                                   |    |     |      |       |         |
+| bingbong               | brickJiggler.js       | (dom,int,int,int,[int],[int],[int],[int])                         |  2 |   1 |    7 |       |         |
+| bingbong               | doPaddlePower.js      | (dom,int,int)                                                     |  3 |   2 |   12 |       |         |
+| bingbong               | drawLevel.js          | (dom,int,int,int,int)                                             |  3 |   2 |   18 |       |         |
+| bingbong               | goPing.js             | (dom,int,int,int)                                                 |  3 |   2 |    9 |       |         |
+| bingbong               | initBricks.js         | (dom,int,[int],[int],[int],[int],int,[string])                    | 13 |  12 |   46 |       |         |
+| bingbong               | moveBall.js           | too complex                                                       |    |     |      |       |         |
 |------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| burncanvas             | do_draw.js            |                                                                   |    |     |      |       |         |
+| burncanvas             | do_draw.js            | (int,int,int,int,int,int,int)                                     | 14 |  12 |   29 |       |         |
 | burncanvas             | modify_region.js      |                                                                   |    |     |      |       |         |
 |------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
 | CS-in-JS               | luhn-algorithm.js     |                                                                   |    |     |      |       |         |
