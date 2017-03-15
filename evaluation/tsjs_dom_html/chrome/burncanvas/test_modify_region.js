@@ -101,7 +101,54 @@ function modify_region(mpressed, iheight, iwidth, idata, reach, centerx, centery
     log(23);
 }
 
-// all branches: 
+/**
+   all branches: 
+   (1,2) *
+   (2,3) *
+   (3,4) * 
+   (4,5) *
+   (4,6) *
+   (6,7) *
+   (6,8) * 
+   (3,9) *
+   (1,10) *
+   (10,11) * 
+   (11,12) *
+   (12,13)
+   (12,14) *
+   (14,15)
+   (14,16) *
+   (16,17)
+   (16,18) *
+   (18,19)
+   (18,20) *
+   (11,21) *
+   (10,22) * 
+*/
 
-// cover branch (1,3), (3,4), (4,5), (8,9), (10,11), (12,13), (14,15), (16,17), (18,19), (20,22), (22,24); path = [1,3,4,5,6,8,9,10,11,12,13,14,15,16,17,18,19,20,22,24]
-runTest(modify_region, dom1, [0,0,0,0,0,0,0]);
+// cover branch (1,2); path = [1,2,23]
+runTest(modify_region, dom1, [true,0,0,[],0,0,0]);
+
+// cover branch (1,2), (2,3), (3,9); path = [1,2,3,9,23]
+runTest(modify_region, dom1, [true,1,0,[],0,0,0]);
+
+// cover branch (1,2), (2,3), (3,4), (6,8); path = [1,2,3,4,6,8,9,23]
+runTest(modify_region, dom1, [true,1,1,[],0,0,0]);
+
+// cover branch (1,2), (2,3), (3,4), (4,5), (6,7); path = [1,2,3,4,5,6,7,8,4,5,6,7,8,9,3,4,6,8,4,5,6,8,9,23]
+runTest(modify_region, dom1, [true,2,2,[],0,0,0]);
+
+// cover branch (1,10), (10,22); path = [1,10,22,23]
+runTest(modify_region, dom1, [false,0,0,[],0,0,0]);
+
+// cover branch (1,10), (10,11), (11,21); path = [1,10,11,21,22,23]
+runTest(modify_region, dom1, [false,1,0,[],0,0,0]);
+
+// cover branch (1,10), (10,11), (11,12), (12,14), (14,16), (16,18), (18,20); path = [1,10,11,12,14,16,18,20,21,22,23]
+runTest(modify_region, dom1, [false,1,1,[],0,0,0]);
+
+// cover branch (1,10), (10,11), (11,12), (12,14), (14,16), (16,18), (18,20); path = [1,10,11,12,14,16,18,20,21,22,23]
+runTest(modify_region, dom1, [false,1,1,[-1],1,0,0]);
+
+
+// TODO: cover the rest of the branches

@@ -3,67 +3,67 @@ Case-studies journal:
 * TODO review sources of the "moodle" project
 
 
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| Case-Study             | Function              | Signature                                                         | CC | #Br | #LOC | #Args | ?Tested |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| sudoku                 | getPossibleNumbers.js |                                                                   |    |     |      |       |         |
-| sudoku                 | helpMe.js             |                                                                   |    |     |      |       |         |
-| sudoku                 | highlightSquare.js    |                                                                   |    |     |      |       |         |
-| sudoku                 | initSudoku.js         |                                                                   |    |     |      |       |         |
-| sudoku                 | insertNumber.js       |                                                                   |    |     |      |       |         |
-| sudoku                 | isGameFinished.js     | (dom)                                                             |  5 |   4 |      |       |         |
-| sudoku                 | newGame.js            | (dom)                                                             |  3 |   2 |      |       |         |
-| sudoku                 | revealAll.js          | (dom)                                                             |  3 |   2 |      |       |         |
-| sudoku                 | showCell.js           |                                                                   |    |     |      |       |         |
-| sudoku                 | showColumnsInGroup.js |                                                                   |    |     |      |       |         |
-| sudoku                 | showHint.js           |                                                                   |    |     |      |       |         |
-| sudoku                 | shuffleBoard.js       | (dom)                                                             |    |     |      |       |         |
-| sudoku                 | switchLevel.js        | (dom,bool)                                                        |  3 |   2 |    8 |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| phormer                | reshuffle             | (dom)                                                             |  2 |   1 |    5 |       |         |
-| phormer                | toggleInfo            | (dom,string)                                                      |  4 |   2 |   13 |       |         |
-| phormer                | update                | (int,[string],bool,[string],[string],bool,[string],[string],int)  |  6 |   6 |   26 |       |         |
-| phormer                | updateIndic           | (dom,bool)                                                        |  4 |   6 |   10 |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| HotelReservationSystem | RequiredField.js      | (dom,[string])                                                    |  4 |   4 |    8 |       |         |
-| HotelReservationSystem | checkPassConfirm.js   | (dom)                                                             |  2 |   2 |    8 |       |         |
-| HotelReservationSystem | checkValid.js         | (dom,string)                                                      |  5 |   8 |    9 |       |         |
-| HotelReservationSystem | isValidCard.js        | (string)                                                          |  6 |   7 |   14 |       |         |
-| HotelReservationSystem | isValidMasterCard.js  | (string)                                                          |  3 |   2 |    3 |       |         |
-| HotelReservationSystem | isValidVISA.js        | (string)                                                          |  3 |   2 |    3 |       |         |
-| HotelReservationSystem | validateEmail.js      | (dom)                                                             |  4 |   1 |    7 |       |         |
-| HotelReservationSystem | validateNumber.js     | (dom,string)                                                      |  2 |   1 |    5 |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| apophis                | doRain.js             | (dom,string,int,int,int,int,int,int)                              |  4 |   2 |    9 |       |         |
-| apophis                | drawShields.js        | (dom,[int])                                                       |  3 |   1 |    5 |       |         |
-| apophis                | fireMeteor.js         | (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) |  4 |   3 |   14 |       |         |
-| apophis                | getReady.js           | (dom,int,int,int,int,int,int)                                     |  3 |   2 |   13 |       |         |
-| apophis                | initShields.js        | (dom,[int],int,int)                                               |  2 |   1 |    6 |       |         |
-| apophis                | maintainMeteor.js     |                                                                   |    |     |      |       |         |
-| apophis                | maintainMissile.js    |                                                                   |    |     |      |       |         |
-| apophis                | tankExplosion.js      |                                                                   |    |     |      |       |         |
-| apophis                | writeText.js          |                                                                   |    |     |      |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| bingbong               | brickJiggler.js       | (dom,int,int,int,[int],[int],[int],[int])                         |  2 |   1 |    7 |       |         |
-| bingbong               | doPaddlePower.js      | (dom,int,int)                                                     |  3 |   2 |   12 |       |         |
-| bingbong               | drawLevel.js          | (dom,int,int,int,int)                                             |  3 |   2 |   18 |       |         |
-| bingbong               | goPing.js             | (dom,int,int,int)                                                 |  3 |   2 |    9 |       |         |
-| bingbong               | initBricks.js         | (dom,int,[int],[int],[int],[int],int,[string])                    | 13 |  12 |   46 |       |         |
-| bingbong               | moveBall.js           | too complex                                                       |    |     |      |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| burncanvas             | do_draw.js            | (int,int,int,int,int,int,int)                                     | 14 |  12 |   29 |       |         |
-| burncanvas             | modify_region.js      |                                                                   |    |     |      |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| CS-in-JS               | luhn-algorithm.js     |                                                                   |    |     |      |       |         |
-| CS-in-JS               | quicksort.js          |                                                                   |    |     |      |       |         |
-|                        | binary-search.js      |                                                                   |    |     |      |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| mathjs                 | probability_gamma     |                                                                   |    |     |      |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
-| Tudu-Lists             | tabs_activateMenu.js  |                                                                   |    |     |      |       |         |
-| Tudu-Lists             | tabs_decorateMenu.js  |                                                                   |    |     |      |       |         |
-| Tudu-Lists             | tabs_initMenu.js      |                                                                   |    |     |      |       |         |
-|------------------------+-----------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| Case-Study             | Function               | Signature                                                         | CC | #Br | #LOC | #Args | ?Tested |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| sudoku                 | getPossibleNumbers.js  |                                                                   |    |     |      |       |         |
+| sudoku                 | helpMe.js              |                                                                   |    |     |      |       |         |
+| sudoku                 | highlightSquare.js     |                                                                   |    |     |      |       |         |
+| sudoku                 | initSudoku.js          |                                                                   |    |     |      |       |         |
+| sudoku                 | insertNumber.js        |                                                                   |    |     |      |       |         |
+| sudoku                 | isGameFinished.js      | (dom)                                                             |  5 |   4 |      |       |         |
+| sudoku                 | newGame.js             | (dom)                                                             |  3 |   2 |      |       |         |
+| sudoku                 | revealAll.js           | (dom)                                                             |  3 |   2 |      |       |         |
+| sudoku                 | showCell.js            |                                                                   |    |     |      |       |         |
+| sudoku                 | showColumnsInGroup.js  |                                                                   |    |     |      |       |         |
+| sudoku                 | showHint.js            |                                                                   |    |     |      |       |         |
+| sudoku                 | shuffleBoard.js        | (dom)                                                             |    |     |      |       |         |
+| sudoku                 | switchLevel.js         | (dom,bool)                                                        |  3 |   2 |    8 |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| phormer                | reshuffle              | (dom)                                                             |  2 |   1 |    5 |       |         |
+| phormer                | toggleInfo             | (dom,string)                                                      |  4 |   2 |   13 |       |         |
+| phormer                | update                 | (int,[string],bool,[string],[string],bool,[string],[string],int)  |  6 |   6 |   26 |       |         |
+| phormer                | updateIndic            | (dom,bool)                                                        |  4 |   6 |   10 |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| HotelReservationSystem | RequiredField.js       | (dom,[string])                                                    |  4 |   4 |    8 |       |         |
+| HotelReservationSystem | checkPassConfirm.js    | (dom)                                                             |  2 |   2 |    8 |       |         |
+| HotelReservationSystem | checkValid.js          | (dom,string)                                                      |  5 |   8 |    9 |       |         |
+| HotelReservationSystem | isValidCard.js         | (string)                                                          |  6 |   7 |   14 |       |         |
+| HotelReservationSystem | isValidMasterCard.js   | (string)                                                          |  3 |   2 |    3 |       |         |
+| HotelReservationSystem | isValidVISA.js         | (string)                                                          |  3 |   2 |    3 |       |         |
+| HotelReservationSystem | validateEmail.js       | (dom)                                                             |  4 |   1 |    7 |       |         |
+| HotelReservationSystem | validateNumber.js      | (dom,string)                                                      |  2 |   1 |    5 |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| apophis                | doRain.js              | (dom,string,int,int,int,int,int,int)                              |  4 |   2 |    9 |       |         |
+| apophis                | drawShields.js         | (dom,[int])                                                       |  3 |   1 |    5 |       |         |
+| apophis                | fireMeteor.js          | (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) |  4 |   3 |   14 |       |         |
+| apophis                | getReady.js            | (dom,int,int,int,int,int,int)                                     |  3 |   2 |   13 |       |         |
+| apophis                | initShields.js         | (dom,[int],int,int)                                               |  2 |   1 |    6 |       |         |
+| apophis                | maintainMeteor.js      | todo                                                              |    |     |      |       |         |
+| apophis                | maintainMissile.js     | todo                                                              |    |     |      |       |         |
+| apophis                | tankExplosion.js       | simple                                                            |    |     |      |       |         |
+| apophis                | writeText.js           | todo                                                              |    |     |      |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| bingbong               | brickJiggler.js        | (dom,int,int,int,[int],[int],[int],[int])                         |  2 |   1 |    7 |       |         |
+| bingbong               | doPaddlePower.js       | (dom,int,int)                                                     |  3 |   2 |   12 |       |         |
+| bingbong               | drawLevel.js           | (dom,int,int,int,int)                                             |  3 |   2 |   18 |       |         |
+| bingbong               | goPing.js              | (dom,int,int,int)                                                 |  3 |   2 |    9 |       |         |
+| bingbong               | initBricks.js          | (dom,int,[int],[int],[int],[int],int,[string])                    | 13 |  12 |   46 |       |         |
+| bingbong               | moveBall.js            | too complex                                                       |    |     |      |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| burncanvas             | do_draw.js             | (int,int,int,int,int,int,int)                                     | 14 |  12 |   29 |       |         |
+| burncanvas             | modify_region.js       | (bool,int,int,[int],int,int,int)                                  |  8 |   7 |   47 |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| CS-in-JS               | luhn-algorithm.js      | (string,bool)                                                     |  6 |   3 |   13 |       |         |
+| CS-in-JS               | quicksort-partition.js | ([int],int,int)                                                   |  3 |   1 |   11 |       |         |
+| CS-in-JS               | binary-search.js       | ([int],int)                                                       |  6 |   4 |    5 |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| mathjs                 | probability_gamma      | (float)                                                           | 16 |   8 |   30 |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
+| Tudu-Lists             | tabs_activateMenu.js   | skip                                                              |    |     |      |       |         |
+| Tudu-Lists             | tabs_decorateMenu.js   | skip                                                              |    |     |      |       |         |
+| Tudu-Lists             | tabs_initMenu.js       | skip                                                              |    |     |      |       |         |
+|------------------------+------------------------+-------------------------------------------------------------------+----+-----+------+-------+---------|
   
 
 
