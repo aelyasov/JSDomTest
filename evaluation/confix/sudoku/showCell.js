@@ -1,4 +1,5 @@
-function showCell(inputDiv) {
+function showCell() {
+    var inputDiv = document.getElementById("inputDiv");
     var span = inputDiv.getElementsByTagName('SPAN')[0];
     span.style.display = '';
     inputDiv.style.backgroundColor = '#DDD';
@@ -7,8 +8,3 @@ function showCell(inputDiv) {
     typingSpan.style.display = 'none';
 
 }
-
-/*
- * Types:
- * inputDiv: Element
- */

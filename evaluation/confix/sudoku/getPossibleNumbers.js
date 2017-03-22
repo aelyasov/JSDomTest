@@ -1,5 +1,5 @@
 function getPossibleNumbers(inputObj) {
-  
+
     var noArray = new Array();
     var countNumbers = 0;
     var spans = inputObj.getElementsByTagName('SPAN');
