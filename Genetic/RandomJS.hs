@@ -36,7 +36,7 @@ genRandomArray :: JSCPool -> JSType -> IO [JSArg]
 genRandomArray pool jsType =
   do arraySize <- randomRIO (0, 10)
      randomArray <- mapM (const (genRandomVal' pool jsType)) [1..(arraySize :: Int)]
-     debugM rootLoggerName (show randomArray)
+     debugM rootLoggerName $ show randomArray
      setCondBreakPoint
      return randomArray
 
@@ -48,7 +48,7 @@ genRandomInt ints = do
   randomInt <- generate $ case ints of
                             [] -> arbitrary
                             _  -> oneof [arbitrary, elements ints]
-  debugM rootLoggerName (show randomInt)
+  debugM rootLoggerName $ show randomInt
   setCondBreakPoint
   return randomInt
                             
@@ -60,7 +60,7 @@ genRandomString strs = do
   randomStr <- case strs of
                  [] -> arbitraryStr
                  _  -> generate $ oneof [elements strs]
-  debugM rootLoggerName (show randomStr)
+  debugM rootLoggerName $ show randomStr
   setCondBreakPoint
   return randomStr
   where
@@ -73,14 +73,15 @@ genRandomString strs = do
 genRandomBool :: IO Bool
 genRandomBool = do
   randomBool <- generate $ arbitrary
-  debugM rootLoggerName (show randomBool)
+  debugM rootLoggerName $ show randomBool
   setCondBreakPoint
   return randomBool
+
 
 genRandomDom :: JSDoms -> IO ByteString
 genRandomDom doms = do
   html <- genValidHtml doms 
-  debugM rootLoggerName (prettyHtmlByteString html)
+  debugM rootLoggerName $ prettyHtmlByteString html
   setCondBreakPoint
   return html
  

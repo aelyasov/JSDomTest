@@ -50,6 +50,7 @@ instance Size JSArg where
   size (StringJS s) = 1
   size (BoolJS b)   = 1
   size (DomJS s)    = let doc = parseLBS s in sizeDocument doc
+  size (ArrayJS a)  = length a 
 
 instance Size a => Size [a] where
   size xs = product $ map size xs
@@ -62,6 +63,7 @@ instance Depth JSArg where
   depth (StringJS s) = 1
   depth (BoolJS b)   = 1
   depth (DomJS s)    = let doc = parseLBS s in depthDocument doc
+  depth (ArrayJS a)  = 1 
 
 instance Depth a => Depth [a] where
   depth xs = product $ map depth xs  
@@ -81,4 +83,6 @@ instance Statistics JSArg where
                                 in "depth: " ++
                                    (show $ depthDocument doc)
                                    ++ " size: " ++
-                                   (show $ sizeDocument doc) 
+                                   (show $ sizeDocument doc)
+  showStatistics (ArrayJS arr) = show arr
+  showStatistics jsarg = error $ (show jsarg) ++ " can't compute statistics"

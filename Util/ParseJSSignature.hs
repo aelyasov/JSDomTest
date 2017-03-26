@@ -37,7 +37,7 @@ str2JSType str | "bool"   `isPrefixOf` str = JS_BOOL
                | "float"  `isPrefixOf` str = JS_FLOAT
                | "string" `isPrefixOf` str = JS_STRING
                | "dom"    `isPrefixOf` str = JS_DOM
-               | "["      `isPrefixOf` str = JS_ARRAY (str2JSType $ tail str)
+               | "["      `isPrefixOf` str = JS_ARRAY $ str2JSType $ tail str
                | otherwise = error $ str ++ " type isn't defined"
 
 splitBy :: (Eq a) => a -> [a] -> [[a]]

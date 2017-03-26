@@ -85,12 +85,17 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
                                     ++ show fitness
                                     ++ "\n"
                                     ++ "Archive Statistics:\n"
-                                    ++ (intercalate "\n" $ map (\(f, p) -> (showStatistics p)  ++ " fitness: " ++ (show $ fromMaybe (-1) f)) archive)
+                                    ++ showArchive archive
                                     ++ "\nPopulation statistics:\n"
                                     ++ showStatistics pop
     where
       (Just fitness, e) = headNote "showGeneration" archive
-
+      showArchive = intercalate "\n" . map showScoredEntity 
+      showScoredEntity (f, p) = showPopulation p
+                                ++ "\n" ++ " fitness: "
+                                ++ showFitness f
+      showPopulation = showStatistics
+      showFitness = show . fromMaybe (-1)  
 
 
 readGenetcAlgConfig :: IO (Int, Int, Int, Float, Float, Float, Float, Bool, Bool)

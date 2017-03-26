@@ -64,7 +64,7 @@ http.createServer(function(request, response) {
 
     if (pathname == "/genetic") {
 	request.on('data', function(data) {
-	    //winston.debug("Received arguments which are new population:", data.toString());
+	    winston.debug("Received arguments which constitute the new population:", data.toString());
 	    
 	    let jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>");
 	    winston.debug("jsFunArgs: ", jsFunArgs);
@@ -91,7 +91,7 @@ http.createServer(function(request, response) {
 	    eval(jsFun);
 	    
 	    try {
-		Reflect.apply(test, this, []);
+		Reflect.apply(test, this, jsFunArgs);
 		// test.apply(this, realJSFunArgs, window, document);
 	    } catch (e) {
 		trace.push(-100); // label -100 indicates exceptional termination
