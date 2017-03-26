@@ -28,10 +28,10 @@ import Util.Debug (setCondBreakPoint)
 mutateJSArg :: JSArg -> StdGen -> JSCPool -> IO JSArg
 mutateJSArg jsArg gen pool =
   case jsArg of
-    DomJS d1   -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] gen pool d1
-    IntJS i1   -> mutateJSInt i1 pool
-    StringJS _ -> mutateJSString pool
-    ArrayJS  _ -> error "undefined operation"
+    DomJS dom    -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] gen pool dom
+    IntJS int    -> mutateJSInt int pool
+    StringJS _   -> mutateJSString pool
+    ArrayJS  arr -> error "undefined operation"
     mtype      -> error $ "mutation of type " ++ (show mtype)  ++ " isn't defined"
 
 
@@ -146,6 +146,8 @@ mutateJSString pool = do
   debugM rootLoggerName $ "Mutate by generating a new str arg" ++ (show s)
   return $ StringJS s
 
+
+mutateJSArray ::
 
 
 -- | TEST: mutateHtml (mkStdGen 5) thtml

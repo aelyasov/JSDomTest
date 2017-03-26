@@ -63,15 +63,16 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
         args' <- crossAllArgs g' args
         return (d:args')
           
-  mutation (sig, pool) p seed e = liftM Just $ mutateAllArgs gen e
+  mutation (sig, pool) _ seed args = liftM Just $ mutateAllArgs gen typedArgs
     where
       gen = mkStdGen seed
-      mutateAllArgs :: StdGen -> [JSArg] -> IO [JSArg]
+      typedArgs = zip sig args
+      mutateAllArgs :: StdGen -> [(JSType, JSArg)] -> IO [JSArg]
       mutateAllArgs g [] = return []
-      mutateAllArgs g (arg:args) = do
+      mutateAllArgs g (tpArg:tpArgs) = do
         let (a, g')  = random g :: (Int, StdGen)
-        d     <- mutateJSArg arg g pool
-        args' <- mutateAllArgs g' args
+        d       <- mutateJSArg tpArg g pool
+        tpArgs' <- mutateAllArgs g' tpArgs
         return (d:args')      
 
   score = fitnessScore
@@ -92,7 +93,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
       (Just fitness, e) = headNote "showGeneration" archive
       showArchive = intercalate "\n" . map showScoredEntity 
       showScoredEntity (f, p) = showPopulation p
-                                ++ "\n" ++ " fitness: "
+                                ++ "\n" ++ "fitness: "
                                 ++ showFitness f
       showPopulation = showStatistics
       showFitness = show . fromMaybe (-1)  
