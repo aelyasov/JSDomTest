@@ -25,14 +25,20 @@ genRandomVal pool tp = do
 
 
 genRandomVal' :: JSCPool -> JSType -> IO JSArg
-genRandomVal' (ints, _, _)    JS_INT    = liftM IntJS    $ genRandomInt ints
-genRandomVal' (_, strings, _) JS_STRING = liftM StringJS $ genRandomString strings
-genRandomVal' _               JS_BOOL   = liftM BoolJS   $ genRandomBool
-genRandomVal' (_, _, doms)    JS_DOM    = liftM DomJS    $ genRandomDom doms
-genRandomVal' pool            (JSArray arType) =
-  do arrSize <- randomRIO (0, 10)
-     arr <- mapM (const (genRandomVal' pool arType)) [1..(arrSize :: Int)]
-     return $ ArrayJS arr
+genRandomVal' (ints, _, _)    JS_INT            = liftM IntJS    $ genRandomInt ints
+genRandomVal' (_, strings, _) JS_STRING         = liftM StringJS $ genRandomString strings
+genRandomVal' _               JS_BOOL           = liftM BoolJS   $ genRandomBool
+genRandomVal' (_, _, doms)    JS_DOM            = liftM DomJS    $ genRandomDom doms 
+genRandomVal' pool            (JS_ARRAY jsType) = liftM ArrayJS  $ genRandomArray pool jsType
+
+  
+genRandomArray :: JSCPool -> JSType -> IO [JSArg]
+genRandomArray pool jsType =
+  do arraySize <- randomRIO (0, 10)
+     randomArray <- mapM (const (genRandomVal' pool jsType)) [1..(arraySize :: Int)]
+     debugM rootLoggerName (show randomArray)
+     setCondBreakPoint
+     return randomArray
 
 
 -- | generate random integer value out of given diaposon
@@ -43,6 +49,7 @@ genRandomInt ints = do
                             [] -> arbitrary
                             _  -> oneof [arbitrary, elements ints]
   debugM rootLoggerName (show randomInt)
+  setCondBreakPoint
   return randomInt
                             
 
@@ -50,20 +57,25 @@ genRandomInt ints = do
 -- | TODO: can be extended to generate sometimes an arbitrary string value
 genRandomString :: JSStrings -> IO String
 genRandomString strs = do
-  gstr <- arbitraryMy
-  generate $ case strs of
-               [] -> return gstr
-               _  -> oneof [elements strs]
+  randomStr <- case strs of
+                 [] -> arbitraryStr
+                 _  -> generate $ oneof [elements strs]
+  debugM rootLoggerName (show randomStr)
+  setCondBreakPoint
+  return randomStr
   where
-    arbitraryMy :: IO String
-    arbitraryMy = do g <- newStdGen
-                     return $ take 10 $ randomRs ('a','z') g
+    arbitraryStr :: IO String
+    arbitraryStr = do g <- newStdGen
+                      return $ take 10 $ randomRs ('a','z') g
 
 
 -- | generate random boolean value out of given diaposon
 genRandomBool :: IO Bool
-genRandomBool = generate $ arbitrary
-
+genRandomBool = do
+  randomBool <- generate $ arbitrary
+  debugM rootLoggerName (show randomBool)
+  setCondBreakPoint
+  return randomBool
 
 genRandomDom :: JSDoms -> IO ByteString
 genRandomDom doms = do

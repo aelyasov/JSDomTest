@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Genetic.MutationJS where
+module Genetic.MutationJS (mutateJSArg) where
 
 import Data.ByteString.Lazy (ByteString)
 import Text.XML.Pretty (prettyHtmlByteString, prettyDocument, bytestring2document, bytestring2LabeledDocument)
@@ -23,6 +23,16 @@ import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
 import Analysis.Static (removeDuplicates)
 import Test.QuickCheck.Gen (elements, generate)
 import Util.Debug (setCondBreakPoint)
+
+
+mutateJSArg :: JSArg -> StdGen -> JSCPool -> IO JSArg
+mutateJSArg jsArg gen pool =
+  case jsArg of
+    DomJS d1   -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] gen pool d1
+    IntJS i1   -> mutateJSInt i1 pool
+    StringJS _ -> mutateJSString pool
+    ArrayJS  _ -> error "undefined operation"
+    mtype      -> error $ "mutation of type " ++ (show mtype)  ++ " isn't defined"
 
 
 data MutationType = DropSubtree
@@ -135,6 +145,7 @@ mutateJSString pool = do
   s <- genRandomString $ getJSStrings pool
   debugM rootLoggerName $ "Mutate by generating a new str arg" ++ (show s)
   return $ StringJS s
+
 
 
 -- | TEST: mutateHtml (mkStdGen 5) thtml

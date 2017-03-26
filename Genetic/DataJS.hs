@@ -44,7 +44,7 @@ data JSType = JS_INT
             | JS_STRING
             | JS_BOOL
             | JS_DOM
-            | JSArray JSType
+            | JS_ARRAY JSType
             deriving Show
 
 type JSSig = [JSType]

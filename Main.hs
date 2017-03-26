@@ -64,7 +64,7 @@ import System.Process (system)
 readMainConfig :: IO (Algorithm, Priority)
 readMainConfig = do
   config   <- load [ Required "jsdomtest.cfg"]
-  display config 
+  -- display config 
   algType  <- liftM read $ require config "algorithm.type"
   logLevel <- liftM read $ require config "logging.level"
   return (algType, logLevel)

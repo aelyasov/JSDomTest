@@ -40,9 +40,8 @@ http.createServer(function(request, response) {
 	    let rawJsFun = JSON.parse(data).jsFun;
 	    winston.debug("jsFun before eval:\n", rawJsFun);
 
-	    let fullJsSig = JSON.parse(data).jsSig;
-	    jsSig = JSON.parse(data).jsSig.slice(1);
-	    winston.debug("test function signature:\n", fullJsSig);
+	    jsSig = JSON.parse(data).jsSig;
+	    winston.debug("test function signature:\n", jsSig);
 
 	    const library = "var instrument = require(\"./instrumentLib.js\");\n";
 	    //jsFun = library + rawJsFun;
@@ -69,9 +68,14 @@ http.createServer(function(request, response) {
 	    
 	    let jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>");
 	    winston.debug("jsFunArgs: ", jsFunArgs);
-	    
-	    let jsFunDom = jsFunArgs[0];
-	    let realJSFunArgs = _.zip(jsSig, jsFunArgs.slice(1)).map( arg => instrument.convertArg(arg[0], arg[1]) );
+
+	    let jsFunDom = "";
+	    if (jsSig[0] == "JS_DOM") {
+		jsFunDom = jsFunArgs[0];
+		jsFunArgs = jsFunArgs.slice(1);
+		jsSig = jsSig.slice(1);
+	    }
+	    let realJSFunArgs = _.zip(jsSig, jsFunArgs).map( arg => instrument.convertArg(arg[0], arg[1]) );
 
 	    document = jsdom.jsdom(jsFunDom);
 	    window = document.defaultView;
