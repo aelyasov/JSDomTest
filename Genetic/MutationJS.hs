@@ -17,21 +17,21 @@ import qualified Text.Blaze.Html.Renderer.Utf8 as BR
 import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
 import Html5C.Attributes (assignIdsToDocumentRandomly, assignClassesToDocumentRandomly)
-import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms, getJSIds, getJSClasses)
+import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms, getJSIds, getJSClasses, JSType)
 import Control.Monad (liftM)
-import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom)
+import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom, genRandomArray)
 import Analysis.Static (removeDuplicates)
 import Test.QuickCheck.Gen (elements, generate)
 import Util.Debug (setCondBreakPoint)
 
 
-mutateJSArg :: JSArg -> StdGen -> JSCPool -> IO JSArg
-mutateJSArg jsArg gen pool =
+mutateJSArg :: (JSType, JSArg) -> StdGen -> JSCPool -> IO JSArg
+mutateJSArg (jsType, jsArg) gen pool =
   case jsArg of
     DomJS dom    -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] gen pool dom
     IntJS int    -> mutateJSInt int pool
     StringJS _   -> mutateJSString pool
-    ArrayJS  arr -> error "undefined operation"
+    ArrayJS  arr -> mutateJSArray_new pool jsType
     mtype      -> error $ "mutation of type " ++ (show mtype)  ++ " isn't defined"
 
 
@@ -134,11 +134,6 @@ mutateJSInt int pool = do
   debugM rootLoggerName $ "Mutation of the integer value: " ++ (show int) ++ " replaced by: " ++ (show int')
   return $ IntJS int'
 
--- mutateJSInt :: JSCPool -> IO JSArg
--- mutateJSInt pool = do
---   i <- genRandomInt $ getJSInts pool
---   debugM rootLoggerName $ "Mutate by generating a new int arg" ++ (show i)
---   return $ IntJS i 
 
 mutateJSString :: JSCPool -> IO JSArg
 mutateJSString pool = do
@@ -147,7 +142,12 @@ mutateJSString pool = do
   return $ StringJS s
 
 
-mutateJSArray ::
+mutateJSArray_new :: JSCPool -> JSType -> IO JSArg
+mutateJSArray_new pool jsType = do
+  result <- genRandomArray pool jsType
+  debugM rootLoggerName $ "Generate new array: " ++ (show result)
+  setCondBreakPoint
+  return $ ArrayJS result
 
 
 -- | TEST: mutateHtml (mkStdGen 5) thtml

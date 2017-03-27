@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Genetic.CrossoverJS where
+module Genetic.CrossoverJS (crossoverJSArgs) where
 
 import qualified Data.ByteString.Lazy as B
 import Data.ByteString.Lazy (ByteString)
@@ -13,13 +13,51 @@ import Text.Blaze.Html.Renderer.Pretty (renderHtml)
 import qualified Text.Blaze.Html.Renderer.Utf8 as BR
 import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
-
+import Genetic.DataJS
+import Control.Monad (liftM)
+import System.Random (randomRIO)
 import Debug.Trace
 import Util.Debug (setCondBreakPoint)
 
 
-crossoverHTML :: StdGen -> ByteString -> ByteString -> IO ByteString
-crossoverHTML gen html1 html2 = do
+crossoverJSArgs :: StdGen -> (JSArg, JSArg) -> IO JSArg
+crossoverJSArgs gen pairJsArgs = case pairJsArgs of
+  (DomJS d1, DomJS d2)         -> liftM DomJS $ crossoverDomJS gen d1 d2
+  (IntJS i1, IntJS i2)         -> crossoverIntJS i1 i2
+  (StringJS s1, StringJS s2)   -> crossoverStringJS s1 s2
+  (ArrayJS arr1, ArrayJS arr2) -> crossoverArrayJS arr1 arr2
+  otherwise -> error $ "crossover for elements of type " ++ (show pairJsArgs) ++ " isn't defined"
+
+
+crossoverArrayJS :: [JSArg] -> [JSArg] -> IO JSArg
+crossoverArrayJS arr1 arr2 = do
+  crossPoint <- randomRIO (0, max (length arr1) (length arr2))
+  let crossArr1 = take crossPoint arr1 ++ drop crossPoint arr2
+      crossArr2 = take crossPoint arr2 ++ drop crossPoint arr1
+  result <- liftM ([crossArr1, crossArr2]!!) $ randomRIO (0, 1)
+  debugM rootLoggerName $ "Crossing over: " ++ (show arr1) ++ " and " ++ (show arr2) ++ " results in " ++ (show result)
+  setCondBreakPoint
+  return $ ArrayJS result
+  
+
+crossoverStringJS :: String -> String -> IO JSArg
+crossoverStringJS s1 s2 = do
+  result <- liftM ([s1,s2]!!) $ randomRIO (0, 1)
+  debugM rootLoggerName $ "Crossing over: " ++ (show s1) ++ " and " ++ (show s2) ++ " results in " ++ (show result)
+  setCondBreakPoint
+  return $ StringJS result
+
+
+crossoverIntJS :: Int -> Int -> IO JSArg
+crossoverIntJS i1 i2 = do
+  result <- liftM ([i1,i2]!!) $ randomRIO (0, 1)
+  debugM rootLoggerName $ "Crossing over: " ++ (show i1) ++ " and " ++ (show i2) ++ " results in " ++ (show result)
+  setCondBreakPoint
+  return $ IntJS result  
+  
+
+crossoverDomJS :: StdGen -> ByteString -> ByteString -> IO ByteString
+crossoverDomJS gen html1 html2 = do
   let logger = rootLoggerName
   debugM logger $ "Crossing over two html document:\n"
     ++ (prettyHtmlByteString html1)
@@ -68,7 +106,7 @@ crossoverDocuments labFrom labWhere docFrom docWhere = do
   insertElementInDocumentByLabel labWhere elementInsert docWhere
 
 
--- | TEST: crossoverHTML (mkStdGen 5) (C.pack thtml) (C.pack thtml)
+-- | TEST: crossoverDomJS (mkStdGen 5) (C.pack thtml) (C.pack thtml)
 thtml1 :: ByteString
 thtml1 = "<!DOCTYPE HTML><html><head><title>Title1</title></head><body><h1><a></a>Foo</h1><h1></h1></body></html>"
 

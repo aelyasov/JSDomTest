@@ -7,7 +7,7 @@ module Genetic.Instance (runAlgorithm, Algorithm(..)) where
 
 import Genetic.DataJS
 import Genetic.RandomJS
-import Genetic.CrossoverJS
+import Genetic.CrossoverJS (crossoverJSArgs)
 import Genetic.ScoreJS
 import Genetic.MutationJS (mutateJSArg)
 
@@ -44,24 +44,15 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
     liftM Just $ crossAllArgs gen cps
     where
       gen = mkStdGen seed
-      cps = zipWith (\x y -> [x,y]) e1 e2
+      cps = zip e1 e2
 
-      crossAllArgs :: StdGen -> [[JSArg]] -> IO [JSArg]
-      crossAllArgs g [] = return []
-      crossAllArgs g (arg:args) = do 
-        let (a, g')  = random g :: (Int, StdGen)
-        d <- case arg of
-               [DomJS d1, DomJS d2]         -> liftM DomJS $ crossoverHTML g d1 d2
-               [IntJS i1, IntJS i2]         -> liftM (IntJS . ([i1,i2]!!)) $ randomRIO (0, 1)
-               [StringJS i1, StringJS i2]   -> liftM (StringJS . ([i1,i2]!!)) $ randomRIO (0, 1)
-               [ArrayJS arr1, ArrayJS arr2] -> do crossPoint <- randomRIO (0, max (length arr1) (length arr2))
-                                                  let crossArr1 = take crossPoint arr1 ++ drop crossPoint arr2
-                                                      crossArr2 = take crossPoint arr2 ++ drop crossPoint arr1
-                                                  liftM (ArrayJS . ([crossArr1, crossArr2]!!)) $ randomRIO (0, 1) 
-               otherwise -> error "crossover of non-DOM elements isn't defined"
-               -- otherwise            -> return $ arg!!(a `mod` 2) 
-        args' <- crossAllArgs g' args
-        return (d:args')
+      crossAllArgs :: StdGen -> [(JSArg, JSArg)] -> IO [JSArg]
+      crossAllArgs gen [] = return []
+      crossAllArgs gen (pairJsArg:pairJsArgs) = do 
+        let (a, gen') = random gen :: (Int, StdGen)
+        d <- crossoverJSArgs gen pairJsArg
+        pairJsArgs' <- crossAllArgs gen' pairJsArgs
+        return (d:pairJsArgs')
           
   mutation (sig, pool) _ seed args = liftM Just $ mutateAllArgs gen typedArgs
     where
@@ -73,7 +64,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
         let (a, g')  = random g :: (Int, StdGen)
         d       <- mutateJSArg tpArg g pool
         tpArgs' <- mutateAllArgs g' tpArgs
-        return (d:args')      
+        return (d:tpArgs')      
 
   score = fitnessScore
 
