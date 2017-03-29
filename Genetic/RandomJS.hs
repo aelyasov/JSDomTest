@@ -47,7 +47,7 @@ genRandomInt :: JSInts -> IO Int
 genRandomInt ints = do
   randomInt <- generate $ case ints of
                             [] -> arbitrary
-                            _  -> oneof [arbitrary, elements ints]
+                            _  -> frequency [(4, arbitrary), (1, elements ints)]
   debugM rootLoggerName $ "Generate random integer: " ++  show randomInt
   setCondBreakPoint
   return randomInt
