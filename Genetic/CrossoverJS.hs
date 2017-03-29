@@ -15,10 +15,18 @@ import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
 import Genetic.DataJS
 import Control.Monad (liftM)
-import System.Random (randomRIO)
+import System.Random (randomRIO, random)
 import Debug.Trace
 import Util.Debug (setCondBreakPoint)
 
+
+crossAllArgs :: StdGen -> [(JSArg, JSArg)] -> IO [JSArg]
+crossAllArgs gen [] = return []
+crossAllArgs gen (pairJsArg:pairJsArgs) = do 
+  let (a, gen') = random gen :: (Int, StdGen)
+  d <- crossoverJSArgs gen pairJsArg
+  pairJsArgs' <- crossAllArgs gen' pairJsArgs
+  return (d:pairJsArgs')
 
 crossoverJSArgs :: StdGen -> (JSArg, JSArg) -> IO JSArg
 crossoverJSArgs gen pairJsArgs = case pairJsArgs of

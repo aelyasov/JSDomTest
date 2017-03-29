@@ -22,11 +22,15 @@ import Analysis.Static (removeDuplicates)
 import Text.XML.Statistics
 import Safe (headNote)
 import Data.Maybe (fromMaybe)
-import Data.List (intercalate)
+import Data.List (intercalate, intersperse)
 
 import Debug.Trace
 
 import GA.GA
+
+replaceElemInList :: Int -> a -> [a] -> [a]
+replaceElemInList i x as = let (pre, post) = splitAt i as
+                           in pre ++ x:tail post
 
 
 -- | sig = [JS_DOM,JS_STRING]
@@ -34,60 +38,48 @@ import GA.GA
 instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
 
   genRandom pool@(sig, env) seed = do
-    debugM rootLoggerName $ "Generating random population for the signature: " ++ (show sig)
+    debugM rootLoggerName $ "Generating random population for the signature: " ++ show sig
     let uniqueEnv = removeDuplicates env
     args <- mapM (genRandomVal uniqueEnv) sig
-    -- getLine
     return args
 
-  crossover pool _ seed e1 e2 = do
-    liftM Just $ crossAllArgs gen cps
-    where
-      gen = mkStdGen seed
-      cps = zip e1 e2
-
-      crossAllArgs :: StdGen -> [(JSArg, JSArg)] -> IO [JSArg]
-      crossAllArgs gen [] = return []
-      crossAllArgs gen (pairJsArg:pairJsArgs) = do 
-        let (a, gen') = random gen :: (Int, StdGen)
-        d <- crossoverJSArgs gen pairJsArg
-        pairJsArgs' <- crossAllArgs gen' pairJsArgs
-        return (d:pairJsArgs')
+  crossover pool _ seed args1 args2 = do
+    let gen        = mkStdGen seed
+        pairedArgs = zip args1 args2
+        crossArgId = fst $ randomR (0, length pairedArgs - 1) gen
+    debugM rootLoggerName $ "Crossing over arguments: " ++ show args1 ++ " and " ++ show args2
+    debugM rootLoggerName $ "Crossover point is: " ++ show crossArgId
+    crossArg  <- crossoverJSArgs gen (pairedArgs!!crossArgId)
+    crossArgs <- liftM ([args1, args2]!!) $ randomRIO (0, 1)
+    return $ Just $ replaceElemInList crossArgId crossArg crossArgs
           
-  mutation (sig, pool) _ seed args = liftM Just $ mutateAllArgs gen typedArgs
-    where
-      gen = mkStdGen seed
-      typedArgs = zip sig args
-      mutateAllArgs :: StdGen -> [(JSType, JSArg)] -> IO [JSArg]
-      mutateAllArgs g [] = return []
-      mutateAllArgs g (tpArg:tpArgs) = do
-        let (a, g')  = random g :: (Int, StdGen)
-        d       <- mutateJSArg tpArg g pool
-        tpArgs' <- mutateAllArgs g' tpArgs
-        return (d:tpArgs')      
+  mutation (sig, pool) _ seed args = do
+    let gen       = mkStdGen seed
+        typedArgs = zip sig args
+        mutArgId  = fst $ randomR (0, length typedArgs - 1) gen      
+    debugM rootLoggerName $ "Mutating arguments: " ++ show args
+    debugM rootLoggerName $ "Mutation point is: " ++ show mutArgId
+    mutArg <- mutateJSArg (typedArgs!!mutArgId) gen pool
+    return $ Just $ replaceElemInList mutArgId mutArg args
 
   score = fitnessScore
 
   isPerfect (_,s) = s == 0.0
   -- isPerfect (_,s) = s < 1.0
 
-  showGeneration gi (pop,archive) = "best entity (gen. "
-                                    ++ show gi
-                                    ++ ") fitness: "
-                                    ++ show fitness
-                                    ++ "\n"
-                                    ++ "Archive Statistics:\n"
+  showGeneration gi (pop,archive) = showBestEntity
+                                    ++ "\nArchive Statistics:\n"
                                     ++ showArchive archive
                                     ++ "\nPopulation statistics:\n"
-                                    ++ showStatistics pop
+                                    ++ showPopulation pop
     where
+      showBestEntity = "best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
       (Just fitness, e) = headNote "showGeneration" archive
-      showArchive = intercalate "\n" . map showScoredEntity 
-      showScoredEntity (f, p) = showPopulation p
-                                ++ "\n" ++ "fitness: "
-                                ++ showFitness f
-      showPopulation = showStatistics
-      showFitness = show . fromMaybe (-1)  
+      showArchive = intercalate "\n------------\n" . map showScoredEntity 
+      showScoredEntity (f, p) = "fitness: " ++ showFitness f ++ "\n" ++ showEntity p
+      showEntity = showStatistics
+      showFitness = show . fromMaybe (-1)
+      showPopulation = intercalate "\n------------\n" . map showStatistics
 
 
 readGenetcAlgConfig :: IO (Int, Int, Int, Float, Float, Float, Float, Bool, Bool)

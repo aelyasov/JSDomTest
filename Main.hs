@@ -61,13 +61,14 @@ import Data.Configurator (load, Worth(..), require, display)
 import System.Process (system)
 
 
-readMainConfig :: IO (Algorithm, Priority)
+readMainConfig :: IO (Algorithm, Priority, Bool)
 readMainConfig = do
-  config   <- load [ Required "jsdomtest.cfg"]
+  config   <- load [Required "jsdomtest.cfg"]
   -- display config 
   algType  <- liftM read $ require config "algorithm.type"
   logLevel <- liftM read $ require config "logging.level"
-  return (algType, logLevel)
+  isBreakEnabled <- require config "breakpoint.enabled"
+  return (algType, logLevel, isBreakEnabled)
 
 
 setCommonFormatter x =
@@ -78,7 +79,7 @@ setCommonFormatter x =
 -- | run main: :main "nodeCovertest.js"
 main :: IO ()    
 main = do
-  (algType, logLevel) <- readMainConfig
+  (algType, logLevel, isBreak) <- readMainConfig
   -- Logger Configuration
   myStreamHandler <- streamHandler stdout logLevel
   let myStreamHandler' = setCommonFormatter myStreamHandler
@@ -102,7 +103,7 @@ main = do
       jsLabFunInstr@(Script _ [jsLabFunInstrStmt]) = instrScript jsLabFun
       jsLabFunInstrFile = Script l (jsLabFunInstrStmt:jsLabStms)
   noticeM logger "The function has the following CFG:\n"
-  system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii"
+  when isBreak $ void $ system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii" 
   noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
   noticeM logger $ "The following branches have to be covered: " ++ (show branches)
   noticeM logger $ "Initial constant pool data: " ++ (show constPool)

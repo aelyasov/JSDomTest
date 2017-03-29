@@ -19,10 +19,19 @@ import Html5C.ValidationTest (askValidator)
 import Html5C.Attributes (assignIdsToDocumentRandomly, assignClassesToDocumentRandomly)
 import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms, getJSIds, getJSClasses, JSType)
 import Control.Monad (liftM)
-import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom, genRandomArray)
+import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom, genRandomArray, genRandomVal)
 import Analysis.Static (removeDuplicates)
 import Test.QuickCheck.Gen (elements, generate)
 import Util.Debug (setCondBreakPoint)
+
+  
+mutateAllArgs :: StdGen -> JSCPool -> [(JSType, JSArg)] -> IO [JSArg]
+mutateAllArgs g _ [] = return []
+mutateAllArgs g pool (tpArg:tpArgs) = do
+  let (a, g')  = random g :: (Int, StdGen)
+  d       <- mutateJSArg tpArg g pool
+  tpArgs' <- mutateAllArgs g' pool tpArgs
+  return (d:tpArgs')      
 
 
 mutateJSArg :: (JSType, JSArg) -> StdGen -> JSCPool -> IO JSArg
@@ -144,10 +153,8 @@ mutateJSString pool = do
 
 mutateJSArray_new :: JSCPool -> JSType -> IO JSArg
 mutateJSArray_new pool jsType = do
-  result <- genRandomArray pool jsType
-  debugM rootLoggerName $ "Generate new array: " ++ (show result)
-  setCondBreakPoint
-  return $ ArrayJS result
+  result <- genRandomVal pool jsType
+  return result
 
 
 -- | TEST: mutateHtml (mkStdGen 5) thtml

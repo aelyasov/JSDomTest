@@ -121,8 +121,10 @@ data JSEnviroment =
 data BranchDist =
   BranchDist { getBrLab  :: Int 
              , getBrDist :: Int
-             } deriving (Eq, Show, Generic)
+             } deriving (Eq, Generic)
 
+instance Show BranchDist where
+  show (BranchDist lab dist) = show (lab, dist)
 
 
 instance ToJSON GAInput where

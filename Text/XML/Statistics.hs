@@ -73,16 +73,16 @@ class Statistics a where
   showStatistics :: a -> String
 
 instance Statistics a => Statistics [a] where
-  showStatistics as = intercalate "\n" $ map showStatistics as 
+  showStatistics as = intercalate "\n" $ map showStatistics as
 
 instance Statistics JSArg where
-  showStatistics (IntJS i)    = show i
-  showStatistics (StringJS s) = show s
-  showStatistics (BoolJS b)   = show b
+  showStatistics (IntJS i)    = "integer: " ++ show i
+  showStatistics (StringJS s) = "string: " ++ show s
+  showStatistics (BoolJS b)   = "boolean: " ++ show b
   showStatistics (DomJS s)    = let doc = parseLBS s
                                 in "depth: " ++
                                    (show $ depthDocument doc)
                                    ++ " size: " ++
                                    (show $ sizeDocument doc)
-  showStatistics (ArrayJS arr) = show arr
+  showStatistics (ArrayJS arr) = "array: " ++ show arr
   showStatistics jsarg = error $ (show jsarg) ++ " can't compute statistics"

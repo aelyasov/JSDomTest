@@ -27,14 +27,19 @@ function binarySearch(items, value){
         if (value < items[middle]){
 	    log(3);
             stopIndex = middle - 1;            
-        } else if (value > items[middle]){
+        } else {
+	    // if (value > items[middle]){
 	    log(4);
-            startIndex = middle + 1;
+		startIndex = middle + 1;
+	    // } else {
+	    // 	log("test");
+	    // }
         }
 	log(5);
         
         //recalculate middle
-        middle = Math.floor((stopIndex + startIndex)/2);    
+        middle = Math.floor((stopIndex + startIndex)/2);
+	log(stopIndex, startIndex, middle);
     }
     log(6);
 
@@ -44,11 +49,13 @@ function binarySearch(items, value){
 
 /* branhes: (1,2), (1,6), (1,2), (2,3), (2,4) */
 
-// cover branch (1,2), (2,3); path = [1,2,3,5,6]
-runTest(binarySearch, dom1, [[1,2,3], 1]);
+// // cover branch (1,2), (2,3); path = [1,2,3,5,6]
+// runTest(binarySearch, dom1, [[1,2,3], 1]);
 
-// cover branch (1,6); path = [1,6]
-runTest(binarySearch, dom1, [[], 1]);
+// // cover branch (1,6); path = [1,6]
+// runTest(binarySearch, dom1, [[], 1]);
 
-// cover branch (1,2), (2,4),; path = [1,2,4,5,6]
-runTest(binarySearch, dom1, [[5,5], 6]);
+// // cover branch (1,2), (2,4),; path = [1,2,4,5,6]
+// runTest(binarySearch, dom1, [[5,5], 6]);
+
+runTest(binarySearch, dom1, [[1,2,3,4,5], 5]);

@@ -20,7 +20,6 @@ genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
   debugM rootLoggerName  $ "Generating random value of type: " ++ (show tp)
   debugM rootLoggerName $ "Constant pool data: " ++ (show pool)
-  debugM rootLoggerName $ "Generated random value is:"
   genRandomVal' pool tp
 
 
@@ -34,7 +33,8 @@ genRandomVal' pool            (JS_ARRAY jsType) = liftM ArrayJS  $ genRandomArra
   
 genRandomArray :: JSCPool -> JSType -> IO [JSArg]
 genRandomArray pool jsType =
-  do arraySize <- randomRIO (0, 10)
+  do arraySize <- randomRIO (0, 5)
+     debugM rootLoggerName $ "Generating random array of length: " ++ (show arraySize)
      randomArray <- mapM (const (genRandomVal' pool jsType)) [1..(arraySize :: Int)]
      debugM rootLoggerName $ show randomArray
      setCondBreakPoint
@@ -48,7 +48,7 @@ genRandomInt ints = do
   randomInt <- generate $ case ints of
                             [] -> arbitrary
                             _  -> oneof [arbitrary, elements ints]
-  debugM rootLoggerName $ show randomInt
+  debugM rootLoggerName $ "Generate random integer: " ++  show randomInt
   setCondBreakPoint
   return randomInt
                             
