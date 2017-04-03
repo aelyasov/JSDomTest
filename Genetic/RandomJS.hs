@@ -39,7 +39,7 @@ genRandomArray pool jsType =
      debugM rootLoggerName $ show randomArray
      setCondBreakPoint
      return randomArray
-
+  
 
 -- | generate random integer value out of given diaposon
 -- | TODO: can be extended to generate sometimes an arbitrary integer value
@@ -47,7 +47,7 @@ genRandomInt :: JSInts -> IO Int
 genRandomInt ints = do
   randomInt <- generate $ case ints of
                             [] -> arbitrary
-                            _  -> frequency [(4, arbitrary), (1, elements ints)]
+                            _  -> frequency [(4, choose (-10, 10)), (1, elements ints)]
   debugM rootLoggerName $ "Generate random integer: " ++  show randomInt
   setCondBreakPoint
   return randomInt

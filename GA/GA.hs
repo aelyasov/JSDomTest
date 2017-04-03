@@ -157,13 +157,14 @@ module GA.GA (Entity(..),
 
 import Control.Monad (zipWithM, foldM)
 import Control.Monad.IO.Class (MonadIO, liftIO)
-import Data.List (sortBy, nub, nubBy)
+import Data.List (sortBy, nub, nubBy, intercalate)
 import Data.Maybe (catMaybes, fromJust, isJust)
 import Data.Ord (comparing)
 import Data.Monoid ((<>), mempty, mconcat)
 import System.Directory (createDirectoryIfMissing, doesFileExist)
 import System.Random (StdGen, mkStdGen, random, randoms)
-import System.Log.Logger (rootLoggerName, noticeM)
+import System.Log.Logger (rootLoggerName, noticeM, errorM)
+import Data.Maybe (fromMaybe)
 
 import Debug.Trace
 import Safe (headNote)
@@ -314,6 +315,14 @@ class (Eq e, Ord e, Read e, Show e,
                                   
     where
       (Just fitness, e) = headNote "showGeneration" archive
+
+  showArchive :: Statistics e => Archive e s -> String
+  showArchive archive = "Archive Statistics:\n" ++ (intercalate "\n------------\n" $ map showScoredEntity archive)
+    where 
+      showScoredEntity (f, p) = "fitness: " ++ showFitness f ++ "\n" ++ showEntity p
+      showEntity = showStatistics
+      showFitness = show . fromJust
+
 
   -- |Determine whether evolution should continue or not, 
   --  based on lists of archive fitnesses of previous generations.
@@ -538,25 +547,26 @@ evolutionVerbose cfg pool universe pastArchives gen step ((gi,seed):gss) = do
     liftIO $ if (getWithCheckpointing cfg)
       then checkpointGen cfg gi seed newPa
       else return () -- skip checkpoint
-    liftIO $ noticeM rootLoggerName $ showGeneration gi newPa  
-    -- liftIO $ putStrLn $ showGeneration gi newPa
+    liftIO $ errorM rootLoggerName $ showGeneration gi newPa
+    liftIO $ errorM rootLoggerName $ showArchive archive'
     -- check for perfect entity
     if hasConverged pastArchives || isPerfect_
-       then do 
-               liftIO $ putStrLn $ if isPerfect_
-                                     then    "perfect entity found, "
-                                          ++ "finished after " ++ show gi 
-                                          ++ " generations!"
-                                     else    "no progress for 3 generations, "
-                                          ++ "stopping after " ++ show gi
-                                          ++ " generations!"
+       then do liftIO $ errorM rootLoggerName
+                 $ if isPerfect_
+                   then "Perfect entity found, "
+                        ++ "finished after " ++ show gi 
+                        ++ " generations!"
+                   else "No progress for 3 generations, "
+                        ++ "stopping after " ++ show gi
+                        ++ " generations!"
                return newPa
        else evolutionVerbose cfg pool' universe' (archive':pastArchives) newPa step gss
 
 -- no more gen. indices/seeds => quit
 evolutionVerbose _ _ _ _ gen _ [] = do 
-    liftIO $ putStrLn $ "done evolving!"
+    liftIO $ errorM rootLoggerName "Perfect entity is not found during evolving!"
     return gen
+
 
 -- |Initialize.
 initGA :: (Entity e s d p m) => StdGen  -- ^ random generator

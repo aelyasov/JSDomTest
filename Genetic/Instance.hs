@@ -22,7 +22,7 @@ import Analysis.Static (removeDuplicates)
 import Text.XML.Statistics
 import Safe (headNote)
 import Data.Maybe (fromMaybe)
-import Data.List (intercalate, intersperse)
+import Data.List (intercalate)
 
 import Debug.Trace
 
@@ -68,18 +68,18 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
   -- isPerfect (_,s) = s < 1.0
 
   showGeneration gi (pop,archive) = showBestEntity
-                                    ++ "\nArchive Statistics:\n"
-                                    ++ showArchive archive
-                                    ++ "\nPopulation statistics:\n"
-                                    ++ showPopulation pop
+                                    -- ++ "\nArchive Statistics:\n"
+                                    -- ++ showArchive archive
+    --                                 ++ "\nPopulation statistics:\n"
+    --                                 ++ showPopulation pop
     where
-      showBestEntity = "best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
+      showBestEntity = "Best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
       (Just fitness, e) = headNote "showGeneration" archive
-      showArchive = intercalate "\n------------\n" . map showScoredEntity 
-      showScoredEntity (f, p) = "fitness: " ++ showFitness f ++ "\n" ++ showEntity p
-      showEntity = showStatistics
-      showFitness = show . fromMaybe (-1)
-      showPopulation = intercalate "\n------------\n" . map showStatistics
+      -- showArchive = intercalate "\n------------\n" . map showScoredEntity 
+      -- showScoredEntity (f, p) = "fitness: " ++ showFitness f ++ "\n" ++ showEntity p
+      -- showEntity = showStatistics
+      -- showFitness = show . fromMaybe (-1)
+      -- showPopulation = intercalate "\n------------\n" . map showStatistics
 
 
 readGenetcAlgConfig :: IO (Int, Int, Int, Float, Float, Float, Float, Bool, Bool)

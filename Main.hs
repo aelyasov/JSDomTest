@@ -61,14 +61,16 @@ import Data.Configurator (load, Worth(..), require, display)
 import System.Process (system)
 
 
-readMainConfig :: IO (Algorithm, Priority, Bool)
+readMainConfig :: IO (Algorithm, Priority, Bool, Int, Int)
 readMainConfig = do
   config   <- load [Required "jsdomtest.cfg"]
   -- display config 
-  algType  <- liftM read $ require config "algorithm.type"
-  logLevel <- liftM read $ require config "logging.level"
-  isBreakEnabled <- require config "breakpoint.enabled"
-  return (algType, logLevel, isBreakEnabled)
+  algType          <- liftM read $ require config "algorithm.type"
+  logLevel         <- liftM read $ require config "logging.level"
+  isBreakEnabled   <- require config "breakpoint.enabled"
+  iterateTotal     <- require config "iterate.total"
+  coverageBranches <- require config "coverage.branches"
+  return (algType, logLevel, isBreakEnabled, iterateTotal, coverageBranches)
 
 
 setCommonFormatter x =
@@ -79,7 +81,7 @@ setCommonFormatter x =
 -- | run main: :main "nodeCovertest.js"
 main :: IO ()    
 main = do
-  (algType, logLevel, isBreak) <- readMainConfig
+  (algType, logLevel, isBreak, iterateTotal, coverageBranches) <- readMainConfig
   -- Logger Configuration
   myStreamHandler <- streamHandler stdout logLevel
   let myStreamHandler' = setCommonFormatter myStreamHandler
@@ -123,19 +125,19 @@ main = do
                         }
   initResp <- httpLbs reqInit man
   debugM logger $ prettyPrintResponse initResp
-
-  showAllBranches labBranches
-  askForBranchsToCover algType man jsFunCFG (jsSig, constPool) labBranches
-
+  replicateM iterateTotal $ askForBranchsToCover coverageBranches algType man jsFunCFG (jsSig, constPool) labBranches
+  return ()
 
 
-askForBranchsToCover :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO ()
-askForBranchsToCover algType man cfg (sig, constPool) branches = do
-  choice <- getLine
-  let choiceN = read choice :: Int
-      branchesToCover = if (null choice) || (choiceN == 0) then branches else [(branches!!(choiceN-1))]
-  killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover
-  
+askForBranchsToCover :: Int -> Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO ()
+askForBranchsToCover branchN algType man cfg (sig, constPool) branches = do
+  if (branchN /= 0)
+    then do showAllBranches branches
+            choice <- getLine
+            let choiceN = read choice :: Int
+                branchesToCover = if (null choice) || (choiceN == 0) then branches else [(branches!!(choiceN-1))]
+            killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover
+    else killJSMutationGeneticAll algType man cfg (sig, constPool) branches
 
 showAllBranches :: [(Int, LEdge ELab)] -> IO ()
 showAllBranches branches = do
@@ -156,7 +158,7 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
     killJSMutationGenetic alg man mutN target pool = do
       let logger = rootLoggerName
       putStrLn $ replicate 70 '-'
-      noticeM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
+      errorM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
       noticeM logger $ "Initial pool data: " ++ (show pool)
       request <- parseUrl "http://localhost:7777/mutation"
       let reqMut = request { method = "POST"
