@@ -75,8 +75,8 @@ http.createServer(function(request, response) {
 		jsFunArgs = jsFunArgs.slice(1);
 		jsSig = jsSig.slice(1);
 	    }
-	    let realJSFunArgs = _.zip(jsSig, jsFunArgs).map( arg => instrument.convertArg(arg[0], arg[1]) );
-
+	    // let realJSFunArgs = _.zip(jsSig, jsFunArgs).map( arg => instrument.convertArg(arg[0], arg[1]) );
+	    let realJSFunArgs = jsFunArgs.map( arg => JSON.parse(arg)); 
 	    document = jsdom.jsdom(jsFunDom);
 	    window = document.defaultView;
 	    
@@ -91,7 +91,7 @@ http.createServer(function(request, response) {
 	    eval(jsFun);
 	    
 	    try {
-		Reflect.apply(test, this, jsFunArgs);
+		Reflect.apply(test, this, realJSFunArgs);
 		// test.apply(this, realJSFunArgs, window, document);
 	    } catch (e) {
 		trace.push(-100); // label -100 indicates exceptional termination

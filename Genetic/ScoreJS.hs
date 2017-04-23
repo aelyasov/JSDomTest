@@ -13,7 +13,7 @@ import Control.Monad
 import Analysis.CFG.Data
 
 -- import Analysis.CFG.Build
-import Analysis.CFG.Fitness (computeCfgLevel, computeRealCfgLevelOne, distanceToExit)
+import Analysis.CFG.Fitness (computeFitness)
 import Data.Graph.Inductive.PatriciaTree
 import Data.Graph.Inductive.Graph (LEdge)
 
@@ -50,10 +50,10 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
 
   (JSExecution trace_ distances_ loops_ enviroment_) <- return $ (fromMaybe (error $ "fitnessScore in response" ++ (show response)) . decode) $ response 
 
-  noticeM logger $ "Execution trace: "    ++ (show trace_)
-  infoM logger   $ "Branch distances: "   ++ (show distances_)
-  infoM logger   $ "Loop iteration map: " ++ (show loops_)
-  infoM logger   $ "New Enviroment: "     ++ (show enviroment_)
+  noticeM logger $ "Execution trace: "    ++ show trace_
+  infoM logger   $ "Branch distances: "   ++ show distances_
+  infoM logger   $ "Loop iteration map: " ++ show loops_
+  infoM logger   $ "New Enviroment: "     ++ show enviroment_
   
   infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
   fitnessVal1 <- if (loc == exitLoc)
@@ -70,25 +70,6 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   setCondBreakPoint
   
   return (Just fitnessVal, ([], ([], [], ([], getIdsJS enviroment_, getNamesJS enviroment_, getClassesJS enviroment_)))) 
-
-  
-branchDistNormalize :: Int -> Double
-branchDistNormalize b = fromIntegral b / fromIntegral (b+1)
-
-
-computeFitness :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> IO Double
-computeFitness cfg loopIterMap target path disatnces = do
-  let (cfgLevel, problemNode) = computeRealCfgLevelOne cfg loopIterMap path target
-      branchLevel      = maybe 0 getBrDist $ find ((problemNode==) . getBrLab) disatnces
-      normBrLevel      = branchDistNormalize branchLevel
-      isException      = last path == (-100) && ((last $ init path) == problemNode)
-      problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
-      fitnessVal       = if target `elem` path then 0 else fromIntegral (cfgLevel - 1) + problemNodeLevel
-      logger           = rootLoggerName
-  infoM logger $ "ProblemNode: " ++ (show problemNode)
-  infoM logger $ "CfgLevel: " ++ (show cfgLevel)
-  infoM logger $ "ProblemNodeLevel: " ++ (show problemNodeLevel)
-  return fitnessVal
 
 
 -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]

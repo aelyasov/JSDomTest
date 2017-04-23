@@ -33,7 +33,7 @@ genRandomVal' pool            (JS_ARRAY jsType) = liftM ArrayJS  $ genRandomArra
   
 genRandomArray :: JSCPool -> JSType -> IO [JSArg]
 genRandomArray pool jsType =
-  do arraySize <- randomRIO (0, 5)
+  do arraySize <- randomRIO (1, 5)
      debugM rootLoggerName $ "Generating random array of length: " ++ (show arraySize)
      randomArray <- mapM (const (genRandomVal' pool jsType)) [1..(arraySize :: Int)]
      debugM rootLoggerName $ show randomArray
@@ -46,7 +46,7 @@ genRandomArray pool jsType =
 genRandomInt :: JSInts -> IO Int
 genRandomInt ints = do
   randomInt <- generate $ case ints of
-                            [] -> arbitrary
+                            [] -> choose (-10, 10)
                             _  -> frequency [(4, choose (-10, 10)), (1, elements ints)]
   debugM rootLoggerName $ "Generate random integer: " ++  show randomInt
   setCondBreakPoint

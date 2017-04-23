@@ -163,7 +163,7 @@ import Data.Ord (comparing)
 import Data.Monoid ((<>), mempty, mconcat)
 import System.Directory (createDirectoryIfMissing, doesFileExist)
 import System.Random (StdGen, mkStdGen, random, randoms)
-import System.Log.Logger (rootLoggerName, noticeM, errorM)
+import System.Log.Logger (rootLoggerName, noticeM, errorM, debugM)
 import Data.Maybe (fromMaybe)
 
 import Debug.Trace
@@ -682,7 +682,7 @@ evolveVerbose g cfg pool dataset = do
 -- |Random searching.
 --
 -- Useful to compare with results from genetic algorithm.
-randomSearch :: (Entity e s d p m) => StdGen -- ^ random generator
+randomSearch :: (Entity e s d p m, MonadIO m) => StdGen -- ^ random generator
                                    -> Int -- ^ number of random entities
                                    -> p -- ^ random entity pool
                                    -> d -- ^ scoring dataset
@@ -691,6 +691,25 @@ randomSearch g n pool dataset = do
     let seed = fst $ random g :: Int
     es <- initPop pool n seed
     (scores, _) <- scoreAll dataset [] es
+    liftIO $ debugM rootLoggerName $ show es
     return $ nubBy (\x y -> comparing snd x y == EQ) 
            $ sortBy (comparing fst)
            $ zip scores es
+
+
+-- |Random searching.
+--
+-- Useful to compare with results from genetic algorithm.
+randomSearchMy :: (Entity e s d p m, MonadIO m) => StdGen -- ^ random generator
+                                   -> Int -- ^ number of random entities
+                                   -> p -- ^ random entity pool
+                                   -> d -- ^ scoring dataset
+                                   -> m (Archive e s) -- ^ scored entities (sorted)
+randomSearchMy g n pool dataset = do
+    let seed = fst $ random g :: Int
+    es <- initPop pool n seed
+    (scores, _) <- scoreAll dataset [] es
+    liftIO $ debugM rootLoggerName $ show es
+    return $ nubBy (\x y -> comparing snd x y == EQ) 
+           $ sortBy (comparing fst)
+           $ zip scores es      

@@ -51,16 +51,22 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
     debugM rootLoggerName $ "Crossover point is: " ++ show crossArgId
     crossArg  <- crossoverJSArgs gen (pairedArgs!!crossArgId)
     crossArgs <- liftM ([args1, args2]!!) $ randomRIO (0, 1)
-    return $ Just $ replaceElemInList crossArgId crossArg crossArgs
+    let cresult = replaceElemInList crossArgId crossArg crossArgs
+    debugM rootLoggerName $ "Crossed arguments:  " ++ show cresult
+    return $ Just cresult
           
   mutation (sig, pool) _ seed args = do
-    let gen       = mkStdGen seed
-        typedArgs = zip sig args
-        mutArgId  = fst $ randomR (0, length typedArgs - 1) gen      
-    debugM rootLoggerName $ "Mutating arguments: " ++ show args
-    debugM rootLoggerName $ "Mutation point is: " ++ show mutArgId
-    mutArg <- mutateJSArg (typedArgs!!mutArgId) gen pool
-    return $ Just $ replaceElemInList mutArgId mutArg args
+    -- let gen       = mkStdGen seed
+    --     typedArgs = zip sig args
+    --     mutArgId  = fst $ randomR (0, length typedArgs - 1) gen      
+    -- debugM rootLoggerName $ "Mutating arguments: " ++ show args
+    -- debugM rootLoggerName $ "Mutation point is: " ++ show mutArgId
+    -- mutArg <- mutateJSArg (typedArgs!!mutArgId) gen pool
+    -- let mresult = replaceElemInList mutArgId mutArg args
+    -- debugM rootLoggerName $ "Mutated arguments:  " ++ show mresult
+
+    mresult <- genRandom (sig, pool) seed
+    return $ Just mresult
 
   score = fitnessScore
 

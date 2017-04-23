@@ -8,9 +8,9 @@ function abs(x, y) {
     if (typeX == typeY) {
 	switch (typeX)
 	{
-	    case "number" : return Math.abs(x-y); break;
-	    case "string" : return getEditDistance(x,y); break;
-	    case "string" : return naiveHammerDistance(x,y); break;
+	    case "number" : console.log("num"); return Math.abs(x-y); break;
+	    case "string" : console.log("str"); return getEditDistance(x,y); break;
+	    case "string" : return naiveHammerDistance(x,y);console.log("str"); break;
 	    case "boolean": return Math.abs(x-y); break;
 	    case "object" : return Number(x == y); break;
 	    default: return 0;

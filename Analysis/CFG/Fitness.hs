@@ -15,22 +15,43 @@ import Control.Applicative ((<|>))
 import Data.Function (on)
 import Debug.Trace
 
-
 import Analysis.CFG.Util 
 import Analysis.CFG.Build
 import Control.Monad
+import Genetic.DataJS
+import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
+
+computeFitness :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> IO Double
+computeFitness cfg loopIterMap target path distances = do
+  let (cfgLevel, problemNode) = computeRealCfgLevelOne cfg loopIterMap path target
+      branchDistances  = filter ((problemNode==) . getBrLab) distances
+      branchLevel      = if null branchDistances
+                         then 0
+                         else getBrDist $ minimumBy (comparing getBrDist) branchDistances
+      normBrLevel      = branchDistNormalize branchLevel
+      isException      = last path == (-100) && ((last $ init path) == problemNode)
+      problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
+      fitnessVal       = if target `elem` path then 0 else fromIntegral (cfgLevel - 1) + problemNodeLevel
+      logger           = rootLoggerName
+  infoM logger $ "ProblemNode: " ++ show problemNode
+  infoM logger $ "CfgLevel: " ++ show cfgLevel
+  infoM logger $ "ProblemNodeLevel: " ++ show problemNodeLevel
+  return fitnessVal
+
+branchDistNormalize :: Int -> Double
+branchDistNormalize b = fromIntegral b / fromIntegral (b+1)
 
 computeRealCfgLevelOne :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> (Int, SLab)
 computeRealCfgLevelOne graph initIterMap path target =
   headNote "computeRealCfgLevelOne" $ computeRealCfgLevel graph initIterMap path target
-
+  
   
 computeRealCfgLevel :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(Int, SLab)]
-computeRealCfgLevel graph initIterMap path target = map return shortestPathsToTarget
+computeRealCfgLevel graph initIterMap path target = map cfgLevelAndProblemNode shortestPathsToTarget
   where
     shortestPathsToTarget = getShortestsPathsToTarget graph initIterMap path target
-    return (pToTarget, sz) = (sz, headNote "computeRealCfgLevel" pToTarget)
+    cfgLevelAndProblemNode (pToTarget, sz) = (sz, headNote "computeRealCfgLevel" pToTarget)
     
 
 getShortestsPathsToTarget :: Gr NLab ELab -> LoopIterationMap -> GPath -> SLab -> [(GPath, Int)]
@@ -67,9 +88,9 @@ estimateAllPath graph initIterMap path target = -- trace ("\ninitIterMap: " ++ (
 
 findAllPathToTarget :: Gr NLab ELab -> GPath -> SLab -> [(GPath, GPath)]
 findAllPathToTarget graph path target =
-  filter (not . null . fst)
-  $ concatMap (\p -> zip (findAllPathsBetweenTwoNodes graph target $ last p) (repeat p))
-  $ tailNote "findPathToTarget"
+  filter (not . null . fst) $
+  concatMap (\p -> zip (findAllPathsBetweenTwoNodes graph target $ last p) (repeat p))
+  $ tailNote "findAllPathToTarget"
   $ inits path
 
 
@@ -81,6 +102,10 @@ findAllPathsBetweenTwoNodes :: Gr NLab ELab -> SLab -> SLab -> [GPath]
 findAllPathsBetweenTwoNodes graph target start =
   filter (\path -> target == last path) $ pathTree $ match start graph
 
+
+-----------------------------------------------------------
+--   Code below is currently not used
+-----------------------------------------------------------
 
 allCompletePaths2Target :: Gr NLab ELab -> SLab -> [GPath]
 allCompletePaths2Target graph target =

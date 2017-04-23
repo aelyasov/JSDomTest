@@ -39,9 +39,10 @@ crossoverJSArgs gen pairJsArgs = case pairJsArgs of
 
 crossoverArrayJS :: [JSArg] -> [JSArg] -> IO JSArg
 crossoverArrayJS arr1 arr2 = do
-  crossPoint <- randomRIO (0, max (length arr1) (length arr2))
-  let crossArr1 = take crossPoint arr1 ++ drop crossPoint arr2
-      crossArr2 = take crossPoint arr2 ++ drop crossPoint arr1
+  crossPoint1 <- randomRIO (0, length arr1)
+  crossPoint2 <- randomRIO (0, length arr2)
+  let crossArr1 = take crossPoint1 arr1 ++ drop crossPoint2 arr2
+      crossArr2 = take crossPoint2 arr2 ++ drop crossPoint1 arr1
   result <- liftM ([crossArr1, crossArr2]!!) $ randomRIO (0, 1)
   debugM rootLoggerName $ "Crossing over: " ++ (show arr1) ++ " and " ++ (show arr2) ++ " results in " ++ (show result)
   setCondBreakPoint

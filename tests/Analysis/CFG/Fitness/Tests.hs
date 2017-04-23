@@ -98,6 +98,23 @@ findAllPathToTarget01 = do
     [([0,1,10,-1],[0]),([1,10,-1],[0,1]),([2,3,4,5,1,10,-1],[0,1,2]),([2,3,8,9,1,10,-1],[0,1,2])]
 
 
+findAllPathToTargetTest :: Assertion
+findAllPathToTargetTest = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test6.js"
+  print graph 
+  let path       = [0,1,2,3,4,1,2,3,4,1,-1]
+      targetNode = 5 
+  findAllPathToTarget graph path targetNode @?= []
+
+ 
+estimateAllPathTest :: Assertion 
+estimateAllPathTest = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test6.js"
+  let loopIterMap = IntMap.fromList []
+      path        = [0,1,2,3,4,1,2,3,4,1,-1]
+      target      = 5
+  estimateAllPath graph loopIterMap path target @?= []
+
 estimateAllPath01 :: Assertion 
 estimateAllPath01 = do
   graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test5.js"
@@ -150,6 +167,15 @@ getShortestPathsToTarget01 = do
       path        = [0,1,4,5,6,7]
       target      = 9
   getShortestsPathsToTarget graph loopIterMap path target @?= [([5,8,9],3)]
+
+
+getShortestPathsToTargetTest :: Assertion
+getShortestPathsToTargetTest = do
+  graph <- mkTestCFG "tests/Analysis/CFG/Fitness/resources/test6.js"
+  let loopIterMap = IntMap.fromList []
+      path        = [0,1,2,3,4,1,2,3,4,1,-1]
+      target      = 5
+  getShortestsPathsToTarget graph loopIterMap path target @?= []
 
 
 computeRealCfgLevel01 :: Assertion
