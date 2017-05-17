@@ -14,7 +14,7 @@ import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 import System.Random
 import Control.Monad.Trans.Class
 import Util.Debug (setCondBreakPoint)
-
+import Data.Char (isHexDigit)
 
 genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
@@ -45,9 +45,9 @@ genRandomArray pool jsType =
 -- | TODO: can be extended to generate sometimes an arbitrary integer value
 genRandomInt :: JSInts -> IO Int
 genRandomInt ints = do
-  randomInt <- generate $ case ints of
-                            [] -> choose (-10, 10)
-                            _  -> frequency [(4, choose (-10, 10)), (1, elements ints)]
+  randomInt <- generate $ if null ints
+                          then choose (-10, 10)
+                          else frequency [(4, choose (-10, 10)), (1, elements ints)]
   debugM rootLoggerName $ "Generate random integer: " ++  show randomInt
   setCondBreakPoint
   return randomInt
@@ -57,16 +57,16 @@ genRandomInt ints = do
 -- | TODO: can be extended to generate sometimes an arbitrary string value
 genRandomString :: JSStrings -> IO String
 genRandomString strs = do
-  randomStr <- case strs of
-                 [] -> arbitraryStr
-                 _  -> generate $ oneof [elements strs]
+  stringSize <- randomRIO (1, 5)
+  debugM rootLoggerName $ "Generating random string of length: " ++ (show stringSize)
+  randomStr <- generate $ if null strs
+                          then genFixedString stringSize
+                          else frequency [(4, genFixedString stringSize), (1, elements strs)]
   debugM rootLoggerName $ show randomStr
   setCondBreakPoint
   return randomStr
-  where
-    arbitraryStr :: IO String
-    arbitraryStr = do g <- newStdGen
-                      return $ take 10 $ randomRs ('a','z') g
+    where
+      genFixedString size = vectorOf size $ suchThat arbitrary isHexDigit
 
 
 -- | generate random boolean value out of given diaposon

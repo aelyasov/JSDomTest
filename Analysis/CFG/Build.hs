@@ -25,11 +25,11 @@ import Data.Either (either)
 
 
 getAllBranches :: Gr NLab ELab -> [LEdge ELab]
-getAllBranches gr = filterOnlyIfBranches $ if null branches then [(-1, -1, "")] else branches
+getAllBranches gr = if null branches then [(-1, -1, "")] else branches
   where
     filterOnlyIfBranches = filter (\(_,_,lab) -> lab == "then" || lab == "else")
     (minNode, maxNode) = nodeRange gr
-    branches =  foldr (\nd edges -> if (outdeg gr nd > 1) then (out gr nd) ++ edges else edges ) [] [minNode .. maxNode]
+    branches = filterOnlyIfBranches $ foldr (\nd edges -> if (outdeg gr nd > 1) then (out gr nd) ++ edges else edges ) [] [minNode .. maxNode]
 
 ppCFG :: FilePath -> IO ()
 ppCFG fp = do

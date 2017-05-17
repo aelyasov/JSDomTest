@@ -266,7 +266,9 @@ list2LoopTree _ [] = error "list2LoopTree: loop can't be empty"
 list2LoopTree iterMap path@(head:body) =
   case (IntMap.lookup head iterMap) of
    Just iterN -> Node iterN head (map Leaf body)
-   Nothing    -> trace ("no info about loop: " ++ (show head)) $ Node 10 head (map Leaf body)  
+   Nothing    -> Node 10 head (map Leaf body)
+     -- trace ("no info about loop: " ++ (show head)) $ Node 10 head (map Leaf body)
+  
 
 buildLoopMaxSizeMap :: Gr NLab ELab -> LoopIterationMap -> LoopMaxSizeMap
 buildLoopMaxSizeMap gr iterMap =

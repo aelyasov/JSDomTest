@@ -30,13 +30,22 @@ crossAllArgs gen (pairJsArg:pairJsArgs) = do
 
 crossoverJSArgs :: StdGen -> (JSArg, JSArg) -> IO JSArg
 crossoverJSArgs gen pairJsArgs = case pairJsArgs of
-  (DomJS d1, DomJS d2)         -> liftM DomJS $ crossoverDomJS gen d1 d2
+  (BoolJS b1, BoolJS b2)       -> crossoverBoolJS b1 b2 
+  (DomJS d1, DomJS d2)         -> crossoverDomJS gen d1 d2
   (IntJS i1, IntJS i2)         -> crossoverIntJS i1 i2
   (StringJS s1, StringJS s2)   -> crossoverStringJS s1 s2
   (ArrayJS arr1, ArrayJS arr2) -> crossoverArrayJS arr1 arr2
   otherwise -> error $ "crossover for elements of type " ++ (show pairJsArgs) ++ " isn't defined"
 
 
+crossoverBoolJS :: Bool -> Bool -> IO JSArg
+crossoverBoolJS b1 b2 = do
+  result <- liftM ([b1,b2]!!) $ randomRIO (0, 1)
+  debugM rootLoggerName $ "Crossing over: " ++ (show b1) ++ " and " ++ (show b2) ++ " results in " ++ (show result)
+  setCondBreakPoint
+  return $ BoolJS result
+
+  
 crossoverArrayJS :: [JSArg] -> [JSArg] -> IO JSArg
 crossoverArrayJS arr1 arr2 = do
   crossPoint1 <- randomRIO (0, length arr1)
@@ -65,7 +74,7 @@ crossoverIntJS i1 i2 = do
   return $ IntJS result  
   
 
-crossoverDomJS :: StdGen -> ByteString -> ByteString -> IO ByteString
+crossoverDomJS :: StdGen -> ByteString -> ByteString -> IO JSArg
 crossoverDomJS gen html1 html2 = do
   let logger = rootLoggerName
   debugM logger $ "Crossing over two html document:\n"
@@ -77,12 +86,12 @@ crossoverDomJS gen html1 html2 = do
   if (snd parent1 <= 4)
     then do debugM logger $ "Crossover result:\n" ++ (prettyHtmlByteString html2)
             setCondBreakPoint
-            return html2      
+            return $ DomJS html2      
     else if (snd parent2 <= 4)
          then do debugM logger $ "Crossover result:\n" ++ (prettyHtmlByteString html1)
                  setCondBreakPoint
-                 return html1
-         else crossoverIterate gen parent1 parent2
+                 return $ DomJS html1
+         else liftM DomJS $ crossoverIterate gen parent1 parent2
 
 
 crossoverIterate :: StdGen -> (Document, Int) -> (Document, Int) -> IO ByteString 

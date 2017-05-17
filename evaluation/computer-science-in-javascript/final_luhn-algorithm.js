@@ -1,4 +1,4 @@
-/*t [int]:int:int  */
+/*t string:bool */
 function test(identifier, alt) {
     var sum = 0,
         i = identifier.length - 1,

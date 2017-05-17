@@ -37,11 +37,12 @@ mutateAllArgs g pool (tpArg:tpArgs) = do
 mutateJSArg :: (JSType, JSArg) -> StdGen -> JSCPool -> IO JSArg
 mutateJSArg (jsType, jsArg) gen pool =
   case jsArg of
-    DomJS dom    -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] gen pool dom
-    IntJS int    -> mutateJSInt int pool
-    StringJS _   -> mutateJSString pool
-    ArrayJS  arr -> mutateJSArray_new pool jsType
-    mtype      -> error $ "mutation of type " ++ (show mtype)  ++ " isn't defined"
+    DomJS dom   -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] gen pool dom
+    IntJS int   -> mutateJSInt int pool
+    StringJS _  -> mutateJSString pool
+    BoolJS b    -> mutateJSBool b
+    ArrayJS arr -> mutateJSArray_new pool jsType
+    mtype       -> error $ "mutation of type " ++ (show mtype)  ++ " isn't defined"
 
 
 data MutationType = DropSubtree
@@ -49,6 +50,7 @@ data MutationType = DropSubtree
                   | ReassignIds
                   | ReassignClasses
                   deriving (Show)
+
 
 mutateHtml :: [MutationType] -> StdGen -> JSCPool -> ByteString -> IO ByteString
 mutateHtml mutations gen pool html = do
@@ -62,7 +64,7 @@ mutateHtml mutations gen pool html = do
         ReassignIds     -> mutateHtml_reassignIds pool html
         ReassignClasses -> mutateHtml_reassignClasses pool html
 
-    
+      
 mutateHtml_dropSubtree :: StdGen -> ByteString -> IO ByteString
 mutateHtml_dropSubtree gen html = do
   let logger = rootLoggerName
@@ -142,6 +144,13 @@ mutateJSInt int pool = do
   int' <- generate $ elements (r:ints)
   debugM rootLoggerName $ "Mutation of the integer value: " ++ (show int) ++ " replaced by: " ++ (show int')
   return $ IntJS int'
+
+
+mutateJSBool :: Bool -> IO JSArg
+mutateJSBool b = do
+  let b' = not b
+  debugM rootLoggerName $ "Mutate boolean value: " ++ (show b) ++ " replaced by: " ++ (show b')
+  return $ BoolJS b'  
 
 
 mutateJSString :: JSCPool -> IO JSArg
