@@ -1,5 +1,5 @@
 /*t dom:string */
-function validateNumber(input) {
+function test(input) {
     var number = /^[0-9]+$/;
     if (input.match(number)) {
         return true;
