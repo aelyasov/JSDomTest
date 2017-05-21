@@ -45,7 +45,21 @@ minusJS expr1 expr2 = InfixExpr def OpSub expr1 expr2
 
 plusOne :: Default a => Expression a -> Expression a
 plusOne expr = InfixExpr def OpAdd expr (IntLit def 1)
-                   
+
+-- mkForTestExpr :: Default a => Expression a -> Expression a
+-- mkForTestExpr (InfixExpr _ infixOp expr1 expr2) =
+--   let absDiff = absJS $ expr1 `minusJS` expr2
+--   in  case infixOp of
+--        OpLT  -> absDiff
+--        OpLEq -> plusOne absDiff
+--        _     -> error $ "getForTestStmt: unknown infix operator " ++ (show infixOp)
+
+-- mkForTestStmt :: Default a => Expression a -> Statement a
+-- mkForTestStmt expr = ReturnStmt def (Just expr)
+
+-- mkJSForLoopEstimate :: Default a => Statement a -> Statement a -> Expression a
+-- mkJSForLoopEstimate stmt1 stmt2 = CallExpr def (FuncExpr def Nothing [] [stmt1, stmt2]) []
+               
 mkForTestExpr :: Default a => Expression a -> (Expression a, Expression a)
 mkForTestExpr (InfixExpr _ infixOp expr1 expr2) =
   let absDiff = absJS $ expr1 `minusJS` expr2
@@ -59,7 +73,9 @@ mkForTestStmt (expr1, expr2) = IfSingleStmt def (InfixExpr def OpLOr expr2 (Infi
 
 
 mkJSForLoopEstimate :: Default a => Statement a -> Statement a -> Expression a
-mkJSForLoopEstimate stmt1 stmt2 = CallExpr def (FuncExpr def Nothing [] [stmt1, stmt2, ThrowStmt def (StringLit def "bad loop condition")]) []
+mkJSForLoopEstimate stmt1 stmt2 = CallExpr def (FuncExpr def Nothing [] [stmt1, stmt2, ReturnStmt def (Just (IntLit def 1))]) []
+
+-- ThrowStmt def (NewExpr def (VarRef def (Id def "Error")) [StringLit def "loopMap"])
 
 getNextStLab :: SLab -> [Statement (SourcePos, SLab)] -> SLab
 getNextStLab defL sts = maybe defL (getStmtLab . upwrapDoWhileStmt) $ headMay sts
@@ -365,4 +381,5 @@ injectLoopsInGroups loops (group:groups) =
   in  if cond
       then group':groups
       else group:injectLoopsInGroups loops groups
+
 

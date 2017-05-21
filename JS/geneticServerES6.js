@@ -9,7 +9,7 @@ const _ = require('underscore');
 const instrument = require("./instrumentLib.js");
 const winston = require('winston');
 
-// winston.level = 'info';
+//winston.level = 'info';
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {
@@ -120,7 +120,7 @@ http.createServer(function(request, response) {
                 // test.apply(this, realJSFunArgs, window, document);
             } catch (e) {
                 trace.push(-100); // label -100 indicates exceptional termination
-                winston.debug("Test function is exceptionally terminated with the message: %s", e.stack);
+                winston.debug("Test function is exceptionally terminated with the message: %s and stack trace %s", e.message, e.stack);
             }
 
             winston.debug("trace", trace);

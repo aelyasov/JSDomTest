@@ -27,7 +27,7 @@ import Data.Either (either)
 getAllBranches :: Gr NLab ELab -> [LEdge ELab]
 getAllBranches gr = if null branches then [(-1, -1, "")] else branches
   where
-    filterOnlyIfBranches = filter (\(_,_,lab) -> lab == "then" || lab == "else")
+    filterOnlyIfBranches = filter (\(_,_,lab) -> lab == "then" || lab == "else" || lab == "inFor" || lab == "inWhile")
     (minNode, maxNode) = nodeRange gr
     branches = filterOnlyIfBranches $ foldr (\nd edges -> if (outdeg gr nd > 1) then (out gr nd) ++ edges else edges ) [] [minNode .. maxNode]
 
