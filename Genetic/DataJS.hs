@@ -49,12 +49,12 @@ data JSType = JS_INT
 
 type JSSig = [JSType]
 
-type JSInts    = [Int]
-type JSStrings = [String]
-type JSTags    = [HTML_TAG]
-type JSIds     = [String]
-type JSNames   = [String]
-type JSClasses = [String]
+type JSInts    = Maybe [Int]
+type JSStrings = Maybe [String]
+type JSTags    = Maybe [HTML_TAG]
+type JSIds     = Maybe [String]
+type JSNames   = Maybe [String]
+type JSClasses = Maybe [String]
 type JSDoms    = (JSTags, JSIds, JSNames, JSClasses)
 
 type JSCPool = (JSInts, JSStrings, JSDoms)

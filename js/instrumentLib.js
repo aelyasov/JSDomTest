@@ -1,3 +1,5 @@
+const winston = require('winston');
+
 var _K_ = 1;
 //     _branchDistance_ = [],
 //     _trace_ = [1];
@@ -5,34 +7,35 @@ var _K_ = 1;
 function abs(x, y) {
     var typeX = typeof(x);
     var typeY = typeof(y);
-    console.log("typeX: ", typeX);
-    console.log("typeY: ", typeY);
+    winston.debug("x=" + x + " is of type " + typeX);
+    winston.debug("y=" + y + " is of type " + typeY);
     if (typeX == typeY) {
         switch (typeX) {
             case "number":
-                console.log("num");
+                winston.debug("nummer");
                 if (Number.isNaN(x) || Number.isNaN(y)) throw new Error("Not a number " + x + y);
                 if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Error("Number is not finite " + x + y);
                 return Math.abs(x - y);
                 break;
             case "string":
-                console.log("str");
+                winston.debug("string");
                 return getEditDistance(x, y);
                 break;
                 //case "string" : return naiveHammerDistance(x,y);console.log("str"); break;
             case "boolean":
-                console.log("bool");
+                winston.debug("boolean");
                 return Math.abs(x - y);
                 break;
             case "object":
-                console.log("obj");
+                winston.debug("object");
                 return Number(x == y);
                 break;
             default:
-                console.log("def");
+                winston.debug("default");
                 return 0;
         }
     } else {
+        winston.debug("types don't match");
         return 1;
     }
 }
@@ -40,20 +43,26 @@ function abs(x, y) {
 
 function absZero(x) {
     var typeX = typeof(x);
+    winston.debug("x=" + x + " is of type " + typeX);
     switch (typeX) {
-        default: return _K_;
+        default: winston.debug("default");
+        return _K_;
     }
 }
 
 
 function absNegZero(x) {
     var typeX = typeof(x);
+    winston.debug("x=" + x + " is of type " + typeX);
     switch (typeX) {
         case "number":
+            winston.debug("nummer");
             return Math.abs(x);
         case "string":
+            winston.debug("string");
             return Math.abs(x.length);
         default:
+            winston.debug("default");
             return _K_;
     }
 }

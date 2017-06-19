@@ -1,6 +1,7 @@
 module Html5C.Tags where 
 
-import Data.Char 
+import Data.Char
+import Debug.Trace
 
 
 data HTML_TAG = TAG_A
@@ -15,6 +16,7 @@ data HTML_TAG = TAG_A
               | TAG_BDI
               | TAG_BDO
               | TAG_BLOCKQUOTE
+              | TAG_BODY
               | TAG_BR
               | TAG_BUTTON
               | TAG_CANVAS
@@ -119,4 +121,4 @@ data HTML_TAG = TAG_A
 
 
 str2HtmlTag :: String -> HTML_TAG
-str2HtmlTag tag = read ("TAG_" ++ map toUpper tag) :: HTML_TAG
+str2HtmlTag tag = read ("TAG_" ++ (map toUpper tag)) :: HTML_TAG

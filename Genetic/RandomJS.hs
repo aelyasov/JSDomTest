@@ -15,6 +15,8 @@ import System.Random
 import Control.Monad.Trans.Class
 import Util.Debug (setCondBreakPoint)
 import Data.Char (isHexDigit)
+import Data.Maybe (isNothing, fromJust)
+
 
 genRandomVal :: JSCPool -> JSType -> IO JSArg
 genRandomVal pool tp = do
@@ -27,7 +29,7 @@ genRandomVal' :: JSCPool -> JSType -> IO JSArg
 genRandomVal' (ints, _, _)    JS_INT            = liftM IntJS    $ genRandomInt ints
 genRandomVal' (_, strings, _) JS_STRING         = liftM StringJS $ genRandomString strings
 genRandomVal' _               JS_BOOL           = liftM BoolJS   $ genRandomBool
-genRandomVal' (_, _, doms)    JS_DOM            = liftM DomJS    $ genRandomDom doms 
+genRandomVal' pool            JS_DOM            = liftM DomJS    $ genRandomDom pool
 genRandomVal' pool            (JS_ARRAY jsType) = liftM ArrayJS  $ genRandomArray pool jsType
 
   
@@ -45,9 +47,9 @@ genRandomArray pool jsType =
 -- | TODO: can be extended to generate sometimes an arbitrary integer value
 genRandomInt :: JSInts -> IO Int
 genRandomInt ints = do
-  randomInt <- generate $ if null ints
+  randomInt <- generate $ if isNothing ints
                           then choose (-10, 10)
-                          else frequency [(4, choose (-10, 10)), (1, elements ints)]
+                          else frequency [(4, choose (-10, 10)), (1, elements $ fromJust ints)]
   debugM rootLoggerName $ "Generate random integer: " ++  show randomInt
   setCondBreakPoint
   return randomInt
@@ -59,9 +61,9 @@ genRandomString :: JSStrings -> IO String
 genRandomString strs = do
   stringSize <- randomRIO (1, 5)
   debugM rootLoggerName $ "Generating random string of length: " ++ (show stringSize)
-  randomStr <- generate $ if null strs
+  randomStr <- generate $ if isNothing strs
                           then genFixedString stringSize
-                          else frequency [(4, genFixedString stringSize), (1, elements strs)]
+                          else frequency [(4, genFixedString stringSize), (1, elements $ fromJust strs)]
   debugM rootLoggerName $ show randomStr
   setCondBreakPoint
   return randomStr
@@ -78,9 +80,9 @@ genRandomBool = do
   return randomBool
 
 
-genRandomDom :: JSDoms -> IO ByteString
-genRandomDom doms = do
-  html <- genValidHtml doms 
+genRandomDom :: JSCPool -> IO ByteString
+genRandomDom pool = do
+  html <- genValidHtml pool 
   debugM rootLoggerName $ prettyHtmlByteString html
   setCondBreakPoint
   return html

@@ -37,7 +37,7 @@ mutateAllArgs g pool (tpArg:tpArgs) = do
 mutateJSArg :: (JSType, JSArg) -> StdGen -> JSCPool -> IO JSArg
 mutateJSArg (jsType, jsArg) gen pool =
   case jsArg of
-    DomJS dom   -> liftM DomJS $ mutateHtml [DropSubtree, NewRandom, ReassignIds, ReassignClasses] gen pool dom
+    DomJS dom   -> liftM DomJS $ mutateHtml [ReassignIds, ReassignClasses, NewRandom] gen pool dom -- DropSubtree,  
     IntJS int   -> mutateJSInt int pool
     StringJS _  -> mutateJSString pool
     BoolJS b    -> mutateJSBool b
@@ -82,7 +82,7 @@ mutateHtml_newRandom pool = do
       setPool = removeDuplicates pool
   debugM logger $ "Constant pool data: " ++ (show setPool)
   debugM rootLoggerName $ "Mutation: generate new html:"
-  genRandomDom $ getJSDoms setPool
+  genRandomDom setPool
 
 
 mutateHtml_reassignIds :: JSCPool -> ByteString -> IO ByteString
@@ -90,10 +90,11 @@ mutateHtml_reassignIds pool html = do
   let logger  = rootLoggerName
       setPool = removeDuplicates pool
       tagIds  = getJSIds setPool
+      strs    = getJSStrings setPool
       plain_html = removeAttributeFromDocument "id" $ bytestring2document html
   debugM rootLoggerName $ "Mutate element:\n" ++ (prettyHtmlByteString html)    
   debugM logger $ "Constant pool data: " ++ (show setPool)
-  new_html <- liftM document2bytestring $ assignIdsToDocumentRandomly tagIds plain_html
+  new_html <- liftM document2bytestring $ assignIdsToDocumentRandomly strs tagIds plain_html
   debugM rootLoggerName $ "Mutation result: re-assign ids:\n" ++ (prettyHtmlByteString new_html)
   setCondBreakPoint
   return new_html
@@ -104,10 +105,11 @@ mutateHtml_reassignClasses pool html = do
   let logger     = rootLoggerName
       setPool    = removeDuplicates pool
       tagClasses = getJSClasses setPool
+      strs       = getJSStrings setPool
       plain_html = removeAttributeFromDocument "class" $ bytestring2document html
   debugM rootLoggerName $ "Mutate element:\n" ++ (prettyHtmlByteString html)    
   debugM logger $ "Constant pool data: " ++ (show setPool)
-  new_html <- liftM document2bytestring $ assignClassesToDocumentRandomly tagClasses plain_html
+  new_html <- liftM document2bytestring $ assignClassesToDocumentRandomly strs tagClasses plain_html
   debugM rootLoggerName $ "Mutation result: re-assign classes:\n" ++ (prettyHtmlByteString new_html)
   setCondBreakPoint
   return new_html

@@ -49,6 +49,7 @@ fromTag2Gen TAG_BASE       = genTAG_base
 fromTag2Gen TAG_BDI        = genTAG_bdi
 fromTag2Gen TAG_BDO        = genTAG_bdo
 fromTag2Gen TAG_BLOCKQUOTE = genTAG_blockquote
+fromTag2Gen TAG_BODY       = genTAG_body
 fromTag2Gen TAG_BR         = genTAG_br
 fromTag2Gen TAG_BUTTON     = genTAG_button
 fromTag2Gen TAG_CANVAS     = genTAG_canvas
@@ -188,7 +189,7 @@ arbHtmlHTML = do
            if hasHead
            then arbHtmlDefaultHead
            else arbHtmlHEAD
-  body_ <- put st{ getDepth = iter n, getCtx = push CFlow ctx} >> arbHtmlBODY
+  body_ <- put st{ getDepth = iter n, getCtx = push CFlow ctx} >> genTAG_body
   if n == 0
   then lift $ return $ toHtml "HTML"
   else lift $ return $ docTypeHtml $ head_ >> body_
@@ -290,8 +291,8 @@ genTAG_template :: GenHtmlState
 genTAG_template = debug "genTAG_template" $ lift $ return $ template $ toHtml "TEMPLATE"
 
 
-arbHtmlBODY :: GenHtmlState
-arbHtmlBODY = debug "arbHtmlBODY" $ do
+genTAG_body :: GenHtmlState
+genTAG_body = debug "genTAG_body" $ do
   st <- get
   let ctx   = getCtx st 
       depth = getDepth st

@@ -24,21 +24,26 @@ import SYB.Data.Generics.Schemes (everywhereM')
 import Data.Generics.Aliases (extM)
 import Debug.Trace
 import Control.Monad (liftM, foldM)
+import Control.Applicative ((<|>))
+import Data.Maybe (fromJust)
 
-assignIdsToDocumentRandomly :: [String] -> Document -> IO Document
+
+assignIdsToDocumentRandomly :: Maybe [String] -> Maybe [String] -> Document -> IO Document
 assignIdsToDocumentRandomly = assignAttributesToDocumentRandomly "id"
 
 
-assignClassesToDocumentRandomly :: [String] -> Document -> IO Document
+assignClassesToDocumentRandomly :: Maybe [String] -> Maybe [String] -> Document -> IO Document
 assignClassesToDocumentRandomly = assignAttributesToDocumentRandomly "class"
 
 
-assignAttributesToDocumentRandomly :: String -> [String] -> Document -> IO Document   
-assignAttributesToDocumentRandomly attrName attrValues (Document prologue (Element html html_attrs [header, NodeElement body]) epilogue) = do
+assignAttributesToDocumentRandomly :: String -> Maybe [String] -> Maybe [String] -> Document -> IO Document   
+assignAttributesToDocumentRandomly attrName strConsts attrValues doc = do
   gen <- newStdGen
-  let (labeledElement, maxLabel) = labelXMLElement body
+  let (Document prologue (Element html html_attrs [header, NodeElement body]) epilogue) = doc
+      values = fromJust $ attrValues <|> strConsts <|> Just ["test"]
+      (labeledElement, maxLabel) = labelXMLElement body
       randomLabeles              = take (maxLabel - 1) $ nub $ randomRs (1, maxLabel - 1) gen
-      labsAndValues              = sortBy (compare `on` fst) $ zip randomLabeles attrValues
+      labsAndValues              = sortBy (compare `on` fst) $ zip randomLabeles values
       elementNewValues           = foldl (\el (lab, val) -> assignAttributeToElement lab attrName val el) labeledElement labsAndValues
       elementNewValuesNoLabels   = removeAttributeFromElementEverywhere "label" elementNewValues
   return $ Document prologue (Element html html_attrs [header, NodeElement elementNewValuesNoLabels]) epilogue
@@ -55,5 +60,5 @@ test_span = "<!DOCTYPE HTML><html><head><title>Title</title></head><body><span><
 
 
 
-label_test = (assignIdsToDocumentRandomly ["foo", "bar"] $ parseLT test_html) >>= putStr . PP.renderHtml . toMarkup
+label_test = (assignIdsToDocumentRandomly (Just ["test"]) (Just ["foo", "bar"]) $ parseLT test_html) >>= putStr . PP.renderHtml . toMarkup
 

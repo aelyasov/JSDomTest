@@ -32,6 +32,7 @@ function rand(x) {
 // all branches: (1,2), (1,3)
 
 // cover branch (1,3); path = [1,3]
+
 runTest(reshuffle, dom1);
 
 // cover branch (1,2); path = [1,2,2,3]

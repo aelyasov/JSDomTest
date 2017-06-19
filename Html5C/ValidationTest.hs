@@ -2,6 +2,8 @@
 
 module Html5C.ValidationTest where
 
+import Data.Maybe (fromMaybe)
+
 import Html5C.Validation (checkErrorsInResponse)
 import Html5C.Arbitrary
 import Html5C.Tags
@@ -50,7 +52,7 @@ runTestsWithTags :: JSTags -> IO ()
 runTestsWithTags tags = verboseCheckWith (stdArgs {maxSuccess = 10}) property
 -- runTestsWithTags tags = quickCheckWith (stdArgs {maxSuccess = 100}) property
   where property = monadicIO $ do
-          h <- run $ genValidHtml (tags,[],[],[])
+          h <- run $ genValidHtml (Nothing, Nothing, (tags, Nothing, Nothing, Nothing))
           assert True
 
 
@@ -58,9 +60,9 @@ prop_ValidHtml :: Html -> Property
 prop_ValidHtml html = monadicIO $ (run $ validatorCheck html) >>= assert'
 
 
-genValidHtml :: JSDoms -> IO ByteString
-genValidHtml env@(tags, ids, names, classes) = do
-  let state = defaultState{ htmlTags    = tags
+genValidHtml :: JSCPool -> IO ByteString
+genValidHtml env@(ints, strs,  (tags, ids, names, classes)) = do
+  let state = defaultState{ htmlTags    = fromMaybe [TAG_DIV] tags
                           , htmlNames   = names
                           , htmlIds     = ids
                           , htmlClasses = classes}
@@ -70,8 +72,8 @@ genValidHtml env@(tags, ids, names, classes) = do
   -- debugM logger $ "Second step of html generation (with ids):\n"
   --   ++ (prettyHtmlByteString html)
   docPlain       <- liftM (parseLT . PT.renderHtml) $ generate $ evalStateT htmlGenState state
-  docWithIds     <- assignIdsToDocumentRandomly (htmlIds state) docPlain
-  docWithClasses <- assignClassesToDocumentRandomly (htmlClasses state) docWithIds
+  docWithIds     <- assignIdsToDocumentRandomly strs (htmlIds state) docPlain
+  docWithClasses <- assignClassesToDocumentRandomly strs (htmlClasses state) docWithIds
   html <- return $ (renderHtml . toMarkup) docWithClasses
   response  <- askValidator  html
   case response  of
@@ -106,7 +108,7 @@ assert' :: Monad m => Maybe Text -> PropertyM m ()
 assert' Nothing = return ()
 assert' (Just str) = fail $ T.unpack str
 
-test_genValidHtml = genValidHtml ([TAG_H1],[],[],[])
+test_genValidHtml = genValidHtml (Nothing, Nothing, (Just [TAG_H1], Nothing, Nothing, Nothing))
 
 -- | parseLBS $ C.pack test_html
 test_html = "<!DOCTYPE HTML>\n<html><head><title>Title</title><base href=\".\" target=\"_blank\"></head><body itemscope=\"\" itemtype=\"http://schema.org/WebPage\"><h1><a></a>A2A2</h1><h1></h1></body></html>"

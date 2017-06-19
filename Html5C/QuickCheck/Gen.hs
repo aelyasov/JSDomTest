@@ -45,9 +45,9 @@ defaultState =
                                 -- , tagFreqTbl  = normFreqTblReal defTagFreqTblReal
                 , tagFreqTbl  = filter $ take topN $ sortBy (\i j -> fst j `compare` fst i) defTagFreqTblReal
                 , htmlTags    = []
-                , htmlNames   = []
-                , htmlIds     = []
-                , htmlClasses = []
+                , htmlNames   = Nothing
+                , htmlIds     = Nothing
+                , htmlClasses = Nothing
                 , hasDefHead  = True
                 } 
 
@@ -57,9 +57,9 @@ data HtmlState = HtmlState { hasMain     :: Bool
                            , getCtx      :: Context 
                            , tagFreqTbl  :: [(Int, HTML_TAG)] 
                            , htmlTags    :: [HTML_TAG]
-                           , htmlNames   :: [String]
-                           , htmlIds     :: [String]
-                           , htmlClasses :: [String]
+                           , htmlNames   :: Maybe [String]
+                           , htmlIds     :: Maybe [String]
+                           , htmlClasses :: Maybe [String]
                            , hasDefHead  :: Bool
                            }
                  deriving Show

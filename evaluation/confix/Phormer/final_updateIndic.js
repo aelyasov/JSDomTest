@@ -12,7 +12,8 @@ function test(isAjaxing) {
         document.getElementById('indicator').innerHTML = '&nbsp; ' + v;
     }
     if (isAjaxing) {
-        setTimeout("updateIndic();", 500);
+        console.log("call updateIndic()");
+        //setTimeout("updateIndic();", 500);
     } else {
         document.getElementById('indicator').innerHTML = '';
     }

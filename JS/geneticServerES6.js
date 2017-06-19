@@ -9,7 +9,7 @@ const _ = require('underscore');
 const instrument = require("./instrumentLib.js");
 const winston = require('winston');
 
-//winston.level = 'info';
+// winston.level = 'info';
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {
@@ -18,19 +18,6 @@ winston.add(winston.transports.Console, {
 
 
 let jsSig, jsFun, environment, window, document;
-
-environment = {
-    tags: new Set(),
-    names: new Set(),
-    ids: new Set(),
-    classes: new Set(),
-    selectors: new Set()
-};
-
-document = jsdom.jsdom();
-window = document.defaultView;
-require('./domIntercept.js')(window, environment, winston);
-
 
 http.createServer(function(request, response) {
     let pathname = url.parse(request.url, true).pathname;
@@ -114,6 +101,19 @@ http.createServer(function(request, response) {
             // winston.debug("jsFun:\n", jsFun);
 
             eval(jsFun);
+
+	    document = jsdom.jsdom();
+	    window = document.defaultView;
+	    environment = {
+		tags: new Set(),
+		names: new Set(),
+		ids: new Set(),
+		classes: new Set(),
+		selectors: new Set()
+};
+
+	    require('./domIntercept.js')(window, environment, winston);
+
 
             try {
                 Reflect.apply(test, this, realJSFunArgs);

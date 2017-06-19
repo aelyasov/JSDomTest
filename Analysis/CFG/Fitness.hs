@@ -37,6 +37,7 @@ computeFitness cfg loopIterMap target path distances = do
   infoM logger $ "ProblemNode: " ++ show problemNode
   infoM logger $ "CfgLevel: " ++ show cfgLevel
   infoM logger $ "ProblemNodeLevel: " ++ show problemNodeLevel
+  infoM logger $ "Fitness value for location #" ++ show target ++ ": " ++ show fitnessVal 
   return fitnessVal
 
 branchDistNormalize :: Int -> Double
