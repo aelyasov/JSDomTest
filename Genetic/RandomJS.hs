@@ -14,7 +14,7 @@ import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 import System.Random
 import Control.Monad.Trans.Class
 import Util.Debug (setCondBreakPoint)
-import Data.Char (isHexDigit)
+import Data.Char (isAlphaNum)
 import Data.Maybe (isNothing, fromJust)
 
 
@@ -26,38 +26,49 @@ genRandomVal pool tp = do
 
 
 genRandomVal' :: JSCPool -> JSType -> IO JSArg
-genRandomVal' (ints, _, _)    JS_INT            = liftM IntJS    $ genRandomInt ints
-genRandomVal' (_, strings, _) JS_STRING         = liftM StringJS $ genRandomString strings
-genRandomVal' _               JS_BOOL           = liftM BoolJS   $ genRandomBool
-genRandomVal' pool            JS_DOM            = liftM DomJS    $ genRandomDom pool
-genRandomVal' pool            (JS_ARRAY jsType) = liftM ArrayJS  $ genRandomArray pool jsType
+genRandomVal' pool jsType = case jsType of
+  JS_INT          -> genRandomInt    $ getJSInts pool
+  JS_FLOAT        -> genRandomFloat  $ getJSFloats pool
+  JS_STRING       -> genRandomString $ getJSStrings pool
+  JS_BOOL         -> genRandomBool
+  JS_DOM          -> genRandomDom pool
+  JS_ARRAY jsType -> genRandomArray pool jsType
 
   
-genRandomArray :: JSCPool -> JSType -> IO [JSArg]
+genRandomArray :: JSCPool -> JSType -> IO JSArg
 genRandomArray pool jsType =
   do arraySize <- randomRIO (1, 5)
      debugM rootLoggerName $ "Generating random array of length: " ++ (show arraySize)
      randomArray <- mapM (const (genRandomVal' pool jsType)) [1..(arraySize :: Int)]
      debugM rootLoggerName $ show randomArray
      setCondBreakPoint
-     return randomArray
+     return $ ArrayJS randomArray
   
 
 -- | generate random integer value out of given diaposon
 -- | TODO: can be extended to generate sometimes an arbitrary integer value
-genRandomInt :: JSInts -> IO Int
+genRandomInt :: JSInts -> IO JSArg
 genRandomInt ints = do
   randomInt <- generate $ if isNothing ints
                           then choose (-10, 10)
                           else frequency [(4, choose (-10, 10)), (1, elements $ fromJust ints)]
   debugM rootLoggerName $ "Generate random integer: " ++  show randomInt
   setCondBreakPoint
-  return randomInt
-                            
+  return $ IntJS randomInt
+
+genRandomFloat :: JSFloats -> IO JSArg    
+genRandomFloat floats = do
+  randomFloat <- generate $ if isNothing floats
+                            then choose (-10.0, 10.0)
+                            else frequency [(4, choose (-10.0, 10.0)), (1, elements $ fromJust floats)]
+  debugM rootLoggerName $ "Generate random float: " ++  show randomFloat
+  setCondBreakPoint
+  return $ FloatJS randomFloat
+
 
 -- | generate random string value out of given diaposon
 -- | TODO: can be extended to generate sometimes an arbitrary string value
-genRandomString :: JSStrings -> IO String
+genRandomString :: JSStrings -> IO JSArg
 genRandomString strs = do
   stringSize <- randomRIO (1, 5)
   debugM rootLoggerName $ "Generating random string of length: " ++ (show stringSize)
@@ -66,24 +77,22 @@ genRandomString strs = do
                           else frequency [(4, genFixedString stringSize), (1, elements $ fromJust strs)]
   debugM rootLoggerName $ show randomStr
   setCondBreakPoint
-  return randomStr
+  return $ StringJS randomStr
     where
-      genFixedString size = vectorOf size $ suchThat arbitrary isHexDigit
-
+      genFixedString size = vectorOf size $ suchThat arbitrary (\ch -> ch `elem` ['A' .. 'Z'] || ch `elem` ['a' .. 'z'] || ch `elem` ['0' .. '9'])
 
 -- | generate random boolean value out of given diaposon
-genRandomBool :: IO Bool
+genRandomBool :: IO JSArg
 genRandomBool = do
   randomBool <- generate $ arbitrary
   debugM rootLoggerName $ show randomBool
   setCondBreakPoint
-  return randomBool
+  return $ BoolJS randomBool
 
-
-genRandomDom :: JSCPool -> IO ByteString
+genRandomDom :: JSCPool -> IO JSArg
 genRandomDom pool = do
   html <- genValidHtml pool 
   debugM rootLoggerName $ prettyHtmlByteString html
   setCondBreakPoint
-  return html
+  return $ DomJS html
  

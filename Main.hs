@@ -158,7 +158,7 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
     killJSMutationGenetic alg man mutN target pool = do
       let logger = rootLoggerName
       putStrLn $ replicate 70 '-'
-      errorM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
+      criticalM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
       noticeM logger $ "Initial pool data: " ++ (show pool)
       request <- parseUrl "http://localhost:7777/mutation"
       let reqMut = request { method = "POST"

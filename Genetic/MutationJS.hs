@@ -17,31 +17,26 @@ import qualified Text.Blaze.Html.Renderer.Utf8 as BR
 import Text.Blaze.Html (toHtml)
 import Html5C.ValidationTest (askValidator)
 import Html5C.Attributes (assignIdsToDocumentRandomly, assignClassesToDocumentRandomly)
-import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSStrings, getJSDoms, getJSIds, getJSClasses, JSType)
+import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSFloats, getJSStrings, getJSDoms, getJSIds, getJSClasses, JSType(..))
 import Control.Monad (liftM)
-import Genetic.RandomJS (genRandomInt, genRandomString, genRandomDom, genRandomArray, genRandomVal)
+import Genetic.RandomJS (genRandomInt, genRandomFloat, genRandomString, genRandomDom, genRandomArray, genRandomVal)
 import Analysis.Static (removeDuplicates)
 import Test.QuickCheck.Gen (elements, generate)
 import Util.Debug (setCondBreakPoint)
-
-  
-mutateAllArgs :: StdGen -> JSCPool -> [(JSType, JSArg)] -> IO [JSArg]
-mutateAllArgs g _ [] = return []
-mutateAllArgs g pool (tpArg:tpArgs) = do
-  let (a, g')  = random g :: (Int, StdGen)
-  d       <- mutateJSArg tpArg g pool
-  tpArgs' <- mutateAllArgs g' pool tpArgs
-  return (d:tpArgs')      
+import Analysis.CFG.Util (replaceElemInList)
+import Safe (atNote)
 
 
-mutateJSArg :: (JSType, JSArg) -> StdGen -> JSCPool -> IO JSArg
-mutateJSArg (jsType, jsArg) gen pool =
-  case jsArg of
-    DomJS dom   -> liftM DomJS $ mutateHtml [ReassignIds, ReassignClasses, NewRandom] gen pool dom -- DropSubtree,  
-    IntJS int   -> mutateJSInt int pool
-    StringJS _  -> mutateJSString pool
-    BoolJS b    -> mutateJSBool b
-    ArrayJS arr -> mutateJSArray_new pool jsType
+mutateJSArg :: JSArg -> JSType -> StdGen -> JSCPool -> IO JSArg
+mutateJSArg jsArg jsType gen pool =
+  case (jsArg, jsType) of
+    (DomJS dom,  _) ->  mutateHtml [ReassignIds, ReassignClasses, NewRandom] gen pool dom
+    -- DropSubtree,  
+    (IntJS int,  _)     -> mutateJSInt int pool
+    (FloatJS float,  _) -> mutateJSFloat float pool
+    (StringJS str, _)   -> mutateJSString gen str pool
+    (BoolJS b,   _)     -> mutateJSBool b
+    (ArrayJS arr, JS_ARRAY typ) -> mutateJSArray gen arr typ pool
     mtype       -> error $ "mutation of type " ++ (show mtype)  ++ " isn't defined"
 
 
@@ -52,10 +47,10 @@ data MutationType = DropSubtree
                   deriving (Show)
 
 
-mutateHtml :: [MutationType] -> StdGen -> JSCPool -> ByteString -> IO ByteString
+mutateHtml :: [MutationType] -> StdGen -> JSCPool -> ByteString -> IO JSArg
 mutateHtml mutations gen pool html = do
   mutN <- randomRIO (0, (length mutations) - 1)
-  mutateHtml' (mutations!!mutN) gen pool html
+  liftM DomJS $ mutateHtml' (mutations!!mutN) gen pool html
     where
       mutateHtml' :: MutationType -> StdGen -> JSCPool -> ByteString -> IO ByteString
       mutateHtml' mutType gen pool html = case mutType of
@@ -82,7 +77,7 @@ mutateHtml_newRandom pool = do
       setPool = removeDuplicates pool
   debugM logger $ "Constant pool data: " ++ (show setPool)
   debugM rootLoggerName $ "Mutation: generate new html:"
-  genRandomDom setPool
+  liftM getDomJS $ genRandomDom setPool
 
 
 mutateHtml_reassignIds :: JSCPool -> ByteString -> IO ByteString
@@ -141,11 +136,20 @@ mutateDocument = deleteNodeInDocumentByLabel
 
 mutateJSInt :: Int -> JSCPool -> IO JSArg
 mutateJSInt int pool = do
-  r <- genRandomInt $ getJSInts pool
+  r <- liftM getIntJS $ genRandomInt $ getJSInts pool
   let ints = map (\f -> f int) [(+1), (+(-1))]
   int' <- generate $ elements (r:ints)
   debugM rootLoggerName $ "Mutation of the integer value: " ++ (show int) ++ " replaced by: " ++ (show int')
   return $ IntJS int'
+
+
+mutateJSFloat :: Float -> JSCPool -> IO JSArg
+mutateJSFloat float pool = do
+  r <- liftM getFloatJS $ genRandomFloat $ getJSFloats pool
+  let floats = map (\f -> f float) [(+10.0), (+(-10.0)), (+1.0), (+(-1.0)), (+0.1), (+(-0.1)), fromIntegral . round]
+  float' <- generate $ elements (r:floats)
+  debugM rootLoggerName $ "Mutation of the float value: " ++ (show float) ++ " replaced by: " ++ (show float')
+  return $ FloatJS float'  
 
 
 mutateJSBool :: Bool -> IO JSArg
@@ -155,18 +159,35 @@ mutateJSBool b = do
   return $ BoolJS b'  
 
 
-mutateJSString :: JSCPool -> IO JSArg
-mutateJSString pool = do
-  s <- genRandomString $ getJSStrings pool
-  debugM rootLoggerName $ "Mutate by generating a new str arg" ++ (show s)
-  return $ StringJS s
+mutateJSString :: StdGen -> String -> JSCPool -> IO JSArg
+mutateJSString gen str pool =
+  if null str
+  then genRandomString Nothing 
+  else do
+    let (mutId, gen') = randomR (0, length str - 1) gen
+        chr = atNote "mutateJSString" str mutId
+        mutChar = if even mutId
+                  then if chr `elem` ['z','9', 'Z'] then pred chr else succ chr
+                  else if chr `elem` ['a','0', 'A'] then succ chr else pred chr
+        mresult = replaceElemInList mutId mutChar str
+    debugM rootLoggerName $ "Mutation of string: " ++ show str ++ " at an index " ++ (show mutId)   
+    debugM rootLoggerName $ "Mutated string:  " ++ show mresult    
+    return $ StringJS mresult
 
 
-mutateJSArray_new :: JSCPool -> JSType -> IO JSArg
-mutateJSArray_new pool jsType = do
-  result <- genRandomVal pool jsType
-  return result
-
+mutateJSArray :: StdGen -> [JSArg] -> JSType -> JSCPool -> IO JSArg
+mutateJSArray gen args typ pool =
+  if null args
+  then genRandomArray pool typ
+  else do
+    let (mutId, gen') = randomR (0, length args - 1) gen
+        arg = atNote "mutateJSArray" args mutId
+    debugM rootLoggerName $ "Mutation of an array: " ++ show args ++ " at an index " ++ (show mutId)
+    mutArg <- mutateJSArg arg typ gen' pool
+    let mresult = replaceElemInList mutId mutArg args
+    debugM rootLoggerName $ "Mutated array:  " ++ show mresult
+    return $ ArrayJS mresult
+  
 
 -- | TEST: mutateHtml (mkStdGen 5) thtml
 thtml :: ByteString

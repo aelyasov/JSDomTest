@@ -1,14 +1,17 @@
 const winston = require('winston');
+const _ = require('underscore');
 
 var _K_ = 1;
+var UNKNOWN = 10;
 //     _branchDistance_ = [],
 //     _trace_ = [1];
 
 function abs(x, y) {
     var typeX = typeof(x);
     var typeY = typeof(y);
-    winston.debug("x=" + x + " is of type " + typeX);
-    winston.debug("y=" + y + " is of type " + typeY);
+    var distance;
+    winston.debug("x='" + x + "' is of type " + typeX);
+    winston.debug("y='" + y + "' is of type " + typeY);
     if (typeX == typeY) {
         switch (typeX) {
             case "number":
@@ -16,37 +19,46 @@ function abs(x, y) {
                 if (Number.isNaN(x) || Number.isNaN(y)) throw new Error("Not a number " + x + y);
                 if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Error("Number is not finite " + x + y);
                 return Math.abs(x - y);
-                break;
             case "string":
-                winston.debug("string");
-                return getEditDistance(x, y);
-                break;
+                distance = absString(x, y); //getEditDistance(x, y);
+                winston.debug("string: " + distance);
+                return distance;
                 //case "string" : return naiveHammerDistance(x,y);console.log("str"); break;
             case "boolean":
                 winston.debug("boolean");
                 return Math.abs(x - y);
-                break;
             case "object":
                 winston.debug("object");
                 return Number(x == y);
-                break;
             default:
-                winston.debug("default");
-                return 0;
+                winston.debug("default: " + typeX);
+                return UNKNOWN;
         }
     } else {
         winston.debug("types don't match");
-        return 1;
+        return UNKNOWN;
     }
 }
-
 
 function absZero(x) {
     var typeX = typeof(x);
     winston.debug("x=" + x + " is of type " + typeX);
     switch (typeX) {
-        default: winston.debug("default");
-        return _K_;
+        case "number":
+            winston.debug("nummer");
+            return _K_;
+        case "string":
+            winston.debug("string");
+            return _K_;
+        case "boolean":
+            winston.debug("boolean");
+            return _K_;
+        case "object":
+            winston.debug("object");
+            return _K_;
+        default:
+            winston.debug("default: " + typeX);
+            return UNKNOWN;
     }
 }
 
@@ -61,12 +73,39 @@ function absNegZero(x) {
         case "string":
             winston.debug("string");
             return Math.abs(x.length);
-        default:
-            winston.debug("default");
+        case "boolean":
+            winston.debug("boolean");
             return _K_;
+        case "object":
+            winston.debug("object");
+            return _K_;
+        default:
+            winston.debug("default: " + typeX);
+            return UNKNOWN;
     }
 }
 
+function absString(str1, str2) {
+    function str2ints(str) {
+        var r = [];
+        for (var i = 0; i < str.length; i++) {
+            r.push(str.charCodeAt(i));
+        }
+        return r;
+    }
+
+    var code = 0;
+    var minStrLen = Math.min(str1.length, str2.length);
+    var lenDiff = Math.abs(str1.length - str2.length);
+    var codes1 = str2ints(str1);
+    var codes2 = str2ints(str2);
+
+    for (var i = 0; i < minStrLen; i++) {
+        code += Math.abs(codes1[i] - codes2[i]);
+    }
+    return code + 100 * lenDiff;
+
+}
 
 function naiveHammerDistance(str1, str2) {
     var dist = 0;

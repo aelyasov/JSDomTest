@@ -47,6 +47,7 @@ class Size a where
 
 instance Size JSArg where
   size (IntJS i)    = 1
+  size (FloatJS f)  = 1
   size (StringJS s) = 1
   size (BoolJS b)   = 1
   size (DomJS s)    = let doc = parseLBS s in sizeDocument doc
@@ -60,6 +61,7 @@ class Depth a where
 
 instance Depth JSArg where
   depth (IntJS i)    = 1
+  depth (FloatJS f)  = 1
   depth (StringJS s) = 1
   depth (BoolJS b)   = 1
   depth (DomJS s)    = let doc = parseLBS s in depthDocument doc
@@ -77,6 +79,7 @@ instance Statistics a => Statistics [a] where
 
 instance Statistics JSArg where
   showStatistics (IntJS i)    = "integer: " ++ show i
+  showStatistics (FloatJS f)  = "float: " ++ show f
   showStatistics (StringJS s) = "string: " ++ show s
   showStatistics (BoolJS b)   = "boolean: " ++ show b
   showStatistics (DomJS s)    = let doc = parseLBS s
@@ -85,4 +88,4 @@ instance Statistics JSArg where
                                    ++ " size: " ++
                                    (show $ sizeDocument doc)
   showStatistics (ArrayJS arr) = "array: " ++ show arr
-  showStatistics jsarg = error $ (show jsarg) ++ " can't compute statistics"
+  -- showStatistics jsarg = error $ (show jsarg) ++ " can't compute statistics"

@@ -20,6 +20,10 @@ import Analysis.CFG.Data
 import Data.Function (on)
 import Debug.Trace
 
+replaceElemInList :: Int -> a -> [a] -> [a]
+replaceElemInList i x as = let (pre, post) = splitAt i as
+                           in pre ++ x:tail post
+
 
 traceForLoopSize :: Default a => SLab -> ForInit a -> Expression a -> Statement a
 traceForLoopSize forLab forInit forTest =
@@ -176,8 +180,8 @@ expr2objFun expr@(InfixExpr l inOp ex1 ex2) =
           -- OpIn
           -- OpInstanceof
 -- expr2objFun (RegexpLit l str b1 b2)        = undefined 
--- expr2objFun (BracketRef l ex1 ex2)         = undefined
 -- expr2objFun (NewExpr l ex exs)             = undefined
+expr2objFun ex@(BracketRef l ex1 ex2)      = CallExpr def (VarRef def (Id def distanceZero)) [ex]
 expr2objFun ex@(StringLit l str)           = expr2objFun (InfixExpr def OpNEq ex (StringLit def ""))
 expr2objFun ex@(NumLit l val)              = expr2objFun (InfixExpr def OpNEq ex (NumLit def 0))
 expr2objFun ex@(IntLit l val)              = expr2objFun (InfixExpr def OpNEq ex (IntLit def 0))

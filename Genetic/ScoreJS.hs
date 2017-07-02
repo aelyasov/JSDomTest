@@ -69,7 +69,7 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
 
   setCondBreakPoint
   
-  return (Just fitnessVal, ([], (Nothing, Nothing, (Nothing, Just $ getIdsJS enviroment_, Just $ getNamesJS enviroment_, Just $ getClassesJS enviroment_)))) 
+  return (Just fitnessVal, ([], (Nothing, Nothing, Nothing, (Nothing, Just $ getIdsJS enviroment_, Just $ getNamesJS enviroment_, Just $ getClassesJS enviroment_)))) 
 
 
 -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]

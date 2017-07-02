@@ -9,8 +9,8 @@ const _ = require('underscore');
 const instrument = require("./instrumentLib.js");
 const winston = require('winston');
 
-// winston.level = 'info';
-winston.level = 'debug';
+winston.level = 'info';
+//winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {
     'timestamp': () => (new Date()).toJSON()
@@ -91,6 +91,16 @@ http.createServer(function(request, response) {
 
             document = jsdom.jsdom(jsFunDom);
             window = document.defaultView;
+	    environment = {
+		tags: new Set(),
+		names: new Set(),
+		ids: new Set(),
+		classes: new Set(),
+		selectors: new Set()
+	    };
+
+	    require('./domIntercept.js')(window, environment, winston);
+
 
             var _K_ = 1;
             let branchDistance = [];
@@ -101,19 +111,6 @@ http.createServer(function(request, response) {
             // winston.debug("jsFun:\n", jsFun);
 
             eval(jsFun);
-
-	    document = jsdom.jsdom();
-	    window = document.defaultView;
-	    environment = {
-		tags: new Set(),
-		names: new Set(),
-		ids: new Set(),
-		classes: new Set(),
-		selectors: new Set()
-};
-
-	    require('./domIntercept.js')(window, environment, winston);
-
 
             try {
                 Reflect.apply(test, this, realJSFunArgs);

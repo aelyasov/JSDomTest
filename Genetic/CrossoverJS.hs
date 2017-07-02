@@ -33,6 +33,7 @@ crossoverJSArgs gen pairJsArgs = case pairJsArgs of
   (BoolJS b1, BoolJS b2)       -> crossoverBoolJS b1 b2 
   (DomJS d1, DomJS d2)         -> crossoverDomJS gen d1 d2
   (IntJS i1, IntJS i2)         -> crossoverIntJS i1 i2
+  (FloatJS f1, FloatJS f2)     -> crossoverFloatJS f1 f2
   (StringJS s1, StringJS s2)   -> crossoverStringJS s1 s2
   (ArrayJS arr1, ArrayJS arr2) -> crossoverArrayJS arr1 arr2
   otherwise -> error $ "crossover for elements of type " ++ (show pairJsArgs) ++ " isn't defined"
@@ -59,11 +60,20 @@ crossoverArrayJS arr1 arr2 = do
   
 
 crossoverStringJS :: String -> String -> IO JSArg
-crossoverStringJS s1 s2 = do
-  result <- liftM ([s1,s2]!!) $ randomRIO (0, 1)
-  debugM rootLoggerName $ "Crossing over: " ++ (show s1) ++ " and " ++ (show s2) ++ " results in " ++ (show result)
+crossoverStringJS str1 str2 = do
+  result <- liftM ([str1,str2]!!) $ randomRIO (0, 1)
+  debugM rootLoggerName $ "Crossing over: " ++ (show str1) ++ " and " ++ (show str2) ++ " results in " ++ (show result)
   setCondBreakPoint
   return $ StringJS result
+
+  -- crossPoint1 <- randomRIO (0, length str1)
+  -- crossPoint2 <- randomRIO (0, length str2)
+  -- let crossStr1 = take crossPoint1 str1 ++ drop crossPoint2 str2
+  --     crossStr2 = take crossPoint2 str2 ++ drop crossPoint1 str1
+  -- result <- liftM ([crossStr1, crossStr2]!!) $ randomRIO (0, 1)
+  -- debugM rootLoggerName $ "Crossing over: " ++ (show str1) ++ " and " ++ (show str2) ++ " results in " ++ (show result)
+  -- setCondBreakPoint
+  -- return $ StringJS result
 
 
 crossoverIntJS :: Int -> Int -> IO JSArg
@@ -71,7 +81,15 @@ crossoverIntJS i1 i2 = do
   result <- liftM ([i1,i2]!!) $ randomRIO (0, 1)
   debugM rootLoggerName $ "Crossing over: " ++ (show i1) ++ " and " ++ (show i2) ++ " results in " ++ (show result)
   setCondBreakPoint
-  return $ IntJS result  
+  return $ IntJS result
+
+
+crossoverFloatJS :: Float -> Float -> IO JSArg
+crossoverFloatJS f1 f2 = do
+  result <- liftM ([f1,f2]!!) $ randomRIO (0, 1)
+  debugM rootLoggerName $ "Crossing over: " ++ (show f1) ++ " and " ++ (show f2) ++ " results in " ++ (show result)
+  setCondBreakPoint
+  return $ FloatJS result  
   
 
 crossoverDomJS :: StdGen -> ByteString -> ByteString -> IO JSArg

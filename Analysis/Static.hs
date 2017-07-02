@@ -21,16 +21,16 @@ collectStaticRefs = everything mappend (mempty `mkQ` foldExpr)
 foldExpr :: Expression SourcePosLab -> JSCPool
 foldExpr (CallExpr _ (DotRef _ _ (Id _ fun)) [StringLit _ arg]) =
   case fun of
-   "createElement"          -> (mempty, mempty, (Just [str2HtmlTag arg], mempty, mempty, mempty)) 
-   "getElementById"         -> (mempty, mempty, (mempty,            Just [arg],  mempty, mempty))
-   "getElementsByClassName" -> (mempty, mempty, (mempty,            mempty, mempty, Just [arg]))
-   "getElementsByName"      -> (mempty, mempty, (mempty,            mempty, Just [arg],  mempty))
-   "getElementsByTagName"   -> (mempty, mempty, (Just [str2HtmlTag  arg], mempty, mempty, mempty))
+   "createElement"          -> (mempty, mempty, mempty, (Just [str2HtmlTag arg], mempty, mempty, mempty)) 
+   "getElementById"         -> (mempty, mempty, mempty, (mempty,            Just [arg],  mempty, mempty))
+   "getElementsByClassName" -> (mempty, mempty, mempty, (mempty,            mempty, mempty, Just [arg]))
+   "getElementsByName"      -> (mempty, mempty, mempty, (mempty,            mempty, Just [arg],  mempty))
+   "getElementsByTagName"   -> (mempty, mempty, mempty, (Just [str2HtmlTag  arg], mempty, mempty, mempty))
    _                        -> mempty
-foldExpr (DotRef _ _ (Id _ fun)) | fun == "insertRow" = (mempty, mempty, (Just [TAG_TABLE], mempty, mempty, mempty))
+foldExpr (DotRef _ _ (Id _ fun)) | fun == "insertRow" = (mempty, mempty, mempty, (Just [TAG_TABLE], mempty, mempty, mempty))
                                  | otherwise          = mempty
-foldExpr (StringLit _ str) = (mempty, Just [str], (mempty, mempty, mempty, mempty))
-foldExpr (IntLit _ int)    = (Just [int], mempty, (mempty, mempty, mempty, mempty))   
+foldExpr (StringLit _ str) = (mempty, mempty, Just [str],  (mempty, mempty, mempty, mempty))
+foldExpr (IntLit _ int)    = (Just [int], mempty, mempty, (mempty, mempty, mempty, mempty))   
 foldExpr (InfixExpr _ infixOp leftExpr rightExpr)
   | infixOp `elem` [OpEq, OpNEq] = extractClassName leftExpr rightExpr <> extractClassName rightExpr leftExpr
 foldExpr _ = mempty
@@ -38,7 +38,7 @@ foldExpr _ = mempty
 
 extractClassName :: Expression SourcePosLab -> Expression SourcePosLab -> JSCPool
 extractClassName expr (StringLit _ className)
-  | isExprEndsWithClassName expr = (mempty, mempty, (mempty, mempty, mempty, Just [className]))
+  | isExprEndsWithClassName expr = (mempty, mempty, mempty, (mempty, mempty, mempty, Just [className]))
   | otherwise                    = mempty
 extractClassName _ _ = mempty
 
@@ -54,7 +54,8 @@ collectConstantInfoJS = removeDuplicates . collectStaticRefs
 
 
 removeDuplicates :: JSCPool -> JSCPool
-removeDuplicates (ints, strings, (tags, ids, names, classes)) = ( liftM nub ints
+removeDuplicates (ints, floats, strings, (tags, ids, names, classes)) = ( liftM nub ints
+                                                                , liftM nub floats
                                                                 , liftM nub strings
                                                                 , ( liftM nub tags
                                                                   , liftM nub ids

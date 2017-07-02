@@ -21,11 +21,11 @@ import Text.XML.Pretty (prettyHtmlByteString)
 
 import Html5C.Tags
 
-data JSArg = IntJS Int
-           | FloatJS Float
-           | StringJS String
+data JSArg = IntJS { getIntJS :: Int } 
+           | FloatJS { getFloatJS :: Float }
+           | StringJS { getStringJS :: String }
            | BoolJS Bool
-           | DomJS ByteString
+           | DomJS { getDomJS :: ByteString }
            | ArrayJS [JSArg]
            deriving (Read, Ord, Eq)
 
@@ -50,6 +50,7 @@ data JSType = JS_INT
 type JSSig = [JSType]
 
 type JSInts    = Maybe [Int]
+type JSFloats  = Maybe [Float]
 type JSStrings = Maybe [String]
 type JSTags    = Maybe [HTML_TAG]
 type JSIds     = Maybe [String]
@@ -57,22 +58,25 @@ type JSNames   = Maybe [String]
 type JSClasses = Maybe [String]
 type JSDoms    = (JSTags, JSIds, JSNames, JSClasses)
 
-type JSCPool = (JSInts, JSStrings, JSDoms)
+type JSCPool = (JSInts, JSFloats, JSStrings, JSDoms)
 
 getJSDoms :: JSCPool -> JSDoms
-getJSDoms (_, _, doms) = doms
+getJSDoms (_, _, _, doms) = doms
 
 getJSInts :: JSCPool -> JSInts
-getJSInts (ints, _, _) = ints
+getJSInts (ints, _, _, _) = ints
+
+getJSFloats :: JSCPool -> JSFloats
+getJSFloats (_, floats, _, _) = floats
 
 getJSStrings :: JSCPool -> JSStrings
-getJSStrings (_, strings, _) = strings
+getJSStrings (_, _, strings, _) = strings
 
 getJSIds :: JSCPool -> JSIds
-getJSIds (_, _, (_, ids, _, _)) = ids
+getJSIds (_, _, _, (_, ids, _, _)) = ids
 
 getJSClasses :: JSCPool -> JSClasses
-getJSClasses (_, _, (_, _, _, classes)) = classes
+getJSClasses (_, _, _, (_, _, _, classes)) = classes
 
 isPrimJSArg :: JSArg -> Bool
 isPrimJSArg (DomJS _ ) = False
@@ -85,6 +89,7 @@ isDomJSArg _         = False
 
 jsarg2bstr :: JSArg -> Text
 jsarg2bstr (IntJS i)    = T.pack $ show i
+jsarg2bstr (FloatJS f)  = T.pack $ show f
 jsarg2bstr (StringJS s) = T.pack s
 jsarg2bstr (BoolJS b)   = case b of
                             True  -> T.pack "true"

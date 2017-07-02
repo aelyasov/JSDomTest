@@ -23,27 +23,23 @@ import Text.XML.Statistics
 import Safe (headNote)
 import Data.Maybe (fromMaybe)
 import Data.List (intercalate)
+import Analysis.CFG.Util (replaceElemInList)
 
 import Debug.Trace
 
 import GA.GA
 
-replaceElemInList :: Int -> a -> [a] -> [a]
-replaceElemInList i x as = let (pre, post) = splitAt i as
-                           in pre ++ x:tail post
-
-
 -- | sig = [JS_DOM,JS_STRING]
 -- | pool = ([], ["node"], ([TAG_IFRAME], ["node"], [], []))
 instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
 
-  genRandom pool@(sig, env) seed = do
+  genRandom (sig, pool) seed = do
     debugM rootLoggerName $ "Generating random population for the signature: " ++ show sig
-    let uniqueEnv = removeDuplicates env
-    args <- mapM (genRandomVal uniqueEnv) sig
+    let pool' = removeDuplicates pool
+    args <- mapM (genRandomVal pool') sig
     return args
 
-  crossover pool _ seed args1 args2 = do
+  crossover _ _ seed args1 args2 = do
     let gen        = mkStdGen seed
         pairedArgs = zip args1 args2
         crossArgId = fst $ randomR (0, length pairedArgs - 1) gen
@@ -56,16 +52,16 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
     return $ Just cresult
           
   mutation (sig, pool) _ seed args = do
-    let gen       = mkStdGen seed
-        typedArgs = zip sig args
-        mutArgId  = fst $ randomR (0, length typedArgs - 1) gen      
+    let uniquePool = removeDuplicates pool
+        gen        = mkStdGen seed
+        mutId      = fst $ randomR (0, length args - 1) gen
+        arg        = args !! mutId
+        typ        = sig !! mutId 
     debugM rootLoggerName $ "Mutating arguments: " ++ show args
-    debugM rootLoggerName $ "Mutation point is: " ++ show mutArgId
-    mutArg <- mutateJSArg (typedArgs!!mutArgId) gen pool
-    let mresult = replaceElemInList mutArgId mutArg args
+    debugM rootLoggerName $ "Mutation point is: " ++ show mutId
+    mutArg <- mutateJSArg arg typ gen uniquePool
+    let mresult = replaceElemInList mutId mutArg args
     debugM rootLoggerName $ "Mutated arguments:  " ++ show mresult
-
-    -- mresult <- genRandom (sig, pool) seed
     return $ Just mresult
 
   score = fitnessScore
@@ -79,7 +75,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
     --                                 ++ "\nPopulation statistics:\n"
     --                                 ++ showPopulation pop
     where
-      showBestEntity = "Best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
+      showBestEntity = "Best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness ++ " \n" ++ (show e)
       (Just fitness, e) = headNote "showGeneration" archive
       -- showArchive = intercalate "\n------------\n" . map showScoredEntity 
       -- showScoredEntity (f, p) = "fitness: " ++ showFitness f ++ "\n" ++ showEntity p
@@ -105,7 +101,7 @@ readGenetcAlgConfig = do
   
 
 runGenetic :: Target -> (JSSig, JSCPool) -> IO [JSArg]
-runGenetic target pool@(sig, (intP, stringP, (tagP, idP, nameP, classP))) = do
+runGenetic target pool@(sig, (intP, floatP, stringP, (tagP, idP, nameP, classP))) = do
   (population, archive, generations, crossoverRate, mutationRate, crossoverParam, mutationParam, checkpointing, rescorearchive) <- readGenetcAlgConfig
   let conf = GAConfig population archive generations crossoverRate mutationRate crossoverParam mutationParam checkpointing rescorearchive 
       g = mkStdGen 0            

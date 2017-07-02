@@ -5,11 +5,13 @@ function test(pingH, pingV, iteration) {
         PING.src = "img/ping1.png";
         moveObjTo(PING, pingH, pingV);
         window.setTimeout("goPing(" + pingH + "," + pingV + ",2);", 80);
-    } else if (iteration == 2) {
+    } else {
+      if (iteration == 2) {
         PING.src = "img/ping2.png";
         window.setTimeout("goPing(0,0,3);", 80);
-    } else {
+      } else {
         moveObjTo(PING, -100, -100);
+      }
     }
 }
 
