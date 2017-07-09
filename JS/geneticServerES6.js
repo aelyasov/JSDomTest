@@ -83,7 +83,7 @@ http.createServer(function(request, response) {
                 if (arg[0] == "JS_STRING") {
                     return arg[1];
                 } else {
-                    return JSON.parse(arg[1]);
+                    return eval(arg[1]);
                 }
             });
             //let realJSFunArgs = jsFunArgs.map(myParse);

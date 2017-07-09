@@ -53,12 +53,14 @@ import Data.Graph.Inductive
 import Debug.Trace
 import Util.Debug (setCondBreakPoint)
 import System.IO (stdout, Handle)
-import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, noticeM, setLevel, errorM, criticalM)
-import System.Log.Handler.Simple (streamHandler, GenericHandler)
-import System.Log.Handler (setFormatter)
+import System.Log.Logger (rootLoggerName, getRootLogger, setHandlers, updateGlobalLogger, Priority(..), debugM, infoM, noticeM, setLevel, errorM, criticalM, removeAllHandlers)
+import System.Log.Handler.Simple (streamHandler, GenericHandler(..))
+import System.Log.Handler (setFormatter, close)
 import System.Log.Formatter
 import Data.Configurator (load, Worth(..), require, display)
 import System.Process (system)
+import System.IO (openFile, IOMode(..), hClose)
+import Control.Exception (onException)
 
 
 readMainConfig :: IO (Algorithm, Priority, Bool, Int, Int)
@@ -73,24 +75,37 @@ readMainConfig = do
   return (algType, logLevel, isBreakEnabled, iterateTotal, coverageBranches)
 
 
-setCommonFormatter x =
-  let f = simpleLogFormatter "[$time $loggername $prio] $msg"
-  in  setFormatter x f
+fileHandlerReadWrite :: FilePath -> Priority -> IO (GenericHandler Handle)
+fileHandlerReadWrite fp pri = do
+  h  <- openFile fp WriteMode
+  sh <- streamHandler h pri
+  return (sh{closeFunc = hClose})
+
+parseInputAndSetupLogger :: Priority -> IO String
+parseInputAndSetupLogger logLevel = do
+  args <- getArgs
+  (handler, inFile) <- case args of
+    [jsFile]          -> liftM (\h -> (h, jsFile)) $ streamHandler stdout logLevel
+    [jsFile, outFile] -> liftM (\h -> (h, jsFile)) $ fileHandlerReadWrite outFile logLevel 
+    otherwise         -> error $ "Wrong number of input arguments: " ++ (show $ length args) 
+  let formatter = simpleLogFormatter "[$time $loggername $prio] $msg"
+      handler'  = setFormatter handler formatter
+      logger    = rootLoggerName
+  updateGlobalLogger logger $ setLevel logLevel
+  updateGlobalLogger logger $ setHandlers [handler']
+  return inFile
+
+main :: IO ()    
+main = main' `onException` removeAllHandlers
 
 
 -- | run main: :main "nodeCovertest.js"
-main :: IO ()    
-main = do
+main' :: IO ()    
+main' = do
   (algType, logLevel, isBreak, iterateTotal, coverageBranches) <- readMainConfig
-  -- Logger Configuration
-  myStreamHandler <- streamHandler stdout logLevel
-  let myStreamHandler' = setCommonFormatter myStreamHandler
+  -- Parse input and set logger
+  jsFile <- parseInputAndSetupLogger logLevel
   let logger = rootLoggerName
-  updateGlobalLogger logger (setLevel logLevel)
-  updateGlobalLogger logger (setHandlers [myStreamHandler'])
-
-  -- | Instrument and statically analize JS program
-  (jsFile:_) <- getArgs
   debugM logger $ "JavaScript file given for the analysis: " ++ (show jsFile)
   jsFileContent <- parseFromFile jsFile
   jsSig <- parseJSSignature jsFile  
@@ -157,7 +172,7 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
     killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
     killJSMutationGenetic alg man mutN target pool = do
       let logger = rootLoggerName
-      putStrLn $ replicate 70 '-'
+      criticalM logger $ replicate 70 '-'
       criticalM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
       noticeM logger $ "Initial pool data: " ++ (show pool)
       request <- parseUrl "http://localhost:7777/mutation"
