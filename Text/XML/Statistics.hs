@@ -62,10 +62,10 @@ class Depth a where
 instance Depth JSArg where
   depth (IntJS i)    = 1
   depth (FloatJS f)  = 1
-  depth (StringJS s) = 1
+  depth (StringJS s) = length s
   depth (BoolJS b)   = 1
   depth (DomJS s)    = let doc = parseLBS s in depthDocument doc
-  depth (ArrayJS a)  = 1 
+  depth (ArrayJS a)  = length a 
 
 instance Depth a => Depth [a] where
   depth xs = product $ map depth xs  

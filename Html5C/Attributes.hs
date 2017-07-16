@@ -25,7 +25,7 @@ import Data.Generics.Aliases (extM)
 import Debug.Trace
 import Control.Monad (liftM, foldM)
 import Control.Applicative ((<|>))
-import Data.Maybe (fromJust)
+import Data.Maybe (maybe, fromMaybe)
 
 
 assignIdsToDocumentRandomly :: Maybe [String] -> Maybe [String] -> Document -> IO Document
@@ -40,7 +40,7 @@ assignAttributesToDocumentRandomly :: String -> Maybe [String] -> Maybe [String]
 assignAttributesToDocumentRandomly attrName strConsts attrValues doc = do
   gen <- newStdGen
   let (Document prologue (Element html html_attrs [header, NodeElement body]) epilogue) = doc
-      values = fromJust $ attrValues <|> strConsts <|> Just ["test"]
+      values = maybe [] (\attrs -> if null attrs then fromMaybe [] strConsts else attrs) attrValues
       (labeledElement, maxLabel) = labelXMLElement body
       randomLabeles              = take (maxLabel - 1) $ nub $ randomRs (1, maxLabel - 1) gen
       labsAndValues              = sortBy (compare `on` fst) $ zip randomLabeles values

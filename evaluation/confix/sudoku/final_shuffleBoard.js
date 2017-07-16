@@ -1,9 +1,9 @@
-/*t dom */
-function test() {
+/*t dom:int:int */
+function test(number1, number2) {
     var squareObjects = document.getElementsByTagName("DIV");
-    for (var counter = 0; counter < 30; counter++) {
-        var number1 = Math.ceil(Math.random() * 9);
-        var number2 = Math.ceil(Math.random() * 9);
+    for (var counter = 0; counter < 2; counter++) {
+        //var number1 = Math.ceil(Math.random() * 9);
+        //var number2 = Math.ceil(Math.random() * 9);
         while (number2 == number1) {
             number2 = Math.ceil(Math.random() * 9);
         }

@@ -28,6 +28,7 @@ foldExpr (CallExpr _ (DotRef _ _ (Id _ fun)) [StringLit _ arg]) =
    "getElementsByTagName"   -> (mempty, mempty, mempty, (Just [str2HtmlTag  arg], mempty, mempty, mempty))
    _                        -> mempty
 foldExpr (DotRef _ _ (Id _ fun)) | fun == "insertRow" = (mempty, mempty, mempty, (Just [TAG_TABLE], mempty, mempty, mempty))
+                                 | fun == "className" = (mempty, mempty, mempty, (mempty, mempty, mempty, Just []))
                                  | otherwise          = mempty
 foldExpr (StringLit _ str) = (mempty, mempty, Just [str],  (mempty, mempty, mempty, mempty))
 foldExpr (IntLit _ int)    = (Just [int], mempty, mempty, (mempty, mempty, mempty, mempty))   
@@ -62,3 +63,6 @@ removeDuplicates (ints, floats, strings, (tags, ids, names, classes)) = ( liftM 
                                                                   , liftM nub names
                                                                   , liftM nub classes))
 
+
+
+-- CallExpr _ (DotRef _ (DotRef _ (BracketRef _ (VarRef _ (Id _ "subDivs")) (VarRef _ (Id _ "no"))) (Id _ "className")) (Id _ "indexOf")) [StringLit (line 1, column 31) "sudokuSquare"]

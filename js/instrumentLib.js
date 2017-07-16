@@ -15,23 +15,26 @@ function abs(x, y) {
     if (typeX == typeY) {
         switch (typeX) {
             case "number":
-                winston.debug("nummer");
+                distance = Math.abs(x - y);
+                winston.debug("nummer: " + distance);
                 if (Number.isNaN(x) || Number.isNaN(y)) throw new Error("Not a number " + x + y);
                 if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Error("Number is not finite " + x + y);
-                return Math.abs(x - y);
+                return distance;
             case "string":
                 distance = absString(x, y); //getEditDistance(x, y);
                 winston.debug("string: " + distance);
                 return distance;
                 //case "string" : return naiveHammerDistance(x,y);console.log("str"); break;
             case "boolean":
-                winston.debug("boolean");
-                return Math.abs(x - y);
+                distance = Math.abs(x - y);
+                winston.debug("boolean: " + distance);
+                return distance;
             case "object":
-                winston.debug("object");
-                return Number(x == y);
+                distance = Number(x == y);
+                winston.debug("object: " + distance);
+                return distance;
             default:
-                winston.debug("default: " + typeX);
+                winston.debug("unknown type (" + typeX + "): " + UNKNOWN);
                 return UNKNOWN;
         }
     } else {
@@ -45,19 +48,19 @@ function absZero(x) {
     winston.debug("x=" + x + " is of type " + typeX);
     switch (typeX) {
         case "number":
-            winston.debug("nummer");
+            winston.debug("nummer: " + _K_);
             return _K_;
         case "string":
-            winston.debug("string");
+            winston.debug("string: " + _K_);
             return _K_;
         case "boolean":
-            winston.debug("boolean");
+            winston.debug("boolean: " + _K_);
             return _K_;
         case "object":
-            winston.debug("object");
+            winston.debug("object: " + _K_);
             return _K_;
         default:
-            winston.debug("default: " + typeX);
+            winston.debug("default (" + typeX + "): " + UNKNOWN);
             return UNKNOWN;
     }
 }
@@ -65,23 +68,29 @@ function absZero(x) {
 
 function absNegZero(x) {
     var typeX = typeof(x);
+    var distance;
     winston.debug("x=" + x + " is of type " + typeX);
     switch (typeX) {
         case "number":
-            winston.debug("nummer");
-            return Math.abs(x);
+            distance = Math.abs(x);
+            winston.debug("nummer: " + distance);
+            return distance;
         case "string":
-            winston.debug("string");
-            return Math.abs(x.length);
+            distance = Math.abs(x.length);
+            winston.debug("string: " + distance);
+            return distance;
         case "boolean":
-            winston.debug("boolean");
-            return _K_;
+            distance = _K_;
+            winston.debug("boolean: " + distance);
+            return distance;
         case "object":
-            winston.debug("object");
-            return _K_;
+            distance = _K_;
+            winston.debug("object: " + distance);
+            return distance;
         default:
-            winston.debug("default: " + typeX);
-            return UNKNOWN;
+            distance = UNKNOWN;
+            winston.debug("default (" + typeX + ") " + distance);
+            return distance;
     }
 }
 
