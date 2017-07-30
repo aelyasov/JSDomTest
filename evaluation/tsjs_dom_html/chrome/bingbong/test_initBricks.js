@@ -68,7 +68,7 @@ function initBricks(i, myCenterH, brickV, brickH, brickStat, theLevelArt, levelD
         brickH[i] = brickCol;
         brickV[i] = brickRow;
         brickStat[i] = 2;
-        document.getElementById('BRICK' + i).src = "img/solid.png";
+        document.gиetElementById('BRICK' + i).src = "img/solid.png";
         document.getElementById('BRICK' + i).style.left = brickH[i];
         document.getElementById('BRICK' + i).style.top = brickV[i];
     } else if (thisBrick == 'Z') {

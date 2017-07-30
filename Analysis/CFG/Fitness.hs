@@ -33,9 +33,10 @@ computeFitness cfg loopIterMap target path distances = do
       isException      = last path == (-100) && ((last $ init path) == problemNode)
       problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
       fitnessVal       = if target `elem` path then 0 else fromIntegral (cfgLevel - 1) + problemNodeLevel
-      logger           = rootLoggerName
+      logger           = rootLoggerName    
   infoM logger $ "ProblemNode: " ++ show problemNode
   infoM logger $ "CfgLevel: " ++ show cfgLevel
+  infoM logger $ "Branch level: " ++ show branchLevel
   infoM logger $ "ProblemNodeLevel: " ++ show problemNodeLevel
   infoM logger $ "Fitness value for location #" ++ show target ++ ": " ++ show fitnessVal 
   return fitnessVal

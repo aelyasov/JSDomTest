@@ -31,7 +31,7 @@ import GA.GA
 
 -- | sig = [JS_DOM,JS_STRING]
 -- | pool = ([], ["node"], ([TAG_IFRAME], ["node"], [], []))
-instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
+instance Entity [JSArg] (Double, Double) Target (JSSig, JSCPool) IO where
 
   genRandom (sig, pool) seed = do
     debugM rootLoggerName $ "Generating random population for the signature: " ++ show sig
@@ -66,7 +66,7 @@ instance Entity [JSArg] Double Target (JSSig, JSCPool) IO where
 
   score = fitnessScore
 
-  isPerfect (_,s) = s == 0.0
+  isPerfect (_,s) = s == (0.0, 0.0)
   -- isPerfect (_,s) = s < 1.0
 
   showGeneration gi (pop,archive) = showBestEntity

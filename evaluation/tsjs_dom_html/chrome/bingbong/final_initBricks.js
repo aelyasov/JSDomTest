@@ -68,6 +68,6 @@ function test(i, myCenterH, brickV, brickH, brickStat, theLevelArt, levelData) {
     }
     i++;
     if (i <= 50) {
-        window.setTimeout("initBricks(" + i + ");", 20);
+        //window.setTimeout("initBricks(" + i + ");", 20);
     }
 }

@@ -76,7 +76,7 @@ function absNegZero(x) {
             winston.debug("nummer: " + distance);
             return distance;
         case "string":
-            distance = Math.abs(x.length);
+            distance = absString(x, "");
             winston.debug("string: " + distance);
             return distance;
         case "boolean":

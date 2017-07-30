@@ -61,19 +61,19 @@ crossoverArrayJS arr1 arr2 = do
 
 crossoverStringJS :: String -> String -> IO JSArg
 crossoverStringJS str1 str2 = do
-  result <- liftM ([str1,str2]!!) $ randomRIO (0, 1)
-  debugM rootLoggerName $ "Crossing over: " ++ (show str1) ++ " and " ++ (show str2) ++ " results in " ++ (show result)
-  setCondBreakPoint
-  return $ StringJS result
-
-  -- crossPoint1 <- randomRIO (0, length str1)
-  -- crossPoint2 <- randomRIO (0, length str2)
-  -- let crossStr1 = take crossPoint1 str1 ++ drop crossPoint2 str2
-  --     crossStr2 = take crossPoint2 str2 ++ drop crossPoint1 str1
-  -- result <- liftM ([crossStr1, crossStr2]!!) $ randomRIO (0, 1)
+  -- result <- liftM ([str1,str2]!!) $ randomRIO (0, 1)
   -- debugM rootLoggerName $ "Crossing over: " ++ (show str1) ++ " and " ++ (show str2) ++ " results in " ++ (show result)
   -- setCondBreakPoint
   -- return $ StringJS result
+
+  crossPoint1 <- randomRIO (0, length str1)
+  crossPoint2 <- randomRIO (0, length str2)
+  let crossStr1 = take crossPoint1 str1 ++ drop crossPoint2 str2
+      crossStr2 = take crossPoint2 str2 ++ drop crossPoint1 str1
+  result <- liftM ([crossStr1, crossStr2]!!) $ randomRIO (0, 1)
+  debugM rootLoggerName $ "Crossing over: " ++ (show str1) ++ " and " ++ (show str2) ++ " results in " ++ (show result)
+  setCondBreakPoint
+  return $ StringJS result
 
 
 crossoverIntJS :: Int -> Int -> IO JSArg

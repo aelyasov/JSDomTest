@@ -81,6 +81,7 @@ genRandomString strs = do
     where
       genFixedString size = vectorOf size $ suchThat arbitrary (\ch -> ch `elem` ['A' .. 'Z'] || ch `elem` ['a' .. 'z'] || ch `elem` ['0' .. '9'])
 
+
 -- | generate random boolean value out of given diaposon
 genRandomBool :: IO JSArg
 genRandomBool = do
@@ -88,6 +89,7 @@ genRandomBool = do
   debugM rootLoggerName $ show randomBool
   setCondBreakPoint
   return $ BoolJS randomBool
+
 
 genRandomDom :: JSCPool -> IO JSArg
 genRandomDom pool = do

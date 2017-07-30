@@ -10,7 +10,7 @@ const instrument = require("./instrumentLib.js");
 const winston = require('winston');
 
 winston.level = 'info';
-// winston.level = 'debug';
+//winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {
     'timestamp': () => (new Date()).toJSON()
@@ -38,7 +38,7 @@ http.createServer(function(request, response) {
             jsFun = rawJsFun;
         });
         response.writeHead(200, {
-            "Content-Type": "text/plain"
+            "bcfg-Type": "text/plain"
         });
         response.write("init response");
         response.end();

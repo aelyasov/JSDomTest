@@ -8,7 +8,7 @@ import Text.XML.Label (deleteNodeInDocumentByLabel, removeAttributeFromDocument)
 import Text.XML.Statistics (depthDocument, sizeDocument)
 import Text.XML (Document(..))
 import Text.XML.Convert (document2bytestring)
-import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
+import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM, criticalM)
 -- import System.Random (mkStdGen, StdGen, randomR)
 import System.Random
 import Text.Blaze.Html.Renderer.Pretty (renderHtml)
@@ -21,10 +21,11 @@ import Genetic.DataJS (JSCPool, JSArg(..), getJSInts, getJSFloats, getJSStrings,
 import Control.Monad (liftM)
 import Genetic.RandomJS (genRandomInt, genRandomFloat, genRandomString, genRandomDom, genRandomArray, genRandomVal)
 import Analysis.Static (removeDuplicates)
-import Test.QuickCheck.Gen (elements, generate)
+import Test.QuickCheck.Gen (elements, generate, frequency)
 import Util.Debug (setCondBreakPoint)
 import Analysis.CFG.Util (replaceElemInList)
 import Safe (atNote)
+import Debug.Trace
 
 
 mutateJSArg :: JSArg -> JSType -> StdGen -> JSCPool -> IO JSArg
@@ -136,11 +137,11 @@ mutateDocument = deleteNodeInDocumentByLabel
 
 mutateJSInt :: Int -> JSCPool -> IO JSArg
 mutateJSInt int pool = do
-  r <- liftM getIntJS $ genRandomInt $ getJSInts pool
-  let ints = map (\f -> f int) [(+1), (+(-1))]
-  int' <- generate $ elements (r:ints)
-  debugM rootLoggerName $ "Mutation of the integer value: " ++ (show int) ++ " replaced by: " ++ (show int')
-  return $ IntJS int'
+  randInt <- liftM getIntJS $ genRandomInt $ getJSInts pool
+  let mutInts = map (\f -> f int) [(+1), (+(-1))]
+  result <- generate $ elements (randInt:mutInts)
+  debugM rootLoggerName $ "Mutation of the integer value: " ++ (show int) ++ " replaced by: " ++ (show result)
+  return $ IntJS result
 
 
 mutateJSFloat :: Float -> JSCPool -> IO JSArg
@@ -167,9 +168,11 @@ mutateJSString gen str pool =
     let (mutId, gen') = randomR (0, length str - 1) gen
         chr = atNote "mutateJSString" str mutId
         mutChar = if even mutId
-                  then if chr `elem` ['z','9', 'Z'] then pred chr else succ chr
-                  else if chr `elem` ['a','0', 'A'] then succ chr else pred chr
-        mresult = replaceElemInList mutId mutChar str
+                  then if chr `elem` ['z', '9', 'Z'] then pred chr else succ chr
+                  else if chr `elem` ['a', '0', 'A'] then succ chr else pred chr
+        mutStr = replaceElemInList mutId mutChar str
+    randStr <- liftM getStringJS $ genRandomString $ getJSStrings pool    
+    mresult <- generate $ frequency [(4, return mutStr), (1, return randStr)]  
     debugM rootLoggerName $ "Mutation of string: " ++ show str ++ " at an index " ++ (show mutId)   
     debugM rootLoggerName $ "Mutated string:  " ++ show mresult    
     return $ StringJS mresult
