@@ -6,7 +6,7 @@ import Genetic.DataJS
 
 import Network.HTTP.Types
 import qualified Data.CaseInsensitive as CI
-import Network.HTTP.Conduit
+import Network.HTTP.Conduit (parseRequest, newManager, tlsManagerSettings, Request(..), RequestBody(..), httpLbs, responseBody, responseTimeoutMicro, HttpException(..))
 import Control.Monad.IO.Class (liftIO)
 import Control.Applicative
 import Control.Monad
@@ -33,14 +33,18 @@ import Util.Debug (setCondBreakPoint)
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
 
-fitnessScore :: Target -> [JSArg] -> IO (Maybe (Double, Double), (JSSig, JSCPool))
+defaultResponseTimeout :: Int
+defaultResponseTimeout = 60 * 10 ^ 6 -- one minute in microseconds
+
+fitnessScore :: Target -> [JSArg] -> IO (Maybe (Double, Double, Int), (JSSig, JSCPool))
 fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   let logger = rootLoggerName
   debugM logger $ "Compute fitness score for the target: " ++ (show loc)
   debugM logger $ "Compute fitness score for the JS arguments:\n" ++ (show jargs)
   man <- liftIO $ newManager tlsManagerSettings
-  initReq <- parseUrl "http://localhost:7777/genetic"
+  initReq <- parseRequest "http://localhost:7777/genetic"
   let req = initReq { method = "POST"
+                    , responseTimeout = responseTimeoutMicro defaultResponseTimeout
                     , requestHeaders = [(CI.mk "Content-Type", "application/json;charset=UTF-8")]
                     , requestBody = RequestBodyLBS $ encode $ GAInput (jsargs2bstrs jargs)
                     }
@@ -63,7 +67,7 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   fitnessVal2 <- computeFitness cfg (map2IntMap loops_) (-1) trace_ distances_
   -- fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
   -- infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
-  let fitnessVal = (fitnessVal1, fitnessVal2)
+  let fitnessVal = (fitnessVal1, fitnessVal2, length trace_)
   -- let fitnessVal = fitnessVal1
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
 

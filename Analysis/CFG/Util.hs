@@ -20,9 +20,11 @@ import Analysis.CFG.Data
 import Data.Function (on)
 import Debug.Trace
 
-replaceElemInList :: Int -> a -> [a] -> [a]
+replaceElemInList :: Int -> Maybe a -> [a] -> [a]
 replaceElemInList i x as = let (pre, post) = splitAt i as
-                           in pre ++ x:tail post
+                           in case x of
+                                Just x' -> pre ++ x':tail post
+                                Nothing -> pre ++ tail post
 
 
 traceForLoopSize :: Default a => SLab -> ForInit a -> Expression a -> Statement a

@@ -167,7 +167,7 @@ import System.Log.Logger (rootLoggerName, noticeM, errorM, debugM, criticalM)
 import Data.Maybe (fromMaybe)
 
 import Debug.Trace
-import Safe (headNote)
+import Safe (headNote, headDef)
 import Text.XML.Statistics
 
 -- |Currify a list of elements into tuples.
@@ -311,8 +311,9 @@ class (Eq e, Ord e, Read e, Show e,
   -- showGeneration gi (_,archive) = "best entity (gen. " 
   --                               ++ show gi ++ "): " ++ (show e) 
   --                               ++ " [fitness: " ++ show fitness ++ "]"
-  showGeneration gi (_,archive) = "best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
-                                  
+  showGeneration gi (_,archive) = if null archive
+                                  then "Archive is empty"
+                                  else "best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
     where
       (Just fitness, e) = headNote "showGeneration" archive
 
@@ -451,7 +452,7 @@ evolutionStep dataset
         [crossSeed,mutSeed] = take 2 $ randoms g
         pool' = pool <> poolNew
         -- new archive: best entities so far
-        compareArchive = comparing fst <> comparing (depth . snd) <> comparing (size . snd)
+        compareArchive = comparing fst -- <> comparing (depth . snd) <> comparing (size . snd)
         newArchive = take an 
                      $ nubBy (\x y -> comparing snd x y == EQ)
                      $ sortBy compareArchive
@@ -462,9 +463,11 @@ evolutionStep dataset
     -- check if perfect entry is found
     if (isPerfect (e,fitness))
       then return (universe, (pop, newArchive), pool, True)
-      else do crossEnts <- performCrossover crossPar cn crossSeed pool' combo
-              mutEnts   <- performMutation mutPar mn mutSeed pool' combo
-              let newPop = crossEnts ++ mutEnts -- new population: crossovered + mutated entities
+      else do newPop <- if cn + mn == 0
+                        then initPop pool' (length pop) seed
+                        else do crossEnts <- performCrossover crossPar cn crossSeed pool' combo
+                                mutEnts   <- performMutation mutPar mn mutSeed pool' combo
+                                return $ crossEnts ++ mutEnts -- new population: crossovered + mutated entities
               return (newUniverse, (newPop,newArchive), pool', False)
 
 -- |Evolution: evaluate generation and continue.
@@ -537,24 +540,24 @@ evolutionVerbose :: (Entity e s d p m, MonadIO m, Statistics e)
                               -> [(Int,Int)] -- ^ gen indicies and seeds
                               -> m (Generation e s) -- ^ evolved generation
 evolutionVerbose cfg pool universe pastArchives gen step ((gi,seed):gss) = do
-    (universe',newPa@(_,archive'), pool', isPerfect_) <- step pool universe gen seed
+    liftIO $ errorM rootLoggerName    $ showArchive $ headDef [] pastArchives
+    (universe', newPa@(_,archive'), pool', isPerfect_) <- step pool universe gen seed
     liftIO $ if (getWithCheckpointing cfg)
-      then checkpointGen cfg gi seed newPa
-      else return () -- skip checkpoint
-    liftIO $ criticalM rootLoggerName $ showGeneration gi newPa
-    liftIO $ errorM rootLoggerName $ showArchive archive'
+             then checkpointGen cfg gi seed newPa
+             else return () -- skip checkpoint
+    liftIO $ criticalM rootLoggerName $ showGeneration gi newPa              
     -- check for perfect entity
     if hasConverged pastArchives || isPerfect_
-       then do liftIO $ errorM rootLoggerName
-                 $ if isPerfect_
-                   then "Perfect entity found, "
-                        ++ "finished after " ++ show gi 
-                        ++ " generations!"
-                   else "No progress for 3 generations, "
-                        ++ "stopping after " ++ show gi
-                        ++ " generations!"
-               return newPa
-       else evolutionVerbose cfg pool' universe' (archive':pastArchives) newPa step gss
+      then do liftIO $ criticalM rootLoggerName
+                $ if isPerfect_
+                  then "Perfect entity found, "
+                       ++ "finished after " ++ show gi 
+                       ++ " generations!"
+                  else "No progress for 3 generations, "
+                       ++ "stopping after " ++ show gi
+                       ++ " generations!"
+              return newPa
+      else evolutionVerbose cfg pool' universe' (archive':pastArchives) newPa step gss
 
 -- no more gen. indices/seeds => quit
 evolutionVerbose _ _ _ _ gen _ [] = do 

@@ -17,7 +17,52 @@ winston.add(winston.transports.Console, {
 });
 
 
-let jsSig, jsFun, environment, window, document;
+var jsSig, jsFun, document, window, environment;
+
+document = jsdom.jsdom("");
+window = document.defaultView;
+
+(getElementsByTagNameCopy => {
+    window.Document.prototype.getElementsByTagName = function(tag) {
+	environment.tags.add(tag);
+	return Reflect.apply(getElementsByTagNameCopy, this, [tag]);
+    };
+})(window.Document.prototype.getElementsByTagName);
+	    
+    
+(getElementsByTagNameCopy => {
+    window.Element.prototype.getElementsByTagName = function(tag) {
+	environment.tags.add(tag);
+	return Reflect.apply(getElementsByTagNameCopy, this, [tag]);
+    };
+})(window.Element.prototype.getElementsByTagName);
+
+
+(getAttributeCopy => {  
+    window.Element.prototype.getAttribute = function(arg) {
+	let attrValue = Reflect.apply(getAttributeCopy, this, [arg]);
+	if (attrValue != null) {
+	    switch (arg) {
+	    case "class":
+		environment.classes.add(attrValue);
+        	break;
+	    case "id":
+		environment.ids.add(attrValue);
+		break; 
+	    }
+	}
+	return attrValue;
+    };
+})(window.Element.prototype.getAttribute);
+    
+    
+(getElementByIdCopy => {
+    window.Document.prototype.getElementById = function(id) {
+	environment.ids.add(id);
+	return Reflect.apply(getElementByIdCopy, this, [id]);
+    };
+})(window.Document.prototype.getElementById);
+
 
 http.createServer(function(request, response) {
     let pathname = url.parse(request.url, true).pathname;
@@ -98,9 +143,8 @@ http.createServer(function(request, response) {
 		classes: new Set(),
 		selectors: new Set()
 	    };
-
-	    require('./domIntercept.js')(window, environment, winston);
-
+	    
+	    //require('./domIntercept.js')(environment, winston);
 
             var _K_ = 1;
             let branchDistance = [];

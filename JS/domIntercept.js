@@ -1,4 +1,4 @@
-module.exports = function(window, environment, logger) {
+module.exports = function(environment, logger) {
 
     (getElementsByTagNameCopy => {
 	window.Document.prototype.getElementsByTagName = function(tag) {

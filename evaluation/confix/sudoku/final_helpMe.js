@@ -12,9 +12,9 @@ function test(row, col) {
                 spans[1].style.color = '#FF0000';
                 allreadyRevealed = false;
             }
-            if (el.style.backgroundColor) {
-                allreadyRevealed = true;
-            }
+            // if (el.style.backgroundColor) {
+            //     allreadyRevealed = true;
+            // }
         } else {
             break;
         }

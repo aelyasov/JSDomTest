@@ -21,6 +21,7 @@ import System.IO.Unsafe (unsafePerformIO)
 
 import Debug.Trace
 import Data.List (sortBy)
+import Control.Monad.IO.Class 
 
 type HasMain = Bool
 
@@ -68,9 +69,7 @@ data HtmlState = HtmlState { hasMain     :: Bool
 type GenHtmlState = GenState HtmlState Html
 
 type GenState s = StateT s Gen
-
-type GetSHtml = GenState HasMain Html
-
+  
 optional :: GenState s Html -> GenState s Html
 optional st = do html_ <- st
                  lift $ frequency [(1, return html_), (1, return Empty)] 

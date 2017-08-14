@@ -23,23 +23,48 @@ import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
 
 computeFitness :: Gr NLab ELab -> LoopIterationMap -> SLab -> GPath -> [BranchDist] -> IO Double
-computeFitness cfg loopIterMap target path distances = do
-  let (cfgLevel, problemNode) = computeRealCfgLevelOne cfg loopIterMap path target
-      branchDistances  = filter ((problemNode==) . getBrLab) distances
-      branchLevel      = if null branchDistances
-                         then 0
-                         else getBrDist $ minimumBy (comparing getBrDist) branchDistances
-      normBrLevel      = branchDistNormalize branchLevel
-      isException      = last path == (-100) && ((last $ init path) == problemNode)
-      problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
-      fitnessVal       = if target `elem` path then 0 else fromIntegral (cfgLevel - 1) + problemNodeLevel
-      logger           = rootLoggerName    
-  infoM logger $ "ProblemNode: " ++ show problemNode
-  infoM logger $ "CfgLevel: " ++ show cfgLevel
-  infoM logger $ "Branch level: " ++ show branchLevel
-  infoM logger $ "ProblemNodeLevel: " ++ show problemNodeLevel
-  infoM logger $ "Fitness value for location #" ++ show target ++ ": " ++ show fitnessVal 
-  return fitnessVal
+computeFitness cfg loopIterMap target path distances = 
+  if False -- (length path >= maxExecutionLength)
+  then computeFitnessExecutionLengthExceeded target path 
+  else computeFitnessExecutionLengthNotExceeded cfg loopIterMap target path distances
+  where
+    maxExecutionLength :: Int
+    maxExecutionLength = 250
+
+    fitnessValueExecutionLengthExceeded :: Double
+    fitnessValueExecutionLengthExceeded = 100.0 
+
+
+    computeFitnessExecutionLengthNotExceeded :: Gr NLab ELab
+                                             -> LoopIterationMap
+                                             -> SLab
+                                             -> GPath
+                                             -> [BranchDist]
+                                             -> IO Double
+    computeFitnessExecutionLengthNotExceeded cfg loopIterMap target path distances = do
+      let (cfgLevel, problemNode) = computeRealCfgLevelOne cfg loopIterMap path target
+          branchDistances  = filter ((problemNode==) . getBrLab) distances
+          branchLevel      = if null branchDistances
+                             then 0
+                             else getBrDist $ minimumBy (comparing getBrDist) branchDistances
+          normBrLevel      = branchDistNormalize branchLevel
+          isException      = last path == (-100) && ((last $ init path) == problemNode)
+          problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
+          fitnessVal       = if target `elem` path then 0 else fromIntegral (cfgLevel - 1) + problemNodeLevel
+          logger           = rootLoggerName    
+      infoM logger $ "ProblemNode: " ++ show problemNode
+      infoM logger $ "CfgLevel: " ++ show cfgLevel
+      infoM logger $ "Branch level: " ++ show branchLevel
+      infoM logger $ "ProblemNodeLevel: " ++ show problemNodeLevel
+      infoM logger $ "Fitness value for location #" ++ show target ++ ": " ++ show fitnessVal 
+      return fitnessVal
+
+    computeFitnessExecutionLengthExceeded :: SLab -> GPath -> IO Double
+    computeFitnessExecutionLengthExceeded target path = do
+      infoM rootLoggerName $ "Execution path has exceeded maximum permitted length: " ++ show maxExecutionLength
+      infoM rootLoggerName $ "Fitness value for location #" ++ show target ++ ": " ++ show fitnessValueExecutionLengthExceeded
+      return fitnessValueExecutionLengthExceeded
+
 
 branchDistNormalize :: Int -> Double
 branchDistNormalize b = fromIntegral b / fromIntegral (b+1)

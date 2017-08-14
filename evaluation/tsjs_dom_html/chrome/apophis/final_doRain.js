@@ -10,12 +10,5 @@ function test(id, locX, locY, speed, tankLive, myHeight, myWidth) {
             locX = locX - (0.76 * speed);
             locY = locY + (1.71 * speed);
         }
-        moveObjTo(obj, locX, locY);
     }
-}
-
-//Simple move function
-function moveObjTo(obj, oleft, otop) {
-    obj.style.left = oleft;
-    obj.style.top = otop;
 }

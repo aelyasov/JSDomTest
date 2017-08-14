@@ -32,7 +32,7 @@ import Analysis.CFG.Data (ELab, NLab)
 import Analysis.Static
 
 -- | Networking
-import Network.HTTP.Conduit
+import Network.HTTP.Conduit (parseRequest, newManager, tlsManagerSettings, Request(..), RequestBody(..), httpLbs, responseBody, responseTimeoutMicro, HttpException(..), Manager(..), Response(..))
 import Network.HTTP.Types.Status (statusMessage)
 import qualified Data.CaseInsensitive as CI
 
@@ -60,6 +60,7 @@ import System.Log.Formatter
 import Data.Configurator (load, Worth(..), require, display)
 import System.Process (system)
 import System.IO (openFile, IOMode(..), hClose)
+import System.Directory (createDirectoryIfMissing)
 import Control.Exception (onException)
 
 
@@ -77,9 +78,11 @@ readMainConfig = do
 
 fileHandlerReadWrite :: FilePath -> Priority -> IO (GenericHandler Handle)
 fileHandlerReadWrite fp pri = do
+  -- createDirectoryIfMissing True fp
   h  <- openFile fp WriteMode
   sh <- streamHandler h pri
   return (sh{closeFunc = hClose})
+
 
 parseInputAndSetupLogger :: Priority -> IO String
 parseInputAndSetupLogger logLevel = do
@@ -94,6 +97,7 @@ parseInputAndSetupLogger logLevel = do
   updateGlobalLogger logger $ setLevel logLevel
   updateGlobalLogger logger $ setHandlers [handler']
   return inFile
+
 
 main :: IO ()    
 main = main' `onException` removeAllHandlers
@@ -129,7 +133,7 @@ main' = do
   
   -- | Send initial data to the client
   noticeM logger $ "Initialise first request to send instrumented function under test:"
-  request <- parseUrl "http://localhost:7777/init"
+  request <- parseRequest "http://localhost:7777/init"
   man     <- liftIO $ newManager tlsManagerSettings
   let reqInit = request { method = "POST"
                         , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
@@ -140,19 +144,18 @@ main' = do
                         }
   initResp <- httpLbs reqInit man
   debugM logger $ prettyPrintResponse initResp
-  replicateM iterateTotal $ askForBranchsToCover coverageBranches algType man jsFunCFG (jsSig, constPool) labBranches
-  return ()
+  mapM_ (askForBranchsToCover coverageBranches algType man jsFunCFG (jsSig, constPool) labBranches) [1..iterateTotal]
 
 
-askForBranchsToCover :: Int -> Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO ()
-askForBranchsToCover branchN algType man cfg (sig, constPool) branches = do
+askForBranchsToCover :: Int -> Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> Int -> IO ()
+askForBranchsToCover branchN algType man cfg (sig, constPool) branches iterN = do
   if (branchN /= 0)
     then do showAllBranches branches
             choice <- getLine
             let choiceN = read choice :: Int
                 branchesToCover = if (null choice) || (choiceN == 0) then branches else [(branches!!(choiceN-1))]
-            killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover
-    else killJSMutationGeneticAll algType man cfg (sig, constPool) branches
+            killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover iterN
+    else killJSMutationGeneticAll algType man cfg (sig, constPool) branches iterN
 
 showAllBranches :: [(Int, LEdge ELab)] -> IO ()
 showAllBranches branches = do
@@ -165,17 +168,17 @@ prettyPrintResponse :: Response C.ByteString -> String
 prettyPrintResponse response = "Status: " ++ (show $ statusMessage $ responseStatus response) ++ ", Body: " ++ (show $ responseBody response)
 
 
-killJSMutationGeneticAll :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO ()
-killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
+killJSMutationGeneticAll :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> Int -> IO ()
+killJSMutationGeneticAll algType man cfg (sig, constPool) branches iterN =
   mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target cfg branch) (sig, constPool)) branches
   where
     killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
     killJSMutationGenetic alg man mutN target pool = do
       let logger = rootLoggerName
       criticalM logger $ replicate 70 '-'
-      criticalM logger $ "Branch : #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
+      criticalM logger $ "Started iteration #" ++ (show iterN) ++ " to cover branch: #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
       noticeM logger $ "Initial pool data: " ++ (show pool)
-      request <- parseUrl "http://localhost:7777/mutation"
+      request <- parseRequest "http://localhost:7777/mutation"
       let reqMut = request { method = "POST"
                            , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                            , requestBody = RequestBodyLBS $ encode (MutData (T.pack $ show mutN))
@@ -186,8 +189,7 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branches =
       -- for the integration testing purpose runGenetic has been replaced with fitnessScore
       -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
       -- let jsArgs = [DomJS test_html, StringJS "iframe"]
-      criticalM logger $ "Best entity (GA): " ++ (show jsArgs)
-    
+      criticalM logger $ "Completed iteration #" ++ (show iterN) ++ " to cover branch: #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
       let reqExec = request { method = "POST"
                             , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                             , queryString = "execute=true"

@@ -16,7 +16,7 @@ import Html5C.Tags
 import Control.Monad
 import System.Random
 -- import qualified Data.ByteString as BS
-import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
+import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM, criticalM)
 import Data.Configurator (load, Worth(..), require)
 import Analysis.Static (removeDuplicates)
 import Text.XML.Statistics
@@ -31,7 +31,7 @@ import GA.GA
 
 -- | sig = [JS_DOM,JS_STRING]
 -- | pool = ([], ["node"], ([TAG_IFRAME], ["node"], [], []))
-instance Entity [JSArg] (Double, Double) Target (JSSig, JSCPool) IO where
+instance Entity [JSArg] (Double, Double, Int) Target (JSSig, JSCPool) IO where
 
   genRandom (sig, pool) seed = do
     debugM rootLoggerName $ "Generating random population for the signature: " ++ show sig
@@ -47,7 +47,7 @@ instance Entity [JSArg] (Double, Double) Target (JSSig, JSCPool) IO where
     debugM rootLoggerName $ "Crossover point is: " ++ show crossArgId
     crossArg  <- crossoverJSArgs gen (pairedArgs!!crossArgId)
     crossArgs <- liftM ([args1, args2]!!) $ randomRIO (0, 1)
-    let cresult = replaceElemInList crossArgId crossArg crossArgs
+    let cresult = replaceElemInList crossArgId (Just crossArg) crossArgs
     debugM rootLoggerName $ "Crossed arguments:  " ++ show cresult
     return $ Just cresult
           
@@ -60,22 +60,22 @@ instance Entity [JSArg] (Double, Double) Target (JSSig, JSCPool) IO where
     debugM rootLoggerName $ "Mutating arguments: " ++ show args
     debugM rootLoggerName $ "Mutation point is: " ++ show mutId
     mutArg <- mutateJSArg arg typ gen uniquePool
-    let mresult = replaceElemInList mutId mutArg args
+    let mresult = replaceElemInList mutId (Just mutArg) args
     debugM rootLoggerName $ "Mutated arguments:  " ++ show mresult
     return $ Just mresult
 
   score = fitnessScore
 
-  isPerfect (_,s) = s == (0.0, 0.0)
+  isPerfect (_,(f1, f2, _)) = f1 == 0.0 && f2 == 0.0
   -- isPerfect (_,s) = s < 1.0
 
-  showGeneration gi (pop,archive) = showBestEntity
+  showGeneration gi (pop,archive) = if (null archive) then "Archive is empty" else showBestEntity
                                     -- ++ "\nArchive Statistics:\n"
                                     -- ++ showArchive archive
     --                                 ++ "\nPopulation statistics:\n"
     --                                 ++ showPopulation pop
     where
-      showBestEntity = "Best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness ++ " \n" ++ (show e)
+      showBestEntity = "Best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness ++ "\n" ++ (show e) ++ "\n" ++ (showStatistics e) 
       (Just fitness, e) = headNote "showGeneration" archive
       -- showArchive = intercalate "\n------------\n" . map showScoredEntity 
       -- showScoredEntity (f, p) = "fitness: " ++ showFitness f ++ "\n" ++ showEntity p
@@ -105,10 +105,11 @@ runGenetic target pool@(sig, (intP, floatP, stringP, (tagP, idP, nameP, classP))
   (population, archive, generations, crossoverRate, mutationRate, crossoverParam, mutationParam, checkpointing, rescorearchive) <- readGenetcAlgConfig
   let conf = GAConfig population archive generations crossoverRate mutationRate crossoverParam mutationParam checkpointing rescorearchive 
       g = mkStdGen 0            
-  es <- evolveVerbose g conf pool target
+  (bestFitness, bestScoredEntry) <- liftM head $ evolveVerbose g conf pool target
   -- es <- evolve g conf pool target
-  noticeM rootLoggerName $ "Best fitness value: " ++ (show $ fst $ head es)
-  return $ snd $ head es
+  criticalM rootLoggerName $ "Best fitness value: " ++ show bestFitness
+  criticalM rootLoggerName $ "Best entity (GA): " ++ show bestScoredEntry
+  return bestScoredEntry
 
 
 readRandomAlgConfig :: IO Int

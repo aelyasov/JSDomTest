@@ -18,6 +18,7 @@ import Control.Monad (liftM)
 import System.Random (randomRIO, random)
 import Debug.Trace
 import Util.Debug (setCondBreakPoint)
+import Data.Maybe
 
 
 crossAllArgs :: StdGen -> [(JSArg, JSArg)] -> IO [JSArg]
@@ -109,11 +110,17 @@ crossoverDomJS gen html1 html2 = do
          then do debugM logger $ "Crossover result:\n" ++ (prettyHtmlByteString html1)
                  setCondBreakPoint
                  return $ DomJS html1
-         else liftM DomJS $ crossoverIterate gen parent1 parent2
+         else do (crossedHtml, status) <- crossoverIterate 10 gen parent1 parent2
+                 if status
+                   then return $ DomJS crossedHtml
+                   else do debugM logger $ "Crossover limit is exhausted"
+                           setCondBreakPoint
+                           liftM (DomJS . ([html1, html2]!!)) $ randomRIO (0, 1)
 
 
-crossoverIterate :: StdGen -> (Document, Int) -> (Document, Int) -> IO ByteString 
-crossoverIterate gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
+
+crossoverIterate :: Int -> StdGen -> (Document, Int) -> (Document, Int) -> IO (ByteString, Bool) 
+crossoverIterate climit gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
   let logger = rootLoggerName
       (fromLabel, gen1) = randomR (4, docDepth1 - 1) gen
       (whereLabel, gen2) = randomR (4, docDepth2 - 1) gen1
@@ -124,16 +131,18 @@ crossoverIterate gen doc1@(fromDoc, docDepth1) doc2@(whereDoc, docDepth2) = do
     " and #" ++
     (show whereLabel) ++  " (" ++ (show docDepth2) ++ ") "        
   case crossoveredDocumentNoLabel of
-   Just document -> do let html   = toHtml document
-                           result = BR.renderHtml html 
-                       response <- askValidator result
-                       case response of
-                        Just _  -> do debugM logger $ "The Offsprint is inconsistent html"
-                                      crossoverIterate gen2 doc1 doc2
-                        Nothing -> do debugM logger $ "Crossover result:\n" ++ (renderHtml html)
-                                      setCondBreakPoint
-                                      return result              
-   Nothing       -> crossoverIterate gen2 doc1 doc2
+    Just doc -> do let html   = toHtml doc
+                       result = BR.renderHtml html 
+                   response <- askValidator result
+                   if (climit == 0)
+                     then return (result, False)
+                     else case response of
+                            Just _  -> do debugM logger $ "The Offsprint is inconsistent html"
+                                          crossoverIterate (climit-1) gen2 doc1 doc2
+                            Nothing -> do debugM logger $ "Crossover result:\n" ++ (renderHtml html)
+                                          setCondBreakPoint
+                                          return (result, True)              
+    Nothing       -> crossoverIterate (climit-1) gen2 doc1 doc2
 
 
 crossoverDocuments :: Int -> Int -> Document -> Document -> Maybe Document      

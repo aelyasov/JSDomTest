@@ -31,7 +31,7 @@ instance Arbitrary Html where
 htmlGenState :: GenHtmlState
 htmlGenState = do st <- get
                   let depth = getDepth st
-                  resizeState depth arbHtmlHTML
+                  resizeState (trace ("htmlGenState:" ++ show depth) depth) arbHtmlHTML
                       
 
 -- htmlGenState :: HtmlRandomGenConfig -> GenHtmlState

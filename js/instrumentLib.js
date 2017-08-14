@@ -2,7 +2,7 @@ const winston = require('winston');
 const _ = require('underscore');
 
 var _K_ = 1;
-var UNKNOWN = 10;
+var UNKNOWN = 100000;
 //     _branchDistance_ = [],
 //     _trace_ = [1];
 
@@ -16,9 +16,9 @@ function abs(x, y) {
         switch (typeX) {
             case "number":
                 distance = Math.abs(x - y);
+	        //if (Number.isNaN(x) || Number.isNaN(y)) throw new Error("Not a number " + x + y);
+            if (!Number.isFinite(x) || !Number.isFinite(y)) {distance = UNKNOWN;} //throw new Error("Number is not finite " + x + y);
                 winston.debug("nummer: " + distance);
-                if (Number.isNaN(x) || Number.isNaN(y)) throw new Error("Not a number " + x + y);
-                if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Error("Number is not finite " + x + y);
                 return distance;
             case "string":
                 distance = absString(x, y); //getEditDistance(x, y);
@@ -184,6 +184,11 @@ function getEditDistance(a, b) {
     return matrix[b.length][a.length];
 };
 
+function assert(condition) {
+    if (!condition) {
+        throw new Error('Assertion failed');
+    }
+}
 
 
 // module.exports._K_ = _K_;
@@ -192,3 +197,4 @@ function getEditDistance(a, b) {
 module.exports.abs = abs;
 module.exports.absZero = absZero;
 module.exports.absNegZero = absNegZero;
+module.exports.assert = assert;

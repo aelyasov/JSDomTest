@@ -80,12 +80,12 @@ instance Statistics a => Statistics [a] where
 instance Statistics JSArg where
   showStatistics (IntJS i)    = "integer: " ++ show i
   showStatistics (FloatJS f)  = "float: " ++ show f
-  showStatistics (StringJS s) = "string: " ++ show s
+  showStatistics (StringJS s) = "string: " ++ (show $ length s)
   showStatistics (BoolJS b)   = "boolean: " ++ show b
   showStatistics (DomJS s)    = let doc = parseLBS s
                                 in "depth: " ++
                                    (show $ depthDocument doc)
                                    ++ " size: " ++
                                    (show $ sizeDocument doc)
-  showStatistics (ArrayJS arr) = "array: " ++ show arr
+  showStatistics (ArrayJS arr) = "array of: " ++ (show $ length arr) ++ " elements [\n" ++ (showStatistics arr) ++ "\n]"
   -- showStatistics jsarg = error $ (show jsarg) ++ " can't compute statistics"

@@ -12,7 +12,7 @@ import Html5C.Attributes
 
 import Network.HTTP.Types
 import qualified Data.CaseInsensitive as CI
-import Network.HTTP.Conduit
+import Network.HTTP.Conduit (parseRequest, newManager, tlsManagerSettings, Request(..), RequestBody(..), httpLbs, responseBody, responseTimeoutMicro)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Trans.State
 import Control.Monad
@@ -85,13 +85,16 @@ genValidHtml env@(_, _, strs, (tags, ids, names, classes)) = do
 validatorCheck :: Html -> IO (Maybe Text)
 validatorCheck = askValidator . renderHtml
 
+defaultResponseTimeout :: Int
+defaultResponseTimeout = 60 * 10 ^ 6 -- one minute in microseconds
 
 askValidator :: ByteString -> IO (Maybe Text)
 askValidator html_str = do
   man <- liftIO $ newManager tlsManagerSettings
-  -- initReq <- parseUrl "http://html5.validator.nu" 
-  initReq <- parseUrl "http://localhost:8888"
+  -- initReq <- parseRequest "http://html5.validator.nu" 
+  initReq <- parseRequest "http://localhost:8888"
   let req = initReq { method = "POST"
+                    , responseTimeout = responseTimeoutMicro defaultResponseTimeout
                     , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                     , queryString = "laxtype=yes&parser=html5&out=json"
                     , requestBody = RequestBodyLBS  html_str
@@ -108,7 +111,7 @@ assert' :: Monad m => Maybe Text -> PropertyM m ()
 assert' Nothing = return ()
 assert' (Just str) = fail $ T.unpack str
 
-test_genValidHtml = genValidHtml (Nothing, Nothing, Nothing, (Just [TAG_H1], Nothing, Nothing, Nothing))
+test_genValidHtml = genValidHtml (Nothing, Nothing, Nothing, (Nothing, Nothing, Nothing, Nothing))
 
 -- | parseLBS $ C.pack test_html
 test_html = "<!DOCTYPE HTML>\n<html><head><title>Title</title><base href=\".\" target=\"_blank\"></head><body itemscope=\"\" itemtype=\"http://schema.org/WebPage\"><h1><a></a>A2A2</h1><h1></h1></body></html>"

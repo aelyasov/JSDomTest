@@ -170,9 +170,10 @@ mutateJSString gen str pool =
         mutChar = if even mutId
                   then if chr `elem` ['z', '9', 'Z'] then pred chr else succ chr
                   else if chr `elem` ['a', '0', 'A'] then succ chr else pred chr
-        mutStr = replaceElemInList mutId mutChar str
+        mutStr = replaceElemInList mutId (Just mutChar) str
+        delStr = replaceElemInList mutId Nothing str
     randStr <- liftM getStringJS $ genRandomString $ getJSStrings pool    
-    mresult <- generate $ frequency [(4, return mutStr), (1, return randStr)]  
+    mresult <- generate $ frequency [(4, return mutStr), (1, return randStr), (1, return delStr)]  
     debugM rootLoggerName $ "Mutation of string: " ++ show str ++ " at an index " ++ (show mutId)   
     debugM rootLoggerName $ "Mutated string:  " ++ show mresult    
     return $ StringJS mresult
@@ -187,7 +188,7 @@ mutateJSArray gen args typ pool =
         arg = atNote "mutateJSArray" args mutId
     debugM rootLoggerName $ "Mutation of an array: " ++ show args ++ " at an index " ++ (show mutId)
     mutArg <- mutateJSArg arg typ gen' pool
-    let mresult = replaceElemInList mutId mutArg args
+    let mresult = replaceElemInList mutId (Just mutArg) args
     debugM rootLoggerName $ "Mutated array:  " ++ show mresult
     return $ ArrayJS mresult
   
