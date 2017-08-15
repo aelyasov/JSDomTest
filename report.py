@@ -1,48 +1,48 @@
 #!/usr/bin/python
 
 import csv
-from  datetime import datetime
+from datetime import datetime
 import sys
 from os.path import split, splitext, join
 
-result = []
 
-file_path = "./evaluation/results/genetic/initBricks.genetic.out"
-# "./evaluation/results/genetic/luhn-algorithm.genetic.out"
-
-
-def isLogStatement( str ):
+def isLogStatement(str):
     return (str[0] == '[') and str[1:5].isdigit() and str[6:8].isdigit() and str[9:11].isdigit()
 
-def parseLine( str ):
+
+def parseLine(str):
     strSplit = str.split(']', 1)
     timeStamp = strSplit[0][1:].split(' ')[1]
     logMessage = strSplit[1].lstrip()
     return (timeStamp, logMessage)
 
-def parseGenTarget( str ):
+
+def parseGenTarget(str):
     return str.split(' ')[-1][:-1]
 
-def parseGenEntry( str ):
+
+def parseGenEntry(str):
     words = str.split(' ')
     gen = words[3][:-1]
     fitness = words[-1][:-1]
     return (gen, fitness)
 
-def parseIterNumber( str ):
+
+def parseIterNumber(str):
     return str.split(' ')[2][1:]
 
-def parseRawReport( path ):
+
+def parseRawReport(path):
     newIterN = curIterN = '1'
     iterations = []
     result = []
-    inputfile = open(path,'r')
+    inputfile = open(path, 'r')
     targetSearches = []
     for line in inputfile:
         if not isLogStatement(line):
             continue
         (ts, logm) = parseLine(line)
-        if logm.startswith("Started iteration"):
+        if logm.startswith('Started iteration'):
             newIterN = parseIterNumber(logm)
             if newIterN != curIterN:
                 curIterN = newIterN
@@ -52,13 +52,13 @@ def parseRawReport( path ):
             targetSearches = [target]
             targetSearches.append(ts)
             continue
-        if logm.startswith("Completed iteration"):
+        if logm.startswith('Completed iteration'):
             targetSearches.append(ts)
             iterations.append(targetSearches)
-        if logm.startswith("Best entity (gen."):
+        if logm.startswith('Best entity (gen.'):
             entry = parseGenEntry(logm)
             targetSearches.append(entry)
-    result.append(iterations)        
+    result.append(iterations)
     inputfile.close()
     return result
 
@@ -72,13 +72,15 @@ def processReport(path):
             stime = target[0:2][1]
             etime = target[:-3:-1][0]
             FMT = '%H:%M:%S'
-            tdelta = datetime.strptime(etime, FMT) - datetime.strptime(stime, FMT)
-            iteration_new.append(target[0:2] + target[:-3:-1] + [tdelta.seconds])
+            tdelta = datetime.strptime(
+                etime, FMT) - datetime.strptime(stime, FMT)
+            iteration_new.append(
+                target[0:2] + target[:-3:-1] + [tdelta.seconds])
         report_new.append(iteration_new)
-    return report_new     
+    return report_new
 
 
-def printTarget( writer, target_stats ):
+def printTarget(writer, target_stats):
     target_name = target_stats[0][0]
     start_times = target_stats[1]
     end_times = target_stats[2]
@@ -105,11 +107,11 @@ def outputCsvReport():
         writer = csv.writer(csvfile, delimiter=';')
         writer.writerow(header)
         report = processReport(inputfile)
-        #print report
-        transp_report = map(list, zip(*report)) 
+        # print report
+        transp_report = map(list, zip(*report))
         for target in transp_report:
             transp_target = map(list, zip(*target))
             printTarget(writer, transp_target)
 
+
 outputCsvReport()
-            

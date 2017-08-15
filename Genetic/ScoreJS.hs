@@ -67,7 +67,7 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   fitnessVal2 <- computeFitness cfg (map2IntMap loops_) (-1) trace_ distances_
   -- fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
   -- infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
-  let fitnessVal = (fitnessVal1, fitnessVal2, length trace_)
+  let fitnessVal = (fitnessVal1, fitnessVal2, 0)
   -- let fitnessVal = fitnessVal1
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
 

@@ -17,7 +17,7 @@ burncanvas = tsjs_dom_html + "chrome/burncanvas/final_"
 csjs = "./evaluation/computer-science-in-javascript/final_"
 mathjs = "./evaluation/mathjs/final_"
 
-#out_folder = "./evaluation/result" + time()
+# out_folder = "./evaluation/result" + time()
 
 case_studies = [
     sudoku + "helpMe.js",
@@ -31,7 +31,7 @@ case_studies = [
     phormer + "toggleInfo.js",
     phormer + "update.js",
     phormer + "updateIndic.js",
-    
+
     hotel + "RequiredField.js",
     hotel + "isValidCard.js",
     hotel + "isValidMasterCard.js",
@@ -51,7 +51,7 @@ case_studies = [
     bingbong + "initBricks.js",
 
     burncanvas + "do_draw.js",
-    burncanvas + "modify_region.js",
+    # burncanvas + "modify_region.js",
 
     csjs + "luhn-algorithm.js",
     csjs + "quicksort_partition.js",
@@ -61,11 +61,10 @@ case_studies = [
 
 for cs in case_studies:
     cs_base = basename(cs)
-    cs_filename = splitext(cs_base)[0] 
+    cs_filename = splitext(cs_base)[0]
     cs_out = cs_filename[6:] + "_genetic.out"
     ts = time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     print st, "Processing case study: ", cs
     print st, "Writing output to: ", cs_out
-    # call(["./JSDomTest", cs, "./evaluation/results/genetic/" +  cs_out])
-
+    call(["cabal", "run", cs, "./evaluation/results/genetic1/" + cs_out])
