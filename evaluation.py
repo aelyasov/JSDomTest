@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
 from subprocess import call
-from os.path import basename, splitext
+from os.path import basename, splitext, join
 from time import time
-import datetime
+from datetime import datetime
+import sys
 
 confix = "./evaluation/confix/"
 tsjs_dom_html = "./evaluation/tsjs_dom_html/"
@@ -17,9 +18,10 @@ burncanvas = tsjs_dom_html + "chrome/burncanvas/final_"
 csjs = "./evaluation/computer-science-in-javascript/final_"
 mathjs = "./evaluation/mathjs/final_"
 
-# out_folder = "./evaluation/result" + time()
+out_folder = "./evaluation/result" 
 
 case_studies = [
+    sudoku + "getPossibleNumbers.js",
     sudoku + "helpMe.js",
     sudoku + "isGameFinished.js",
     sudoku + "newGame.js",
@@ -60,11 +62,14 @@ case_studies = [
 ]
 
 for cs in case_studies:
+    eval_type = sys.argv[1]
     cs_base = basename(cs)
-    cs_filename = splitext(cs_base)[0]
-    cs_out = cs_filename[6:] + "_genetic.out"
-    ts = time()
-    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    cs_outfile = splitext(cs_base)[0]
+    cs_out = cs_outfile[6:] + ".out"
+    st = datetime.fromtimestamp(time()).strftime('%Y-%m-%d_%H:%M:%S')
+    cs_outfolder = join(out_folder, eval_type, st)
+    cs_output = cs_outfolder+ "/" + cs_out
     print st, "Processing case study: ", cs
-    print st, "Writing output to: ", cs_out
-    call(["cabal", "run", cs, "./evaluation/results/genetic1/" + cs_out])
+    print st, "Writing output to: ", cs_output
+    #call(["cabal", "run", cs, cs_output])
+
