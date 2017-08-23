@@ -5,6 +5,7 @@ from os.path import basename, splitext, join
 from time import time
 from datetime import datetime
 import sys
+from os import makedirs 
 
 confix = "./evaluation/confix/"
 tsjs_dom_html = "./evaluation/tsjs_dom_html/"
@@ -21,7 +22,7 @@ mathjs = "./evaluation/mathjs/final_"
 out_folder = "./evaluation/result" 
 
 case_studies = [
-    sudoku + "getPossibleNumbers.js",
+    # sudoku + "getPossibleNumbers.js",
     sudoku + "helpMe.js",
     sudoku + "isGameFinished.js",
     sudoku + "newGame.js",
@@ -61,15 +62,16 @@ case_studies = [
     mathjs + "probability_gamma.js"
 ]
 
+eval_type = sys.argv[1]
+st = datetime.fromtimestamp(time()).strftime('%Y-%m-%d_%H:%M:%S')
+cs_outfolder = join(out_folder, eval_type, st)
+makedirs(cs_outfolder)
 for cs in case_studies:
-    eval_type = sys.argv[1]
     cs_base = basename(cs)
     cs_outfile = splitext(cs_base)[0]
     cs_out = cs_outfile[6:] + ".out"
-    st = datetime.fromtimestamp(time()).strftime('%Y-%m-%d_%H:%M:%S')
-    cs_outfolder = join(out_folder, eval_type, st)
     cs_output = cs_outfolder+ "/" + cs_out
     print st, "Processing case study: ", cs
     print st, "Writing output to: ", cs_output
-    #call(["cabal", "run", cs, cs_output])
+    call(["stack", "exec", "JSDomTest", cs, cs_output])
 

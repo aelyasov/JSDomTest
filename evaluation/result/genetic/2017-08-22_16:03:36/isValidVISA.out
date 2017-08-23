@@ -1,0 +1,1110 @@
+[2017-08-22 16:03:36 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:36 CEST  CRITICAL] Started iteration #1 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:37 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4444444444444444,0.0,0)
+[[4,4,6,4,-4]]
+array of: 5 elements [
+integer: 4
+integer: 4
+integer: 6
+integer: 4
+integer: -4
+]
+[2017-08-22 16:03:37 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4375,0.0,0)
+[[4,4,6,4,5,-4]]
+array of: 6 elements [
+integer: 4
+integer: 4
+integer: 6
+integer: 4
+integer: 5
+integer: -4
+]
+[2017-08-22 16:03:37 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4375,0.0,0)
+[[4,4,6,5,5,-4]]
+array of: 6 elements [
+integer: 4
+integer: 4
+integer: 6
+integer: 5
+integer: 5
+integer: -4
+]
+[2017-08-22 16:03:38 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4166666666666667,0.0,0)
+[[4,4,6,5,5,16,4,4]]
+array of: 8 elements [
+integer: 4
+integer: 4
+integer: 6
+integer: 5
+integer: 5
+integer: 16
+integer: 4
+integer: 4
+]
+[2017-08-22 16:03:38 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4166666666666667,0.0,0)
+[[4,4,6,-4,6,4,3,1]]
+array of: 8 elements [
+integer: 4
+integer: 4
+integer: 6
+integer: -4
+integer: 6
+integer: 4
+integer: 3
+integer: 1
+]
+[2017-08-22 16:03:38 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,0.0,0)
+[[4,3,1,1,6,6,-5,2,-6,8,4,4,6,5,5,-4]]
+array of: 16 elements [
+integer: 4
+integer: 3
+integer: 1
+integer: 1
+integer: 6
+integer: 6
+integer: -5
+integer: 2
+integer: -6
+integer: 8
+integer: 4
+integer: 4
+integer: 6
+integer: 5
+integer: 5
+integer: -4
+]
+[2017-08-22 16:03:38 CEST  CRITICAL] Perfect entity found, finished after 5 generations!
+[2017-08-22 16:03:38 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:38 CEST  CRITICAL] Best entity (GA): [[4,3,1,1,6,6,-5,2,-6,8,4,4,6,5,5,-4]]
+[2017-08-22 16:03:38 CEST  CRITICAL] Completed iteration #1 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:38 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:38 CEST  CRITICAL] Started iteration #1 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:39 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[4,-9,4,6]]
+array of: 4 elements [
+integer: 4
+integer: -9
+integer: 4
+integer: 6
+]
+[2017-08-22 16:03:39 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:39 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:39 CEST  CRITICAL] Best entity (GA): [[4,-9,4,6]]
+[2017-08-22 16:03:39 CEST  CRITICAL] Completed iteration #1 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:39 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:39 CEST  CRITICAL] Started iteration #2 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:39 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.45,0.0,0)
+[[4,0,-3,-4]]
+array of: 4 elements [
+integer: 4
+integer: 0
+integer: -3
+integer: -4
+]
+[2017-08-22 16:03:39 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.45,0.0,0)
+[[4,0,-3,-4]]
+array of: 4 elements [
+integer: 4
+integer: 0
+integer: -3
+integer: -4
+]
+[2017-08-22 16:03:40 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4166666666666667,0.0,0)
+[[7,8,-3,-4,-7,0,-1,9,-7,-9,-10]]
+array of: 11 elements [
+integer: 7
+integer: 8
+integer: -3
+integer: -4
+integer: -7
+integer: 0
+integer: -1
+integer: 9
+integer: -7
+integer: -9
+integer: -10
+]
+[2017-08-22 16:03:40 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4166666666666667,0.0,0)
+[[7,8,-3,-4,-7,0,-1,9,-6,-9,-10]]
+array of: 11 elements [
+integer: 7
+integer: 8
+integer: -3
+integer: -4
+integer: -7
+integer: 0
+integer: -1
+integer: 9
+integer: -6
+integer: -9
+integer: -10
+]
+[2017-08-22 16:03:40 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.3333333333333333,0.0,0)
+[[4,-1,9,-7,-9,2,-1,9,-7,-9,-10]]
+array of: 11 elements [
+integer: 4
+integer: -1
+integer: 9
+integer: -7
+integer: -9
+integer: 2
+integer: -1
+integer: 9
+integer: -7
+integer: -9
+integer: -10
+]
+[2017-08-22 16:03:41 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,0.0,0)
+[[4,-8,-2,-5,-1,-3,0,-5,4,-3,8,-3,9,-7,-9,-10]]
+array of: 16 elements [
+integer: 4
+integer: -8
+integer: -2
+integer: -5
+integer: -1
+integer: -3
+integer: 0
+integer: -5
+integer: 4
+integer: -3
+integer: 8
+integer: -3
+integer: 9
+integer: -7
+integer: -9
+integer: -10
+]
+[2017-08-22 16:03:41 CEST  CRITICAL] Perfect entity found, finished after 5 generations!
+[2017-08-22 16:03:41 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:41 CEST  CRITICAL] Best entity (GA): [[4,-8,-2,-5,-1,-3,0,-5,4,-3,8,-3,9,-7,-9,-10]]
+[2017-08-22 16:03:41 CEST  CRITICAL] Completed iteration #2 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:41 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:41 CEST  CRITICAL] Started iteration #2 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:41 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[-6,4,13,4]]
+array of: 4 elements [
+integer: -6
+integer: 4
+integer: 13
+integer: 4
+]
+[2017-08-22 16:03:41 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:41 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:41 CEST  CRITICAL] Best entity (GA): [[-6,4,13,4]]
+[2017-08-22 16:03:41 CEST  CRITICAL] Completed iteration #2 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:41 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:41 CEST  CRITICAL] Started iteration #3 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:42 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.45,0.0,0)
+[[4,-6,0,5]]
+array of: 4 elements [
+integer: 4
+integer: -6
+integer: 0
+integer: 5
+]
+[2017-08-22 16:03:42 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4375,0.0,0)
+[[3,16,-6,4,8,-4,-10]]
+array of: 7 elements [
+integer: 3
+integer: 16
+integer: -6
+integer: 4
+integer: 8
+integer: -4
+integer: -10
+]
+[2017-08-22 16:03:42 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4285714285714286,0.0,0)
+[[5,-6,0,5,-3,-10,0,0]]
+array of: 8 elements [
+integer: 5
+integer: -6
+integer: 0
+integer: 5
+integer: -3
+integer: -10
+integer: 0
+integer: 0
+]
+[2017-08-22 16:03:43 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.3333333333333333,0.0,0)
+[[5,-6,0,5,5,-6,0,5,0,-3,-10,0,-3,-10,0]]
+array of: 15 elements [
+integer: 5
+integer: -6
+integer: 0
+integer: 5
+integer: 5
+integer: -6
+integer: 0
+integer: 5
+integer: 0
+integer: -3
+integer: -10
+integer: 0
+integer: -3
+integer: -10
+integer: 0
+]
+[2017-08-22 16:03:43 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.3333333333333333,0.0,0)
+[[2,-10,-6,0,5,5,-6,0,5,0,-3,-10,0,-3,-10,0]]
+array of: 16 elements [
+integer: 2
+integer: -10
+integer: -6
+integer: 0
+integer: 5
+integer: 5
+integer: -6
+integer: 0
+integer: 5
+integer: 0
+integer: -3
+integer: -10
+integer: 0
+integer: -3
+integer: -10
+integer: 0
+]
+[2017-08-22 16:03:43 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,0.0,0)
+[[4,-5,0,5,-5,0,5,-3,-10,0,-3,-10,0]]
+array of: 13 elements [
+integer: 4
+integer: -5
+integer: 0
+integer: 5
+integer: -5
+integer: 0
+integer: 5
+integer: -3
+integer: -10
+integer: 0
+integer: -3
+integer: -10
+integer: 0
+]
+[2017-08-22 16:03:43 CEST  CRITICAL] Perfect entity found, finished after 5 generations!
+[2017-08-22 16:03:43 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:43 CEST  CRITICAL] Best entity (GA): [[4,-5,0,5,-5,0,5,-3,-10,0,-3,-10,0]]
+[2017-08-22 16:03:43 CEST  CRITICAL] Completed iteration #3 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:43 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:43 CEST  CRITICAL] Started iteration #3 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:44 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[-3,0]]
+array of: 2 elements [
+integer: -3
+integer: 0
+]
+[2017-08-22 16:03:44 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:44 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:44 CEST  CRITICAL] Best entity (GA): [[-3,0]]
+[2017-08-22 16:03:44 CEST  CRITICAL] Completed iteration #3 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:44 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:44 CEST  CRITICAL] Started iteration #4 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:44 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.45,0.0,0)
+[[5,5,-5,16,-5]]
+array of: 5 elements [
+integer: 5
+integer: 5
+integer: -5
+integer: 16
+integer: -5
+]
+[2017-08-22 16:03:44 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4444444444444444,0.0,0)
+[[5,5,-5,16,-5,-2]]
+array of: 6 elements [
+integer: 5
+integer: 5
+integer: -5
+integer: 16
+integer: -5
+integer: -2
+]
+[2017-08-22 16:03:45 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4444444444444444,0.0,0)
+[[5,7,-6,-4,-8,0]]
+array of: 6 elements [
+integer: 5
+integer: 7
+integer: -6
+integer: -4
+integer: -8
+integer: 0
+]
+[2017-08-22 16:03:45 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4166666666666667,0.0,0)
+[[5,5,-6,16,5,5,-5,16,-5]]
+array of: 9 elements [
+integer: 5
+integer: 5
+integer: -6
+integer: 16
+integer: 5
+integer: 5
+integer: -5
+integer: 16
+integer: -5
+]
+[2017-08-22 16:03:45 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.3333333333333333,0.0,0)
+[[4,2,3,3,8,-6,-4,6,6,-6,-4]]
+array of: 11 elements [
+integer: 4
+integer: 2
+integer: 3
+integer: 3
+integer: 8
+integer: -6
+integer: -4
+integer: 6
+integer: 6
+integer: -6
+integer: -4
+]
+[2017-08-22 16:03:46 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.25,0.0,0)
+[[4,3,6,5,-5,13,10,16,9,4,4,-5,6,5]]
+array of: 14 elements [
+integer: 4
+integer: 3
+integer: 6
+integer: 5
+integer: -5
+integer: 13
+integer: 10
+integer: 16
+integer: 9
+integer: 4
+integer: 4
+integer: -5
+integer: 6
+integer: 5
+]
+[2017-08-22 16:03:46 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,0.0,0)
+[[4,2,3,3,8,-6,-4,-5,6,3,8,-6,-4]]
+array of: 13 elements [
+integer: 4
+integer: 2
+integer: 3
+integer: 3
+integer: 8
+integer: -6
+integer: -4
+integer: -5
+integer: 6
+integer: 3
+integer: 8
+integer: -6
+integer: -4
+]
+[2017-08-22 16:03:46 CEST  CRITICAL] Perfect entity found, finished after 6 generations!
+[2017-08-22 16:03:46 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:46 CEST  CRITICAL] Best entity (GA): [[4,2,3,3,8,-6,-4,-5,6,3,8,-6,-4]]
+[2017-08-22 16:03:46 CEST  CRITICAL] Completed iteration #4 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:46 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:46 CEST  CRITICAL] Started iteration #4 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:47 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[7,5,0]]
+array of: 3 elements [
+integer: 7
+integer: 5
+integer: 0
+]
+[2017-08-22 16:03:47 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:47 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:47 CEST  CRITICAL] Best entity (GA): [[7,5,0]]
+[2017-08-22 16:03:47 CEST  CRITICAL] Completed iteration #4 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:47 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:47 CEST  CRITICAL] Started iteration #5 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:47 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4444444444444444,0.0,0)
+[[4,6,13,4,-1]]
+array of: 5 elements [
+integer: 4
+integer: 6
+integer: 13
+integer: 4
+integer: -1
+]
+[2017-08-22 16:03:47 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4375,0.0,0)
+[[3,-4,8,7,-4,8,7]]
+array of: 7 elements [
+integer: 3
+integer: -4
+integer: 8
+integer: 7
+integer: -4
+integer: 8
+integer: 7
+]
+[2017-08-22 16:03:48 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4,0.0,0)
+[[3,-4,8,7,-4,8,8,16,16,-1]]
+array of: 10 elements [
+integer: 3
+integer: -4
+integer: 8
+integer: 7
+integer: -4
+integer: 8
+integer: 8
+integer: 16
+integer: 16
+integer: -1
+]
+[2017-08-22 16:03:48 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4,0.0,0)
+[[3,-4,8,7,-4,8,8,16,16,-1]]
+array of: 10 elements [
+integer: 3
+integer: -4
+integer: 8
+integer: 7
+integer: -4
+integer: 8
+integer: 8
+integer: 16
+integer: 16
+integer: -1
+]
+[2017-08-22 16:03:48 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.3333333333333333,0.0,0)
+[[6,4,6,13,4,-1,5,-3,8,-7,1,8,4]]
+array of: 13 elements [
+integer: 6
+integer: 4
+integer: 6
+integer: 13
+integer: 4
+integer: -1
+integer: 5
+integer: -3
+integer: 8
+integer: -7
+integer: 1
+integer: 8
+integer: 4
+]
+[2017-08-22 16:03:49 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.25,0.0,0)
+[[3,5,4,6,4,6,14,4,5,6,13,4,-1]]
+array of: 13 elements [
+integer: 3
+integer: 5
+integer: 4
+integer: 6
+integer: 4
+integer: 6
+integer: 14
+integer: 4
+integer: 5
+integer: 6
+integer: 13
+integer: 4
+integer: -1
+]
+[2017-08-22 16:03:49 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.25,0.0,0)
+[[3,5,4,6,4,6,14,4,5,6,13,4,-1]]
+array of: 13 elements [
+integer: 3
+integer: 5
+integer: 4
+integer: 6
+integer: 4
+integer: 6
+integer: 14
+integer: 4
+integer: 5
+integer: 6
+integer: 13
+integer: 4
+integer: -1
+]
+[2017-08-22 16:03:50 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.25,0.0,0)
+[[3,-4,6,6,4,6,13,4,-1,5,-3,8,-7,1,7,4]]
+array of: 16 elements [
+integer: 3
+integer: -4
+integer: 6
+integer: 6
+integer: 4
+integer: 6
+integer: 13
+integer: 4
+integer: -1
+integer: 5
+integer: -3
+integer: 8
+integer: -7
+integer: 1
+integer: 7
+integer: 4
+]
+[2017-08-22 16:03:50 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.25,0.0,0)
+[[3,-4,6,6,4,6,13,4,-1,6,-3,8,-7,1,7,4]]
+array of: 16 elements [
+integer: 3
+integer: -4
+integer: 6
+integer: 6
+integer: 4
+integer: 6
+integer: 13
+integer: 4
+integer: -1
+integer: 6
+integer: -3
+integer: 8
+integer: -7
+integer: 1
+integer: 7
+integer: 4
+]
+[2017-08-22 16:03:50 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.25,0.0,0)
+[[4,-4,6,6,5,6,13,8,-8,7,8,4]]
+array of: 12 elements [
+integer: 4
+integer: -4
+integer: 6
+integer: 6
+integer: 5
+integer: 6
+integer: 13
+integer: 8
+integer: -8
+integer: 7
+integer: 8
+integer: 4
+]
+[2017-08-22 16:03:50 CEST  CRITICAL] Best entity (gen. 10) fitness: (0.0,0.0,0)
+[[4,-4,6,6,5,4,6,13,4,-1,-5,8,6,-4,7,7]]
+array of: 16 elements [
+integer: 4
+integer: -4
+integer: 6
+integer: 6
+integer: 5
+integer: 4
+integer: 6
+integer: 13
+integer: 4
+integer: -1
+integer: -5
+integer: 8
+integer: 6
+integer: -4
+integer: 7
+integer: 7
+]
+[2017-08-22 16:03:50 CEST  CRITICAL] Perfect entity found, finished after 10 generations!
+[2017-08-22 16:03:50 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:50 CEST  CRITICAL] Best entity (GA): [[4,-4,6,6,5,4,6,13,4,-1,-5,8,6,-4,7,7]]
+[2017-08-22 16:03:50 CEST  CRITICAL] Completed iteration #5 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:50 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:50 CEST  CRITICAL] Started iteration #5 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:51 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[8,13,3,6,9]]
+array of: 5 elements [
+integer: 8
+integer: 13
+integer: 3
+integer: 6
+integer: 9
+]
+[2017-08-22 16:03:51 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:51 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:51 CEST  CRITICAL] Best entity (GA): [[8,13,3,6,9]]
+[2017-08-22 16:03:51 CEST  CRITICAL] Completed iteration #5 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:51 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:51 CEST  CRITICAL] Started iteration #6 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:51 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4444444444444444,0.0,0)
+[[4,-7,-1,0,4]]
+array of: 5 elements [
+integer: 4
+integer: -7
+integer: -1
+integer: 0
+integer: 4
+]
+[2017-08-22 16:03:52 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4375,0.0,0)
+[[4,3,3,7,13,-5]]
+array of: 6 elements [
+integer: 4
+integer: 3
+integer: 3
+integer: 7
+integer: 13
+integer: -5
+]
+[2017-08-22 16:03:52 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4,0.0,0)
+[[4,4,4,16,0,6,4,-1,-3]]
+array of: 9 elements [
+integer: 4
+integer: 4
+integer: 4
+integer: 16
+integer: 0
+integer: 6
+integer: 4
+integer: -1
+integer: -3
+]
+[2017-08-22 16:03:52 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4,0.0,0)
+[[4,4,4,16,0,6,4,-1,-3]]
+array of: 9 elements [
+integer: 4
+integer: 4
+integer: 4
+integer: 16
+integer: 0
+integer: 6
+integer: 4
+integer: -1
+integer: -3
+]
+[2017-08-22 16:03:53 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.375,0.0,0)
+[[3,3,7,13,-5,3,7,-6,4,9,1]]
+array of: 11 elements [
+integer: 3
+integer: 3
+integer: 7
+integer: 13
+integer: -5
+integer: 3
+integer: 7
+integer: -6
+integer: 4
+integer: 9
+integer: 1
+]
+[2017-08-22 16:03:53 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,0.0,0)
+[[4,-7,-1,0,4,0,-1,16,0,6,4,-1,-3]]
+array of: 13 elements [
+integer: 4
+integer: -7
+integer: -1
+integer: 0
+integer: 4
+integer: 0
+integer: -1
+integer: 16
+integer: 0
+integer: 6
+integer: 4
+integer: -1
+integer: -3
+]
+[2017-08-22 16:03:53 CEST  CRITICAL] Perfect entity found, finished after 5 generations!
+[2017-08-22 16:03:53 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:53 CEST  CRITICAL] Best entity (GA): [[4,-7,-1,0,4,0,-1,16,0,6,4,-1,-3]]
+[2017-08-22 16:03:53 CEST  CRITICAL] Completed iteration #6 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:53 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:53 CEST  CRITICAL] Started iteration #6 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:54 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[0,4]]
+array of: 2 elements [
+integer: 0
+integer: 4
+]
+[2017-08-22 16:03:54 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:54 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:54 CEST  CRITICAL] Best entity (GA): [[0,4]]
+[2017-08-22 16:03:54 CEST  CRITICAL] Completed iteration #6 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:54 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:54 CEST  CRITICAL] Started iteration #7 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:54 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.45,0.0,0)
+[[4,2,-3,0]]
+array of: 4 elements [
+integer: 4
+integer: 2
+integer: -3
+integer: 0
+]
+[2017-08-22 16:03:54 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4285714285714286,0.0,0)
+[[4,2,-3,0,4,-2,1]]
+array of: 7 elements [
+integer: 4
+integer: 2
+integer: -3
+integer: 0
+integer: 4
+integer: -2
+integer: 1
+]
+[2017-08-22 16:03:55 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.375,0.0,0)
+[[4,2,-3,0,4,4,-9,-6,9,6]]
+array of: 10 elements [
+integer: 4
+integer: 2
+integer: -3
+integer: 0
+integer: 4
+integer: 4
+integer: -9
+integer: -6
+integer: 9
+integer: 6
+]
+[2017-08-22 16:03:55 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.375,0.0,0)
+[[4,2,-3,0,5,4,-9,-6,9,6]]
+array of: 10 elements [
+integer: 4
+integer: 2
+integer: -3
+integer: 0
+integer: 5
+integer: 4
+integer: -9
+integer: -6
+integer: 9
+integer: 6
+]
+[2017-08-22 16:03:55 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,0.0,0)
+[[4,2,-3,0,4,-6,4,-4,-4,4,-9,-6,1]]
+array of: 13 elements [
+integer: 4
+integer: 2
+integer: -3
+integer: 0
+integer: 4
+integer: -6
+integer: 4
+integer: -4
+integer: -4
+integer: 4
+integer: -9
+integer: -6
+integer: 1
+]
+[2017-08-22 16:03:55 CEST  CRITICAL] Perfect entity found, finished after 4 generations!
+[2017-08-22 16:03:55 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:55 CEST  CRITICAL] Best entity (GA): [[4,2,-3,0,4,-6,4,-4,-4,4,-9,-6,1]]
+[2017-08-22 16:03:55 CEST  CRITICAL] Completed iteration #7 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:55 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:55 CEST  CRITICAL] Started iteration #7 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:55 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[-8,7]]
+array of: 2 elements [
+integer: -8
+integer: 7
+]
+[2017-08-22 16:03:55 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:55 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:55 CEST  CRITICAL] Best entity (GA): [[-8,7]]
+[2017-08-22 16:03:55 CEST  CRITICAL] Completed iteration #7 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:55 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:55 CEST  CRITICAL] Started iteration #8 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:56 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4444444444444444,0.0,0)
+[[4,4,0,4,3]]
+array of: 5 elements [
+integer: 4
+integer: 4
+integer: 0
+integer: 4
+integer: 3
+]
+[2017-08-22 16:03:56 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4375,0.0,0)
+[[4,1,13,3,3,16]]
+array of: 6 elements [
+integer: 4
+integer: 1
+integer: 13
+integer: 3
+integer: 3
+integer: 16
+]
+[2017-08-22 16:03:56 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4166666666666667,0.0,0)
+[[4,4,0,4,3,3,3,16]]
+array of: 8 elements [
+integer: 4
+integer: 4
+integer: 0
+integer: 4
+integer: 3
+integer: 3
+integer: 3
+integer: 16
+]
+[2017-08-22 16:03:57 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4166666666666667,0.0,0)
+[[3,1,13,3,16,3,-8,1,2]]
+array of: 9 elements [
+integer: 3
+integer: 1
+integer: 13
+integer: 3
+integer: 16
+integer: 3
+integer: -8
+integer: 1
+integer: 2
+]
+[2017-08-22 16:03:57 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4,0.0,0)
+[[4,1,13,3,7,-9,10,-9,4]]
+array of: 9 elements [
+integer: 4
+integer: 1
+integer: 13
+integer: 3
+integer: 7
+integer: -9
+integer: 10
+integer: -9
+integer: 4
+]
+[2017-08-22 16:03:57 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.25,0.0,0)
+[[4,1,13,3,1,1,4,4,13,3,3,15]]
+array of: 12 elements [
+integer: 4
+integer: 1
+integer: 13
+integer: 3
+integer: 1
+integer: 1
+integer: 4
+integer: 4
+integer: 13
+integer: 3
+integer: 3
+integer: 15
+]
+[2017-08-22 16:03:58 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,0.0,0)
+[[4,7,-9,11,-9,-8,4,1,13,3,0,1,2]]
+array of: 13 elements [
+integer: 4
+integer: 7
+integer: -9
+integer: 11
+integer: -9
+integer: -8
+integer: 4
+integer: 1
+integer: 13
+integer: 3
+integer: 0
+integer: 1
+integer: 2
+]
+[2017-08-22 16:03:58 CEST  CRITICAL] Perfect entity found, finished after 6 generations!
+[2017-08-22 16:03:58 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:58 CEST  CRITICAL] Best entity (GA): [[4,7,-9,11,-9,-8,4,1,13,3,0,1,2]]
+[2017-08-22 16:03:58 CEST  CRITICAL] Completed iteration #8 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:58 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:58 CEST  CRITICAL] Started iteration #8 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:58 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[0]]
+array of: 1 elements [
+integer: 0
+]
+[2017-08-22 16:03:58 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:03:58 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:03:58 CEST  CRITICAL] Best entity (GA): [[0]]
+[2017-08-22 16:03:58 CEST  CRITICAL] Completed iteration #8 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:03:58 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:03:58 CEST  CRITICAL] Started iteration #9 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:03:59 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4444444444444444,0.0,0)
+[[4,4,3,-7,-3]]
+array of: 5 elements [
+integer: 4
+integer: 4
+integer: 3
+integer: -7
+integer: -3
+]
+[2017-08-22 16:03:59 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4285714285714286,0.0,0)
+[[4,4,3,4,3,-7,-3]]
+array of: 7 elements [
+integer: 4
+integer: 4
+integer: 3
+integer: 4
+integer: 3
+integer: -7
+integer: -3
+]
+[2017-08-22 16:03:59 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.375,0.0,0)
+[[4,4,-1,2,4,3,4,3,-7,-3]]
+array of: 10 elements [
+integer: 4
+integer: 4
+integer: -1
+integer: 2
+integer: 4
+integer: 3
+integer: 4
+integer: 3
+integer: -7
+integer: -3
+]
+[2017-08-22 16:04:00 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.375,0.0,0)
+[[4,4,3,-7,-2,-3,-7,0,4,10]]
+array of: 10 elements [
+integer: 4
+integer: 4
+integer: 3
+integer: -7
+integer: -2
+integer: -3
+integer: -7
+integer: 0
+integer: 4
+integer: 10
+]
+[2017-08-22 16:04:00 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,0.0,0)
+[[4,4,-1,2,4,3,4,3,0,9,10,-2,-6]]
+array of: 13 elements [
+integer: 4
+integer: 4
+integer: -1
+integer: 2
+integer: 4
+integer: 3
+integer: 4
+integer: 3
+integer: 0
+integer: 9
+integer: 10
+integer: -2
+integer: -6
+]
+[2017-08-22 16:04:00 CEST  CRITICAL] Perfect entity found, finished after 4 generations!
+[2017-08-22 16:04:00 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:04:00 CEST  CRITICAL] Best entity (GA): [[4,4,-1,2,4,3,4,3,0,9,10,-2,-6]]
+[2017-08-22 16:04:00 CEST  CRITICAL] Completed iteration #9 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:04:00 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:04:00 CEST  CRITICAL] Started iteration #9 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:04:00 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[4,6,-6,3,4]]
+array of: 5 elements [
+integer: 4
+integer: 6
+integer: -6
+integer: 3
+integer: 4
+]
+[2017-08-22 16:04:00 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:04:00 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:04:00 CEST  CRITICAL] Best entity (GA): [[4,6,-6,3,4]]
+[2017-08-22 16:04:00 CEST  CRITICAL] Completed iteration #9 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:04:00 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:04:00 CEST  CRITICAL] Started iteration #10 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:04:01 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4444444444444444,0.0,0)
+[[4,13,3,-2,16]]
+array of: 5 elements [
+integer: 4
+integer: 13
+integer: 3
+integer: -2
+integer: 16
+]
+[2017-08-22 16:04:01 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4444444444444444,0.0,0)
+[[6,-2,1,16,4,8,-1]]
+array of: 7 elements [
+integer: 6
+integer: -2
+integer: 1
+integer: 16
+integer: 4
+integer: 8
+integer: -1
+]
+[2017-08-22 16:04:02 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4375,0.0,0)
+[[6,-2,1,16,4,4,8,-1]]
+array of: 8 elements [
+integer: 6
+integer: -2
+integer: 1
+integer: 16
+integer: 4
+integer: 4
+integer: 8
+integer: -1
+]
+[2017-08-22 16:04:02 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4166666666666667,0.0,0)
+[[5,13,3,-1,5,0,7,13,-1]]
+array of: 9 elements [
+integer: 5
+integer: 13
+integer: 3
+integer: -1
+integer: 5
+integer: 0
+integer: 7
+integer: 13
+integer: -1
+]
+[2017-08-22 16:04:02 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.25,0.0,0)
+[[4,4,-2,-1,5,1,8,13,0,7,13,-1]]
+array of: 12 elements [
+integer: 4
+integer: 4
+integer: -2
+integer: -1
+integer: 5
+integer: 1
+integer: 8
+integer: 13
+integer: 0
+integer: 7
+integer: 13
+integer: -1
+]
+[2017-08-22 16:04:03 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.25,0.0,0)
+[[4,7,3,-1,16,1,8,13,0,7,13,-1]]
+array of: 12 elements [
+integer: 4
+integer: 7
+integer: 3
+integer: -1
+integer: 16
+integer: 1
+integer: 8
+integer: 13
+integer: 0
+integer: 7
+integer: 13
+integer: -1
+]
+[2017-08-22 16:04:03 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.25,0.0,0)
+[[4,4,-2,-1,5,1,8,13,0,4,13,3,-5,3]]
+array of: 14 elements [
+integer: 4
+integer: 4
+integer: -2
+integer: -1
+integer: 5
+integer: 1
+integer: 8
+integer: 13
+integer: 0
+integer: 4
+integer: 13
+integer: 3
+integer: -5
+integer: 3
+]
+[2017-08-22 16:04:03 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,0.0,0)
+[[4,13,8,6,-2,0,16,4,4,8,-1,6,-2,1,4,3]]
+array of: 16 elements [
+integer: 4
+integer: 13
+integer: 8
+integer: 6
+integer: -2
+integer: 0
+integer: 16
+integer: 4
+integer: 4
+integer: 8
+integer: -1
+integer: 6
+integer: -2
+integer: 1
+integer: 4
+integer: 3
+]
+[2017-08-22 16:04:03 CEST  CRITICAL] Perfect entity found, finished after 7 generations!
+[2017-08-22 16:04:03 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:04:03 CEST  CRITICAL] Best entity (GA): [[4,13,8,6,-2,0,16,4,4,8,-1,6,-2,1,4,3]]
+[2017-08-22 16:04:03 CEST  CRITICAL] Completed iteration #10 to cover branch: #1 -> (2,3,"then")
+[2017-08-22 16:04:03 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-22 16:04:03 CEST  CRITICAL] Started iteration #10 to cover branch: #2 -> (2,5,"else")
+[2017-08-22 16:04:04 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[9,16,-10]]
+array of: 3 elements [
+integer: 9
+integer: 16
+integer: -10
+]
+[2017-08-22 16:04:04 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-22 16:04:04 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-22 16:04:04 CEST  CRITICAL] Best entity (GA): [[9,16,-10]]
+[2017-08-22 16:04:04 CEST  CRITICAL] Completed iteration #10 to cover branch: #2 -> (2,5,"else")
