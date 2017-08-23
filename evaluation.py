@@ -5,7 +5,7 @@ from os.path import basename, splitext, join
 from time import time
 from datetime import datetime
 import sys
-from os import makedirs 
+from os import makedirs
 
 confix = "./evaluation/confix/"
 tsjs_dom_html = "./evaluation/tsjs_dom_html/"
@@ -69,9 +69,9 @@ makedirs(cs_outfolder)
 for cs in case_studies:
     cs_base = basename(cs)
     cs_outfile = splitext(cs_base)[0]
-    cs_out = cs_outfile[6:] + ".out"
-    cs_output = cs_outfolder+ "/" + cs_out
+    cs_out = cs_outfile[6:] + "_" + eval_type + ".out"
+    cs_output = cs_outfolder + "/" + cs_out
     print st, "Processing case study: ", cs
     print st, "Writing output to: ", cs_output
     call(["stack", "exec", "JSDomTest", cs, cs_output])
-
+    # call(["cabal", "run", cs, cs_output])
