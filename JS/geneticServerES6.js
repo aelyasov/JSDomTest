@@ -10,7 +10,7 @@ const instrument = require("./instrumentLib.js");
 const winston = require('winston');
 
 winston.level = 'info';
-//winston.level = 'debug';
+// winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {
     'timestamp': () => (new Date()).toJSON()
