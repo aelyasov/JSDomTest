@@ -110,6 +110,7 @@ main' = do
   -- Parse input and set logger
   jsFile <- parseInputAndSetupLogger logLevel
   let logger = rootLoggerName
+  criticalM logger $ "Test generation strategy: " ++ (show algType)
   debugM logger $ "JavaScript file given for the analysis: " ++ (show jsFile)
   jsFileContent <- parseFromFile jsFile
   jsSig <- parseJSSignature jsFile  
