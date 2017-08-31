@@ -110,11 +110,12 @@ main' = do
   -- Parse input and set logger
   jsFile <- parseInputAndSetupLogger logLevel
   let logger = rootLoggerName
-  criticalM logger $ "Test generation strategy: " ++ (show algType)
-  debugM logger $ "JavaScript file given for the analysis: " ++ (show jsFile)
+  criticalM logger $ "Test generation strategy: " ++ show algType
+  criticalM logger $ "Number of performed generation runs: " ++ show iterateTotal 
+  debugM logger $ "JavaScript file given for the analysis: " ++ show jsFile
   jsFileContent <- parseFromFile jsFile
   jsSig <- parseJSSignature jsFile  
-  debugM logger $ "JS function signature: " ++ (show jsSig)
+  debugM logger $ "JS function signature: " ++ show jsSig
   let jsFun         = transfromJS jsFileContent               
       (Script l (jsLabFun':jsLabStms)) = fst $ flip runState 0 $ assignUniqueIdsSt jsFun
       jsLabFun      = Script l [jsLabFun'] 
@@ -127,8 +128,8 @@ main' = do
   noticeM logger "The function has the following CFG:\n"
   when isBreak $ void $ system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii" 
   noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
-  noticeM logger $ "The following branches have to be covered: " ++ (show branches)
-  noticeM logger $ "Initial constant pool data: " ++ (show constPool)
+  noticeM logger $ "The following branches have to be covered: " ++ show branches
+  noticeM logger $ "Initial constant pool data: " ++ show constPool
 
   setCondBreakPoint
   
