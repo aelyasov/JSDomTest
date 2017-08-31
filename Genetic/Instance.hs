@@ -102,7 +102,21 @@ readGenetcAlgConfig = do
 
 runGenetic :: Target -> (JSSig, JSCPool) -> IO [JSArg]
 runGenetic target pool@(sig, (intP, floatP, stringP, (tagP, idP, nameP, classP))) = do
-  (population, archive, generations, crossoverRate, mutationRate, crossoverParam, mutationParam, checkpointing, rescorearchive) <- readGenetcAlgConfig
+  (population,
+   archive,
+   generations,
+   crossoverRate,
+   mutationRate,
+   crossoverParam,
+   mutationParam,
+   checkpointing,
+   rescorearchive) <- readGenetcAlgConfig
+  criticalM rootLoggerName "Genetic algorithm configurations"
+  criticalM rootLoggerName $ "genetic.population: "     ++ show population
+  criticalM rootLoggerName $ "genetic.archive: "        ++ show archive
+  criticalM rootLoggerName $ "genetic.generations: "    ++ show generations
+  criticalM rootLoggerName $ "genetic.crossover_rate: " ++ show crossoverRate
+  criticalM rootLoggerName $ "genetic.mutation_rate: "  ++ show mutationRate
   let conf = GAConfig population archive generations crossoverRate mutationRate crossoverParam mutationParam checkpointing rescorearchive 
       g = mkStdGen 0            
   (bestFitness, bestScoredEntry) <- liftM head $ evolveVerbose g conf pool target
