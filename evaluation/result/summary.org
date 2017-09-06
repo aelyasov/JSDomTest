@@ -1,0 +1,14 @@
+
+* genetic
+** DONE 2017-08-22_14:13:20 - 10 times
+** DONE 2017-08-24_10:29:48 - 10 times
+** TODO 2017-08-28_08:53:19 - 10 times
+*** do_draw_genetic
+*** few files are missing
+* random
+** TODO 2017-08-23_00:41:47 - 10 times
+*** initBricks_random
+** TODO 2017-08-23_19:01:48 - 10 times
+*** probability_gamma_random
+** DONE 2017-08-27_15:12:23
+
