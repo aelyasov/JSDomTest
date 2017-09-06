@@ -1,0 +1,7294 @@
+[2017-08-30 16:16:28 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:28 CEST  CRITICAL] Started iteration #1 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:16:30 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_n">
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_title">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_refresh">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,5,["ss_theend",".?p=","03u2L","4G","zl"],False,["vGzI3","i","ss_link2"],["pVG","R43VZ","b5h9"],False,["3G","N","Nb","6","A0Tq"],["eR","dC","ss_desc"],-5]
+depth: 6 size: 16
+integer: 5
+array of: 5 elements [
+string: 9
+string: 4
+string: 5
+string: 2
+string: 2
+]
+boolean: False
+array of: 3 elements [
+string: 5
+string: 1
+string: 8
+]
+array of: 3 elements [
+string: 3
+string: 5
+string: 4
+]
+boolean: False
+array of: 5 elements [
+string: 2
+string: 1
+string: 2
+string: 1
+string: 4
+]
+array of: 3 elements [
+string: 2
+string: 2
+string: 7
+]
+integer: -5
+[2017-08-30 16:16:30 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:30 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:30 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_n">
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_title">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_refresh">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,5,["ss_theend",".?p=","03u2L","4G","zl"],False,["vGzI3","i","ss_link2"],["pVG","R43VZ","b5h9"],False,["3G","N","Nb","6","A0Tq"],["eR","dC","ss_desc"],-5]
+[2017-08-30 16:16:30 CEST  CRITICAL] Completed iteration #1 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:16:30 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:30 CEST  CRITICAL] Started iteration #1 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:16:31 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_title">
+            </div>
+            <div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_playpause_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_date">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+        <div id="ss_refresh">
+            <div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+            <div id="ss_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,0,["ivZ","Yk"],False,["yif1","5"],["UJ1","Opv4","8OOkY"],False,["nKJ","uB","56QZI","i7m0y"],["Play it","HVw","VGY2"],1]
+depth: 6 size: 32
+integer: 0
+array of: 2 elements [
+string: 3
+string: 2
+]
+boolean: False
+array of: 2 elements [
+string: 4
+string: 1
+]
+array of: 3 elements [
+string: 3
+string: 4
+string: 5
+]
+boolean: False
+array of: 4 elements [
+string: 3
+string: 2
+string: 5
+string: 5
+]
+array of: 3 elements [
+string: 7
+string: 3
+string: 4
+]
+integer: 1
+[2017-08-30 16:16:31 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:31 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:31 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_title">
+            </div>
+            <div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_playpause_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_date">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+        <div id="ss_refresh">
+            <div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+            <div id="ss_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,0,["ivZ","Yk"],False,["yif1","5"],["UJ1","Opv4","8OOkY"],False,["nKJ","uB","56QZI","i7m0y"],["Play it","HVw","VGY2"],1]
+[2017-08-30 16:16:31 CEST  CRITICAL] Completed iteration #1 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:16:31 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:31 CEST  CRITICAL] Started iteration #1 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:16:32 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div id="ss_playpause_link2">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+                DIV2
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+        <div id="ss_refresh">
+            <div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,["DS0K","uzz","iW"],True,["1YYAE","w3xwG","ss_desc"],["ss_title"],False,["none","k"],["svrxT","ss_date","yx6f","P"],-3]
+depth: 6 size: 39
+integer: 3
+array of: 3 elements [
+string: 4
+string: 3
+string: 2
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 5
+string: 7
+]
+array of: 1 elements [
+string: 8
+]
+boolean: False
+array of: 2 elements [
+string: 4
+string: 1
+]
+array of: 4 elements [
+string: 5
+string: 7
+string: 4
+string: 1
+]
+integer: -3
+[2017-08-30 16:16:32 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:32 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:32 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div id="ss_playpause_link2">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+                DIV2
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+        <div id="ss_refresh">
+            <div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,["DS0K","uzz","iW"],True,["1YYAE","w3xwG","ss_desc"],["ss_title"],False,["none","k"],["svrxT","ss_date","yx6f","P"],-3]
+[2017-08-30 16:16:32 CEST  CRITICAL] Completed iteration #1 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:16:32 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:32 CEST  CRITICAL] Started iteration #1 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:16:34 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            DIV2
+            <div id="ss_n">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+            </div>
+        </div>
+    </body>
+</html>
+,7,["py","F3a","0Y"],False,["flIFT","ka","ss_n","aT"],["LP","NZ2Hf","none","cZy","ZVh"],True,["fb4","Pause it","KKBj"],["ss_refresh"],-2]
+depth: 6 size: 13
+integer: 7
+array of: 3 elements [
+string: 2
+string: 3
+string: 2
+]
+boolean: False
+array of: 4 elements [
+string: 5
+string: 2
+string: 4
+string: 2
+]
+array of: 5 elements [
+string: 2
+string: 5
+string: 4
+string: 3
+string: 3
+]
+boolean: True
+array of: 3 elements [
+string: 3
+string: 8
+string: 4
+]
+array of: 1 elements [
+string: 10
+]
+integer: -2
+[2017-08-30 16:16:34 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:34 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:34 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            DIV2
+            <div id="ss_n">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+            </div>
+        </div>
+    </body>
+</html>
+,7,["py","F3a","0Y"],False,["flIFT","ka","ss_n","aT"],["LP","NZ2Hf","none","cZy","ZVh"],True,["fb4","Pause it","KKBj"],["ss_refresh"],-2]
+[2017-08-30 16:16:34 CEST  CRITICAL] Completed iteration #1 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:16:34 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:34 CEST  CRITICAL] Started iteration #1 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:16:36 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,2.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            DIV2
+            <div id="ss_title">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div id="ss_n">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+        <div id="ss_playpause_link2">
+            <div id="ss_refresh">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_photo">
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,9,["J1pfG"],True,["XLsuV","4W","Da"],["5tNs2","Final","c24r","aBX2","Play it"],True,["hVs7","Op","ss_n"],["F","y1","InI","ss_n","kA"],0]
+depth: 6 size: 21
+integer: 9
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 2
+string: 2
+]
+array of: 5 elements [
+string: 5
+string: 5
+string: 4
+string: 4
+string: 7
+]
+boolean: True
+array of: 3 elements [
+string: 4
+string: 2
+string: 4
+]
+array of: 5 elements [
+string: 1
+string: 2
+string: 3
+string: 4
+string: 2
+]
+integer: 0
+[2017-08-30 16:16:38 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,2.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="ss_link2" id="ss_playpause_link2">
+            <div class="none" id="ss_playpause_link">
+                <div class="block" id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div class="ss_theend" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div class="ss_n" id="ss_link2">
+        </div>
+    </body>
+</html>
+,8,["M",".?p=","DKY","iJ","ss_playpause_link"],True,["z48","ss_link2","LGm"],["lH",".?p="],False,["wplR","LDoe"],["ss_desc"],-6]
+depth: 6 size: 13
+integer: 8
+array of: 5 elements [
+string: 1
+string: 4
+string: 3
+string: 2
+string: 17
+]
+boolean: True
+array of: 3 elements [
+string: 3
+string: 8
+string: 3
+]
+array of: 2 elements [
+string: 2
+string: 4
+]
+boolean: False
+array of: 2 elements [
+string: 4
+string: 4
+]
+array of: 1 elements [
+string: 7
+]
+integer: -6
+[2017-08-30 16:16:38 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div class="ss_theend" id="ss_photo">
+            <div class="none" id="ss_refresh">
+                <div class="ss_link2" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_playpause_link" id="ss_theend">
+                DIV2
+            </div>
+            <div class="block" id="ss_link2">
+                <div class="ss_n" id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div class="Final" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,5,["3ESTq","w","AQPK"],True,["ss_photo","ss_link2","9v","ss_title"],["Hj","sUaNi","1GzAf"],True,["5U","b","ByrSj","dC","Final"],["C","39nX","s28"],-9]
+depth: 6 size: 17
+integer: 5
+array of: 3 elements [
+string: 5
+string: 1
+string: 4
+]
+boolean: True
+array of: 4 elements [
+string: 8
+string: 8
+string: 2
+string: 8
+]
+array of: 3 elements [
+string: 2
+string: 5
+string: 5
+]
+boolean: True
+array of: 5 elements [
+string: 2
+string: 1
+string: 5
+string: 2
+string: 5
+]
+array of: 3 elements [
+string: 1
+string: 4
+string: 3
+]
+integer: -9
+[2017-08-30 16:16:38 CEST  CRITICAL] Perfect entity found, finished after 2 generations!
+[2017-08-30 16:16:38 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:38 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div class="ss_theend" id="ss_photo">
+            <div class="none" id="ss_refresh">
+                <div class="ss_link2" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_playpause_link" id="ss_theend">
+                DIV2
+            </div>
+            <div class="block" id="ss_link2">
+                <div class="ss_n" id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div class="Final" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,5,["3ESTq","w","AQPK"],True,["ss_photo","ss_link2","9v","ss_title"],["Hj","sUaNi","1GzAf"],True,["5U","b","ByrSj","dC","Final"],["C","39nX","s28"],-9]
+[2017-08-30 16:16:38 CEST  CRITICAL] Completed iteration #1 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:16:38 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:38 CEST  CRITICAL] Started iteration #1 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:16:39 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_refresh">
+                DIV2DIV2
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_theend">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["Dt7"],True,["ss_photo","8bC"],["ss_title"],True,["ss_refresh","T","B","QQxV5"],["orL","LuG","rRfM","XHFOV"],4]
+depth: 6 size: 16
+integer: 4
+array of: 1 elements [
+string: 3
+]
+boolean: True
+array of: 2 elements [
+string: 8
+string: 3
+]
+array of: 1 elements [
+string: 8
+]
+boolean: True
+array of: 4 elements [
+string: 10
+string: 1
+string: 1
+string: 5
+]
+array of: 4 elements [
+string: 3
+string: 3
+string: 4
+string: 5
+]
+integer: 4
+[2017-08-30 16:16:39 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:39 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:39 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_refresh">
+                DIV2DIV2
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_theend">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["Dt7"],True,["ss_photo","8bC"],["ss_title"],True,["ss_refresh","T","B","QQxV5"],["orL","LuG","rRfM","XHFOV"],4]
+[2017-08-30 16:16:39 CEST  CRITICAL] Completed iteration #1 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:16:39 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:39 CEST  CRITICAL] Started iteration #2 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:16:41 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_theend">
+            </div>
+            <div id="ss_n">
+                DIV2
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+        </div>
+    </body>
+</html>
+,8,["s5mL","PMdl"],True,["lE","7n"],["i","fdc","P","p"],True,["Play it","Play it"],["ss_n","Mdp","Yplo","12Syy"],6]
+depth: 5 size: 11
+integer: 8
+array of: 2 elements [
+string: 4
+string: 4
+]
+boolean: True
+array of: 2 elements [
+string: 2
+string: 2
+]
+array of: 4 elements [
+string: 1
+string: 3
+string: 1
+string: 1
+]
+boolean: True
+array of: 2 elements [
+string: 7
+string: 7
+]
+array of: 4 elements [
+string: 4
+string: 3
+string: 4
+string: 5
+]
+integer: 6
+[2017-08-30 16:16:41 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:41 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:41 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_theend">
+            </div>
+            <div id="ss_n">
+                DIV2
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+        </div>
+    </body>
+</html>
+,8,["s5mL","PMdl"],True,["lE","7n"],["i","fdc","P","p"],True,["Play it","Play it"],["ss_n","Mdp","Yplo","12Syy"],6]
+[2017-08-30 16:16:41 CEST  CRITICAL] Completed iteration #2 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:16:41 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:41 CEST  CRITICAL] Started iteration #2 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:16:42 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+        <div id="ss_link2">
+            <div id="ss_refresh">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,-8,["ss_theend","ss_playpause_link","wvlX","je","J"],False,["ss_theend","iJmn","3P","ss_link1","qNkr"],["s73","Play it","O"],False,["P","M"],["P0q","ss_playpause_link2","mho0"],-7]
+depth: 6 size: 33
+integer: -8
+array of: 5 elements [
+string: 9
+string: 17
+string: 4
+string: 2
+string: 1
+]
+boolean: False
+array of: 5 elements [
+string: 9
+string: 4
+string: 2
+string: 8
+string: 4
+]
+array of: 3 elements [
+string: 3
+string: 7
+string: 1
+]
+boolean: False
+array of: 2 elements [
+string: 1
+string: 1
+]
+array of: 3 elements [
+string: 3
+string: 18
+string: 4
+]
+integer: -7
+[2017-08-30 16:16:42 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:42 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:42 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+        <div id="ss_link2">
+            <div id="ss_refresh">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,-8,["ss_theend","ss_playpause_link","wvlX","je","J"],False,["ss_theend","iJmn","3P","ss_link1","qNkr"],["s73","Play it","O"],False,["P","M"],["P0q","ss_playpause_link2","mho0"],-7]
+[2017-08-30 16:16:42 CEST  CRITICAL] Completed iteration #2 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:16:42 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:42 CEST  CRITICAL] Started iteration #2 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:16:43 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_n">
+            DIV2
+            <div id="ss_photo">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_playpause_link2">
+            <div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["avY"],True,["href","DV","yGp","LDK7","YD"],["ThQ","yj","b","ON"],False,["YzHly","9Hsh","IG","pb8B","5"],["1","Dh","Sq"],5]
+depth: 6 size: 32
+integer: 4
+array of: 1 elements [
+string: 3
+]
+boolean: True
+array of: 5 elements [
+string: 4
+string: 2
+string: 3
+string: 4
+string: 2
+]
+array of: 4 elements [
+string: 3
+string: 2
+string: 1
+string: 2
+]
+boolean: False
+array of: 5 elements [
+string: 5
+string: 4
+string: 2
+string: 4
+string: 1
+]
+array of: 3 elements [
+string: 1
+string: 2
+string: 2
+]
+integer: 5
+[2017-08-30 16:16:43 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:43 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:43 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_n">
+            DIV2
+            <div id="ss_photo">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_playpause_link2">
+            <div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["avY"],True,["href","DV","yGp","LDK7","YD"],["ThQ","yj","b","ON"],False,["YzHly","9Hsh","IG","pb8B","5"],["1","Dh","Sq"],5]
+[2017-08-30 16:16:43 CEST  CRITICAL] Completed iteration #2 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:16:43 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:43 CEST  CRITICAL] Started iteration #2 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:16:45 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            <div id="ss_playpause_link2">
+                DIV2DIV2
+            </div>
+            <div id="ss_n">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,9,["YjCz","ss_refresh","vcb"],False,["ouV","P7HLa","jQk2"],["U","F"],False,["89rw","r1","jyS","ss_link2"],["f1P","7cw","Ru","sq44L","mzi"],10]
+depth: 6 size: 14
+integer: 9
+array of: 3 elements [
+string: 4
+string: 10
+string: 3
+]
+boolean: False
+array of: 3 elements [
+string: 3
+string: 5
+string: 4
+]
+array of: 2 elements [
+string: 1
+string: 1
+]
+boolean: False
+array of: 4 elements [
+string: 4
+string: 2
+string: 3
+string: 8
+]
+array of: 5 elements [
+string: 3
+string: 3
+string: 2
+string: 5
+string: 3
+]
+integer: 10
+[2017-08-30 16:16:45 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:45 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:45 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            <div id="ss_playpause_link2">
+                DIV2DIV2
+            </div>
+            <div id="ss_n">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,9,["YjCz","ss_refresh","vcb"],False,["ouV","P7HLa","jQk2"],["U","F"],False,["89rw","r1","jyS","ss_link2"],["f1P","7cw","Ru","sq44L","mzi"],10]
+[2017-08-30 16:16:45 CEST  CRITICAL] Completed iteration #2 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:16:45 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:45 CEST  CRITICAL] Started iteration #2 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:16:46 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_refresh">
+            <div id="ss_n">
+            </div>
+            DIV2
+        </div>
+        <div id="ss_link2">
+            <div id="ss_playpause_link">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div id="ss_playpause_link2">
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,8,[".?p=","mZ","OjjT"],True,["Cl","oHd","Upay","TKmZJ"],["ss_date","ss_playpause_link","z","prn0a","UemK6"],False,["viE5R","aP","71cn","S","umykj"],["A","KNMO",".?p="],-8]
+depth: 6 size: 16
+integer: 8
+array of: 3 elements [
+string: 4
+string: 2
+string: 4
+]
+boolean: True
+array of: 4 elements [
+string: 2
+string: 3
+string: 4
+string: 5
+]
+array of: 5 elements [
+string: 7
+string: 17
+string: 1
+string: 5
+string: 5
+]
+boolean: False
+array of: 5 elements [
+string: 5
+string: 2
+string: 4
+string: 1
+string: 5
+]
+array of: 3 elements [
+string: 1
+string: 4
+string: 4
+]
+integer: -8
+[2017-08-30 16:16:46 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:46 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:46 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_refresh">
+            <div id="ss_n">
+            </div>
+            DIV2
+        </div>
+        <div id="ss_link2">
+            <div id="ss_playpause_link">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div id="ss_playpause_link2">
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,8,[".?p=","mZ","OjjT"],True,["Cl","oHd","Upay","TKmZJ"],["ss_date","ss_playpause_link","z","prn0a","UemK6"],False,["viE5R","aP","71cn","S","umykj"],["A","KNMO",".?p="],-8]
+[2017-08-30 16:16:46 CEST  CRITICAL] Completed iteration #2 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:16:46 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:46 CEST  CRITICAL] Started iteration #2 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:16:48 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+            <div id="ss_theend">
+            </div>
+            <div id="ss_title">
+                DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_date">
+            <div id="ss_playpause_link2">
+            </div>
+            <div id="ss_playpause_link">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["izA"],True,["ss_playpause_link2","ss_playpause_link2","wLoc","ll9Cr","1uK"],["none"],False,["Gd08Z","kUgO0","LaEFF"],["HFuXf","rSP","RqqXT"],7]
+depth: 6 size: 21
+integer: 4
+array of: 1 elements [
+string: 3
+]
+boolean: True
+array of: 5 elements [
+string: 18
+string: 18
+string: 4
+string: 5
+string: 3
+]
+array of: 1 elements [
+string: 4
+]
+boolean: False
+array of: 3 elements [
+string: 5
+string: 5
+string: 5
+]
+array of: 3 elements [
+string: 5
+string: 3
+string: 5
+]
+integer: 7
+[2017-08-30 16:16:48 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:48 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:48 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+            <div id="ss_theend">
+            </div>
+            <div id="ss_title">
+                DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_date">
+            <div id="ss_playpause_link2">
+            </div>
+            <div id="ss_playpause_link">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["izA"],True,["ss_playpause_link2","ss_playpause_link2","wLoc","ll9Cr","1uK"],["none"],False,["Gd08Z","kUgO0","LaEFF"],["HFuXf","rSP","RqqXT"],7]
+[2017-08-30 16:16:48 CEST  CRITICAL] Completed iteration #2 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:16:48 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:48 CEST  CRITICAL] Started iteration #3 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:16:49 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_n">
+                DIV2
+            </div>
+            <div id="ss_title">
+            </div>
+            <div id="ss_date">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_desc">
+            <div id="ss_playpause_link">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,10,["EM","d","ss_desc"],True,["Cju"],["Ib"],True,["ss_title","cDjOJ","ss_photo"],["1v9","OsiD"],8]
+depth: 6 size: 26
+integer: 10
+array of: 3 elements [
+string: 2
+string: 1
+string: 7
+]
+boolean: True
+array of: 1 elements [
+string: 3
+]
+array of: 1 elements [
+string: 2
+]
+boolean: True
+array of: 3 elements [
+string: 8
+string: 5
+string: 8
+]
+array of: 2 elements [
+string: 3
+string: 4
+]
+integer: 8
+[2017-08-30 16:16:49 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:49 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:49 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_n">
+                DIV2
+            </div>
+            <div id="ss_title">
+            </div>
+            <div id="ss_date">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_desc">
+            <div id="ss_playpause_link">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,10,["EM","d","ss_desc"],True,["Cju"],["Ib"],True,["ss_title","cDjOJ","ss_photo"],["1v9","OsiD"],8]
+[2017-08-30 16:16:49 CEST  CRITICAL] Completed iteration #3 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:16:49 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:49 CEST  CRITICAL] Started iteration #3 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:16:51 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,3.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_n">
+            DIV2
+            <div id="ss_playpause_link">
+                DIV2
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_photo">
+                DIV2
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_date">
+            <div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_refresh">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,1,["1UTr","48S","3f"],False,["GqYzo"],["ss_date","ss_desc","block","none","Hihhv"],False,["bTG","VYz","sfj","VS6"],["Play it","Zbk2"],-1]
+depth: 6 size: 26
+integer: 1
+array of: 3 elements [
+string: 4
+string: 3
+string: 2
+]
+boolean: False
+array of: 1 elements [
+string: 5
+]
+array of: 5 elements [
+string: 7
+string: 7
+string: 5
+string: 4
+string: 5
+]
+boolean: False
+array of: 4 elements [
+string: 3
+string: 3
+string: 3
+string: 3
+]
+array of: 2 elements [
+string: 7
+string: 4
+]
+integer: -1
+[2017-08-30 16:16:52 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="ss_photo" id="ss_refresh">
+            <div class="ss_link2" id="ss_date">
+                <div class="ss_title" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div class="block" id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class=".?p=" id="ss_n">
+                DIV2
+                <div class="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="Play it" id="ss_link1">
+            </div>
+        </div>
+        <div class="ss_date" id="ss_title">
+            <div class="ss_desc">
+            </div>
+            DIV2
+            <div class="Pause it">
+                DIV2
+            </div>
+        </div>
+        <div class="Final">
+            <div class="ss_playpause_link" id="ss_theend">
+                <div class="ss_link1" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_n" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_playpause_link2">
+                <div class="none">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_theend" id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="href">
+            </div>
+        </div>
+    </body>
+</html>
+,-2,["d6W","udEF"],True,["ss_desc","j9sfd","UD3iQ","n","ss_photo"],["aNvby","DF"],True,["IBRY","Rk"],["rL1","hIiHD","sifp"],1]
+depth: 6 size: 34
+integer: -2
+array of: 2 elements [
+string: 3
+string: 4
+]
+boolean: True
+array of: 5 elements [
+string: 7
+string: 5
+string: 5
+string: 1
+string: 8
+]
+array of: 2 elements [
+string: 5
+string: 2
+]
+boolean: True
+array of: 2 elements [
+string: 4
+string: 2
+]
+array of: 3 elements [
+string: 3
+string: 5
+string: 4
+]
+integer: 1
+[2017-08-30 16:16:52 CEST  CRITICAL] Perfect entity found, finished after 1 generations!
+[2017-08-30 16:16:52 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:52 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="ss_photo" id="ss_refresh">
+            <div class="ss_link2" id="ss_date">
+                <div class="ss_title" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div class="block" id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class=".?p=" id="ss_n">
+                DIV2
+                <div class="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="Play it" id="ss_link1">
+            </div>
+        </div>
+        <div class="ss_date" id="ss_title">
+            <div class="ss_desc">
+            </div>
+            DIV2
+            <div class="Pause it">
+                DIV2
+            </div>
+        </div>
+        <div class="Final">
+            <div class="ss_playpause_link" id="ss_theend">
+                <div class="ss_link1" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_n" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_playpause_link2">
+                <div class="none">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_theend" id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="href">
+            </div>
+        </div>
+    </body>
+</html>
+,-2,["d6W","udEF"],True,["ss_desc","j9sfd","UD3iQ","n","ss_photo"],["aNvby","DF"],True,["IBRY","Rk"],["rL1","hIiHD","sifp"],1]
+[2017-08-30 16:16:52 CEST  CRITICAL] Completed iteration #3 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:16:52 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:52 CEST  CRITICAL] Started iteration #3 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:16:53 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_playpause_link">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,7,["Nhz0k"],True,["6","M3IO5","ss_link2","5FdhK"],["jUX2","s","ss_date"],False,["G","ss_desc","l","jOs5","je7Jd"],["ss_title","q4aFl","r7hn","wjsJB","ss_n"],0]
+depth: 6 size: 14
+integer: 7
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 4 elements [
+string: 1
+string: 5
+string: 8
+string: 5
+]
+array of: 3 elements [
+string: 4
+string: 1
+string: 7
+]
+boolean: False
+array of: 5 elements [
+string: 1
+string: 7
+string: 1
+string: 4
+string: 5
+]
+array of: 5 elements [
+string: 8
+string: 5
+string: 4
+string: 5
+string: 4
+]
+integer: 0
+[2017-08-30 16:16:53 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:53 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:53 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_playpause_link">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,7,["Nhz0k"],True,["6","M3IO5","ss_link2","5FdhK"],["jUX2","s","ss_date"],False,["G","ss_desc","l","jOs5","je7Jd"],["ss_title","q4aFl","r7hn","wjsJB","ss_n"],0]
+[2017-08-30 16:16:53 CEST  CRITICAL] Completed iteration #3 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:16:53 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:53 CEST  CRITICAL] Started iteration #3 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:16:54 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_n">
+                DIV2
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_link2">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,5,["oty","yDd"],False,["m1hgB","KeQJ"],["Vo9","fF","none","qVI"],True,["QhenB","s4a","ss_link1",".?p=","NVfn9"],["ss_n"],-6]
+depth: 6 size: 16
+integer: 5
+array of: 2 elements [
+string: 3
+string: 3
+]
+boolean: False
+array of: 2 elements [
+string: 5
+string: 4
+]
+array of: 4 elements [
+string: 3
+string: 2
+string: 4
+string: 3
+]
+boolean: True
+array of: 5 elements [
+string: 5
+string: 3
+string: 8
+string: 4
+string: 5
+]
+array of: 1 elements [
+string: 4
+]
+integer: -6
+[2017-08-30 16:16:54 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:54 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:54 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_n">
+                DIV2
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_link2">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,5,["oty","yDd"],False,["m1hgB","KeQJ"],["Vo9","fF","none","qVI"],True,["QhenB","s4a","ss_link1",".?p=","NVfn9"],["ss_n"],-6]
+[2017-08-30 16:16:54 CEST  CRITICAL] Completed iteration #3 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:16:54 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:54 CEST  CRITICAL] Started iteration #3 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:16:57 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,2.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_link2">
+            <div id="ss_playpause_link">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,8,["j","Yj","lXyO","BQ6","J1"],True,["W6","ss_n"],["XUt4","RfcFx"],True,["k","aGR6k","8Jt","h"],["KVwC","G","Vmjj2","NpqCp","ss_title"],-7]
+depth: 6 size: 18
+integer: 8
+array of: 5 elements [
+string: 1
+string: 2
+string: 4
+string: 3
+string: 2
+]
+boolean: True
+array of: 2 elements [
+string: 2
+string: 4
+]
+array of: 2 elements [
+string: 4
+string: 5
+]
+boolean: True
+array of: 4 elements [
+string: 1
+string: 5
+string: 3
+string: 1
+]
+array of: 5 elements [
+string: 4
+string: 1
+string: 5
+string: 5
+string: 8
+]
+integer: -7
+[2017-08-30 16:16:57 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="Final" id="ss_photo">
+            <div class="block" id="ss_refresh">
+                <div class="none" id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div class="ss_link2" id="ss_theend">
+            <div class="ss_theend" id="ss_playpause_link">
+                <div class="ss_n" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["Final","e","gT","ok7a"],True,["B9N5","mn07I","YWI"],["ZmzK","xyiOA","Rs0fp"],True,["F8nLg","z","B"],["W","72C","Bk","W","aKiRX"],-1]
+depth: 6 size: 16
+integer: 4
+array of: 4 elements [
+string: 5
+string: 1
+string: 2
+string: 4
+]
+boolean: True
+array of: 3 elements [
+string: 4
+string: 5
+string: 3
+]
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 1
+string: 1
+]
+array of: 5 elements [
+string: 1
+string: 3
+string: 2
+string: 1
+string: 5
+]
+integer: -1
+[2017-08-30 16:16:57 CEST  CRITICAL] Perfect entity found, finished after 1 generations!
+[2017-08-30 16:16:57 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:57 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="Final" id="ss_photo">
+            <div class="block" id="ss_refresh">
+                <div class="none" id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div class="ss_link2" id="ss_theend">
+            <div class="ss_theend" id="ss_playpause_link">
+                <div class="ss_n" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["Final","e","gT","ok7a"],True,["B9N5","mn07I","YWI"],["ZmzK","xyiOA","Rs0fp"],True,["F8nLg","z","B"],["W","72C","Bk","W","aKiRX"],-1]
+[2017-08-30 16:16:57 CEST  CRITICAL] Completed iteration #3 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:16:57 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:57 CEST  CRITICAL] Started iteration #3 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:16:59 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_playpause_link2">
+                DIV2
+            </div>
+            <div id="ss_date">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            DIV2
+            <div id="ss_n">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_desc">
+            </div>
+        </div>
+    </body>
+</html>
+,3,["X","N7"],True,["P6o","RI"],["ss_link2"],True,["EQhr","ss_desc","t0wB"],["szjJ","ss_playpause_link2","dpT","nJ","Pause it"],10]
+depth: 6 size: 22
+integer: 3
+array of: 2 elements [
+string: 1
+string: 2
+]
+boolean: True
+array of: 2 elements [
+string: 3
+string: 2
+]
+array of: 1 elements [
+string: 8
+]
+boolean: True
+array of: 3 elements [
+string: 4
+string: 7
+string: 4
+]
+array of: 5 elements [
+string: 4
+string: 18
+string: 3
+string: 2
+string: 8
+]
+integer: 10
+[2017-08-30 16:16:59 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:16:59 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:16:59 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_playpause_link2">
+                DIV2
+            </div>
+            <div id="ss_date">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            DIV2
+            <div id="ss_n">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_desc">
+            </div>
+        </div>
+    </body>
+</html>
+,3,["X","N7"],True,["P6o","RI"],["ss_link2"],True,["EQhr","ss_desc","t0wB"],["szjJ","ss_playpause_link2","dpT","nJ","Pause it"],10]
+[2017-08-30 16:16:59 CEST  CRITICAL] Completed iteration #3 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:16:59 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:16:59 CEST  CRITICAL] Started iteration #4 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:00 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_playpause_link2">
+            </div>
+            DIV2
+            <div id="ss_playpause_link">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_desc">
+                DIV2DIV2DIV2
+            </div>
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,5,["fIUi","rUMI","c0cYc"],True,["sMD0","rHlnK"],["Qk","NRTr"],True,["9GmZ","Eqmq","3I4Ie"],["yf1jT","Tz","IO"],4]
+depth: 6 size: 20
+integer: 5
+array of: 3 elements [
+string: 4
+string: 4
+string: 5
+]
+boolean: True
+array of: 2 elements [
+string: 4
+string: 5
+]
+array of: 2 elements [
+string: 2
+string: 4
+]
+boolean: True
+array of: 3 elements [
+string: 4
+string: 4
+string: 5
+]
+array of: 3 elements [
+string: 5
+string: 2
+string: 2
+]
+integer: 4
+[2017-08-30 16:17:00 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:00 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:00 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_playpause_link2">
+            </div>
+            DIV2
+            <div id="ss_playpause_link">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_desc">
+                DIV2DIV2DIV2
+            </div>
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,5,["fIUi","rUMI","c0cYc"],True,["sMD0","rHlnK"],["Qk","NRTr"],True,["9GmZ","Eqmq","3I4Ie"],["yf1jT","Tz","IO"],4]
+[2017-08-30 16:17:00 CEST  CRITICAL] Completed iteration #4 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:00 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:00 CEST  CRITICAL] Started iteration #4 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:02 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_theend">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_playpause_link">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,1,["VDWz","F","n","1qDIE"],True,["hKCx","CKuz","ss_photo","kb"],["NHo","v","sV"],True,["6"],["href","M2","P"],-3]
+depth: 6 size: 23
+integer: 1
+array of: 4 elements [
+string: 4
+string: 1
+string: 1
+string: 5
+]
+boolean: True
+array of: 4 elements [
+string: 4
+string: 4
+string: 8
+string: 2
+]
+array of: 3 elements [
+string: 3
+string: 1
+string: 2
+]
+boolean: True
+array of: 1 elements [
+string: 1
+]
+array of: 3 elements [
+string: 4
+string: 2
+string: 1
+]
+integer: -3
+[2017-08-30 16:17:02 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:02 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:02 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_theend">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_playpause_link">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,1,["VDWz","F","n","1qDIE"],True,["hKCx","CKuz","ss_photo","kb"],["NHo","v","sV"],True,["6"],["href","M2","P"],-3]
+[2017-08-30 16:17:02 CEST  CRITICAL] Completed iteration #4 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:02 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:02 CEST  CRITICAL] Started iteration #4 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:03 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            DIV2
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,4,["YrqO","ma"],True,["l","7y5","Pause it","odEq","2j9"],["pZe2","jjrJ","OglN","ss_desc"],False,["1","ss_photo","vFG",".?p=","V"],["5QTD","vrR","s"],4]
+depth: 6 size: 15
+integer: 4
+array of: 2 elements [
+string: 4
+string: 2
+]
+boolean: True
+array of: 5 elements [
+string: 1
+string: 3
+string: 8
+string: 4
+string: 3
+]
+array of: 4 elements [
+string: 4
+string: 4
+string: 4
+string: 7
+]
+boolean: False
+array of: 5 elements [
+string: 1
+string: 8
+string: 3
+string: 4
+string: 1
+]
+array of: 3 elements [
+string: 4
+string: 3
+string: 1
+]
+integer: 4
+[2017-08-30 16:17:03 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:03 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:03 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            DIV2
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,4,["YrqO","ma"],True,["l","7y5","Pause it","odEq","2j9"],["pZe2","jjrJ","OglN","ss_desc"],False,["1","ss_photo","vFG",".?p=","V"],["5QTD","vrR","s"],4]
+[2017-08-30 16:17:03 CEST  CRITICAL] Completed iteration #4 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:03 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:03 CEST  CRITICAL] Started iteration #4 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:04 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_link2">
+            <div id="ss_theend">
+                DIV2
+            </div>
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_desc">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_n">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,8,["AqF","6","iL"],False,["OHrSf","E6MU"],["kM","ss_playpause_link","Zp4G"],True,["h","pNbU"],["block","egly"],1]
+depth: 6 size: 21
+integer: 8
+array of: 3 elements [
+string: 3
+string: 1
+string: 2
+]
+boolean: False
+array of: 2 elements [
+string: 5
+string: 4
+]
+array of: 3 elements [
+string: 2
+string: 17
+string: 4
+]
+boolean: True
+array of: 2 elements [
+string: 1
+string: 4
+]
+array of: 2 elements [
+string: 5
+string: 4
+]
+integer: 1
+[2017-08-30 16:17:04 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:04 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:04 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_link2">
+            <div id="ss_theend">
+                DIV2
+            </div>
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_desc">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_n">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,8,["AqF","6","iL"],False,["OHrSf","E6MU"],["kM","ss_playpause_link","Zp4G"],True,["h","pNbU"],["block","egly"],1]
+[2017-08-30 16:17:04 CEST  CRITICAL] Completed iteration #4 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:04 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:04 CEST  CRITICAL] Started iteration #4 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:06 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_theend">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+    </body>
+</html>
+,9,["6CoG","8"],True,["ss_refresh","ss_link2"],["block","p2tPQ","OWr3"],False,["Final","P44","Final","uAA2F","HWKdj"],["ss_title","wum"],-7]
+depth: 6 size: 14
+integer: 9
+array of: 2 elements [
+string: 4
+string: 1
+]
+boolean: True
+array of: 2 elements [
+string: 10
+string: 8
+]
+array of: 3 elements [
+string: 5
+string: 5
+string: 4
+]
+boolean: False
+array of: 5 elements [
+string: 5
+string: 3
+string: 5
+string: 5
+string: 5
+]
+array of: 2 elements [
+string: 8
+string: 3
+]
+integer: -7
+[2017-08-30 16:17:06 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:06 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:06 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_theend">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+    </body>
+</html>
+,9,["6CoG","8"],True,["ss_refresh","ss_link2"],["block","p2tPQ","OWr3"],False,["Final","P44","Final","uAA2F","HWKdj"],["ss_title","wum"],-7]
+[2017-08-30 16:17:06 CEST  CRITICAL] Completed iteration #4 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:06 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:06 CEST  CRITICAL] Started iteration #4 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:07 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link2">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link1">
+            <div id="ss_photo">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["A9ATT"],True,["js2","ss_link1","dRNk"],["n","ss_title"],True,["none","Pause it"],["ss_n","lAHQ","EK","ss_n"],2]
+depth: 6 size: 22
+integer: 9
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 3 elements [
+string: 3
+string: 8
+string: 4
+]
+array of: 2 elements [
+string: 1
+string: 8
+]
+boolean: True
+array of: 2 elements [
+string: 4
+string: 8
+]
+array of: 4 elements [
+string: 4
+string: 4
+string: 2
+string: 4
+]
+integer: 2
+[2017-08-30 16:17:07 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:07 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:07 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link2">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link1">
+            <div id="ss_photo">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["A9ATT"],True,["js2","ss_link1","dRNk"],["n","ss_title"],True,["none","Pause it"],["ss_n","lAHQ","EK","ss_n"],2]
+[2017-08-30 16:17:07 CEST  CRITICAL] Completed iteration #4 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:07 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:07 CEST  CRITICAL] Started iteration #5 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:08 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            <div id="ss_n">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,8,["CY"],False,["e"],["ss_playpause_link","uP","Johl"],False,["dplsK","F3","PEB"],["oVd","DHN","ss_n","p","Play it"],10]
+depth: 6 size: 10
+integer: 8
+array of: 1 elements [
+string: 2
+]
+boolean: False
+array of: 1 elements [
+string: 1
+]
+array of: 3 elements [
+string: 17
+string: 2
+string: 4
+]
+boolean: False
+array of: 3 elements [
+string: 5
+string: 2
+string: 3
+]
+array of: 5 elements [
+string: 3
+string: 3
+string: 4
+string: 1
+string: 7
+]
+integer: 10
+[2017-08-30 16:17:08 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:08 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:08 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            <div id="ss_n">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,8,["CY"],False,["e"],["ss_playpause_link","uP","Johl"],False,["dplsK","F3","PEB"],["oVd","DHN","ss_n","p","Play it"],10]
+[2017-08-30 16:17:08 CEST  CRITICAL] Completed iteration #5 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:08 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:08 CEST  CRITICAL] Started iteration #5 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:10 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link">
+            <div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                DIV2
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_n">
+        </div>
+        <div id="ss_theend">
+            <div id="ss_refresh">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                DIV2DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,0,["3","y","block","UxMIZ","ecRA"],True,["V8S","Final","9"],["fvH9","ss_date","zM","4g2","Nvf"],False,["l7"],["oh","iKs","bs5c","NwFk"],-8]
+depth: 6 size: 27
+integer: 0
+array of: 5 elements [
+string: 1
+string: 1
+string: 5
+string: 5
+string: 4
+]
+boolean: True
+array of: 3 elements [
+string: 3
+string: 5
+string: 1
+]
+array of: 5 elements [
+string: 4
+string: 7
+string: 2
+string: 3
+string: 3
+]
+boolean: False
+array of: 1 elements [
+string: 2
+]
+array of: 4 elements [
+string: 2
+string: 3
+string: 4
+string: 4
+]
+integer: -8
+[2017-08-30 16:17:10 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:10 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:10 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link">
+            <div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                DIV2
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_n">
+        </div>
+        <div id="ss_theend">
+            <div id="ss_refresh">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                DIV2DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,0,["3","y","block","UxMIZ","ecRA"],True,["V8S","Final","9"],["fvH9","ss_date","zM","4g2","Nvf"],False,["l7"],["oh","iKs","bs5c","NwFk"],-8]
+[2017-08-30 16:17:10 CEST  CRITICAL] Completed iteration #5 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:10 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:10 CEST  CRITICAL] Started iteration #5 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:11 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div id="ss_n">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_title">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_date">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+            </div>
+        </div>
+    </body>
+</html>
+,8,["8"],True,["ss_playpause_link2","tSZ","KKO","jO"],["OlD","NpnYi"],True,["jLr","NOxaA","ofgA"],["75pD","sifu","axPs6"],-7]
+depth: 6 size: 21
+integer: 8
+array of: 1 elements [
+string: 1
+]
+boolean: True
+array of: 4 elements [
+string: 18
+string: 3
+string: 3
+string: 2
+]
+array of: 2 elements [
+string: 3
+string: 5
+]
+boolean: True
+array of: 3 elements [
+string: 3
+string: 5
+string: 4
+]
+array of: 3 elements [
+string: 4
+string: 4
+string: 5
+]
+integer: -7
+[2017-08-30 16:17:11 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:11 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:11 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div id="ss_n">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_title">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_date">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+            </div>
+        </div>
+    </body>
+</html>
+,8,["8"],True,["ss_playpause_link2","tSZ","KKO","jO"],["OlD","NpnYi"],True,["jLr","NOxaA","ofgA"],["75pD","sifu","axPs6"],-7]
+[2017-08-30 16:17:11 CEST  CRITICAL] Completed iteration #5 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:11 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:11 CEST  CRITICAL] Started iteration #5 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:12 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+            <div id="ss_theend">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            <div id="ss_date">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                DIV2DIV2
+            </div>
+            DIV2
+            <div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_photo">
+            </div>
+            DIV2
+            <div>
+                DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,6,["6JEpg","tzn","Final"],False,["T0LUm","href"],["KEykL"],True,["RLX","Zj","wSqE","cMC7J"],["OOIz","X4l","ss_theend","ss_title","xJ"],-2]
+depth: 6 size: 32
+integer: 6
+array of: 3 elements [
+string: 5
+string: 3
+string: 5
+]
+boolean: False
+array of: 2 elements [
+string: 5
+string: 4
+]
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 4 elements [
+string: 3
+string: 2
+string: 4
+string: 5
+]
+array of: 5 elements [
+string: 4
+string: 3
+string: 9
+string: 8
+string: 2
+]
+integer: -2
+[2017-08-30 16:17:12 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:12 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:12 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+            <div id="ss_theend">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            <div id="ss_date">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                DIV2DIV2
+            </div>
+            DIV2
+            <div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_photo">
+            </div>
+            DIV2
+            <div>
+                DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,6,["6JEpg","tzn","Final"],False,["T0LUm","href"],["KEykL"],True,["RLX","Zj","wSqE","cMC7J"],["OOIz","X4l","ss_theend","ss_title","xJ"],-2]
+[2017-08-30 16:17:12 CEST  CRITICAL] Completed iteration #5 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:12 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:12 CEST  CRITICAL] Started iteration #5 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:13 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link">
+            <div id="ss_link2">
+                DIV2DIV2
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_photo">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_refresh">
+        </div>
+    </body>
+</html>
+,8,["7Sly","iEt0","v","kXtP"],True,["WX","Yqyd6","4J","BY"],["6Pwf","MVTbD"],True,["rDDRv","none",".?p=","a7ZbV","9uWYk"],["ss_link1","3NJb","not","xt4rV"],0]
+depth: 6 size: 16
+integer: 8
+array of: 4 elements [
+string: 4
+string: 4
+string: 1
+string: 4
+]
+boolean: True
+array of: 4 elements [
+string: 2
+string: 5
+string: 2
+string: 2
+]
+array of: 2 elements [
+string: 4
+string: 5
+]
+boolean: True
+array of: 5 elements [
+string: 5
+string: 4
+string: 4
+string: 5
+string: 5
+]
+array of: 4 elements [
+string: 8
+string: 4
+string: 3
+string: 5
+]
+integer: 0
+[2017-08-30 16:17:13 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:13 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:13 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link">
+            <div id="ss_link2">
+                DIV2DIV2
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_photo">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_refresh">
+        </div>
+    </body>
+</html>
+,8,["7Sly","iEt0","v","kXtP"],True,["WX","Yqyd6","4J","BY"],["6Pwf","MVTbD"],True,["rDDRv","none",".?p=","a7ZbV","9uWYk"],["ss_link1","3NJb","not","xt4rV"],0]
+[2017-08-30 16:17:13 CEST  CRITICAL] Completed iteration #5 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:13 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:13 CEST  CRITICAL] Started iteration #5 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:15 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_refresh">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["dOCbw"],True,["YjqSd","qkQY","block"],["LP","Qgl1"],False,["ss_link2","ss_n","ss_n","AW6JB","ARER"],["gcOe","2","ss_link1","Fs"],3]
+depth: 6 size: 17
+integer: 4
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 4
+string: 5
+]
+array of: 2 elements [
+string: 2
+string: 4
+]
+boolean: False
+array of: 5 elements [
+string: 8
+string: 4
+string: 4
+string: 5
+string: 4
+]
+array of: 4 elements [
+string: 4
+string: 1
+string: 8
+string: 2
+]
+integer: 3
+[2017-08-30 16:17:15 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:15 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:15 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_refresh">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,4,["dOCbw"],True,["YjqSd","qkQY","block"],["LP","Qgl1"],False,["ss_link2","ss_n","ss_n","AW6JB","ARER"],["gcOe","2","ss_link1","Fs"],3]
+[2017-08-30 16:17:15 CEST  CRITICAL] Completed iteration #5 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:15 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:15 CEST  CRITICAL] Started iteration #6 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:16 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            <div id="ss_title">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link2">
+        </div>
+        DIV2
+    </body>
+</html>
+,1,["href"],True,["Af","ss_refresh"],["NR6"],False,["Final"],["mw","wFJ4r","ss_playpause_link","ss_title"],10]
+depth: 6 size: 19
+integer: 1
+array of: 1 elements [
+string: 4
+]
+boolean: True
+array of: 2 elements [
+string: 2
+string: 10
+]
+array of: 1 elements [
+string: 3
+]
+boolean: False
+array of: 1 elements [
+string: 5
+]
+array of: 4 elements [
+string: 2
+string: 5
+string: 17
+string: 8
+]
+integer: 10
+[2017-08-30 16:17:16 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:16 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:16 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_theend">
+            <div id="ss_title">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link2">
+        </div>
+        DIV2
+    </body>
+</html>
+,1,["href"],True,["Af","ss_refresh"],["NR6"],False,["Final"],["mw","wFJ4r","ss_playpause_link","ss_title"],10]
+[2017-08-30 16:17:16 CEST  CRITICAL] Completed iteration #6 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:16 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:16 CEST  CRITICAL] Started iteration #6 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:18 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_link2">
+            <div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_photo">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            DIV2
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_playpause_link2">
+            </div>
+        </div>
+    </body>
+</html>
+,-7,["href","ss_refresh","ss_link2","B5OM","xmV"],False,["TPzbu","h","I","AOU","Jx"],["cI"],False,["ss_link1","mzAt","ss_n"],["J1v","wFy","zg","4C","cMQL"],-3]
+depth: 6 size: 30
+integer: -7
+array of: 5 elements [
+string: 4
+string: 10
+string: 8
+string: 4
+string: 3
+]
+boolean: False
+array of: 5 elements [
+string: 5
+string: 1
+string: 1
+string: 3
+string: 2
+]
+array of: 1 elements [
+string: 2
+]
+boolean: False
+array of: 3 elements [
+string: 8
+string: 4
+string: 4
+]
+array of: 5 elements [
+string: 3
+string: 3
+string: 2
+string: 2
+string: 4
+]
+integer: -3
+[2017-08-30 16:17:18 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:18 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:18 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_link2">
+            <div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_photo">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_theend">
+            DIV2
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_playpause_link2">
+            </div>
+        </div>
+    </body>
+</html>
+,-7,["href","ss_refresh","ss_link2","B5OM","xmV"],False,["TPzbu","h","I","AOU","Jx"],["cI"],False,["ss_link1","mzAt","ss_n"],["J1v","wFy","zg","4C","cMQL"],-3]
+[2017-08-30 16:17:18 CEST  CRITICAL] Completed iteration #6 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:18 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:18 CEST  CRITICAL] Started iteration #6 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:19 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_playpause_link">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div id="ss_title">
+            </div>
+        </div>
+        DIV2
+        <div id="ss_n">
+            <div id="ss_photo">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                DIV2DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,10,["bbNCa"],True,["c","McHkr","ss_refresh"],["Yehs","eFyez","ss_playpause_link","gV3"],False,["V4QZ","gTg","EoF","4s","31"],["Pause it","B"],6]
+depth: 6 size: 18
+integer: 10
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 3 elements [
+string: 1
+string: 5
+string: 10
+]
+array of: 4 elements [
+string: 4
+string: 5
+string: 17
+string: 3
+]
+boolean: False
+array of: 5 elements [
+string: 4
+string: 3
+string: 3
+string: 2
+string: 2
+]
+array of: 2 elements [
+string: 8
+string: 1
+]
+integer: 6
+[2017-08-30 16:17:19 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:19 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:19 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_playpause_link">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div id="ss_title">
+            </div>
+        </div>
+        DIV2
+        <div id="ss_n">
+            <div id="ss_photo">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                DIV2DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,10,["bbNCa"],True,["c","McHkr","ss_refresh"],["Yehs","eFyez","ss_playpause_link","gV3"],False,["V4QZ","gTg","EoF","4s","31"],["Pause it","B"],6]
+[2017-08-30 16:17:19 CEST  CRITICAL] Completed iteration #6 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:19 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:19 CEST  CRITICAL] Started iteration #6 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:20 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_link2">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_n">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,7,["afX","3qNf","U"],False,["ss_n","ZFrKi"],["2u","wBy","y4WS"],True,["GQ","ss_desc","kEjj6"],["Vlwpp","ss_theend"],10]
+depth: 6 size: 15
+integer: 7
+array of: 3 elements [
+string: 3
+string: 4
+string: 1
+]
+boolean: False
+array of: 2 elements [
+string: 4
+string: 5
+]
+array of: 3 elements [
+string: 2
+string: 3
+string: 4
+]
+boolean: True
+array of: 3 elements [
+string: 2
+string: 7
+string: 5
+]
+array of: 2 elements [
+string: 5
+string: 9
+]
+integer: 10
+[2017-08-30 16:17:20 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:20 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:20 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_link2">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_n">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,7,["afX","3qNf","U"],False,["ss_n","ZFrKi"],["2u","wBy","y4WS"],True,["GQ","ss_desc","kEjj6"],["Vlwpp","ss_theend"],10]
+[2017-08-30 16:17:20 CEST  CRITICAL] Completed iteration #6 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:20 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:20 CEST  CRITICAL] Started iteration #6 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:23 CEST  CRITICAL] Best entity (gen. 0) fitness: (3.0,2.25,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_theend">
+                DIV2
+            </div>
+            <div id="ss_playpause_link">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,5,["XK","d0SG"],True,["80k","Ek"],["e6c","01ZF","cn","XT0oc","mqjg"],False,["jkE5j","7p","qjGXV","ss_theend","P"],["ss_title"],-6]
+depth: 6 size: 11
+integer: 5
+array of: 2 elements [
+string: 2
+string: 4
+]
+boolean: True
+array of: 2 elements [
+string: 3
+string: 2
+]
+array of: 5 elements [
+string: 3
+string: 4
+string: 2
+string: 5
+string: 4
+]
+boolean: False
+array of: 5 elements [
+string: 5
+string: 2
+string: 5
+string: 9
+string: 1
+]
+array of: 1 elements [
+string: 8
+]
+integer: -6
+[2017-08-30 16:17:24 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,2.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="Final" id="ss_link2">
+            <div class="ss_link2" id="ss_playpause_link">
+                <div class="ss_n" id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_theend" id="ss_playpause_link2">
+                <div class="none" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div class="block" id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,["rGd"],True,["Pause it"],["jj","ytAv","nyQHf","ss_title"],False,["gT","g","xU","wvr","CKrGA"],["Y","yRN"],0]
+depth: 6 size: 14
+integer: 3
+array of: 1 elements [
+string: 3
+]
+boolean: True
+array of: 1 elements [
+string: 8
+]
+array of: 4 elements [
+string: 2
+string: 4
+string: 5
+string: 8
+]
+boolean: False
+array of: 5 elements [
+string: 2
+string: 1
+string: 2
+string: 3
+string: 5
+]
+array of: 2 elements [
+string: 1
+string: 3
+]
+integer: 0
+[2017-08-30 16:17:25 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="block" id="ss_refresh">
+            <div class="ss_theend" id="ss_playpause_link2">
+                <div class="Final" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_link2" id="ss_playpause_link">
+                DIV2
+                <div class="none" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div class="ss_n" id="ss_n">
+        </div>
+    </body>
+</html>
+,9,["3PtPH","b"],True,["none"],["z","4Cur","wq","1A","2X"],False,["0oh9","t"],["ss_link1","ss_theend","k","ss_title"],0]
+depth: 6 size: 16
+integer: 9
+array of: 2 elements [
+string: 5
+string: 1
+]
+boolean: True
+array of: 1 elements [
+string: 4
+]
+array of: 5 elements [
+string: 1
+string: 4
+string: 2
+string: 2
+string: 2
+]
+boolean: False
+array of: 2 elements [
+string: 4
+string: 1
+]
+array of: 4 elements [
+string: 8
+string: 9
+string: 1
+string: 8
+]
+integer: 0
+[2017-08-30 16:17:25 CEST  CRITICAL] Perfect entity found, finished after 2 generations!
+[2017-08-30 16:17:25 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:25 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="block" id="ss_refresh">
+            <div class="ss_theend" id="ss_playpause_link2">
+                <div class="Final" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_link2" id="ss_playpause_link">
+                DIV2
+                <div class="none" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div class="ss_n" id="ss_n">
+        </div>
+    </body>
+</html>
+,9,["3PtPH","b"],True,["none"],["z","4Cur","wq","1A","2X"],False,["0oh9","t"],["ss_link1","ss_theend","k","ss_title"],0]
+[2017-08-30 16:17:25 CEST  CRITICAL] Completed iteration #6 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:25 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:25 CEST  CRITICAL] Started iteration #6 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:27 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.375,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_playpause_link2">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="ss_link2">
+            <div id="ss_desc">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+        </div>
+        <div id="ss_title">
+            DIV2
+        </div>
+    </body>
+</html>
+,5,["cJVW","LF9S","S"],True,["X1lG7","z","tVWl","lCiH","m"],[".?p=","Pause it","U","irik"],True,["nzQAf","ss_link1"],["i","GLU","5","p"],-2]
+depth: 6 size: 22
+integer: 5
+array of: 3 elements [
+string: 4
+string: 4
+string: 1
+]
+boolean: True
+array of: 5 elements [
+string: 5
+string: 1
+string: 4
+string: 4
+string: 1
+]
+array of: 4 elements [
+string: 4
+string: 8
+string: 1
+string: 4
+]
+boolean: True
+array of: 2 elements [
+string: 5
+string: 8
+]
+array of: 4 elements [
+string: 1
+string: 3
+string: 1
+string: 1
+]
+integer: -2
+[2017-08-30 16:17:27 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="ss_link2" id="ss_playpause_link2">
+            <div class="Pause it" id="ss_n">
+                <div class="ss_theend" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_n" id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="Final" id="ss_refresh">
+                <div class="block" id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div class="none" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div class="Play it" id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,5,["6VIvW"],True,["fKQlw","ss_n","s4nw"],["ss_playpause_link","jJ"],True,["DbLeS","ss_link2","E"],["Yxa7e","wt5","9d4","Final","L"],1]
+depth: 6 size: 20
+integer: 5
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 4
+string: 4
+]
+array of: 2 elements [
+string: 17
+string: 2
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 8
+string: 1
+]
+array of: 5 elements [
+string: 5
+string: 3
+string: 3
+string: 5
+string: 1
+]
+integer: 1
+[2017-08-30 16:17:27 CEST  CRITICAL] Perfect entity found, finished after 1 generations!
+[2017-08-30 16:17:27 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:27 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="ss_link2" id="ss_playpause_link2">
+            <div class="Pause it" id="ss_n">
+                <div class="ss_theend" id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_n" id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="Final" id="ss_refresh">
+                <div class="block" id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div class="none" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div class="Play it" id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,5,["6VIvW"],True,["fKQlw","ss_n","s4nw"],["ss_playpause_link","jJ"],True,["DbLeS","ss_link2","E"],["Yxa7e","wt5","9d4","Final","L"],1]
+[2017-08-30 16:17:27 CEST  CRITICAL] Completed iteration #6 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:27 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:27 CEST  CRITICAL] Started iteration #7 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:29 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_title">
+            <div id="ss_link2">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                DIV2
+            </div>
+        </div>
+        <div>
+            <div id="ss_date">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div id="ss_link1">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,8,["CVyq3",".?p=","1f","v4C","ss_playpause_link"],False,["2f","tyzU"],["ZH7A","xnQ8"],True,["ss_playpause_link2"],["yqOuM","kYlK"],6]
+depth: 6 size: 38
+integer: 8
+array of: 5 elements [
+string: 5
+string: 4
+string: 2
+string: 3
+string: 17
+]
+boolean: False
+array of: 2 elements [
+string: 2
+string: 4
+]
+array of: 2 elements [
+string: 4
+string: 4
+]
+boolean: True
+array of: 1 elements [
+string: 18
+]
+array of: 2 elements [
+string: 5
+string: 4
+]
+integer: 6
+[2017-08-30 16:17:29 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:29 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:29 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_title">
+            <div id="ss_link2">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                DIV2
+            </div>
+        </div>
+        <div>
+            <div id="ss_date">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div id="ss_link1">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,8,["CVyq3",".?p=","1f","v4C","ss_playpause_link"],False,["2f","tyzU"],["ZH7A","xnQ8"],True,["ss_playpause_link2"],["yqOuM","kYlK"],6]
+[2017-08-30 16:17:29 CEST  CRITICAL] Completed iteration #7 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:29 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:29 CEST  CRITICAL] Started iteration #7 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:30 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_photo">
+            <div id="ss_link1">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            <div id="ss_playpause_link">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+            <div id="ss_refresh">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-8,["ss_playpause_link2","W","If"],True,["S"],["Xi","G"],True,["Em"],["Pause it"],9]
+depth: 6 size: 22
+integer: -8
+array of: 3 elements [
+string: 18
+string: 1
+string: 2
+]
+boolean: True
+array of: 1 elements [
+string: 1
+]
+array of: 2 elements [
+string: 2
+string: 1
+]
+boolean: True
+array of: 1 elements [
+string: 2
+]
+array of: 1 elements [
+string: 8
+]
+integer: 9
+[2017-08-30 16:17:30 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:30 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:30 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_photo">
+            <div id="ss_link1">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            <div id="ss_playpause_link">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+            <div id="ss_refresh">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-8,["ss_playpause_link2","W","If"],True,["S"],["Xi","G"],True,["Em"],["Pause it"],9]
+[2017-08-30 16:17:30 CEST  CRITICAL] Completed iteration #7 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:30 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:30 CEST  CRITICAL] Started iteration #7 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:31 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_photo">
+            <div id="ss_title">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                DIV2
+            </div>
+            <div id="ss_theend">
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            DIV2DIV2
+            <div id="ss_n">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,8,["ss_date","mPiv","bkpdY","SnR"],True,["i","bX8M","n","fizpN","Final"],["bSSn","oCoH","Z"],False,["X","w55"],["wnz"],7]
+depth: 6 size: 23
+integer: 8
+array of: 4 elements [
+string: 7
+string: 4
+string: 5
+string: 3
+]
+boolean: True
+array of: 5 elements [
+string: 1
+string: 4
+string: 1
+string: 5
+string: 5
+]
+array of: 3 elements [
+string: 4
+string: 4
+string: 1
+]
+boolean: False
+array of: 2 elements [
+string: 1
+string: 3
+]
+array of: 1 elements [
+string: 3
+]
+integer: 7
+[2017-08-30 16:17:31 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:31 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:31 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_photo">
+            <div id="ss_title">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                DIV2
+            </div>
+            <div id="ss_theend">
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            DIV2DIV2
+            <div id="ss_n">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,8,["ss_date","mPiv","bkpdY","SnR"],True,["i","bX8M","n","fizpN","Final"],["bSSn","oCoH","Z"],False,["X","w55"],["wnz"],7]
+[2017-08-30 16:17:31 CEST  CRITICAL] Completed iteration #7 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:31 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:31 CEST  CRITICAL] Started iteration #7 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:33 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_photo">
+            <div id="ss_desc">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+            </div>
+            <div id="ss_title">
+            </div>
+        </div>
+        <div id="ss_link2">
+            <div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+    </body>
+</html>
+,3,["4q"],False,["t0rtA"],["S7"],False,["cLu"],["f","ss_desc","YgUD","Gs8","oF"],4]
+depth: 6 size: 24
+integer: 3
+array of: 1 elements [
+string: 2
+]
+boolean: False
+array of: 1 elements [
+string: 5
+]
+array of: 1 elements [
+string: 2
+]
+boolean: False
+array of: 1 elements [
+string: 3
+]
+array of: 5 elements [
+string: 1
+string: 7
+string: 4
+string: 3
+string: 2
+]
+integer: 4
+[2017-08-30 16:17:33 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:33 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:33 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_photo">
+            <div id="ss_desc">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+            </div>
+            <div id="ss_title">
+            </div>
+        </div>
+        <div id="ss_link2">
+            <div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+    </body>
+</html>
+,3,["4q"],False,["t0rtA"],["S7"],False,["cLu"],["f","ss_desc","YgUD","Gs8","oF"],4]
+[2017-08-30 16:17:33 CEST  CRITICAL] Completed iteration #7 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:33 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:33 CEST  CRITICAL] Started iteration #7 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:34 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_photo">
+            <div id="ss_refresh">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_desc">
+            <div id="ss_playpause_link2">
+            </div>
+            <div id="ss_date">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,10,["aGQ","Play it","ss_date","M"],True,["2","wU8vq","wud1"],["ss_link2"],True,["x8ZwN","JlMw"],["rO","A","ss_desc","6cB1h","xWrLU"],-3]
+depth: 6 size: 20
+integer: 10
+array of: 4 elements [
+string: 3
+string: 7
+string: 7
+string: 1
+]
+boolean: True
+array of: 3 elements [
+string: 1
+string: 5
+string: 4
+]
+array of: 1 elements [
+string: 8
+]
+boolean: True
+array of: 2 elements [
+string: 5
+string: 4
+]
+array of: 5 elements [
+string: 2
+string: 1
+string: 7
+string: 5
+string: 5
+]
+integer: -3
+[2017-08-30 16:17:34 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:34 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:34 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_photo">
+            <div id="ss_refresh">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_desc">
+            <div id="ss_playpause_link2">
+            </div>
+            <div id="ss_date">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,10,["aGQ","Play it","ss_date","M"],True,["2","wU8vq","wud1"],["ss_link2"],True,["x8ZwN","JlMw"],["rO","A","ss_desc","6cB1h","xWrLU"],-3]
+[2017-08-30 16:17:34 CEST  CRITICAL] Completed iteration #7 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:34 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:34 CEST  CRITICAL] Started iteration #7 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:36 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_photo">
+            <div id="ss_link2">
+                DIV2
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            DIV2
+            <div id="ss_playpause_link">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+        <div id="ss_theend">
+            DIV2DIV2
+        </div>
+    </body>
+</html>
+,1,["mk"],True,["u2z","ss_playpause_link","ss_n","x","eI"],["XOq","ss_photo","HC","hX"],False,["h","vy"],["EfKJ","hu","ADAVD"],6]
+depth: 6 size: 16
+integer: 1
+array of: 1 elements [
+string: 2
+]
+boolean: True
+array of: 5 elements [
+string: 3
+string: 17
+string: 4
+string: 1
+string: 2
+]
+array of: 4 elements [
+string: 3
+string: 8
+string: 2
+string: 2
+]
+boolean: False
+array of: 2 elements [
+string: 1
+string: 2
+]
+array of: 3 elements [
+string: 4
+string: 2
+string: 5
+]
+integer: 6
+[2017-08-30 16:17:36 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:36 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:36 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_photo">
+            <div id="ss_link2">
+                DIV2
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            DIV2
+            <div id="ss_playpause_link">
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+        <div id="ss_theend">
+            DIV2DIV2
+        </div>
+    </body>
+</html>
+,1,["mk"],True,["u2z","ss_playpause_link","ss_n","x","eI"],["XOq","ss_photo","HC","hX"],False,["h","vy"],["EfKJ","hu","ADAVD"],6]
+[2017-08-30 16:17:36 CEST  CRITICAL] Completed iteration #7 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:36 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:36 CEST  CRITICAL] Started iteration #8 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:37 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_date">
+                DIV2
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_title">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["1h"],False,["Xf","none","an"],["ss_n","o","RAo"],True,["block","Play it","CfZWP","ss_photo"],["ss_link1"],1]
+depth: 6 size: 24
+integer: 9
+array of: 1 elements [
+string: 2
+]
+boolean: False
+array of: 3 elements [
+string: 2
+string: 4
+string: 2
+]
+array of: 3 elements [
+string: 4
+string: 1
+string: 3
+]
+boolean: True
+array of: 4 elements [
+string: 5
+string: 7
+string: 5
+string: 8
+]
+array of: 1 elements [
+string: 8
+]
+integer: 1
+[2017-08-30 16:17:37 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:37 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:37 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            <div id="ss_date">
+                DIV2
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_title">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["1h"],False,["Xf","none","an"],["ss_n","o","RAo"],True,["block","Play it","CfZWP","ss_photo"],["ss_link1"],1]
+[2017-08-30 16:17:37 CEST  CRITICAL] Completed iteration #8 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:37 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:37 CEST  CRITICAL] Started iteration #8 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:38 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_date">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="ss_theend">
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_n">
+            </div>
+            <div id="ss_link2">
+                DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-1,["Yjv3x","zN","qLQ","1Iy"],False,["UM","ss_link1","UA9q","newW","K"],["tNBk","5fh"],False,["wR","7u"],["ss_link1"],0]
+depth: 6 size: 22
+integer: -1
+array of: 4 elements [
+string: 5
+string: 2
+string: 3
+string: 3
+]
+boolean: False
+array of: 5 elements [
+string: 2
+string: 8
+string: 4
+string: 4
+string: 1
+]
+array of: 2 elements [
+string: 4
+string: 3
+]
+boolean: False
+array of: 2 elements [
+string: 2
+string: 2
+]
+array of: 1 elements [
+string: 8
+]
+integer: 0
+[2017-08-30 16:17:38 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:38 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:38 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_date">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="ss_theend">
+        </div>
+        <div id="ss_playpause_link">
+            <div id="ss_n">
+            </div>
+            <div id="ss_link2">
+                DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-1,["Yjv3x","zN","qLQ","1Iy"],False,["UM","ss_link1","UA9q","newW","K"],["tNBk","5fh"],False,["wR","7u"],["ss_link1"],0]
+[2017-08-30 16:17:38 CEST  CRITICAL] Completed iteration #8 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:38 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:38 CEST  CRITICAL] Started iteration #8 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:40 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div id="ss_photo">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_refresh">
+            DIV2
+            <div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["WPwo","pccm","Play it"],True,["Ui"],["ss_n","z34s","ss_link2","ReFm2"],False,["T3CVZ","WGvx","uAdy","j","ss_n"],["pWA","kk","EazN","ss_link2"],-10]
+depth: 6 size: 27
+integer: 9
+array of: 3 elements [
+string: 4
+string: 4
+string: 7
+]
+boolean: True
+array of: 1 elements [
+string: 2
+]
+array of: 4 elements [
+string: 4
+string: 4
+string: 8
+string: 5
+]
+boolean: False
+array of: 5 elements [
+string: 5
+string: 4
+string: 4
+string: 1
+string: 4
+]
+array of: 4 elements [
+string: 3
+string: 2
+string: 4
+string: 8
+]
+integer: -10
+[2017-08-30 16:17:40 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:40 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:40 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div id="ss_photo">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_refresh">
+            DIV2
+            <div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["WPwo","pccm","Play it"],True,["Ui"],["ss_n","z34s","ss_link2","ReFm2"],False,["T3CVZ","WGvx","uAdy","j","ss_n"],["pWA","kk","EazN","ss_link2"],-10]
+[2017-08-30 16:17:40 CEST  CRITICAL] Completed iteration #8 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:40 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:40 CEST  CRITICAL] Started iteration #8 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:41 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_n">
+            <div id="ss_photo">
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_link2">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,[".?p=","Wk0m","hj1vJ","0","nCunb"],False,["HAoJ","Cfhh","gmJ","9RwwY","oIG"],["href","0gAi","8vDay","at"],False,["Ug","D","JQ","2Bz","Yl"],["ss_photo","5us","HMUj"],0]
+depth: 6 size: 17
+integer: 9
+array of: 5 elements [
+string: 4
+string: 4
+string: 5
+string: 1
+string: 5
+]
+boolean: False
+array of: 5 elements [
+string: 4
+string: 4
+string: 3
+string: 5
+string: 3
+]
+array of: 4 elements [
+string: 4
+string: 4
+string: 5
+string: 2
+]
+boolean: False
+array of: 5 elements [
+string: 2
+string: 1
+string: 2
+string: 3
+string: 2
+]
+array of: 3 elements [
+string: 8
+string: 3
+string: 4
+]
+integer: 0
+[2017-08-30 16:17:41 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:41 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:41 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_n">
+            <div id="ss_photo">
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div id="ss_link2">
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,[".?p=","Wk0m","hj1vJ","0","nCunb"],False,["HAoJ","Cfhh","gmJ","9RwwY","oIG"],["href","0gAi","8vDay","at"],False,["Ug","D","JQ","2Bz","Yl"],["ss_photo","5us","HMUj"],0]
+[2017-08-30 16:17:41 CEST  CRITICAL] Completed iteration #8 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:41 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:41 CEST  CRITICAL] Started iteration #8 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:42 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div id="ss_playpause_link">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_title">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,1,["ss_title"],True,["ss_n"],["ss_refresh","b1c"],True,["6qquB","Play it","qrnG","gF","ba"],["fVjho"],0]
+depth: 6 size: 25
+integer: 1
+array of: 1 elements [
+string: 8
+]
+boolean: True
+array of: 1 elements [
+string: 4
+]
+array of: 2 elements [
+string: 10
+string: 3
+]
+boolean: True
+array of: 5 elements [
+string: 5
+string: 7
+string: 4
+string: 2
+string: 2
+]
+array of: 1 elements [
+string: 5
+]
+integer: 0
+[2017-08-30 16:17:42 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:42 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:42 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_desc">
+            <div id="ss_playpause_link">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_title">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,1,["ss_title"],True,["ss_n"],["ss_refresh","b1c"],True,["6qquB","Play it","qrnG","gF","ba"],["fVjho"],0]
+[2017-08-30 16:17:42 CEST  CRITICAL] Completed iteration #8 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:42 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:42 CEST  CRITICAL] Started iteration #8 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:44 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_date">
+            DIV2
+        </div>
+        <div id="ss_desc">
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_playpause_link">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            <div id="ss_theend">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+            </div>
+        </div>
+    </body>
+</html>
+,1,["9CwE"],True,["svv","hc5r"],["Mc"],True,["a","KPTMT","Play it","ss_date","oPFr"],["20zA","tLM","Yo","LD","8"],9]
+depth: 6 size: 26
+integer: 1
+array of: 1 elements [
+string: 4
+]
+boolean: True
+array of: 2 elements [
+string: 3
+string: 4
+]
+array of: 1 elements [
+string: 2
+]
+boolean: True
+array of: 5 elements [
+string: 1
+string: 5
+string: 7
+string: 7
+string: 4
+]
+array of: 5 elements [
+string: 4
+string: 3
+string: 2
+string: 2
+string: 1
+]
+integer: 9
+[2017-08-30 16:17:44 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:44 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:44 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_date">
+            DIV2
+        </div>
+        <div id="ss_desc">
+            <div id="ss_refresh">
+            </div>
+            <div id="ss_playpause_link">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link2">
+            <div id="ss_theend">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_n">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link1">
+            </div>
+        </div>
+    </body>
+</html>
+,1,["9CwE"],True,["svv","hc5r"],["Mc"],True,["a","KPTMT","Play it","ss_date","oPFr"],["20zA","tLM","Yo","LD","8"],9]
+[2017-08-30 16:17:44 CEST  CRITICAL] Completed iteration #8 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:44 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:44 CEST  CRITICAL] Started iteration #9 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:45 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                DIV2DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,6,["Final","WJk","YrL"],True,["Vmc2N","2"],["qN","9a1GL","8Qp","aBaj"],False,["bd8E"],["4f2KD","vt"],9]
+depth: 6 size: 15
+integer: 6
+array of: 3 elements [
+string: 5
+string: 3
+string: 3
+]
+boolean: True
+array of: 2 elements [
+string: 5
+string: 1
+]
+array of: 4 elements [
+string: 2
+string: 5
+string: 3
+string: 4
+]
+boolean: False
+array of: 1 elements [
+string: 4
+]
+array of: 2 elements [
+string: 5
+string: 2
+]
+integer: 9
+[2017-08-30 16:17:45 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:45 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:45 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link2">
+                DIV2DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,6,["Final","WJk","YrL"],True,["Vmc2N","2"],["qN","9a1GL","8Qp","aBaj"],False,["bd8E"],["4f2KD","vt"],9]
+[2017-08-30 16:17:45 CEST  CRITICAL] Completed iteration #9 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:45 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:45 CEST  CRITICAL] Started iteration #9 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:46 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link1">
+                DIV2
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link2">
+            DIV2
+        </div>
+        <div id="ss_theend">
+            <div id="ss_photo">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,0,["JquU"],True,["0me","qGb","sv","mds7W","ss_link1"],["ss_link1"],True,["Play it","R0FkY"],["e","3Z","ss_n","Ge"],7]
+depth: 6 size: 23
+integer: 0
+array of: 1 elements [
+string: 4
+]
+boolean: True
+array of: 5 elements [
+string: 3
+string: 3
+string: 2
+string: 5
+string: 8
+]
+array of: 1 elements [
+string: 8
+]
+boolean: True
+array of: 2 elements [
+string: 7
+string: 5
+]
+array of: 4 elements [
+string: 1
+string: 2
+string: 4
+string: 2
+]
+integer: 7
+[2017-08-30 16:17:46 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:46 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:46 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link1">
+                DIV2
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link2">
+            DIV2
+        </div>
+        <div id="ss_theend">
+            <div id="ss_photo">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,0,["JquU"],True,["0me","qGb","sv","mds7W","ss_link1"],["ss_link1"],True,["Play it","R0FkY"],["e","3Z","ss_n","Ge"],7]
+[2017-08-30 16:17:46 CEST  CRITICAL] Completed iteration #9 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:46 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:46 CEST  CRITICAL] Started iteration #9 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:48 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div id="ss_theend">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_date">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_link2">
+            <div id="ss_n">
+            </div>
+            <div id="ss_refresh">
+                DIV2
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,10,["1usX","ss_theend","zGl"],True,["y1X9f","K","H","2"],["3H","block"],True,["ss_photo","1so"],["z384q"],4]
+depth: 6 size: 30
+integer: 10
+array of: 3 elements [
+string: 4
+string: 9
+string: 3
+]
+boolean: True
+array of: 4 elements [
+string: 5
+string: 1
+string: 1
+string: 1
+]
+array of: 2 elements [
+string: 2
+string: 5
+]
+boolean: True
+array of: 2 elements [
+string: 8
+string: 3
+]
+array of: 1 elements [
+string: 5
+]
+integer: 4
+[2017-08-30 16:17:48 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:48 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:48 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div id="ss_theend">
+                <div id="ss_desc">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_date">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_link2">
+            <div id="ss_n">
+            </div>
+            <div id="ss_refresh">
+                DIV2
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,10,["1usX","ss_theend","zGl"],True,["y1X9f","K","H","2"],["3H","block"],True,["ss_photo","1so"],["z384q"],4]
+[2017-08-30 16:17:48 CEST  CRITICAL] Completed iteration #9 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:48 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:48 CEST  CRITICAL] Started iteration #9 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:49 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_playpause_link">
+                DIV2DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_link2">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,10,["h"],False,["Pause it","ss_title"],["hw","C","block","KNkvO"],True,["aAH","86sI","block","8","pw"],["2","tF"],-1]
+depth: 6 size: 15
+integer: 10
+array of: 1 elements [
+string: 1
+]
+boolean: False
+array of: 2 elements [
+string: 8
+string: 8
+]
+array of: 4 elements [
+string: 2
+string: 1
+string: 5
+string: 5
+]
+boolean: True
+array of: 5 elements [
+string: 3
+string: 4
+string: 5
+string: 1
+string: 2
+]
+array of: 2 elements [
+string: 1
+string: 2
+]
+integer: -1
+[2017-08-30 16:17:49 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:49 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:49 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_playpause_link">
+                DIV2DIV2
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_link2">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,10,["h"],False,["Pause it","ss_title"],["hw","C","block","KNkvO"],True,["aAH","86sI","block","8","pw"],["2","tF"],-1]
+[2017-08-30 16:17:49 CEST  CRITICAL] Completed iteration #9 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:49 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:49 CEST  CRITICAL] Started iteration #9 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:50 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_n">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+            </div>
+            <div id="ss_title">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+    </body>
+</html>
+,2,["ucME"],True,["I5mWM","KGZ","T"],["NZ6dn","XN3"],True,["Ch","rZsZe","l3xK","ss_title"],["E1op"],-9]
+depth: 6 size: 15
+integer: 2
+array of: 1 elements [
+string: 4
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 3
+string: 1
+]
+array of: 2 elements [
+string: 5
+string: 3
+]
+boolean: True
+array of: 4 elements [
+string: 2
+string: 5
+string: 4
+string: 8
+]
+array of: 1 elements [
+string: 4
+]
+integer: -9
+[2017-08-30 16:17:50 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:50 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:50 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_playpause_link2">
+            <div id="ss_n">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+            </div>
+            <div id="ss_title">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+    </body>
+</html>
+,2,["ucME"],True,["I5mWM","KGZ","T"],["NZ6dn","XN3"],True,["Ch","rZsZe","l3xK","ss_title"],["E1op"],-9]
+[2017-08-30 16:17:50 CEST  CRITICAL] Completed iteration #9 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:17:50 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:50 CEST  CRITICAL] Started iteration #9 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:52 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link2">
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_playpause_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_title">
+        </div>
+    </body>
+</html>
+,8,["HN","ss_n","N4fJy"],True,["osnv","zyH","ss_photo","lbI50"],["49gP3"],False,["asKH","ss_n","E"],["8j8","xhjh","oneXF"],4]
+depth: 6 size: 16
+integer: 8
+array of: 3 elements [
+string: 2
+string: 4
+string: 5
+]
+boolean: True
+array of: 4 elements [
+string: 4
+string: 3
+string: 8
+string: 5
+]
+array of: 1 elements [
+string: 5
+]
+boolean: False
+array of: 3 elements [
+string: 4
+string: 4
+string: 1
+]
+array of: 3 elements [
+string: 3
+string: 4
+string: 5
+]
+integer: 4
+[2017-08-30 16:17:52 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:52 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:52 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_refresh">
+            <div id="ss_link2">
+            </div>
+        </div>
+        <div id="ss_photo">
+            <div id="ss_playpause_link2">
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_title">
+        </div>
+    </body>
+</html>
+,8,["HN","ss_n","N4fJy"],True,["osnv","zyH","ss_photo","lbI50"],["49gP3"],False,["asKH","ss_n","E"],["8j8","xhjh","oneXF"],4]
+[2017-08-30 16:17:52 CEST  CRITICAL] Completed iteration #9 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:17:52 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:52 CEST  CRITICAL] Started iteration #10 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:53 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_date">
+            <div id="ss_playpause_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_n">
+                DIV2DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_desc">
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link2">
+            DIV2
+            <div id="ss_refresh">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,1,["DXDL"],False,["0hK","L"],["sDfiv","trWYJ","F2pE","Aiyj"],False,["DA","Play it","P"],["block","h","wM9W"],-6]
+depth: 6 size: 30
+integer: 1
+array of: 1 elements [
+string: 4
+]
+boolean: False
+array of: 2 elements [
+string: 3
+string: 1
+]
+array of: 4 elements [
+string: 5
+string: 5
+string: 4
+string: 4
+]
+boolean: False
+array of: 3 elements [
+string: 2
+string: 7
+string: 1
+]
+array of: 3 elements [
+string: 5
+string: 1
+string: 4
+]
+integer: -6
+[2017-08-30 16:17:53 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:53 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:53 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_date">
+            <div id="ss_playpause_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_n">
+                DIV2DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_desc">
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_link2">
+            DIV2
+            <div id="ss_refresh">
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,1,["DXDL"],False,["0hK","L"],["sDfiv","trWYJ","F2pE","Aiyj"],False,["DA","Play it","P"],["block","h","wM9W"],-6]
+[2017-08-30 16:17:53 CEST  CRITICAL] Completed iteration #10 to cover branch: #1 -> (3,4,"then")
+[2017-08-30 16:17:53 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:53 CEST  CRITICAL] Started iteration #10 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:56 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,2.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div id="ss_n">
+                DIV2DIV2
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div id="ss_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_date">
+            </div>
+        </div>
+        <div id="ss_theend">
+            <div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-8,["NNcDm"],False,["Ioxvl"],["wx6","uya","ss_playpause_link","lq"],True,["zLIo"],["ss_playpause_link","ss_playpause_link2","ss_playpause_link"],0]
+depth: 6 size: 32
+integer: -8
+array of: 1 elements [
+string: 5
+]
+boolean: False
+array of: 1 elements [
+string: 5
+]
+array of: 4 elements [
+string: 3
+string: 3
+string: 17
+string: 2
+]
+boolean: True
+array of: 1 elements [
+string: 4
+]
+array of: 3 elements [
+string: 17
+string: 18
+string: 17
+]
+integer: 0
+[2017-08-30 16:17:56 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="Final">
+        </div>
+        <div class="ss_n" id="ss_theend">
+        </div>
+        <div class="ss_link2" id="ss_link2">
+            <div class="ss_theend" id="ss_desc">
+                <div class="block" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div class="Pause it" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_refresh" id="ss_playpause_link2">
+                <div class="ss_playpause_link2" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_photo" id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="none" id="ss_link1">
+                <div class="Play it" id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-8,["Qxs","ss_desc"],True,["Final","Yi68","QGIC"],["Pause it","BQkkG"],True,["mfO"],["ss_photo",".?p=","2nKI"],-5]
+depth: 6 size: 23
+integer: -8
+array of: 2 elements [
+string: 3
+string: 7
+]
+boolean: True
+array of: 3 elements [
+string: 5
+string: 4
+string: 4
+]
+array of: 2 elements [
+string: 8
+string: 5
+]
+boolean: True
+array of: 1 elements [
+string: 3
+]
+array of: 3 elements [
+string: 8
+string: 4
+string: 4
+]
+integer: -5
+[2017-08-30 16:17:56 CEST  CRITICAL] Perfect entity found, finished after 1 generations!
+[2017-08-30 16:17:56 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:56 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="Final">
+        </div>
+        <div class="ss_n" id="ss_theend">
+        </div>
+        <div class="ss_link2" id="ss_link2">
+            <div class="ss_theend" id="ss_desc">
+                <div class="block" id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+                <div class="Pause it" id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="ss_refresh" id="ss_playpause_link2">
+                <div class="ss_playpause_link2" id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_photo" id="ss_refresh">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="none" id="ss_link1">
+                <div class="Play it" id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div class="ss_playpause_link" id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-8,["Qxs","ss_desc"],True,["Final","Yi68","QGIC"],["Pause it","BQkkG"],True,["mfO"],["ss_photo",".?p=","2nKI"],-5]
+[2017-08-30 16:17:56 CEST  CRITICAL] Completed iteration #10 to cover branch: #2 -> (3,20,"else")
+[2017-08-30 16:17:56 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:56 CEST  CRITICAL] Started iteration #10 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:57 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            DIV2
+            <div id="ss_desc">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_title">
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_photo">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["BUSrf"],True,["1CS","Ud"],["sYFfa","Kyh","WS3","VtBv","block"],False,["d74x","ss_refresh","aBow"],["LLd","DGT","t","YU3M"],-4]
+depth: 6 size: 27
+integer: 9
+array of: 1 elements [
+string: 5
+]
+boolean: True
+array of: 2 elements [
+string: 3
+string: 2
+]
+array of: 5 elements [
+string: 5
+string: 3
+string: 3
+string: 4
+string: 5
+]
+boolean: False
+array of: 3 elements [
+string: 4
+string: 10
+string: 4
+]
+array of: 4 elements [
+string: 3
+string: 3
+string: 1
+string: 4
+]
+integer: -4
+[2017-08-30 16:17:57 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:57 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:57 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link2">
+            DIV2
+            <div id="ss_desc">
+                <div id="ss_theend">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_title">
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_photo">
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="ss_playpause_link">
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_link1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["BUSrf"],True,["1CS","Ud"],["sYFfa","Kyh","WS3","VtBv","block"],False,["d74x","ss_refresh","aBow"],["LLd","DGT","t","YU3M"],-4]
+[2017-08-30 16:17:57 CEST  CRITICAL] Completed iteration #10 to cover branch: #3 -> (9,10,"then")
+[2017-08-30 16:17:57 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:57 CEST  CRITICAL] Started iteration #10 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:59 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_playpause_link">
+            DIV2
+            <div id="ss_link2">
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+        <div id="ss_theend">
+        </div>
+    </body>
+</html>
+,8,["Final"],False,["CvP","yy3kG","7F","09K","l1Y"],["P"],False,["Pause it","ss_link2","7B"],["0anWU","juoG","q","5iUw9"],8]
+depth: 4 size: 11
+integer: 8
+array of: 1 elements [
+string: 5
+]
+boolean: False
+array of: 5 elements [
+string: 3
+string: 5
+string: 2
+string: 3
+string: 3
+]
+array of: 1 elements [
+string: 1
+]
+boolean: False
+array of: 3 elements [
+string: 8
+string: 8
+string: 2
+]
+array of: 4 elements [
+string: 5
+string: 4
+string: 1
+string: 5
+]
+integer: 8
+[2017-08-30 16:17:59 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:17:59 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:17:59 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div id="ss_playpause_link">
+            DIV2
+            <div id="ss_link2">
+            </div>
+            <div id="ss_n">
+            </div>
+        </div>
+        <div id="ss_theend">
+        </div>
+    </body>
+</html>
+,8,["Final"],False,["CvP","yy3kG","7F","09K","l1Y"],["P"],False,["Pause it","ss_link2","7B"],["0anWU","juoG","q","5iUw9"],8]
+[2017-08-30 16:17:59 CEST  CRITICAL] Completed iteration #10 to cover branch: #4 -> (9,19,"else")
+[2017-08-30 16:17:59 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:17:59 CEST  CRITICAL] Started iteration #10 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:18:00 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_date">
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div id="ss_desc">
+            </div>
+        </div>
+        <div>
+            <div id="ss_link1">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["Pause it"],True,["dxhx"],["t","x"],False,["b2U"],["nLp0Q","mZoa","1P2uQ"],-8]
+depth: 6 size: 33
+integer: 9
+array of: 1 elements [
+string: 8
+]
+boolean: True
+array of: 1 elements [
+string: 4
+]
+array of: 2 elements [
+string: 1
+string: 1
+]
+boolean: False
+array of: 1 elements [
+string: 3
+]
+array of: 3 elements [
+string: 5
+string: 4
+string: 5
+]
+integer: -8
+[2017-08-30 16:18:00 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:18:00 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:18:00 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_date">
+            <div>
+                <div id="ss_n">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div id="ss_refresh">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div id="ss_desc">
+            </div>
+        </div>
+        <div>
+            <div id="ss_link1">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_playpause_link">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_theend">
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_link2">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,9,["Pause it"],True,["dxhx"],["t","x"],False,["b2U"],["nLp0Q","mZoa","1P2uQ"],-8]
+[2017-08-30 16:18:00 CEST  CRITICAL] Completed iteration #10 to cover branch: #5 -> (14,15,"then")
+[2017-08-30 16:18:00 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-30 16:18:00 CEST  CRITICAL] Started iteration #10 to cover branch: #6 -> (14,18,"else")
+[2017-08-30 16:18:01 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_theend">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div>
+            <div id="ss_n">
+            </div>
+            <div id="ss_link2">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,8,["ss_playpause_link","HcApz"],True,["nj","ss_refresh","href","0EBow","XSBT9"],["HsnP"],True,["ss_date","ss_date","xsW8"],["ss_link2","wF1pF"],9]
+depth: 6 size: 22
+integer: 8
+array of: 2 elements [
+string: 17
+string: 5
+]
+boolean: True
+array of: 5 elements [
+string: 2
+string: 10
+string: 4
+string: 5
+string: 5
+]
+array of: 1 elements [
+string: 4
+]
+boolean: True
+array of: 3 elements [
+string: 7
+string: 7
+string: 4
+]
+array of: 2 elements [
+string: 8
+string: 5
+]
+integer: 9
+[2017-08-30 16:18:01 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-30 16:18:01 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-30 16:18:01 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="ss_link1">
+        </div>
+        <div id="ss_refresh">
+            <div id="ss_theend">
+                <div id="ss_photo">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_desc">
+                <div id="ss_playpause_link2">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_date">
+                    PHRASING CONTENT
+                </div>
+                <div id="ss_title">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="ss_playpause_link">
+            </div>
+        </div>
+        <div>
+            <div id="ss_n">
+            </div>
+            <div id="ss_link2">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,8,["ss_playpause_link","HcApz"],True,["nj","ss_refresh","href","0EBow","XSBT9"],["HsnP"],True,["ss_date","ss_date","xsW8"],["ss_link2","wF1pF"],9]
+[2017-08-30 16:18:01 CEST  CRITICAL] Completed iteration #10 to cover branch: #6 -> (14,18,"else")
