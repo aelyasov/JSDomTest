@@ -95,7 +95,8 @@ askValidator html_str = do
   initReq <- parseRequest "http://localhost:8888"
   let req = initReq { method = "POST"
                     , responseTimeout = responseTimeoutMicro defaultResponseTimeout
-                    , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
+                    , requestHeaders = [ (CI.mk "Content-Type", "text/html;charset=UTF-8")
+                                       , (hUserAgent, "jsdomtest")]
                     , queryString = "laxtype=yes&parser=html5&out=json"
                     , requestBody = RequestBodyLBS  html_str
                     }
