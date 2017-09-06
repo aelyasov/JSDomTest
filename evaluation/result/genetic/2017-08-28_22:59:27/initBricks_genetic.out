@@ -1,0 +1,8240 @@
+[2017-08-29 02:48:03 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:48:03 CEST  CRITICAL] Started iteration #1 to cover branch: #1 -> (6,7,"then")
+[2017-08-29 02:48:05 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-1,[4,-7],[10],[-3,125,3],[7,-9,0,4,10],0,["ze1l","dMn","yxL5J","9","aHobm"]]
+depth: 6 size: 10
+integer: -1
+array of: 2 elements [
+integer: 4
+integer: -7
+]
+array of: 1 elements [
+integer: 10
+]
+array of: 3 elements [
+integer: -3
+integer: 125
+integer: 3
+]
+array of: 5 elements [
+integer: 7
+integer: -9
+integer: 0
+integer: 4
+integer: 10
+]
+integer: 0
+array of: 5 elements [
+string: 4
+string: 3
+string: 5
+string: 1
+string: 5
+]
+[2017-08-29 02:48:06 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                DIV2
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,-10,[-1,-9,-5],[-5,7],[9,0,1,7],[4,-8],1,["Wqs","za","brTA","img/weakbrick1.png","LQ4xk"]]
+depth: 5 size: 11
+integer: -10
+array of: 3 elements [
+integer: -1
+integer: -9
+integer: -5
+]
+array of: 2 elements [
+integer: -5
+integer: 7
+]
+array of: 4 elements [
+integer: 9
+integer: 0
+integer: 1
+integer: 7
+]
+array of: 2 elements [
+integer: 4
+integer: -8
+]
+integer: 1
+array of: 5 elements [
+string: 3
+string: 2
+string: 4
+string: 18
+string: 5
+]
+[2017-08-29 02:48:07 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                DIV2
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,-10,[-1,-9,-5],[-5,7,31,-7,-8],[9,0,1,7],[4,-8],1,["Wqs","za","brTA","img/weakbrick1.png","LQ4xk"]]
+depth: 5 size: 11
+integer: -10
+array of: 3 elements [
+integer: -1
+integer: -9
+integer: -5
+]
+array of: 5 elements [
+integer: -5
+integer: 7
+integer: 31
+integer: -7
+integer: -8
+]
+array of: 4 elements [
+integer: 9
+integer: 0
+integer: 1
+integer: 7
+]
+array of: 2 elements [
+integer: 4
+integer: -8
+]
+integer: 1
+array of: 5 elements [
+string: 3
+string: 2
+string: 4
+string: 18
+string: 5
+]
+[2017-08-29 02:48:07 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-5,[4,-7],[10],[-3,125,3],[7,-9,0,4,10],1,["ze1l","dMn","yxL5J","9","aHobm"]]
+depth: 6 size: 10
+integer: -5
+array of: 2 elements [
+integer: 4
+integer: -7
+]
+array of: 1 elements [
+integer: 10
+]
+array of: 3 elements [
+integer: -3
+integer: 125
+integer: 3
+]
+array of: 5 elements [
+integer: 7
+integer: -9
+integer: 0
+integer: 4
+integer: 10
+]
+integer: 1
+array of: 5 elements [
+string: 4
+string: 3
+string: 5
+string: 1
+string: 5
+]
+[2017-08-29 02:48:08 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div id="BRICK-5">
+                <div id="BRICK-11">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK-1">
+                <div id="BRICK-10">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div id="BRICK-9">
+            <div id="BRICK4">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK10">
+            </div>
+            <div id="BRICK125">
+                <div id="BRICK3">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[6],[6,-2,-10,6,6],[8,10,-1,1],[180,5],1,["","ezgTl","tuN37","iS"]]
+depth: 6 size: 27
+integer: 2
+array of: 1 elements [
+integer: 6
+]
+array of: 5 elements [
+integer: 6
+integer: -2
+integer: -10
+integer: 6
+integer: 6
+]
+array of: 4 elements [
+integer: 8
+integer: 10
+integer: -1
+integer: 1
+]
+array of: 2 elements [
+integer: 180
+integer: 5
+]
+integer: 1
+array of: 4 elements [
+string: 0
+string: 5
+string: 5
+string: 2
+]
+[2017-08-29 02:48:08 CEST  CRITICAL] Perfect entity found, finished after 4 generations!
+[2017-08-29 02:48:08 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:48:08 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div id="BRICK-5">
+                <div id="BRICK-11">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK-1">
+                <div id="BRICK-10">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div id="BRICK-9">
+            <div id="BRICK4">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK10">
+            </div>
+            <div id="BRICK125">
+                <div id="BRICK3">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[6],[6,-2,-10,6,6],[8,10,-1,1],[180,5],1,["","ezgTl","tuN37","iS"]]
+[2017-08-29 02:48:08 CEST  CRITICAL] Completed iteration #1 to cover branch: #1 -> (6,7,"then")
+[2017-08-29 02:48:08 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:48:08 CEST  CRITICAL] Started iteration #1 to cover branch: #2 -> (6,10,"else")
+[2017-08-29 02:48:09 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-6,40,0],[-6,0],[-7],[10],10,["Z","img/weakbrick1.png","8m"]]
+depth: 6 size: 33
+integer: 85
+array of: 3 elements [
+integer: -6
+integer: 40
+integer: 0
+]
+array of: 2 elements [
+integer: -6
+integer: 0
+]
+array of: 1 elements [
+integer: -7
+]
+array of: 1 elements [
+integer: 10
+]
+integer: 10
+array of: 3 elements [
+string: 1
+string: 18
+string: 2
+]
+[2017-08-29 02:48:10 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,50,[10,8,9,180,2],[-7],[7,-1,3],[10,-2,6,2,-7],4,["img/death.png"]]
+depth: 6 size: 12
+integer: 50
+array of: 5 elements [
+integer: 10
+integer: 8
+integer: 9
+integer: 180
+integer: 2
+]
+array of: 1 elements [
+integer: -7
+]
+array of: 3 elements [
+integer: 7
+integer: -1
+integer: 3
+]
+array of: 5 elements [
+integer: 10
+integer: -2
+integer: 6
+integer: 2
+integer: -7
+]
+integer: 4
+array of: 1 elements [
+string: 13
+]
+[2017-08-29 02:48:11 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,41,[-5,6,200],[6,-2],[-1,70],[8],-6,["V","byZnZ","60d","SjZ","smcv"]]
+depth: 6 size: 26
+integer: 41
+array of: 3 elements [
+integer: -5
+integer: 6
+integer: 200
+]
+array of: 2 elements [
+integer: 6
+integer: -2
+]
+array of: 2 elements [
+integer: -1
+integer: 70
+]
+array of: 1 elements [
+integer: 8
+]
+integer: -6
+array of: 5 elements [
+string: 1
+string: 5
+string: 3
+string: 3
+string: 4
+]
+[2017-08-29 02:48:12 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[3,1,-6,6],[0,-5,-2],[40],[3,3],-6,["img/death.png","img/brick.png","BRICK","Gr","Ir"]]
+depth: 6 size: 18
+integer: 31
+array of: 4 elements [
+integer: 3
+integer: 1
+integer: -6
+integer: 6
+]
+array of: 3 elements [
+integer: 0
+integer: -5
+integer: -2
+]
+array of: 1 elements [
+integer: 40
+]
+array of: 2 elements [
+integer: 3
+integer: 3
+]
+integer: -6
+array of: 5 elements [
+string: 13
+string: 13
+string: 5
+string: 2
+string: 2
+]
+[2017-08-29 02:48:13 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        DIV2
+    </body>
+</html>
+,51,[10,8,9,180,2],[],[7,-1,3],[10,-2,6,2,-7],4,["img/death.png","img/death-png"]]
+depth: 4 size: 8
+integer: 51
+array of: 5 elements [
+integer: 10
+integer: 8
+integer: 9
+integer: 180
+integer: 2
+]
+array of: 0 elements [
+
+]
+array of: 3 elements [
+integer: 7
+integer: -1
+integer: 3
+]
+array of: 5 elements [
+integer: 10
+integer: -2
+integer: 6
+integer: 2
+integer: -7
+]
+integer: 4
+array of: 2 elements [
+string: 13
+string: 13
+]
+[2017-08-29 02:48:14 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,41,[-4,6,200],[6,-2],[1,70],[8],4,["V","byZnZ","60d","SjZ","smcv"]]
+depth: 6 size: 26
+integer: 41
+array of: 3 elements [
+integer: -4
+integer: 6
+integer: 200
+]
+array of: 2 elements [
+integer: 6
+integer: -2
+]
+array of: 2 elements [
+integer: 1
+integer: 70
+]
+array of: 1 elements [
+integer: 8
+]
+integer: 4
+array of: 5 elements [
+string: 1
+string: 5
+string: 3
+string: 3
+string: 4
+]
+[2017-08-29 02:48:14 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,41,[-4,6,200],[6,-2],[1,70],[8],4,["V","byZnZ","60d","Z","img/weakbrick1.png","8m"]]
+depth: 6 size: 26
+integer: 41
+array of: 3 elements [
+integer: -4
+integer: 6
+integer: 200
+]
+array of: 2 elements [
+integer: 6
+integer: -2
+]
+array of: 2 elements [
+integer: 1
+integer: 70
+]
+array of: 1 elements [
+integer: 8
+]
+integer: 4
+array of: 6 elements [
+string: 1
+string: 5
+string: 3
+string: 1
+string: 18
+string: 2
+]
+[2017-08-29 02:48:15 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,41,[],[6,-2],[1,70],[8],4,["V","byZnZ","60d","SjZ","smcv"]]
+depth: 6 size: 26
+integer: 41
+array of: 0 elements [
+
+]
+array of: 2 elements [
+integer: 6
+integer: -2
+]
+array of: 2 elements [
+integer: 1
+integer: 70
+]
+array of: 1 elements [
+integer: 8
+]
+integer: 4
+array of: 5 elements [
+string: 1
+string: 5
+string: 3
+string: 3
+string: 4
+]
+[2017-08-29 02:48:16 CEST  CRITICAL] Best entity (gen. 8) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="" id="BRICK-1">
+        </div>
+    </body>
+</html>
+,41,[-5,6,200],[6,-3],[-1,70],[8],4,["V","byZnZ","60d","SjY","smcv"]]
+depth: 4 size: 6
+integer: 41
+array of: 3 elements [
+integer: -5
+integer: 6
+integer: 200
+]
+array of: 2 elements [
+integer: 6
+integer: -3
+]
+array of: 2 elements [
+integer: -1
+integer: 70
+]
+array of: 1 elements [
+integer: 8
+]
+integer: 4
+array of: 5 elements [
+string: 1
+string: 5
+string: 3
+string: 3
+string: 4
+]
+[2017-08-29 02:48:17 CEST  CRITICAL] Best entity (gen. 9) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,41,[],[6,-7,-2],[1,70],[8],4,["V","byZnZ","60d","SjZ","smcv"]]
+depth: 6 size: 26
+integer: 41
+array of: 0 elements [
+
+]
+array of: 3 elements [
+integer: 6
+integer: -7
+integer: -2
+]
+array of: 2 elements [
+integer: 1
+integer: 70
+]
+array of: 1 elements [
+integer: 8
+]
+integer: 4
+array of: 5 elements [
+string: 1
+string: 5
+string: 3
+string: 3
+string: 4
+]
+[2017-08-29 02:48:18 CEST  CRITICAL] Best entity (gen. 10) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div id="BRICK42">
+            <div id="BRICK50">
+                <div id="BRICK9">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="BRICK-6">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK7">
+                DIV2
+                <div id="BRICK51">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="BRICK-10">
+            <div id="BRICK6">
+                <div id="BRICK-1">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK41">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK0">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,41,[],[6,-2],[1,70],[8],4,["V","byZnZ","60d","SjZ","smcv"]]
+depth: 6 size: 26
+integer: 41
+array of: 0 elements [
+
+]
+array of: 2 elements [
+integer: 6
+integer: -2
+]
+array of: 2 elements [
+integer: 1
+integer: 70
+]
+array of: 1 elements [
+integer: 8
+]
+integer: 4
+array of: 5 elements [
+string: 1
+string: 5
+string: 3
+string: 3
+string: 4
+]
+[2017-08-29 02:48:18 CEST  CRITICAL] Perfect entity found, finished after 10 generations!
+[2017-08-29 02:48:18 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:48:18 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div id="BRICK42">
+            <div id="BRICK50">
+                <div id="BRICK9">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="BRICK-6">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK7">
+                DIV2
+                <div id="BRICK51">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="BRICK-10">
+            <div id="BRICK6">
+                <div id="BRICK-1">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK41">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK0">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,41,[],[6,-2],[1,70],[8],4,["V","byZnZ","60d","SjZ","smcv"]]
+[2017-08-29 02:48:18 CEST  CRITICAL] Completed iteration #1 to cover branch: #2 -> (6,10,"else")
+[2017-08-29 02:48:18 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:48:18 CEST  CRITICAL] Started iteration #1 to cover branch: #3 -> (11,12,"then")
+[2017-08-29 02:48:20 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],40,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 6 size: 20
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:20 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            PHRASING CONTENT
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],40,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 4 size: 10
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:21 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],39,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 6 size: 20
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 39
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:22 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],40,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 6 size: 20
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:23 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        PHRASING CONTENT
+                    </div>
+                    <div>
+                        PHRASING CONTENT
+                    </div>
+                    DIV2
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                    </div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],39,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 8 size: 39
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 39
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:25 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[3,2],[235,3,-6],[0],[10,7],40,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 6 size: 20
+integer: 11
+array of: 2 elements [
+integer: 3
+integer: 2
+]
+array of: 3 elements [
+integer: 235
+integer: 3
+integer: -6
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:26 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[3,2],[235,0],[-7,-9,3,0],[10,7],40,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 6 size: 20
+integer: 11
+array of: 2 elements [
+integer: 3
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 4 elements [
+integer: -7
+integer: -9
+integer: 3
+integer: 0
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:26 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            PHRASING CONTENT
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[10,0,-10,-4,31],[235,0,0,-7,1,3,-6],[-7,-1,-1],[10,7],40,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 4 size: 10
+integer: 11
+array of: 5 elements [
+integer: 10
+integer: 0
+integer: -10
+integer: -4
+integer: 31
+]
+array of: 7 elements [
+integer: 235
+integer: 0
+integer: 0
+integer: -7
+integer: 1
+integer: 3
+integer: -6
+]
+array of: 3 elements [
+integer: -7
+integer: -1
+integer: -1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:27 CEST  CRITICAL] Best entity (gen. 8) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[3,2],[5,235,0],[0],[10,7],40,["Iq","img/weakbrick1.png","mSlq"]]
+depth: 6 size: 20
+integer: 11
+array of: 2 elements [
+integer: 3
+integer: 2
+]
+array of: 3 elements [
+integer: 5
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 3 elements [
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:28 CEST  CRITICAL] Best entity (gen. 9) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],39,["A","I","img/weakbrick1.png","mSmq"]]
+depth: 8 size: 30
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 39
+array of: 4 elements [
+string: 1
+string: 1
+string: 18
+string: 4
+]
+[2017-08-29 02:48:29 CEST  CRITICAL] Best entity (gen. 10) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,235,0],[2],[10,7],40,["Iq","img/weakbrick1.png"]]
+depth: 6 size: 20
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 3 elements [
+integer: 235
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 2
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 40
+array of: 2 elements [
+string: 2
+string: 18
+]
+[2017-08-29 02:48:30 CEST  CRITICAL] Best entity (gen. 11) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],2,["A","I","img/weakbrick1.png","mSmq"]]
+depth: 8 size: 30
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 2
+array of: 4 elements [
+string: 1
+string: 1
+string: 18
+string: 4
+]
+[2017-08-29 02:48:30 CEST  CRITICAL] Best entity (gen. 12) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],2,["A","I","img/weakbrick1.png","mSmq"]]
+depth: 8 size: 30
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 2
+array of: 4 elements [
+string: 1
+string: 1
+string: 18
+string: 4
+]
+[2017-08-29 02:48:31 CEST  CRITICAL] Best entity (gen. 13) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2,2],[235,0],[1],[10,7],2,["A","I","img/weakbrick1.png","mSmq"]]
+depth: 8 size: 30
+integer: 11
+array of: 3 elements [
+integer: 2
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 2
+array of: 4 elements [
+string: 1
+string: 1
+string: 18
+string: 4
+]
+[2017-08-29 02:48:32 CEST  CRITICAL] Best entity (gen. 14) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],2,["A","I","Iq","img/weakbrick1.png","mSlq"]]
+depth: 8 size: 30
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 2
+array of: 5 elements [
+string: 1
+string: 1
+string: 2
+string: 18
+string: 4
+]
+[2017-08-29 02:48:33 CEST  CRITICAL] Best entity (gen. 15) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        <div>
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,0],[1],[10,7],2,["BRICK","img/weakbrick1.png","mSlq"]]
+depth: 8 size: 30
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 0
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 2
+array of: 3 elements [
+string: 5
+string: 18
+string: 4
+]
+[2017-08-29 02:48:34 CEST  CRITICAL] Best entity (gen. 16) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK-2">
+            <div id="BRICK7">
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div id="BRICK30">
+                        <div id="BRICK12">
+                            PHRASING CONTENT
+                        </div>
+                        <div id="BRICK-4">
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div id="BRICK10">
+                        <div id="BRICK5">
+                            PHRASING CONTENT
+                        </div>
+                        <div id="BRICK84">
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div id="BRICK8">
+                <div id="BRICK31">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK11">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div id="BRICK6">
+            DIV2
+            <div id="BRICK85">
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,1],[1],[10,7],2,["A","I","img/weakbrick1.png","mSmq"]]
+depth: 8 size: 30
+integer: 11
+array of: 2 elements [
+integer: 2
+integer: 2
+]
+array of: 2 elements [
+integer: 235
+integer: 1
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 2 elements [
+integer: 10
+integer: 7
+]
+integer: 2
+array of: 4 elements [
+string: 1
+string: 1
+string: 18
+string: 4
+]
+[2017-08-29 02:48:34 CEST  CRITICAL] Perfect entity found, finished after 16 generations!
+[2017-08-29 02:48:34 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:48:34 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK-2">
+            <div id="BRICK7">
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div id="BRICK30">
+                        <div id="BRICK12">
+                            PHRASING CONTENT
+                        </div>
+                        <div id="BRICK-4">
+                            PHRASING CONTENT
+                        </div>
+                    </div>
+                    <div id="BRICK10">
+                        <div id="BRICK5">
+                            PHRASING CONTENT
+                        </div>
+                        <div id="BRICK84">
+                            PHRASING CONTENT
+                        </div>
+                        DIV2
+                    </div>
+                </div>
+            </div>
+            <div id="BRICK8">
+                <div id="BRICK31">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK11">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        <div id="BRICK6">
+            DIV2
+            <div id="BRICK85">
+            </div>
+        </div>
+    </body>
+</html>
+,11,[2,2],[235,1],[1],[10,7],2,["A","I","img/weakbrick1.png","mSmq"]]
+[2017-08-29 02:48:34 CEST  CRITICAL] Completed iteration #1 to cover branch: #3 -> (11,12,"then")
+[2017-08-29 02:48:34 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:48:34 CEST  CRITICAL] Started iteration #1 to cover branch: #4 -> (11,15,"else")
+[2017-08-29 02:48:35 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,70,[70,-9],[41,5,-3],[8,3,-10,100],[6,9],-2,["Z","O"]]
+depth: 6 size: 13
+integer: 70
+array of: 2 elements [
+integer: 70
+integer: -9
+]
+array of: 3 elements [
+integer: 41
+integer: 5
+integer: -3
+]
+array of: 4 elements [
+integer: 8
+integer: 3
+integer: -10
+integer: 100
+]
+array of: 2 elements [
+integer: 6
+integer: 9
+]
+integer: -2
+array of: 2 elements [
+string: 1
+string: 1
+]
+[2017-08-29 02:48:36 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10,1],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:37 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10,1],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:37 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10,1],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:38 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10,1],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:39 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10,-5,-9,9,-7,3],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 8 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: -5
+integer: -9
+integer: 9
+integer: -7
+integer: 3
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:40 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,201,[-8,235,1],[0],[21,6,-10,1],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 201
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 1
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:41 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[22,6,-10,1],[-7],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 22
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 1 elements [
+integer: -7
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:42 CEST  CRITICAL] Best entity (gen. 8) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[10,3],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 2 elements [
+integer: 10
+integer: 3
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:42 CEST  CRITICAL] Best entity (gen. 9) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10,1],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:43 CEST  CRITICAL] Best entity (gen. 10) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,125,-6,-8],[1],[21,6,-10,1],[-5,-6,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 4 elements [
+integer: -8
+integer: 125
+integer: -6
+integer: -8
+]
+array of: 1 elements [
+integer: 1
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -6
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:44 CEST  CRITICAL] Best entity (gen. 11) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[22,6,-10,1],[-6],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 22
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 1 elements [
+integer: -6
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:45 CEST  CRITICAL] Best entity (gen. 12) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2,2],[0],[21,6,-10,1],[-5,-7,-1],0,["qm7v","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 4 elements [
+integer: -8
+integer: 235
+integer: 2
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:46 CEST  CRITICAL] Best entity (gen. 13) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10,1],[-1],1,["qm7w","OwtKQ","OM9og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 4 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 1 elements [
+integer: -1
+]
+integer: 1
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:47 CEST  CRITICAL] Best entity (gen. 14) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10],[-5,-7,-1],0,["qm7w","OwtKP","OM8og","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 3 elements [
+integer: 21
+integer: 6
+integer: -10
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 5 elements [
+string: 4
+string: 5
+string: 5
+string: 5
+string: 5
+]
+[2017-08-29 02:48:48 CEST  CRITICAL] Best entity (gen. 15) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK6">
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[],[-3,6,-10,21,6,-10,1],[-5,-7,-1],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 0 elements [
+
+]
+array of: 7 elements [
+integer: -3
+integer: 6
+integer: -10
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:49 CEST  CRITICAL] Best entity (gen. 16) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK6">
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[2],[21,6,-10,1,6,-10,1],[-7],0,["qm7w","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 2
+]
+array of: 7 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 1 elements [
+integer: -7
+]
+integer: 0
+array of: 3 elements [
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:50 CEST  CRITICAL] Best entity (gen. 17) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="">
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[0],[21,6,-10],[-5,-5,-7,-1],0,["qm7w","OwtKP","OM8og","OwtKP","OM8og"]]
+depth: 4 size: 6
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 1 elements [
+integer: 0
+]
+array of: 3 elements [
+integer: 21
+integer: 6
+integer: -10
+]
+array of: 4 elements [
+integer: -5
+integer: -5
+integer: -7
+integer: -1
+]
+integer: 0
+array of: 5 elements [
+string: 4
+string: 5
+string: 5
+string: 5
+string: 5
+]
+[2017-08-29 02:48:51 CEST  CRITICAL] Best entity (gen. 18) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="BRICK" id="BRICK-3">
+            <div class="img/solid.png" id="BRICK2">
+                <div class="Z" id="BRICK100">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="o" id="BRICK-2">
+                <div class="img/weakbrick1.png" id="BRICK201">
+                    PHRASING CONTENT
+                </div>
+                <div class="img/brick.png" id="BRICK70">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK101">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="" id="BRICK6">
+                <div id="BRICK0">
+                    PHRASING CONTENT
+                </div>
+                <div class="O" id="BRICK9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="BRICK200">
+            <div id="BRICK-4">
+                DIV2
+                <div class="img/death.png" id="BRICK-7">
+                    PHRASING CONTENT
+                </div>
+                <div class="x" id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[],[21,6,-10,1,21,6,-10,1],[-5,-6,-1],0,["qm7w","OwtKP","OwtKP","qm7w","OwtKP","OM8og"]]
+depth: 6 size: 28
+integer: 100
+array of: 3 elements [
+integer: -8
+integer: 235
+integer: 2
+]
+array of: 0 elements [
+
+]
+array of: 8 elements [
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+integer: 21
+integer: 6
+integer: -10
+integer: 1
+]
+array of: 3 elements [
+integer: -5
+integer: -6
+integer: -1
+]
+integer: 0
+array of: 6 elements [
+string: 4
+string: 5
+string: 5
+string: 4
+string: 5
+string: 5
+]
+[2017-08-29 02:48:51 CEST  CRITICAL] Perfect entity found, finished after 18 generations!
+[2017-08-29 02:48:51 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:48:51 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="BRICK" id="BRICK-3">
+            <div class="img/solid.png" id="BRICK2">
+                <div class="Z" id="BRICK100">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="o" id="BRICK-2">
+                <div class="img/weakbrick1.png" id="BRICK201">
+                    PHRASING CONTENT
+                </div>
+                <div class="img/brick.png" id="BRICK70">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK101">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="" id="BRICK6">
+                <div id="BRICK0">
+                    PHRASING CONTENT
+                </div>
+                <div class="O" id="BRICK9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="BRICK200">
+            <div id="BRICK-4">
+                DIV2
+                <div class="img/death.png" id="BRICK-7">
+                    PHRASING CONTENT
+                </div>
+                <div class="x" id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,100,[-8,235,2],[],[21,6,-10,1,21,6,-10,1],[-5,-6,-1],0,["qm7w","OwtKP","OwtKP","qm7w","OwtKP","OM8og"]]
+[2017-08-29 02:48:51 CEST  CRITICAL] Completed iteration #1 to cover branch: #4 -> (11,15,"else")
+[2017-08-29 02:48:51 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:48:51 CEST  CRITICAL] Started iteration #1 to cover branch: #5 -> (16,17,"then")
+[2017-08-29 02:48:52 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,21,[7,5,-6,-3,-9],[-8,-10,0,6,9],[4],[-4],5,["l","","b7"]]
+depth: 6 size: 30
+integer: 21
+array of: 5 elements [
+integer: 7
+integer: 5
+integer: -6
+integer: -3
+integer: -9
+]
+array of: 5 elements [
+integer: -8
+integer: -10
+integer: 0
+integer: 6
+integer: 9
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 1 elements [
+integer: -4
+]
+integer: 5
+array of: 3 elements [
+string: 1
+string: 0
+string: 2
+]
+[2017-08-29 02:48:53 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+    </body>
+</html>
+,30,[1,125,0,-9,8],[6,9],[-4,10,125,-4,290,6,-3],[4,1],-7,["ScT"]]
+depth: 4 size: 6
+integer: 30
+array of: 5 elements [
+integer: 1
+integer: 125
+integer: 0
+integer: -9
+integer: 8
+]
+array of: 2 elements [
+integer: 6
+integer: 9
+]
+array of: 7 elements [
+integer: -4
+integer: 10
+integer: 125
+integer: -4
+integer: 290
+integer: 6
+integer: -3
+]
+array of: 2 elements [
+integer: 4
+integer: 1
+]
+integer: -7
+array of: 1 elements [
+string: 3
+]
+[2017-08-29 02:48:54 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        DIV2
+    </body>
+</html>
+,30,[1,125,0,-9,8],[9],[-4,290,6,-3],[4,1],-7,["ScT"]]
+depth: 4 size: 7
+integer: 30
+array of: 5 elements [
+integer: 1
+integer: 125
+integer: 0
+integer: -9
+integer: 8
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 4 elements [
+integer: -4
+integer: 290
+integer: 6
+integer: -3
+]
+array of: 2 elements [
+integer: 4
+integer: 1
+]
+integer: -7
+array of: 1 elements [
+string: 3
+]
+[2017-08-29 02:48:55 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                PHRASING CONTENT
+            </div>
+            <div>
+                PHRASING CONTENT
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,21,[7,5,-6,-3,-9],[-8,-10,0,6,41,-3],[4],[-4],4,["l","","b7"]]
+depth: 5 size: 11
+integer: 21
+array of: 5 elements [
+integer: 7
+integer: 5
+integer: -6
+integer: -3
+integer: -9
+]
+array of: 6 elements [
+integer: -8
+integer: -10
+integer: 0
+integer: 6
+integer: 41
+integer: -3
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 1 elements [
+integer: -4
+]
+integer: 4
+array of: 3 elements [
+string: 1
+string: 0
+string: 2
+]
+[2017-08-29 02:48:56 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,21,[7,5,-6,-3,-9],[-8,-10,0,6,9],[4],[7,3,8],5,["l","","b7","l","","b7"]]
+depth: 6 size: 30
+integer: 21
+array of: 5 elements [
+integer: 7
+integer: 5
+integer: -6
+integer: -3
+integer: -9
+]
+array of: 5 elements [
+integer: -8
+integer: -10
+integer: 0
+integer: 6
+integer: 9
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 3 elements [
+integer: 7
+integer: 3
+integer: 8
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 0
+string: 2
+string: 1
+string: 0
+string: 2
+]
+[2017-08-29 02:48:57 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    <div>
+                        PHRASING CONTENT
+                    </div>
+                    <div>
+                        PHRASING CONTENT
+                    </div>
+                    DIV2
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,21,[7,5,-6,-3,-9],[-8,-10,0,6,9],[4],[7,3,8],5,["l","","b7","l","","b7"]]
+depth: 7 size: 34
+integer: 21
+array of: 5 elements [
+integer: 7
+integer: 5
+integer: -6
+integer: -3
+integer: -9
+]
+array of: 5 elements [
+integer: -8
+integer: -10
+integer: 0
+integer: 6
+integer: 9
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 3 elements [
+integer: 7
+integer: 3
+integer: 8
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 0
+string: 2
+string: 1
+string: 0
+string: 2
+]
+[2017-08-29 02:48:57 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK11">
+            <div>
+                <div id="BRICK2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK5">
+                <div id="BRICK9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div id="BRICK6">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK8">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK100">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div id="BRICK10">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK21">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="BRICK180">
+        </div>
+    </body>
+</html>
+,21,[7,5,-6,-3,-9],[-8,-10,0,6,9],[4],[7,3,8],5,["l","52ClC","b7","l","","b7"]]
+depth: 6 size: 30
+integer: 21
+array of: 5 elements [
+integer: 7
+integer: 5
+integer: -6
+integer: -3
+integer: -9
+]
+array of: 5 elements [
+integer: -8
+integer: -10
+integer: 0
+integer: 6
+integer: 9
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 3 elements [
+integer: 7
+integer: 3
+integer: 8
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 5
+string: 2
+string: 1
+string: 0
+string: 2
+]
+[2017-08-29 02:48:57 CEST  CRITICAL] Perfect entity found, finished after 6 generations!
+[2017-08-29 02:48:57 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:48:57 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK11">
+            <div>
+                <div id="BRICK2">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK5">
+                <div id="BRICK9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div id="BRICK6">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK8">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK100">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div id="BRICK10">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK21">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="BRICK180">
+        </div>
+    </body>
+</html>
+,21,[7,5,-6,-3,-9],[-8,-10,0,6,9],[4],[7,3,8],5,["l","52ClC","b7","l","","b7"]]
+[2017-08-29 02:48:57 CEST  CRITICAL] Completed iteration #1 to cover branch: #5 -> (16,17,"then")
+[2017-08-29 02:48:57 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:48:57 CEST  CRITICAL] Started iteration #1 to cover branch: #6 -> (16,20,"else")
+[2017-08-29 02:48:59 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div>
+            </div>
+            <div>
+                DIV2
+            </div>
+            <div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,420,[0,6,10,-7,9],[21,2],[8],[-4,10,8],7,["3krf","O"]]
+depth: 5 size: 12
+integer: 420
+array of: 5 elements [
+integer: 0
+integer: 6
+integer: 10
+integer: -7
+integer: 9
+]
+array of: 2 elements [
+integer: 21
+integer: 2
+]
+array of: 1 elements [
+integer: 8
+]
+array of: 3 elements [
+integer: -4
+integer: 10
+integer: 8
+]
+integer: 7
+array of: 2 elements [
+string: 4
+string: 1
+]
+[2017-08-29 02:49:00 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+        </div>
+        DIV2
+    </body>
+</html>
+,420,[0,6,10,-7,9],[21,2],[8],[-4,10,8],7,["3krf","O"]]
+depth: 4 size: 8
+integer: 420
+array of: 5 elements [
+integer: 0
+integer: 6
+integer: 10
+integer: -7
+integer: 9
+]
+array of: 2 elements [
+integer: 21
+integer: 2
+]
+array of: 1 elements [
+integer: 8
+]
+array of: 3 elements [
+integer: -4
+integer: 10
+integer: 8
+]
+integer: 7
+array of: 2 elements [
+string: 4
+string: 1
+]
+[2017-08-29 02:49:01 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="x">
+        </div>
+        <div class="o">
+            <div>
+            </div>
+            <div class="img/death.png">
+            </div>
+            <div class="">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div class="BRICK">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div class="img/solid.png">
+            <div class="img/weakbrick1.png">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div class="O">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="Z">
+                <div class="img/brick.png">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,50,[-10,3],[4,-5,2,4,180,-10,3,200],[40,2,4,-3],[4,5,2,21],420,["A1N","O","5v2xw","y","Cy15"]]
+depth: 6 size: 25
+integer: 50
+array of: 2 elements [
+integer: -10
+integer: 3
+]
+array of: 8 elements [
+integer: 4
+integer: -5
+integer: 2
+integer: 4
+integer: 180
+integer: -10
+integer: 3
+integer: 200
+]
+array of: 4 elements [
+integer: 40
+integer: 2
+integer: 4
+integer: -3
+]
+array of: 4 elements [
+integer: 4
+integer: 5
+integer: 2
+integer: 21
+]
+integer: 420
+array of: 5 elements [
+string: 3
+string: 1
+string: 5
+string: 1
+string: 4
+]
+[2017-08-29 02:49:02 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div>
+            </div>
+            <div>
+                DIV2
+            </div>
+            <div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,85,[0,6,10,-7,9],[21,2],[8],[-4,10,8],21,["3krf","O"]]
+depth: 5 size: 12
+integer: 85
+array of: 5 elements [
+integer: 0
+integer: 6
+integer: 10
+integer: -7
+integer: 9
+]
+array of: 2 elements [
+integer: 21
+integer: 2
+]
+array of: 1 elements [
+integer: 8
+]
+array of: 3 elements [
+integer: -4
+integer: 10
+integer: 8
+]
+integer: 21
+array of: 2 elements [
+string: 4
+string: 1
+]
+[2017-08-29 02:49:02 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+        DIV2
+        <div>
+            <div>
+                <div>
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,235,[41,2,-10,0],[8,8,3,-3],[235,11,8,1],[8,7],-4,["hZGzY","BRICK","c","UM","dkH5","m3S"]]
+depth: 5 size: 13
+integer: 235
+array of: 4 elements [
+integer: 41
+integer: 2
+integer: -10
+integer: 0
+]
+array of: 4 elements [
+integer: 8
+integer: 8
+integer: 3
+integer: -3
+]
+array of: 4 elements [
+integer: 235
+integer: 11
+integer: 8
+integer: 1
+]
+array of: 2 elements [
+integer: 8
+integer: 7
+]
+integer: -4
+array of: 6 elements [
+string: 5
+string: 5
+string: 1
+string: 2
+string: 4
+string: 3
+]
+[2017-08-29 02:49:03 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="x">
+        </div>
+        <div class="o">
+            <div>
+            </div>
+            <div class="img/death.png">
+            </div>
+            <div class="">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div class="BRICK">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div class="img/solid.png">
+            <div class="img/weakbrick1.png">
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div class="O">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="Z">
+                <div class="img/brick.png">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,50,[-10,3],[4,-5,2,4,180,-10,3,200],[40,2,4,-3],[4,2,21],420,["UM","dkH5","m3S","y","Cy15"]]
+depth: 6 size: 25
+integer: 50
+array of: 2 elements [
+integer: -10
+integer: 3
+]
+array of: 8 elements [
+integer: 4
+integer: -5
+integer: 2
+integer: 4
+integer: 180
+integer: -10
+integer: 3
+integer: 200
+]
+array of: 4 elements [
+integer: 40
+integer: 2
+integer: 4
+integer: -3
+]
+array of: 3 elements [
+integer: 4
+integer: 2
+integer: 21
+]
+integer: 420
+array of: 5 elements [
+string: 2
+string: 4
+string: 3
+string: 1
+string: 4
+]
+[2017-08-29 02:49:04 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,50,[-11,3],[4,-5,2,4],[6,11,8,1,-3],[4,5,2,21],420,["A1N","O","5v2xw","y","Cy15"]]
+depth: 6 size: 25
+integer: 50
+array of: 2 elements [
+integer: -11
+integer: 3
+]
+array of: 4 elements [
+integer: 4
+integer: -5
+integer: 2
+integer: 4
+]
+array of: 5 elements [
+integer: 6
+integer: 11
+integer: 8
+integer: 1
+integer: -3
+]
+array of: 4 elements [
+integer: 4
+integer: 5
+integer: 2
+integer: 21
+]
+integer: 420
+array of: 5 elements [
+string: 3
+string: 1
+string: 5
+string: 1
+string: 4
+]
+[2017-08-29 02:49:05 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+        DIV2
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,235,[-10,41,2,40,0],[8,3,-3,4],[11,8,1],[8,7],-4,["UM","dkH5","m3S"]]
+depth: 6 size: 14
+integer: 235
+array of: 5 elements [
+integer: -10
+integer: 41
+integer: 2
+integer: 40
+integer: 0
+]
+array of: 4 elements [
+integer: 8
+integer: 3
+integer: -3
+integer: 4
+]
+array of: 3 elements [
+integer: 11
+integer: 8
+integer: 1
+]
+array of: 2 elements [
+integer: 8
+integer: 7
+]
+integer: -4
+array of: 3 elements [
+string: 2
+string: 4
+string: 3
+]
+[2017-08-29 02:49:06 CEST  CRITICAL] Best entity (gen. 8) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+        </div>
+        DIV2
+    </body>
+</html>
+,420,[0,6,10,-7],[21,3],[8],[8,9],7,["3krf","x"]]
+depth: 4 size: 8
+integer: 420
+array of: 4 elements [
+integer: 0
+integer: 6
+integer: 10
+integer: -7
+]
+array of: 2 elements [
+integer: 21
+integer: 3
+]
+array of: 1 elements [
+integer: 8
+]
+array of: 2 elements [
+integer: 8
+integer: 9
+]
+integer: 7
+array of: 2 elements [
+string: 4
+string: 1
+]
+[2017-08-29 02:49:06 CEST  CRITICAL] Best entity (gen. 9) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+        DIV2
+        <div>
+        </div>
+    </body>
+</html>
+,235,[41,2,7,0],[8,3,-3],[235,11,8,1],[2,21],-4,["UM","dkH5","m3S"]]
+depth: 4 size: 10
+integer: 235
+array of: 4 elements [
+integer: 41
+integer: 2
+integer: 7
+integer: 0
+]
+array of: 3 elements [
+integer: 8
+integer: 3
+integer: -3
+]
+array of: 4 elements [
+integer: 235
+integer: 11
+integer: 8
+integer: 1
+]
+array of: 2 elements [
+integer: 2
+integer: 21
+]
+integer: -4
+array of: 3 elements [
+string: 2
+string: 4
+string: 3
+]
+[2017-08-29 02:49:07 CEST  CRITICAL] Best entity (gen. 10) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,50,[-10,-2],[8,3,-3,4,3],[40,2,4,-3],[4,5,2,21],0,["A1N","O","5v2xw","y","Cy15"]]
+depth: 6 size: 24
+integer: 50
+array of: 2 elements [
+integer: -10
+integer: -2
+]
+array of: 5 elements [
+integer: 8
+integer: 3
+integer: -3
+integer: 4
+integer: 3
+]
+array of: 4 elements [
+integer: 40
+integer: 2
+integer: 4
+integer: -3
+]
+array of: 4 elements [
+integer: 4
+integer: 5
+integer: 2
+integer: 21
+]
+integer: 0
+array of: 5 elements [
+string: 3
+string: 1
+string: 5
+string: 1
+string: 4
+]
+[2017-08-29 02:49:08 CEST  CRITICAL] Best entity (gen. 11) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="img/brick.png">
+        </div>
+        <div class="img/weakbrick1.png">
+            <div class="o">
+            </div>
+            <div>
+            </div>
+            <div class="Z">
+                <div class="BRICK">
+                    PHRASING CONTENT
+                </div>
+                <div class="img/death.png">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div class="O">
+            <div class="x">
+                <div class="img/solid.png">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                </div>
+            </div>
+            <div>
+                <div class="">
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,50,[-10,-2],[8,3,-3,4,3],[40,2,4,-3],[4,5,2,21],0,["A1N","O","5v2xw","y","Cy15"]]
+depth: 6 size: 24
+integer: 50
+array of: 2 elements [
+integer: -10
+integer: -2
+]
+array of: 5 elements [
+integer: 8
+integer: 3
+integer: -3
+integer: 4
+integer: 3
+]
+array of: 4 elements [
+integer: 40
+integer: 2
+integer: 4
+integer: -3
+]
+array of: 4 elements [
+integer: 4
+integer: 5
+integer: 2
+integer: 21
+]
+integer: 0
+array of: 5 elements [
+string: 3
+string: 1
+string: 5
+string: 1
+string: 4
+]
+[2017-08-29 02:49:09 CEST  CRITICAL] Best entity (gen. 12) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,50,[-10,-2],[8,3,-3,4,3],[40,2,4,-3],[7,-7,2,21],0,["A1N","O","5v2xw","y","Cy15"]]
+depth: 6 size: 24
+integer: 50
+array of: 2 elements [
+integer: -10
+integer: -2
+]
+array of: 5 elements [
+integer: 8
+integer: 3
+integer: -3
+integer: 4
+integer: 3
+]
+array of: 4 elements [
+integer: 40
+integer: 2
+integer: 4
+integer: -3
+]
+array of: 4 elements [
+integer: 7
+integer: -7
+integer: 2
+integer: 21
+]
+integer: 0
+array of: 5 elements [
+string: 3
+string: 1
+string: 5
+string: 1
+string: 4
+]
+[2017-08-29 02:49:10 CEST  CRITICAL] Best entity (gen. 13) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                DIV2DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,41,[-3],[6],[-2,-2,4,235,-3],[70,1,5,2,21],7,["BFZ","p5kp","vTPk","A1N","O","5v2xw","y","Cy15"]]
+depth: 6 size: 23
+integer: 41
+array of: 1 elements [
+integer: -3
+]
+array of: 1 elements [
+integer: 6
+]
+array of: 5 elements [
+integer: -2
+integer: -2
+integer: 4
+integer: 235
+integer: -3
+]
+array of: 5 elements [
+integer: 70
+integer: 1
+integer: 5
+integer: 2
+integer: 21
+]
+integer: 7
+array of: 8 elements [
+string: 3
+string: 4
+string: 4
+string: 3
+string: 1
+string: 5
+string: 1
+string: 4
+]
+[2017-08-29 02:49:11 CEST  CRITICAL] Best entity (gen. 14) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK100">
+            DIV2
+            <div id="BRICK-5">
+                <div id="BRICK51">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK50">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="BRICK-6">
+            <div id="BRICK-10">
+            </div>
+            DIV2
+        </div>
+        <div id="BRICK1">
+            <div>
+                DIV2DIV2
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK41">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,41,[-3],[6],[-2,-2,4,235,-3],[70,1,5,2,21],7,["BFZ","p5kp","vTPk","A1N","O","5v2xw","y","Cy15"]]
+depth: 6 size: 23
+integer: 41
+array of: 1 elements [
+integer: -3
+]
+array of: 1 elements [
+integer: 6
+]
+array of: 5 elements [
+integer: -2
+integer: -2
+integer: 4
+integer: 235
+integer: -3
+]
+array of: 5 elements [
+integer: 70
+integer: 1
+integer: 5
+integer: 2
+integer: 21
+]
+integer: 7
+array of: 8 elements [
+string: 3
+string: 4
+string: 4
+string: 3
+string: 1
+string: 5
+string: 1
+string: 4
+]
+[2017-08-29 02:49:11 CEST  CRITICAL] Perfect entity found, finished after 14 generations!
+[2017-08-29 02:49:11 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:49:11 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK100">
+            DIV2
+            <div id="BRICK-5">
+                <div id="BRICK51">
+                    PHRASING CONTENT
+                </div>
+                <div id="BRICK50">
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div id="BRICK-6">
+            <div id="BRICK-10">
+            </div>
+            DIV2
+        </div>
+        <div id="BRICK1">
+            <div>
+                DIV2DIV2
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK41">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,41,[-3],[6],[-2,-2,4,235,-3],[70,1,5,2,21],7,["BFZ","p5kp","vTPk","A1N","O","5v2xw","y","Cy15"]]
+[2017-08-29 02:49:11 CEST  CRITICAL] Completed iteration #1 to cover branch: #6 -> (16,20,"else")
+[2017-08-29 02:49:11 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:49:11 CEST  CRITICAL] Started iteration #1 to cover branch: #7 -> (21,22,"then")
+[2017-08-29 02:49:12 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[10,-7,-5,9],[-3,5,5,-7,3],-3,["a","NTcw","kxpM","Z"]]
+depth: 6 size: 15
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 4 elements [
+integer: 10
+integer: -7
+integer: -5
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: -3
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 1
+]
+[2017-08-29 02:49:13 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[10,-7,-5,9],[-3,5,5,-7,3],-3,["a","NTcw","kxpM","Z"]]
+depth: 6 size: 15
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 4 elements [
+integer: 10
+integer: -7
+integer: -5
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: -3
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 1
+]
+[2017-08-29 02:49:14 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[10,-7,-5,9],[-3,5,5,-7,3],-4,["a","NTcw","kxpM","Z"]]
+depth: 6 size: 15
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 4 elements [
+integer: 10
+integer: -7
+integer: -5
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: -4
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 1
+]
+[2017-08-29 02:49:15 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[10,-7,-5,9],[-3,5,5,-7,3],-4,["a","NTcw","kxpM","Z"]]
+depth: 6 size: 15
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 4 elements [
+integer: 10
+integer: -7
+integer: -5
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: -4
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 1
+]
+[2017-08-29 02:49:16 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,9],[10,-7,-5,9],[-3,5,5,-7,3],-3,["a","NTcw","kxpM","Z"]]
+depth: 6 size: 15
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 4 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: 9
+]
+array of: 4 elements [
+integer: 10
+integer: -7
+integer: -5
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: -3
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 1
+]
+[2017-08-29 02:49:17 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-10,1,125],[9],[-3,5,5,-7,3],-4,["a","NTcw","kxpM","Z"]]
+depth: 6 size: 15
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 3 elements [
+integer: -10
+integer: 1
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: -4
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 1
+]
+[2017-08-29 02:49:18 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[],[-2,3,2,-2,125],[9],[-3,5,5,-7,3],-4,["a","NTcw","kxpM",""]]
+depth: 6 size: 15
+integer: 31
+array of: 0 elements [
+
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 2
+integer: -2
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: -4
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 0
+]
+[2017-08-29 02:49:19 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,9],[11,-7,-5,9],[-4,-2,-7,3],-3,["a","NTcw","kxpM","Z"]]
+depth: 6 size: 15
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 4 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: 9
+]
+array of: 4 elements [
+integer: 11
+integer: -7
+integer: -5
+integer: 9
+]
+array of: 4 elements [
+integer: -4
+integer: -2
+integer: -7
+integer: 3
+]
+integer: -3
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 1
+]
+[2017-08-29 02:49:20 CEST  CRITICAL] Best entity (gen. 8) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                PHRASING CONTENT
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[9],[-3,5,5,-7,3],1,["a","NTcw","kxpM",""]]
+depth: 5 size: 10
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: 1
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 0
+]
+[2017-08-29 02:49:21 CEST  CRITICAL] Best entity (gen. 9) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                PHRASING CONTENT
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[9],[-3,5,5,-7,3],1,["a","NTcw","kxpM",""]]
+depth: 5 size: 10
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: 1
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 0
+]
+[2017-08-29 02:49:22 CEST  CRITICAL] Best entity (gen. 10) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                PHRASING CONTENT
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[9],[-3,5,5,-7,3],1,["a","NTcw","kxpM",""]]
+depth: 5 size: 10
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: 1
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 0
+]
+[2017-08-29 02:49:23 CEST  CRITICAL] Best entity (gen. 11) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                PHRASING CONTENT
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[9],[],1,["a","NTcw","kxpM",""]]
+depth: 5 size: 10
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 0 elements [
+
+]
+integer: 1
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 0
+]
+[2017-08-29 02:49:24 CEST  CRITICAL] Best entity (gen. 12) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                PHRASING CONTENT
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[9],[-3,5,5,-7,3],1,["a","NTcw","kxpM",""]]
+depth: 5 size: 10
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 5 elements [
+integer: -3
+integer: 5
+integer: 5
+integer: -7
+integer: 3
+]
+integer: 1
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 0
+]
+[2017-08-29 02:49:24 CEST  CRITICAL] Best entity (gen. 13) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="O" id="BRICK-7">
+            <div class="x" id="BRICK31">
+                <div class="img/brick.png" id="BRICK-5">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="BRICK" id="BRICK-3">
+                DIV2
+                <div class="" id="BRICK50">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[9],[],1,["a","NTcw","kxpM",""]]
+depth: 6 size: 14
+integer: 31
+array of: 3 elements [
+integer: -2
+integer: 9
+integer: -2
+]
+array of: 5 elements [
+integer: -2
+integer: 3
+integer: 41
+integer: -2
+integer: 125
+]
+array of: 1 elements [
+integer: 9
+]
+array of: 0 elements [
+
+]
+integer: 1
+array of: 4 elements [
+string: 1
+string: 4
+string: 4
+string: 0
+]
+[2017-08-29 02:49:24 CEST  CRITICAL] Perfect entity found, finished after 13 generations!
+[2017-08-29 02:49:24 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:49:24 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="O" id="BRICK-7">
+            <div class="x" id="BRICK31">
+                <div class="img/brick.png" id="BRICK-5">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div class="BRICK" id="BRICK-3">
+                DIV2
+                <div class="" id="BRICK50">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,31,[-2,9,-2],[-2,3,41,-2,125],[9],[],1,["a","NTcw","kxpM",""]]
+[2017-08-29 02:49:24 CEST  CRITICAL] Completed iteration #1 to cover branch: #7 -> (21,22,"then")
+[2017-08-29 02:49:24 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:49:24 CEST  CRITICAL] Started iteration #1 to cover branch: #8 -> (21,25,"else")
+[2017-08-29 02:49:26 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+    </body>
+</html>
+,70,[235,9],[1,4,8,10,-6],[0,290,-2,-1,420],[10,3,-5,6],9,["0N"]]
+depth: 4 size: 6
+integer: 70
+array of: 2 elements [
+integer: 235
+integer: 9
+]
+array of: 5 elements [
+integer: 1
+integer: 4
+integer: 8
+integer: 10
+integer: -6
+]
+array of: 5 elements [
+integer: 0
+integer: 290
+integer: -2
+integer: -1
+integer: 420
+]
+array of: 4 elements [
+integer: 10
+integer: 3
+integer: -5
+integer: 6
+]
+integer: 9
+array of: 1 elements [
+string: 2
+]
+[2017-08-29 02:49:27 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        DIV2
+    </body>
+</html>
+,180,[5,21,4,8,1],[-5,-7],[-2,2],[10],5,["Q","xR3aH","x","4o"]]
+depth: 4 size: 7
+integer: 180
+array of: 5 elements [
+integer: 5
+integer: 21
+integer: 4
+integer: 8
+integer: 1
+]
+array of: 2 elements [
+integer: -5
+integer: -7
+]
+array of: 2 elements [
+integer: -2
+integer: 2
+]
+array of: 1 elements [
+integer: 10
+]
+integer: 5
+array of: 4 elements [
+string: 1
+string: 5
+string: 1
+string: 2
+]
+[2017-08-29 02:49:27 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-2,-7,10,180],[-1,2],[21,0,-4,-2],[-8,40,40,100],-8,["NvqN","0LnPQ"]]
+depth: 6 size: 17
+integer: 85
+array of: 4 elements [
+integer: -2
+integer: -7
+integer: 10
+integer: 180
+]
+array of: 2 elements [
+integer: -1
+integer: 2
+]
+array of: 4 elements [
+integer: 21
+integer: 0
+integer: -4
+integer: -2
+]
+array of: 4 elements [
+integer: -8
+integer: 40
+integer: 40
+integer: 100
+]
+integer: -8
+array of: 2 elements [
+string: 4
+string: 5
+]
+[2017-08-29 02:49:28 CEST  CRITICAL] Best entity (gen. 3) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,70,[50,0,420],[11,-2,-9],[-5],[-9,4],9,["img/solid.png","y","Drsq","","56U"]]
+depth: 6 size: 22
+integer: 70
+array of: 3 elements [
+integer: 50
+integer: 0
+integer: 420
+]
+array of: 3 elements [
+integer: 11
+integer: -2
+integer: -9
+]
+array of: 1 elements [
+integer: -5
+]
+array of: 2 elements [
+integer: -9
+integer: 4
+]
+integer: 9
+array of: 5 elements [
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:29 CEST  CRITICAL] Best entity (gen. 4) fitness: (0.0,13.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,84,[-8,6,0,10,31],[-4,420,420],[-6,-10,235,4],[-4,70,5],8,["img/solid.png","Lhm","VqH3A","img/weakbrick1.png"]]
+depth: 4 size: 11
+integer: 84
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 3 elements [
+integer: -4
+integer: 420
+integer: 420
+]
+array of: 4 elements [
+integer: -6
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 8
+array of: 4 elements [
+string: 13
+string: 3
+string: 5
+string: 18
+]
+[2017-08-29 02:49:30 CEST  CRITICAL] Best entity (gen. 5) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,420],[-6,-10,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 4 size: 11
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -6
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:31 CEST  CRITICAL] Best entity (gen. 6) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,420],[-6,-10,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 4 size: 11
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -6
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:32 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,420],[-6,-10,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 4 size: 11
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -6
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:33 CEST  CRITICAL] Best entity (gen. 8) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,420],[-7,-10,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 4 size: 11
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -7
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:34 CEST  CRITICAL] Best entity (gen. 9) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,420],[-7,-10,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 5 size: 12
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -7
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:35 CEST  CRITICAL] Best entity (gen. 10) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,420],[-8,-10,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 4 size: 11
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -8
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:36 CEST  CRITICAL] Best entity (gen. 11) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,420],[-7,-10,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 5 size: 12
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -7
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:36 CEST  CRITICAL] Best entity (gen. 12) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-6,11,50,0,10,31],[-4,420],[-6,-10,235,4],[-4,70,6],4,["o","img/solid.png","y","Drsq","0N"]]
+depth: 4 size: 11
+integer: 85
+array of: 6 elements [
+integer: -6
+integer: 11
+integer: 50
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 4 elements [
+integer: -6
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 6
+]
+integer: 4
+array of: 5 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 2
+]
+[2017-08-29 02:49:37 CEST  CRITICAL] Best entity (gen. 13) fitness: (0.0,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-8,6,0,10,31],[-4,419],[-8,-10,235,4],[-4,3,-5,6,-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 4 size: 11
+integer: 85
+array of: 5 elements [
+integer: -8
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 419
+]
+array of: 4 elements [
+integer: -8
+integer: -10
+integer: 235
+integer: 4
+]
+array of: 7 elements [
+integer: -4
+integer: 3
+integer: -5
+integer: 6
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:38 CEST  CRITICAL] Best entity (gen. 14) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK-10">
+            DIV2
+        </div>
+        <div id="BRICK-6">
+            DIV2
+            <div id="BRICK9">
+            </div>
+            <div id="BRICK85">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-7,6,0,10,31],[-4,420],[-6,-10,235,-5,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+depth: 5 size: 12
+integer: 85
+array of: 5 elements [
+integer: -7
+integer: 6
+integer: 0
+integer: 10
+integer: 31
+]
+array of: 2 elements [
+integer: -4
+integer: 420
+]
+array of: 6 elements [
+integer: -6
+integer: -10
+integer: 235
+integer: -5
+integer: 235
+integer: 4
+]
+array of: 3 elements [
+integer: -4
+integer: 70
+integer: 5
+]
+integer: 5
+array of: 6 elements [
+string: 1
+string: 13
+string: 1
+string: 4
+string: 0
+string: 3
+]
+[2017-08-29 02:49:38 CEST  CRITICAL] Perfect entity found, finished after 14 generations!
+[2017-08-29 02:49:38 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-29 02:49:38 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK-10">
+            DIV2
+        </div>
+        <div id="BRICK-6">
+            DIV2
+            <div id="BRICK9">
+            </div>
+            <div id="BRICK85">
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,85,[-7,6,0,10,31],[-4,420],[-6,-10,235,-5,235,4],[-4,70,5],5,["o","img/solid.png","y","Drsq","","56U"]]
+[2017-08-29 02:49:38 CEST  CRITICAL] Completed iteration #1 to cover branch: #8 -> (21,25,"else")
+[2017-08-29 02:49:38 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-29 02:49:38 CEST  CRITICAL] Started iteration #1 to cover branch: #9 -> (29,30,"then")
+[2017-08-29 02:49:40 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.495049504950495,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,-8,[-9,-6],[-3],[-3],[7,-7],1,["CbQ","q3cG","xqas"]]
+depth: 6 size: 12
+integer: -8
+array of: 2 elements [
+integer: -9
+integer: -6
+]
+array of: 1 elements [
+integer: -3
+]
+array of: 1 elements [
+integer: -3
+]
+array of: 2 elements [
+integer: 7
+integer: -7
+]
+integer: 1
+array of: 3 elements [
+string: 3
+string: 4
+string: 4
+]
+[2017-08-29 02:49:41 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.495049504950495,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,-4,[235,3],[4,-10,8],[-1,-8,-7,-8,11],[3,7],2,["x","Um","W","RNa9c"]]
+depth: 6 size: 22
+integer: -4
+array of: 2 elements [
+integer: 235
+integer: 3
+]
+array of: 3 elements [
+integer: 4
+integer: -10
+integer: 8
+]
+array of: 5 elements [
+integer: -1
+integer: -8
+integer: -7
+integer: -8
+integer: 11
+]
+array of: 2 elements [
+integer: 3
+integer: 7
+]
+integer: 2
+array of: 4 elements [
+string: 1
+string: 2
+string: 1
+string: 5
+]
+[2017-08-29 02:49:41 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.484375,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[7,21,3],[85,41],[5,2,0],0,["CY","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 3 elements [
+integer: 7
+integer: 21
+integer: 3
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 0
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:42 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.484375,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[3],[85,41],[5,2,0],0,["CY","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 0
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:43 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.484375,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[7,21,3],[85,41],[5,2,0],0,["CY","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 25
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 3 elements [
+integer: 7
+integer: 21
+integer: 3
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 0
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:45 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.4791666666666667,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[235,-10,-7,10],[4,-10,8],[-1,-8,-7,-8,11],[3,7],3,["x","Um","W","RNa9c"]]
+depth: 7 size: 18
+integer: 3
+array of: 4 elements [
+integer: 235
+integer: -10
+integer: -7
+integer: 10
+]
+array of: 3 elements [
+integer: 4
+integer: -10
+integer: 8
+]
+array of: 5 elements [
+integer: -1
+integer: -8
+integer: -7
+integer: -8
+integer: 11
+]
+array of: 2 elements [
+integer: 3
+integer: 7
+]
+integer: 3
+array of: 4 elements [
+string: 1
+string: 2
+string: 1
+string: 5
+]
+[2017-08-29 02:49:45 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.4791666666666667,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[235,-10,-7,10],[4,-10,8],[-1,-8,-7,-8,11],[3,6],3,["x","Um","W","RNa9c"]]
+depth: 7 size: 18
+integer: 3
+array of: 4 elements [
+integer: 235
+integer: -10
+integer: -7
+integer: 10
+]
+array of: 3 elements [
+integer: 4
+integer: -10
+integer: 8
+]
+array of: 5 elements [
+integer: -1
+integer: -8
+integer: -7
+integer: -8
+integer: 11
+]
+array of: 2 elements [
+integer: 3
+integer: 6
+]
+integer: 3
+array of: 4 elements [
+string: 1
+string: 2
+string: 1
+string: 5
+]
+[2017-08-29 02:49:46 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.4782608695652173,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="" id="BRICK-8">
+            DIV2
+        </div>
+        DIV2DIV2
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[3],[85,41],[5,2,0],0,["CbQ"]]
+depth: 4 size: 8
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 0
+array of: 1 elements [
+string: 3
+]
+[2017-08-29 02:49:47 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.4615384615384617,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[3],[85,41],[5,2,0],3,["CY","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:48 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.4615384615384617,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="" id="BRICK-8">
+            DIV2
+        </div>
+        DIV2DIV2
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[3],[85,41],[5,2,0],0,["TloE","8R9MA"]]
+depth: 4 size: 8
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 0
+array of: 2 elements [
+string: 4
+string: 5
+]
+[2017-08-29 02:49:49 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.4615384615384617,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div class="" id="BRICK-8">
+            DIV2
+        </div>
+        DIV2DIV2
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[3],[85],[5,2,0],0,["TloE","8R9MA"]]
+depth: 4 size: 8
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 1 elements [
+integer: 85
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 0
+array of: 2 elements [
+string: 4
+string: 5
+]
+[2017-08-29 02:49:50 CEST  CRITICAL] Best entity (gen. 11) fitness: (1.4615384615384617,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[3],[84,41],[5,2,0],3,["CY","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 84
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:51 CEST  CRITICAL] Best entity (gen. 12) fitness: (1.4615384615384617,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,2,[3,-3,1,10,-4],[3],[86,41],[5,2,0],3,["CY","TVy6","C","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 2
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 86
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:52 CEST  CRITICAL] Best entity (gen. 13) fitness: (1.45,7.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[3],[86,41],[5,2,0],3,["CY","TVy6","C","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 86
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:53 CEST  CRITICAL] Best entity (gen. 14) fitness: (1.45,7.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-3,1,10,-4],[3],[86,41],[5,2,0],3,["CY","TVy6","C","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 8 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 86
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:53 CEST  CRITICAL] Best entity (gen. 15) fitness: (1.45,7.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[3],[86,41],[5,2,0],3,["CY","TVy6","C","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 86
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:54 CEST  CRITICAL] Best entity (gen. 16) fitness: (1.45,7.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[3],[85,41],[9,2,0],3,["8BFl","img/weakbrick1.png","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 3 elements [
+integer: 9
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 4
+string: 18
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:55 CEST  CRITICAL] Best entity (gen. 17) fitness: (1.45,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div id="BRICK-8">
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[3],[84,41],[5,2,0],3,["CY","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 84
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:56 CEST  CRITICAL] Best entity (gen. 18) fitness: (1.45,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div id="BRICK-8">
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[3],[84,41],[5,2,0],3,["DY","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 84
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:57 CEST  CRITICAL] Best entity (gen. 19) fitness: (1.45,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div id="BRICK-8">
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,3,-4],[3],[84,41],[5,2,0],3,["DY","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 3
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 84
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 2
+integer: 0
+]
+integer: 3
+array of: 5 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:58 CEST  CRITICAL] Best entity (gen. 20) fitness: (1.25,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[4],[85,41],[5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 5 elements [
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 7 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:49:59 CEST  CRITICAL] Best entity (gen. 21) fitness: (1.25,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[4],[85,41],[5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 5 elements [
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 7 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:00 CEST  CRITICAL] Best entity (gen. 22) fitness: (1.25,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[-4],[4],[85,41],[5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 1 elements [
+integer: -4
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 5 elements [
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 7 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:01 CEST  CRITICAL] Best entity (gen. 23) fitness: (1.25,6.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,-3,1,10,-4],[],[85,41],[5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 11
+integer: 3
+array of: 5 elements [
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 0 elements [
+
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 5 elements [
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 7 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:02 CEST  CRITICAL] Best entity (gen. 24) fitness: (1.25,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div id="BRICK-8">
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,3,-3,1,10,-4],[3],[84,41],[5,3,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA","CY","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 6 elements [
+integer: 3
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 84
+integer: 41
+]
+array of: 3 elements [
+integer: 5
+integer: 3
+integer: 0
+]
+integer: 3
+array of: 12 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:02 CEST  CRITICAL] Best entity (gen. 25) fitness: (1.25,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div>
+                        DIV2
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[-4],[-9],[86,41],[5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 1 elements [
+integer: -4
+]
+array of: 1 elements [
+integer: -9
+]
+array of: 2 elements [
+integer: 86
+integer: 41
+]
+array of: 5 elements [
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 7 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:03 CEST  CRITICAL] Best entity (gen. 26) fitness: (1.25,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div id="BRICK-8">
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,3,-3,1,10,-4],[3],[84,41],[5,5,2,5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA","CY","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 6 elements [
+integer: 3
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 2 elements [
+integer: 84
+integer: 41
+]
+array of: 8 elements [
+integer: 5
+integer: 5
+integer: 2
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 12 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:04 CEST  CRITICAL] Best entity (gen. 27) fitness: (1.25,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div>
+                DIV2
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-8">
+                    DIV2
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[-4],[4],[85,41],[5,2,5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA"]]
+depth: 6 size: 12
+integer: 3
+array of: 1 elements [
+integer: -4
+]
+array of: 1 elements [
+integer: 4
+]
+array of: 2 elements [
+integer: 85
+integer: 41
+]
+array of: 7 elements [
+integer: 5
+integer: 2
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 7 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:05 CEST  CRITICAL] Best entity (gen. 28) fitness: (1.25,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div>
+                        DIV2
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div class="x" id="BRICK-3">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[-4],[-9],[86,41],[5,2,0,5,0],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 1 elements [
+integer: -4
+]
+array of: 1 elements [
+integer: -9
+]
+array of: 2 elements [
+integer: 86
+integer: 41
+]
+array of: 5 elements [
+integer: 5
+integer: 2
+integer: 0
+integer: 5
+integer: 0
+]
+integer: 3
+array of: 7 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+]
+[2017-08-29 02:50:06 CEST  CRITICAL] Best entity (gen. 29) fitness: (1.25,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="BRICK41">
+            <div id="BRICK2">
+                <div id="BRICK0">
+                    <div id="BRICK-8">
+                        PHRASING CONTENT
+                    </div>
+                </div>
+                <div>
+                    DIV2
+                </div>
+                <div id="BRICK-9">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="BRICK3">
+                <div id="BRICK-4">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+    </body>
+</html>
+,3,[3,3,-3,1,10,-4],[3],[41],[5,5,2,5],3,["CY","TVy6","C","TVy6","B","TloE","8R9MA","CY","TVy6","B","TloE","8R9MA"]]
+depth: 7 size: 18
+integer: 3
+array of: 6 elements [
+integer: 3
+integer: 3
+integer: -3
+integer: 1
+integer: 10
+integer: -4
+]
+array of: 1 elements [
+integer: 3
+]
+array of: 1 elements [
+integer: 41
+]
+array of: 4 elements [
+integer: 5
+integer: 5
+integer: 2
+integer: 5
+]
+integer: 3
+array of: 12 elements [
+string: 2
+string: 4
+string: 1
+string: 4
+string: 1
+string: 4
+string: 5
+string: 2
+string: 4
+string: 1
+string: 4
+string: 5
+]

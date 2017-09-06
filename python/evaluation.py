@@ -5,7 +5,7 @@ from os.path import basename, splitext, join
 from time import time
 from datetime import datetime
 import sys
-from os import makedirs
+from os import makedirs, chdir
 
 confix = "./evaluation/confix/"
 tsjs_dom_html = "./evaluation/tsjs_dom_html/"
