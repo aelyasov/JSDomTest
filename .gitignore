@@ -24,3 +24,5 @@ examples/casestudies/moodle
 *~
 *#
 /TAGS
+evaluation/result/**/*.csv
+evaluation/result/**/*.xlsx
