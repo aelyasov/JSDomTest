@@ -90,8 +90,8 @@ def printTarget(writer, target_stats):
     fitnesses = list(zipGenFit[1])
     writer.writerow([target_name] + fitnesses)
     writer.writerow(['generations#'] + generations)
-    writer.writerow(['starttime'] + start_times)
-    writer.writerow(['endtime'] + end_times)
+    #writer.writerow(['starttime'] + start_times)
+    #writer.writerow(['endtime'] + end_times)
     writer.writerow(['difftime'] + delta_times)
 
 
@@ -103,12 +103,13 @@ def outputCsvReport():
     outputfile = join(input_path, input_name) + '.csv'
     print 'Generating report:', outputfile
     with open(outputfile, 'w') as csvfile:
-        header = ['brunch', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+        report = processReport(inputfile)
+        print 'len', len(report)
+        header = ['brunch'] + range(1, len(report)+1)
         writer = csv.writer(csvfile, delimiter=';')
         writer.writerow(header)
-        report = processReport(inputfile)
-        # print report
         transp_report = map(list, zip(*report))
+        #print len(transp_report)
         for target in transp_report:
             transp_target = map(list, zip(*target))
             printTarget(writer, transp_target)
