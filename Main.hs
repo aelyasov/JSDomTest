@@ -84,6 +84,7 @@ fileHandlerReadWrite fp pri = do
   return (sh{closeFunc = hClose})
 
 
+
 parseInputAndSetupLogger :: Priority -> IO String
 parseInputAndSetupLogger logLevel = do
   args <- getArgs
