@@ -30,16 +30,38 @@ import qualified Data.IntMap as IntMap
 
 import Debug.Trace
 import Util.Debug (setCondBreakPoint)
+import Safe
 import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 
 
 defaultResponseTimeout :: Int
 defaultResponseTimeout = 60 * 10 ^ 6 -- one minute in microseconds
 
-fitnessScore :: Target -> [JSArg] -> IO (Maybe (Double, Double, Int), (JSSig, JSCPool))
-fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
+updateTargetPath :: GPath -> [LEdge ELab] -> [(Int, LEdge ELab)] -> [LEdge ELab]
+updateTargetPath execPath targetPath labBranches =
+  let branches = Data.List.map snd $ trace ("labBranches: " ++ show labBranches) labBranches
+      revExecPath = reverse $ trace ("execPath: " ++ show execPath) execPath
+      (lastBranch, lastTarget, _) = head $ trace ("targetPath: " ++ show targetPath) targetPath
+      findBranchToNode brs nd = find (\(_, to, _) -> nd == to) brs 
+      prefixExecPath = tailNote "Last branch is not found" $ snd $ break (lastBranch==) revExecPath
+      negatePrecedBranch (prevBranch, prevNode, _) =
+        fromJust $ find ( \(from, to, _) ->
+                            (from == prevBranch) &&
+                            (to /= prevNode)) branches
+
+      findPrecedBranch :: GPath -> [LEdge ELab]
+      findPrecedBranch [] = targetPath
+      findPrecedBranch (node:nodes) =
+        case findBranchToNode branches node of
+          Just br -> (negatePrecedBranch br):targetPath
+          Nothing -> findPrecedBranch nodes                       
+  in  findPrecedBranch prefixExecPath
+
+
+fitnessScore :: Target -> [JSArg] -> IO (Maybe ScoredPath, (JSSig, JSCPool))
+fitnessScore tg@(Target cfg targetPath)  jargs = do
   let logger = rootLoggerName
-  debugM logger $ "Compute fitness score for the target: " ++ (show loc)
+  debugM logger $ "Compute fitness score for the target path: " ++ (show targetPath)
   debugM logger $ "Compute fitness score for the JS arguments:\n" ++ (show jargs)
   man <- liftIO $ newManager tlsManagerSettings
   initReq <- parseRequest "http://localhost:7777/genetic"
@@ -49,7 +71,6 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
                     , requestBody = RequestBodyLBS $ encode $ GAInput (jsargs2bstrs jargs)
                     }
       logger = rootLoggerName
-      exitLoc = (-1, -1, "")      
   response <- (liftM responseBody $ httpLbs req man) `E.catch` \e -> putStrLn ("Caught " ++ show (e :: HttpException)) >> return "Fitness score calculation exception"
 
   (JSExecution trace_ distances_ loops_ enviroment_) <- return $ (fromMaybe (error $ "fitnessScore in response" ++ (show response)) . decode) $ response 
@@ -58,22 +79,23 @@ fitnessScore tg@(Target cfg loc@(from, to, _))  jargs = do
   infoM logger   $ "Branch distances: "   ++ show distances_
   infoM logger   $ "Loop iteration map: " ++ show loops_
   infoM logger   $ "New Enviroment: "     ++ show enviroment_
-  
-  infoM logger $ "Computing approach level for the location: " ++ (show loc) ++ " along the path: " ++ (show trace_)
-  fitnessVal1 <- if (loc == exitLoc)
-                 then return 0
-                 else computeFitness cfg (map2IntMap loops_) to trace_ distances_
-  -- infoM logger $ "Computing approach level for the location: " ++ (show exitLoc) ++ " along the path: " ++ (show trace_)
-  fitnessVal2 <- computeFitness cfg (map2IntMap loops_) (-1) trace_ distances_
-  -- fitnessVal2 <- return $ fromIntegral $ distanceToExit cfg trace_
-  -- infoM logger $ "FitnessVal2: " ++ (show fitnessVal2)
-  let fitnessVal = (fitnessVal1, fitnessVal2, 0)
-  -- let fitnessVal = fitnessVal1
-  noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVal)
 
+  let loopIterMap = map2IntMap loops_
+      updatedJSCPool = ([], ( Nothing,
+                              Nothing,
+                              Nothing,
+                              ( Nothing
+                              , Just $ getIdsJS enviroment_
+                              , Just $ getNamesJS enviroment_
+                              , Just $ getClassesJS enviroment_)))
+      
+  fitnessVals <- mapM (\(from, to, _) -> computeFitness cfg loopIterMap to trace_ distances_ ) targetPath
+ 
+
+  noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVals)
   setCondBreakPoint
   
-  return (Just fitnessVal, ([], (Nothing, Nothing, Nothing, (Nothing, Just $ getIdsJS enviroment_, Just $ getNamesJS enviroment_, Just $ getClassesJS enviroment_)))) 
+  return (Just $ ScoredPath fitnessVals trace_, updatedJSCPool) 
 
 
 -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]

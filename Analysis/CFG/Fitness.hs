@@ -9,7 +9,7 @@ import qualified Data.IntMap as IntMap
 import Analysis.CFG.Data
 import Safe (maximumByNote, headNote, at, tailNote)
 import Data.List (nub, groupBy, find, findIndex, inits, minimumBy, sortBy)
-import Data.Maybe (mapMaybe)
+import Data.Maybe (mapMaybe, fromJust)
 import Data.Ord 
 import Control.Applicative ((<|>))
 import Data.Function (on)
@@ -51,12 +51,13 @@ computeFitness cfg loopIterMap target path distances =
           isException      = last path == (-100) && ((last $ init path) == problemNode)
           problemNodeLevel = if isException then 1 else (0.5 * normBrLevel)
           fitnessVal       = if target `elem` path then 0 else fromIntegral (cfgLevel - 1) + problemNodeLevel
-          logger           = rootLoggerName    
+          logger           = rootLoggerName
+      infoM logger $ "Computing fitness value for the location #" ++ show target    
       infoM logger $ "ProblemNode: " ++ show problemNode
       infoM logger $ "CfgLevel: " ++ show cfgLevel
       infoM logger $ "Branch level: " ++ show branchLevel
       infoM logger $ "ProblemNodeLevel: " ++ show problemNodeLevel
-      infoM logger $ "Fitness value for location #" ++ show target ++ ": " ++ show fitnessVal 
+      infoM logger $ "Fitness value for the location #" ++ show target ++ ": " ++ show fitnessVal 
       return fitnessVal
 
     computeFitnessExecutionLengthExceeded :: SLab -> GPath -> IO Double

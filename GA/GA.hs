@@ -217,8 +217,12 @@ data GAConfig = GAConfig {
     -- |enable/disable built-in checkpointing mechanism
     getWithCheckpointing :: Bool,
     -- |rescore archive in each generation?
-    getRescoreArchive :: Bool
-                }
+    getRescoreArchive :: Bool,
+    -- | defines the size of the archive to be checked for convergence
+    getArchiveConvergenceSize :: Int,
+    -- | should check if archive has already converged
+    checkArchiveConvergence :: Bool
+                } deriving Show
 
 -- |Type class for entities that represent a candidate solution.
 --
@@ -331,9 +335,10 @@ class (Eq e, Ord e, Read e, Show e,
   --  Note: most recent archives are at the head of the list.
   --
   --  Default implementation always returns False.
-  hasConverged :: [Archive e s] -- ^ archives so far
+  hasConverged :: Int -- ^ part of the archive to be checked for convergence
+               -> [Archive e s] -- ^ archives so far
                -> Bool -- ^ whether or not convergence was detected
-  hasConverged _ = False
+  hasConverged _ _ = False
 
 -- |Initialize: generate initial population.
 initPop :: (Entity e s d p m) => p -- ^ pool for generating random entities
@@ -488,7 +493,8 @@ evolution cfg pool universe pastArchives gen step ((_,seed):gss) = do
     (universe',nextGen, pool', isPerfect_) <- step pool universe gen seed 
     let (Just fitness, e) = (headNote "evolution" $ snd nextGen)
         newArchive = snd nextGen
-    if hasConverged pastArchives || isPerfect (e,fitness)
+        convergeSize = getArchiveConvergenceSize cfg 
+    if hasConverged convergeSize pastArchives || isPerfect (e,fitness)
       then return nextGen
       else evolution cfg pool' universe' (newArchive:pastArchives) nextGen step gss
 -- no more gen. indices/seeds => quit
@@ -538,41 +544,49 @@ evolutionVerbose :: (Entity e s d p m, MonadIO m, Statistics e)
                                   -> m (Universe e, Generation e s, p, Bool)
                                  ) -- ^ function that evolves a generation
                               -> [(Int,Int)] -- ^ gen indicies and seeds
-                              -> m (Generation e s) -- ^ evolved generation
+                              -> m (Generation e s, Bool, Int) -- ^ evolved generation
 evolutionVerbose cfg pool universe pastArchives gen step ((gi,seed):gss) = do
-    liftIO $ errorM rootLoggerName    $ showArchive $ headDef [] pastArchives
+    liftIO $ errorM rootLoggerName $ showArchive $ headDef [] pastArchives
     (universe', newPa@(_,archive'), pool', isPerfect_) <- step pool universe gen seed
     liftIO $ if (getWithCheckpointing cfg)
              then checkpointGen cfg gi seed newPa
              else return () -- skip checkpoint
     liftIO $ criticalM rootLoggerName $ showGeneration gi newPa              
     -- check for perfect entity
-    if hasConverged pastArchives || isPerfect_
-      then do liftIO $ criticalM rootLoggerName
-                $ if isPerfect_
-                  then "Perfect entity found, "
-                       ++ "finished after " ++ show gi 
-                       ++ " generations!"
-                  else "No progress for 3 generations, "
-                       ++ "stopping after " ++ show gi
-                       ++ " generations!"
-              return newPa
+    let convergeSize = getArchiveConvergenceSize cfg 
+    if (hasConverged convergeSize pastArchives && checkArchiveConvergence cfg) || isPerfect_
+      then if isPerfect_
+           then do liftIO $ criticalM rootLoggerName $
+                     "Perfect entity found, " ++
+                     "finished after " ++
+                     show gi ++
+                     " generations!"
+                   return (newPa, False, gi)
+           else do liftIO $ criticalM rootLoggerName $
+                     "No progress for " ++
+                     (show convergeSize) ++
+                     " generations, " ++
+                     "stopping after " ++
+                     show gi ++
+                     " generations!"
+                   return (newPa, True, gi)
       else evolutionVerbose cfg pool' universe' (archive':pastArchives) newPa step gss
 
 -- no more gen. indices/seeds => quit
 evolutionVerbose _ _ _ _ gen _ [] = do 
-    liftIO $ errorM rootLoggerName "Perfect entity is not found during evolving!"
-    return gen
+    liftIO $ criticalM rootLoggerName "Perfect entity is not found during evolving!"
+    return (gen, False, -1)
 
 
 -- |Initialize.
-initGA :: (Entity e s d p m) => StdGen  -- ^ random generator
+initGA :: (Entity e s d p m) => Int -- ^ initial generation number
+                           -> StdGen  -- ^ random generator
                            -> GAConfig -- ^ configuration for GA
                            -> p -- ^ pool for generating random entities
                            -> m ([e],Int,Int,Int,
                                  Float,Float,[(Int,Int)]
                                 ) -- ^ initialization result
-initGA g cfg pool = do
+initGA init g cfg pool = do
     -- generate list of random integers
     let (seed:rs) = randoms g :: [Int]
         ps = getPopSize cfg
@@ -589,7 +603,7 @@ initGA g cfg pool = do
         --  seeds for evolution
         seeds = take (getMaxGenerations cfg) rs
         -- seeds per generation
-        genSeeds = zip [0..] seeds
+        genSeeds = zip [init..] seeds
     return (pop, cCnt, mCnt, aSize, crossPar, mutPar, genSeeds)
 
 -- |Do the evolution!
@@ -603,7 +617,7 @@ evolve g cfg pool dataset = do
     -- initialize
     (pop, cCnt, mCnt, aSize, 
      crossPar, mutPar, genSeeds) <- if not (getWithCheckpointing cfg)
-       then initGA g cfg pool
+       then initGA 0 g cfg pool
        else error $ "(evolve) No checkpointing support " 
                  ++ "(requires liftIO); see evolveVerbose."
     -- do the evolution
@@ -642,15 +656,16 @@ restoreFromChkpt _ [] = return Nothing
 --
 -- Note: requires support for liftIO in monad used.
 evolveVerbose :: (Entity e s d p m, MonadIO m, Statistics e) 
-                             => StdGen -- ^ random generator
+                             => Int -- ^ initial generation
+                             -> StdGen -- ^ random generator
                              -> GAConfig -- ^ configuration for GA
                              -> p -- ^ random entities pool
                              -> d -- ^ dataset required to score entities
-                             -> m (Archive e s) -- ^ best entities
-evolveVerbose g cfg pool dataset = do
+                             -> m (Archive e s, Bool, Int) -- ^ best entities
+evolveVerbose init g cfg pool dataset = do
     -- initialize
     (pop, cCnt, mCnt, aSize, 
-     crossPar, mutPar, genSeeds) <- initGA g cfg pool
+     crossPar, mutPar, genSeeds) <- initGA init g cfg pool
     let checkpointing = getWithCheckpointing cfg
     -- (maybe) restore from checkpoint
     restored <- liftIO $ if checkpointing
@@ -665,16 +680,16 @@ evolveVerbose g cfg pool dataset = do
         genSeeds' = filter ((>gi) . fst) genSeeds
         rescoreArchive = getRescoreArchive cfg
     -- do the evolution
-    (_,resArchive) <- evolutionVerbose 
-                        cfg pool [] [] gen 
-                        (evolutionStep dataset 
-                                       (cCnt,mCnt,aSize) 
-                                       (crossPar,mutPar) 
-                                       rescoreArchive
-                        )
-                        genSeeds'
+    ((_, resArchive), hasConverged, gi) <- evolutionVerbose 
+                                             cfg pool [] [] gen 
+                                             (evolutionStep dataset 
+                                              (cCnt,mCnt,aSize) 
+                                              (crossPar,mutPar) 
+                                              rescoreArchive
+                                             )
+                                             genSeeds'
     -- return best entity 
-    return resArchive
+    return (resArchive, hasConverged, gi)
 
 -- |Random searching.
 --

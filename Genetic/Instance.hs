@@ -24,6 +24,8 @@ import Safe (headNote)
 import Data.Maybe (fromMaybe)
 import Data.List (intercalate)
 import Analysis.CFG.Util (replaceElemInList)
+import Data.Graph.Inductive.Graph (LEdge)
+import Analysis.CFG.Data (ELab)
 
 import Debug.Trace
 
@@ -31,7 +33,7 @@ import GA.GA
 
 -- | sig = [JS_DOM,JS_STRING]
 -- | pool = ([], ["node"], ([TAG_IFRAME], ["node"], [], []))
-instance Entity [JSArg] (Double, Double, Int) Target (JSSig, JSCPool) IO where
+instance Entity [JSArg] ScoredPath Target (JSSig, JSCPool) IO where
 
   genRandom (sig, pool) seed = do
     debugM rootLoggerName $ "Generating random population for the signature: " ++ show sig
@@ -66,7 +68,7 @@ instance Entity [JSArg] (Double, Double, Int) Target (JSSig, JSCPool) IO where
 
   score = fitnessScore
 
-  isPerfect (_,(f1, f2, _)) = f1 == 0.0 && f2 == 0.0
+  isPerfect (_,scoredPath) = (sum $ scores scoredPath) == 0.0
   -- isPerfect (_,s) = s < 1.0
 
   showGeneration gi (pop,archive) = if (null archive) then "Archive is empty" else showBestEntity
@@ -82,9 +84,18 @@ instance Entity [JSArg] (Double, Double, Int) Target (JSSig, JSCPool) IO where
       -- showEntity = showStatistics
       -- showFitness = show . fromMaybe (-1)
       -- showPopulation = intercalate "\n------------\n" . map showStatistics
+      
+  hasConverged size archives = (length archives >= size) && (hasConvergedAll $ take size archives)
+    where
+      hasConvergedAll archs = allTheSame $ concat [ [ scores $ fromMaybe (ScoredPath [] []) $ fst se
+                                                    | se <- ar]
+                                                  | ar <- archs ]
+      allTheSame :: (Eq a) => [a] -> Bool
+      allTheSame xs = all (== head xs) (tail xs)
 
 
-readGenetcAlgConfig :: IO (Int, Int, Int, Float, Float, Float, Float, Bool, Bool)
+
+readGenetcAlgConfig :: IO (Int, Int, Int, Float, Float, Float, Float, Bool, Bool, Int, Bool)
 readGenetcAlgConfig = do
   config         <- load [ Required "jsdomtest.cfg"]
   population     <- require config "genetic.population"
@@ -96,36 +107,78 @@ readGenetcAlgConfig = do
   mutationParam  <- require config "genetic.mutation_param"
   checkpointing  <- require config "genetic.checkpointing"
   rescorearchive <- require config "genetic.rescorearchive"
-  return (population, archive, generations, crossoverRate, mutationRate, crossoverParam,mutationParam, checkpointing, rescorearchive)
-  
+  convergeSize   <- require config "genetic.converge_archive_size"
+  checkConverge  <- require config "genetic.check_converge"
+  return ( population
+         , archive
+         , generations
+         , crossoverRate
+         , mutationRate
+         , crossoverParam
+         , mutationParam
+         , checkpointing
+         , rescorearchive
+         , convergeSize
+         , checkConverge)
   
 
-runGenetic :: Target -> (JSSig, JSCPool) -> IO [JSArg]
-runGenetic target pool@(sig, (intP, floatP, stringP, (tagP, idP, nameP, classP))) = do
-  (population,
-   archive,
-   generations,
-   crossoverRate,
-   mutationRate,
-   crossoverParam,
-   mutationParam,
-   checkpointing,
-   rescorearchive) <- readGenetcAlgConfig
+runGenetic :: Target -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO [JSArg]
+runGenetic target@(Target cfg targetPath) pool@(sig, (intP, floatP, stringP, (tagP, idP, nameP, classP))) branches = do
+  ( population,
+    archive,
+    generations,
+    crossoverRate,
+    mutationRate,
+    crossoverParam,
+    mutationParam,
+    checkpointing,
+    rescorearchive,
+    convergeSize,
+    checkConverge) <- readGenetcAlgConfig
   criticalM rootLoggerName "Genetic algorithm configurations"
   criticalM rootLoggerName $ "genetic.population: "     ++ show population
   criticalM rootLoggerName $ "genetic.archive: "        ++ show archive
   criticalM rootLoggerName $ "genetic.generations: "    ++ show generations
   criticalM rootLoggerName $ "genetic.crossover_rate: " ++ show crossoverRate
   criticalM rootLoggerName $ "genetic.mutation_rate: "  ++ show mutationRate
-  let conf = GAConfig population archive generations crossoverRate mutationRate crossoverParam mutationParam checkpointing rescorearchive 
-      g = mkStdGen 0            
-  (bestFitness, bestScoredEntry) <- liftM head $ evolveVerbose g conf pool target
-  -- es <- evolve g conf pool target
-  criticalM rootLoggerName $ "Best fitness value: " ++ show bestFitness
-  criticalM rootLoggerName $ "Best entity (GA): " ++ show bestScoredEntry
-  return bestScoredEntry
+  let config = GAConfig population
+                        archive
+                        generations
+                        crossoverRate
+                        mutationRate
+                        crossoverParam
+                        mutationParam
+                        checkpointing
+                        rescorearchive
+                        convergeSize
+                        checkConverge
+      gen    = mkStdGen 0
+  evolveVerboseUntilArchiveConverged 0 gen config pool (Target cfg targetPath) branches
+      
 
+evolveVerboseUntilArchiveConverged :: Int
+                                   -> StdGen
+                                   -> GAConfig
+                                   -> (JSSig, JSCPool)
+                                   -> Target
+                                   -> [(Int, LEdge ELab)]
+                                   -> IO [JSArg]
+evolveVerboseUntilArchiveConverged gi gen config pool (Target cfg targetPath) branches = do
+    (resArchive, hasConverged, giLast) <- evolveVerbose gi gen config pool (Target cfg targetPath)
+    let (Just (ScoredPath fitnessVals execPath), bestScoredEntry) = head resArchive
+    if hasConverged
+      then do let newTargetPath = updateTargetPath execPath targetPath branches
+                  giNew         = giLast + 1
+                  newConfig     = if newTargetPath == targetPath
+                                  then config{checkArchiveConvergence = False}
+                                  else config
+                  targetNew     = Target cfg $ trace ("newTargetPath: " ++ show newTargetPath) newTargetPath
+              evolveVerboseUntilArchiveConverged giNew gen (trace (show newConfig) newConfig) pool targetNew branches
+      else do criticalM rootLoggerName $ "Best fitness value: " ++ show fitnessVals
+              criticalM rootLoggerName $ "Best entity (GA): " ++ show bestScoredEntry
+              return bestScoredEntry
 
+  
 readRandomAlgConfig :: IO Int
 readRandomAlgConfig = do
   config <- load [ Required "jsdomtest.cfg"]
@@ -133,8 +186,8 @@ readRandomAlgConfig = do
   return budget
   
 
-runRandom :: Target -> (JSSig, JSCPool) -> IO [JSArg]
-runRandom target pool  = do
+runRandom :: Target -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO [JSArg]
+runRandom target pool _  = do
   budget <- readRandomAlgConfig
   es <- randomSearch (mkStdGen 0) budget pool target
   putStrLn $ "Best fitness value: " ++ (show $ fst $ head es)
@@ -144,6 +197,6 @@ runRandom target pool  = do
 data Algorithm = GEN | RAND
                deriving (Show, Read)
 
-runAlgorithm :: Algorithm ->  Target -> (JSSig, JSCPool) -> IO [JSArg]
+runAlgorithm :: Algorithm ->  Target -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> IO [JSArg]
 runAlgorithm GEN  = runGenetic
 runAlgorithm RAND = runRandom

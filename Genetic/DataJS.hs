@@ -13,6 +13,7 @@ import Data.Aeson.Types (typeMismatch)
 import Data.Map (Map)
 import Data.Monoid ((<>))
 import GHC.Generics
+import Data.Function (on)
 
 import Analysis.CFG.Data
 import Data.Graph.Inductive.PatriciaTree
@@ -37,7 +38,12 @@ instance Show JSArg where
   show (DomJS s)    = prettyHtmlByteString s
   show (ArrayJS ar) = show ar
   
-data Target = Target { jsCFG :: Gr NLab ELab, mutSrc :: LEdge ELab } deriving Show
+data Target = Target { jsCFG :: Gr NLab ELab, jsTargetPath :: [LEdge ELab] } deriving Show
+
+data ScoredPath = ScoredPath { scores :: [Double], path :: GPath } deriving (Read, Show, Eq)
+
+instance Ord ScoredPath where
+  compare = compare `on` scores
 
 data JSType = JS_INT
             | JS_FLOAT

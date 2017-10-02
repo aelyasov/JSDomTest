@@ -157,8 +157,8 @@ askForBranchsToCover branchN algType man cfg (sig, constPool) branches iterN = d
             choice <- getLine
             let choiceN = read choice :: Int
                 branchesToCover = if (null choice) || (choiceN == 0) then branches else [(branches!!(choiceN-1))]
-            killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover iterN
-    else killJSMutationGeneticAll algType man cfg (sig, constPool) branches iterN
+            killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover branches iterN
+    else killJSMutationGeneticAll algType man cfg (sig, constPool) branches branches iterN
 
 showAllBranches :: [(Int, LEdge ELab)] -> IO ()
 showAllBranches branches = do
@@ -171,15 +171,15 @@ prettyPrintResponse :: Response C.ByteString -> String
 prettyPrintResponse response = "Status: " ++ (show $ statusMessage $ responseStatus response) ++ ", Body: " ++ (show $ responseBody response)
 
 
-killJSMutationGeneticAll :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> Int -> IO ()
-killJSMutationGeneticAll algType man cfg (sig, constPool) branches iterN =
-  mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target cfg branch) (sig, constPool)) branches
+killJSMutationGeneticAll :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> [(Int, LEdge ELab)] -> Int -> IO ()
+killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover allBranches iterN =
+  mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target cfg [branch, (-1,-1,"exit")]) (sig, constPool)) branchesToCover
   where
     killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
     killJSMutationGenetic alg man mutN target pool = do
       let logger = rootLoggerName
       criticalM logger $ replicate 70 '-'
-      criticalM logger $ "Started iteration #" ++ (show iterN) ++ " to cover branch: #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
+      criticalM logger $ "Started iteration #" ++ (show iterN) ++ " to cover branch: #" ++ (show mutN) ++ " -> " ++ (show $ jsTargetPath target)
       noticeM logger $ "Initial pool data: " ++ (show pool)
       request <- parseRequest "http://localhost:7777/mutation"
       let reqMut = request { method = "POST"
@@ -188,11 +188,11 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branches iterN =
                            }
       mutResp <- httpLbs reqMut man
       debugM logger $ prettyPrintResponse mutResp
-      jsArgs <- runAlgorithm alg target pool
+      jsArgs <- runAlgorithm alg target pool allBranches
       -- for the integration testing purpose runGenetic has been replaced with fitnessScore
       -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
       -- let jsArgs = [DomJS test_html, StringJS "iframe"]
-      criticalM logger $ "Completed iteration #" ++ (show iterN) ++ " to cover branch: #" ++ (show mutN) ++ " -> " ++ (show $ mutSrc target)
+      criticalM logger $ "Completed iteration #" ++ (show iterN) ++ " to cover branch: #" ++ (show mutN) ++ " -> " ++ (show $ jsTargetPath target)
       let reqExec = request { method = "POST"
                             , requestHeaders = [(CI.mk "Content-Type", "text/html;charset=UTF-8")]
                             , queryString = "execute=true"
