@@ -40,10 +40,14 @@ defaultResponseTimeout = 60 * 10 ^ 6 -- one minute in microseconds
 updateTargetPath :: GPath -> [LEdge ELab] -> [(Int, LEdge ELab)] -> [LEdge ELab]
 updateTargetPath execPath targetPath labBranches =
   let branches = Data.List.map snd $ trace ("labBranches: " ++ show labBranches) labBranches
-      revExecPath = reverse $ trace ("execPath: " ++ show execPath) execPath
-      (lastBranch, lastTarget, _) = head $ trace ("targetPath: " ++ show targetPath) targetPath
-      findBranchToNode brs nd = find (\(_, to, _) -> nd == to) brs 
-      prefixExecPath = tailNote "Last branch is not found" $ snd $ break (lastBranch==) revExecPath
+
+      (prefix, suffix) = splitAt (length targetPath - 2) targetPath
+
+      targetBranch@(tgFrom, tgTo, _) = head $ trace ("suffix: " ++ show suffix) suffix
+      prevTargetBranch@(prTgFrom, prTgTo, _) = last prefix
+      prefixExecPath = tailNote "Last branch is not found" $ snd $ break (prTgFrom==) execPath
+      
+      findBranchToNode brs nd = find (\(from, _, _) -> nd == from) brs 
       negatePrecedBranch (prevBranch, prevNode, _) =
         fromJust $ find ( \(from, to, _) ->
                             (from == prevBranch) &&
@@ -53,9 +57,12 @@ updateTargetPath execPath targetPath labBranches =
       findPrecedBranch [] = targetPath
       findPrecedBranch (node:nodes) =
         case findBranchToNode branches node of
-          Just br -> (negatePrecedBranch br):targetPath
-          Nothing -> findPrecedBranch nodes                       
-  in  findPrecedBranch prefixExecPath
+          Just br@(brFrom, brTo, _) | brFrom /= tgFrom -> prefix ++ [negatePrecedBranch br] ++ suffix
+                                    | otherwise        -> targetPath
+          Nothing                                      -> findPrecedBranch nodes                       
+  in  if Data.List.null $ trace ("prefix: " ++ show prefix) prefix
+      then findPrecedBranch execPath
+      else findPrecedBranch $ trace ("prefixExecPath: " ++ show prefixExecPath) prefixExecPath
 
 
 fitnessScore :: Target -> [JSArg] -> IO (Maybe ScoredPath, (JSSig, JSCPool))

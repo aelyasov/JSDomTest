@@ -601,10 +601,10 @@ initGA init g cfg pool = do
         crossPar = getCrossoverParam cfg
         mutPar = getMutationParam cfg
         --  seeds for evolution
-        seeds = take (getMaxGenerations cfg) rs
+        seeds = take (getMaxGenerations cfg - init) rs
         -- seeds per generation
         genSeeds = zip [init..] seeds
-    return (pop, cCnt, mCnt, aSize, crossPar, mutPar, genSeeds)
+    return (pop, cCnt, mCnt, aSize, crossPar, mutPar, trace ("genSeeds: " ++ (show $ length genSeeds))  genSeeds)
 
 -- |Do the evolution!
 evolve :: (Entity e s d p m, MonadIO m)
