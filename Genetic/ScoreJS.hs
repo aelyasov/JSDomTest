@@ -65,7 +65,7 @@ updateTargetPath execPath targetPath labBranches =
       else findPrecedBranch $ trace ("prefixExecPath: " ++ show prefixExecPath) prefixExecPath
 
 
-fitnessScore :: Target -> [JSArg] -> IO (Maybe ScoredPath, (JSSig, JSCPool))
+fitnessScore :: Target -> [JSArg] -> IO (Maybe ScoredPath, Pool)
 fitnessScore tg@(Target cfg targetPath)  jargs = do
   let logger = rootLoggerName
   debugM logger $ "Compute fitness score for the target path: " ++ (show targetPath)
@@ -88,13 +88,15 @@ fitnessScore tg@(Target cfg targetPath)  jargs = do
   infoM logger   $ "New Enviroment: "     ++ show enviroment_
 
   let loopIterMap = map2IntMap loops_
-      updatedJSCPool = ([], ( Nothing,
-                              Nothing,
-                              Nothing,
-                              ( Nothing
-                              , Just $ getIdsJS enviroment_
-                              , Just $ getNamesJS enviroment_
-                              , Just $ getClassesJS enviroment_)))
+      newCPool = ( Nothing,
+                   Nothing,
+                   Nothing,
+                   ( Nothing
+                   , Just $ getIdsJS enviroment_
+                   , Just $ getNamesJS enviroment_
+                   , Just $ getClassesJS enviroment_)
+                 )
+      newPool = Pool [] newCPool []
       
   fitnessVals <- mapM (\(from, to, _) -> computeFitness cfg loopIterMap to trace_ distances_ ) targetPath
  
@@ -102,7 +104,7 @@ fitnessScore tg@(Target cfg targetPath)  jargs = do
   noticeM logger $ "Final Fitness value is equal to: " ++ (show fitnessVals)
   setCondBreakPoint
   
-  return (Just $ ScoredPath fitnessVals trace_, updatedJSCPool) 
+  return (Just $ ScoredPath fitnessVals trace_, newPool) 
 
 
 -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]

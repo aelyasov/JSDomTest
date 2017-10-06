@@ -138,8 +138,8 @@ mutateDocument = deleteNodeInDocumentByLabel
 mutateJSInt :: Int -> JSCPool -> IO JSArg
 mutateJSInt int pool = do
   randInt <- liftM getIntJS $ genRandomInt $ getJSInts pool
-  let mutInts = map (\f -> f int) [(+1), (+(-1))]
-  result <- generate $ frequency $ zip [4,1,1] $ map return (randInt:mutInts)
+  let mutInts = map (\f -> f int) [(+1), (+(-1)), (+10), (+(-10))]
+  result <- generate $ frequency $ zip [1,1,1,1,1] $ map return (randInt:mutInts)
   debugM rootLoggerName $ "Mutation of the integer value: " ++ (show int) ++ " replaced by: " ++ (show result)
   return $ IntJS result
 

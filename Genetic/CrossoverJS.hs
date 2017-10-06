@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Genetic.CrossoverJS (crossoverJSArgs) where
+module Genetic.CrossoverJS  where
 
 import qualified Data.ByteString.Lazy as B
 import Data.ByteString.Lazy (ByteString)

@@ -28,7 +28,7 @@ import Analysis.CFG.Instrument (instrScript)
 import Analysis.CFG.Build (enrichCollectedEdges, getAllBranches)
 import Analysis.CFG.Label (assignUniqueIdsSt)
 import Analysis.CFG.Transform (transfromJS)
-import Analysis.CFG.Data (ELab, NLab)
+import Analysis.CFG.Data (ELab, NLab, EnumLEdge)
 import Analysis.Static
 
 -- | Networking
@@ -123,14 +123,14 @@ main' = do
       jsFunCFG      = uncurry mkGraph $ enrichCollectedEdges [jsLabFun']
       branches      = getAllBranches jsFunCFG
       labBranches   = zip [1..] branches
-      constPool     = collectConstantInfoJS jsLabFun
+      cpool     = collectConstantInfoJS jsLabFun
       jsLabFunInstr@(Script _ [jsLabFunInstrStmt]) = instrScript jsLabFun
       jsLabFunInstrFile = Script l (jsLabFunInstrStmt:jsLabStms)
   noticeM logger "The function has the following CFG:\n"
   when isBreak $ void $ system $ "echo " ++ (show $ showDot $ fglToDotString jsFunCFG) ++ " | graph-easy --as_ascii" 
   noticeM logger $ "Instrumented version of the analysed function:\n" ++ (show $ JSP.prettyPrint jsLabFunInstr)
   noticeM logger $ "The following branches have to be covered: " ++ show branches
-  noticeM logger $ "Initial constant pool data: " ++ show constPool
+  noticeM logger $ "Initial constant pool data: " ++ show cpool
 
   setCondBreakPoint
   
@@ -147,20 +147,23 @@ main' = do
                         }
   initResp <- httpLbs reqInit man
   debugM logger $ prettyPrintResponse initResp
-  mapM_ (askForBranchsToCover coverageBranches algType man jsFunCFG (jsSig, constPool) labBranches) [1..iterateTotal]
+  mapM_ (askForBranchsToCover coverageBranches algType man jsFunCFG (Pool jsSig cpool labBranches)) [1..iterateTotal]
 
 
-askForBranchsToCover :: Int -> Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> Int -> IO ()
-askForBranchsToCover branchN algType man cfg (sig, constPool) branches iterN = do
+askForBranchsToCover :: Int -> Algorithm -> Manager -> Gr NLab ELab -> Pool -> Int -> IO ()
+askForBranchsToCover branchN algType man cfg pool@(Pool _ _ branches) iterN = do
   if (branchN /= 0)
     then do showAllBranches branches
             choice <- getLine
             let choiceN = read choice :: Int
-                branchesToCover = if (null choice) || (choiceN == 0) then branches else [(branches!!(choiceN-1))]
-            killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover branches iterN
-    else killJSMutationGeneticAll algType man cfg (sig, constPool) branches branches iterN
+                branchesToCover = if (null choice) || (choiceN == 0)
+                                  then branches
+                                  else [(branches!!(choiceN-1))]
+            killJSMutationGeneticAll algType man cfg pool branchesToCover iterN
+    else killJSMutationGeneticAll algType man cfg pool branches iterN
 
-showAllBranches :: [(Int, LEdge ELab)] -> IO ()
+
+showAllBranches :: EnumLEdge -> IO ()
 showAllBranches branches = do
   putStrLn "Choose the branch to cover:"
   putStrLn "0: all branches"
@@ -168,18 +171,28 @@ showAllBranches branches = do
 
 
 prettyPrintResponse :: Response C.ByteString -> String
-prettyPrintResponse response = "Status: " ++ (show $ statusMessage $ responseStatus response) ++ ", Body: " ++ (show $ responseBody response)
+prettyPrintResponse response = "Status: " ++
+                               (show $ statusMessage $ responseStatus response) ++
+                               ", Body: " ++
+                               (show $ responseBody response)
 
 
-killJSMutationGeneticAll :: Algorithm -> Manager -> Gr NLab ELab -> (JSSig, JSCPool) -> [(Int, LEdge ELab)] -> [(Int, LEdge ELab)] -> Int -> IO ()
-killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover allBranches iterN =
-  mapM_  (\(i, branch) -> killJSMutationGenetic algType man i (Target cfg [branch, (-1,-1,"exit")]) (sig, constPool)) branchesToCover
+killJSMutationGeneticAll :: Algorithm -> Manager -> Gr NLab ELab -> Pool -> EnumLEdge -> Int -> IO ()
+killJSMutationGeneticAll algType man cfg pool branchesToCover iterN =
+  mapM_  (\(i, branch) ->
+            killJSMutationGenetic algType man i (Target cfg [branch, (-1,-1,"exit")]) pool) branchesToCover
   where
-    killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> (JSSig, JSCPool) -> IO ()
+    killJSMutationGenetic :: Algorithm -> Manager -> Int -> Target -> Pool -> IO ()
     killJSMutationGenetic alg man mutN target pool = do
       let logger = rootLoggerName
       criticalM logger $ replicate 70 '-'
-      criticalM logger $ "Started iteration #" ++ (show iterN) ++ " to cover branch: #" ++ (show mutN) ++ " -> " ++ (show $ jsTargetPath target)
+      criticalM logger $
+        "Started iteration #" ++
+        (show iterN) ++
+        " to cover branch: #" ++
+        (show mutN) ++
+        " -> " ++
+        (show $ jsTargetPath target)
       noticeM logger $ "Initial pool data: " ++ (show pool)
       request <- parseRequest "http://localhost:7777/mutation"
       let reqMut = request { method = "POST"
@@ -188,7 +201,7 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover allBra
                            }
       mutResp <- httpLbs reqMut man
       debugM logger $ prettyPrintResponse mutResp
-      jsArgs <- runAlgorithm alg target pool allBranches
+      jsArgs <- runAlgorithm alg target pool
       -- for the integration testing purpose runGenetic has been replaced with fitnessScore
       -- mkTestCFG "./Genetic/safeAdd.js" >>= \g -> fitnessScore (Target g 9) [DomJS test_html, StringJS "iframe"]
       -- let jsArgs = [DomJS test_html, StringJS "iframe"]
@@ -206,7 +219,8 @@ killJSMutationGeneticAll algType man cfg (sig, constPool) branchesToCover allBra
 
 
 
--- | The generateJSMutations function given a function produces all possible mutations out of existing. It returns the mutated programs together with the source positions to which the mutation operators were applied.x
+-- | The generateJSMutations function given a function produces all possible mutations out of existing.
+-- | It returns the mutated programs together with the source positions to which the mutation operators were applied.
 generateJSMutations :: JavaScript SourcePosLab -> [(Int, Mutation SourcePosLab)]
 generateJSMutations js = zip [1..] $ concatMap (\m -> m js) domMutations
 

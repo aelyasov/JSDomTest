@@ -27,7 +27,7 @@ data JSArg = IntJS { getIntJS :: Int }
            | StringJS { getStringJS :: String }
            | BoolJS Bool
            | DomJS { getDomJS :: ByteString }
-           | ArrayJS [JSArg]
+           | ArrayJS { getArrayJS :: [JSArg] }
            deriving (Read, Ord, Eq)
 
 instance Show JSArg where
@@ -37,10 +37,21 @@ instance Show JSArg where
   show (BoolJS b)   = show b
   show (DomJS s)    = prettyHtmlByteString s
   show (ArrayJS ar) = show ar
-  
-data Target = Target { jsCFG :: Gr NLab ELab, jsTargetPath :: [LEdge ELab] } deriving Show
 
-data ScoredPath = ScoredPath { scores :: [Double], path :: GPath } deriving (Read, Show, Eq)
+data Pool = Pool { getJSSig    :: JSSig
+                 , getJSPool   :: JSCPool
+                 , getBranches :: EnumLEdge
+                 } deriving Show
+
+instance Monoid Pool where
+  mempty = Pool [] mempty mempty
+  mappend (Pool sig cpool1 branches) (Pool _ cpool2 _) = Pool sig (cpool1 <> cpool2) branches
+
+data Target = Target { jsCFG        :: Gr NLab ELab
+                     , jsTargetPath :: [LEdge ELab] } deriving Show
+
+data ScoredPath = ScoredPath { scores :: [Double]
+                             , path   :: GPath } deriving (Read, Show, Eq)
 
 instance Ord ScoredPath where
   compare = compare `on` scores

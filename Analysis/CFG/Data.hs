@@ -4,11 +4,13 @@ import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
 import Data.Map (Map)
 import qualified Data.Map as Map
+import Data.Graph.Inductive (LEdge(..))
 
 type SLab = Int
 type NLab = String
 type ELab = String
 type GPath = [SLab]
+type EnumLEdge = [(Int, LEdge ELab)]
 
 type LoopSizeMap = IntMap Int
 type LoopIterationMap = IntMap Int
