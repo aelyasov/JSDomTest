@@ -173,13 +173,15 @@ evolveVerboseUntilArchiveConverged gi gen config pool (Target cfg targetPath) = 
     (resArchive, hasConverged, giLast) <- evolveVerbose gi gen config pool (Target cfg targetPath)
     let (Just (ScoredPath fitnessVals execPath), bestScoredEntry) = head resArchive
     if hasConverged
-      then do let newTargetPath = updateTargetPath execPath targetPath $ getBranches pool
-                  giNew         = giLast + 1
-                  newConfig     = if newTargetPath == targetPath
-                                  then config{checkArchiveConvergence = False}
-                                  else config
-                  targetNew     = Target cfg $ trace ("newTargetPath: " ++ show newTargetPath) newTargetPath
-              evolveVerboseUntilArchiveConverged giNew gen (trace (show newConfig) newConfig) pool targetNew
+      then do let giNew     = giLast + 1
+                  branches  = getBranches pool
+                  (newTargetPath, newBranches) = updateTargetPath cfg execPath branches targetPath
+                  newConfig = if newTargetPath == targetPath
+                              then config{ checkArchiveConvergence = False }
+                              else config
+                  targetNew     = Target cfg newTargetPath
+                  newPool = pool{ getBranches = newBranches }
+              evolveVerboseUntilArchiveConverged giNew gen newConfig newPool targetNew
       else do criticalM rootLoggerName $ "Best fitness value: " ++ show fitnessVals
               criticalM rootLoggerName $ "Best entity (GA): " ++ show bestScoredEntry
               return bestScoredEntry

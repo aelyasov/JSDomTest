@@ -147,20 +147,20 @@ main' = do
                         }
   initResp <- httpLbs reqInit man
   debugM logger $ prettyPrintResponse initResp
-  mapM_ (askForBranchsToCover coverageBranches algType man jsFunCFG (Pool jsSig cpool labBranches)) [1..iterateTotal]
+  mapM_ (askForBranchsToCover coverageBranches algType man jsFunCFG (Pool jsSig cpool branches) labBranches) [1..iterateTotal]
 
 
-askForBranchsToCover :: Int -> Algorithm -> Manager -> Gr NLab ELab -> Pool -> Int -> IO ()
-askForBranchsToCover branchN algType man cfg pool@(Pool _ _ branches) iterN = do
+askForBranchsToCover :: Int -> Algorithm -> Manager -> Gr NLab ELab -> Pool -> EnumLEdge -> Int -> IO ()
+askForBranchsToCover branchN algType man cfg pool labBranches iterN = do
   if (branchN /= 0)
-    then do showAllBranches branches
+    then do showAllBranches labBranches
             choice <- getLine
             let choiceN = read choice :: Int
                 branchesToCover = if (null choice) || (choiceN == 0)
-                                  then branches
-                                  else [(branches!!(choiceN-1))]
+                                  then labBranches
+                                  else [(labBranches!!(choiceN-1))]
             killJSMutationGeneticAll algType man cfg pool branchesToCover iterN
-    else killJSMutationGeneticAll algType man cfg pool branches iterN
+    else killJSMutationGeneticAll algType man cfg pool labBranches iterN
 
 
 showAllBranches :: EnumLEdge -> IO ()

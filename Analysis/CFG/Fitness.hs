@@ -123,7 +123,8 @@ findAllPathToTarget graph path target =
 
 
 findPathToTarget :: Gr NLab ELab -> GPath -> SLab -> Maybe [GPath]
-findPathToTarget graph path target = find (not . null) $  map (findAllPathsBetweenTwoNodes graph target) path
+findPathToTarget graph path target = find (not . null)
+                                     $ map (findAllPathsBetweenTwoNodes graph target) path
 
 
 findAllPathsBetweenTwoNodes :: Gr NLab ELab -> SLab -> SLab -> [GPath]

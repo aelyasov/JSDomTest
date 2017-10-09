@@ -16,6 +16,7 @@ import Analysis.CFG.Data
 import Analysis.CFG.Fitness (computeFitness)
 import Data.Graph.Inductive.PatriciaTree
 import Data.Graph.Inductive.Graph (LEdge)
+import Data.Graph.Inductive.Query.Dominators (dom)
 
 import qualified Data.ByteString.Lazy.Char8 as C
 import qualified Data.Text as T
@@ -37,33 +38,25 @@ import System.Log.Logger (rootLoggerName, infoM, debugM, noticeM)
 defaultResponseTimeout :: Int
 defaultResponseTimeout = 60 * 10 ^ 6 -- one minute in microseconds
 
-updateTargetPath :: GPath -> [LEdge ELab] -> [(Int, LEdge ELab)] -> [LEdge ELab]
-updateTargetPath execPath targetPath labBranches =
-  let branches = Data.List.map snd $ trace ("labBranches: " ++ show labBranches) labBranches
+updateTargetPath :: Gr NLab ELab
+                  -> GPath
+                  -> [LEdge ELab]
+                  -> [LEdge ELab]
+                  -> ([LEdge ELab], [LEdge ELab]) 
+updateTargetPath cfg path branches target = let
+  ((targetFrom, _, _), rest) = if length target == 2 then (target!!0, target) else (target!!1, tail target)
+  doms = reverse $ tail $ snd $ fromJust $ find (\(n, _) -> n == targetFrom) $ dom cfg 0
+    
+  findNewDomBranch :: Int -> Maybe (LEdge ELab) 
+  findNewDomBranch d = find (\(n1, n2, _) -> d == n1 && n2 `notElem` path) branches
+  
+  findNewTarget :: [Int] -> ([LEdge ELab], [LEdge ELab])
+  findNewTarget []     =  (rest, branches)
+  findNewTarget (d:ds) = case findNewDomBranch d of
+        Just br -> ((br:rest), Data.List.filter (\br1@(n1, n2, _) -> br1 /= br && (n1 /= d || n2 `notElem` path)) branches) 
+        Nothing -> findNewTarget ds
 
-      (prefix, suffix) = splitAt (length targetPath - 2) targetPath
-
-      targetBranch@(tgFrom, tgTo, _) = head $ trace ("suffix: " ++ show suffix) suffix
-      prevTargetBranch@(prTgFrom, prTgTo, _) = last prefix
-      prefixExecPath = tailNote "Last branch is not found" $ snd $ break (prTgFrom==) execPath
-      
-      findBranchToNode brs nd = find (\(from, _, _) -> nd == from) brs 
-      negatePrecedBranch (prevBranch, prevNode, _) =
-        fromJust $ find ( \(from, to, _) ->
-                            (from == prevBranch) &&
-                            (to /= prevNode)) branches
-
-      findPrecedBranch :: GPath -> [LEdge ELab]
-      findPrecedBranch [] = targetPath
-      findPrecedBranch (node:nodes) =
-        case findBranchToNode branches node of
-          Just br@(brFrom, brTo, _) | brFrom /= tgFrom -> prefix ++ [negatePrecedBranch br] ++ suffix
-                                    | otherwise        -> targetPath
-          Nothing                                      -> findPrecedBranch nodes                       
-  in  if Data.List.null $ trace ("prefix: " ++ show prefix) prefix
-      then findPrecedBranch execPath
-      else findPrecedBranch $ trace ("prefixExecPath: " ++ show prefixExecPath) prefixExecPath
-
+  in  findNewTarget doms
 
 fitnessScore :: Target -> [JSArg] -> IO (Maybe ScoredPath, Pool)
 fitnessScore tg@(Target cfg targetPath)  jargs = do

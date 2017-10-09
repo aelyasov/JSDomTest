@@ -40,7 +40,7 @@ instance Show JSArg where
 
 data Pool = Pool { getJSSig    :: JSSig
                  , getJSPool   :: JSCPool
-                 , getBranches :: EnumLEdge
+                 , getBranches :: [LEdge ELab]
                  } deriving Show
 
 instance Monoid Pool where
