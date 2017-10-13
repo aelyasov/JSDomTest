@@ -604,7 +604,7 @@ initGA init g cfg pool = do
         seeds = take (getMaxGenerations cfg - init) rs
         -- seeds per generation
         genSeeds = zip [init..] seeds
-    return (pop, cCnt, mCnt, aSize, crossPar, mutPar, trace ("genSeeds: " ++ (show $ length genSeeds))  genSeeds)
+    return (pop, cCnt, mCnt, aSize, crossPar, mutPar, genSeeds)
 
 -- |Do the evolution!
 evolve :: (Entity e s d p m, MonadIO m)

@@ -41,23 +41,23 @@ instance Entity [JSArg] ScoredPath Target Pool IO where
     return args
 
   crossover _ _ seed args1 args2 = do
-    -- let gen        = mkStdGen seed
-    --     pairedArgs = zip args1 args2
-    --     crossArgId = fst $ randomR (0, length pairedArgs - 1) gen
-    -- debugM rootLoggerName $ "Crossing over arguments: " ++ show args1 ++ " and " ++ show args2
-    -- debugM rootLoggerName $ "Crossover point is: " ++ show crossArgId
-    -- crossArg  <- crossoverJSArgs gen (pairedArgs!!crossArgId)
-    -- crossArgs <- liftM ([args1, args2]!!) $ randomRIO (0, 1)
-    -- let cresult = replaceElemInList crossArgId (Just crossArg) crossArgs
-    -- debugM rootLoggerName $ "Crossed arguments:  " ++ show cresult
-    -- return $ Just cresult
-    
-    crossPoint <- randomRIO (0, length args1)
-    debugM rootLoggerName $ "Crossover point is: " ++ show crossPoint
-    let crossArr1 = take crossPoint args1 ++ drop crossPoint args2
-        crossArr2 = take crossPoint args2 ++ drop crossPoint args1
-    cresult <- liftM ([crossArr1, crossArr2]!!) $ randomRIO (0, 1)
+    let gen        = mkStdGen seed
+        pairedArgs = zip args1 args2
+        crossArgId = fst $ randomR (0, length pairedArgs - 1) gen
+    debugM rootLoggerName $ "Crossing over arguments: " ++ show args1 ++ " and " ++ show args2
+    debugM rootLoggerName $ "Crossover point is: " ++ show crossArgId
+    crossArg  <- crossoverJSArgs gen (pairedArgs!!crossArgId)
+    crossArgs <- liftM ([args1, args2]!!) $ randomRIO (0, 1)
+    let cresult = replaceElemInList crossArgId (Just crossArg) crossArgs
+    debugM rootLoggerName $ "Crossed arguments:  " ++ show cresult
     return $ Just cresult
+    
+    -- crossPoint <- randomRIO (0, length args1)
+    -- debugM rootLoggerName $ "Crossover point is: " ++ show crossPoint
+    -- let crossArr1 = take crossPoint args1 ++ drop crossPoint args2
+    --     crossArr2 = take crossPoint args2 ++ drop crossPoint args1
+    -- cresult <- liftM ([crossArr1, crossArr2]!!) $ randomRIO (0, 1)
+    -- return $ Just cresult
 
           
   mutation (Pool sig cpool _) _ seed args = do
@@ -176,7 +176,7 @@ evolveVerboseUntilArchiveConverged gi gen config pool (Target cfg targetPath) = 
       then do let giNew     = giLast + 1
                   branches  = getBranches pool
                   (newTargetPath, newBranches) = updateTargetPath cfg execPath branches targetPath
-                  newConfig = if newTargetPath == targetPath
+                  newConfig = if length newTargetPath == 2 -- length 2 indicates convergence to the intial target
                               then config{ checkArchiveConvergence = False }
                               else config
                   targetNew     = Target cfg newTargetPath
