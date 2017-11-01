@@ -1,7 +1,7 @@
 [2017-10-29 18:55:10 CET  CRITICAL] Test generation strategy: GEN
 [2017-10-29 18:55:10 CET  CRITICAL] Number of performed generation runs: 1
 [2017-10-29 18:55:10 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 18:55:10 CET  CRITICAL] Started iteration #1 to cover branch: #1 -> [(6,7,"then"),(-1,-1,"exit")]
+[2017-10-29 18:55:10 CET  CRITICAL] Started iteration #38 to cover branch: #1 -> [(6,7,"then"),(-1,-1,"exit")]
 [2017-10-29 18:55:10 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 18:55:10 CET  CRITICAL] genetic.population: 50
 [2017-10-29 18:55:10 CET  CRITICAL] genetic.archive: 1
@@ -134,9 +134,9 @@ string: 1
     </body>
 </html>
 ,-9,[-10,3,-9,-5,180],[-1,-8,-5,-6,85],[3,-6,-9,11,-7],[6],3,["x","1v","Mttj","D"]]
-[2017-10-29 18:55:14 CET  CRITICAL] Completed iteration #1 to cover branch: #1 -> [(6,7,"then"),(-1,-1,"exit")]
+[2017-10-29 18:55:14 CET  CRITICAL] Completed iteration #38 to cover branch: #1 -> [(6,7,"then"),(-1,-1,"exit")]
 [2017-10-29 18:55:14 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 18:55:14 CET  CRITICAL] Started iteration #1 to cover branch: #2 -> [(6,10,"else"),(-1,-1,"exit")]
+[2017-10-29 18:55:14 CET  CRITICAL] Started iteration #38 to cover branch: #2 -> [(6,10,"else"),(-1,-1,"exit")]
 [2017-10-29 18:55:14 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 18:55:14 CET  CRITICAL] genetic.population: 50
 [2017-10-29 18:55:14 CET  CRITICAL] genetic.archive: 1
@@ -1523,9 +1523,9 @@ string: 3
     </body>
 </html>
 ,41,[7,2,4,-2,8],[-1,8],[-3,-5,3,4],[-1,-3,-3,-7,6],2,["qjn","img/weakbrick1.png","","GFl"]]
-[2017-10-29 18:55:44 CET  CRITICAL] Completed iteration #1 to cover branch: #2 -> [(6,10,"else"),(-1,-1,"exit")]
+[2017-10-29 18:55:44 CET  CRITICAL] Completed iteration #38 to cover branch: #2 -> [(6,10,"else"),(-1,-1,"exit")]
 [2017-10-29 18:55:44 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 18:55:44 CET  CRITICAL] Started iteration #1 to cover branch: #3 -> [(11,12,"then"),(-1,-1,"exit")]
+[2017-10-29 18:55:44 CET  CRITICAL] Started iteration #38 to cover branch: #3 -> [(11,12,"then"),(-1,-1,"exit")]
 [2017-10-29 18:55:44 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 18:55:44 CET  CRITICAL] genetic.population: 50
 [2017-10-29 18:55:44 CET  CRITICAL] genetic.archive: 1
@@ -12245,9 +12245,9 @@ string: 4
     </body>
 </html>
 ,20,[-7,-1],[4,4,-7,41],[-6,2,1,-8],[4],0,["bL","AWa","Hd1fl","Y","Z0Gh"]]
-[2017-10-29 19:01:42 CET  CRITICAL] Completed iteration #1 to cover branch: #3 -> [(11,12,"then"),(-1,-1,"exit")]
+[2017-10-29 19:01:42 CET  CRITICAL] Completed iteration #38 to cover branch: #3 -> [(11,12,"then"),(-1,-1,"exit")]
 [2017-10-29 19:01:42 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:01:42 CET  CRITICAL] Started iteration #1 to cover branch: #4 -> [(11,15,"else"),(-1,-1,"exit")]
+[2017-10-29 19:01:42 CET  CRITICAL] Started iteration #38 to cover branch: #4 -> [(11,15,"else"),(-1,-1,"exit")]
 [2017-10-29 19:01:42 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:01:42 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:01:42 CET  CRITICAL] genetic.archive: 1
@@ -15789,9 +15789,9 @@ string: 2
     </body>
 </html>
 ,50,[6,-10],[-3,-6,-5],[5,7,-9,6],[0,-6,0],1,["Vo","img/weakbrick1.png","x","WL"]]
-[2017-10-29 19:03:28 CET  CRITICAL] Completed iteration #1 to cover branch: #4 -> [(11,15,"else"),(-1,-1,"exit")]
+[2017-10-29 19:03:28 CET  CRITICAL] Completed iteration #38 to cover branch: #4 -> [(11,15,"else"),(-1,-1,"exit")]
 [2017-10-29 19:03:28 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:03:28 CET  CRITICAL] Started iteration #1 to cover branch: #5 -> [(16,17,"then"),(-1,-1,"exit")]
+[2017-10-29 19:03:28 CET  CRITICAL] Started iteration #38 to cover branch: #5 -> [(16,17,"then"),(-1,-1,"exit")]
 [2017-10-29 19:03:28 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:03:28 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:03:28 CET  CRITICAL] genetic.archive: 1
@@ -27411,9 +27411,9 @@ string: 5
     </body>
 </html>
 ,30,[8,4,-7],[2,20,-6,0,0],[1,-3,4,125,200],[40,290],1,["img/weakbrick1.png","0Sp","cfUeu"]]
-[2017-10-29 19:09:10 CET  CRITICAL] Completed iteration #1 to cover branch: #5 -> [(16,17,"then"),(-1,-1,"exit")]
+[2017-10-29 19:09:10 CET  CRITICAL] Completed iteration #38 to cover branch: #5 -> [(16,17,"then"),(-1,-1,"exit")]
 [2017-10-29 19:09:10 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:09:10 CET  CRITICAL] Started iteration #1 to cover branch: #6 -> [(16,20,"else"),(-1,-1,"exit")]
+[2017-10-29 19:09:10 CET  CRITICAL] Started iteration #38 to cover branch: #6 -> [(16,20,"else"),(-1,-1,"exit")]
 [2017-10-29 19:09:11 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:09:11 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:09:11 CET  CRITICAL] genetic.archive: 1
@@ -29357,9 +29357,9 @@ string: 2
     </body>
 </html>
 ,200,[7,2,5],[8,100,85],[7,3,8,-10],[0,4,2,6,-3],0,["diW","do","Md","lr"]]
-[2017-10-29 19:10:13 CET  CRITICAL] Completed iteration #1 to cover branch: #6 -> [(16,20,"else"),(-1,-1,"exit")]
+[2017-10-29 19:10:13 CET  CRITICAL] Completed iteration #38 to cover branch: #6 -> [(16,20,"else"),(-1,-1,"exit")]
 [2017-10-29 19:10:13 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:10:13 CET  CRITICAL] Started iteration #1 to cover branch: #7 -> [(21,22,"then"),(-1,-1,"exit")]
+[2017-10-29 19:10:13 CET  CRITICAL] Started iteration #38 to cover branch: #7 -> [(21,22,"then"),(-1,-1,"exit")]
 [2017-10-29 19:10:13 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:10:13 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:10:13 CET  CRITICAL] genetic.archive: 1
@@ -41069,9 +41069,9 @@ string: 5
     </body>
 </html>
 ,40,[1],[6,-7],[-2,-1],[1,-9,4],0,["O","nZp","img/weakbrick1.png","2B","taF44"]]
-[2017-10-29 19:16:06 CET  CRITICAL] Completed iteration #1 to cover branch: #7 -> [(21,22,"then"),(-1,-1,"exit")]
+[2017-10-29 19:16:06 CET  CRITICAL] Completed iteration #38 to cover branch: #7 -> [(21,22,"then"),(-1,-1,"exit")]
 [2017-10-29 19:16:06 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:16:06 CET  CRITICAL] Started iteration #1 to cover branch: #8 -> [(21,25,"else"),(-1,-1,"exit")]
+[2017-10-29 19:16:06 CET  CRITICAL] Started iteration #38 to cover branch: #8 -> [(21,25,"else"),(-1,-1,"exit")]
 [2017-10-29 19:16:06 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:16:06 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:16:06 CET  CRITICAL] genetic.archive: 1
@@ -48924,9 +48924,9 @@ string: 4
     </body>
 </html>
 ,180,[-10],[-4,4,0,-1],[-9,-6,4],[0,20,-1,0],2,["","TV8M","b","wOBX"]]
-[2017-10-29 19:20:11 CET  CRITICAL] Completed iteration #1 to cover branch: #8 -> [(21,25,"else"),(-1,-1,"exit")]
+[2017-10-29 19:20:11 CET  CRITICAL] Completed iteration #38 to cover branch: #8 -> [(21,25,"else"),(-1,-1,"exit")]
 [2017-10-29 19:20:11 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:20:11 CET  CRITICAL] Started iteration #1 to cover branch: #9 -> [(29,30,"then"),(-1,-1,"exit")]
+[2017-10-29 19:20:11 CET  CRITICAL] Started iteration #38 to cover branch: #9 -> [(29,30,"then"),(-1,-1,"exit")]
 [2017-10-29 19:20:11 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:20:11 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:20:11 CET  CRITICAL] genetic.archive: 1
@@ -57689,9 +57689,9 @@ string: 18
     </body>
 </html>
 ,1,[10,41],[-5,125,-3,5,10],[-5,4],[-4,6,-3],3,["o","B94","Z","x","img/weakbrick1.png"]]
-[2017-10-29 19:26:03 CET  CRITICAL] Completed iteration #1 to cover branch: #9 -> [(29,30,"then"),(-1,-1,"exit")]
+[2017-10-29 19:26:03 CET  CRITICAL] Completed iteration #38 to cover branch: #9 -> [(29,30,"then"),(-1,-1,"exit")]
 [2017-10-29 19:26:03 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:26:03 CET  CRITICAL] Started iteration #1 to cover branch: #10 -> [(29,37,"else"),(-1,-1,"exit")]
+[2017-10-29 19:26:03 CET  CRITICAL] Started iteration #38 to cover branch: #10 -> [(29,37,"else"),(-1,-1,"exit")]
 [2017-10-29 19:26:03 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:26:03 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:26:03 CET  CRITICAL] genetic.archive: 1
@@ -57837,9 +57837,9 @@ string: 1
     </body>
 </html>
 ,10,[5],[3,290],[-9,30,6,-6],[6,8,235,6,5],3,["x","B","Z","x","o"]]
-[2017-10-29 19:26:07 CET  CRITICAL] Completed iteration #1 to cover branch: #10 -> [(29,37,"else"),(-1,-1,"exit")]
+[2017-10-29 19:26:07 CET  CRITICAL] Completed iteration #38 to cover branch: #10 -> [(29,37,"else"),(-1,-1,"exit")]
 [2017-10-29 19:26:07 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:26:07 CET  CRITICAL] Started iteration #1 to cover branch: #11 -> [(38,39,"then"),(-1,-1,"exit")]
+[2017-10-29 19:26:07 CET  CRITICAL] Started iteration #38 to cover branch: #11 -> [(38,39,"then"),(-1,-1,"exit")]
 [2017-10-29 19:26:07 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:26:07 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:26:07 CET  CRITICAL] genetic.archive: 1
@@ -61103,9 +61103,9 @@ string: 3
     </body>
 </html>
 ,1,[-4,-7,-10,-2,1],[10,3,9,9],[200,85,3,20,41],[1,-4,-9],0,["O","bR","p","DfI"]]
-[2017-10-29 19:27:47 CET  CRITICAL] Completed iteration #1 to cover branch: #11 -> [(38,39,"then"),(-1,-1,"exit")]
+[2017-10-29 19:27:47 CET  CRITICAL] Completed iteration #38 to cover branch: #11 -> [(38,39,"then"),(-1,-1,"exit")]
 [2017-10-29 19:27:47 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:27:47 CET  CRITICAL] Started iteration #1 to cover branch: #12 -> [(38,46,"else"),(-1,-1,"exit")]
+[2017-10-29 19:27:47 CET  CRITICAL] Started iteration #38 to cover branch: #12 -> [(38,46,"else"),(-1,-1,"exit")]
 [2017-10-29 19:27:48 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:27:48 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:27:48 CET  CRITICAL] genetic.archive: 1
@@ -61338,9 +61338,9 @@ string: 4
     </body>
 </html>
 ,-3,[4,-7,-10,50],[-6,-5,3],[-8,1,8,-2,2],[-1,-3],2,["Be","Rqlc","Fos0"]]
-[2017-10-29 19:27:52 CET  CRITICAL] Completed iteration #1 to cover branch: #12 -> [(38,46,"else"),(-1,-1,"exit")]
+[2017-10-29 19:27:52 CET  CRITICAL] Completed iteration #38 to cover branch: #12 -> [(38,46,"else"),(-1,-1,"exit")]
 [2017-10-29 19:27:52 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:27:52 CET  CRITICAL] Started iteration #1 to cover branch: #13 -> [(47,48,"then"),(-1,-1,"exit")]
+[2017-10-29 19:27:52 CET  CRITICAL] Started iteration #38 to cover branch: #13 -> [(47,48,"then"),(-1,-1,"exit")]
 [2017-10-29 19:27:52 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:27:52 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:27:52 CET  CRITICAL] genetic.archive: 1
@@ -63488,9 +63488,9 @@ string: 3
     </body>
 </html>
 ,1,[-9,-6,7,1],[7,-6,9,-10],[50,-4,21,-3],[10,7,9,-10,1],0,["Z","a","8gv"]]
-[2017-10-29 19:29:09 CET  CRITICAL] Completed iteration #1 to cover branch: #13 -> [(47,48,"then"),(-1,-1,"exit")]
+[2017-10-29 19:29:09 CET  CRITICAL] Completed iteration #38 to cover branch: #13 -> [(47,48,"then"),(-1,-1,"exit")]
 [2017-10-29 19:29:09 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:29:09 CET  CRITICAL] Started iteration #1 to cover branch: #14 -> [(47,55,"else"),(-1,-1,"exit")]
+[2017-10-29 19:29:09 CET  CRITICAL] Started iteration #38 to cover branch: #14 -> [(47,55,"else"),(-1,-1,"exit")]
 [2017-10-29 19:29:09 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:29:09 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:29:09 CET  CRITICAL] genetic.archive: 1
@@ -63642,9 +63642,9 @@ string: 1
     </body>
 </html>
 ,100,[-1,-7,-5,-5,-6],[3,10],[3,9,10],[-1,4],0,["BR","7b6","ou","1"]]
-[2017-10-29 19:29:13 CET  CRITICAL] Completed iteration #1 to cover branch: #14 -> [(47,55,"else"),(-1,-1,"exit")]
+[2017-10-29 19:29:13 CET  CRITICAL] Completed iteration #38 to cover branch: #14 -> [(47,55,"else"),(-1,-1,"exit")]
 [2017-10-29 19:29:13 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:29:13 CET  CRITICAL] Started iteration #1 to cover branch: #15 -> [(56,57,"then"),(-1,-1,"exit")]
+[2017-10-29 19:29:13 CET  CRITICAL] Started iteration #38 to cover branch: #15 -> [(56,57,"then"),(-1,-1,"exit")]
 [2017-10-29 19:29:13 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:29:13 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:29:13 CET  CRITICAL] genetic.archive: 1
@@ -74296,9 +74296,9 @@ string: 4
     </body>
 </html>
 ,5,[100,8],[-1,-2,2,-1],[-2,5,5,-6,-7],[-4],0,["Mzuco","WS5X"]]
-[2017-10-29 19:35:34 CET  CRITICAL] Completed iteration #1 to cover branch: #15 -> [(56,57,"then"),(-1,-1,"exit")]
+[2017-10-29 19:35:34 CET  CRITICAL] Completed iteration #38 to cover branch: #15 -> [(56,57,"then"),(-1,-1,"exit")]
 [2017-10-29 19:35:34 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:35:34 CET  CRITICAL] Started iteration #1 to cover branch: #16 -> [(56,64,"else"),(-1,-1,"exit")]
+[2017-10-29 19:35:34 CET  CRITICAL] Started iteration #38 to cover branch: #16 -> [(56,64,"else"),(-1,-1,"exit")]
 [2017-10-29 19:35:34 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:35:34 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:35:34 CET  CRITICAL] genetic.archive: 1
@@ -74425,9 +74425,9 @@ string: 5
     </body>
 </html>
 ,-9,[-1,6],[10,-10,-7],[1,-6,9,2,7],[-9,0,40],1,["84gHS","xKi","8R1Rf"]]
-[2017-10-29 19:35:38 CET  CRITICAL] Completed iteration #1 to cover branch: #16 -> [(56,64,"else"),(-1,-1,"exit")]
+[2017-10-29 19:35:38 CET  CRITICAL] Completed iteration #38 to cover branch: #16 -> [(56,64,"else"),(-1,-1,"exit")]
 [2017-10-29 19:35:38 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:35:38 CET  CRITICAL] Started iteration #1 to cover branch: #17 -> [(69,70,"then"),(-1,-1,"exit")]
+[2017-10-29 19:35:38 CET  CRITICAL] Started iteration #38 to cover branch: #17 -> [(69,70,"then"),(-1,-1,"exit")]
 [2017-10-29 19:35:38 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:35:38 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:35:38 CET  CRITICAL] genetic.archive: 1
@@ -74601,9 +74601,9 @@ string: 2
     </body>
 </html>
 ,-7,[5],[-6,420],[-4,40,8,-7,-4],[-7,5],0,["vT"]]
-[2017-10-29 19:35:41 CET  CRITICAL] Completed iteration #1 to cover branch: #17 -> [(69,70,"then"),(-1,-1,"exit")]
+[2017-10-29 19:35:41 CET  CRITICAL] Completed iteration #38 to cover branch: #17 -> [(69,70,"then"),(-1,-1,"exit")]
 [2017-10-29 19:35:41 CET  CRITICAL] ----------------------------------------------------------------------
-[2017-10-29 19:35:41 CET  CRITICAL] Started iteration #1 to cover branch: #18 -> [(69,71,"else"),(-1,-1,"exit")]
+[2017-10-29 19:35:41 CET  CRITICAL] Started iteration #38 to cover branch: #18 -> [(69,71,"else"),(-1,-1,"exit")]
 [2017-10-29 19:35:41 CET  CRITICAL] Genetic algorithm configurations
 [2017-10-29 19:35:41 CET  CRITICAL] genetic.population: 50
 [2017-10-29 19:35:41 CET  CRITICAL] genetic.archive: 1
@@ -75569,4 +75569,4 @@ string: 1
     </body>
 </html>
 ,235,[-9,-3,6,-9],[21],[7,10],[-5,-7,-1],3,["Go7hf","qC1hI","3m","O","A"]]
-[2017-10-29 19:36:12 CET  CRITICAL] Completed iteration #1 to cover branch: #18 -> [(69,71,"else"),(-1,-1,"exit")]
+[2017-10-29 19:36:12 CET  CRITICAL] Completed iteration #38 to cover branch: #18 -> [(69,71,"else"),(-1,-1,"exit")]

@@ -1,0 +1,2385 @@
+[2017-09-11 11:17:54 CEST  CRITICAL] Test generation strategy: GEN
+[2017-09-11 11:17:54 CEST  CRITICAL] Number of performed generation runs: 10
+[2017-09-11 11:17:54 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:17:54 CEST  CRITICAL] Started iteration #1 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:17:54 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:17:54 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:17:54 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:17:54 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:17:54 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:17:54 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:17:55 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4666666666666668,0.0,0)
+[[3,2,1,7,3]]
+array of: 5 elements [
+integer: 3
+integer: 2
+integer: 1
+integer: 7
+integer: 3
+]
+[2017-09-11 11:17:55 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4583333333333333,0.0,0)
+[[3,2,1,7,7,5,6,-3]]
+array of: 8 elements [
+integer: 3
+integer: 2
+integer: 1
+integer: 7
+integer: 7
+integer: 5
+integer: 6
+integer: -3
+]
+[2017-09-11 11:17:55 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4583333333333333,0.0,0)
+[[3,1,1,7,3,-10,-3]]
+array of: 7 elements [
+integer: 3
+integer: 1
+integer: 1
+integer: 7
+integer: 3
+integer: -10
+integer: -3
+]
+[2017-09-11 11:17:56 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4375,0.0,0)
+[[5,1,-10,9,1,1,-9,0,1]]
+array of: 9 elements [
+integer: 5
+integer: 1
+integer: -10
+integer: 9
+integer: 1
+integer: 1
+integer: -9
+integer: 0
+integer: 1
+]
+[2017-09-11 11:17:56 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4375,0.0,0)
+[[5,1,-10,8,1,1,-9,0,1]]
+array of: 9 elements [
+integer: 5
+integer: 1
+integer: -10
+integer: 8
+integer: 1
+integer: 1
+integer: -9
+integer: 0
+integer: 1
+]
+[2017-09-11 11:17:56 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.4166666666666667,0.0,0)
+[[3,2,1,7,3,-10,-3,1,2,1,4,-9,3,5]]
+array of: 14 elements [
+integer: 3
+integer: 2
+integer: 1
+integer: 7
+integer: 3
+integer: -10
+integer: -3
+integer: 1
+integer: 2
+integer: 1
+integer: 4
+integer: -9
+integer: 3
+integer: 5
+]
+[2017-09-11 11:17:57 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.375,0.0,0)
+[[3,0,3,2,1,3,-4,1,2,10,4,-9,3,4,0,1]]
+array of: 16 elements [
+integer: 3
+integer: 0
+integer: 3
+integer: 2
+integer: 1
+integer: 3
+integer: -4
+integer: 1
+integer: 2
+integer: 10
+integer: 4
+integer: -9
+integer: 3
+integer: 4
+integer: 0
+integer: 1
+]
+[2017-09-11 11:17:57 CEST  CRITICAL] Best entity (gen. 7) fitness: (0.0,0.0,0)
+[[5,1,-11,8,3,-4,1,2,10,4,-9,3,7,1,2,2]]
+array of: 16 elements [
+integer: 5
+integer: 1
+integer: -11
+integer: 8
+integer: 3
+integer: -4
+integer: 1
+integer: 2
+integer: 10
+integer: 4
+integer: -9
+integer: 3
+integer: 7
+integer: 1
+integer: 2
+integer: 2
+]
+[2017-09-11 11:17:57 CEST  CRITICAL] Perfect entity found, finished after 7 generations!
+[2017-09-11 11:17:57 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:17:57 CEST  CRITICAL] Best entity (GA): [[5,1,-11,8,3,-4,1,2,10,4,-9,3,7,1,2,2]]
+[2017-09-11 11:17:57 CEST  CRITICAL] Completed iteration #1 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:17:57 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:17:57 CEST  CRITICAL] Started iteration #1 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:17:57 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:17:57 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[5,-2,-9,1,8]]
+array of: 5 elements [
+integer: 5
+integer: -2
+integer: -9
+integer: 1
+integer: 8
+]
+[2017-09-11 11:17:57 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:17:57 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:17:57 CEST  CRITICAL] Best entity (GA): [[5,-2,-9,1,8]]
+[2017-09-11 11:17:57 CEST  CRITICAL] Completed iteration #1 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:17:57 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:17:57 CEST  CRITICAL] Started iteration #2 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:17:57 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:17:57 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:17:58 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4615384615384617,0.0,0)
+[[5,6,-3,-5,2]]
+array of: 5 elements [
+integer: 5
+integer: 6
+integer: -3
+integer: -5
+integer: 2
+]
+[2017-09-11 11:17:58 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4615384615384617,0.0,0)
+[[6,1,-5,-10,-9]]
+array of: 5 elements [
+integer: 6
+integer: 1
+integer: -5
+integer: -10
+integer: -9
+]
+[2017-09-11 11:17:59 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.45,0.0,0)
+[[6,1,-5,10,6,-4,4,4]]
+array of: 8 elements [
+integer: 6
+integer: 1
+integer: -5
+integer: 10
+integer: 6
+integer: -4
+integer: 4
+integer: 4
+]
+[2017-09-11 11:17:59 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.45,0.0,0)
+[[5,6,-3,-5,2,-4,-5,2]]
+array of: 8 elements [
+integer: 5
+integer: 6
+integer: -3
+integer: -5
+integer: 2
+integer: -4
+integer: -5
+integer: 2
+]
+[2017-09-11 11:17:59 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4,0.0,0)
+[[6,1,-5,10,6,-4,4,3,0,6,6,-10,5]]
+array of: 13 elements [
+integer: 6
+integer: 1
+integer: -5
+integer: 10
+integer: 6
+integer: -4
+integer: 4
+integer: 3
+integer: 0
+integer: 6
+integer: 6
+integer: -10
+integer: 5
+]
+[2017-09-11 11:18:00 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.375,0.0,0)
+[[6,1,-5,10,6,-4,4,3,0,6,6,-10,-10,5]]
+array of: 14 elements [
+integer: 6
+integer: 1
+integer: -5
+integer: 10
+integer: 6
+integer: -4
+integer: 4
+integer: 3
+integer: 0
+integer: 6
+integer: 6
+integer: -10
+integer: -10
+integer: 5
+]
+[2017-09-11 11:18:00 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.3333333333333333,0.0,0)
+[[4,5,6,1,-5,3,2,4,-9,3,0,6,6,-10,5]]
+array of: 15 elements [
+integer: 4
+integer: 5
+integer: 6
+integer: 1
+integer: -5
+integer: 3
+integer: 2
+integer: 4
+integer: -9
+integer: 3
+integer: 0
+integer: 6
+integer: 6
+integer: -10
+integer: 5
+]
+[2017-09-11 11:18:00 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.3333333333333333,0.0,0)
+[[4,5,6,1,-5,3,2,4,-9,1,-5,5,1,6,0]]
+array of: 15 elements [
+integer: 4
+integer: 5
+integer: 6
+integer: 1
+integer: -5
+integer: 3
+integer: 2
+integer: 4
+integer: -9
+integer: 1
+integer: -5
+integer: 5
+integer: 1
+integer: 6
+integer: 0
+]
+[2017-09-11 11:18:01 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.3333333333333333,0.0,0)
+[[6,0,2,6,1,1,10,6,-3,-5,2,6,-4,-5,2,5]]
+array of: 16 elements [
+integer: 6
+integer: 0
+integer: 2
+integer: 6
+integer: 1
+integer: 1
+integer: 10
+integer: 6
+integer: -3
+integer: -5
+integer: 2
+integer: 6
+integer: -4
+integer: -5
+integer: 2
+integer: 5
+]
+[2017-09-11 11:18:01 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.3333333333333333,0.0,0)
+[[6,1,-5,4,5,1,10,6,-3,-5,2,6,1,6,6,-6,5]]
+array of: 17 elements [
+integer: 6
+integer: 1
+integer: -5
+integer: 4
+integer: 5
+integer: 1
+integer: 10
+integer: 6
+integer: -3
+integer: -5
+integer: 2
+integer: 6
+integer: 1
+integer: 6
+integer: 6
+integer: -6
+integer: 5
+]
+[2017-09-11 11:18:01 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.3333333333333333,0.0,0)
+[[6,0,2,6,1,1,10,6,-2,-5,2,6,-4,-10,-10,5]]
+array of: 16 elements [
+integer: 6
+integer: 0
+integer: 2
+integer: 6
+integer: 1
+integer: 1
+integer: 10
+integer: 6
+integer: -2
+integer: -5
+integer: 2
+integer: 6
+integer: -4
+integer: -10
+integer: -10
+integer: 5
+]
+[2017-09-11 11:18:02 CEST  CRITICAL] Best entity (gen. 11) fitness: (1.25,0.0,0)
+[[5,1,-5,4,5,6,-3,-5,2,-3,-5,1,-1,3,-9]]
+array of: 15 elements [
+integer: 5
+integer: 1
+integer: -5
+integer: 4
+integer: 5
+integer: 6
+integer: -3
+integer: -5
+integer: 2
+integer: -3
+integer: -5
+integer: 1
+integer: -1
+integer: 3
+integer: -9
+]
+[2017-09-11 11:18:02 CEST  CRITICAL] Best entity (gen. 12) fitness: (1.25,0.0,0)
+[[6,1,-5,10,6,-4,-10,6,-4,4,3,0,6,6,1,5]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: -5
+integer: 10
+integer: 6
+integer: -4
+integer: -10
+integer: 6
+integer: -4
+integer: 4
+integer: 3
+integer: 0
+integer: 6
+integer: 6
+integer: 1
+integer: 5
+]
+[2017-09-11 11:18:02 CEST  CRITICAL] Best entity (gen. 13) fitness: (1.25,0.0,0)
+[[5,1,0,2,6,1,1,10,6,-2,-5,2,6,-4,-6,2,5]]
+array of: 17 elements [
+integer: 5
+integer: 1
+integer: 0
+integer: 2
+integer: 6
+integer: 1
+integer: 1
+integer: 10
+integer: 6
+integer: -2
+integer: -5
+integer: 2
+integer: 6
+integer: -4
+integer: -6
+integer: 2
+integer: 5
+]
+[2017-09-11 11:18:03 CEST  CRITICAL] Best entity (gen. 14) fitness: (1.25,0.0,0)
+[[5,1,-6,4,5,6,-3,0,6,-1,-5,2,6,-4,-10,-10,5]]
+array of: 17 elements [
+integer: 5
+integer: 1
+integer: -6
+integer: 4
+integer: 5
+integer: 6
+integer: -3
+integer: 0
+integer: 6
+integer: -1
+integer: -5
+integer: 2
+integer: 6
+integer: -4
+integer: -10
+integer: -10
+integer: 5
+]
+[2017-09-11 11:18:03 CEST  CRITICAL] Best entity (gen. 15) fitness: (0.0,0.0,0)
+[[5,5,6,1,-5,3,1,4,-9,2,4,-9,5,6,-10,5]]
+array of: 16 elements [
+integer: 5
+integer: 5
+integer: 6
+integer: 1
+integer: -5
+integer: 3
+integer: 1
+integer: 4
+integer: -9
+integer: 2
+integer: 4
+integer: -9
+integer: 5
+integer: 6
+integer: -10
+integer: 5
+]
+[2017-09-11 11:18:03 CEST  CRITICAL] Perfect entity found, finished after 15 generations!
+[2017-09-11 11:18:03 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:03 CEST  CRITICAL] Best entity (GA): [[5,5,6,1,-5,3,1,4,-9,2,4,-9,5,6,-10,5]]
+[2017-09-11 11:18:03 CEST  CRITICAL] Completed iteration #2 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:03 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:03 CEST  CRITICAL] Started iteration #2 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:03 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:03 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:03 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:03 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:03 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:03 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:04 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[0,6,-2]]
+array of: 3 elements [
+integer: 0
+integer: 6
+integer: -2
+]
+[2017-09-11 11:18:04 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:04 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:04 CEST  CRITICAL] Best entity (GA): [[0,6,-2]]
+[2017-09-11 11:18:04 CEST  CRITICAL] Completed iteration #2 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:04 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:04 CEST  CRITICAL] Started iteration #3 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:04 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:04 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:04 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:04 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:04 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:04 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:04 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4642857142857144,0.0,0)
+[[3,5,0,16,9]]
+array of: 5 elements [
+integer: 3
+integer: 5
+integer: 0
+integer: 16
+integer: 9
+]
+[2017-09-11 11:18:04 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4583333333333333,0.0,0)
+[[3,5,0,16,9,-6,5]]
+array of: 7 elements [
+integer: 3
+integer: 5
+integer: 0
+integer: 16
+integer: 9
+integer: -6
+integer: 5
+]
+[2017-09-11 11:18:05 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4583333333333333,0.0,0)
+[[5,-1,0,-3,10,16,-3]]
+array of: 7 elements [
+integer: 5
+integer: -1
+integer: 0
+integer: -3
+integer: 10
+integer: 16
+integer: -3
+]
+[2017-09-11 11:18:05 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.45,0.0,0)
+[[3,2,3,8,5,0,16,9,-6,5]]
+array of: 10 elements [
+integer: 3
+integer: 2
+integer: 3
+integer: 8
+integer: 5
+integer: 0
+integer: 16
+integer: 9
+integer: -6
+integer: 5
+]
+[2017-09-11 11:18:06 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.3333333333333333,0.0,0)
+[[6,0,5,-4,8,1,4,1,-9,-10,-7,7,5,1,2,1]]
+array of: 16 elements [
+integer: 6
+integer: 0
+integer: 5
+integer: -4
+integer: 8
+integer: 1
+integer: 4
+integer: 1
+integer: -9
+integer: -10
+integer: -7
+integer: 7
+integer: 5
+integer: 1
+integer: 2
+integer: 1
+]
+[2017-09-11 11:18:06 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.3333333333333333,0.0,0)
+[[6,0,5,-4,8,1,4,1,-9,-10,-7,7,5,1,2,1]]
+array of: 16 elements [
+integer: 6
+integer: 0
+integer: 5
+integer: -4
+integer: 8
+integer: 1
+integer: 4
+integer: 1
+integer: -9
+integer: -10
+integer: -7
+integer: 7
+integer: 5
+integer: 1
+integer: 2
+integer: 1
+]
+[2017-09-11 11:18:06 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.3333333333333333,0.0,0)
+[[6,0,5,-4,8,1,4,1,-9,-10,-7,7,5,1,2,1]]
+array of: 16 elements [
+integer: 6
+integer: 0
+integer: 5
+integer: -4
+integer: 8
+integer: 1
+integer: 4
+integer: 1
+integer: -9
+integer: -10
+integer: -7
+integer: 7
+integer: 5
+integer: 1
+integer: 2
+integer: 1
+]
+[2017-09-11 11:18:07 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.3333333333333333,0.0,0)
+[[3,5,3,2,3,8,5,0,16,9,-3,10,1,0,-5,8]]
+array of: 16 elements [
+integer: 3
+integer: 5
+integer: 3
+integer: 2
+integer: 3
+integer: 8
+integer: 5
+integer: 0
+integer: 16
+integer: 9
+integer: -3
+integer: 10
+integer: 1
+integer: 0
+integer: -5
+integer: 8
+]
+[2017-09-11 11:18:07 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.3333333333333333,0.0,0)
+[[3,5,3,2,3,8,0,16,9,5,0,16,9,0,-6,5]]
+array of: 16 elements [
+integer: 3
+integer: 5
+integer: 3
+integer: 2
+integer: 3
+integer: 8
+integer: 0
+integer: 16
+integer: 9
+integer: 5
+integer: 0
+integer: 16
+integer: 9
+integer: 0
+integer: -6
+integer: 5
+]
+[2017-09-11 11:18:07 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.25,0.0,0)
+[[6,1,5,4,2,0,9,1,0,-5,1,0,-3,9,16,-3]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: 5
+integer: 4
+integer: 2
+integer: 0
+integer: 9
+integer: 1
+integer: 0
+integer: -5
+integer: 1
+integer: 0
+integer: -3
+integer: 9
+integer: 16
+integer: -3
+]
+[2017-09-11 11:18:08 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.25,0.0,0)
+[[6,1,5,4,2,0,9,1,10,-5,1,0,-3,9,16,-3]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: 5
+integer: 4
+integer: 2
+integer: 0
+integer: 9
+integer: 1
+integer: 10
+integer: -5
+integer: 1
+integer: 0
+integer: -3
+integer: 9
+integer: 16
+integer: -3
+]
+[2017-09-11 11:18:08 CEST  CRITICAL] Best entity (gen. 11) fitness: (1.25,0.0,0)
+[[6,5,0,9,4,1,4,1,-9,-11,-7,7,5,8,2,1]]
+array of: 16 elements [
+integer: 6
+integer: 5
+integer: 0
+integer: 9
+integer: 4
+integer: 1
+integer: 4
+integer: 1
+integer: -9
+integer: -11
+integer: -7
+integer: 7
+integer: 5
+integer: 8
+integer: 2
+integer: 1
+]
+[2017-09-11 11:18:08 CEST  CRITICAL] Best entity (gen. 12) fitness: (1.25,0.0,0)
+[[6,5,5,-3,8,1,-2,1,-9,-10,-7,7,5,8,2,0]]
+array of: 16 elements [
+integer: 6
+integer: 5
+integer: 5
+integer: -3
+integer: 8
+integer: 1
+integer: -2
+integer: 1
+integer: -9
+integer: -10
+integer: -7
+integer: 7
+integer: 5
+integer: 8
+integer: 2
+integer: 0
+]
+[2017-09-11 11:18:09 CEST  CRITICAL] Best entity (gen. 13) fitness: (1.25,0.0,0)
+[[5,5,0,0,8,5,0,16,9,-3,10,0,0,-5,8]]
+array of: 15 elements [
+integer: 5
+integer: 5
+integer: 0
+integer: 0
+integer: 8
+integer: 5
+integer: 0
+integer: 16
+integer: 9
+integer: -3
+integer: 10
+integer: 0
+integer: 0
+integer: -5
+integer: 8
+]
+[2017-09-11 11:18:09 CEST  CRITICAL] Best entity (gen. 14) fitness: (1.25,0.0,0)
+[[6,5,5,-3,8,1,-2,1,-9,-11,-7,7,5,9,2,0]]
+array of: 16 elements [
+integer: 6
+integer: 5
+integer: 5
+integer: -3
+integer: 8
+integer: 1
+integer: -2
+integer: 1
+integer: -9
+integer: -11
+integer: -7
+integer: 7
+integer: 5
+integer: 9
+integer: 2
+integer: 0
+]
+[2017-09-11 11:18:09 CEST  CRITICAL] Best entity (gen. 15) fitness: (0.0,0.0,0)
+[[5,5,3,3,8,8,1,3,1,-9,-10,-7,0,-5,10,-8]]
+array of: 16 elements [
+integer: 5
+integer: 5
+integer: 3
+integer: 3
+integer: 8
+integer: 8
+integer: 1
+integer: 3
+integer: 1
+integer: -9
+integer: -10
+integer: -7
+integer: 0
+integer: -5
+integer: 10
+integer: -8
+]
+[2017-09-11 11:18:09 CEST  CRITICAL] Perfect entity found, finished after 15 generations!
+[2017-09-11 11:18:09 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:09 CEST  CRITICAL] Best entity (GA): [[5,5,3,3,8,8,1,3,1,-9,-10,-7,0,-5,10,-8]]
+[2017-09-11 11:18:09 CEST  CRITICAL] Completed iteration #3 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:09 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:09 CEST  CRITICAL] Started iteration #3 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:09 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:09 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:09 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:09 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:09 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:09 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:10 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[1,-2]]
+array of: 2 elements [
+integer: 1
+integer: -2
+]
+[2017-09-11 11:18:10 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:10 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:10 CEST  CRITICAL] Best entity (GA): [[1,-2]]
+[2017-09-11 11:18:10 CEST  CRITICAL] Completed iteration #3 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:10 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:10 CEST  CRITICAL] Started iteration #4 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:10 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:10 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:10 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:10 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:10 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:10 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:10 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4615384615384617,0.0,0)
+[[6,1,4,5,1]]
+array of: 5 elements [
+integer: 6
+integer: 1
+integer: 4
+integer: 5
+integer: 1
+]
+[2017-09-11 11:18:11 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4583333333333333,0.0,0)
+[[6,1,4,5,-9,5]]
+array of: 6 elements [
+integer: 6
+integer: 1
+integer: 4
+integer: 5
+integer: -9
+integer: 5
+]
+[2017-09-11 11:18:11 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4583333333333333,0.0,0)
+[[3,1,-4,-9,-1,7,-4]]
+array of: 7 elements [
+integer: 3
+integer: 1
+integer: -4
+integer: -9
+integer: -1
+integer: 7
+integer: -4
+]
+[2017-09-11 11:18:11 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4444444444444444,0.0,0)
+[[3,1,1,5,5,1,-9,-1,7,-4]]
+array of: 10 elements [
+integer: 3
+integer: 1
+integer: 1
+integer: 5
+integer: 5
+integer: 1
+integer: -9
+integer: -1
+integer: 7
+integer: -4
+]
+[2017-09-11 11:18:12 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4285714285714286,0.0,0)
+[[3,1,-4,-9,-1,7,4,-3,1,5,0,-4]]
+array of: 12 elements [
+integer: 3
+integer: 1
+integer: -4
+integer: -9
+integer: -1
+integer: 7
+integer: 4
+integer: -3
+integer: 1
+integer: 5
+integer: 0
+integer: -4
+]
+[2017-09-11 11:18:12 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.375,0.0,0)
+[[6,1,4,5,8,4,1,5,0,16,1,-4,1,-10]]
+array of: 14 elements [
+integer: 6
+integer: 1
+integer: 4
+integer: 5
+integer: 8
+integer: 4
+integer: 1
+integer: 5
+integer: 0
+integer: 16
+integer: 1
+integer: -4
+integer: 1
+integer: -10
+]
+[2017-09-11 11:18:13 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.3333333333333333,0.0,0)
+[[6,1,10,5,8,10,6,1,4,-3,9,5,8,11,-1]]
+array of: 15 elements [
+integer: 6
+integer: 1
+integer: 10
+integer: 5
+integer: 8
+integer: 10
+integer: 6
+integer: 1
+integer: 4
+integer: -3
+integer: 9
+integer: 5
+integer: 8
+integer: 11
+integer: -1
+]
+[2017-09-11 11:18:13 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.25,0.0,0)
+[[5,1,-10,0,4,1,1,5,5,1,-9,-1,5,-9,5]]
+array of: 15 elements [
+integer: 5
+integer: 1
+integer: -10
+integer: 0
+integer: 4
+integer: 1
+integer: 1
+integer: 5
+integer: 5
+integer: 1
+integer: -9
+integer: -1
+integer: 5
+integer: -9
+integer: 5
+]
+[2017-09-11 11:18:13 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.25,0.0,0)
+[[6,1,4,-3,1,6,0,10,1,4,6,1,-9,-1,7,-4]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: 4
+integer: -3
+integer: 1
+integer: 6
+integer: 0
+integer: 10
+integer: 1
+integer: 4
+integer: 6
+integer: 1
+integer: -9
+integer: -1
+integer: 7
+integer: -4
+]
+[2017-09-11 11:18:14 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.25,0.0,0)
+[[4,1,4,-3,1,1,4,10,4,8,10,6,1,4,-3,4]]
+array of: 16 elements [
+integer: 4
+integer: 1
+integer: 4
+integer: -3
+integer: 1
+integer: 1
+integer: 4
+integer: 10
+integer: 4
+integer: 8
+integer: 10
+integer: 6
+integer: 1
+integer: 4
+integer: -3
+integer: 4
+]
+[2017-09-11 11:18:14 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.25,0.0,0)
+[[5,1,-10,0,4,1,1,4,10,4,8,10,6,1,4,-3,4]]
+array of: 17 elements [
+integer: 5
+integer: 1
+integer: -10
+integer: 0
+integer: 4
+integer: 1
+integer: 1
+integer: 4
+integer: 10
+integer: 4
+integer: 8
+integer: 10
+integer: 6
+integer: 1
+integer: 4
+integer: -3
+integer: 4
+]
+[2017-09-11 11:18:14 CEST  CRITICAL] Best entity (gen. 11) fitness: (0.0,0.0,0)
+[[5,1,-10,0,4,1,1,5,0,6,0,10,5,8,11,-1]]
+array of: 16 elements [
+integer: 5
+integer: 1
+integer: -10
+integer: 0
+integer: 4
+integer: 1
+integer: 1
+integer: 5
+integer: 0
+integer: 6
+integer: 0
+integer: 10
+integer: 5
+integer: 8
+integer: 11
+integer: -1
+]
+[2017-09-11 11:18:14 CEST  CRITICAL] Perfect entity found, finished after 11 generations!
+[2017-09-11 11:18:14 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:14 CEST  CRITICAL] Best entity (GA): [[5,1,-10,0,4,1,1,5,0,6,0,10,5,8,11,-1]]
+[2017-09-11 11:18:14 CEST  CRITICAL] Completed iteration #4 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:14 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:14 CEST  CRITICAL] Started iteration #4 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:14 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:14 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:14 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:14 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:14 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:14 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:15 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[16]]
+array of: 1 elements [
+integer: 16
+]
+[2017-09-11 11:18:15 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:15 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:15 CEST  CRITICAL] Best entity (GA): [[16]]
+[2017-09-11 11:18:15 CEST  CRITICAL] Completed iteration #4 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:15 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:15 CEST  CRITICAL] Started iteration #5 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:15 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:15 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:15 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:15 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:15 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:15 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:15 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4583333333333333,0.0,0)
+[[5,1,1,4,1]]
+array of: 5 elements [
+integer: 5
+integer: 1
+integer: 1
+integer: 4
+integer: 1
+]
+[2017-09-11 11:18:15 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4583333333333333,0.0,0)
+[[5,1,1,3,1]]
+array of: 5 elements [
+integer: 5
+integer: 1
+integer: 1
+integer: 3
+integer: 1
+]
+[2017-09-11 11:18:16 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4583333333333333,0.0,0)
+[[1,5,-1,-5,-3,2,0,1,6]]
+array of: 9 elements [
+integer: 1
+integer: 5
+integer: -1
+integer: -5
+integer: -3
+integer: 2
+integer: 0
+integer: 1
+integer: 6
+]
+[2017-09-11 11:18:16 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4444444444444444,0.0,0)
+[[5,2,1,-6,5,1,0,4,1]]
+array of: 9 elements [
+integer: 5
+integer: 2
+integer: 1
+integer: -6
+integer: 5
+integer: 1
+integer: 0
+integer: 4
+integer: 1
+]
+[2017-09-11 11:18:17 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4444444444444444,0.0,0)
+[[5,2,1,4,5,1,1,4,1]]
+array of: 9 elements [
+integer: 5
+integer: 2
+integer: 1
+integer: 4
+integer: 5
+integer: 1
+integer: 1
+integer: 4
+integer: 1
+]
+[2017-09-11 11:18:17 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.3333333333333333,0.0,0)
+[[5,2,1,-6,5,1,0,4,1,-6,5,1,0,4,1]]
+array of: 15 elements [
+integer: 5
+integer: 2
+integer: 1
+integer: -6
+integer: 5
+integer: 1
+integer: 0
+integer: 4
+integer: 1
+integer: -6
+integer: 5
+integer: 1
+integer: 0
+integer: 4
+integer: 1
+]
+[2017-09-11 11:18:17 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.25,0.0,0)
+[[5,1,0,4,1,-5,5,2,1,1,8,1,0,4,1]]
+array of: 15 elements [
+integer: 5
+integer: 1
+integer: 0
+integer: 4
+integer: 1
+integer: -5
+integer: 5
+integer: 2
+integer: 1
+integer: 1
+integer: 8
+integer: 1
+integer: 0
+integer: 4
+integer: 1
+]
+[2017-09-11 11:18:18 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.25,0.0,0)
+[[5,2,9,4,5,1,1,4,1,1,-7,8,1,0,-8,1]]
+array of: 16 elements [
+integer: 5
+integer: 2
+integer: 9
+integer: 4
+integer: 5
+integer: 1
+integer: 1
+integer: 4
+integer: 1
+integer: 1
+integer: -7
+integer: 8
+integer: 1
+integer: 0
+integer: -8
+integer: 1
+]
+[2017-09-11 11:18:18 CEST  CRITICAL] Best entity (gen. 8) fitness: (0.0,0.0,0)
+[[5,1,0,2,2,1,-6,5,2,1,4,5,1,1,4,1]]
+array of: 16 elements [
+integer: 5
+integer: 1
+integer: 0
+integer: 2
+integer: 2
+integer: 1
+integer: -6
+integer: 5
+integer: 2
+integer: 1
+integer: 4
+integer: 5
+integer: 1
+integer: 1
+integer: 4
+integer: 1
+]
+[2017-09-11 11:18:18 CEST  CRITICAL] Perfect entity found, finished after 8 generations!
+[2017-09-11 11:18:18 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:18 CEST  CRITICAL] Best entity (GA): [[5,1,0,2,2,1,-6,5,2,1,4,5,1,1,4,1]]
+[2017-09-11 11:18:18 CEST  CRITICAL] Completed iteration #5 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:18 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:18 CEST  CRITICAL] Started iteration #5 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:18 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:18 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[4,-4,10,1,5]]
+array of: 5 elements [
+integer: 4
+integer: -4
+integer: 10
+integer: 1
+integer: 5
+]
+[2017-09-11 11:18:18 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:18 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:18 CEST  CRITICAL] Best entity (GA): [[4,-4,10,1,5]]
+[2017-09-11 11:18:18 CEST  CRITICAL] Completed iteration #5 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:18 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:18 CEST  CRITICAL] Started iteration #6 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:18 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:18 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:19 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4615384615384617,0.0,0)
+[[4,1,-1,4,16]]
+array of: 5 elements [
+integer: 4
+integer: 1
+integer: -1
+integer: 4
+integer: 16
+]
+[2017-09-11 11:18:19 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4615384615384617,0.0,0)
+[[3,1,-9,-10,-4,0]]
+array of: 6 elements [
+integer: 3
+integer: 1
+integer: -9
+integer: -10
+integer: -4
+integer: 0
+]
+[2017-09-11 11:18:19 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4583333333333333,0.0,0)
+[[1,1,0,0,-8,3,6,-1,4]]
+array of: 9 elements [
+integer: 1
+integer: 1
+integer: 0
+integer: 0
+integer: -8
+integer: 3
+integer: 6
+integer: -1
+integer: 4
+]
+[2017-09-11 11:18:20 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4545454545454546,0.0,0)
+[[7,4,10,2,-9,4,11,2,-10]]
+array of: 9 elements [
+integer: 7
+integer: 4
+integer: 10
+integer: 2
+integer: -9
+integer: 4
+integer: 11
+integer: 2
+integer: -10
+]
+[2017-09-11 11:18:20 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4285714285714286,0.0,0)
+[[7,4,11,2,7,4,10,2,-9,4,11,2,-10]]
+array of: 13 elements [
+integer: 7
+integer: 4
+integer: 11
+integer: 2
+integer: 7
+integer: 4
+integer: 10
+integer: 2
+integer: -9
+integer: 4
+integer: 11
+integer: 2
+integer: -10
+]
+[2017-09-11 11:18:21 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.4166666666666667,0.0,0)
+[[7,2,16,1,-1,4,4,11,2,7,4,10,2,-9,4,11,2,-10]]
+array of: 18 elements [
+integer: 7
+integer: 2
+integer: 16
+integer: 1
+integer: -1
+integer: 4
+integer: 4
+integer: 11
+integer: 2
+integer: 7
+integer: 4
+integer: 10
+integer: 2
+integer: -9
+integer: 4
+integer: 11
+integer: 2
+integer: -10
+]
+[2017-09-11 11:18:21 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.375,0.0,0)
+[[4,1,2,5,16,6,2,4,6,3,1,-9,-6,2]]
+array of: 14 elements [
+integer: 4
+integer: 1
+integer: 2
+integer: 5
+integer: 16
+integer: 6
+integer: 2
+integer: 4
+integer: 6
+integer: 3
+integer: 1
+integer: -9
+integer: -6
+integer: 2
+]
+[2017-09-11 11:18:21 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.3333333333333333,0.0,0)
+[[6,1,1,0,0,-8,3,6,-1,1,-1,4,-8,3,6]]
+array of: 15 elements [
+integer: 6
+integer: 1
+integer: 1
+integer: 0
+integer: 0
+integer: -8
+integer: 3
+integer: 6
+integer: -1
+integer: 1
+integer: -1
+integer: 4
+integer: -8
+integer: 3
+integer: 6
+]
+[2017-09-11 11:18:22 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.25,0.0,0)
+[[5,5,7,4,11,2,7,4,10,2,-9,4,12,2,-10,3,6]]
+array of: 17 elements [
+integer: 5
+integer: 5
+integer: 7
+integer: 4
+integer: 11
+integer: 2
+integer: 7
+integer: 4
+integer: 10
+integer: 2
+integer: -9
+integer: 4
+integer: 12
+integer: 2
+integer: -10
+integer: 3
+integer: 6
+]
+[2017-09-11 11:18:22 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.25,0.0,0)
+[[5,5,7,4,11,2,7,4,10,2,-9,4,12,2,-10,3,7]]
+array of: 17 elements [
+integer: 5
+integer: 5
+integer: 7
+integer: 4
+integer: 11
+integer: 2
+integer: 7
+integer: 4
+integer: 10
+integer: 2
+integer: -9
+integer: 4
+integer: 12
+integer: 2
+integer: -10
+integer: 3
+integer: 7
+]
+[2017-09-11 11:18:22 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.25,0.0,0)
+[[6,1,1,0,0,11,2,7,4,10,2,-9,4,2,3,-10]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: 1
+integer: 0
+integer: 0
+integer: 11
+integer: 2
+integer: 7
+integer: 4
+integer: 10
+integer: 2
+integer: -9
+integer: 4
+integer: 2
+integer: 3
+integer: -10
+]
+[2017-09-11 11:18:23 CEST  CRITICAL] Best entity (gen. 11) fitness: (1.25,0.0,0)
+[[5,5,7,4,0,0,-8,7,0,4,10,2,-10,4,11]]
+array of: 15 elements [
+integer: 5
+integer: 5
+integer: 7
+integer: 4
+integer: 0
+integer: 0
+integer: -8
+integer: 7
+integer: 0
+integer: 4
+integer: 10
+integer: 2
+integer: -10
+integer: 4
+integer: 11
+]
+[2017-09-11 11:18:23 CEST  CRITICAL] Best entity (gen. 12) fitness: (0.0,0.0,0)
+[[5,5,7,4,11,2,7,-3,10,2,-9,4,12,2,3,3]]
+array of: 16 elements [
+integer: 5
+integer: 5
+integer: 7
+integer: 4
+integer: 11
+integer: 2
+integer: 7
+integer: -3
+integer: 10
+integer: 2
+integer: -9
+integer: 4
+integer: 12
+integer: 2
+integer: 3
+integer: 3
+]
+[2017-09-11 11:18:23 CEST  CRITICAL] Perfect entity found, finished after 12 generations!
+[2017-09-11 11:18:23 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:23 CEST  CRITICAL] Best entity (GA): [[5,5,7,4,11,2,7,-3,10,2,-9,4,12,2,3,3]]
+[2017-09-11 11:18:23 CEST  CRITICAL] Completed iteration #6 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:23 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:23 CEST  CRITICAL] Started iteration #6 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:23 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:23 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[-4,7]]
+array of: 2 elements [
+integer: -4
+integer: 7
+]
+[2017-09-11 11:18:23 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:23 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:23 CEST  CRITICAL] Best entity (GA): [[-4,7]]
+[2017-09-11 11:18:23 CEST  CRITICAL] Completed iteration #6 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:23 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:23 CEST  CRITICAL] Started iteration #7 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:23 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:23 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:24 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4666666666666668,0.0,0)
+[[6,2,0,3]]
+array of: 4 elements [
+integer: 6
+integer: 2
+integer: 0
+integer: 3
+]
+[2017-09-11 11:18:24 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4642857142857144,0.0,0)
+[[5,1,5]]
+array of: 3 elements [
+integer: 5
+integer: 1
+integer: 5
+]
+[2017-09-11 11:18:25 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4615384615384617,0.0,0)
+[[5,1,-2,6]]
+array of: 4 elements [
+integer: 5
+integer: 1
+integer: -2
+integer: 6
+]
+[2017-09-11 11:18:25 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4583333333333333,0.0,0)
+[[6,4,5,1,9,8,9]]
+array of: 7 elements [
+integer: 6
+integer: 4
+integer: 5
+integer: 1
+integer: 9
+integer: 8
+integer: 9
+]
+[2017-09-11 11:18:25 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4545454545454546,0.0,0)
+[[5,1,4,-2,-1,0]]
+array of: 6 elements [
+integer: 5
+integer: 1
+integer: 4
+integer: -2
+integer: -1
+integer: 0
+]
+[2017-09-11 11:18:26 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.4375,0.0,0)
+[[9,5,9,5,9,4,8,4,5,1,5,9,5]]
+array of: 13 elements [
+integer: 9
+integer: 5
+integer: 9
+integer: 5
+integer: 9
+integer: 4
+integer: 8
+integer: 4
+integer: 5
+integer: 1
+integer: 5
+integer: 9
+integer: 5
+]
+[2017-09-11 11:18:26 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.4285714285714286,0.0,0)
+[[9,5,9,5,9,4,8,4,5,1,5,9,5,4]]
+array of: 14 elements [
+integer: 9
+integer: 5
+integer: 9
+integer: 5
+integer: 9
+integer: 4
+integer: 8
+integer: 4
+integer: 5
+integer: 1
+integer: 5
+integer: 9
+integer: 5
+integer: 4
+]
+[2017-09-11 11:18:26 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.375,0.0,0)
+[[5,1,16,-2,-1,0,7,10,5,8,4,8,4]]
+array of: 13 elements [
+integer: 5
+integer: 1
+integer: 16
+integer: -2
+integer: -1
+integer: 0
+integer: 7
+integer: 10
+integer: 5
+integer: 8
+integer: 4
+integer: 8
+integer: 4
+]
+[2017-09-11 11:18:27 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.25,0.0,0)
+[[5,1,16,-2,-1,0,7,10,5,8,5,8,5,4,-5]]
+array of: 15 elements [
+integer: 5
+integer: 1
+integer: 16
+integer: -2
+integer: -1
+integer: 0
+integer: 7
+integer: 10
+integer: 5
+integer: 8
+integer: 5
+integer: 8
+integer: 5
+integer: 4
+integer: -5
+]
+[2017-09-11 11:18:27 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.25,0.0,0)
+[[5,1,16,-2,-1,0,7,10,5,8,4,8,5,4,-5]]
+array of: 15 elements [
+integer: 5
+integer: 1
+integer: 16
+integer: -2
+integer: -1
+integer: 0
+integer: 7
+integer: 10
+integer: 5
+integer: 8
+integer: 4
+integer: 8
+integer: 5
+integer: 4
+integer: -5
+]
+[2017-09-11 11:18:27 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.25,0.0,0)
+[[5,1,16,-2,-1,0,7,10,5,8,4,8,5,4,5,-9,4]]
+array of: 17 elements [
+integer: 5
+integer: 1
+integer: 16
+integer: -2
+integer: -1
+integer: 0
+integer: 7
+integer: 10
+integer: 5
+integer: 8
+integer: 4
+integer: 8
+integer: 5
+integer: 4
+integer: 5
+integer: -9
+integer: 4
+]
+[2017-09-11 11:18:28 CEST  CRITICAL] Best entity (gen. 11) fitness: (0.0,0.0,0)
+[[5,1,4,7,5,9,4,8,9,5,10,7,1,9,8,9]]
+array of: 16 elements [
+integer: 5
+integer: 1
+integer: 4
+integer: 7
+integer: 5
+integer: 9
+integer: 4
+integer: 8
+integer: 9
+integer: 5
+integer: 10
+integer: 7
+integer: 1
+integer: 9
+integer: 8
+integer: 9
+]
+[2017-09-11 11:18:28 CEST  CRITICAL] Perfect entity found, finished after 11 generations!
+[2017-09-11 11:18:28 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:28 CEST  CRITICAL] Best entity (GA): [[5,1,4,7,5,9,4,8,9,5,10,7,1,9,8,9]]
+[2017-09-11 11:18:28 CEST  CRITICAL] Completed iteration #7 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:28 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:28 CEST  CRITICAL] Started iteration #7 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:28 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:28 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[7]]
+array of: 1 elements [
+integer: 7
+]
+[2017-09-11 11:18:28 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:28 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:28 CEST  CRITICAL] Best entity (GA): [[7]]
+[2017-09-11 11:18:28 CEST  CRITICAL] Completed iteration #7 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:28 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:28 CEST  CRITICAL] Started iteration #8 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:28 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:28 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:29 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4666666666666668,0.0,0)
+[[5,0,0]]
+array of: 3 elements [
+integer: 5
+integer: 0
+integer: 0
+]
+[2017-09-11 11:18:29 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4666666666666668,0.0,0)
+[[1,5,4,-2,0,0]]
+array of: 6 elements [
+integer: 1
+integer: 5
+integer: 4
+integer: -2
+integer: 0
+integer: 0
+]
+[2017-09-11 11:18:29 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4583333333333333,0.0,0)
+[[8,8,10,16,2,-7,10,16,2,-7,-8]]
+array of: 11 elements [
+integer: 8
+integer: 8
+integer: 10
+integer: 16
+integer: 2
+integer: -7
+integer: 10
+integer: 16
+integer: 2
+integer: -7
+integer: -8
+]
+[2017-09-11 11:18:30 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.45,0.0,0)
+[[2,1,5,10,9,5,-1,4,1,-7]]
+array of: 10 elements [
+integer: 2
+integer: 1
+integer: 5
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 4
+integer: 1
+integer: -7
+]
+[2017-09-11 11:18:30 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4285714285714286,0.0,0)
+[[1,1,-2,8,4,-2,5,10,9,5,-1,4,1,-6]]
+array of: 14 elements [
+integer: 1
+integer: 1
+integer: -2
+integer: 8
+integer: 4
+integer: -2
+integer: 5
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 4
+integer: 1
+integer: -6
+]
+[2017-09-11 11:18:30 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.4,0.0,0)
+[[2,1,5,10,9,5,-1,4,1,-7,10,9,5,-1,4,1,-7]]
+array of: 17 elements [
+integer: 2
+integer: 1
+integer: 5
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 4
+integer: 1
+integer: -7
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 4
+integer: 1
+integer: -7
+]
+[2017-09-11 11:18:31 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.4,0.0,0)
+[[2,1,5,10,9,5,-1,5,1,-7,10,9,5,-1,4,1,-7]]
+array of: 17 elements [
+integer: 2
+integer: 1
+integer: 5
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 5
+integer: 1
+integer: -7
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 4
+integer: 1
+integer: -7
+]
+[2017-09-11 11:18:31 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.375,0.0,0)
+[[2,1,5,10,-2,8,4,-1,5,10,9,5,-1,4,1,-6]]
+array of: 16 elements [
+integer: 2
+integer: 1
+integer: 5
+integer: 10
+integer: -2
+integer: 8
+integer: 4
+integer: -1
+integer: 5
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 4
+integer: 1
+integer: -6
+]
+[2017-09-11 11:18:31 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.3333333333333333,0.0,0)
+[[5,5,-2,0,-6,-6,0,5,1,0,0,5,0,0]]
+array of: 14 elements [
+integer: 5
+integer: 5
+integer: -2
+integer: 0
+integer: -6
+integer: -6
+integer: 0
+integer: 5
+integer: 1
+integer: 0
+integer: 0
+integer: 5
+integer: 0
+integer: 0
+]
+[2017-09-11 11:18:32 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.3333333333333333,0.0,0)
+[[5,5,-2,0,-6,-6,0,5,1,0,0,5,0,1]]
+array of: 14 elements [
+integer: 5
+integer: 5
+integer: -2
+integer: 0
+integer: -6
+integer: -6
+integer: 0
+integer: 5
+integer: 1
+integer: 0
+integer: 0
+integer: 5
+integer: 0
+integer: 1
+]
+[2017-09-11 11:18:32 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.3333333333333333,0.0,0)
+[[3,5,10,9,4,5,5,10,5,10,9,5,-1,4,1,-6]]
+array of: 16 elements [
+integer: 3
+integer: 5
+integer: 10
+integer: 9
+integer: 4
+integer: 5
+integer: 5
+integer: 10
+integer: 5
+integer: 10
+integer: 9
+integer: 5
+integer: -1
+integer: 4
+integer: 1
+integer: -6
+]
+[2017-09-11 11:18:32 CEST  CRITICAL] Best entity (gen. 11) fitness: (1.3333333333333333,0.0,0)
+[[5,5,-2,0,-6,-6,0,5,1,0,-1,4,1,0]]
+array of: 14 elements [
+integer: 5
+integer: 5
+integer: -2
+integer: 0
+integer: -6
+integer: -6
+integer: 0
+integer: 5
+integer: 1
+integer: 0
+integer: -1
+integer: 4
+integer: 1
+integer: 0
+]
+[2017-09-11 11:18:33 CEST  CRITICAL] Best entity (gen. 12) fitness: (0.0,0.0,0)
+[[5,5,5,10,8,4,5,5,10,9,0,6,0,5,1,-6]]
+array of: 16 elements [
+integer: 5
+integer: 5
+integer: 5
+integer: 10
+integer: 8
+integer: 4
+integer: 5
+integer: 5
+integer: 10
+integer: 9
+integer: 0
+integer: 6
+integer: 0
+integer: 5
+integer: 1
+integer: -6
+]
+[2017-09-11 11:18:33 CEST  CRITICAL] Perfect entity found, finished after 12 generations!
+[2017-09-11 11:18:33 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:33 CEST  CRITICAL] Best entity (GA): [[5,5,5,10,8,4,5,5,10,9,0,6,0,5,1,-6]]
+[2017-09-11 11:18:33 CEST  CRITICAL] Completed iteration #8 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:33 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:33 CEST  CRITICAL] Started iteration #8 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:33 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:33 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[-10]]
+array of: 1 elements [
+integer: -10
+]
+[2017-09-11 11:18:33 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:33 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:33 CEST  CRITICAL] Best entity (GA): [[-10]]
+[2017-09-11 11:18:33 CEST  CRITICAL] Completed iteration #8 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:33 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:33 CEST  CRITICAL] Started iteration #9 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:33 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:33 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:34 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4615384615384617,0.0,0)
+[[6,1,-5,-4,8]]
+array of: 5 elements [
+integer: 6
+integer: 1
+integer: -5
+integer: -4
+integer: 8
+]
+[2017-09-11 11:18:34 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4615384615384617,0.0,0)
+[[6,1,-4,-4,8]]
+array of: 5 elements [
+integer: 6
+integer: 1
+integer: -4
+integer: -4
+integer: 8
+]
+[2017-09-11 11:18:34 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4615384615384617,0.0,0)
+[[6,1,1,-4,8]]
+array of: 5 elements [
+integer: 6
+integer: 1
+integer: 1
+integer: -4
+integer: 8
+]
+[2017-09-11 11:18:35 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4545454545454546,0.0,0)
+[[6,1,6,1,1,-4,8]]
+array of: 7 elements [
+integer: 6
+integer: 1
+integer: 6
+integer: 1
+integer: 1
+integer: -4
+integer: 8
+]
+[2017-09-11 11:18:35 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4166666666666667,0.0,0)
+[[6,1,6,1,7,8,5,0,-3,7,16,5]]
+array of: 12 elements [
+integer: 6
+integer: 1
+integer: 6
+integer: 1
+integer: 7
+integer: 8
+integer: 5
+integer: 0
+integer: -3
+integer: 7
+integer: 16
+integer: 5
+]
+[2017-09-11 11:18:35 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.4166666666666667,0.0,0)
+[[5,1,-5,5,-6,7,2,16,1,4,-3]]
+array of: 11 elements [
+integer: 5
+integer: 1
+integer: -5
+integer: 5
+integer: -6
+integer: 7
+integer: 2
+integer: 16
+integer: 1
+integer: 4
+integer: -3
+]
+[2017-09-11 11:18:36 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.4,0.0,0)
+[[6,0,10,1,6,1,7,8,5,0,-3,7,16,5]]
+array of: 14 elements [
+integer: 6
+integer: 0
+integer: 10
+integer: 1
+integer: 6
+integer: 1
+integer: 7
+integer: 8
+integer: 5
+integer: 0
+integer: -3
+integer: 7
+integer: 16
+integer: 5
+]
+[2017-09-11 11:18:36 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.375,0.0,0)
+[[6,1,1,1,-5,4,-3,10,5,3,5,-6,-3,-3]]
+array of: 14 elements [
+integer: 6
+integer: 1
+integer: 1
+integer: 1
+integer: -5
+integer: 4
+integer: -3
+integer: 10
+integer: 5
+integer: 3
+integer: 5
+integer: -6
+integer: -3
+integer: -3
+]
+[2017-09-11 11:18:36 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.25,0.0,0)
+[[5,1,-5,5,7,7,2,16,1,-1,6,0,1,4,-2]]
+array of: 15 elements [
+integer: 5
+integer: 1
+integer: -5
+integer: 5
+integer: 7
+integer: 7
+integer: 2
+integer: 16
+integer: 1
+integer: -1
+integer: 6
+integer: 0
+integer: 1
+integer: 4
+integer: -2
+]
+[2017-09-11 11:18:36 CEST  CRITICAL] Best entity (gen. 9) fitness: (0.0,0.0,0)
+[[5,1,-6,4,-6,7,2,16,1,7,5,-1,10,7,3,5]]
+array of: 16 elements [
+integer: 5
+integer: 1
+integer: -6
+integer: 4
+integer: -6
+integer: 7
+integer: 2
+integer: 16
+integer: 1
+integer: 7
+integer: 5
+integer: -1
+integer: 10
+integer: 7
+integer: 3
+integer: 5
+]
+[2017-09-11 11:18:36 CEST  CRITICAL] Perfect entity found, finished after 9 generations!
+[2017-09-11 11:18:36 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:36 CEST  CRITICAL] Best entity (GA): [[5,1,-6,4,-6,7,2,16,1,7,5,-1,10,7,3,5]]
+[2017-09-11 11:18:36 CEST  CRITICAL] Completed iteration #9 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:36 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:36 CEST  CRITICAL] Started iteration #9 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:37 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:37 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[-4,0,5,0,7]]
+array of: 5 elements [
+integer: -4
+integer: 0
+integer: 5
+integer: 0
+integer: 7
+]
+[2017-09-11 11:18:37 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:37 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:37 CEST  CRITICAL] Best entity (GA): [[-4,0,5,0,7]]
+[2017-09-11 11:18:37 CEST  CRITICAL] Completed iteration #9 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:37 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:37 CEST  CRITICAL] Started iteration #10 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:37 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:37 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:37 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4666666666666668,0.0,0)
+[[5,1]]
+array of: 2 elements [
+integer: 5
+integer: 1
+]
+[2017-09-11 11:18:38 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4615384615384617,0.0,0)
+[[3,6,3,0,0,2,1]]
+array of: 7 elements [
+integer: 3
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+]
+[2017-09-11 11:18:38 CEST  CRITICAL] Best entity (gen. 2) fitness: (1.4375,0.0,0)
+[[3,6,3,0,0,2,1,1,6,8,0,-6]]
+array of: 12 elements [
+integer: 3
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: -6
+]
+[2017-09-11 11:18:38 CEST  CRITICAL] Best entity (gen. 3) fitness: (1.4375,0.0,0)
+[[3,6,3,0,0,2,1,1,6,9,0,-6]]
+array of: 12 elements [
+integer: 3
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 9
+integer: 0
+integer: -6
+]
+[2017-09-11 11:18:39 CEST  CRITICAL] Best entity (gen. 4) fitness: (1.4,0.0,0)
+[[3,6,3,0,0,2,1,1,6,8,0,3,9,8,-5]]
+array of: 15 elements [
+integer: 3
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: 3
+integer: 9
+integer: 8
+integer: -5
+]
+[2017-09-11 11:18:39 CEST  CRITICAL] Best entity (gen. 5) fitness: (1.375,0.0,0)
+[[3,6,3,0,0,2,1,1,6,8,0,3,9,8,-8,1]]
+array of: 16 elements [
+integer: 3
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: 3
+integer: 9
+integer: 8
+integer: -8
+integer: 1
+]
+[2017-09-11 11:18:39 CEST  CRITICAL] Best entity (gen. 6) fitness: (1.375,0.0,0)
+[[3,6,3,0,0,2,1,1,6,8,0,3,9,8,-8,1]]
+array of: 16 elements [
+integer: 3
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: 3
+integer: 9
+integer: 8
+integer: -8
+integer: 1
+]
+[2017-09-11 11:18:40 CEST  CRITICAL] Best entity (gen. 7) fitness: (1.375,0.0,0)
+[[3,6,3,0,0,2,1,1,6,8,0,3,3,6,7,1]]
+array of: 16 elements [
+integer: 3
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: 3
+integer: 3
+integer: 6
+integer: 7
+integer: 1
+]
+[2017-09-11 11:18:40 CEST  CRITICAL] Best entity (gen. 8) fitness: (1.3333333333333333,0.0,0)
+[[6,1,5,0,-8,4,6,3,0,0,2,1,5,1,-6]]
+array of: 15 elements [
+integer: 6
+integer: 1
+integer: 5
+integer: 0
+integer: -8
+integer: 4
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 5
+integer: 1
+integer: -6
+]
+[2017-09-11 11:18:40 CEST  CRITICAL] Best entity (gen. 9) fitness: (1.25,0.0,0)
+[[4,1,1,-1,-1,2,1,1,6,8,0,3,9,8,-8,1]]
+array of: 16 elements [
+integer: 4
+integer: 1
+integer: 1
+integer: -1
+integer: -1
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: 3
+integer: 9
+integer: 8
+integer: -8
+integer: 1
+]
+[2017-09-11 11:18:41 CEST  CRITICAL] Best entity (gen. 10) fitness: (1.25,0.0,0)
+[[4,1,1,-1,-1,2,1,1,6,8,0,3,9,8,-8,1]]
+array of: 16 elements [
+integer: 4
+integer: 1
+integer: 1
+integer: -1
+integer: -1
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: 3
+integer: 9
+integer: 8
+integer: -8
+integer: 1
+]
+[2017-09-11 11:18:41 CEST  CRITICAL] Best entity (gen. 11) fitness: (1.25,0.0,0)
+[[4,1,1,-1,0,-1,9,-1,9,9,0,0,2,8,6,0]]
+array of: 16 elements [
+integer: 4
+integer: 1
+integer: 1
+integer: -1
+integer: 0
+integer: -1
+integer: 9
+integer: -1
+integer: 9
+integer: 9
+integer: 0
+integer: 0
+integer: 2
+integer: 8
+integer: 6
+integer: 0
+]
+[2017-09-11 11:18:41 CEST  CRITICAL] Best entity (gen. 12) fitness: (1.25,0.0,0)
+[[4,1,1,-1,5,-1,9,-1,9,9,0,0,2,6,7,1]]
+array of: 16 elements [
+integer: 4
+integer: 1
+integer: 1
+integer: -1
+integer: 5
+integer: -1
+integer: 9
+integer: -1
+integer: 9
+integer: 9
+integer: 0
+integer: 0
+integer: 2
+integer: 6
+integer: 7
+integer: 1
+]
+[2017-09-11 11:18:42 CEST  CRITICAL] Best entity (gen. 13) fitness: (1.25,0.0,0)
+[[6,1,5,0,-8,4,0,3,0,0,2,1,4,5,1,-6]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: 5
+integer: 0
+integer: -8
+integer: 4
+integer: 0
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 4
+integer: 5
+integer: 1
+integer: -6
+]
+[2017-09-11 11:18:42 CEST  CRITICAL] Best entity (gen. 14) fitness: (1.25,0.0,0)
+[[6,1,5,0,-8,4,0,3,0,-1,2,1,4,1,-6,0]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: 5
+integer: 0
+integer: -8
+integer: 4
+integer: 0
+integer: 3
+integer: 0
+integer: -1
+integer: 2
+integer: 1
+integer: 4
+integer: 1
+integer: -6
+integer: 0
+]
+[2017-09-11 11:18:42 CEST  CRITICAL] Best entity (gen. 15) fitness: (1.25,0.0,0)
+[[6,1,5,1,-7,4,6,3,0,0,2,1,1,6,9,1]]
+array of: 16 elements [
+integer: 6
+integer: 1
+integer: 5
+integer: 1
+integer: -7
+integer: 4
+integer: 6
+integer: 3
+integer: 0
+integer: 0
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: 9
+integer: 1
+]
+[2017-09-11 11:18:43 CEST  CRITICAL] Best entity (gen. 16) fitness: (0.0,0.0,0)
+[[5,1,0,0,0,1,1,1,6,8,0,2,3,6,7,1]]
+array of: 16 elements [
+integer: 5
+integer: 1
+integer: 0
+integer: 0
+integer: 0
+integer: 1
+integer: 1
+integer: 1
+integer: 6
+integer: 8
+integer: 0
+integer: 2
+integer: 3
+integer: 6
+integer: 7
+integer: 1
+]
+[2017-09-11 11:18:43 CEST  CRITICAL] Perfect entity found, finished after 16 generations!
+[2017-09-11 11:18:43 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:43 CEST  CRITICAL] Best entity (GA): [[5,1,0,0,0,1,1,1,6,8,0,2,3,6,7,1]]
+[2017-09-11 11:18:43 CEST  CRITICAL] Completed iteration #10 to cover branch: #1 -> (2,3,"then")
+[2017-09-11 11:18:43 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-09-11 11:18:43 CEST  CRITICAL] Started iteration #10 to cover branch: #2 -> (2,5,"else")
+[2017-09-11 11:18:43 CEST  CRITICAL] Genetic algorithm configurations
+[2017-09-11 11:18:43 CEST  CRITICAL] genetic.population: 50
+[2017-09-11 11:18:43 CEST  CRITICAL] genetic.archive: 25
+[2017-09-11 11:18:43 CEST  CRITICAL] genetic.generations: 200
+[2017-09-11 11:18:43 CEST  CRITICAL] genetic.crossover_rate: 0.5
+[2017-09-11 11:18:43 CEST  CRITICAL] genetic.mutation_rate: 0.5
+[2017-09-11 11:18:43 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[[-1]]
+array of: 1 elements [
+integer: -1
+]
+[2017-09-11 11:18:43 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-09-11 11:18:43 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-09-11 11:18:43 CEST  CRITICAL] Best entity (GA): [[-1]]
+[2017-09-11 11:18:43 CEST  CRITICAL] Completed iteration #10 to cover branch: #2 -> (2,5,"else")

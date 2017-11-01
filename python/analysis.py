@@ -3,36 +3,6 @@
 import pandas as pd
 from glob import glob
 
-# a = pd.read_csv('RequiredField.csv', sep=';')
-# print a
-# b = pd.read_csv('RequiredField1.csv', sep=';')
-# print b
-# b = b.drop('brunch', axis=1)
-# result = a['brunch'].to_frame()
-# print result
-# merged = pd.concat([a, b], axis=1)
-# meged_numeric = merged.apply(pd.to_numeric, errors='coerce')
-# result['mean'] = meged_numeric.mean(axis=1)
-# result['max'] = meged_numeric.max(axis=1)
-# result['min'] = meged_numeric.min(axis=1)
-# result['median'] = meged_numeric.median(axis=1)
-# print result
-# headers = ['brunch', 'mean', 'max', 'min', 'median']
-# result.to_csv('output.csv', index=False, header=headers)
-
-# writer = pd.ExcelWriter('result.xlsx', engine='xlsxwriter')
-# result.to_excel(writer, sheet_name='RequiredField')
-# writer.save()
-
-
-# random_csvs = ['validateNumber_random_1.csv',
-#                'validateNumber_random_2.csv',
-#                'validateNumber_random_3.csv']
-
-# genetic_csvs = ['validateNumber_genetic_1.csv',
-#                 'validateNumber_genetic_2.csv',
-#                 'validateNumber_genetic_3.csv']
-
 
 def get_summary_report(csvs):
     result = pd.read_csv(csvs[0], sep=';')['brunch'].to_frame()
@@ -51,15 +21,46 @@ def get_summary_report(csvs):
     return result
 
 
-def generateExcelReport(cs_name, random_csvs, genetic_csvs):
-    genetic_df = get_summary_report(genetic_csvs)
+def generateExcelReport(cs_name,
+                        random_csvs,
+                        genetic_csvs,
+                        genetic_converge5_csvs,
+                        genetic_converge10_csvs,
+                        genetic_converge20_csvs):
     random_df = get_summary_report(random_csvs)
-    concat_result = pd.concat([genetic_df, random_df], axis=1)
+    genetic_df = get_summary_report(genetic_csvs)
+    genetic_converge5_df = get_summary_report(genetic_converge5_csvs)
+    genetic_converge10_df = get_summary_report(genetic_converge10_csvs)
+    genetic_converge20_df = get_summary_report(genetic_converge20_csvs)
+    concat_result = pd.concat([genetic_df,
+                               genetic_converge5_df,
+                               genetic_converge10_df,
+                               genetic_converge20_df,
+                               random_df],
+                              axis=1)
     headers = ['gbrunch',
                'gmean',
                'gmax',
                'gmin',
                'gmedian',
+
+               'g5brunch',
+               'g5mean',
+               'g5max',
+               'g5min',
+               'g5median',
+
+               'g10brunch',
+               'g10mean',
+               'g10max',
+               'g10min',
+               'g10median',
+
+               'g20brunch',
+               'g20mean',
+               'g20max',
+               'g20min',
+               'g20median',
 
                'rbrunch',
                'rmean',
@@ -78,10 +79,12 @@ all_csvs = glob('*.csv')
 index = {}
 for csv_fname in all_csvs:
     csv_filename_split = csv_fname.split('_')
+    print 'csv_filename_split:', csv_filename_split
     key = '_'.join(csv_filename_split[0:(len(csv_filename_split) - 2)])
+    print 'key:', key
     index.setdefault(key, list()).append(csv_fname)
 
-# print index
+print index
 
 for cs_name, cs_filenames in index.iteritems():
     print 'casestudy:', cs_name
@@ -92,5 +95,10 @@ for cs_name, cs_filenames in index.iteritems():
         key = filename_split[len(filename_split) - 2]
         print key
         tmp_index.setdefault(key, list()).append(filename)
-    generateExcelReport(cs_name, tmp_index['random'], tmp_index['genetic'])
+    generateExcelReport(cs_name,
+                        tmp_index['random'],
+                        tmp_index['genetic'],
+                        tmp_index['geneticconverge5'],
+                        tmp_index['geneticconverge10'],
+                        tmp_index['geneticconverge20'])
 writer.save()
