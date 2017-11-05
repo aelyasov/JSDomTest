@@ -51,7 +51,7 @@ case_studies = [
     # bingbong + "doPaddlePower.js",  # -
     # bingbong + "drawLevel.js",      # -
     # bingbong + "goPing.js",
-    bingbong + "initBricks.js",     # -
+    # bingbong + "initBricks.js",     # -
 
     # burncanvas + "do_draw.js",      # -
     # burncanvas + "modify_region.js",
@@ -59,7 +59,7 @@ case_studies = [
     # csjs + "luhn-algorithm.js",
     # csjs + "quicksort_partition.js",
 
-    # mathjs + "probability_gamma.js"  # +
+    mathjs + "probability_gamma.js"  # +
 ]
 
 eval_type = sys.argv[1]
