@@ -1,0 +1,827 @@
+\documentclass[sigconf]{acmart}
+
+\usepackage{booktabs} % For formal tables
+\usepackage{tikz}
+\usetikzlibrary{arrows,shadows,positioning}
+\usepackage{pgf-umlsd}
+\usepackage{tikz-uml}
+\usepackage{hyperref}
+\usepackage{upquote}
+\usepackage{listings}
+\usepackage{lsthaskell}
+\usepackage{xspace}
+\usepackage{algorithmic}
+\usepackage{longtable}
+\usepackage{longtable}
+\usepackage[titlenotnumbered, linesnumbered, ruled]{algorithm2e} % language for algorithm description
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = red, %Colour of internal links
+  citecolor    = green %Colour of citations
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ltblue}{rgb}{0,0.4,0.4}
+\definecolor{dkblue}{rgb}{0,0.1,0.6}
+\definecolor{dkgreen}{rgb}{0,0.4,0}
+\definecolor{dkviolet}{rgb}{0.3,0,0.5}
+\definecolor{dkred}{rgb}{0.5,0,0}
+
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\definecolor{orange}{rgb}{1,0.45,0.13}		
+\definecolor{olive}{rgb}{0.17,0.59,0.20}
+\definecolor{brown}{rgb}{0.69,0.31,0.31}
+\definecolor{purple}{rgb}{0.38,0.18,0.81}
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}
+\definecolor{lightred}{rgb}{1,0.4,0.5}
+% CSS
+\lstdefinelanguage{CSS}{
+  keywords={color,background-image:,margin,padding,font,weight,display,position,top,left,right,bottom,list,style,border,size,white,space,min,width, transition:, transform:, transition-property, transition-duration, transition-timing-function},	
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  alsoletter={:},
+  alsodigit={-}
+}
+
+% JavaScript
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, for},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,	
+  alsoletter={<>=-},	
+  morecomment=[s]{<!-}{-->},
+  tag=[s],
+  otherkeywords={
+  % General
+  >,
+  % Standard tags
+  <!DOCTYPE,
+  </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+  % body
+  </body, <body,
+  % Divs
+  </div, <div, </div>, 
+  % Paragraphs
+  </p, <p, </p>,
+  % scripts
+  </script, <script,
+  % More tags...
+  <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article, </span, <span, </span> 
+  },
+  ndkeywords={
+  % General
+  =,
+  % HTML attributes
+  charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+  % SVG attributes
+  fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+  % properties
+  margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
+  % CSS3 properties
+  transform:, -moz-transform:, -webkit-transform:,
+  animation:, -webkit-animation:,
+  transition:,  transition-duration:, transition-property:, transition-timing-function:,
+  }
+}
+
+\lstdefinestyle{htmlcssjs} {%
+  % General design
+  backgroundcolor=\color{editorGray},
+  basicstyle={\scriptsize\ttfamily},   
+  frame=tb,
+  % line-numbers
+  xleftmargin={0.75cm},
+  numbers=left,
+  stepnumber=1,
+  firstnumber=1,
+  numberfirstline=true,	
+  % Code design
+  identifierstyle=\color{black},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{editorGreen}\bfseries,
+  stringstyle=\color{editorOcher}\ttfamily,
+  commentstyle=\color{brown}\ttfamily,
+  % Code
+  language=JavaScript,
+  alsolanguage=HTML5,
+  alsodigit={.:;},	
+  tabsize=2,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  extendedchars=true,
+  breaklines=true,
+  escapechar=|c
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\listfiles % used to output the versions of all files being used by the latex
+
+\newcommand{\Server}{\emph{Server}\xspace}
+\newcommand{\Client}{\emph{Client}\xspace}
+\newcommand{\User}{\emph{User}\xspace}
+\newcommand{\Validator}{\emph{Validator}\xspace}
+\newcommand{\thenBr}{\text{then}}
+\newcommand{\elseBr}{\text{else}}
+\newcommand{\inFor}{\text{inFor}}
+\newcommand{\inWhile}{\text{inWhile}}
+
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+\acmDOI{10.475/123_4}
+
+% ISBN
+\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+\acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
+  Paso, Texas USA} 
+\acmYear{1997}
+\copyrightyear{2016}
+
+\acmPrice{15.00}
+
+
+\begin{document}
+\title{Search-Based Test Data Generation for JavaScript Functions with DOM}
+
+
+%% \author{
+%%   \alignauthor Alexander Elyasov, Wishnu Prasetya, Jurriaan Hage\\ 
+%%   \affaddr{Utrecht University, The Netherlands}\\
+%%   \email{\{a.elyasov,s.w.b.prasetya,j.hage\}@uu.nl}
+%% }
+
+\author{Alexander Elyasov}
+\affiliation{%
+  \institution{Utrecht University}
+  \city{Utrecht} 
+  \country{The Netherlands} 
+}
+\email{a.elyasov@uu.nl}
+
+\author{Wishnu Prasetya}
+\affiliation{%
+  \institution{Utrecht University}
+  \city{Utrecht} 
+  \country{The Netherlands} 
+}
+\email{s.w.b.prasetya@uu.nl}
+
+\author{Jurriaan Hage}
+\affiliation{%
+  \institution{Utrecht University}
+  \city{Utrecht} 
+  \country{The Netherlands} 
+}
+\email{j.hage@uu.nl}
+
+
+\begin{abstract}
+This paper provides a sample of a \LaTeX\ document which conforms,
+somewhat loosely, to the formatting guidelines for
+ACM SIG Proceedings.\footnote{This is an abstract footnote}
+\end{abstract}
+
+%
+% The code below should be generated by the tool at
+% http://dl.acm.org/ccs.cfm
+% Please copy and paste the code instead of the example below. 
+%
+\begin{CCSXML}
+TODO 
+\end{CCSXML}
+
+\ccsdesc[500]{Computer systems organization~Embedded systems}
+\ccsdesc[300]{Computer systems organization~Redundancy}
+\ccsdesc{Computer systems organization~Robotics}
+\ccsdesc[100]{Networks~Network reliability}
+
+
+\keywords{ACM proceedings, \LaTeX, text tagging}
+
+
+\maketitle
+
+
+\section{Introduction}
+\label{sec.intro}
+Recent empirical study of client-side JavaScript bugs~\cite{frolin:TSE16} has shown that 68\% of faults are DOM related.
+
+Another empirical work~\cite{richards2010analysis}.
+
+%% --------------------------------------------------------------------
+\section{Motivating Example}
+\label{sec.example}
+%% --------------------------------------------------------------------
+
+\begin{figure}[t]
+  \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
+function safeAdd() {
+  var iframe = document.createElement("iframe");
+  var whereto = document.getElementById("debug");
+  var frameid = document.getElementById("frame");
+  iframe.setAttribute("id", "frame");
+  if (frameid) { 
+    iframe.removeChild(frameid.childNodes[0]); |c \label{lbl:error} |c
+    // frameid.parentNode.removeChild(frameid); |c \label{lbl:correction} |c
+  } else { whereto.appendChild(iframe); } }  
+  \end{lstlisting}
+
+  \begin{lstlisting}[style=htmlcssjs, language=HTML5]
+<html>
+  <body>
+    <div id="frame"></div>
+    <div id="debug"></div>
+  </body>
+</html>
+  \end{lstlisting}
+
+  \begin{lstlisting}[style=htmlcssjs, language=HTML5]
+<html>
+  <body>
+    <div id="debug"></div>
+  </body>
+</html>
+\end{lstlisting}    
+  \caption{Stackoverflow Example}
+  \label{fig..safeAdd.js}
+\end{figure}
+
+
+\begin{figure}[t]
+  \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
+/*t dom */
+function revealAll() {
+ for(var row=0; row<2; row++){
+  for(var col=0; col<2; col++){
+   var obj = document.getElementById('square_'+row+'_'+col);
+   var spans = obj.getElementsByTagName('SPAN');
+   spans[0].style.display='';
+   spans[1].style.display='none';
+   spans[1].style.color='#000000'; } } }
+  \end{lstlisting}
+
+  \begin{lstlisting}[style=htmlcssjs, language=HTML5]
+<html>
+  <body>
+    <div id="square_0_0">
+      <span></span><span></span>
+    </div>
+    <div id="square_0_1">
+      <span></span><span></span>
+    </div>
+    <div id="square_1_0">
+      <span></span><span></span>
+    </div>
+    <div id="square_1_1">
+      <span></span><span></span>
+    </div>
+  </body>
+</html>
+  \end{lstlisting}  
+  \caption{Sudoku Example}
+  \label{fig.revealAll.js}
+\end{figure}
+
+%% --------------------------------------------------------------------
+\section{Test Generation Framework}
+\label{sec.framework}
+%% --------------------------------------------------------------------
+
+\begin{figure}
+  \centering 
+  \begin{sequencediagram}[font=\scriptsize]
+    \newinst{user}{User}
+    \newinst{server}{Server}
+    \newinst[1]{validator}{Validator}
+    \newinst{client}{Client}
+    
+    \begin{call}{user}{fun.js + config}{server}{\textbf{end}}
+      \begin{call}{server}{Initialize(fun.js)}{server}{(cfg, branches, cinfo, ifun, sig)}
+      \end{call}
+      
+      \begin{call}{server}{POST /init \{ifun, sig\}}{client}{status}
+      \end{call}
+      
+      \begin{call}{server}{Select(branches)}{user}{$\text{branches}'$}       
+      \end{call}
+      
+      \begin{sdblock}{Genetic Loop}{\hspace{2mm}$\text{branch} \in \text{branches}'$}
+        \begin{sdblock}{Random Loop}{errors > 0}
+          \begin{call}{server}{pop = Random(cinfo, config)}{validator}{errors}
+          \end{call}
+          \prelevel
+        \end{sdblock}
+        
+        \begin{sdblock}{Fitness Loop}{(fitness $\neq$ 0) $\vee$ gen.limit}
+
+          \begin{sdblock}{Evaluation Loop}{p $\in$ pop}
+            \begin{call}{server}{POST /genetic \{p\}}{client}{response = ifun(p: sig)}
+            \end{call}
+            
+            \begin{callself}{server}{Evaluate(branch, cfg, response)}{fitness}
+            \end{callself}
+            \prelevel
+          \end{sdblock}
+          
+          \begin{sdblock}{Crossover Loop}{errors > 0}
+            \begin{call}{server}{cross = Crossover(pop)}{validator}{errors}
+            \end{call}
+            \prelevel
+          \end{sdblock}
+
+          \begin{sdblock}{Mutation Loop}{errors > 0}
+            \begin{call}{server}{mut = Mutation(cinfo, pop)}{validator}{errors}
+            \end{call}
+            \prelevel
+          \end{sdblock}
+         
+          \begin{callself}{server}{cross $\cup$ mut}{pop}
+          \end{callself}
+          \prelevel
+        \end{sdblock}
+        \mess{server}{best fitness}{user}
+        
+      \end{sdblock}
+    \end{call}
+  \end{sequencediagram}
+  \caption{Architecture of the test framework}
+  \label{fig.framework.architect} 
+\end{figure}
+
+Given JS function $f$ and some set of its branches $B_f$, the purpose of our testing framework is to generate input arguments for $f$ that trigger executions covering all branches in $B_f$. The general workflow of the test generation process is represented as a sequence diagram in Figure~\ref{fig.framework.architect}. The diagram consists of four interacting components: \User, \Server\, \Validator and \Client. \Server is the key one. It performs all preparatory steps (\emph{Initialization Phase}) as well as controls the data generation (\emph{Genetic Phase}). These two phases will be covered in details in Section~\ref{sub.sec.init.phase} and \ref{sub.sec.genetic.phase} respectively. Every request sent to \Validator\footnote{\url{https://validator.w3.org/nu/}} with an HTML document as the body triggers a response containing the list of syntactic errors in that document. \Client is a \emph{Node.js}\footnote{\url{https://nodejs.org/en/}} application that is mainly responsible for the execution of the JavaScript code. It relies on the \emph{jsdom}\footnote{\url{https://github.com/tmpvar/jsdom}} library simulating calls to native DOM. 
+
+Let us get a closer look at the sequence of interactions in Figure~\ref{fig.framework.architect}. First, \User provides JS file \emph{fun.js} that defines the function under test (FUT) \emph{fun} annotated with its type. Additionally, user supplies a configuration file \emph{config} that parameterizes some settings related to the genetic algorithm, random generation, logging etc. These data are processed by \Server in the \emph{Initialization Phase}. As an output we get a tuple with the following information about $fun$: control flow graph (\emph{cfg}), list of branches (\emph{branches}), static information about constants (\emph{cinfo}), instrumented function (\emph{ifun}) and the function's signature (\emph{sig}). \Server sends a \texttt{POST} request to the \Client to store \emph{ifun} and \emph{sig}. Second, \Server asks \User to select a branch(s) that has to be covered by the execution of \emph{fun}. For each branch our framework enters the \emph{Genetic Loop}. Inside of this phase it starts with a randomly generated population (\emph{Random Loop}), and continues to optimize it until earthier perfect fitness is found or generation limit is exceeded. Each candidate in the population has to be evaluated (\emph{Evaluation Loop}). To do so \Client parses the candidate according the known signature \emph{sig}, invokes \emph{ifun} on the result, collects some information along the execution and sends it back to \Server, where the final fitness value is computed for the candidate. New population is formed as the joint result of the \emph{Crossover} and \emph{Mutation Loop}. These two loops together with the \emph{Random} one are performed in conversation with \Validator. It forces to proceed generation until no more errors are present in the data. At the end of the \emph{Fitness Loop} the best candidate with the best fitness value are reported back to \User. After exploring all branches \emph{Genetic Loop} terminates. 
+
+\subsection{Initialization Phase}
+\label{sub.sec.init.phase}
+
+\begin{algorithm}[t!]
+  \caption{Initialization Phase}
+  \label{alg.init}
+  \algsetup{linenosize=\tiny}
+  \scriptsize
+  \DontPrintSemicolon
+  \SetAlgoVlined
+  \SetKwInOut{Input}{Input}
+  \SetKwInOut{Output}{Output}
+  \SetKwInOut{Require}{Require}
+  \SetKwProg{Fn}{Function}{}{}
+  \Input{
+    $fun.js$ is a JS file with FUT and type annotation
+  }
+  \Output{
+    tuple with $(cfg, branches, cinfo, ifun, sig)$
+  }
+  \Fn{$Initialize(fun.js)$}{
+ 
+    $(ast, sig) \longleftarrow ParseFunAndSig(fun.js)$\label{alg.init.parse.fun.sig}\;
+    $cinfo \longleftarrow GetConstInfo(ast)$\label{alg.init.collect.info}\;
+    $ast \longleftarrow NormalizeAST(ast)$\label{alg.init.transform.ast}\;
+    $cfg \longleftarrow BuildCFG(ast)$\label{alg.init.build.cfg}\;
+    $branches \longleftarrow GetBranches(cfg)$\label{alg.init.get.branches}\;
+    $ifun \longleftarrow Instrument(ast)$\label{alg.init.instr}\;
+    \Return{$(cfg, branches, cinfo, ifun, sig)$}
+    }
+\end{algorithm}
+
+The goal of the \emph{Initialization Phase} is to prepare FUT for the follow up \emph{Genetic Phase}. The main steps of the initialization are illustrated in Algorithm~\ref{alg.init}. Given the file \emph{fun.js} as an input, we separately parse the function and its signature in line~\ref{alg.init.parse.fun.sig}. Currently our framework recognizes signatures composed of four primitive types such as \texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string} and a newly introduced type \texttt{dom}. To facilitate random generation in the \emph{Genetic Phase} we statically analyze the FUT to collect useful data about potential string and numeric constants (line~\ref{alg.init.collect.info}). Moreover, we track calls to such browser API methods as \texttt{getElementsByTagName}, \texttt{getElementById}, \texttt{getElementsByClassName}, \texttt{getElementsByName}, which gives us information about \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} respectively. Knowing this data significantly increases our chances to produce a desired test input. Sometimes it is necessary to normalize FUT before applying instrumentation (line~\ref{alg.init.transform.ast}), e.g. we transform \emph{if-then} branches to \emph{if-then-else}. After the normalization we can build CFG (line~\ref{alg.init.build.cfg}) and get all branches (line~\ref{alg.init.get.branches}). The final step is to instrument \emph{fun} (line~\ref{alg.init.instr}) in order to collect some run-time data such as execution trace, branch and loop distances, and constants. This data will be required for fitness evaluation (Section~\ref{sub.sub.sec.fitness.fun}) and updating of \emph{cinfo}.
+
+
+\subsection{Genetic Phase}
+\label{sub.sec.genetic.phase}
+
+\begin{algorithm}[!t]
+  \caption{Genetic Phase}
+  \label{alg.gen}
+  \algsetup{linenosize=\tiny}
+  \scriptsize
+  \DontPrintSemicolon
+  \SetAlgoVlined
+  \SetKwInOut{Input}{Input}
+  \SetKwInOut{Output}{Output}
+  \SetKwInOut{Require}{Require}
+  \SetKwProg{Fn}{Function}{}{}
+  \Input{
+    $b_N$ is target branch, $cfg$ is control-flow graph\\
+    $cinfo$ is constant info, $config$ is configuration file\\
+    $ifun$ instrumented JS function, $sig$ type signature
+  }
+  \Output{
+     element $p^*$ on which the best fitness $f^*$ is achieved  
+  }
+  \Fn{$Genetic(b_N, cfg, cinfo, config, ifun, sig)$}{
+    $(size_P, size_A, size_G, rate_C, rate_M) \longleftarrow Read(config)$\label{alg.gen.read.config}\;
+    $archive \longleftarrow \emptyset$; $i \longleftarrow 0 $\label{alg.gen.arch.init}\;
+    $pop \longleftarrow Random(cinfo, size_P)$\label{alg.gen.random.gen}\;
+    \Repeat{$isPerfect(f^*) \vee i > size_G $}{\label{alg.gen.loop.begin}
+      $scoredPop \longleftarrow \emptyset$\;
+      \ForAll{$p \in pop$}{\label{alg.gen.eval.begin}
+        $args \longleftarrow MakeArguments(p, sig)$\label{alg.gen.make.args}\;
+        $(tr, d_B, d_L, consts) \longleftarrow ifun(args)$\label{alg.gen.call.ifun}\;
+        $f \longleftarrow Evaluate(b_N, cfg, tr, d_B, d_L)$\label{alg.gen.eval}\;
+        $scoredPop \longleftarrow (f, p) \cup scoredPop$\;
+        $cinfo \longleftarrow consts \cup cinfo$\label{alg.gen.eval.end}\;
+      }
+      $combo \longleftarrow scoredPop \cup archive$\label{alg.gen.get.combo}\;
+      $cross \longleftarrow Crossover(combo, rate_C)$\label{alg.gen.cross}\;
+      $mut \longleftarrow Mutation(combo, cinfo, rate_M)$\label{alg.gen.mut}\;
+      $pop \longleftarrow cross \cup mut$\label{alg.gen.new.pop}\;
+      $archive \longleftarrow SortArchive(combo, size_A)$\label{alg.gen.new.archive}\;
+      $(f^*, p^*) \longleftarrow head(archive)$\label{alg.gen.archive.head}\;
+      $i \longleftarrow i + 1$\;
+    }\label{alg.gen.loop.end}
+    \Return{$(f^*, p^*)$}\label{alg.gen.return} 
+  }
+\end{algorithm} 
+
+The heart of our test data generation framework is in the \emph{Genetic Phase}. The main workflow of the underlying genetic algorithm (GA) is quite standard~\cite{poli2008field}, and with some adjustments is presented in Algorithm~\ref{alg.gen}. First, we read the \emph{config} file in line~\ref{alg.gen.read.config}. As a result, we get information about the number of elements in a population ($size_P$), size of the archive ($size_A$), number of generations ($size_G$) and respectively crossover ($rate_C$) and mutation ($rate_M$) rates. \emph{Archive} has the capacity of $size_A$ elements and stores the most fitted candidates observed so far. It is empty in the beginning of the evolution (line~\ref{alg.gen.arch.init}). The first population consisting of $size_P$ elements is randomly constructed from the elements in \emph{cinfo} (line~\ref{alg.gen.random.gen}). Inside of the loop (lines~\ref{alg.gen.loop.begin}-\ref{alg.gen.loop.end}) we are evolving the population until either the perfect fitness is found or the generation limit $size_G$ is reached. But first step in this loop is to score the current population~\ref{alg.gen.eval.begin}-\ref{alg.gen.eval.end}. Each candidate in the population has to be converted to an argument list by coercing it to a respective type according to the signature $sig$ (line~\ref{alg.gen.make.args}). Calling the instrumented function $ifun$ on those arguments (line~\ref{alg.gen.call.ifun}), we get 4-tuple consisting of the execution trace ($tr$), the branch distances ($d_B$), the loop distances ($d_L$) and the new set of constants ($consts$) collected at the run time. The next step is actually to evaluate the fitness value of the given candidate (line~\ref{alg.gen.eval}). Collected constants $consts$ are added to the existing constants info $cinfo$ (line~\ref{alg.gen.eval.end}). Eventually the scored population is combined with the archive (line~\ref{alg.gen.get.combo}) and is used for the crossover (line~\ref{alg.gen.cross}) and mutation steps (line~\ref{alg.gen.mut}). The rates specify the distribution in which the respective operations are applied to produce the new population (line~\ref{alg.gen.new.pop}). Scored population together with the current archive are sorted based on the fitness value, and the best $size_A$ elements form the new archive (line~\ref{alg.gen.new.archive}). On top of the archive we have the most fitted candidate observed over the course of all iterations (line~\ref{alg.gen.archive.head}). The fitness value of that element defines if perfect candidate is found (line~\ref{alg.gen.loop.end}) and it is return at the end of the algorithm (line~\ref{alg.gen.return}).
+
+In order to instantiate genetic algorithm for a particular problem, its user has to define all the aforementioned operations specific for the problem in question. Since GAs have been commonly used for generation of test data for primitive types such as integers and strings~\cite{paper_on_search-based_test_case_generation}, we skip their definitions and rather focus or the interesting case, namely, HTML generation.  
+
+\subsubsection{Random HTML Generation}
+\label{sub.sub.sec.random.html}
+
+We want to generate HTML as it is specified by WHATWG\footnote{\url{https://html.spec.whatwg.org}}. HTML is an XML-family markup language that uses special tags and attributes to describe document structures on the Web. Recent HTML5 standard defines more than hundred of tags and attributes which both have to comply with extremely complex logic to constitute a syntactically valid HTML. Browsers are usually tolerant to syntactic errors in HTML. They will silently fix them and display the page anyway.
+
+In order to support the variability of HTML content, we have developed an eDSL that prescribes the generation of syntactically valid HTML. This was a challenge on its own because, as we have mentioned early, the complexity of HTML and lack of formal specification. Our language is inspired by QuickCheck~\cite{claessen2011quickcheck} and essentially employs the library\footnote{\url{https://hackage.haskell.org/package/QuickCheck}} to define an \texttt{Arbitrary} instance for the \texttt{Html} data type. With some technical details left out for the sake of simplicity, Figure~\ref{fig.html.arb.def} highlights that definition. Data type \texttt{HtmlState} (lines~\ref{ref.HtmlState.begin}--\ref{ref.HtmlState.end}) describes the internal state of \texttt{Html} during generation. The state is composed of the following components:
+\begin{itemize}
+\item \texttt{depth} and \texttt{degree} specify maximum depth and node degree of HTML respectively
+\item \texttt{ctx} is the current value of the HTML content model stack 
+\item \texttt{tagFreq} provides statistical information about the frequency of tags in HTML
+\item \texttt{tags}, \texttt{ids} and \texttt{classes} are predefined sets of HTML elements which are given preference in the generation process.  
+\end{itemize}
+Combined with the random generation monad \texttt{Gen}, this state is wrapped into a state monad transformer~\cite{jones1995functional} (line~\ref{ref.GenState}) which returns the randomly generated \texttt{Html} (line~\ref{ref.GenHtmlState}). Each HTML tag should be defined as a value of type \texttt{GenHtmlState}. Lines~\ref{ref.generateHTML.begin}--\ref{ref.generateHTML.end} show an example of content generation for the \texttt{<html>} tag. According to its specification\footnote{\url{https://html.spec.whatwg.org/multipage/semantics.html\#the-html-element}}, the tag is composed of the \texttt{<head>} tag followed by the \texttt{<body>} tag. First, we store the state of HTML generation and retrieve the current the depth (lines~\ref{ref.generateHTML.getState} and \ref{ref.generateHTML.getDepth} respectively). Then, if depth is equal to zero, we just return some string constant (line~\ref{ref.generateHTML.returnString}). Otherwise, we update the state with the depth decreased by one, generate new content for \texttt{head} and \texttt{body}, and return their combination (lines~\ref{ref.generateHTML.updateState}, \ref{ref.generateHTML.newHead}, \ref{ref.generateHTML.newBody} and \ref{ref.generateHTML.end} respectively).
+
+\begin{figure}[t]
+  \begin{haskell}
+instance Arbitrary Html where
+  arbitrary = evalStateT generateHTML defaultState
+
+generateHTML :: GenHtmlState |c \label{ref.generateHTML.begin} |c
+generateHTML = do
+  state <- get |c \label{ref.generateHTML.getState} |c   
+  let d = getDepth state |c \label{ref.generateHTML.getDepth} |c
+  if d == 0
+  then lift \dollar return \dollar toHtml "HTML" |c \label{ref.generateHTML.returnString} |c
+  else do put state{depth = d - 1} |c \label{ref.generateHTML.updateState} |c
+           head <- generateHEAD |c \label{ref.generateHTML.newHead} |c
+           body <- generateBODY |c \label{ref.generateHTML.newBody} |c
+           lift\dollar return \dollar docTypeHtml \dollar head >> body |c \label{ref.generateHTML.end} |c
+
+data Tag = HTML | HEAD | BODY | ...
+type Context = CFlow | CMetadata | ...
+data HtmlState = |c \label{ref.HtmlState.begin} |c
+  HtmlState { depth      :: Int 
+             , degree    :: Int    
+             , ctx       :: Stack Context 
+             , tagFreq   :: [(Int, Tag)] 
+             , tags      :: [Tag]
+             , ids       :: [String]
+             , classes   :: [String] } |c \label{ref.HtmlState.end} |c
+type GenState s = StateT s Gen |c \label{ref.GenState} |c
+type GenHtmlState = GenState HtmlState Html |c \label{ref.GenHtmlState} |c
+  \end{haskell}
+  \caption{\texttt{Arbitrary} instance for \texttt{Html} data type}
+  \label{fig.html.arb.def}
+\end{figure}
+
+\subsubsection{Genetic HTML Operations}
+\label{sub.sub.sec.genetic.oper}
+
+In essence, HTML document is a labeled tree with \emph{tags} instead of nodes and \emph{attributes} as labels. Therefore crossover and mutations are defined similar to those concepts for the expression trees in genetic programming.  
+
+\textbf{HTML Crossover} takes two HTML trees, randomly picks a node in each tree, and returns the first tree with a sub-tree swapped from the second tree.
+
+\textbf{HTML Mutations} are of three categories: \emph{NewTree}, \emph{DropTree}, and \emph{ShuffleAttributes}. \emph{NewTree} simply generate a new tree based on the given state of constant pool. \emph{DropTree} mutation selects a node in a tree and drops the sub-tree starting from that node. \emph{ShuffleAttributes} for a given tree and an attribute type, re-assigns the attributes of the specified type on that tree. Currently we instantiated the \emph{ShuffleAttributes} mutation for only for two types of attributes \emph{class} and \emph{id}, which gave us it total four variations for mutation. Each time a mutation is performed the type is chosen uniformly. In the future we consider experiment with assigning some priorities to curtain mutations.  
+
+\subsubsection{Fitness Function}
+\label{sub.sub.sec.fitness.fun}
+
+Success of any search-based algorithm heavily relies on the choice of the fitness function (FF) that guides the evolution process. Our search target is a specific branch of the program under test that we want to cover by generating a valid input data. The input is \emph{valid} only if the program normally terminates on it, i.e. without premature exception. Thus, our search target is an ordered pair of CFG nodes $(n_b, n_x)$ where $n_b$ is the label of the target branch, and $n_x$ is the normal exit node of the program. FF for a CFG node is traditionally defined as a combination of the \emph{approach level} and the normalized \emph{branch distance}\cite{arcuri2010does}. 
+\[
+\mathcal{F}(n) = \text{Approach Level} + \alpha({\text{Branch Distance}})
+\]
+
+Therefore, the resulted FF ($\mathcal{F}^*$) is an ordered pair of the FFs of the respective nodes.   
+
+\[
+\mathcal{F}^*(n_b, n_x) = (\mathcal{F}(n_b), \mathcal{F}(n_x))
+\]
+
+%% --------------------------------------------------------------------
+\section{Empirical Evaluation}
+\label{sec.evaluation}
+%% --------------------------------------------------------------------
+
+\begin{description}
+\item[\textbf{Q1}] How often \emph{validator} rejects generated HTML in case of the random and genetic (mutation and crossover) phases. This question characterizes potential performance issues that can occur in the generation.
+\item[\textbf{Q2}] Efficiency (compare with random)  
+\end{description}
+
+\subsection{Case Studies}
+\label{sub.sec.case.studies}
+
+For the purpose of validation we selected two classes of programs. The first class only includes JS programs composed of the primitive types. The programs in the second class additionally accept arguments of the DOM type. We collected those program from several researches in the field of web application analysis, and JS in particular. Moreover, we introduced few other subjects found in open source such as \emph{mathjs}\footnote{\url{https://github.com/josdejong/mathjs/}}.
+
+Consider examples from: \cite{artemis2011}, \cite{dom2011}...
+
+To report on cyclomatic complexity we use \emph{jshint}\footnote{http://jshint.com/} (we can also use this tool\footnote{http://jsmeter.info/})
+
+\begin{table*}
+  \caption{Summary of the case studies}
+  \label{tbl.case.studies}
+  %\resizebox{\textwidth}{!}{
+    \footnotesize
+  \begin{tabular}{l|l|l|r|r|r|c|c|c|c}
+    \toprule
+    \textbf{case-study} & \textbf{function} & \textbf{type} & \textbf{\#BR} & \textbf{\#LOC} & \textbf{CC} & \textbf{DOM} & \textbf{id} & \textbf{tag} & \textbf{class} \\
+    \midrule
+    sudoku     & helpMe & (dom,int,int) & & & & + & + & + & - \\
+    sudoku     & isGameFinished & (dom) & & & & + & + & + & + \\
+    sudoku     & newGame & (dom)        & & & & + & + & + & + \\
+    sudoku     & revealAll & (dom)      & & & & + & + & + & - \\
+    sudoku     & shuffleBoard & (dom)   & & & & + & - & + & - \\
+    \midrule
+    phormer    & toggleInfo & (dom,string) & & & & + & + & - & - \\
+    \midrule
+    hotel RS   & isValidCard & ([int]) & & & & - & - & - & - \\
+    hotel RS   & isValidMasterCard & ([int])  & & & & - & - & - & - \\
+    \midrule
+    apophis    & initShields & (dom,[int],int,int) & & & & + & + & - & -\\
+    \midrule
+    bingbong   & brickJiggler & (dom,int,int,int,[int],[int],[int],[int]) & & & & + & + & - & - \\
+    bingbong   & initBricks & (dom,[int],int,int) & & & & + & + & - & - \\
+    \midrule
+    burncanvas & do\_draw & (int,int,int,int,int,int,int) & & & & - & - & - & - \\
+    \midrule
+    mathjs     & probability\_gamma & (float) & & & & - & - & - & - \\
+    \bottomrule
+  \end{tabular}
+%}
+\end{table*}
+
+
+\begin{table*}
+  \caption{Statistics for genetic and random algorithms}
+  \label{tbl.stats}
+  \resizebox{\textwidth}{!}{
+    \footnotesize
+    \begin{tabular}{l|rrrr|rrrr|rrrr|rrrr|r|r|r|r|r|r}
+      \toprule
+      \textbf{name}     & $\bar{x}_R$ & $\bar{x}_G$ & $\bar{x}_{G5}$ & $\bar{x}_{G10}$ & $m_R$ & $m_G$ & $m_{G5}$ & $m_{G10}$ & $\min_R$ & $\min_G$ & $\min_{G5}$ & $\min_{G10}$ & $\max_R$ & $\max_G$ & $\max_{G5}$ & $\max_{G10}$ & \textbf{R-G} & \textbf{R-G5} & \textbf{R-G10} & \textbf{G-G5} & \textbf{G-G10} & \textbf{G5-G10}\\
+      \toprule
+      helpMe          &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
+    $(3,4,\inFor)$    & 3.94        & 7.94        & 10.22          & 11.7          & 3     & 3.5   & 7       & 7       & 1        & 1        & 1          & 1           & 16       & 31      & 63         & 124 & & & & & & \\
+    $(5,6,\thenBr)$   & 3.7         & 13.08       & 9.2            & 9.6           & 3     & 7     & 5       & 5.5     & 1        & 1        & 1          & 1           & 14       & 95      & 44         & 105 & & & & & & \\
+    $(5,15,\elseBr)$  & 118.64      & 30.14       & 34.12          & 31.68         & 119.5 & 23    & 28.5    & 22      & 4        & 4        & 3          & 1           & 199      & 97      & 167        & 114 & & & & & & \\
+    $(9,10,\thenBr)$  & 105.12      & 17.82       & 21.98          & 21.8          & 83.5  & 17    & 17.5    & 18      & 18       & 1        & 2          & 6           & 199      & 53      & 78         & 77  & & & & & & \\
+    $(9,14,\elseBr$   & 4.28        & 5.06        & 8.14           & 9.56          & 2.5   & 5     & 4       & 4       & 1        & 1        & 1          & 1           & 17       & 20      & 49         & 74  & & & & & & \\
+    \midrule
+    isGameFinished    &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
+    %% $(5,6,\inFor)$    & 0.02        & 0.1         & 0.12           & 0.1           & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 2       & 2          & 2   \\
+    $(7,8,\thenBr)$   & 75.18       & 40.54       & 18.86          & 14.66         & 35.5  & 7     & 8       & 11      & 0        & 0        & 0          & 0           & 199      & 199     & 199        & 82  & & & & & & \\
+    %% $(7,15,\elseBr)$  & 0           & 0.06        & 0.04           & 0.08          & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 0        & 2       & 1          & 2   \\
+    $(10,11,\thenBr)$ & 199         & 35.74       & 21.56          & 24.36         & 199   & 10    & 10      & 9       & 199      & 1        & 1          & 1           & 199      & 199     & 199        & 199 & & & & & & \\
+    $(10,14,\elseBr)$ & 69.62       & 56.32       & 28.74          & 31.92         & 23.5  & 10    & 16.5    & 18      & 1        & 0        & 0          & 0           & 199      & 199     & 199        & 199 & & & & & & \\
+    \midrule
+    newGame           &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
+    %% $(4,5,\inFor)$    & 0.04        & 0.12        & 0.1            & 0             & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 2       & 1          & 0 \\
+    $(6,7,\thenBr)$   & 21.54       & 10.48       & 9.92           & 8.34          & 15    & 7.5   & 7.5     & 7       & 0        & 0        & 0          & 0           & 97       & 53      & 30         & 35 & & & & & & \\
+    %% $(6,12,\elseBr)$  & 0.06        & 0.14        & 0.1            & 0.04          & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 3       & 2          & 1\\
+    \midrule
+    revealAll         &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & \\
+    $(2,3,\inFor)$    & 31.78       & 24.84       & 34.94          & 28.04         & 24    & 23    & 29      & 22.5    & 4        & 7        & 7          & 10          & 106      & 57      & 129        & 75 & & & & & & \\
+    $(4,5,\inFor)$    & 46.12       & 26.22       & 30.1           & 27.64         & 34    & 19    & 26.5    & 22      & 5        & 9        & 9          & 6           & 199      & 78      & 71         & 90 & & & & & & \\
+    \midrule
+    shuffleBoard      &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & &\\
+    %% $(5,6,\inWhile)$  & 0.36        & 0.32        & 0.24           & 0.48          & 0     & 0     & 0.24    & 0       & 0        & 0        & 0          & 0           & 4        & 3       & 2          & 0\\
+    $(13,14,\thenBr)$ & 6.38        & 7.7         & 8.72           & 7.86          & 4     & 4     & 8.72    & 4       & 0        & 0        & 0          & 0           & 22       & 67      & 64         & 38 & & & & & & \\
+    $(17,18,\thenBr)$ & 5.66        & 11.86       & 16.96          & 17.72         & 3.5   & 5.5   & 16.96   & 3.5     & 0        & 0        & 0          & 0           & 33       & 133     & 86         & 118 & & & & & & \\
+    %% $(21,22,\inFor)$  & 199         & 199         & 199            & 199           & 199   & 199   & 199     & 199     & 0        & 0        & 0          & 0           & 199      & 199     & 199        & 199\\
+    \midrule
+    \midrule
+    toggleInfo        &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & \\
+    $(2,3,\thenBr)$   & 1.58        & 1.12        & 1.1            & 1             & 1     & 1     & 1       & 1       & 0        & 0        & 0          & 0           & 11       & 4       & 3          & 3 & & & & & & \\
+    $(6,7,\thenBr)$   & 1.48        & 9.9         & 17             & 15.3          & 1     & 2     & 4       & 4       & 0        & 0        & 0          & 0           & 8        & 125     & 143        & 136 & & & & & & \\
+    \midrule
+    \midrule
+    isValidCard       &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\ 
+    $(3,6,\elseBr)$   & 199         & 2.98        & 3              & 2.82          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 5       & 5          & 4 & & & & & & \\
+    $(7,8,\inFor)$    & 199         & 2.92        & 3.04           & 2.96          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 5       & 4          & 5 & & & & & & \\
+    $(10,11,\thenBr)$ & 199         & 3           & 2.86           & 3.06          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
+    $(10,13,\elseBr)$ & 199         & 2.84        & 2.98           & 3.04          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
+    $(14,15,\inFor)$  & 199         & 3.02        & 2.92           & 2.94          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
+    \midrule
+    isValidMasterCard & \multicolumn{16}{l}{} \\ 
+    $(2,3,\thenBr)$   & 199         & 11.04       & 12.08          & 11.42         & 199   & 10    & 12      & 12      & 199      & 4        & 5          & 5           & 199      & 27      & 32         & 23 & & & & & & \\
+    %% isValidVISA       &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & \\
+    %% $(2,3,\thenBr)$   & 199         & 6.54        & 6.38           & 6.48          & 199   & 6     & 6       & 6       & 199      & 4        & 3          & 4           & 199      &  14     & 16         & 18  \\
+    \midrule
+    \midrule
+    initShields       &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & &\\
+    $(2,3,\inFor)$    & 5           & 5.32        & 5.28           & 5.26          & 5     & 5     & 5       & 5       & 5        & 5        & 5          & 5           & 5        & 6       & 7          & 7 & & & & & & \\
+    \midrule
+    \midrule
+    brickJiggler      &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & &\\
+    $(2,3,\thenBr)$   & 5.22        & 5.34        & 5.68           & 5.3           & 5     & 4     & 4       & 4       & 1        & 2        & 1          & 1           & 18       & 39      & 20         & 20 & & & & & & \\
+    doPaddlePower     &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
+    %% $(5,8,\elseBr)$   & 0.14        & 0.4         & 0.14           & 0.28          & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 5       & 3          & 5 \\
+    $(10,11,\thenBr)$ & 17.96       & 193.14      & 47.18          & 42.5          & 14.5  & 199   & 17      & 21      & 0        & 3        & 0          & 0           & 53       & 199     & 199        & 199 & & & & & & \\
+    %% drawLevel         &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & \\
+    %% $(5,6,\thenBr)$   & 0.18        & 0.16        & 0.14           & 0.2           & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 2        & 3       & 5          & 5 \\
+    %% $(8,9,\inFor)$    & 0.1         & 0.16        & 0.34           & 0.3           & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 3        & 5       & 5          & 5 \\
+    %% $(10,11,\thenBr)$ & 0.64        & 1.26        & 0.98           & 0.8           & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 3        & 7       & 7          & 8 \\
+    %% $(10,13,\elseBr)$ & 0.06        & 0.22        & 0.3            & 0.2           & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 3       & 7          & 3 \\
+    %% $(14,15,\inFor)$  & 0.08        & 0.34        & 0.3            & 0.36          & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 7       & 4          & 6 \\
+    \midrule
+    initBricks        &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
+    $(6,7,\thenBr)$   & 1.5         & 3           & 2.6            & 2.74          & 1     & 4     & 2       & 2       & 1        & 1        & 1          & 1           & 5        & 5       & 5          & 5 & & & & & & \\
+    $(6,10,\elseBr)$  & 29.82       & 5.98        & 5.28           & 7.1           & 13.5  & 5     & 5       & 5       & 1        & 1        & 1          & 1           & 199      & 14      & 13         & 24 & & & & & & \\
+    $(11,12,\thenBr)$ & 162.28      & 18.36       & 27.58          & 25.26         & 199   & 13    & 16.5    & 16      & 2        & 5        & 4          & 4           & 199      & 56      & 71         & 77 & & & & & & \\
+    $(11,15,\elseBr)$ & 32.44       & 5.9         & 6.02           & 8.1           & 17    & 5     & 6       & 5       & 1        & 1        & 1          & 1           & 199      & 16      & 28         & 55 & & & & & & \\
+    $(16,17,\thenBr)$ & 164.06      & 25.14       & 37.48          & 28.64         & 199   & 16    & 12.5    & 16      & 4        & 4        & 1          & 2           & 199      & 199     & 199        & 112 & & & & & & \\
+    $(16,20,\elseBr)$ & 57.22       & 8.32        & 12.2           & 10.92         & 23.5  & 6     & 5       & 7       & 1        & 1        & 1          & 1           & 199      & 62      & 68         & 86 & & & & & & \\
+    $(21,22,\thenBr)$ & 152.56      & 19.38       & 30.92          & 40.12         & 199   & 13    & 12.5    & 16      & 1        & 1        & 2          & 2           & 199      & 199     & 117        & 149 & & & & & & \\
+    $(21,25,\elseBr)$ & 56.34       & 6.88        & 11.56          & 12.82         & 24.5  & 6     & 6       & 6.5     & 2        & 2        & 1          & 1           & 199      & 22      & 91         & 80 & & & & & & \\
+    $(29,30,\thenBr)$ & 147.66      & 102.66      & 91             & 96.48         & 199   & 65    & 69.5    & 73      & 2        & 5        & 5          & 5           & 199      & 199     & 199        & 199& & & & & & \\
+    $(29,37,\elseBr)$ & 1.46        & 2.5         & 2.52           & 2.78          & 1     & 2     & 2       & 2       & 1        & 1        & 1          & 1           & 5        & 6       & 5          & 5 & & & & & & \\
+    $(38,39,\thenBr)$ & 145.72      & 108.1       & 94.46          & 89.2          & 184   & 84    & 74.5    & 46.5    & 16       & 4        & 11         & 4           & 199      & 199     & 199        & 199& & & & & & \\
+    $(38,46,\elseBr)$ & 1.42        & 2.5         & 2.7            & 2.5           & 1     & 2     & 2       & 2       & 1        & 1        & 1          & 1           & 3        & 6       & 6          & 5 & & & & & & \\
+    $(47,48,\thenBr)$ & 141.5       & 121         & 112.16         & 108.1         & 185.5 & 199   & 118     & 125.5   & 2        & 5        & 5          & 6           & 199      & 199     & 199        & 199 & & & & & & \\
+    $(47,55,\elseBr)$ & 1.54        & 2.44        & 2.5            & 2.46          & 1     & 2     & 2       & 2       & 1        & 1        & 1          & 1           & 4        & 5       & 5          & 5 & & & & & & \\
+    $(56,57,\thenBr)$ & 111.98      & 96.62       & 94.8           & 90.16         & 108   & 48.5  & 113     & 48      & 3        & 5        & 5          & 4           & 199      & 199     & 199        & 199 & & & & & & \\
+    $(56,64,\elseBr)$ & 1.52        & 2.66        & 2.96           & 2.48          & 1     & 2     & 2       & 2       & 1        & 1        & 1          & 1           & 3        & 5       & 13         & 5 & & & & & & \\
+    $(69,70,\thenBr)$ & 1.42        & 2.64        & 2.8            & 2.52          & 1     & 2     & 2       & 2       & 1        & 1        & 1          & 1           & 3        & 6       & 7          & 6 & & & & & & \\
+    $(69,71,\elseBr)$ & 74.98       & 102.98      & 54.82          & 55.42         & 39.5  & 93.5  & 20      & 26      & 1        & 2        & 1          & 1           & 199      & 199     & 199        & 199 & & & & & & \\
+    \midrule
+    \midrule
+    do\_draw           &             &            &               &                &       &       &         &         &           &          &           &             &          &          &           & & & & & & & \\
+    $(6,7,\thenBr)$    & 8.88        & 6.67       & 6.4           & 5.84           & 6.5   & 7     & 7       & 6       & 0         & 0        & 0         & 0           & 43       & 13       & 16        & 14 & & & & & & \\
+    $(6,12,\elseBr)$   & 12.58       & 5.56       & 5.88          & 5.62           & 9     & 5     & 6       & 6       & 0         & 0        & 0         & 0           & 53       & 17       & 14        & 15 & & & & & & \\
+    $(8,11,\elseBr)$   & 131.86      & 18.78      & 24.16         & 19.34          & 143   & 15.5  & 22      & 18      & 6         & 4        & 6         & 5           & 199      & 65       & 53        & 46 & & & & & &\\
+    %% $(24,27,\elseBr)$  & 0.02        & 0.08       & 0.18          & 0.06           & 0     & 0     & 0       & 0       & 0         & 0        & 0         & 0           & 1        & 3        & 5         & 3\\
+    %% $(36,39,\elseBr)$  & 0.32        & 0.7        & 0.52          & 0.12           & 0     & 0     & 0       & 0       & 0         & 0        & 0         & 0           & 4        & 7        & 7         & 2\\
+    %% $(40,43,\elseBr)$  & 0.1         & 0.1        & 0.52          & 0.34           & 0     & 0     & 0       & 0       & 0         & 0        & 0         & 0           & 1        & 2        & 6         & 12\\
+    $(44,45,\thenBr)$  & 76.1        & 149.16     & 32.14         & 42.8           & 56    & 199   & 26.5    & 38.5    & 3         & 3        & 0         & 1           & 199      & 199      & 199       & 199 & & & & & & \\
+    $(48,49,\thenBr)$  & 36.6        & 114.42     & 29.42         & 31.32          & 25    & 135.5 & 27.5    & 33      & 0         & 0        & 0         & 0           & 185      & 199      & 124       & 41 & & & & & & \\
+    \midrule
+    \midrule
+    probability\_gamma &             &            &               &                &       &       &         &         &           &          &           &             &          &          &           &  & & & & & & \\
+    $(4,5,\thenBr)$    & 195.58      & 1.02       & 1             & 1.06           & 199   & 1     & 1       & 1.06    & 28        & 1        & 1         & 1           & 199      & 2        & 1         & 2 & & & & & & \\
+    $(6,7,\thenBr)$    & 195.2       & 1.14       & 1.29          & 1.28           & 199   & 1     & 1       & 1.28    & 21        & 1        & 1         & 1           & 199      & 3        & 3         & 4 & & & & & & \\
+    $(6,9,\elseBr)$    & 199         & 1.42       & 1.39          & 1.46           & 199   & 1     & 1       & 1.46    & 199       & 1        & 1         & 1           & 199      & 4        & 4         & 4 & & & & & & \\
+    $(10,11,\thenBr)$  & 199         & 60.92      & 61.51         & 60.22          & 199   & 61    & 61      & 60.22   & 199       & 45       & 50        & 48          & 199      & 72       & 76        & 76 & & & & & & \\
+    $(10,13,\elseBr)$  & 199         & 1.24       & 1.19          & 1.22           & 199   & 1     & 1       & 1.22    & 199       & 1        & 1         & 1           & 199      & 2        & 3         & 3 & & & & & & \\
+    $(16,17,\inWhile)$ & 199         & 1.46       & 1.7           & 1.76           & 199   & 1     & 1       & 1.76    & 199       & 1        & 1         & 1           & 199      & 3        & 6         & 8 & & & & & & \\
+    $(20,21,\thenBr)$  & 199         & 5.38       & 4.85          & 6.32           & 199   & 5     & 4       & 6.32    & 199       & 1        & 1         & 1           & 199      & 14       & 14        & 25 & & & & & & \\
+    $(20,23,\elseBr)$  & 199         & 1.54       & 1.37          & 1.28           & 199   & 1     & 1       & 1.28    & 199       & 1        & 1         & 1           & 199      & 4        & 4         & 3 & & & & & & \\
+    $(30,31,\thenBr)$  & 199         & 51.44      &               & 51.96          & 199   & 52    &         & 51.96   & 199       & 42       &           & 42          & 199      & 62       &           & 62 & & & & & & \\
+    $(34,35,\thenBr)$  & 199         & 22.66      &               & 23.32          & 199   & 23    &         & 23.32   & 199       & 13       &           & 16          & 199      & 29       &           & 28 & & & & & & \\
+    \bottomrule
+    \end{tabular}
+}
+\end{table*}
+
+
+\subsection{Limitations}
+\label{sub.sec.eval.limit}
+
+Our framework imposes certain constraints on the structure of JS programs:
+\begin{itemize}
+\item no inter-procedural function calls
+\item no recursion  
+\end{itemize}
+
+
+%% --------------------------------------------------------------------
+\section{Related Work}
+\label{sec:related.work}
+%% --------------------------------------------------------------------
+
+\subsection{Search-Based Test Case Generation}
+\label{sub.sec.search.based}
+
+\cite{wegener2001evolutionary} evolutionary test generation for structural coverage.
+
+\cite{tonella2004evolutionary} evolutionary testing of classes
+
+\cite{wappler2005using} evolutionary testing of object-oriented software.
+
+\cite{wappler2006evolutionary} uses strongly-typed genetic programming and deals with the runtime exceptions.
+
+\cite{lakhotia2007multi} multi-objective search-based test data generation 
+
+\cite{cao2009search} multi-path search-based test data generation
+
+\cite{awedikian2009mc} MC/DC test input generation 
+
+\cite{shahbazi2016black} generation of string test data
+
+\cite{fraser2012mutation} mutation-driven generation of unit tests and oracles
+
+\cite{havrikov2014xmlmate} XMLMate: evolutionary XML test generation.
+
+\cite{mcminn2004search} seminal survey of search-based test data generation techniques.
+
+\cite{mcminn2011search} recent overview of search-based testing.
+
+\cite{mairhofer2011search} search-based testing for dynamic languages (Ruby)
+
+\cite{baars2011symbolic} combines dynamic analysis with symbolic information to improve search-based testing
+
+\cite{alshahwan2011automated} automated web application testing using search based software techniques.
+
+\cite{ma2015grt} guided random testing
+
+\cite{mao2016sapienz} Multi-objective automated testing for Android application
+
+\subsection{Static and Dynamic Analysis of JavaScript}
+\label{sub.sec.js.static.anal}
+
+Static analysis is a powerful technique commonly used as solid alternative for program testing. In fact both techniques can benefit from one another. For such weakly typed and dynamic languages as JavaScript employing static analysis to infer types can be an invaluable source of information to identify potential bugs or even guarantee their absence. Jensen et al.~\cite{tajs2009} presented such an analysis for JavaScript using abstract interpretation. In the follow-up work~\cite{dom2011} they extended the analysis with the abstractions to reason about HTML DOM and browser API. Given step let the authors to carry static analysis at the level of complete web application (JavaScript + HTML).
+\cite{jquery2014}
+
+
+ACTARUS is a static taint analysis of JS\cite{guarnieri2011saving}.
+
+Jalangi is dynamic analysis framework for JavaScript \cite{sen2013jalangi}.
+
+Dynamic type inconsistency analysis (implemented on top Jalangi) for JavaScript\cite{pradel2015typedevil}.
+
+Salable dynamic analysis framework for JS based on shadow executions~\cite{create_citation}.
+
+Information-flow security for JS~\cite{hedin2012information}.
+
+\subsection{Whole Web Application Testing}
+\label{sub.sec.web.app.test}
+
+Artemis~\cite{artemis2011} is a feedback-directed random testing tool for JavaScript web application. It discoverers new tests by generating sequences of executable events and monitoring they effect on the state of the application. \cite{ail2013}
+
+Testing of AJAX application by means of crawling of the application to infer state-flow graph~\cite{mesbah2012crawling} ATUSA ~\cite{mesbah2012invariant}
+
+Learning DOM invariants from multiple executions of the application~\cite{pattabiraman2010dodom}.
+
+Measuring test adequacy for web application based on the DOM state coverage~\cite{mirzaaghaei2014dom}.
+
+Combining human written test cases with the automatically generated once by crawling in order to extend test coverage~\cite{milani2014leveraging}.
+
+DOM-aware JavaScript code completion~\cite{bajaj2014dompletion}. 
+
+\subsection{Formal Techniques}
+\label{sub.sec.formal}
+
+Modeling and reasoning about DOM events~\cite{lerner2012modeling}.
+
+\subsection{JavaScript Unit Testing}
+\label{sub.sec.js.unit.test}
+
+Generating fixture for JavaScript unit tests by means of concolic execution~\cite{amin:ase15}. Inference of UI oracles to complement JS unit tests~\cite{icst16}.
+
+JS unit test generation by means of symbolic execution~\cite{tanida2014automatic}.
+
+Flycatcher~\cite{deautomatic}
+
+\subsection{Misc JavaScript Testing Techniques}
+\label{sub.sec.misc.test.tech}
+
+Discover patterns from bug fixes and imposing them as potential bugs in the future~\cite{quinn:fse16}. 
+
+\section{Conclusion}
+\label{sec:concl}
+1 page.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{icse2018.bib} 
+
+
+\end{document}
