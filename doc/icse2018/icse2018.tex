@@ -67,23 +67,24 @@
   sensitive=true,	
   alsoletter={<>=-},	
   morecomment=[s]{<!-}{-->},
+  morestring=[b]'
   tag=[s],
   otherkeywords={
   % General
   >,
   % Standard tags
-  <!DOCTYPE,
+	<!DOCTYPE,
   </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
-  % body
-  </body, <body,
-  % Divs
-  </div, <div, </div>, 
-  % Paragraphs
-  </p, <p, </p>,
-  % scripts
-  </script, <script,
+	% body
+	</body, <body,
+	% Divs
+	</div, <div, </div>, 
+	% Paragraphs
+	</p, <p, </p>,
+	% scripts
+	</script, <script,
   % More tags...
-  <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article, </span, <span, </span> 
+  <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article
   },
   ndkeywords={
   % General
@@ -94,12 +95,31 @@
   fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
   % properties
   margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
-  % CSS3 properties
+	% CSS3 properties
   transform:, -moz-transform:, -webkit-transform:,
   animation:, -webkit-animation:,
   transition:,  transition-duration:, transition-property:, transition-timing-function:,
   }
 }
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  tagstyle=\color{blue},
+  markfirstintag=true,
+  sensitive=true,
+  alsoletter={<>=-},	
+  morecomment=[s]{<!--}{-->},
+  % tag=[s],
+  %% morestring=[b]'',
+  morestring=[b]',
+  ndkeywords={
+    % General
+    =,
+    % HTML attributes
+    id=, class= 
+  }
+}
+
 
 \lstdefinestyle{htmlcssjs} {%
   % General design
@@ -245,72 +265,86 @@ Another empirical work~\cite{richards2010analysis}.
 
 \begin{figure}[t]
   \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
-function safeAdd() {
-  var iframe = document.createElement("iframe");
-  var whereto = document.getElementById("debug");
-  var frameid = document.getElementById("frame");
-  iframe.setAttribute("id", "frame");
-  if (frameid) { 
-    iframe.removeChild(frameid.childNodes[0]); |c \label{lbl:error} |c
-    // frameid.parentNode.removeChild(frameid); |c \label{lbl:correction} |c
-  } else { whereto.appendChild(iframe); } }  
-  \end{lstlisting}
+/*t dom */
+function isGameFinished() {
+  var obj = document.getElementById('sudoku'); |c \label{isGameFinished.getSudoku} |c
+  var subDivs = obj.getElementsByTagName('DIV'); |c \label{isGameFinished.getDivs} |c
+  var allOk = true;
+  for (var no = 0; no < subDivs.length; no++) { |c \label{isGameFinished.inFor.begin} |c
+    if (subDivs[no].className.indexOf('sudokuSquare') >= 0 |c \label{isGameFinished.if1.begin} |c 
+        && !subDivs[no].style.backgroundColor) { 
+      var spans = subDivs[no].getElementsByTagName('SPAN');
+      if (spans[0].innerHTML != spans[1].innerHTML) { |c \label{isGameFinished.if2.begin} |c
+        allOk = false; |c \label{isGameFinished.unfinished} |c
+        break;
+      } |c \label{isGameFinished.if2.end} |c
+    } |c \label{isGameFinished.if1.end} |c
+  } |c \label{isGameFinished.inFor.end} |c
+  if (allOk) { |c \label{isGameFinished.if3.begin} |c 
+    console.log('Congratulations! You did it'); |c \label{isGameFinished.finished} |c
+  } |c \label{isGameFinished.if3.end} |c
+}
+\end{lstlisting}
+  \caption{JS function \texttt{isGameFinished.js} from sudoku}
+  \label{code.newGame}
 
-  \begin{lstlisting}[style=htmlcssjs, language=HTML5]
-<html>
-  <body>
-    <div id="frame"></div>
-    <div id="debug"></div>
-  </body>
-</html>
-  \end{lstlisting}
-
-  \begin{lstlisting}[style=htmlcssjs, language=HTML5]
-<html>
-  <body>
-    <div id="debug"></div>
-  </body>
-</html>
-\end{lstlisting}    
-  \caption{Stackoverflow Example}
-  \label{fig..safeAdd.js}
 \end{figure}
-
 
 \begin{figure}[t]
-  \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
-/*t dom */
-function revealAll() {
- for(var row=0; row<2; row++){
-  for(var col=0; col<2; col++){
-   var obj = document.getElementById('square_'+row+'_'+col);
-   var spans = obj.getElementsByTagName('SPAN');
-   spans[0].style.display='';
-   spans[1].style.display='none';
-   spans[1].style.color='#000000'; } } }
-  \end{lstlisting}
-
   \begin{lstlisting}[style=htmlcssjs, language=HTML5]
+<!-- T1 covers: (6,15), (16,17) -->
 <html>
   <body>
-    <div id="square_0_0">
-      <span></span><span></span>
-    </div>
-    <div id="square_0_1">
-      <span></span><span></span>
-    </div>
-    <div id="square_1_0">
-      <span></span><span></span>
-    </div>
-    <div id="square_1_1">
-      <span></span><span></span>
+    <div id='sudoku'></div>
+</body>
+</html>
+
+<!-- T2 covers: (6,7), (7,14), (16,17) -->
+<html>
+  <body>
+    <div id='sudoku'>
+      <div></div>
     </div>
   </body>
 </html>
-  \end{lstlisting}  
-  \caption{Sudoku Example}
-  \label{fig.revealAll.js}
+
+<!-- T3 covers: (6,7), (7,9), (10,13), (16,17) -->
+<html>
+  <body>
+    <div id='sudoku'>
+      <div class='sudokuSquare'>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- T4 covers: (6,7), (7,9), (10,11), (16,18) -->
+<html>
+  <body>
+    <div id='sudoku'>
+      <div class='sudokuSquare'>
+        <span></span>
+        <span>TEST</span>
+      </div>
+    </div>
+  </body>
+</html>
+  \end{lstlisting}
+  \caption{Input DOM arguments for \texttt{isGameFinished.js}}
+  \label{fig.isGameFinished.tests}
 \end{figure}
+
+Let us consider JS function \texttt{isGameFinished} in Figure~\ref{code.newGame} taken from the web application game \emph{sudoku}~\ref{ref.sudoku}. This function checks if a sudoku solution entered by the user is valid. First, it finds the game field element (line~\ref{isGameFinished.getSudoku}), retrieves all child divs (line~\ref{isGameFinished.getDivs}), and iterates over that collection. Each div element which corresponds to a sudoku input square (line~\ref{isGameFinished.if1.begin}) consists of two span elements. One contains a user input, and another one, which is hidden at the moment, stores the expected value for the sudoku square. Once, it finds a square where two values are not equal (line~\ref{isGameFinished.if2.begin}) to each other, the game is considered unfinished (line~\ref{isGameFinished.unfinished}) and finished otherwise (line~\ref{isGameFinished.finished}).
+
+Suppose now that we would like to (unit) test this function in isolation to the rest of the application source code. We aim to maximize branch coverage as a common testing criteria~\cite{why_is_common}. That is for each individual branch of the function under test (FUT) \texttt{isGameFinished}, we have to construct a test input which passes the branch and normally exists the function. JS function has \emph{explicit} input arguments (none is our case), but it can also has \emph{implicit} arguments such as DOM state. As assume that DOM is the only global JS object that can be referred from the body of FUT. So in order to test our function we have to construct appropriate DOM objects as test inputs.   
+
+%Our program has the following branches: $(6,15)$, $(6,7)$, $(7,9)$, $(7,14)$, $(10,11)$, $(10,13)$, $(16,17)$, $(16,18)$. Four tests in 
+
+Figure~\ref{fig.isGameFinished.tests} presents four tests that together provide full coverage of the FUT. Let us look at how to construct the test that covers branch $(10,11)$. Line~\ref{isGameFinished.getSudoku} expects DOM to have an element with the id \textquotesingle\texttt{sudoku}\textquotesingle. In order to enter the for-loop on line~{isGameFinished.inFor.begin}, this element should have at least one child of the type $div$. The condition of the first $if$ (line~\ref{isGameFinished.if1.begin}) requires the div to be of the class \textquotesingle\texttt{sudokuSquare}\textquotesingle and have no background color. The last if-condition (line~\ref{isGameFinished.if2.begin}) expects that the div has two \emph{span} elements whose \emph{innerHtml} values are not equal. $T4$ in Figure~\ref{fig.isGameFinished.tests} shows a concrete example of DOM that meets all the conditions above. 
+
+As we have just seen even for such a relatively simple example, the construction of the test input is a far from trivial procedure because it requires deep understanding the program's semantics. In practice, web developers often have to deal with the gazillion of the JS frameworks and libraries freely available on the GitHub. This code is commonly untested and poorly documented. At the same time, unit testing is the most fundamental and easiest to provide level of testing. It greatly saves developers from the unexpected regression and creates a safety belt around the application.
 
 %% --------------------------------------------------------------------
 \section{Test Generation Framework}
@@ -415,7 +449,6 @@ Let us get a closer look at the sequence of interactions in Figure~\ref{fig.fram
 \end{algorithm}
 
 The goal of the \emph{Initialization Phase} is to prepare FUT for the follow up \emph{Genetic Phase}. The main steps of the initialization are illustrated in Algorithm~\ref{alg.init}. Given the file \emph{fun.js} as an input, we separately parse the function and its signature in line~\ref{alg.init.parse.fun.sig}. Currently our framework recognizes signatures composed of four primitive types such as \texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string} and a newly introduced type \texttt{dom}. To facilitate random generation in the \emph{Genetic Phase} we statically analyze the FUT to collect useful data about potential string and numeric constants (line~\ref{alg.init.collect.info}). Moreover, we track calls to such browser API methods as \texttt{getElementsByTagName}, \texttt{getElementById}, \texttt{getElementsByClassName}, \texttt{getElementsByName}, which gives us information about \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} respectively. Knowing this data significantly increases our chances to produce a desired test input. Sometimes it is necessary to normalize FUT before applying instrumentation (line~\ref{alg.init.transform.ast}), e.g. we transform \emph{if-then} branches to \emph{if-then-else}. After the normalization we can build CFG (line~\ref{alg.init.build.cfg}) and get all branches (line~\ref{alg.init.get.branches}). The final step is to instrument \emph{fun} (line~\ref{alg.init.instr}) in order to collect some run-time data such as execution trace, branch and loop distances, and constants. This data will be required for fitness evaluation (Section~\ref{sub.sub.sec.fitness.fun}) and updating of \emph{cinfo}.
-
 
 \subsection{Genetic Phase}
 \label{sub.sec.genetic.phase}
@@ -543,15 +576,34 @@ Therefore, the resulted FF ($\mathcal{F}^*$) is an ordered pair of the FFs of th
 \label{sec.evaluation}
 %% --------------------------------------------------------------------
 
-\begin{description}
-\item[\textbf{Q1}] How often \emph{validator} rejects generated HTML in case of the random and genetic (mutation and crossover) phases. This question characterizes potential performance issues that can occur in the generation.
-\item[\textbf{Q2}] Efficiency (compare with random)  
-\end{description}
+In order to evaluation the feasibility of practical adoption of our genetic test generation framework, we carried out empirical validation on a set of case studies. Table~\ref{tbl.gen.config} shows summary of configuration parameters for both random and genetic instances of our framework.  As a baseline we implemented random test generation strategy. It is similar to the genetic one except that it won't performing crossover and mutation. Hence, it also benefits from initial static analysis and follow up dynamic constant propagation. In addition, we experimented with two different sizes (5 and 10) for genetic restart in case of archive convergence.
+
+\begin{table}
+  \caption{Genetic Algorithm Configurations}
+  \label{tbl.gen.config}
+    \footnotesize
+  \begin{tabular}{l|r|r}
+    \toprule
+    \textbf{Parameter Name} & \textbf{Random} & \textbf{Genetic} \\
+    \midrule
+    Population size                   & 50  & 50 \\
+    Archive size                      & 1   & 25 \\
+    Maximum number of generations     & 200 & 200 \\
+    Crossover rate                    & 0   & 0.5 \\
+    Mutation rate                     & 0   & 0.5 \\
+    Restart after archive convergence & -   & - (5,10) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 
 \subsection{Case Studies}
 \label{sub.sec.case.studies}
 
-For the purpose of validation we selected two classes of programs. The first class only includes JS programs composed of the primitive types. The programs in the second class additionally accept arguments of the DOM type. We collected those program from several researches in the field of web application analysis, and JS in particular. Moreover, we introduced few other subjects found in open source such as \emph{mathjs}\footnote{\url{https://github.com/josdejong/mathjs/}}.
+Being one of the most popular programming languages of the modern time, there are ample open source JS projects on the web. They all are greatly vary in size, complexity and coding style. Moreover, many popular JS web-frameworks, including jQuery and React\footnote{\url{http://todomvc.com/}}, offer an alternative approach for DOM manipulation to vanilla-like JS. Therefore, search for appropriate case-studies requires careful inspection of the application source code, which is often time consuming and labor intensive process. These factors significantly complicate the choice of suitable evaluation subjects. Therefore, we decided to form our experimental data set from two related research works \emph{Confix}~\cite{amin:ase15} and \emph{TAJS}\footnote{\url{http://www.brics.dk/TAJS/dom-benchmarks/}}~\cite{dom2011}. Moreover, we introduced two additional subjects found in open source \emph{mathjs}\footnote{\url{https://github.com/josdejong/mathjs/}} and \emph{cs-in-js}\footnote{\url{https://github.com/nzakas/computer-science-in-javascript}}. For each case study application, we identified several JS functions which were suitable for our test generation framework. Our evaluation set includes both primitive and manipulating with DOM JS functions.
+
+Table~\ref{tbl.case.studies} presents generic quantitative characteristics of the selected functions such as the number of branches (\textbf{\#BR}), lines of code (\textbf{\#LOC}) and cyclomatic complexity (\textbf{CC}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulates with the \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively.       
+
 
 Consider examples from: \cite{artemis2011}, \cite{dom2011}...
 
@@ -584,12 +636,21 @@ To report on cyclomatic complexity we use \emph{jshint}\footnote{http://jshint.c
     \midrule
     burncanvas & do\_draw & (int,int,int,int,int,int,int) & & & & - & - & - & - \\
     \midrule
-    mathjs     & probability\_gamma & (float) & & & & - & - & - & - \\
+    mathjs     & prob\_gamma & (float) & & & & - & - & - & - \\
     \bottomrule
   \end{tabular}
 %}
 \end{table*}
 
+\subsection{Research Questions}
+\label{sub.sec.research.questions}
+
+
+\begin{description}
+\item[\textbf{Q1}] What is the performance of our test generation framework?
+\item[\textbf{Q2}] How does genetic version perform against the random one?
+\item[\textbf{Q3}] How does the restart of genetic algorithm after the archive convergence enhance the performance? 
+\end{description}
 
 \begin{table*}
   \caption{Statistics for genetic and random algorithms}
@@ -598,7 +659,7 @@ To report on cyclomatic complexity we use \emph{jshint}\footnote{http://jshint.c
     \footnotesize
     \begin{tabular}{l|rrrr|rrrr|rrrr|rrrr|r|r|r|r|r|r}
       \toprule
-      \textbf{name}     & $\bar{x}_R$ & $\bar{x}_G$ & $\bar{x}_{G5}$ & $\bar{x}_{G10}$ & $m_R$ & $m_G$ & $m_{G5}$ & $m_{G10}$ & $\min_R$ & $\min_G$ & $\min_{G5}$ & $\min_{G10}$ & $\max_R$ & $\max_G$ & $\max_{G5}$ & $\max_{G10}$ & \textbf{R-G} & \textbf{R-G5} & \textbf{R-G10} & \textbf{G-G5} & \textbf{G-G10} & \textbf{G5-G10}\\
+      \textbf{name}     & $\bar{x}_R$ & $\bar{x}_G$ & $\bar{x}_{G5}$ & $\bar{x}_{G10}$ & $m_R$ & $m_G$ & $m_{G5}$ & $m_{G10}$ & $\min_R$ & $\min_G$ & $\min_{G5}$ & $\min_{G10}$ & $\max_R$ & $\max_G$ & $\max_{G5}$ & $\max_{G10}$ & \textbf{G-R} & \textbf{G5-R} & \textbf{G10-R} & \textbf{G5-G} & \textbf{G10-G} & \textbf{G10-G5}\\
       \toprule
       helpMe          &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
     $(3,4,\inFor)$    & 3.94        & 7.94        & 10.22          & 11.7          & 3     & 3.5   & 7       & 7       & 1        & 1        & 1          & 1           & 16       & 31      & 63         & 124 & & & & & & \\
@@ -696,7 +757,7 @@ To report on cyclomatic complexity we use \emph{jshint}\footnote{http://jshint.c
     $(48,49,\thenBr)$  & 36.6        & 114.42     & 29.42         & 31.32          & 25    & 135.5 & 27.5    & 33      & 0         & 0        & 0         & 0           & 185      & 199      & 124       & 41 & & & & & & \\
     \midrule
     \midrule
-    probability\_gamma &             &            &               &                &       &       &         &         &           &          &           &             &          &          &           &  & & & & & & \\
+    prob\_gamma &             &            &               &                &       &       &         &         &           &          &           &             &          &          &           &  & & & & & & \\
     $(4,5,\thenBr)$    & 195.58      & 1.02       & 1             & 1.06           & 199   & 1     & 1       & 1.06    & 28        & 1        & 1         & 1           & 199      & 2        & 1         & 2 & & & & & & \\
     $(6,7,\thenBr)$    & 195.2       & 1.14       & 1.29          & 1.28           & 199   & 1     & 1       & 1.28    & 21        & 1        & 1         & 1           & 199      & 3        & 3         & 4 & & & & & & \\
     $(6,9,\elseBr)$    & 199         & 1.42       & 1.39          & 1.46           & 199   & 1     & 1       & 1.46    & 199       & 1        & 1         & 1           & 199      & 4        & 4         & 4 & & & & & & \\
@@ -705,8 +766,8 @@ To report on cyclomatic complexity we use \emph{jshint}\footnote{http://jshint.c
     $(16,17,\inWhile)$ & 199         & 1.46       & 1.7           & 1.76           & 199   & 1     & 1       & 1.76    & 199       & 1        & 1         & 1           & 199      & 3        & 6         & 8 & & & & & & \\
     $(20,21,\thenBr)$  & 199         & 5.38       & 4.85          & 6.32           & 199   & 5     & 4       & 6.32    & 199       & 1        & 1         & 1           & 199      & 14       & 14        & 25 & & & & & & \\
     $(20,23,\elseBr)$  & 199         & 1.54       & 1.37          & 1.28           & 199   & 1     & 1       & 1.28    & 199       & 1        & 1         & 1           & 199      & 4        & 4         & 3 & & & & & & \\
-    $(30,31,\thenBr)$  & 199         & 51.44      &               & 51.96          & 199   & 52    &         & 51.96   & 199       & 42       &           & 42          & 199      & 62       &           & 62 & & & & & & \\
-    $(34,35,\thenBr)$  & 199         & 22.66      &               & 23.32          & 199   & 23    &         & 23.32   & 199       & 13       &           & 16          & 199      & 29       &           & 28 & & & & & & \\
+    $(30,31,\thenBr)$  & 199         & 51.44      & 52            & 51.96          & 199   & 52    & 51.66   & 51.96   & 199       & 42       & 41        & 42          & 199      & 62       & 61        & 62 & & & & & & \\
+    $(34,35,\thenBr)$  & 199         & 22.66      & 23            & 23.32          & 199   & 23    & 23.32   & 23.32   & 199       & 13       & 15        & 16          & 199      & 29       & 33        & 28 & & & & & & \\
     \bottomrule
     \end{tabular}
 }
