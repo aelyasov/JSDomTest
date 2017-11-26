@@ -24,7 +24,7 @@ out_folder = "./evaluation/result"
 case_studies = [
     # # sudoku + "getPossibleNumbers.js",
     # sudoku + "helpMe.js",          # +
-    # sudoku + "isGameFinished.js",  # +
+    sudoku + "isGameFinished.js"     # +
     # sudoku + "newGame.js",         # +
     # sudoku + "revealAll.js",       # +
     # # sudoku + "showCell.js",
@@ -59,7 +59,7 @@ case_studies = [
     # csjs + "luhn-algorithm.js",
     # csjs + "quicksort_partition.js",
 
-    mathjs + "probability_gamma.js"  # +
+    # mathjs + "probability_gamma.js"  # +
 ]
 
 eval_type = sys.argv[1]
