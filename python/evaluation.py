@@ -24,7 +24,7 @@ out_folder = "./evaluation/result"
 case_studies = [
     # # sudoku + "getPossibleNumbers.js",
     # sudoku + "helpMe.js",          # +
-    sudoku + "isGameFinished.js"     # +
+    # sudoku + "isGameFinished.js"     # +
     # sudoku + "newGame.js",         # +
     # sudoku + "revealAll.js",       # +
     # # sudoku + "showCell.js",
@@ -51,7 +51,7 @@ case_studies = [
     # bingbong + "doPaddlePower.js",  # -
     # bingbong + "drawLevel.js",      # -
     # bingbong + "goPing.js",
-    # bingbong + "initBricks.js",     # -
+    bingbong + "initBricks.js",     # -
 
     # burncanvas + "do_draw.js",      # -
     # burncanvas + "modify_region.js",
