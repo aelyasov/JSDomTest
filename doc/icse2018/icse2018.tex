@@ -287,7 +287,78 @@ function isGameFinished() {
 \end{lstlisting}
   \caption{JS function \texttt{isGameFinished.js} from sudoku}
   \label{code.newGame}
+\end{figure}
 
+\begin{figure}[t]
+  \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
+function isGameFinished() {
+  trace.push(2);
+  var obj = document.getElementById("sudoku");
+  trace.push(3);
+  var subDivs = obj.getElementsByTagName("DIV");
+  trace.push(4);
+  var allOk = true;
+  loopMap[5] = function () {
+    var no = 0;
+    if (subDivs.length || subDivs.length == 0) {
+      return Math.abs(no - subDivs.length);
+    }
+    return 1;
+  }();
+  for (var no = 0; no < subDivs.length; no++) {
+    trace.push(5);
+    trace.push(6);
+    trace.push(7);
+    if (subDivs[no].className.indexOf("sudokuSquare") >= 0 &&
+        !subDivs[no].style.backgroundColor) {
+      trace.push(8);
+      branchDistance.push({ 
+        label: 7, 
+        distance: Math.min(
+          abs(subDivs[no].className.indexOf("sudokuSquare"), 0) + _K_,
+          absZero(subDivs[no].style.backgroundColor))
+      });
+      trace.push(9);
+      var spans = subDivs[no].getElementsByTagName("SPAN");
+      trace.push(10);
+      if (spans[0].innerHTML != spans[1].innerHTML) {
+      trace.push(11);
+      branchDistance.push({
+        label: 10,
+        distance: abs(spans[0].innerHTML, spans[1].innerHTML)
+      });
+      trace.push(12);
+      allOk = false;
+      break;
+      } else {
+        trace.push(14);
+        branchDistance.push({label: 10,distance: _K_});
+      }
+    } else {
+      trace.push(15);
+      branchDistance.push({
+        label: 7,
+        distance: abs(subDivs[no].className.indexOf("sudokuSquare"), 0) +
+                  absNegZero(subDivs[no].style.backgroundColor)
+      });
+    }
+  }
+  trace.push(5);
+  trace.push(16);
+  if (allOk) {
+    trace.push(17);
+    branchDistance.push({label: 16, distance: absNegZero(allOk)});
+    trace.push(18);
+    console.log("Congratulations! You did it");
+  } else {
+    trace.push(19);
+    branchDistance.push({label: 16 ,distance: absZero(allOk)});
+  }
+  trace.push(-1);
+}
+\end{lstlisting}
+  \caption{Instrumented version of the function \texttt{isGameFinished.js} }
+  \label{code.isGameFinished.instr}
 \end{figure}
 
 \begin{figure}[t]
@@ -614,29 +685,46 @@ To report on cyclomatic complexity we use \emph{jshint}\footnote{http://jshint.c
   \label{tbl.case.studies}
   %\resizebox{\textwidth}{!}{
     \footnotesize
-  \begin{tabular}{l|l|l|r|r|r|c|c|c|c}
+  \begin{tabular}{l|l|l|r|r|r|r|c|c|c|c}
     \toprule
-    \textbf{case-study} & \textbf{function} & \textbf{type} & \textbf{\#BR} & \textbf{\#LOC} & \textbf{CC} & \textbf{DOM} & \textbf{id} & \textbf{tag} & \textbf{class} \\
+    \textbf{case-study} & \textbf{function} & \textbf{type} & \textbf{\#LOC} & \textbf{\#BR} & \textbf{\#D} & \textbf{CC} & \textbf{DOM} & \textbf{id} & \textbf{tag} & \textbf{class} \\
     \midrule
-    sudoku     & helpMe & (dom,int,int) & & & & + & + & + & - \\
-    sudoku     & isGameFinished & (dom) & & & & + & + & + & + \\
-    sudoku     & newGame & (dom)        & & & & + & + & + & + \\
-    sudoku     & revealAll & (dom)      & & & & + & + & + & - \\
-    sudoku     & shuffleBoard & (dom)   & & & & + & - & + & - \\
+    sudoku     & helpMe & (dom,int,int)                                   & 15 & 2  & 3 & 3  & + & + & + & - \\
+    sudoku     & isGameFinished & (dom)                                   & 17 & 4  & 3 & 5  & + & + & + & + \\
+    sudoku     & newGame & (dom)                                          & 12 & 1  & 2 & 2  & + & + & + & + \\
+    sudoku     & revealAll & (dom)                                        & 14 & 0  & 2 & 1  & + & + & + & - \\
+    sudoku     & showCell & (dom)                                         &    &    &   &    &   &   &   & \\
+    sudoku     & shuffleBoard & (dom)                                     & 26 & 2  & 3 & 3  & + & - & + & - \\
+    sudoku     & switchLevel & (dom,bool)                                 &    &    &   &    &   &   &   & \\
     \midrule
-    phormer    & toggleInfo & (dom,string) & & & & + & + & - & - \\
+    phormer    & toggleInfo & (dom,string)                                & 15 & 3  & 1 & 4  & + & + & - & - \\
+    phormer    & update & (dom,int,[string],bool,[string],[string],bool,[string],[string],int) &    &    &   &    &   &   &   & \\
+    phormer    & updateIndic & (dom,bool)                                 &    &    &   &    &   &   &   & \\
     \midrule
-    hotel RS   & isValidCard & ([int]) & & & & - & - & - & - \\
-    hotel RS   & isValidMasterCard & ([int])  & & & & - & - & - & - \\
+    hotelRS    & RequiredField & (dom,[string])                           &    &    &   &    &   &   &   & \\
+    hotel RS   & isValidCard & ([int])                                    & 20 & 2  & 2 & 5  & - & - & - & - \\
+    hotel RS   & isValidMasterCard & ([int])                              & 6  & 4  & 1 & 7  & - & - & - & - \\
+    hotelRS    & isValidVISA & ([int])                                    &    &    &   &    &   &   &   & \\
+    hotelRS    & validateNumber & (dom,string)                            &    &    &   &    &   &   &   & \\
     \midrule
-    apophis    & initShields & (dom,[int],int,int) & & & & + & + & - & -\\
+    apophis    & doRain & (dom,string,int,int,int,int,int,int)            &    &    &   &    &   &   &   & \\
+    apophis    & drawShields & (dom,[int])                                &    &    &   &    &   &   &   & \\
+    apophis    & fireMeteor & (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) &    &    &   &    &   &   &   & \\
+    apophis    & getReady & (dom,int,int,int,int,int,int)                 &    &    &   &    &   &   &   & \\
+    apophis    & initShields & (dom,[int],int,int)                        & 8  & 0  & 1 & 1  & + & + & - & -\\
     \midrule
-    bingbong   & brickJiggler & (dom,int,int,int,[int],[int],[int],[int]) & & & & + & + & - & - \\
-    bingbong   & initBricks & (dom,[int],int,int) & & & & + & + & - & - \\
+    bingbong   & brickJiggler & (dom,int,int,int,[int],[int],[int],[int]) & 7  & 1  & 1 & 2  & + & + & - & - \\
+    bingbong   & initBricks & (dom,[int],int,int)                         & 63 & 12 & 4 & 13 & + & + & - & - \\
+    bingbong   & doPaddlePower & (dom,int,int)                            &    &    &   &    &   &   &   & \\
+    bingbong   & drawLevel & (dom,int,int,int,int)                        &    &    &   &    &   &   &   & \\
+    bingbong   & goPing & (dom,int,int,int)                               &    &    &   &    &   &   &   & \\
     \midrule
-    burncanvas & do\_draw & (int,int,int,int,int,int,int) & & & & - & - & - & - \\
+    burncanvas & do\_draw & (int,int,int,int,int,int,int)                 & 39 & 12 & 2 & 14 & - & - & - & - \\
     \midrule
-    mathjs     & prob\_gamma & (float) & & & & - & - & - & - \\
+    cs-in-js   & luhn-algorithm & (string,bool)                           &    &    &   &    &   &   &   & \\
+    cs-in-js   & quicksort-partition & ([int],int,int)                    &    &    &   &    &   &   &   & \\ 
+    \midrule
+    mathjs     & prob\_gamma & (float)                                    & 56 & 8  & 2 & 16 & - & - & - & - \\
     \bottomrule
   \end{tabular}
 %}
@@ -659,49 +747,56 @@ To report on cyclomatic complexity we use \emph{jshint}\footnote{http://jshint.c
     \footnotesize
     \begin{tabular}{l|rrrr|rrrr|rrrr|rrrr|r|r|r|r|r|r}
       \toprule
-      \textbf{name}     & $\bar{x}_R$ & $\bar{x}_G$ & $\bar{x}_{G5}$ & $\bar{x}_{G10}$ & $m_R$ & $m_G$ & $m_{G5}$ & $m_{G10}$ & $\min_R$ & $\min_G$ & $\min_{G5}$ & $\min_{G10}$ & $\max_R$ & $\max_G$ & $\max_{G5}$ & $\max_{G10}$ & \textbf{G-R} & \textbf{G5-R} & \textbf{G10-R} & \textbf{G5-G} & \textbf{G10-G} & \textbf{G10-G5}\\
+      \textbf{name}   & $\bar{x}_R$     & $\bar{x}_G$   & $\bar{x}_{G5}$ & $\bar{x}_{G10}$ & $m_R$       & $m_G$     & $m_{G5}$     & $m_{G10}$   & $\min_R$  & $\min_G$ & $\min_{G5}$ & $\min_{G10}$ & $\max_R$  & $\max_G$ & $\max_{G5}$ & $\max_{G10}$ & \textbf{G-R} & \textbf{G5-R} & \textbf{G10-R} & \textbf{G5-G} & \textbf{G10-G} & \textbf{G10-G5}\\
       \toprule
-      helpMe          &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
-    $(3,4,\inFor)$    & 3.94        & 7.94        & 10.22          & 11.7          & 3     & 3.5   & 7       & 7       & 1        & 1        & 1          & 1           & 16       & 31      & 63         & 124 & & & & & & \\
-    $(5,6,\thenBr)$   & 3.7         & 13.08       & 9.2            & 9.6           & 3     & 7     & 5       & 5.5     & 1        & 1        & 1          & 1           & 14       & 95      & 44         & 105 & & & & & & \\
-    $(5,15,\elseBr)$  & 118.64      & 30.14       & 34.12          & 31.68         & 119.5 & 23    & 28.5    & 22      & 4        & 4        & 3          & 1           & 199      & 97      & 167        & 114 & & & & & & \\
-    $(9,10,\thenBr)$  & 105.12      & 17.82       & 21.98          & 21.8          & 83.5  & 17    & 17.5    & 18      & 18       & 1        & 2          & 6           & 199      & 53      & 78         & 77  & & & & & & \\
-    $(9,14,\elseBr$   & 4.28        & 5.06        & 8.14           & 9.56          & 2.5   & 5     & 4       & 4       & 1        & 1        & 1          & 1           & 17       & 20      & 49         & 74  & & & & & & \\
+      helpMe          &                 &               &               &               &             &           &             &           &           &          &            &             &           &           &            & & & & & & & \\
+    $(3,4,\inFor)$    & 3.94 (5.34)     & 7.94 (6.24)   & 10.22  (8.48) & 11.7 (9.32)   & 3 (4)       & 3.5 (3)   & 7 (6)       & 7 (6)     & 1 (1)     & 1 (1)    & 1 (1)      & 1 (2)       & 16 (21)   & 31 (23)   & 63 (48)    & 124 (84) & & & & & & \\
+    $(5,6,\thenBr)$   & 3.7 (5.74)      & 13.08 (9.86)  &   9.2  (7.76) & 9.6 (8.06)    & 3 (5)       & 7 (5.5)   & 5 (4)       & 5.5 (5)   & 1 (2)     & 1 (1)    & 1 (1)      & 1 (1)       & 14 (28)   & 95 (68)   & 44 (38)    & 105 (89) & & & & & & \\
+    $(5,15,\elseBr)$  & 118.64 (151.48) & 30.14 (27.08) & 34.12  (32.7) & 31.68 (31.92) & 119.5 (156) & 23 (20.5) & 28.5 (28.5) & 22 (23.5) & 4 (6)     & 4 (3)    & 3 (3)      & 1 (2)       & 199 (294) & 97 (99)   & 167 (156)  & 114 (130) & & & & & & \\
+    $(9,10,\thenBr)$  & 105.12 (124.26) & 17.82 (15.58) & 21.98 (21.66) & 21.8 (21.9)   & 83.5 (101)  & 17 (14)   & 17.5 (17)   & 18 (17)   & 18 (23)   & 1 (1)    & 2 (2)      & 6 (6)       & 199 (245) & 53 (51)   & 78 (83)    & 77  (86) & & & & & & \\
+    $(9,14,\elseBr$   & 4.28 (6.18)     & 5.06 (4.42)   &  8.14 (7.74)  & 9.56 (9.48)   & 2.5 (4)     & 5 (4)     & 4 (4)       & 4 (4)     & 1 (1)     & 1 (1)    & 1 (1)      & 1 (1)       & 17 (21)   & 20 (17)   & 49 (43)    & 74  (79) & & & & & & \\
     \midrule
-    isGameFinished    &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
-    %% $(5,6,\inFor)$    & 0.02        & 0.1         & 0.12           & 0.1           & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 2       & 2          & 2   \\
-    $(7,8,\thenBr)$   & 75.18       & 40.54       & 18.86          & 14.66         & 35.5  & 7     & 8       & 11      & 0        & 0        & 0          & 0           & 199      & 199     & 199        & 82  & & & & & & \\
-    %% $(7,15,\elseBr)$  & 0           & 0.06        & 0.04           & 0.08          & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 0        & 2       & 1          & 2   \\
-    $(10,11,\thenBr)$ & 199         & 35.74       & 21.56          & 24.36         & 199   & 10    & 10      & 9       & 199      & 1        & 1          & 1           & 199      & 199     & 199        & 199 & & & & & & \\
-    $(10,14,\elseBr)$ & 69.62       & 56.32       & 28.74          & 31.92         & 23.5  & 10    & 16.5    & 18      & 1        & 0        & 0          & 0           & 199      & 199     & 199        & 199 & & & & & & \\
+    isGameFinished      &               &               &               &               &             &           &             &           &           &          &            &             &           &           &            & & & & & & & \\
+    %% $(5,6,\inFor)$   & 0.02 (0)      & 0.1 (0.88)    & 0.12 (0.94)   & 0.1 (0.94)    & 0 (1)       & 0 (1)     & 0 (1)       & 0 (1)     & 0 (0)     & 0 (0)    & 0 (0)      & 0 (0)       & 1 (2)     & 2 (3)     & 2 (3)      & 2 (3)  \\
+    $(7,8,\thenBr)$     & 75.18 (63.68) & 40.54 (40.32) & 18.86 (19.62) & 14.66 (15.62) & 35.5 (29.5) & 7 (7.5)   & 8 (9.5)     & 11 (12.5) & 0 (0)     & 0 (0)    & 0 (1)      & 0 (1)       & 199 (191) & 199 (225) & 199 (196)  & 82 (77) & & & & & & \\
+    %% $(7,15,\elseBr)$ & 0 (0.98)      & 0.06 (0.82)   & 0.04 (0.84)   & 0.08 (0.9)    & 0 (1)       & 0 (1)     & 0 (1)       & 0 (1)     & 0 (0)     & 0 (0)    & 0 (0)      & 0 (0)       & 0 (3)     & 2 (3)     & 1 (2)      & 2 (3)  \\
+    $(10,11,\thenBr)$   & 199 (166.32)  & 35.74 (36.6)  & 21.56 (22.5)  & 24.36 (26.44) & 199 (167)   & 10 (10)   & 10 (10.5)   & 9 (11)    & 199 (141) & 1 (2)    & 1 (1)      & 2 (3)       & 199 (191) & 199 (220) & 199 (217)  & 199 (224) & & & & & & \\
+    $(10,14,\elseBr)$   & 69.62 (59.28) & 56.32 (56.44) & 28.74 (31.78) & 31.92 (33.58) & 23.5 (21)   & 10 (10.5) & 16.5 (17)   & 18 (17.5) & 1 (1)     & 0 (0)    & 0 (1)      & 0 (1)       & 199 (186) & 199 (217) & 199 (258)  & 199 (206) & & & & & & \\
     \midrule
-    newGame           &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\
-    %% $(4,5,\inFor)$    & 0.04        & 0.12        & 0.1            & 0             & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 2       & 1          & 0 \\
-    $(6,7,\thenBr)$   & 21.54       & 10.48       & 9.92           & 8.34          & 15    & 7.5   & 7.5     & 7       & 0        & 0        & 0          & 0           & 97       & 53      & 30         & 35 & & & & & & \\
-    %% $(6,12,\elseBr)$  & 0.06        & 0.14        & 0.1            & 0.04          & 0     & 0     & 0       & 0       & 0        & 0        & 0          & 0           & 1        & 3       & 2          & 1\\
+    newGame             &               &              &                &               &             &           &             &           &           &          &            &             &          &            &            & & & & & & & \\
+    %% $(4,5,\inFor)$   & 0.04 (0.9)    & 0.12 (0.66)  & 0.1 (0.84)     & 0 (0.86)      & 0 (1)       & 0 (1)     & 0 (1)       & 0 (1)     & 0 (0)     & 0 (0)    & 0 (0)      & 0 (0)       & 1 (2)    & 2 (2)      & 1 (2)      & 0 (1) \\
+    $(6,7,\thenBr)$     & 21.54 (16.58) & 10.48 (9.78) & 9.92 (10.24)   & 8.34 (8.84)   & 15 (11.5)   & 7.5 (7)   & 7.5 (8)     & 7 (8)     & 0 (1)     & 0 (1)    & 0 (1)      & 0 (0)       & 97 (67)  & 53 (47)    & 30 (34)    & 35 (31) & & & & & & \\
+    %% $(6,12,\elseBr)$ & 0.06 (0.78)   & 0.14 (0.84)  & 0.1 (0.86)     & 0.04 (0.8)    & 0 (1)       & 0 (1)     & 0 (1)       & 0 (1)     & 0 (0)     & 0 (0)    & 0 (0)      & 0 (0)       & 1 (2)    & 3 (4)      & 2 (3)      & 1 (2) \\
     \midrule
-    revealAll         &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & \\
-    $(2,3,\inFor)$    & 31.78       & 24.84       & 34.94          & 28.04         & 24    & 23    & 29      & 22.5    & 4        & 7        & 7          & 10          & 106      & 57      & 129        & 75 & & & & & & \\
-    $(4,5,\inFor)$    & 46.12       & 26.22       & 30.1           & 27.64         & 34    & 19    & 26.5    & 22      & 5        & 9        & 9          & 6           & 199      & 78      & 71         & 90 & & & & & & \\
+    revealAll           &               &               &               &               &             &           &             &           &           &          &            &             &          &            &            & \\
+    $(2,3,\inFor)$      & 31.78 (27.78) & 24.84 (26.7)  & 34.94 (39.34) & 28.04 (32.58) & 24 (20)     & 23 (24)   & 29 (30.5)   & 22.5 (27) & 4 (3)     & 7 (7)    & 7 (7)      & 10 (11)     & 106 (89) & 57 (64)    & 129 (148)  & 75 (100) & & & & & & \\
+    $(4,5,\inFor)$      & 46.12 (41.42) & 26.22 (28.56) & 30.1 (33.02)  & 27.64 (31.46) & 34 (30)     & 19 (20)   & 26.5 (28)   & 22 (25.5) & 5 (5)     & 9 (9)    & 9 (9)      & 6 (5)       & 199 (172)& 78 (89)    & 71 (78)    & 90 (102) & & & & & & \\
     \midrule
-    shuffleBoard      &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & &\\
-    %% $(5,6,\inWhile)$  & 0.36        & 0.32        & 0.24           & 0.48          & 0     & 0     & 0.24    & 0       & 0        & 0        & 0          & 0           & 4        & 3       & 2          & 0\\
-    $(13,14,\thenBr)$ & 6.38        & 7.7         & 8.72           & 7.86          & 4     & 4     & 8.72    & 4       & 0        & 0        & 0          & 0           & 22       & 67      & 64         & 38 & & & & & & \\
-    $(17,18,\thenBr)$ & 5.66        & 11.86       & 16.96          & 17.72         & 3.5   & 5.5   & 16.96   & 3.5     & 0        & 0        & 0          & 0           & 33       & 133     & 86         & 118 & & & & & & \\
-    %% $(21,22,\inFor)$  & 199         & 199         & 199            & 199           & 199   & 199   & 199     & 199     & 0        & 0        & 0          & 0           & 199      & 199     & 199        & 199\\
+    shuffleBoard         &              &              &               &               &             &             &            &           &           &           &           &           &           &           &           &           & & & & & & \\
+    %% $(3,4,\inFor)$    & 0 (1.6)      & 0 (1.36)     & 0 (1.52)      & 0 (1.42)      & 0 (2)       & 0 (1)       & 0 (2)      & 0 (1)     & 0 (1)     & 0 (1)     & 0 (1)     & 0 (1)     & 0 (3)     & 0 (2)     & 0 (2)     & 0 (2 )    & & & & & & \\
+    %% $(5,6,\inWhile)$  & 0.36 (2.94)  & 0.32 (2.6)   & 0.24 (2.58)   & 0.38 (2.88)   & 0 (2)       & 0 (2)       & 0 (2)      & 0 (2)     & 0 (1)     & 0 (1)     & 0 (1)     & 0 (1)     & 4 (11)    & 3 (8)     & 2 (6)     & 5 (15)    & & & & & & \\
+    %% $(10,11,\inFor)$  & 0 (1.88)     & 0 (1.4)      & 0 (1.64)      & 0 (1.58)      & 0 (2)       & 0 (1)       & 0 (2)      & 0 (2)     & 0 (2)     & 0 (1)     & 0 (1)     & 0 (1)     & 0 (3)     & 0 (2)     & 0 (2)     & 0 (2)     & & & & & & \\
+    $(13,14,\thenBr)$    & 6.38 (13.6)  & 7.7 (13.88)  & 8.72 (17.7)   & 7.86 (15.78)  & 4 (9.5)     & 4 (8.5)     & 4 (8.5)    & 5 (9.5)   & 0 (1)     & 0 (1)     & 0 (1)     & 0 (1)     & 22 (44)   & 67 (103)  & 64 (126)  & 38 (78)   & & & & & & \\
+    % $(13,16,\elseBr)$  & 0 (1.52)     & 0 (1.4)      & 0 (1.68)      & 0 (1.5)       & 0 (1.5)     & 0 (1)       & 0 (2)      & 0 (1.5)   & 0 (1)     & 0 (1)     & 0 (1)     & 0 (1)     & 0 (3)     & 0 (2)     & 0 (2)     & 0 (2)     & & & & & & \\
+    $(17,18,\thenBr)$    & 5.66 (13.76) & 11.86 (23.7) & 16.96 (39.58) & 15.02 (34.04) & 3.5 (10)    & 4 (10)      & 5.5 (12.5) & 5 (1)     & 0 (1)     & 0 (2)     & 0 (2)     & 0 (2)     & 33 (73)   & 133 (248) & 86 (180)  & 118 (248) & & & & & & \\
+    %% $(17,20,\elseBr)$ & 0 (2.06)     & 0 (1.84)     & 0 (1.72)      & 0 (1.8)       & 0 (2)       & 0 (2)       & 0 (2)      & 0 (2)     & 0 (1)     & 0 (1)     & 0 (1)     & 0 (1)     &  0 (4)    & 0 (2)     & 0 (2)     & 0 (2)     & & & & & & \\
+    %% $(21,22,\inFor)$  & 199 (373.2)  & 199 (275.1)  & 199 (305.16)  & 199 (299.84)  & 199 (372.5) & 199 (273.5) & 199 (307)  & 199 (302) & 199 (334) & 199 (242) & 199 (260) & 199 (255) & 199 (427) & 199 (322) & 199 (396) & 199 (325) & & & & & & \\
     \midrule
     \midrule
-    toggleInfo        &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & \\
-    $(2,3,\thenBr)$   & 1.58        & 1.12        & 1.1            & 1             & 1     & 1     & 1       & 1       & 0        & 0        & 0          & 0           & 11       & 4       & 3          & 3 & & & & & & \\
-    $(6,7,\thenBr)$   & 1.48        & 9.9         & 17             & 15.3          & 1     & 2     & 4       & 4       & 0        & 0        & 0          & 0           & 8        & 125     & 143        & 136 & & & & & & \\
+    toggleInfo        &             &             &            &              &         &       &         &       &       &       &       &       &         &           &           &           & & & & & & \\
+    $(2,3,\thenBr)$   & 1.58 (2.32) & 1.12 (1.64) & 1.1 (1.7)  & 1 (1.46)     & 1 (1.5) & 1 (2) & 1 (2)   & 1 (1) & 0 (0) & 0 (0) & 0 (0) & 0 (0) & 11 (11) & 4 (4)     & 3 (4)     & 3 (3)     & & & & & & \\
+    %% $(2,5,\elseBr)$   & 0 (0.86)    & 0 (0.84)    & 0 (0.86)   & 0 (0.8)      & 0 (1)   & 0 (1) & 0 (1)   & 0 (1) & 0 (0) & 0 (0) & 0 (0) & 0 (0) & 0 (2)   & 0 (1)     & 0 (1)     & 0 (1)     & & & & & & \\
+    $(6,7,\thenBr)$   & 1.48 (2.1)  & 9.9 (8.7)   & 17 (14.92) & 15.3 (12.34) & 1 (2)   & 2 (3) & 4 (3.5) & 4 (3) & 0 (0) & 0 (0) & 0 (0) & 0 (0) & 8 (8)   & 125 (112) & 143 (132) & 136 (101) & & & & & & \\
+    %% $(6,13,\elseBr)$  & 0 (0.84)    & 0 (0.72)    &  0 (0.82)  & 0 (0.8)      & 0 (1)   & 0 (1) & 0 (1)   & 0 (1) & 0 (0) & 0 (0) & 0 (0) & 0 (0) & 0 (1)   & 0 (1)     & 0 (1)     & 0 (1)     & & & & & & \\
     \midrule
     \midrule
-    isValidCard       &             &             &                &               &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\ 
-    $(3,6,\elseBr)$   & 199         & 2.98        & 3              & 2.82          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 5       & 5          & 4 & & & & & & \\
-    $(7,8,\inFor)$    & 199         & 2.92        & 3.04           & 2.96          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 5       & 4          & 5 & & & & & & \\
-    $(10,11,\thenBr)$ & 199         & 3           & 2.86           & 3.06          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
-    $(10,13,\elseBr)$ & 199         & 2.84        & 2.98           & 3.04          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
-    $(14,15,\inFor)$  & 199         & 3.02        & 2.92           & 2.94          & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
+    isValidCard       &              &             &             &             &       &       &         &         &          &          &            &             &          &         &            & & & & & & & \\ 
+    $(3,4,\thenBr)$   & 0 (0.54)     & 0 (0.3)     & 0 (0.46)    & 0 (0.46)    & 0 (1)
+    $(3,6,\elseBr)$   & 199 (102.98) & 2.98 (1.52) & 3 (1.4)     & 2.82 (1.56) & 199 (102.5)   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 5       & 5          & 4 & & & & & & \\
+    $(7,8,\inFor)$    & 199 (102.38) & 2.92 (1.44) & 3.04 (1.6)  & 2.96 (1.58) & 199 (103)  & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 5       & 4          & 5 & & & & & & \\
+    $(10,11,\thenBr)$ & 199 (101.44) & 3 (1.56)    & 2.86 (1.48) & 3.06 (1.7)  & 199 (102)  & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
+    $(10,13,\elseBr)$ & 199 (104.66) & 2.84 (1.38) & 2.98 (1.54) & 3.04 (1.62) & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
+    $(14,15,\inFor)$  & 199 (101.66) & 3.02 (1.6)  & 2.92 (1.48) & 2.94 (1.5)  & 199   & 3     & 3       & 3       & 199      & 2        & 2          & 2           & 199      & 4       & 5          & 5 & & & & & & \\
     \midrule
     isValidMasterCard & \multicolumn{16}{l}{} \\ 
     $(2,3,\thenBr)$   & 199         & 11.04       & 12.08          & 11.42         & 199   & 10    & 12      & 12      & 199      & 4        & 5          & 5           & 199      & 27      & 32         & 23 & & & & & & \\

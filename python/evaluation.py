@@ -22,42 +22,43 @@ mathjs = "./evaluation/mathjs/final_"
 out_folder = "./evaluation/result"
 
 case_studies = [
-    # # sudoku + "getPossibleNumbers.js",
-    # sudoku + "helpMe.js",          # +
-    # sudoku + "isGameFinished.js"     # +
-    # sudoku + "newGame.js",         # +
-    # sudoku + "revealAll.js",       # +
-    # # sudoku + "showCell.js",
-    # sudoku + "shuffleBoard.js",    # -
-    # # sudoku + "switchLevel.js",
+    # sudoku + "getPossibleNumbers.js",
+    sudoku + "helpMe.js",          # +
+    sudoku + "isGameFinished.js",  # +
+    sudoku + "newGame.js",         # +
+    sudoku + "revealAll.js",       # +
+    # sudoku + "showCell.js",
+    sudoku + "shuffleBoard.js",    # -
+    # sudoku + "switchLevel.js",
 
-    # phormer + "toggleInfo.js",     # -
-    # # phormer + "update.js",
-    # # phormer + "updateIndic.js",
+    phormer + "toggleInfo.js",     # -
+    # phormer + "update.js",
+    # phormer + "updateIndic.js",
 
-    # # hotel + "RequiredField.js",
-    # hotel + "isValidCard.js",        # +
-    # hotel + "isValidMasterCard.js",  # +
-    # hotel + "isValidVISA.js",        # +
-    # hotel + "validateNumber.js",
+    # hotel + "RequiredField.js",
+    hotel + "isValidCard.js",        # +
+    hotel + "isValidMasterCard.js",  # +
+    hotel + "isValidVISA.js",        # +
+    hotel + "validateNumber.js",
 
-    # apophis + "doRain.js",
-    # apophis + "drawShields.js",
-    # apophis + "fireMeteor.js",
-    # apophis + "getReady.js",
-    # apophis + "initShields.js",     # +-
+    apophis + "doRain.js",
+    apophis + "drawShields.js",
+    apophis + "fireMeteor.js",
+    apophis + "getReady.js",
+    apophis + "initShields.js",     # +-
 
-    # bingbong + "brickJiggler.js",   # +
-    # bingbong + "doPaddlePower.js",  # -
-    # bingbong + "drawLevel.js",      # -
-    # bingbong + "goPing.js",
+    bingbong + "brickJiggler.js",   # +
+    bingbong + "doPaddlePower.js",  # -
+    bingbong + "drawLevel.js",      # -
+    bingbong + "goPing.js",
+
     bingbong + "initBricks.js",     # -
 
-    # burncanvas + "do_draw.js",      # -
-    # burncanvas + "modify_region.js",
+    burncanvas + "do_draw.js",      # -
+    burncanvas + "modify_region.js",
 
-    # csjs + "luhn-algorithm.js",
-    # csjs + "quicksort_partition.js",
+    csjs + "luhn-algorithm.js",
+    csjs + "quicksort_partition.js",
 
     # mathjs + "probability_gamma.js"  # +
 ]
