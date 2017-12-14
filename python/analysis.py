@@ -18,7 +18,27 @@ def get_summary_report(csvs):
     result['max'] = merged_dataframes.max(axis=1)
     result['min'] = merged_dataframes.min(axis=1)
     result['median'] = merged_dataframes.median(axis=1)
-    return result
+    ## print merged_dataframes
+    return (merged_dataframes, result)
+
+
+def a12slow(lst1, lst2):
+    more = same = 0.0
+    for x in sorted(lst1):
+        for y in sorted(lst2):
+            if x == y:
+                same += 1
+            elif x > y:
+                more += 1
+    return (more + 0.5*same) / (len(lst1)*len(lst2))
+
+def mk_a12_df(df1, df2):
+    a12 = []
+    for index, row in df1.iterrows():
+        a12.append(a12slow(df1.iloc[index], df2.iloc[index]))
+    a12_df = pd.DataFrame(a12, columns=['a12'])
+    print a12_df
+    return a12_df
 
 
 def generateExcelReport(cs_name,
@@ -27,16 +47,25 @@ def generateExcelReport(cs_name,
                         genetic_converge5_csvs,
                         genetic_converge10_csvs,
                         genetic_converge20_csvs):
-    random_df = get_summary_report(random_csvs)
-    genetic_df = get_summary_report(genetic_csvs)
-    genetic_converge5_df = get_summary_report(genetic_converge5_csvs)
-    genetic_converge10_df = get_summary_report(genetic_converge10_csvs)
-    genetic_converge20_df = get_summary_report(genetic_converge20_csvs)
+    (mrandom_df, random_df) = get_summary_report(random_csvs)
+    (mgenetic_df, genetic_df) = get_summary_report(genetic_csvs)
+    (mgenetic_converge5_df, genetic_converge5_df) = get_summary_report(genetic_converge5_csvs)
+    (mgenetic_converge10_df, genetic_converge10_df) = get_summary_report(genetic_converge10_csvs)
+    (mgenetic_converge20_df, genetic_converge20_df) = get_summary_report(genetic_converge20_csvs)
+
+    rg_df = mk_a12_df(mrandom_df, mgenetic_df)
+    rg5_df = mk_a12_df(mrandom_df, mgenetic_converge5_df)
+    rg10_df = mk_a12_df(mrandom_df, mgenetic_converge10_df)
+    gg5_df = mk_a12_df(mgenetic_df, mgenetic_converge5_df)
+    gg10_df = mk_a12_df(mgenetic_df, mgenetic_converge10_df)
+    g5g10_df = mk_a12_df(mgenetic_converge5_df, mgenetic_converge10_df)
+
     concat_result = pd.concat([genetic_df,
                                genetic_converge5_df,
                                genetic_converge10_df,
                                genetic_converge20_df,
-                               random_df],
+                               random_df,
+                               rg_df, rg5_df, rg10_df, gg5_df, gg10_df, g5g10_df],
                               axis=1)
     headers = ['gbrunch',
                'gmean',
@@ -66,7 +95,9 @@ def generateExcelReport(cs_name,
                'rmean',
                'rmax',
                'rmin',
-               'rmedian']
+               'rmedian',
+
+               'R-G', 'R-G5', 'R-G10', 'G-G5', 'G-G10', 'G5-G10']
     # concat_result.ix[concat_result['brunch'] != 'starttime']
     concat_result.to_excel(writer,
                            index=False,
