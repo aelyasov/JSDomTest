@@ -12,7 +12,7 @@ function test() {
             }
         }
     }
-    if (allOk) {
-        console.log('Congratulations! You did it');
-    }
+    // if (allOk) {
+    //     console.log('Congratulations! You did it');
+    // }
 }

@@ -21,9 +21,9 @@ function test(number1, number2) {
 	    }
         }
 
-        for (var n1 = 0; no < tmpObjects1.length; no++) {
-            tmpObjects1[n1].innerHTML = number2;
-            tmpObjects2[n1].innerHTML = number1;
-        }
+        // for (var n1 = 0; no < tmpObjects1.length; no++) {
+        //     tmpObjects1[n1].innerHTML = number2;
+        //     tmpObjects2[n1].innerHTML = number1;
+        // }
     }
 }
