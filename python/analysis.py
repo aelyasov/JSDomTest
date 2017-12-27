@@ -37,7 +37,7 @@ def mk_a12_df(df1, df2):
     for index, row in df1.iterrows():
         a12.append(a12slow(df1.iloc[index], df2.iloc[index]))
     a12_df = pd.DataFrame(a12, columns=['a12'])
-    print a12_df
+    print(a12_df)
     return a12_df
 
 
@@ -110,21 +110,21 @@ all_csvs = glob('*.csv')
 index = {}
 for csv_fname in all_csvs:
     csv_filename_split = csv_fname.split('_')
-    print 'csv_filename_split:', csv_filename_split
+    print('csv_filename_split:', csv_filename_split)
     key = '_'.join(csv_filename_split[0:(len(csv_filename_split) - 2)])
-    print 'key:', key
+    print('key:', key)
     index.setdefault(key, list()).append(csv_fname)
 
-print index
+print(index)
 
-for cs_name, cs_filenames in index.iteritems():
-    print 'casestudy:', cs_name
-    print 'casestudy files:', cs_filenames
+for cs_name, cs_filenames in index.items():
+    print('casestudy:', cs_name)
+    print('casestudy files:', cs_filenames)
     tmp_index = {}
     for filename in cs_filenames:
         filename_split = filename.split('_')
         key = filename_split[len(filename_split) - 2]
-        print key
+        print(key)
         tmp_index.setdefault(key, list()).append(filename)
     generateExcelReport(cs_name,
                         tmp_index['random'],
