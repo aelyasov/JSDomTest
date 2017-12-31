@@ -97,14 +97,14 @@ def printTarget(writer, target_stats):
 
 def outputCsvReport():
     inputfile = sys.argv[1]
-    print 'Analysing file:', inputfile
+    print('Analysing file:', inputfile)
     (input_path, input_base) = split(inputfile)
     input_name = splitext(input_base)[0]
     outputfile = join(input_path, input_name) + '.csv'
-    print 'Generating report:', outputfile
+    print('Generating report:', outputfile)
     with open(outputfile, 'w') as csvfile:
         report = processReport(inputfile)
-        print 'len', len(report)
+        print('len', len(report))
         header = ['brunch'] + range(1, len(report)+1)
         writer = csv.writer(csvfile, delimiter=';')
         writer.writerow(header)

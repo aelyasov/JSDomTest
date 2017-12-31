@@ -944,10 +944,13 @@ The fact that the median of generation reached the upper limit of \underline{200
 
 Table~\ref{tbl.stats} also shows accumulated statistics for each function as a whole (row in line with the function name). This gives us a way to compare  all three testing strategies with each other at the function level. Chart in Figure~\ref{fig.gen.time.comp} clearly illustrates how the median time varies per function for each algorithm. Across all 14 examples $G10$ indicated the best performance comparing to both $R$ and $G$. We observed only two cases (\emph{revealAll}) and (\emph{doPaddlePower}) where random testing gave a slightly better result by only 6\%. If we take in consideration only examples with the average execution time above 50 seconds, we can conclude that $G10$ was minimum 1.87 time (\emph{do_draw}) and maximum 51.4 (\emph{isValidCard}) time faster than $R$. At the same time, even plain genetic algorithm $G$ outperforms the random one $R$ in all examples except of two \emph{doPaddlePower} and \emph{initBricks} due to the reasons discussed early in this section. In cases of success, especially for some small examples such as \emph{newGame} and \emph{isValidCard}, the genetic algorithm was even able to beat $G5$ by upto 30\%.  
 
-\paragraph{\textbf{RQ2 (cost).}} The cost of one test iteration is defined as the relation between the execution time and the number of generations, i.e. $t/i$ in Table~\ref{tbl.stats}. Figure~\ref{fig.get.cost} shows the comparison of various algorithms across all case-studies. 
+\paragraph{\textbf{RQ2 (cost).}} The cost (time) of one iteration is defined as the relation between the execution time and the number of generations, i.e. $t/i$ in Table~\ref{tbl.stats}. Figure~\ref{fig.get.cost} shows the cost comparison of various algorithms across all case-studies. The execution time of one iteration depends on the population size, in case 50 candidates. Evaluation of a candidate results in an execution trace of a varying length. The length of an execution trace positively correlates with the computation cost of the fitness function. Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. The \emph{do_draw} examples illustrates the latter case, it consists of 40 LOC and operates only with primitive type which do not case any exception. In our evaluation we observed that the iteration cost varied between 0.25 and 3.38 seconds. 
 
+TODO: discuss why cost of one genetic iteration for \emph{do_draw} is higher than random.
 
-\paragraph{\textbf{RQ3 (coverage).}} ...
+TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
+
+\paragraph{\textbf{RQ3 (coverage).}} In this research question we want to compare how coverage progresses with the increase of budget assigned per branch. We chose the following budget categories: 5, 10, 30 etc. up to 150 seconds per branch. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $G$ and $G10$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $G$ slightly outperforms $G10$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $G10$ starts to transcend $G$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds).  
 
 \begin{figure}[t]
   \centering
@@ -1065,12 +1068,14 @@ Table~\ref{tbl.stats} also shows accumulated statistics for each function as a w
         xlabel={Time budget per branch (seconds)},
         ylabel={Number of covered branches},
         xmin=0, xmax=150,
-        ymin=0, ymax=59,
+        ymin=10, ymax=58,
         xtick={0,5,10,30,60,90,120,150,180},
         ytick={0,10,20,30,40,50},
         legend pos=south east,
         ymajorgrids=true,
+        % xmajorgrids=true,
         grid style=dashed,
+        label style={font=\huge}
       ]
       
       \addplot[
@@ -1089,7 +1094,7 @@ Table~\ref{tbl.stats} also shows accumulated statistics for each function as a w
         color=yellow,
         mark=*,
       ]   coordinates {
-        (5,27) (10,35) (30,50) (60,54) (90,55) (120,56) (150,59)
+        (5,27) (10,35) (30,50) (60,54) (90,55) (120,56) (150,58)
       };
       \legend{R,G,G10}
  
