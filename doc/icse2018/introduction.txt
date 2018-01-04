@@ -1,0 +1,11 @@
+- A Search-Based Testing Approach for XML Injection Vulnerabilities in Web Applications
+- A Survey of Dynamic Analysis and Test Generation for JavaScript (http://cs.staff.au.dk/~amoeller/papers/jssurvey/journal.pdf)
+- Chapter Five - Approaches and Tools for Automated End-to-End Web Testing
+- An Overview of JavaScript Testing in 2017 (https://medium.com/powtoon-engineering/a-complete-guide-to-testing-javascript-in-2017-a217b4cd5a2a)
+- JavaScript Testing: Unit vs Functional vs Integration Tests (https://www.sitepoint.com/javascript-testing-unit-functional-integration/)
+- JavaScript Unit Testing book: http://pepa.holla.cz/wp-content/uploads/2016/08/JavaScript-Unit-Testing.pdf
+- Javascript unit testing tools: http://mo.github.io/2017/06/05/javascript-unit-testing.html
+- Chapter Five - Advances in Testing JavaScript-Based Web Application: http://www.sciencedirect.com/science/article/pii/S0065245814000114
+- An Empirical Study of Client-Side JavaScript Bugs: http://www.ece.ubc.ca/~amesbah/docs/frolin-esem13.pdf
+- A Study of Causes and Consequences of Client-Side JavaScript Bugs: http://salt.ece.ubc.ca/publications/docs/frolin-tse16.pdf
+- Automated Software Testing of JavaScript Web Applications: file:///Users/juliapetryshena/Downloads/mrogalla-thesis.pdf
