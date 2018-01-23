@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import pandas as pd
+from scipy.stats import mstats
 from glob import glob
 
 
@@ -37,8 +38,22 @@ def mk_a12_df(df1, df2):
     for index, row in df1.iterrows():
         a12.append(a12slow(df1.iloc[index], df2.iloc[index]))
     a12_df = pd.DataFrame(a12, columns=['a12'])
-    print(a12_df)
     return a12_df
+
+def mk_kruskal(df1, df2):
+    kruskal = []
+    for index, row in df1.iterrows():
+        if df1.iloc[index].isnull().values.any():
+            pval = 0
+        else:
+            if (df1.iloc[index].values == df2.iloc[index].values).all():
+                pval = 0
+            else:
+                args = [df1.iloc[index].values, df2.iloc[index].values]
+                pval = mstats.mannwhitneyu(*args).pvalue
+        kruskal.append(pval)
+    kruskal_df = pd.DataFrame(kruskal, columns=['kruskal'])
+    return kruskal_df
 
 
 def generateExcelReport(cs_name,
@@ -60,24 +75,31 @@ def generateExcelReport(cs_name,
     gg10_df = mk_a12_df(mgenetic_df, mgenetic_converge10_df)
     g5g10_df = mk_a12_df(mgenetic_converge5_df, mgenetic_converge10_df)
 
-    concat_result = pd.concat([genetic_df,
-                               genetic_converge5_df,
+    kruskal_rg   = mk_kruskal(mrandom_df, mgenetic_df)
+    kruskal_rg10 = mk_kruskal(mrandom_df, mgenetic_converge10_df)
+    kruskal_gg10 = mk_kruskal(mgenetic_df, mgenetic_converge10_df)
+
+    concat_result = pd.concat([random_df,
+                               genetic_df,
                                genetic_converge10_df,
-                               genetic_converge20_df,
-                               random_df,
-                               rg_df, rg5_df, rg10_df, gg5_df, gg10_df, g5g10_df],
+                               rg_df,
+                               rg10_df,
+                               gg10_df,
+                               kruskal_rg,
+                               kruskal_rg10,
+                               kruskal_gg10],
                               axis=1)
-    headers = ['gbrunch',
+    headers = ['rbrunch',
+               'rmean',
+               'rmax',
+               'rmin',
+               'rmedian',
+
+               'gbrunch',
                'gmean',
                'gmax',
                'gmin',
                'gmedian',
-
-               'g5brunch',
-               'g5mean',
-               'g5max',
-               'g5min',
-               'g5median',
 
                'g10brunch',
                'g10mean',
@@ -85,19 +107,14 @@ def generateExcelReport(cs_name,
                'g10min',
                'g10median',
 
-               'g20brunch',
-               'g20mean',
-               'g20max',
-               'g20min',
-               'g20median',
+               'R-G',
+               'R-G10',
+               'G-G10',
 
-               'rbrunch',
-               'rmean',
-               'rmax',
-               'rmin',
-               'rmedian',
-
-               'R-G', 'R-G5', 'R-G10', 'G-G5', 'G-G10', 'G5-G10']
+               'kruskal_rg',
+               'kruskal_rg10',
+               'kruskal_gg10'
+    ]
     # concat_result.ix[concat_result['brunch'] != 'starttime']
     concat_result.to_excel(writer,
                            index=False,

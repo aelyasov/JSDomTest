@@ -350,9 +350,9 @@ As we have just seen, even for such a relatively simple example, the constructio
 
 \begin{figure}[t!]
   \centering 
-  \begin{sequencediagram}[font=\footnotesize]
+  \begin{sequencediagram}[font=\scriptsize]
 
-    \renewcommand\unitfactor{0.5}
+    \renewcommand\unitfactor{0.35}
     \newinst{user}{\textbf{User}}
     \newinst{server}{\textbf{Server}}
     \newinst[1]{validator}{\textbf{Validator}}
@@ -368,16 +368,16 @@ As we have just seen, even for such a relatively simple example, the constructio
       \begin{call}{server}{Select(branches)}{user}{$\text{branches}'$}       
       \end{call}
       
-      \begin{sdblock}{\textbf{Genetic Loop}}{\hspace{2mm}$\text{branch} \in \text{branches}'$}
-        \begin{sdblock}{\textbf{Random Loop}}{errors > 0}
+      \begin{sdblock}{\textbf{Genetic Loop}}{\scriptsize \hspace{8mm}$\text{branch} \in \text{branches}'$}
+        \begin{sdblock}{\textbf{Random Loop}}{\scriptsize errors > 0}
           \begin{call}{server}{pop = Random(cinfo, config)}{validator}{errors}
           \end{call}
           \prelevel
         \end{sdblock}
         
-        \begin{sdblock}{\textbf{Fitness Loop}}{(fitness $\neq$ 0) $\vee$ gen.limit}
+        \begin{sdblock}{\textbf{Fitness Loop}}{\scriptsize (fitness $\neq$ 0) $\vee$ gen.limit}
 
-          \begin{sdblock}{\textbf{Evaluation Loop}}{p $\in$ pop}
+          \begin{sdblock}{\textbf{Evaluation Loop}}{\scriptsize p $\in$ pop}
             \begin{call}{server}{POST /genetic \{p\}}{client}{response = ifun(p: sig)}
             \end{call}
             
@@ -386,13 +386,13 @@ As we have just seen, even for such a relatively simple example, the constructio
             \prelevel
           \end{sdblock}
           
-          \begin{sdblock}{\textbf{Crossover Loop}}{errors > 0}
+          \begin{sdblock}{\textbf{Crossover Loop}}{\scriptsize errors > 0}
             \begin{call}{server}{cross = Crossover(cinfo, pop)}{validator}{errors}
             \end{call}
             \prelevel
           \end{sdblock}
 
-          \begin{sdblock}{\textbf{Mutation Loop}}{errors > 0}
+          \begin{sdblock}{\textbf{Mutation Loop}}{\scriptsize errors > 0}
             \begin{call}{server}{mut = Mutation(cinfo, pop)}{validator}{errors}
             \end{call}
             \prelevel
@@ -411,7 +411,7 @@ As we have just seen, even for such a relatively simple example, the constructio
   \label{fig.framework.architect} 
 \end{figure}
 
-Given a JS function $f$ and a set of branches $\mathbb{B}_f$, the ultimate goal of the testing framework is to find input arguments for $f$ that cover all branches from $B_f$. We implemented such a framework as a client-server application which under the hood uses the genetic engine for test generation. The general workflow of the framework is depicted as a sequence diagram in Figure~\ref{fig.framework.architect}. The diagram consists of the four interacting components \User, \Server, \Validator, and \Client. \Server is the key component of the whole framework. It is responsible for the \emph{Initialization Phase} and the \emph{Genetic Phase}. Both phases will be covered in details in Section~\ref{sub.sec.init.phase} and \ref{sub.sec.genetic.phase} respectively.
+Given a JS function $f$ and a set of branches $\mathbb{B}_f$, the ultimate goal of the testing framework is to find input arguments for $f$ that cover all branches from $B_f$. Our JS testing framework, called \emph{JEDI}, is a client-server application which under the hood uses the genetic engine for test generation. The general workflow of the framework is depicted as a sequence diagram in Figure~\ref{fig.framework.architect}. The diagram consists of the four interacting components \User, \Server, \Validator, and \Client. \Server is the key component of the whole framework. It is responsible for the \emph{Initialization Phase} and the \emph{Genetic Phase}. Both phases will be covered in details in Section~\ref{sub.sec.init.phase} and \ref{sub.sec.genetic.phase} respectively.
 
 Each newly constructed HTML document has to be processed by the \Validator\footnote{\url{https://validator.w3.org/nu/}} which checks its syntactic correctness and reports back the set of identified errors. \Server rejects the document if any errors were revealed and generates a new one until the generated document has no errors anymore. \Client is a \emph{Node.js}\footnote{\url{https://nodejs.org/en/}} application that is mainly responsible for the execution of the JS code. We use the \emph{jsdom}\footnote{\url{https://github.com/tmpvar/jsdom}} library to model the virtual DOM and simulate the native browser API calls.   
 
@@ -445,16 +445,7 @@ Let us give a closer look at the sequence of interactions in Figure~\ref{fig.fra
     }
 \end{algorithm}
 
-During the \emph{Initialization Phase} we analyze the FUN in order to retrieve the data required for the consecutive genetic testing. The main steps of this phase are illustrated by Algorithm~\ref{alg.init}. Given a FUT \emph{fun.js} as an input, we parse the function and its type signature in line~\ref{alg.init.parse.fun.sig}. In order to maximize the chances of generating the fittest candidate in the genetic phase, in line~\ref{alg.init.collect.info} we perform static analysis of the FUT with the purpose to collect constant info. Such constants include the numeric and string literals, as well as the arguments to the following DOM API methods:
-\begin{multicols}{2}
-\footnotesize
-\begin{itemize}
-\item \texttt{getElementsByTagName}
-\item \texttt{getElementById}
-\item \texttt{getElementsByClassName}
-\item \texttt{getElementsByName}
-\end{itemize}
-\end{multicols}
+During the \emph{Initialization Phase} we analyze the FUN in order to retrieve the data required for the consecutive genetic testing. The main steps of this phase are illustrated by Algorithm~\ref{alg.init}. Given a FUT \emph{fun.js} as an input, we parse the function and its type signature in line~\ref{alg.init.parse.fun.sig}. In order to maximize the chances of generating the fittest candidate in the genetic phase, in line~\ref{alg.init.collect.info} we perform static analysis of the FUT with the purpose to collect constant info. Such constants include the numeric and string literals, as well as the arguments to the following DOM API methods \texttt{getElementsByTagName}, \texttt{getElementById}, \texttt{getElementsByClassName}, and \texttt{getElementsByName},
 which respectively signify the reference to the \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} encountered in the FUT. Next step is normalizing the FUT before applying any instrumentation (line~\ref{alg.init.transform.ast}), e.g. transform \emph{if-then} branches into \emph{if-then-else}. We instrument the FUT (line~\ref{alg.init.instr}) in order to collect the run-time data such as the execution trace, the approach level, the branch and loop distances, and the constants. Upon the $ifun$ execution this information is gathered and fed back to the fitness evaluation procedure. Finally, we construct the control-flow graph (line~\ref{alg.init.build.cfg}) and identify all branches of the FUT (line~\ref{alg.init.get.branches}).
 
 \subsubsection{Supported Types}
@@ -753,6 +744,14 @@ In order to evaluate the feasibility of our test framework adoption in practice,
   \end{tabular}
 \end{table}
 
+By carrying the evaluation, we would like to address the following research questions:
+\begin{description}
+\item[\textbf{RQ1 (performance):}] What is the performance of our test generation framework? Is there any difference in performance on examples with DOM and without?  Which algorithm works best random, genetic or genetic with restart?
+\item[\textbf{RQ2 (cost):}] What is the cost of one iteration of each algorithm?
+\item[\textbf{RQ3 (coverage):}] How does the branch coverage progress over time given a fixed budget per branch?
+\item[\textbf{RQ4 (significance):}] What is statistical significance and effect size of our experimental results? 
+\end{description}
+
 
 \subsection{Case Studies}
 \label{sub.sec.case.studies}
@@ -761,64 +760,57 @@ Being one of the most popular programming languages of the modern time, there ar
 
 Table~\ref{tbl.case.studies} presents common quantitative characteristics for the selected case-studies. For each function, we reported the following metrics\footnote{\url{http://jsmeter.info/} is the tool used for measuring JS code statistics}: lines of code (\textbf{\#LOC}), number of branches (\textbf{\#BR}), depth (\textbf{\#D}), cyclomatic complexity (\textbf{CC}), halstead volume (\textbf{HV}) and maintainability index (\textbf{MI}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulates with the \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively.      
 
-\begin{table*}[t]
+\setlength\tabcolsep{0.6pt}
+\begin{table}[t]
   \caption{Summary of the Case-Studies}
   \label{tbl.case.studies}
   %\resizebox{\textwidth}{!}{
     \scriptsize
-  \begin{tabular}{l|c|l|l|r|r|r|r|r|r|c|c|c|c}
+  \begin{tabular}{l|l|p{3.1cm}|c|c|c|c|c|c|c|c}
     \toprule
-    \textbf{case-study} & \textbf{?} & \textbf{function} & \textbf{type signature} & \textbf{\#LOC} & \textbf{\#BR} & \textbf{\#D} & \textbf{CC} & \textbf{HV} & \textbf{MI} & \textbf{DOM} & \textbf{id} & \textbf{tag} & \textbf{class} \\
+    \textbf{case-study} & \textbf{function} & \textbf{type signature} & \textbf{LOC} & \textbf{BR} & \textbf{D} & \textbf{CC} & \textbf{DOM} & \textbf{id} & \textbf{tag} & \textbf{class} \\
     \hline
-    sudoku     & + & helpMe & (dom,int,int)    & 14 & 2 & 3 & 3 & 344 & 107.58 & + & + & + & - \\
-    sudoku     & + & isGameFinished & (dom)    & 10 & 3 & 3 & 4 & 370 & 112.55 & + & + & + & + \\
-    sudoku     & + & newGame & (dom)           & 9  & 1 & 2 & 2 & 326 & 115.15 & + & + & + & + \\
-    sudoku     & + & revealAll & (dom)         & 8  & 0 & 2 & 1 & 312 & 117.44 & + & + & + & - \\
-    sudoku     & - & showCell & (dom)         & 8  & 0 & 0 & 1 & 232 & 118.46 & + & + & + & - \\
-    sudoku     & + & shuffleBoard & (dom)      & 23 & 2 & 3 & 3 & 555 & 97.9   & + & - & + & - \\
-    sudoku     & - & switchLevel & (dom,bool) & 10 & 1 & 2 & 2 & 257 & 114.26 & + & - & + & - \\
+    sudoku     & helpMe & (dom,int,int)    & 14 & 2 & 3 & 3 & + & + & + & - \\
+    sudoku     & isGameFinished & (dom)    & 10 & 3 & 3 & 4 & + & + & + & + \\
+    sudoku     & newGame & (dom)           & 9  & 1 & 2 & 2 & + & + & + & + \\
+    sudoku     & revealAll & (dom)         & 8  & 0 & 2 & 1 & + & + & + & - \\
+    %% sudoku     & - & showCell & (dom)          & 8  & 0 & 0 & 1 & + & + & + & - \\
+    sudoku     & shuffleBoard & (dom)      & 23 & 2 & 3 & 3 & + & - & + & - \\
+    %% sudoku     & - & switchLevel & (dom,bool)  & 10 & 1 & 2 & 2 & + & - & + & - \\
     \hline
-    phormer    & + & toggleInfo & (dom,string)                                                      & 16 & 3 & 1 & 4 & 570  & 103.46 & + & + & - & - \\
-    phormer    & - & update & (dom,int,[string],bool,[string],[string],bool,[string],[string],int) & 35 & 5 & 3 & 6 & 1190 & 87.804 & + & + & - & - \\
-    phormer    & - & updateIndic & (dom,bool)                                                      & 16 & 3 & 1 & 4 & 361  & 105    & + & + & - & - \\
+    phormer    & toggleInfo & (dom,string)                                                     & 16 & 3 & 1 & 4 & + & + & - & - \\
+    %% \multirow{2}{*}{phormer}    & \multirow{2}{*}{-} & \multirow{2}{*}{update} & (dom,int,[string],bool,[string],[string],bool,[string],[string],int) &    &   &   &   &   &   &   & \\
+    %%            &   &        &                                                                      & 35 & 5 & 3 & 6 & + & + & - & - \\
+    %% phormer    & - & updateIndic & (dom,bool)                                                      & 16 & 3 & 1 & 4 & + & + & - & - \\
     \hline
-    hotel RS   & - & RequiredField & (dom,[string]) & 11 & 2 & 2 & 5 & 247  & 112.16 & + & + & - & - \\
-    hotel RS   & + & isValidCard & ([int])           & 17 & 2 & 2 & 5 & 351  & 103.91 & - & - & - & - \\
-    hotel RS   & - & isValidMasterCard & ([int])     & 5  & 4 & 1 & 7 & 130  & 126.67 & - & - & - & - \\
-    hotel RS   & + & isValidVISA & ([int])           & 6  & 3 & 1 & 6 & 104  & 124.71 & - & - & - & - \\
-    hotel RS   & - & validateNumber & (dom,string)  & 7  & 1 & 1 & 4 & 98.1 & 122.87 & + & + & - & - \\
+    %% hotel RS   & - & RequiredField & (dom,[string])  & 11 & 2 & 2 & 5 & + & + & - & - \\
+    hotel RS   & isValidCard & ([int])           & 17 & 2 & 2 & 5 & - & - & - & - \\
+    %% hotel RS   & - & isValidMasterCard & ([int])     & 5  & 4 & 1 & 7 & - & - & - & - \\
+    hotel RS   & isValidVISA & ([int])           & 6  & 3 & 1 & 6 & - & - & - & - \\
+    %% hotel RS   & - & validateNumber & (dom,string)   & 7  & 1 & 1 & 4 & + & + & - & - \\
     \hline
-    apophis    & - & doRain & (dom,string,int,int,int,int,int,int)                                  & 10 & 3 & 2 & 4 & 242 & 114.1  & + & + & - & -\\
-    apophis    & - & drawShields & (dom,[int])                                                      & 6  & 1 & 2 & 2 & 212 & 123.19 & + & + & - & - \\
-    apophis    & - & fireMeteor & (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) & 15 & 3 & 2 & 4 & 539 & 104.70 & - & - & - & - \\
-    apophis    & - & getReady & (dom,int,int,int,int,int,int)                                       & 16 & 2 & 2 & 3 & 410 & 104.82 & + & + & - & - \\
-    apophis    & + & initShields & (dom,[int],int,int)                                               & 6  & 0 & 1 & 1 & 310 & 122.12 & + & + & - & -\\
+    %% apophis    & - & doRain & (dom,string,int,int,int,int,int,int)                                  & 10 & 3 & 2 & 4 & + & + & - & -\\
+    %% apophis    & - & drawShields & (dom,[int])                                                      & 6  & 1 & 2 & 2 & + & + & - & - \\
+    %% apophis    & - & fireMeteor & (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) & 15 & 3 & 2 & 4 & - & - & - & - \\
+    %% apophis    & - & getReady & (dom,int,int,int,int,int,int)                                       & 16 & 2 & 2 & 3 & + & + & - & - \\
+    apophis    & initShields & (dom,[int],int,int)                                              & 6  & 0 & 1 & 1 & + & + & - & -\\
     \hline
-    bingbong   & + & brickJiggler & (dom,int,int,int,[int],[int],[int],[int]) & 7  & 1  & 1 & 2  & 305  & 119.45 & + & + & - & - \\
-    bingbong   & + & doPaddlePower & (dom,int,int)                            & 15 & 2  & 1 & 3  & 353  & 106.38 & + & + & - & - \\
-    bingbong   & + & initBricks & (dom,[int],int,int)                         & 70 & 12 & 4 & 13 & 2380 & 72.594 & + & + & - & - \\
-    bingbong   & - & drawLevel & (dom,int,int,int,int)                       & 22 & 2  & 3 & 3  & 703  & 97.816 & + & + & - & - \\
-    bingbong   & - & goPing & (dom,int,int,int)                              & 12 & 2  & 2 & 3  & 268  & 110.93 & + & + & - & - \\
+    bingbong   & brickJiggler & (dom,int,int,int,[int],[int],[int],[int]) & 7  & 1  & 1 & 2  & + & + & - & - \\
+    bingbong   & doPaddlePower & (dom,int,int)                            & 15 & 2  & 1 & 3  & + & + & - & - \\
+    bingbong   & initBricks & (dom,[int],int,int)                         & 70 & 12 & 4 & 13 & + & + & - & - \\
+    %% bingbong   & - & drawLevel & (dom,int,int,int,int)                        & 22 & 2  & 3 & 3  & + & + & - & - \\
+    %% bingbong   & - & goPing & (dom,int,int,int)                               & 12 & 2  & 2 & 3  & + & + & - & - \\
     \hline
-    burncanvas & + & do\_draw & (int,int,int,int,int,int,int)                 & 40 & 12 & 2 & 14 & 583 & 86.214 & - & - & - & - \\
+    burncanvas & do\_draw & (int,int,int,int,int,int,int)                 & 40 & 12 & 2 & 14 & - & - & - & - \\
+    %% \hline
+    %% cs-in-js   & - & luhn-algorithm & (string,bool)                          & 20 & 3 & 2 & 6 & -  & -  & - & - \\
+    %% cs-in-js   & - & quicksort-partition & ([int],int,int)                   & 21 & 1 & 1 & 3 & -  & -  & - & - \\ 
     \hline
-    cs-in-js   & - & luhn-algorithm & (string,bool)                          & 20 & 3 & 2 & 6 & 308 & 101.49 & -  & -  & - & - \\
-    cs-in-js   & - & quicksort-partition & ([int],int,int)                   & 21 & 1 & 1 & 3 & 309 & 101.38 & -  & -  & - & - \\ 
-    \hline
-    mathjs     & + & prob\_gamma & (float)                                    & 57 & 8  & 2 & 16 & 1370 & 77.121 & - & - & - & - \\
+    mathjs     & prob\_gamma & (float)                                   & 57 & 8  & 2 & 16 & - & - & - & - \\
     \bottomrule
   \end{tabular}
 %}
-\end{table*}
-
-\subsection{Research Questions}
-\label{sub.sec.research.questions}
-
-\begin{description}
-\item[\textbf{RQ1:}] What is the performance of our test generation framework? Is there any difference in performance on examples with DOM and without?  Which algorithm works best random, genetic or genetic with restart?
-\item[\textbf{RQ2:}] What is the cost of one iteration of each algorithm?
-\item[\textbf{RQ3:}] How does the branch coverage progress over time given a fixed budget per branch? 
-\end{description}
+\end{table}
 
 \subsection{Results}
 \label{sub.sec.eval.results}
@@ -830,108 +822,108 @@ Table~\ref{tbl.case.studies} presents common quantitative characteristics for th
     \scriptsize
     \begin{tabular}{lc|ccc|ccc|ccc|ccc|ccc}
       \toprule
-      \multirow{2}{*}{\textbf{NAME}} & \multirow{2}{*}{\textbf{\#D}}         &  \multicolumn{3}{c|}{$m_r$} & \multicolumn{3}{c|}{$m_g$} & \multicolumn{3}{c|}{$m_{g10}$} & \multirow{2}{*}{$\frac{t_r}{t_g}$} &  \multirow{2}{*}{$\frac{t_r}{t_{g10}}$} & \multirow{2}{*}{$\frac{t_g}{t_{g10}}$}   & \multirow{2}{*}{$a_{rg}$} &  \multirow{2}{*}{$a_{rg10}$} & \multirow{2}{*}{$a_{gg10}$} \\
+      \multirow{2}{*}{\textbf{NAME}} & \multirow{2}{*}{\textbf{\#D}}         &  \multicolumn{3}{c|}{$m_r$} & \multicolumn{3}{c|}{$m_g$} & \multicolumn{3}{c|}{$m_{g10}$} & \multirow{2}{*}{$\frac{t_r}{t_g}$} &  \multirow{2}{*}{$\frac{t_r}{t_{g10}}$} & \multirow{2}{*}{$\frac{t_g}{t_{g10}}$}   & \multirow{2}{*}{r/g} &  \multirow{2}{*}{r/g10} & \multirow{2}{*}{g/g10} \\
       \cline{3-11}
             &                & $i$      & $t$  & $t/i$     & $i$& $t$&$t/i$             &$i$ &$t$ &$t/i$               &      &       &        &      &       &      \\
       \toprule
     \multicolumn{2}{l|}{\textbf{helpMe}*}     
                                  & 218      & 270  & 1.24      & 61 & 47 & 0.77             & 62 & 56 & 0.9                & 5.74 & 4.82  & 0.84   &      &      &       \\
-    $(3,4,\inFor)$    & 1        & 4        & 4    & 1         & 5  & 3  & 0.6              & 8  & 6  & 0.75               & 1.33 & 0.67  & 0.5    & 0.57 & 0.39 & 0.37  \\
-    $(5,6,\thenBr)$   & 2        & 4        & 5    & 1.25      & 8  & 6  & 0.75             & 7  & 5  & 0.71               & 0.83 & 1     & 1.2    & 0.46 & 0.5  & 0.53  \\
-    $(5,15,\elseBr)$  & 2        & 121      & 156  & 1.29      & 24 & 21 & 0.86             & 23 & 24 & 1.04               & 7.43 & 6.5   & 0.88   & 0.87 & 0.86 & 0.48  \\
-    $(9,10,\thenBr)$  & 3        & 85       & 101  & 1.19      & 18 & 14 & 0.78             & 19 & 17 & 0.89               & 7.21 & 5.94  & 0.82   & 0.98 & 0.95 & 0.40  \\
-    $(9,14,\elseBr)$  & 3        & 4        & 4    & 1         & 6  & 4  & 0.67             & 5  & 4  & 0.8                & 1    & 1     & 1      & 0.56 & 0.51 & 0.45  \\
+    $(3,4,\inFor)$    & 1        & 4        & 4    & 1         & 5  & 3  & 0.6              & 8  & 6  & 0.75               & 1.33 & 0.67  & 0.5    & - & 0.39 & 0.37  \\
+    $(5,6,\thenBr)$   & 2        & 4        & 5    & 1.25      & 8  & 6  & 0.75             & 7  & 5  & 0.71               & 0.83 & 1     & 1.2    & - & -  & -  \\
+    $(5,15,\elseBr)$  & 2        & 121      & 156  & 1.29      & 24 & 21 & 0.86             & 23 & 24 & 1.04               & 7.43 & 6.5   & 0.88   & 0.87 & 0.86 & -  \\
+    $(9,10,\thenBr)$  & 3        & 85       & 101  & 1.19      & 18 & 14 & 0.78             & 19 & 17 & 0.89               & 7.21 & 5.94  & 0.82   & 0.98 & 0.95 & -  \\
+    $(9,14,\elseBr)$  & 3        & 4        & 4    & 1         & 6  & 4  & 0.67             & 5  & 4  & 0.8                & 1    & 1     & 1      & - & - & -  \\
     \hline                                                                                                          
 \multicolumn{2}{l|}{\textbf{isGameFinished}*} 
                                  & 264      & 220  & 0.83      & 32 & 30 & 0.94             & 43 & 43 & 1                  & 7.33 & 5.12  & 0.7    &      &      &        \\
-    $(7,8,\thenBr)$   & 2        & 37       & 30   & 0.81      & 8  & 8  & 1                & 12 & 13 & 1.08               & 3.75 & 2.31  & 0.62   & 0.6  & 0.66 & 0.43   \\
-    $(10,11,\thenBr)$ & 3        & \un{200} & 167  & 0.84      & 11 & 10 & 0.91             & 10 & 11 & 1.1                & 16.7 & 15.18 & 0.91   & 0.88 & 0.96 & 0.48   \\
-    $(10,14,\elseBr)$ & 3        & 25       & 21   & 0.84      & 11 & 11 & 1                & 19 & 18 & 0.95               & 1.91 & 1.17  & 0.61   & 0.55 & 0.55 & 0.46   \\
+    $(7,8,\thenBr)$   & 2        & 37       & 30   & 0.81      & 8  & 8  & 1                & 12 & 13 & 1.08               & 3.75 & 2.31  & 0.62   & -  & 0.66 & -   \\
+    $(10,11,\thenBr)$ & 3        & \un{200} & 167  & 0.84      & 11 & 10 & 0.91             & 10 & 11 & 1.1                & 16.7 & 15.18 & 0.91   & 0.88 & 0.96 & -   \\
+    $(10,14,\elseBr)$ & 3        & 25       & 21   & 0.84      & 11 & 11 & 1                & 19 & 18 & 0.95               & 1.91 & 1.17  & 0.61   & - & - & -   \\
     \hline
     \multicolumn{2}{l|}{\textbf{newGame}*}   
                                  & 18       & 14   & 0.78      & 11 & 9  & 0.81             & 10 & 10 & 1                  & 1.56 & 1.4   & 0.9    &      &      &      \\
-    $(6,7,\thenBr)$   & 2        & 16       & 12   & 0.75      & 9  & 7  & 0.78             & 8  & 8  & 1                  & 1.71 & 1.5   & 0.88   & 0.64 & 0.65 & 0.5  \\
+    $(6,7,\thenBr)$   & 2        & 16       & 12   & 0.75      & 9  & 7  & 0.78             & 8  & 8  & 1                  & 1.71 & 1.5   & 0.88   & 0.64 & 0.65 & -  \\
     \hline
     \multicolumn{2}{l|}{\textbf{revealAll}*}  
                                  & 60       & 50   & 0.83      & 44 & 44 & 1                & 47 & 53 & 1.13               & 1.14 & 0.94  & 0.83   &      &      &        \\
-    $(2,3,\inFor)$    & 1        & 25       & 20   & 0.8       & 24 & 24 & 1                & 24 & 27 & 1.13               & 0.83 & 0.74  & 0.89   & 0.45 & 0.39 &  0.43  \\
-    $(4,5,\inFor)$    & 2        & 35       & 30   & 0.86      & 20 & 20 & 1                & 23 & 26 & 1.13               & 1.5  & 1.15  & 0.77   & 0.62 & 0.55 &  0.37  \\
+    $(2,3,\inFor)$    & 1        & 25       & 20   & 0.8       & 24 & 24 & 1                & 24 & 27 & 1.13               & 0.83 & 0.74  & 0.89   & - & - & -  \\
+    $(4,5,\inFor)$    & 2        & 35       & 30   & 0.86      & 20 & 20 & 1                & 23 & 26 & 1.13               & 1.5  & 1.15  & 0.77   & 0.62 & -   &  0.37  \\
     \hline
 \multicolumn{2}{l|}{\textbf{shuffleBoard}*}   
                                  & 15       & 29   & 1.93      & 15 & 26 & 1.73             & 17 & 29 & 1.71               & 1.12 & 1     & 0.9    &      &      &       \\
-    $(13,14,\thenBr)$ & 3        & 5        & 10   & 2         & 5  & 9  & 1.8              & 6  & 10 & 1.67               & 1.11 & 1     & 0.9    & 0.58 & 0.53 & 0.46  \\
-    $(17,18,\thenBr)$ & 3        & 5        & 10   & 2         & 5  & 10 & 2                & 6  & 11 & 1.83               & 1    & 0.91  & 0.91   & 0.46 & 0.47 & 0.5   \\
+    $(13,14,\thenBr)$ & 3        & 5        & 10   & 2         & 5  & 9  & 1.8              & 6  & 10 & 1.67               & 1.11 & 1     & 0.9    & - & - & -  \\
+    $(17,18,\thenBr)$ & 3        & 5        & 10   & 2         & 5  & 10 & 2                & 6  & 11 & 1.83               & 1    & 0.91  & 0.91   & - & - & -   \\
     \toprule
 \multicolumn{2}{l|}{\textbf{toggleInfo}*}     
                                  & 6        & 6    & 1         & 7  & 7 & 1                 & 9 & 6   & 0.66               & 0.86  & 1     & 1.17  &    &      &       \\
-    $(2,3,\thenBr)$   & 1        & 2        & 2    & 1         & 2  & 2 & 1                 & 2 & 1   & 0.5                & 1     & 2     & 2     & 0.54 & 0.58 & 0.55  \\
-    $(6,7,\thenBr)$   & 1        & 2        & 2    & 1         & 3  & 3 & 1                 & 5 & 3   & 0.6                & 0.67  & 0.67  & 1     & 0.37 & 0.36 & 0.48  \\
+    $(2,3,\thenBr)$   & 1        & 2        & 2    & 1         & 2  & 2 & 1                 & 2 & 1   & 0.5                & 1     & 2     & 2     & - & - & -  \\
+    $(6,7,\thenBr)$   & 1        & 2        & 2    & 1         & 3  & 3 & 1                 & 5 & 3   & 0.6                & 0.67  & 0.67  & 1     & 0.37 & 0.36 & -  \\
     \toprule
 \multicolumn{2}{l|}{\textbf{isValidCard}}        
                                  & 1001     & 514  & 0.51      & 21 & 8 & 0.38              & 21 & 10 & 0.48               & 64.25 & 51.4  & 0.8    &   &   &       \\
-    $(3,6,\elseBr)$   & 1        & \un{200} & 103  & 0.52      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51.5  & 51.5  & 1      & 1 & 1 & 0.5   \\
-    $(7,8,\inFor)$    & 1        & \un{200} & 103  & 0.52      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 103   & 51.5  & 0.5    & 1 & 1 & 0.43  \\
-    $(10,11,\thenBr)$ & 2        & \un{200} & 102  & 0.51      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51    & 51    & 1      & 1 & 1 & 0.43  \\
-    $(10,13,\elseBr)$ & 2        & \un{200} & 106  & 0.53      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 106   & 53    & 0.5    & 1 & 1 & 0.38  \\
-    $(14,15,\inFor)$  & 1        & \un{200} & 100  & 0.5       & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 50    & 50    & 1      & 1 & 1 & 0.55  \\
+    $(3,6,\elseBr)$   & 1        & \un{200} & 103  & 0.52      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51.5  & 51.5  & 1      & 1 & 1 & -   \\
+    $(7,8,\inFor)$    & 1        & \un{200} & 103  & 0.52      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 103   & 51.5  & 0.5    & 1 & 1 & -  \\
+    $(10,11,\thenBr)$ & 2        & \un{200} & 102  & 0.51      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51    & 51    & 1      & 1 & 1 & -  \\
+    $(10,13,\elseBr)$ & 2        & \un{200} & 106  & 0.53      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 106   & 53    & 0.5    & 1 & 1 & -  \\
+    $(14,15,\inFor)$  & 1        & \un{200} & 100  & 0.5       & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 50    & 50    & 1      & 1 & 1 & -  \\
     \hline
 \multicolumn{2}{l|}{\textbf{isValidVISA}}        
                                  & 201      & 95   & 0.47      & 8  & 3 & 0.38              & 8  & 2  & 0.25               & 31.67 & 47.5  & 1.5    &   &   &       \\
-    $(2,3,\thenBr)$   & 1        & \un{200} & 95   & 0.48      & 7  & 3 & 0.43              & 7  & 2  & 0.29               & 31.67 & 47.5  & 1.5    & 1 & 1 & 0.59  \\
+    $(2,3,\thenBr)$   & 1        & \un{200} & 95   & 0.48      & 7  & 3 & 0.43              & 7  & 2  & 0.29               & 31.67 & 47.5  & 1.5    & 1 & 1 & -  \\
     \toprule
 \multicolumn{2}{l|}{\textbf{initShields}*}    
                                  & 6        & 5    & 0.83      & 6  & 5 & 0.83              & 6  & 3  & 0.5                & 1      & 1.67 & 1.67   &      &      &       \\
-    $(2,3,\inFor)$    & 1        & 6        & 5    & 0.83      & 6  & 4 & 0.67              & 6  & 3  & 0.5                & 1.25   & 1.67 & 1.33   & 0.83 & 0.84 & 0.53  \\
+    $(2,3,\inFor)$    & 1        & 6        & 5    & 0.83      & 6  & 4 & 0.67              & 6  & 3  & 0.5                & 1.25   & 1.67 & 1.33   & 0.83 & 0.84 & -  \\
     \toprule
 \multicolumn{2}{l|}{\textbf{brickJiggler}*}   
                                  & 7        & 8    & 1.14      & 6  & 4 & 0.67              & 4  & 3  & 0.75               & 2      & 2.67 & 1.33   &      &      &       \\
-    $(2,3,\thenBr)$   & 1        & 6        & 7    & 1.17      & 5  & 3 & 0.6               & 3  & 2  & 0.67               & 2.33   & 3.5  & 1.5    & 0.83 & 0.85 & 0.56  \\
+    $(2,3,\thenBr)$   & 1        & 6        & 7    & 1.17      & 5  & 3 & 0.6               & 3  & 2  & 0.67               & 2.33   & 3.5  & 1.5    & 0.83 & 0.85 & -  \\
     \hline
 \multicolumn{2}{l|}{\textbf{doPaddlePower}*}  
                                  & 19       & 15   & 0.79      & 204  & 140 & 0.69          & 25 & 16  & 0.64              & 0.11   & 0.94 & 8.75   &       &      &      \\
-    $(10,11,\thenBr)$ & 1        & 16       & 12   & 0.75      & \un{200} & 136 & 0.68      & 22 & 13  & 0.59              & 0.09   & 0.92 & 10.46  &  0.02 & 0.43 & 0.94 \\
+    $(10,11,\thenBr)$ & 1        & 16       & 12   & 0.75      & \un{200} & 136 & 0.68      & 22 & 13  & 0.59              & 0.09   & 0.92 & 10.46  &  0.02 & - & 0.94 \\
     \hline
 \multicolumn{2}{l|}{\textbf{initBricks}*}     
                                  & 1418     & 2379 & 1.68      & 593  & 474 & 0.8           & 422 & 415 & 0.98             & 5.02   & 5.73  & 1.14   &      &      &       \\
-    $(6,7,\thenBr)$   & 1        & 2        & 3    & 1.5       & 5    & 4   & 0.8           & 3   & 3   & 1                & 0.75   & 1     & 1.33   & 0.53 & 0.5  & 0.5   \\
-    $(6,10,\elseBr)$  & 1        & 15       & 23   & 1.53      & 6    & 6   & 1             & 6   & 6   & 1                & 3.83   & 3.83  & 1      & 0.87 & 0.83 & 0.4   \\
-    $(11,12,\thenBr)$ & 2        & \un{200} & 317  & 1.59      & 14   & 12  & 0.86          & 17  & 15  & 0.88             & 26.41  & 21.13 & 0.8    & 0.93 & 0.91 & 0.41  \\
-    $(11,15,\elseBr)$ & 2        & 18       & 30   & 1.67      & 6    & 6   & 1             & 6   & 6   & 1                & 5      & 5     & 1      & 0.89 & 0.86 & 0.47  \\
-    $(16,17,\thenBr)$ & 3        & \un{200} & 324  & 1.62      & 17   & 14  & 0.82          & 17  & 16  & 0.94             & 23.14  & 20.25 & 0.88   & 0.96 & 0.96 & 0.45  \\
-    $(16,20,\elseBr)$ & 3        & 25       & 40   & 1.6       & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.71   & 5.71  & 1      & 0.89 & 0.86 & 0.46  \\
+    $(6,7,\thenBr)$   & 1        & 2        & 3    & 1.5       & 5    & 4   & 0.8           & 3   & 3   & 1                & 0.75   & 1     & 1.33   & - & -  & -   \\
+    $(6,10,\elseBr)$  & 1        & 15       & 23   & 1.53      & 6    & 6   & 1             & 6   & 6   & 1                & 3.83   & 3.83  & 1      & 0.87 & 0.83 & -   \\
+    $(11,12,\thenBr)$ & 2        & \un{200} & 317  & 1.59      & 14   & 12  & 0.86          & 17  & 15  & 0.88             & 26.41  & 21.13 & 0.8    & 0.93 & 0.91 & -  \\
+    $(11,15,\elseBr)$ & 2        & 18       & 30   & 1.67      & 6    & 6   & 1             & 6   & 6   & 1                & 5      & 5     & 1      & 0.89 & 0.86 & -  \\
+    $(16,17,\thenBr)$ & 3        & \un{200} & 324  & 1.62      & 17   & 14  & 0.82          & 17  & 16  & 0.94             & 23.14  & 20.25 & 0.88   & 0.96 & 0.96 & -  \\
+    $(16,20,\elseBr)$ & 3        & 25       & 40   & 1.6       & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.71   & 5.71  & 1      & 0.89 & 0.86 & -  \\
     $(21,22,\thenBr)$ & 4        & \un{200} & 310  & 1.55      & 14   & 13  & 0.93          & 17  & 17  & 1                & 23.85  & 18.24 & 0.76   & 0.94 & 0.9  & 0.36  \\
-    $(21,25,\elseBr)$ & 4        & 26       & 41   & 1.58      & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.86   & 5.86  & 1      & 0.94 & 0.87 & 0.42  \\
-    $(29,30,\thenBr)$ & 1        & \un{200} & 330  & 1.65      & 66   & 58  & 0.88          & 74  & 70  & 0.95             & 5.69   & 4.71  & 0.83   & 0.82 & 0.88 & 0.5   \\
-    $(29,37,\elseBr)$ & 1        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.63 & 0.53 & 0.43  \\
-    $(38,39,\thenBr)$ & 2        & 185      & 328  & 1.77      & 85   & 67  & 0.79          & 48  & 44  & 0.92             & 4.9    & 7.45  & 1.52   & 0.87 & 0.88 & 0.54  \\
-    $(38,46,\elseBr)$ & 2        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & 0.64 & 0.58 & 0.44  \\
-    $(47,48,\thenBr)$ & 3        & 187      & 336  & 1.8       & \un{200} & 141 & 0.7       & 127 & 131 & 1.03             & 2.38   & 2.56  & 1.08   & 0.8  & 0.8  & 0.54  \\
-    $(47,55,\elseBr)$ & 3        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.66 & 0.61 & 0.46  \\
-    $(56,57,\thenBr)$ & 4        & 109      & 198  & 1.82      & 50   & 43  & 0.86          & 49  & 47  & 0.96             & 4.6    & 4.21  & 0.91   & 0.76 & 0.75 & 0.5   \\
-    $(56,64,\elseBr)$ & 4        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.64 & 0.61 & 0.47  \\
-    $(69,70,\thenBr)$ & 1        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & 0.48 & 0.51 & 0.53  \\
-    $(69,71,\elseBr)$ & 1        & 41       & 81   & 1.98      & 95   & 84  & 0.88          & 27  & 26  & 0.96             & 0.96   & 3.12  & 3.23   & 0.57 & 0.68 & 0.61  \\
+    $(21,25,\elseBr)$ & 4        & 26       & 41   & 1.58      & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.86   & 5.86  & 1      & 0.94 & 0.87 & -  \\
+    $(29,30,\thenBr)$ & 1        & \un{200} & 330  & 1.65      & 66   & 58  & 0.88          & 74  & 70  & 0.95             & 5.69   & 4.71  & 0.83   & 0.82 & 0.88 & -   \\
+    $(29,37,\elseBr)$ & 1        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & - & - & -  \\
+    $(38,39,\thenBr)$ & 2        & 185      & 328  & 1.77      & 85   & 67  & 0.79          & 48  & 44  & 0.92             & 4.9    & 7.45  & 1.52   & 0.87 & 0.88 & -  \\
+    $(38,46,\elseBr)$ & 2        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & 0.64 & - & -  \\
+    $(47,48,\thenBr)$ & 3        & 187      & 336  & 1.8       & \un{200} & 141 & 0.7       & 127 & 131 & 1.03             & 2.38   & 2.56  & 1.08   & 0.8  & 0.8  & -  \\
+    $(47,55,\elseBr)$ & 3        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.66 & 0.61 & -  \\
+    $(56,57,\thenBr)$ & 4        & 109      & 198  & 1.82      & 50   & 43  & 0.86          & 49  & 47  & 0.96             & 4.6    & 4.21  & 0.91   & 0.76 & 0.75 & -   \\
+    $(56,64,\elseBr)$ & 4        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.64 & 0.61 & -  \\
+    $(69,70,\thenBr)$ & 1        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & - & - & -  \\
+    $(69,71,\elseBr)$ & 1        & 41       & 81   & 1.98      & 95   & 84  & 0.88          & 27  & 26  & 0.96             & 0.96   & 3.12  & 3.23   & - & 0.68 & 0.61  \\
     \toprule
     \multicolumn{2}{l|}{\textbf{do\_draw}}       
                                  & 268      & 625  & 2.33      & 383  & 1295 & 3.38         & 124 & 334 & 2.69             & 0.48   & 1.87  & 3.88   &      &      &       \\
-    $(6,7,\thenBr)$   & 1        & 8        & 19   & 2.38      & 6    & 25   & 4.1          & 7   & 20  & 2.86             & 0.76   & 0.95  & 1.25   & 0.41 & 0.5  &  0.62 \\
-    $(8,9,\thenBr)$   & 2        & 10       & 23   & 2.3       & 6    & 17   & 2.83         & 7   & 21  & 3                & 1.35   & 1.1   & 0.81   & 0.63 & 0.62 &  0.49 \\
-    $(8,11,\elseBr)$  & 2        & 144      & 343  & 2.39      & 17   & 51   & 3            & 19  & 57  & 3                & 6.73   & 6.02  & 0.89   & 0.91 & 0.91 &  0.46 \\
-    $(44,45,\thenBr)$ & 1        & 57       & 144  & 2.5       & \un{200} & 681  & 3.4      & 40  & 111 & 2.78             & 0.21   & 1.3   & 6.14   & 0.16 & 0.58 &  0.89 \\
-    $(48,49,\thenBr)$ & 1        & 26       & 68   & 2.61      & 137  & 492  & 3.59         & 34  & 97  & 2.85             & 0.14   & 0.7   & 5.07   & 0.24 & 0.4  &  0.74 \\
+    $(6,7,\thenBr)$   & 1        & 8        & 19   & 2.38      & 6    & 25   & 4.1          & 7   & 20  & 2.86             & 0.76   & 0.95  & 1.25   & - & -  &  0.62 \\
+    $(8,9,\thenBr)$   & 2        & 10       & 23   & 2.3       & 6    & 17   & 2.83         & 7   & 21  & 3                & 1.35   & 1.1   & 0.81   & 0.63 & 0.62 &  - \\
+    $(8,11,\elseBr)$  & 2        & 144      & 343  & 2.39      & 17   & 51   & 3            & 19  & 57  & 3                & 6.73   & 6.02  & 0.89   & 0.91 & 0.91 &  - \\
+    $(44,45,\thenBr)$ & 1        & 57       & 144  & 2.5       & \un{200} & 681  & 3.4      & 40  & 111 & 2.78             & 0.21   & 1.3   & 6.14   & 0.16 & - &  0.89 \\
+    $(48,49,\thenBr)$ & 1        & 26       & 68   & 2.61      & 137  & 492  & 3.59         & 34  & 97  & 2.85             & 0.14   & 0.7   & 5.07   & 0.24 & - &  0.74 \\
     \toprule
 \multicolumn{2}{l|}{\textbf{prob\_gamma}}        
                                  & 2006     & 710  & 0.35      & 163 & 84   & 0.52          & 162 & 81  & 0.5              & 8.45   & 8.77  & 1.04   &  &   &        \\
-    $(4,5,\thenBr)$   & 1        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  0.47  \\
-    $(6,7,\thenBr)$   & 2        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  0.51  \\
-    $(6,9,\elseBr)$   & 2        & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  0.49  \\
-    $(10,11,\thenBr)$ & 2        & \un{200} & 72   & 0.36      & 62  & 42   & 0.68          & 61  & 40  & 0.66             & 1.71   & 1.8   & 1.05   & 1 & 1 &  0.62  \\
-    $(10,13,\elseBr)$ & 2        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  0.57  \\
-    $(16,17,\inWhile)$& 2        & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  0.53  \\
-    $(20,21,\thenBr)$ & 2        & \un{200} & 70   & 0.35      & 6   & 2    & 0.33          & 6   & 3   & 0.5              & 35     & 23.33 & 0.67   & 1 & 1 & 0.48   \\
-    $(20,23,\elseBr)$ & 2        & \un{200} & 72   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 72     & 72    & 1      & 1 & 1 &  0.49  \\
-    $(30,31,\thenBr)$ & 1        & \un{200} & 72   & 0.36      & 53  & 23   & 0.43          & 52  & 22  & 0.42             & 3.13   & 3.27  & 1.05   & 1 & 1 &  0.58  \\
-    $(34,35,\thenBr)$ & 1        & \un{200} & 72   & 0.36      & 24  & 10   & 0.42          & 25  & 10  & 0.4              & 7.2    & 7.2   & 1      & 1 & 1 &  0.51  \\
+    $(4,5,\thenBr)$   & 1        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(6,7,\thenBr)$   & 2        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(6,9,\elseBr)$   & 2        & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
+    $(10,11,\thenBr)$ & 2        & \un{200} & 72   & 0.36      & 62  & 42   & 0.68          & 61  & 40  & 0.66             & 1.71   & 1.8   & 1.05   & 1 & 1 &  -  \\
+    $(10,13,\elseBr)$ & 2        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(16,17,\inWhile)$& 2        & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
+    $(20,21,\thenBr)$ & 2        & \un{200} & 70   & 0.35      & 6   & 2    & 0.33          & 6   & 3   & 0.5              & 35     & 23.33 & 0.67   & 1 & 1 &  -  \\
+    $(20,23,\elseBr)$ & 2        & \un{200} & 72   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 72     & 72    & 1      & 1 & 1 &  -  \\
+    $(30,31,\thenBr)$ & 1        & \un{200} & 72   & 0.36      & 53  & 23   & 0.43          & 52  & 22  & 0.42             & 3.13   & 3.27  & 1.05   & 1 & 1 &  -  \\
+    $(34,35,\thenBr)$ & 1        & \un{200} & 72   & 0.36      & 24  & 10   & 0.42          & 25  & 10  & 0.4              & 7.2    & 7.2   & 1      & 1 & 1 &  -  \\
     \bottomrule
     \end{tabular}
 \end{table}
@@ -949,6 +941,8 @@ TODO: discuss why cost of one genetic iteration for \emph{do_draw} is higher tha
 TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
 
 \paragraph{\textbf{RQ3 (coverage).}} In this research question we want to compare how coverage progresses with the increase of budget assigned per branch. We chose the following budget categories: 5, 10, 30 etc. up to 150 seconds per branch. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $G$ and $G10$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $G$ slightly outperforms $G10$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $G10$ starts to transcend $G$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds).  
+
+\paragraph{\textbf{RQ4 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $R$, $G$ and $G10$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values, where it was significant (otherwise '-'), for all three pairs of the test algorithm: $R$ against $G$ ($r/g$), $R$ against $G10$ ($r/g10$), and $G$ against $G10$ ($g/g10$). Depends on the actually exceeded value, the effect size can be small (0.56), medium (0.64), and large (0.71). Both genetic versions ($G$ and $G10$) outperform random ($R$) with the large (medium and small) effect in 33 (37 and 39) subjects, respectively, out of total 57. 
 
 \begin{figure}[t]
   \centering
@@ -1119,6 +1113,8 @@ We would like to open source our test generation framework and introduce a web s
 \item no reference to global variables and functions
 \item limited support of DOM API     
 \end{enumerate}
+
+Multi-objective test suite generation. DOM reduction by means of hierarchical delta-debugging.
 
 \subsection{Limitations}
 \label{sub.sec.eval.limit}
