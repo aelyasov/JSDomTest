@@ -1,5 +1,6 @@
-\documentclass[sigconf]{acmart}
+\documentclass[sigconf,review, anonymous]{acmart}
 
+\usepackage{tablefootnote}
 \usepackage{syntax}
 \usepackage{multirow}
 \usepackage{multicol}
@@ -13,6 +14,7 @@
 \usepackage{listings}
 \usepackage{lsthaskell}
 \usepackage{xspace}
+\usepackage{mdframed}
 \usepackage{algorithmic}
 \usepackage{longtable}
 \usepackage{subcaption}
@@ -168,7 +170,9 @@
 \newcommand{\inFor}{\text{inFor}}
 \newcommand{\inWhile}{\text{while}}
 \newcommand{\un}[1]{\underline{#1}}
-
+\newcommand{\Random}{\mathbb{R}}
+\newcommand{\Genetic}{\mathbb{G}}
+\newcommand{\RGenetic}{\mathbb{G}_{10}}
 
 % Copyright
 %\setcopyright{none}
@@ -188,7 +192,7 @@
 \acmISBN{123-4567-24-567/08/06}
 
 %Conference
-\acmConference[ISSTA'18]{ACM SIGSOFT International Symposium on Software Testing and Analysis}{July 2018}{Amsterdam, The Netherlands} 
+\acmConference[ISSTA 2018]{ACM SIGSOFT International Symposium on Software Testing and Analysis}{16-22 July, 2018}{Amsterdam, The Netherlands}
 \acmYear{1997}
 \copyrightyear{2016}
 
@@ -207,24 +211,19 @@
 
 \author{Alexander Elyasov}
 \affiliation{%
-  \institution{Utrecht University}
-  \city{Utrecht} 
-  \country{The Netherlands} 
+  \institution{Utrecht University, The Netherlands} 
 }
 \email{a.elyasov@uu.nl}
 
 \author{Wishnu Prasetya}
 \affiliation{%
-  \institution{Utrecht University}
-  \city{Utrecht} 
-  \country{The Netherlands} 
+  \institution{Utrecht University, The Netherlands}
 }
 \email{s.w.b.prasetya@uu.nl}
 
 \author{Jurriaan Hage}
 \affiliation{%
-  \institution{Utrecht University}
-  \city{Utrecht} 
+  \institution{Utrecht University, The Netherlands}
   \country{The Netherlands} 
 }
 \email{j.hage@uu.nl}
@@ -663,13 +662,10 @@ generateHTML = do
 data Tag = HTML | HEAD | BODY | ...
 type Context = CFlow | CMetadata | ...
 data HtmlState = |c \label{ref.HtmlState.begin} |c
-  HtmlState { depth      :: Int 
-             , degree    :: Int    
-             , ctx       :: Stack Context 
-             , tagFreq   :: [(Int, Tag)] 
-             , tags      :: [Tag]
-             , ids       :: [String]
-             , classes   :: [String] } |c \label{ref.HtmlState.end} |c
+  HtmlState { depth    :: Int,           degree  :: Int    
+             , ctx     :: Stack Context, tagFreq :: [(Int, Tag)] 
+             , tags    :: [Tag],         ids     :: [String]
+             , classes :: [String] } |c \label{ref.HtmlState.end} |c
 type GenState s = StateT s Gen |c \label{ref.GenState} |c
 type GenHtmlState = GenState HtmlState Html |c \label{ref.GenHtmlState} |c
   \end{haskell}
@@ -732,7 +728,7 @@ In order to evaluate the feasibility of our test framework adoption in practice,
     \scriptsize
   \begin{tabular}{l|r|r|r}
     \toprule
-    \textbf{Parameter Name} & \textbf{R} & \textbf{G} & \textbf{G10} \\
+    \textbf{Parameter Name} &$\Random$&$\Genetic$ &$\RGenetic$ \\
     \hline
     Population size                   & 50  & 50  & 50  \\
     Archive size                      & 1   & 25  & 25  \\
@@ -758,8 +754,8 @@ By carrying the evaluation, we would like to address the following research ques
 
 Being one of the most popular programming languages of the modern time, there are ample open source JS projects on the Web. JS applications are written with the help of countless number of specialized libraries, and greatly vary in size, complexity and coding style. Moreover, some popular JS web-frameworks, such as jQuery and React\footnote{\url{http://todomvc.com/}}, offer an alternative approach to the native DOM manipulation. Before selection, the source code of a potential case-study has to be scrutinized which is time consuming and labor intensive process. Therefore, we decided to primarily focus on the evaluation of the JS subjects well-established in the related research literature such as \emph{Confix}~\cite{amin:ase15} and \emph{TAJS}\footnote{\url{http://www.brics.dk/TAJS/dom-benchmarks/}}~\cite{dom2011}. Both of these works address the problem of testing of JS application with the reference to the browser DOM. We introduced two additional case-studies \emph{mathjs}\footnote{\url{https://github.com/josdejong/mathjs/}} and \emph{cs-in-js}\footnote{\url{https://github.com/nzakas/computer-science-in-javascript}} to increase the presence of primitive (browserless) JS code. For each case-study application, we identified several JS functions that are suitable for our testing framework. In the end, our evaluation set included both primitive and DOM related JS functions.
 
-Table~\ref{tbl.case.studies} presents common quantitative characteristics for the selected case-studies. For each function, we reported the following metrics\footnote{\url{http://jsmeter.info/} is the tool used for measuring JS code statistics}: lines of code (\textbf{\#LOC}), number of branches (\textbf{\#BR}), depth (\textbf{\#D}), cyclomatic complexity (\textbf{CC}), halstead volume (\textbf{HV}) and maintainability index (\textbf{MI}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulates with the \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively.      
-
+For the sake of space, we chose to exclude from the follow up presentation the branches and functions which coverage time was less than two seconds. In all those cases, the three algorithms studied here have shown equally good results by finding a solution within the first iteration --- random generation. This left us with only 7 case studies contributing to the total number of 14 functions  shown in~Table~\ref{tbl.case.studies}. For each function, we reported the following software metrics\footnote{\url{http://jsmeter.info/} is the tool used for measuring JS code statistics}: lines of code~(\textbf{LOC}), number of branches~(\textbf{BR}), depth~(\textbf{D}), and cyclomatic complexity~(\textbf{CC}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulate with \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively. To answer the research questions posed in the beginning of Section~\ref{sec.evaluation}, we evaluated our test generation framework on the aforementioned case studies with the results presented in Section~\ref{sub.sec.eval.results}.  
+       
 \setlength\tabcolsep{0.6pt}
 \begin{table}[t]
   \caption{Summary of the Case-Studies}
@@ -815,134 +811,128 @@ Table~\ref{tbl.case.studies} presents common quantitative characteristics for th
 \subsection{Results}
 \label{sub.sec.eval.results}
 
-\setlength\tabcolsep{0.8pt}
+\setlength\tabcolsep{.98pt}
 \begin{table}[!t]
-  \caption{Performance statistics of branch coverage (in seconds) for four variations of the JS test generation framework}
+  \caption{Branch coverage statistics for three variations of the JS test generation framework}
   \label{tbl.stats}
     \scriptsize
-    \begin{tabular}{lc|ccc|ccc|ccc|ccc|ccc}
+    \begin{tabular}{l|rrr|rrr|rrr|rrr|rrr}
       \toprule
-      \multirow{2}{*}{\textbf{NAME}} & \multirow{2}{*}{\textbf{\#D}}         &  \multicolumn{3}{c|}{$m_r$} & \multicolumn{3}{c|}{$m_g$} & \multicolumn{3}{c|}{$m_{g10}$} & \multirow{2}{*}{$\frac{t_r}{t_g}$} &  \multirow{2}{*}{$\frac{t_r}{t_{g10}}$} & \multirow{2}{*}{$\frac{t_g}{t_{g10}}$}   & \multirow{2}{*}{r/g} &  \multirow{2}{*}{r/g10} & \multirow{2}{*}{g/g10} \\
-      \cline{3-11}
-            &                & $i$      & $t$  & $t/i$     & $i$& $t$&$t/i$             &$i$ &$t$ &$t/i$               &      &       &        &      &       &      \\
-      \toprule
-    \multicolumn{2}{l|}{\textbf{helpMe}*}     
-                                 & 218      & 270  & 1.24      & 61 & 47 & 0.77             & 62 & 56 & 0.9                & 5.74 & 4.82  & 0.84   &      &      &       \\
-    $(3,4,\inFor)$    & 1        & 4        & 4    & 1         & 5  & 3  & 0.6              & 8  & 6  & 0.75               & 1.33 & 0.67  & 0.5    & - & 0.39 & 0.37  \\
-    $(5,6,\thenBr)$   & 2        & 4        & 5    & 1.25      & 8  & 6  & 0.75             & 7  & 5  & 0.71               & 0.83 & 1     & 1.2    & - & -  & -  \\
-    $(5,15,\elseBr)$  & 2        & 121      & 156  & 1.29      & 24 & 21 & 0.86             & 23 & 24 & 1.04               & 7.43 & 6.5   & 0.88   & 0.87 & 0.86 & -  \\
-    $(9,10,\thenBr)$  & 3        & 85       & 101  & 1.19      & 18 & 14 & 0.78             & 19 & 17 & 0.89               & 7.21 & 5.94  & 0.82   & 0.98 & 0.95 & -  \\
-    $(9,14,\elseBr)$  & 3        & 4        & 4    & 1         & 6  & 4  & 0.67             & 5  & 4  & 0.8                & 1    & 1     & 1      & - & - & -  \\
+      \multirow{2}{*}{\textbf{NAME}} &   \multicolumn{3}{c|}{$m_{\Random}$} & \multicolumn{3}{c|}{$m_{\Genetic}$} & \multicolumn{3}{c|}{$m_{\RGenetic}$} & \multirow{2}{*}{$\frac{t_{\Random}}{t_{\Genetic}}$} &  \multirow{2}{*}{$\frac{t_{\Random}}{t_{\RGenetic}}$} & \multirow{2}{*}{$\frac{t_{\Genetic}}{t_{\RGenetic}}$}   & \multirow{2}{*}{\hfil $_{\Genetic}^{\Random}$} &  \multirow{2}{*}{\hfil $_{\RGenetic}^{\Random}$} & \multirow{2}{*}{\hfil $_{\RGenetic}^{\Genetic}$} \\
+      \cline{2-10} % \!:\!
+                             & $i$      & $t$  & $t/i$     & $i$& $t$&$t/i$             &$i$ &$t$ &$t/i$               &      &       &        &      &       &      \\
+      \midrule
+    \textbf{helpMe}*         & 218      & 270  & 1.24      & 61 & 47 & 0.77             & 62 & 56 & 0.9                & 5.74 & 4.82  & 0.84   &      &      &       \\
+    $(3,4,\inFor)$           & 4        & 4    & 1         & 5  & 3  & 0.6              & 8  & 6  & 0.75               & 1.33 & 0.67  & 0.5    & - & 0.39 & 0.37  \\
+    $(5,6,\thenBr)$          & 4        & 5    & 1.25      & 8  & 6  & 0.75             & 7  & 5  & 0.71               & 0.83 & 1     & 1.2    & - & -  & -  \\
+    $(5,15,\elseBr)$         & 121      & 156  & 1.29      & 24 & 21 & 0.86             & 23 & 24 & 1.04               & 7.43 & 6.5   & 0.88   & 0.87 & 0.86 & -  \\
+    $(9,10,\thenBr)$         & 85       & 101  & 1.19      & 18 & 14 & 0.78             & 19 & 17 & 0.89               & 7.21 & 5.94  & 0.82   & 0.98 & 0.95 & -  \\
+    $(9,14,\elseBr)$         & 4        & 4    & 1         & 6  & 4  & 0.67             & 5  & 4  & 0.8                & 1    & 1     & 1      & - & - & -  \\
     \hline                                                                                                          
-\multicolumn{2}{l|}{\textbf{isGameFinished}*} 
-                                 & 264      & 220  & 0.83      & 32 & 30 & 0.94             & 43 & 43 & 1                  & 7.33 & 5.12  & 0.7    &      &      &        \\
-    $(7,8,\thenBr)$   & 2        & 37       & 30   & 0.81      & 8  & 8  & 1                & 12 & 13 & 1.08               & 3.75 & 2.31  & 0.62   & -  & 0.66 & -   \\
-    $(10,11,\thenBr)$ & 3        & \un{200} & 167  & 0.84      & 11 & 10 & 0.91             & 10 & 11 & 1.1                & 16.7 & 15.18 & 0.91   & 0.88 & 0.96 & -   \\
-    $(10,14,\elseBr)$ & 3        & 25       & 21   & 0.84      & 11 & 11 & 1                & 19 & 18 & 0.95               & 1.91 & 1.17  & 0.61   & - & - & -   \\
+    \textbf{isGameFinished}* & 264      & 220  & 0.83      & 32 & 30 & 0.94             & 43 & 43 & 1                  & 7.33 & 5.12  & 0.7    &      &      &        \\
+    $(7,8,\thenBr)$          & 37       & 30   & 0.81      & 8  & 8  & 1                & 12 & 13 & 1.08               & 3.75 & 2.31  & 0.62   & -  & 0.66 & -   \\
+    $(10,11,\thenBr)$        & \un{200} & 167  & 0.84      & 11 & 10 & 0.91             & 10 & 11 & 1.1                & 16.7 & 15.18 & 0.91   & 0.88 & 0.96 & -   \\
+    $(10,14,\elseBr)$        & 25       & 21   & 0.84      & 11 & 11 & 1                & 19 & 18 & 0.95               & 1.91 & 1.17  & 0.61   & - & - & -   \\
     \hline
-    \multicolumn{2}{l|}{\textbf{newGame}*}   
-                                 & 18       & 14   & 0.78      & 11 & 9  & 0.81             & 10 & 10 & 1                  & 1.56 & 1.4   & 0.9    &      &      &      \\
-    $(6,7,\thenBr)$   & 2        & 16       & 12   & 0.75      & 9  & 7  & 0.78             & 8  & 8  & 1                  & 1.71 & 1.5   & 0.88   & 0.64 & 0.65 & -  \\
+    \textbf{newGame}*   
+                             & 18       & 14   & 0.78      & 11 & 9  & 0.81             & 10 & 10 & 1                  & 1.56 & 1.4   & 0.9    &      &      &      \\
+    $(6,7,\thenBr)$          & 16       & 12   & 0.75      & 9  & 7  & 0.78             & 8  & 8  & 1                  & 1.71 & 1.5   & 0.88   & 0.64 & 0.65 & -  \\
     \hline
-    \multicolumn{2}{l|}{\textbf{revealAll}*}  
-                                 & 60       & 50   & 0.83      & 44 & 44 & 1                & 47 & 53 & 1.13               & 1.14 & 0.94  & 0.83   &      &      &        \\
-    $(2,3,\inFor)$    & 1        & 25       & 20   & 0.8       & 24 & 24 & 1                & 24 & 27 & 1.13               & 0.83 & 0.74  & 0.89   & - & - & -  \\
-    $(4,5,\inFor)$    & 2        & 35       & 30   & 0.86      & 20 & 20 & 1                & 23 & 26 & 1.13               & 1.5  & 1.15  & 0.77   & 0.62 & -   &  0.37  \\
+    \textbf{revealAll}*  
+                             & 60       & 50   & 0.83      & 44 & 44 & 1                & 47 & 53 & 1.13               & 1.14 & 0.94  & 0.83   &      &      &        \\
+    $(2,3,\inFor)$           & 25       & 20   & 0.8       & 24 & 24 & 1                & 24 & 27 & 1.13               & 0.83 & 0.74  & 0.89   & - & - & -  \\
+    $(4,5,\inFor)$           & 35       & 30   & 0.86      & 20 & 20 & 1                & 23 & 26 & 1.13               & 1.5  & 1.15  & 0.77   & 0.62 & -   &  0.37  \\
     \hline
-\multicolumn{2}{l|}{\textbf{shuffleBoard}*}   
-                                 & 15       & 29   & 1.93      & 15 & 26 & 1.73             & 17 & 29 & 1.71               & 1.12 & 1     & 0.9    &      &      &       \\
-    $(13,14,\thenBr)$ & 3        & 5        & 10   & 2         & 5  & 9  & 1.8              & 6  & 10 & 1.67               & 1.11 & 1     & 0.9    & - & - & -  \\
-    $(17,18,\thenBr)$ & 3        & 5        & 10   & 2         & 5  & 10 & 2                & 6  & 11 & 1.83               & 1    & 0.91  & 0.91   & - & - & -   \\
-    \toprule
-\multicolumn{2}{l|}{\textbf{toggleInfo}*}     
-                                 & 6        & 6    & 1         & 7  & 7 & 1                 & 9 & 6   & 0.66               & 0.86  & 1     & 1.17  &    &      &       \\
-    $(2,3,\thenBr)$   & 1        & 2        & 2    & 1         & 2  & 2 & 1                 & 2 & 1   & 0.5                & 1     & 2     & 2     & - & - & -  \\
-    $(6,7,\thenBr)$   & 1        & 2        & 2    & 1         & 3  & 3 & 1                 & 5 & 3   & 0.6                & 0.67  & 0.67  & 1     & 0.37 & 0.36 & -  \\
-    \toprule
-\multicolumn{2}{l|}{\textbf{isValidCard}}        
-                                 & 1001     & 514  & 0.51      & 21 & 8 & 0.38              & 21 & 10 & 0.48               & 64.25 & 51.4  & 0.8    &   &   &       \\
-    $(3,6,\elseBr)$   & 1        & \un{200} & 103  & 0.52      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51.5  & 51.5  & 1      & 1 & 1 & -   \\
-    $(7,8,\inFor)$    & 1        & \un{200} & 103  & 0.52      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 103   & 51.5  & 0.5    & 1 & 1 & -  \\
-    $(10,11,\thenBr)$ & 2        & \un{200} & 102  & 0.51      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51    & 51    & 1      & 1 & 1 & -  \\
-    $(10,13,\elseBr)$ & 2        & \un{200} & 106  & 0.53      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 106   & 53    & 0.5    & 1 & 1 & -  \\
-    $(14,15,\inFor)$  & 1        & \un{200} & 100  & 0.5       & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 50    & 50    & 1      & 1 & 1 & -  \\
+    \textbf{shuffleBoard}*   
+                             & 15       & 29   & 1.93      & 15 & 26 & 1.73             & 17 & 29 & 1.71               & 1.12 & 1     & 0.9    &      &      &       \\
+    $(13,14,\thenBr)$        & 5        & 10   & 2         & 5  & 9  & 1.8              & 6  & 10 & 1.67               & 1.11 & 1     & 0.9    & - & - & -  \\
+    $(17,18,\thenBr)$        & 5        & 10   & 2         & 5  & 10 & 2                & 6  & 11 & 1.83               & 1    & 0.91  & 0.91   & - & - & -   \\
     \hline
-\multicolumn{2}{l|}{\textbf{isValidVISA}}        
-                                 & 201      & 95   & 0.47      & 8  & 3 & 0.38              & 8  & 2  & 0.25               & 31.67 & 47.5  & 1.5    &   &   &       \\
-    $(2,3,\thenBr)$   & 1        & \un{200} & 95   & 0.48      & 7  & 3 & 0.43              & 7  & 2  & 0.29               & 31.67 & 47.5  & 1.5    & 1 & 1 & -  \\
-    \toprule
-\multicolumn{2}{l|}{\textbf{initShields}*}    
-                                 & 6        & 5    & 0.83      & 6  & 5 & 0.83              & 6  & 3  & 0.5                & 1      & 1.67 & 1.67   &      &      &       \\
-    $(2,3,\inFor)$    & 1        & 6        & 5    & 0.83      & 6  & 4 & 0.67              & 6  & 3  & 0.5                & 1.25   & 1.67 & 1.33   & 0.83 & 0.84 & -  \\
-    \toprule
-\multicolumn{2}{l|}{\textbf{brickJiggler}*}   
-                                 & 7        & 8    & 1.14      & 6  & 4 & 0.67              & 4  & 3  & 0.75               & 2      & 2.67 & 1.33   &      &      &       \\
-    $(2,3,\thenBr)$   & 1        & 6        & 7    & 1.17      & 5  & 3 & 0.6               & 3  & 2  & 0.67               & 2.33   & 3.5  & 1.5    & 0.83 & 0.85 & -  \\
+   \textbf{toggleInfo}*      & 6        & 6    & 1         & 7  & 7 & 1                 & 9 & 6   & 0.66               & 0.86  & 1     & 1.17  &    &      &       \\
+    $(6,7,\thenBr)$          & 2        & 2    & 1         & 3  & 3 & 1                 & 5 & 3   & 0.6                & 0.67  & 0.67  & 1     & 0.37 & 0.36 & -  \\
     \hline
-\multicolumn{2}{l|}{\textbf{doPaddlePower}*}  
-                                 & 19       & 15   & 0.79      & 204  & 140 & 0.69          & 25 & 16  & 0.64              & 0.11   & 0.94 & 8.75   &       &      &      \\
-    $(10,11,\thenBr)$ & 1        & 16       & 12   & 0.75      & \un{200} & 136 & 0.68      & 22 & 13  & 0.59              & 0.09   & 0.92 & 10.46  &  0.02 & - & 0.94 \\
+   \textbf{isValidCard}      & 1001     & 514  & 0.51      & 21 & 8 & 0.38              & 21 & 10 & 0.48               & 64.25 & 51.4  & 0.8    &   &   &       \\
+    $(3,6,\elseBr)$          & \un{200} & 103  & 0.52      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51.5  & 51.5  & 1      & 1 & 1 & -   \\
+    $(7,8,\inFor)$           & \un{200} & 103  & 0.52      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 103   & 51.5  & 0.5    & 1 & 1 & -  \\
+    $(10,11,\thenBr)$        & \un{200} & 102  & 0.51      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51    & 51    & 1      & 1 & 1 & -  \\
+    $(10,13,\elseBr)$        & \un{200} & 106  & 0.53      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 106   & 53    & 0.5    & 1 & 1 & -  \\
+    $(14,15,\inFor)$         & \un{200} & 100  & 0.5       & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 50    & 50    & 1      & 1 & 1 & -  \\
     \hline
-\multicolumn{2}{l|}{\textbf{initBricks}*}     
-                                 & 1418     & 2379 & 1.68      & 593  & 474 & 0.8           & 422 & 415 & 0.98             & 5.02   & 5.73  & 1.14   &      &      &       \\
-    $(6,7,\thenBr)$   & 1        & 2        & 3    & 1.5       & 5    & 4   & 0.8           & 3   & 3   & 1                & 0.75   & 1     & 1.33   & - & -  & -   \\
-    $(6,10,\elseBr)$  & 1        & 15       & 23   & 1.53      & 6    & 6   & 1             & 6   & 6   & 1                & 3.83   & 3.83  & 1      & 0.87 & 0.83 & -   \\
-    $(11,12,\thenBr)$ & 2        & \un{200} & 317  & 1.59      & 14   & 12  & 0.86          & 17  & 15  & 0.88             & 26.41  & 21.13 & 0.8    & 0.93 & 0.91 & -  \\
-    $(11,15,\elseBr)$ & 2        & 18       & 30   & 1.67      & 6    & 6   & 1             & 6   & 6   & 1                & 5      & 5     & 1      & 0.89 & 0.86 & -  \\
-    $(16,17,\thenBr)$ & 3        & \un{200} & 324  & 1.62      & 17   & 14  & 0.82          & 17  & 16  & 0.94             & 23.14  & 20.25 & 0.88   & 0.96 & 0.96 & -  \\
-    $(16,20,\elseBr)$ & 3        & 25       & 40   & 1.6       & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.71   & 5.71  & 1      & 0.89 & 0.86 & -  \\
-    $(21,22,\thenBr)$ & 4        & \un{200} & 310  & 1.55      & 14   & 13  & 0.93          & 17  & 17  & 1                & 23.85  & 18.24 & 0.76   & 0.94 & 0.9  & 0.36  \\
-    $(21,25,\elseBr)$ & 4        & 26       & 41   & 1.58      & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.86   & 5.86  & 1      & 0.94 & 0.87 & -  \\
-    $(29,30,\thenBr)$ & 1        & \un{200} & 330  & 1.65      & 66   & 58  & 0.88          & 74  & 70  & 0.95             & 5.69   & 4.71  & 0.83   & 0.82 & 0.88 & -   \\
-    $(29,37,\elseBr)$ & 1        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & - & - & -  \\
-    $(38,39,\thenBr)$ & 2        & 185      & 328  & 1.77      & 85   & 67  & 0.79          & 48  & 44  & 0.92             & 4.9    & 7.45  & 1.52   & 0.87 & 0.88 & -  \\
-    $(38,46,\elseBr)$ & 2        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & 0.64 & - & -  \\
-    $(47,48,\thenBr)$ & 3        & 187      & 336  & 1.8       & \un{200} & 141 & 0.7       & 127 & 131 & 1.03             & 2.38   & 2.56  & 1.08   & 0.8  & 0.8  & -  \\
-    $(47,55,\elseBr)$ & 3        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.66 & 0.61 & -  \\
-    $(56,57,\thenBr)$ & 4        & 109      & 198  & 1.82      & 50   & 43  & 0.86          & 49  & 47  & 0.96             & 4.6    & 4.21  & 0.91   & 0.76 & 0.75 & -   \\
-    $(56,64,\elseBr)$ & 4        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.64 & 0.61 & -  \\
-    $(69,70,\thenBr)$ & 1        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & - & - & -  \\
-    $(69,71,\elseBr)$ & 1        & 41       & 81   & 1.98      & 95   & 84  & 0.88          & 27  & 26  & 0.96             & 0.96   & 3.12  & 3.23   & - & 0.68 & 0.61  \\
-    \toprule
-    \multicolumn{2}{l|}{\textbf{do\_draw}}       
-                                 & 268      & 625  & 2.33      & 383  & 1295 & 3.38         & 124 & 334 & 2.69             & 0.48   & 1.87  & 3.88   &      &      &       \\
-    $(6,7,\thenBr)$   & 1        & 8        & 19   & 2.38      & 6    & 25   & 4.1          & 7   & 20  & 2.86             & 0.76   & 0.95  & 1.25   & - & -  &  0.62 \\
-    $(8,9,\thenBr)$   & 2        & 10       & 23   & 2.3       & 6    & 17   & 2.83         & 7   & 21  & 3                & 1.35   & 1.1   & 0.81   & 0.63 & 0.62 &  - \\
-    $(8,11,\elseBr)$  & 2        & 144      & 343  & 2.39      & 17   & 51   & 3            & 19  & 57  & 3                & 6.73   & 6.02  & 0.89   & 0.91 & 0.91 &  - \\
-    $(44,45,\thenBr)$ & 1        & 57       & 144  & 2.5       & \un{200} & 681  & 3.4      & 40  & 111 & 2.78             & 0.21   & 1.3   & 6.14   & 0.16 & - &  0.89 \\
-    $(48,49,\thenBr)$ & 1        & 26       & 68   & 2.61      & 137  & 492  & 3.59         & 34  & 97  & 2.85             & 0.14   & 0.7   & 5.07   & 0.24 & - &  0.74 \\
-    \toprule
-\multicolumn{2}{l|}{\textbf{prob\_gamma}}        
-                                 & 2006     & 710  & 0.35      & 163 & 84   & 0.52          & 162 & 81  & 0.5              & 8.45   & 8.77  & 1.04   &  &   &        \\
-    $(4,5,\thenBr)$   & 1        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
-    $(6,7,\thenBr)$   & 2        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
-    $(6,9,\elseBr)$   & 2        & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
-    $(10,11,\thenBr)$ & 2        & \un{200} & 72   & 0.36      & 62  & 42   & 0.68          & 61  & 40  & 0.66             & 1.71   & 1.8   & 1.05   & 1 & 1 &  -  \\
-    $(10,13,\elseBr)$ & 2        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
-    $(16,17,\inWhile)$& 2        & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
-    $(20,21,\thenBr)$ & 2        & \un{200} & 70   & 0.35      & 6   & 2    & 0.33          & 6   & 3   & 0.5              & 35     & 23.33 & 0.67   & 1 & 1 &  -  \\
-    $(20,23,\elseBr)$ & 2        & \un{200} & 72   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 72     & 72    & 1      & 1 & 1 &  -  \\
-    $(30,31,\thenBr)$ & 1        & \un{200} & 72   & 0.36      & 53  & 23   & 0.43          & 52  & 22  & 0.42             & 3.13   & 3.27  & 1.05   & 1 & 1 &  -  \\
-    $(34,35,\thenBr)$ & 1        & \un{200} & 72   & 0.36      & 24  & 10   & 0.42          & 25  & 10  & 0.4              & 7.2    & 7.2   & 1      & 1 & 1 &  -  \\
+   \textbf{isValidVISA}      & 201      & 95   & 0.47      & 8  & 3 & 0.38              & 8  & 2  & 0.25               & 31.67 & 47.5  & 1.5    &   &   &       \\
+    $(2,3,\thenBr)$          & \un{200} & 95   & 0.48      & 7  & 3 & 0.43              & 7  & 2  & 0.29               & 31.67 & 47.5  & 1.5    & 1 & 1 & -  \\
+    \hline
+   \textbf{initShields}*     & 6        & 5    & 0.83      & 6  & 5 & 0.83              & 6  & 3  & 0.5                & 1      & 1.67 & 1.67   &      &      &       \\
+    $(2,3,\inFor)$           & 6        & 5    & 0.83      & 6  & 4 & 0.67              & 6  & 3  & 0.5                & 1.25   & 1.67 & 1.33   & 0.83 & 0.84 & -  \\
+    \hline
+   \textbf{brickJiggler}*    & 7        & 8    & 1.14      & 6  & 4 & 0.67              & 4  & 3  & 0.75               & 2      & 2.67 & 1.33   &      &      &       \\
+    $(2,3,\thenBr)$          & 6        & 7    & 1.17      & 5  & 3 & 0.6               & 3  & 2  & 0.67               & 2.33   & 3.5  & 1.5    & 0.83 & 0.85 & -  \\
+    \hline
+   \textbf{doPaddlePower}*   & 19       & 15   & 0.79      & 204  & 140 & 0.69          & 25 & 16  & 0.64              & 0.11   & 0.94 & 8.75   &       &      &      \\
+    $(10,11,\thenBr)$        & 16       & 12   & 0.75      & \un{200} & 136 & 0.68      & 22 & 13  & 0.59              & 0.09   & 0.92 & 10.46  &  0.02 & - & 0.94 \\
+    \hline
+   \textbf{initBricks}*      & 1418     & 2379 & 1.68      & 593  & 474 & 0.8           & 422 & 415 & 0.98             & 5.02   & 5.73  & 1.14   &      &      &       \\
+    $(6,7,\thenBr)$          & 2        & 3    & 1.5       & 5    & 4   & 0.8           & 3   & 3   & 1                & 0.75   & 1     & 1.33   & - & -  & -   \\
+    $(6,10,\elseBr)$         & 15       & 23   & 1.53      & 6    & 6   & 1             & 6   & 6   & 1                & 3.83   & 3.83  & 1      & 0.87 & 0.83 & -   \\
+    $(11,12,\thenBr)$        & \un{200} & 317  & 1.59      & 14   & 12  & 0.86          & 17  & 15  & 0.88             & 26.41  & 21.13 & 0.8    & 0.93 & 0.91 & -  \\
+    $(11,15,\elseBr)$        & 18       & 30   & 1.67      & 6    & 6   & 1             & 6   & 6   & 1                & 5      & 5     & 1      & 0.89 & 0.86 & -  \\
+    $(16,17,\thenBr)$        & \un{200} & 324  & 1.62      & 17   & 14  & 0.82          & 17  & 16  & 0.94             & 23.14  & 20.25 & 0.88   & 0.96 & 0.96 & -  \\
+    $(16,20,\elseBr)$        & 25       & 40   & 1.6       & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.71   & 5.71  & 1      & 0.89 & 0.86 & -  \\
+    $(21,22,\thenBr)$        & \un{200} & 310  & 1.55      & 14   & 13  & 0.93          & 17  & 17  & 1                & 23.85  & 18.24 & 0.76   & 0.94 & 0.9  & 0.36  \\
+    $(21,25,\elseBr)$        & 26       & 41   & 1.58      & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.86   & 5.86  & 1      & 0.94 & 0.87 & -  \\
+    $(29,30,\thenBr)$        & \un{200} & 330  & 1.65      & 66   & 58  & 0.88          & 74  & 70  & 0.95             & 5.69   & 4.71  & 0.83   & 0.82 & 0.88 & -   \\
+    $(29,37,\elseBr)$        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & - & - & -  \\
+    $(38,39,\thenBr)$        & 185      & 328  & 1.77      & 85   & 67  & 0.79          & 48  & 44  & 0.92             & 4.9    & 7.45  & 1.52   & 0.87 & 0.88 & -  \\
+    $(38,46,\elseBr)$        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & 0.64 & - & -  \\
+    $(47,48,\thenBr)$        & 187      & 336  & 1.8       & \un{200} & 141 & 0.7       & 127 & 131 & 1.03             & 2.38   & 2.56  & 1.08   & 0.8  & 0.8  & -  \\
+    $(47,55,\elseBr)$        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.66 & 0.61 & -  \\
+    $(56,57,\thenBr)$        & 109      & 198  & 1.82      & 50   & 43  & 0.86          & 49  & 47  & 0.96             & 4.6    & 4.21  & 0.91   & 0.76 & 0.75 & -   \\
+    $(56,64,\elseBr)$        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.64 & 0.61 & -  \\
+    $(69,70,\thenBr)$        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & - & - & -  \\
+    $(69,71,\elseBr)$        & 41       & 81   & 1.98      & 95   & 84  & 0.88          & 27  & 26  & 0.96             & 0.96   & 3.12  & 3.23   & - & 0.68 & 0.61  \\
+    \hline
+    \textbf{do\_draw}        & 268      & 625  & 2.33      & 383  & 1295 & 3.38         & 124 & 334 & 2.69             & 0.48   & 1.87  & 3.88   &      &      &       \\
+    $(6,7,\thenBr)$          & 8        & 19   & 2.38      & 6    & 25   & 4.1          & 7   & 20  & 2.86             & 0.76   & 0.95  & 1.25   & - & -  &  0.62 \\
+    $(8,9,\thenBr)$          & 10       & 23   & 2.3       & 6    & 17   & 2.83         & 7   & 21  & 3                & 1.35   & 1.1   & 0.81   & 0.63 & 0.62 &  - \\
+    $(8,11,\elseBr)$         & 144      & 343  & 2.39      & 17   & 51   & 3            & 19  & 57  & 3                & 6.73   & 6.02  & 0.89   & 0.91 & 0.91 &  - \\
+    $(44,45,\thenBr)$        & 57       & 144  & 2.5       & \un{200} & 681  & 3.4      & 40  & 111 & 2.78             & 0.21   & 1.3   & 6.14   & 0.16 & - &  0.89 \\
+    $(48,49,\thenBr)$        & 26       & 68   & 2.61      & 137  & 492  & 3.59         & 34  & 97  & 2.85             & 0.14   & 0.7   & 5.07   & 0.24 & - &  0.74 \\
+    \hline
+    \textbf{prob\_gamma}     & 2006     & 710  & 0.35      & 163 & 84   & 0.52          & 162 & 81  & 0.5              & 8.45   & 8.77  & 1.04   &  &   &        \\
+    $(4,5,\thenBr)$          & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(6,7,\thenBr)$          & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(6,9,\elseBr)$          & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
+    $(10,11,\thenBr)$        & \un{200} & 72   & 0.36      & 62  & 42   & 0.68          & 61  & 40  & 0.66             & 1.71   & 1.8   & 1.05   & 1 & 1 &  -  \\
+    $(10,13,\elseBr)$        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(16,17,\inWhile)$       & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
+    $(20,21,\thenBr)$        & \un{200} & 70   & 0.35      & 6   & 2    & 0.33          & 6   & 3   & 0.5              & 35     & 23.33 & 0.67   & 1 & 1 &  -  \\
+    $(20,23,\elseBr)$        & \un{200} & 72   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 72     & 72    & 1      & 1 & 1 &  -  \\
+    $(30,31,\thenBr)$        & \un{200} & 72   & 0.36      & 53  & 23   & 0.43          & 52  & 22  & 0.42             & 3.13   & 3.27  & 1.05   & 1 & 1 &  -  \\
+    $(34,35,\thenBr)$        & \un{200} & 72   & 0.36      & 24  & 10   & 0.42          & 25  & 10  & 0.4              & 7.2    & 7.2   & 1      & 1 & 1 &  -  \\
+    \midrule
+    \textbf{TOTAL} & 5507      & 4940 & 0.9       & 1554 & 2176 & 1.4          & 966 & 1061 & 1.1             & 2.27   & 4.66  & 2.05       &   &   &    \\  
     \bottomrule
     \end{tabular}
 \end{table}
 
-\paragraph{\textbf{RQ1 (performance).}} We would like to study the performance of the three variations of the testing framework: Random ($R$), Genetic ($G$) and Genetic with Restart ($G10$). To address this question, we applied our framework to all branches of each function in Table~\ref{tbl.case.studies}. Due to the probabilistic nature of the test generation process, the experiments has to be repeated 50 times to get statistically significant results. Our discussion completely excludes some functions in Table~\ref{tbl.case.studies} ($-$ sign in the $?$ column) as not presenting real challenge. Despite of it apparent complexity, like the function \emph{update}, in practice both random and genetic testing strategies take maximum upto two seconds to cover each branch. This gave us in total 14 functions, for which we present summary of performance statistics in Table~\ref{tbl.stats} for all three testing strategy. For the sake of space, we omitted from that table the branches whose average coverage time was less than one second. Functions suffixed with the start (*) symbol indicate reference to DOM.  Column $D$ next to the branch shows its depth. We computed the following medians for each algorithm: the number of iterations ($i$), time in seconds ($t$), and their ratio ($t/i$). In the table, these values are grouped into three columns $m_r$, $m_g$ and $m_{g10}$, one per algorithm type $R$, $G$ and $G5$  respectively. Next group of columns $t_r/t_g$, $t_r/t_{g10}$ and $t_g/t_{g10}$ measures the relative performance of each pair of the testing strategies $(R,G)$, $(R,G10)$, and $(G,G10)$ respectively.
 
-The fact that the median of generation reached the upper limit of \underline{200} means the branch was never covered. With that budget in mind not all algorithms were always performing successfully. The main reason for the random generation to fail, e.g. the \emph{(10,11,then)} branch of the \emph{isGameFinished} function or any branch of the \emph{isValidCard} function, is the huge size of the search space and complete absence of any guidance. On the contrary, the genetic search may stuck on a flat space when the fitness function does not carry any information how to get out it, e.g. the branches \emph{(10,11,then)}, \emph{(40,48,then)} and \emph{(40,45,then)} of the functions \emph{doPaddlePower}, \emph{initBricks} and \emph{do_draw} respectively. (say why random give better performance in that case) Those examples motivated us to introduce the genetic algorithm with restart ($G5$), which is as our evaluation demonstrated not only provided a solution within given budget, but also outperformed random search. (Maybe discuss examples where $R$ outperformed $G5$)
+\paragraph{\textbf{RQ1 (performance).}} First, we would like to study the performance of our test generation framework, including three test algorithms: Random ($\Random$), Genetic ($\Genetic$) and Genetic with Restart ($\RGenetic$). To address this question, we ran each algorithm against all branches of the functions in Table~\ref{tbl.case.studies}. Due to the probabilistic nature of the test generation process, the experiments were repeated 50 times to achieve statistical significance. 
+%% Functions suffixed with the start (*) symbol indicate reference to DOM.  Column $D$ next to the branch shows its depth. 
+Table~\ref{tbl.stats} contains results of our evaluation. For each algorithm, we computed the following median values per branch: the number of iterations ($i$), time in seconds ($t$), and their ratio ($t/i$). In the table, these values are grouped into three columns $m_{\Random}$, $m_{\Genetic}$ and $m_{\RGenetic}$ according to the algorithm type $\Random$, $\Genetic$ and $\RGenetic$. Next group of columns $t_{\Random}/t_{\Genetic}$, $t_{\Random}/t_{\RGenetic}$ and $t_{\Genetic}/t_{\RGenetic}$ presents the relative performance of each pair of the testing algorithm $(\Random,\Genetic)$, $(\Random,\RGenetic)$, and $(\Genetic,\RGenetic)$ respectively. Inline with the function name, we also present accumulated statistics for the function as a whole. Because of the missing branches, the function's summary may not be equal to the sum of the branches, e.g. see the \emph{toggleInfo} function. At the bottom of the table, we included accumulated data throughout all functions. Let us structure the performance discussion according the three levels of abstraction total, function, and branch.  
 
-Table~\ref{tbl.stats} also shows accumulated statistics for each function as a whole (row in line with the function name). This gives us a way to compare  all three testing strategies with each other at the function level. Chart in Figure~\ref{fig.gen.time.comp} clearly illustrates how the median time varies per function for each algorithm. Across all 14 examples $G10$ indicated the best performance comparing to both $R$ and $G$. We observed only two cases (\emph{revealAll}) and (\emph{doPaddlePower}) where random testing gave a slightly better result by only 6\%. If we take in consideration only examples with the average execution time above 50 seconds, we can conclude that $G10$ was minimum 1.87 time (\emph{do_draw}) and maximum 51.4 (\emph{isValidCard}) time faster than $R$. At the same time, even plain genetic algorithm $G$ outperforms the random one $R$ in all examples except of two \emph{doPaddlePower} and \emph{initBricks} due to the reasons discussed early in this section. In cases of success, especially for some small examples such as \emph{newGame} and \emph{isValidCard}, the genetic algorithm was even able to beat $G5$ by upto 30\%.  
+Given a fixed limit on the number of test iterations, 200 in our case, a search algorithm can not guarantee finding a solution. That is, the underlined values in Table~\ref{tbl.stats}  ($\underline{200}$) indicate branches, which on average were not covered by the respective algorithms. The main reason for the random generation ($\Random$) to fail is the large size of the search space and the lack of any feedback in the generation process, e.g. branch $(10,11)$ of the \emph{isGameFinished} function. In the case of genetic approach~($\Genetic$), it may get stuck at a plateau because the fitness function does not provide sufficient heuristic information, whereas $\Random$ can escape the plateau by chance. We encountered three of such cases in our study: branches $(10,11)$, $(47,48)$ and $(45,45)$ of the function \emph{doPaddlePower}, \emph{initBricks} and \emph{do_draw}, respectively. Those three examples motivated us to introduce the genetic algorithm with restart ($\RGenetic$) which combines strengths of both algorithms genetic and random. It leverages the genetic search while the fitness continues to improve, and restarts the search with a new target, when the fitness converges. As our evaluation has shown, $\RGenetic$ not only manged to cover the three problematic branches and outperform $\Random$, but it also improved some of the genetic search results, e.g. branch $(69,71)$ of the \emph{do_draw} function.
 
-\paragraph{\textbf{RQ2 (cost).}} The cost (time) of one iteration is defined as the relation between the execution time and the number of generations, i.e. $t/i$ in Table~\ref{tbl.stats}. Figure~\ref{fig.get.cost} shows the cost comparison of various algorithms across all case-studies. The execution time of one iteration depends on the population size, in case 50 candidates. Evaluation of a candidate results in an execution trace of a varying length. The length of an execution trace positively correlates with the computation cost of the fitness function. Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. The \emph{do_draw} examples illustrates the latter case, it consists of 40 LOC and operates only with primitive type which do not case any exception. In our evaluation we observed that the iteration cost varied between 0.25 and 3.38 seconds. 
+Figure~\ref{fig.gen.time.branch} shows average generation time per branch for each algorithm. It took maximum upto 26.5 seconds for $\RGenetic$ to cover a branch. This upper bound may service as a rough estimate defining budget for testing a new function with our framework using $\RGenetic$.
 
-TODO: discuss why cost of one genetic iteration for \emph{do_draw} is higher than random.
+%% \setlength{\fboxsep}{2mm}
+%% \fbox{%
+%%   \parbox{8cm}{
+%%     Three testing strategies $\Random$, $\Genetic$ and $\RGenetic$ covered respectively 63\%, 95\% and 100\% of branches.
+%%   }
+%% }
 
-TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
+%% TODO: Maybe discuss examples where $\Random$ outperformed $\RGenetic$
+%% TODO: consider further branch discrimination
 
-\paragraph{\textbf{RQ3 (coverage).}} In this research question we want to compare how coverage progresses with the increase of budget assigned per branch. We chose the following budget categories: 5, 10, 30 etc. up to 150 seconds per branch. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $G$ and $G10$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $G$ slightly outperforms $G10$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $G10$ starts to transcend $G$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds).  
-
-\paragraph{\textbf{RQ4 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $R$, $G$ and $G10$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values, where it was significant (otherwise '-'), for all three pairs of the test algorithm: $R$ against $G$ ($r/g$), $R$ against $G10$ ($r/g10$), and $G$ against $G10$ ($g/g10$). Depends on the actually exceeded value, the effect size can be small (0.56), medium (0.64), and large (0.71). Both genetic versions ($G$ and $G10$) outperform random ($R$) with the large (medium and small) effect in 33 (37 and 39) subjects, respectively, out of total 57. 
 
 \begin{figure}[t]
   \centering
@@ -977,47 +967,16 @@ TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
       \addplot[fill=blue] coordinates {(helpMe*,270) (isGameFinished*,220) (newGame*,14) (revealAll*,50) (shuffleBoard*,29) (toggleInfo*,6) (isValidCard,514) (isValidVISA,95) (initShields*,5) (brickJiggler*,8) (doPaddlePower*,15)  (initBricks*,2379) (do\_draw,625) (prob\_gamma,710)};
       \addplot[fill=red] coordinates {(helpMe*,47)  (isGameFinished*,30)  (newGame*,9)  (revealAll*,44) (shuffleBoard*,26) (toggleInfo*,7) (isValidCard,8)   (isValidVISA,3)  (initShields*,5) (brickJiggler*,4) (doPaddlePower*,140) (initBricks*,474) (do\_draw,1295) (prob\_gamma,84)};
       \addplot[fill=yellow] coordinates {(helpMe*,56)  (isGameFinished*,43)  (newGame*,10) (revealAll*,53) (shuffleBoard*,29) (toggleInfo*,6) (isValidCard,10)  (isValidVISA,2)  (initShields*,3) (brickJiggler*,3) (doPaddlePower*,16) (initBricks*,415) (do\_draw,334) (prob\_gamma,81)}; 
-      \legend{R,G,G10}
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
     \end{axis}
   \end{tikzpicture}
   \caption{Overall test generation time per function.}
   \label{fig.gen.time.comp}
-\end{figure}
+\end{figure}  
 
-% \input{summary_statistics}
+The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at a function level. There are only two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%; and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum 40\%~(\emph{newGame}) and maximum 510\%~(\emph{isValidCard}). According to the industry standard~\cite{bray1997c4}, functions with the CC below 10 are easy to test, and above 10 present a reasonable challenge. Three functions at the bottom of Table~\ref{tbl.case.studies}, \emph{initBricks}, \emph{do_daw} and \emph{prob_gamma} with the respective CC 13, 14 and 16 are of the latter category. Because of they complexity, they are recommended to test, but test construction, especially manual, can be difficult. For those functions, $\RGenetic$ managed to provide complete coverage, where other two algorithms failed, and did it in a shortest time.
 
-\begin{figure}[t]
-  \begin{tikzpicture}[scale=0.8]
-    \begin{axis}[
-        every axis plot post/.style={/pgf/number format/fixed},
-        ybar,
-        ymin=0,ymax=4,
-        width=11cm,height=3.3cm,
-        bar width=3pt,
-        enlarge x limits=0.05,
-        legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
-        legend cell align={left},
-        ylabel={time (sec.)},
-        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
-        xtick=data,
-        nodes near coords,
-        every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
-        % every node near coord/.append style={font=\footnotesize},
-        axis lines*=left,
-        clip=false,
-        x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
-        y tick label style={font=\footnotesize}
-      ]
-      \addplot[fill=blue] coordinates {(helpMe*,1.24) (isGameFinished*,0.83) (newGame*,0.78) (revealAll*,0.83) (shuffleBoard*,1.93) (toggleInfo*,1) (isValidCard,0.51) (isValidVISA,0.47) (initShields*,0.83) (brickJiggler*,1.14) (doPaddlePower*,0.79)  (initBricks*,1.68) (do\_draw,2.33) (prob\_gamma,0.35)};
-      \addplot[fill=red] coordinates {(helpMe*,0.77)  (isGameFinished*,0.94)  (newGame*,0.81)  (revealAll*,1) (shuffleBoard*,1.73) (toggleInfo*,1) (isValidCard,0.38)   (isValidVISA,0.38)  (initShields*,0.83) (brickJiggler*,0.67) (doPaddlePower*,0.69) (initBricks*,0.8) (do\_draw,3.38) (prob\_gamma,0.52)};
-      \addplot[fill=yellow] coordinates {(helpMe*,0.9)  (isGameFinished*,1)  (newGame*,1) (revealAll*,1.13) (shuffleBoard*,1.71) (toggleInfo*,0.66) (isValidCard,0.48)  (isValidVISA,0.25)  (initShields*,0.5) (brickJiggler*,0.75) (doPaddlePower*,0.64) (initBricks*,0.98) (do\_draw,2.69) (prob\_gamma,0.5)}; 
-      \legend{R,G,G10}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Speed of test generation measured as $t/i$}
-    \label{fig.get.cost}
-\end{figure}
-
+In total, $\RGenetic$ outperformed $\Random$ and $\Genetic$ by 4.66 and 2.05 times, respectively; and $\Genetic$ outperformed $\Random$ by 2.27 times. Moreover, $\RGenetic$ was not only the fastest, but also the most effective algorithm reaching 100\% of branch coverage, with $\Genetic$ coming second 95\%, and $\Random$ third 63\%. On average, one algorithm iteration took one second for $\Random$ and $\RGenetic$, with $\Genetic$ performing worse 1.4 seconds. 
 
 \begin{figure}[t]
   \begin{tikzpicture}[scale=0.8]
@@ -1046,13 +1005,54 @@ TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
       \addplot[fill=red] coordinates {(helpMe*,9.4)  (isGameFinished*,6)  (newGame*,3)  (revealAll*,22) (shuffleBoard*,3.25) (toggleInfo*,1.75) (isValidCard,1.33)   (isValidVISA,1.5)  (initShields*,4) (brickJiggler*,2) (doPaddlePower*,35) (initBricks*,26.33) (do\_draw,58.9) (prob\_gamma,5.25)};
       
       \addplot[fill=yellow] coordinates {(helpMe*,11.2)  (isGameFinished*,8.6)  (newGame*,3.3) (revealAll*,26.5) (shuffleBoard*,3.6) (toggleInfo*,1.5) (isValidCard,1.66)  (isValidVISA,1)  (initShields*,3) (brickJiggler*,1.5) (doPaddlePower*,4) (initBricks*,23.1) (do\_draw,15.18) (prob\_gamma,5.1)}; 
-      \legend{R,G,G10}
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
     \end{axis}
   \end{tikzpicture}
   \caption{Average generation time per branch}
-    \label{fig:1}
+    \label{fig.gen.time.branch}
 \end{figure}
 
+\paragraph{\textbf{RQ2 (cost).}} This question is supposed to shed some light on the cost of one iteration of our framework. This information is useful when setting up the maximal generation limit. The cost, shown in column $t/i$ in Table~\ref{tbl.stats}, is calculated as the relation between the execution time and the number of generations, i.e. it measures time of one iteration. Figure~\ref{fig.get.cost} presents the cost comparison of three algorithms across all functions in our study. On one hand, the cost of one iteration depends on the population size, in our case 50 candidates. On the other hand, the cost also depends on the length of the execution trace produced during the evaluation of a candidate, because longer traces increase the computation cost the fitness function. 
+....
+Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. The \emph{do_draw} examples illustrates the latter case, it consists of 40 LOC and operates only with primitive type which do not case any exception. In our evaluation we observed that the iteration cost varied between 0.25 and 3.38 seconds. 
+
+\begin{figure}[t]
+  \begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        every axis plot post/.style={/pgf/number format/fixed},
+        ybar,
+        ymin=0,ymax=4,
+        width=11cm,height=3.3cm,
+        bar width=3pt,
+        enlarge x limits=0.05,
+        legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
+        legend cell align={left},
+        ylabel={time (sec.)},
+        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
+        xtick=data,
+        nodes near coords,
+        every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
+        % every node near coord/.append style={font=\footnotesize},
+        axis lines*=left,
+        clip=false,
+        x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
+        y tick label style={font=\footnotesize}
+      ]
+      \addplot[fill=blue] coordinates {(helpMe*,1.24) (isGameFinished*,0.83) (newGame*,0.78) (revealAll*,0.83) (shuffleBoard*,1.93) (toggleInfo*,1) (isValidCard,0.51) (isValidVISA,0.47) (initShields*,0.83) (brickJiggler*,1.14) (doPaddlePower*,0.79)  (initBricks*,1.68) (do\_draw,2.33) (prob\_gamma,0.35)};
+      \addplot[fill=red] coordinates {(helpMe*,0.77)  (isGameFinished*,0.94)  (newGame*,0.81)  (revealAll*,1) (shuffleBoard*,1.73) (toggleInfo*,1) (isValidCard,0.38)   (isValidVISA,0.38)  (initShields*,0.83) (brickJiggler*,0.67) (doPaddlePower*,0.69) (initBricks*,0.8) (do\_draw,3.38) (prob\_gamma,0.52)};
+      \addplot[fill=yellow] coordinates {(helpMe*,0.9)  (isGameFinished*,1)  (newGame*,1) (revealAll*,1.13) (shuffleBoard*,1.71) (toggleInfo*,0.66) (isValidCard,0.48)  (isValidVISA,0.25)  (initShields*,0.5) (brickJiggler*,0.75) (doPaddlePower*,0.64) (initBricks*,0.98) (do\_draw,2.69) (prob\_gamma,0.5)}; 
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Speed of test generation measured as $t/i$}
+    \label{fig.get.cost}
+\end{figure}
+
+TODO: discuss why cost of one genetic iteration for \emph{do_draw} is higher than random.
+
+TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
+
+\paragraph{\textbf{RQ3 (coverage).}} In this research question we want to compare how coverage progresses with the increase of budget assigned per branch. We chose the following budget categories: 5, 10, 30 etc. up to 150 seconds per branch. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $G$ and $G10$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $G$ slightly outperforms $G10$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $G10$ starts to transcend $G$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds).  
 
 \begin{figure}[!t]
   \begin{tikzpicture}[scale=0.5]
@@ -1088,13 +1088,18 @@ TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
       ]   coordinates {
         (5,27) (10,35) (30,50) (60,54) (90,55) (120,56) (150,58)
       };
-      \legend{R,G,G10}
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
  
     \end{axis}
   \end{tikzpicture}
   \caption{Progress of the branch coverage given fix time budget per branch}
     \label{fig:2}
 \end{figure}
+
+
+\paragraph{\textbf{RQ4 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $R$, $G$ and $G10$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values, where it was significant (otherwise '-'), for all three pairs of the test algorithm: $R$ against $G$ ($r/g$), $R$ against $G10$ ($r/g10$), and $G$ against $G10$ ($g/g10$). Depends on the actually exceeded value, the effect size can be small (0.56), medium (0.64), and large (0.71). Both genetic versions ($G$ and $G10$) outperform random ($R$) with the large (medium and small) effect in 33 (37 and 39) subjects, respectively, out of total 57. 
+
+% \input{summary_statistics}
 
 
 \section{Discussion}
