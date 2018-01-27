@@ -1,4 +1,4 @@
-\documentclass[sigconf,review, anonymous]{acmart}
+\documentclass[sigconf,review,anonymous]{acmart}
 
 \usepackage{tablefootnote}
 \usepackage{syntax}
@@ -175,10 +175,10 @@
 \newcommand{\RGenetic}{\mathbb{G}_{10}}
 
 % Copyright
-%\setcopyright{none}
+\setcopyright{none}
 %\setcopyright{acmcopyright}
 %\setcopyright{acmlicensed}
-\setcopyright{rightsretained}
+%\setcopyright{rightsretained}
 %\setcopyright{usgov}
 %\setcopyright{usgovmixed}
 %\setcopyright{cagov}
@@ -186,28 +186,21 @@
 
 
 % DOI
-\acmDOI{10.475/123_4}
+%\acmDOI{10.475/123_4}
 
 % ISBN
-\acmISBN{123-4567-24-567/08/06}
+%\acmISBN{123-4567-24-567/08/06}
 
 %Conference
 \acmConference[ISSTA 2018]{ACM SIGSOFT International Symposium on Software Testing and Analysis}{16-22 July, 2018}{Amsterdam, The Netherlands}
-\acmYear{1997}
-\copyrightyear{2016}
+%% \acmYear{1997}                  
+%% \copyrightyear{2016}
 
-\acmPrice{15.00}
-
+%% \acmPrice{15.00}
 
 \begin{document}
 \title{Search-Based Test Data Generation for JavaScript Functions with DOM}
 
-
-%% \author{
-%%   \alignauthor Alexander Elyasov, Wishnu Prasetya, Jurriaan Hage\\ 
-%%   \affaddr{Utrecht University, The Netherlands}\\
-%%   \email{\{a.elyasov,s.w.b.prasetya,j.hage\}@uu.nl}
-%% }
 
 \author{Alexander Elyasov}
 \affiliation{%
@@ -230,7 +223,7 @@
 
 
 \begin{abstract}
-As of 2017 JavaScript language and Node.js platform continues to stay the most prevalent technologies voted by the developers in Stack Overflow survey. At the same time  
+As of 2017 JavaScript and Node.js continue to stay the most prevalent technologies according to the Stack Overflow developers survey. Nevertheless, existing JS testing frameworks are still lacking any support for such a vital step in test automation as the generation of input data. To address this problem, we present a novel \textbf{J}avascript \textbf{E}volutionary-based testing framework with \textbf{D}OM as an \textbf{I}input, called \textbf{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function including global DOM state. The \emph{genetic with restart} algorithm, proposed in this paper, was able to achieve complete branch coverage in our empirical evaluation with the average execution time 7.7 sec. per branch 
 \end{abstract}
 
 %
@@ -239,16 +232,24 @@ As of 2017 JavaScript language and Node.js platform continues to stay the most p
 % Please copy and paste the code instead of the example below. 
 %
 \begin{CCSXML}
-TODO 
+<ccs2012>
+<concept>
+<concept_id>10011007.10011074.10011099.10011102.10011103</concept_id>
+<concept_desc>Software and its engineering~Software testing and debugging</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+<concept>
+<concept_id>10011007.10011074.10011784</concept_id>
+<concept_desc>Software and its engineering~Search-based software engineering</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
 \end{CCSXML}
 
-\ccsdesc[500]{Computer systems organization~Embedded systems}
-\ccsdesc[300]{Computer systems organization~Redundancy}
-\ccsdesc{Computer systems organization~Robotics}
-\ccsdesc[100]{Networks~Network reliability}
+\ccsdesc[300]{Software and its engineering~Software testing and debugging}
+\ccsdesc[300]{Software and its engineering~Search-based software engineering}
 
-
-\keywords{ACM proceedings, \LaTeX, text tagging}
+\keywords{JavaScript, search-based testing, branch coverage}
 
 
 \maketitle
@@ -257,23 +258,22 @@ TODO
 \section{Introduction}
 \label{sec.intro}
 
-According to the Stack Overflow survey\footnote{\url{https://insights.stackoverflow.com/survey/2017}} run in 2017 across developers, JavaScript has been recognized for the firth time in row as the most commonly used programming language with Node.js as the most commonly used technology. It is used through all technology stack web, back-ends and mobile. Such a tremendous ever increasing JS success is happening thanks to extensive dynamic features of the language, JS permissiveness and native browser support. On the contrary, JS applications are error-prone~\cite{why}, hard to analyze~\cite{why} and test~\cite{why}. Therefore, it is not surprising that year over year we hear new stories\footnote{\url{https://www.fastcompany.com/40505226/the-year-that-software-bugs-ate-the-world}} about another critical bug being found in a web application by Facebook, Twitter etc. 
+According to a Stack Overflow survey\footnote{\url{https://insights.stackoverflow.com/survey/2017}} run in 2017 across developers, JavaScript has been recognized for the fifth time in row as the most commonly used programming language with Node.js as the most commonly used technology. It is used through all technology stack web, back-ends and mobile. Such a tremendous ever increasing JS success is happening thanks to the extensive dynamic features of the language, JS permissiveness and native browser support. On the other hand, JS applications are error-prone~\cite{why}, hard to analyze~\cite{why} and test~\cite{why}. Therefore, it is not surprising that year after year we hear new stories\footnote{\url{https://www.fastcompany.com/40505226/the-year-that-software-bugs-ate-the-world}} about another critical bug being found in a web application by Facebook, Twitter etc. 
 
 %% Common mistakes JS developers do\footnote{\url{https://www.toptal.com/javascript/10-most-common-javascript-mistakes}}.
 
 %% Notable errors in 2017\footnote{\url{https://www.fastcompany.com/40505226/the-year-that-software-bugs-ate-the-world}}. 
 
-The state of JS 2017 survey~\footnote{\url{https://stateofjs.com/}} contains an extensive list of testing frameworks including Mocha, Jasmine, Jest, Enzyme, Tape, Ava, Karma and QUnit among the most used ones in the decreasing order of popularity. These frameworks support testing at different levels unit, integration and functional. The same survey also indicated relatively low satisfaction rate of the current state of JS testing tools, only 3.2 out of 5. As result, new testing frameworks such as Cypress and Storybook are constantly appearing to improve the situation. But despite of this effort, test data generation stays a missing component not being properly addressed by any of the widely used testing frameworks. Research community has actively been working towards making progress in this direction introducing such tools as Artemis~\cite{artemis2011}, JSConTest~\cite{heidegger2010contract}, Crawljax~\cite{mesbah2012crawling}, JSeft~\cite{mirshokraie2015jseft} and Jalangi~\cite{sen2013jalangi}. Recent study of client-side JS bugs~\cite{ocariza2017study} has shown that majority (68\%) of JS faults are DOM-related and occur in JS code itself. This fact indicates that yet a better testing approach is needed when it comes to unit testing of JS.
+The state of JS 2017 survey~\footnote{\url{https://stateofjs.com/}} contains an extensive list of testing frameworks including Mocha, Jasmine, Jest, Enzyme, Tape, Ava, Karma and QUnit. These frameworks support testing at various levels: unit, integration and functional. The survey also indicated relatively low satisfaction rate of the current state of JS testing tools, scoring only 3.2 out of 5. As result, new testing frameworks such as Cypress and Storybook are constantly appearing to improve the situation. But despite of this effort, test data generation continues to be not properly addressed by any of the widely used testing frameworks. The research community has actively been working towards making progress in this direction introducing such tools as Artemis~\cite{artemis2011}, JSConTest~\cite{heidegger2010contract}, Crawljax~\cite{mesbah2012crawling}, JSeft~\cite{mirshokraie2015jseft} and Jalangi~\cite{sen2013jalangi}. A recent study of client-side JS bugs~\cite{ocariza2017study} has shown that the majority (68\%) of JS faults are DOM-related and occur in JS code, and not in HTML or CSS. This fact indicates that yet a better testing approach is needed when it comes to unit testing of JS.
 
-Over the past two decades search-based test data generation has proven to be one of the most effective solutions for a wide range of technologies including object-oriented~\cite{paper}, web~\cite{paper} and mobile~\cite{paper}. In the recent years, some effort was done to apply search-based testing for dynamic languages such as Python~\cite{paper}, Ruby~\cite{paper} (maybe mention Go and Lua), but to the best of our knowledge search-based testing approach has never been implemented for JavaScript. This circumstance motivated us to introduce a search-based test generation framework for JS with presence of DOM. Our work makes the following contributions:
+Over the past two decades search-based test data generation has proven to be one of the most effective solutions for a wide range of technologies including object-oriented~\cite{paper}, web~\cite{paper} and mobile~\cite{paper}. In recent years, some effort was made to apply search-based testing to dynamic languages such as Python~\cite{paper}, Ruby~\cite{paper} (maybe mention Go and Lua), but to the best of our knowledge search-based testing approach has never been applied to JavaScript. Our work makes the following contributions:
 \begin{enumerate}
-\item JS search-based testing framework
-\item random HTML generation
-\item genetic with restart algorithm
-\item empirical evaluation 
+\item The \emph{JEDI} framework is a novel JS unit testing tool using search-based techniques for generating test data. Notably, our testing framework is able to generate an arbitrary DOM input, which is syntactically valid and compliant with the recent HTML5 specification.   
+\item We propose a novel test generation algorithm, called ``genetic with restart'', combining the benefits of systematic fitness improvement with the genetic search and the ability of escaping plateau by restarting search with a new target.
+\item Based on the case studies found in two related works~\emph{Confix}~\cite{amin:ase15} and \emph{TAJS}~\cite{dom2011}, we conduced an empirical validation of our framework and performed a significance study of the results. The validation has shown the effectiveness of the framework in covering target branches with a reasonable efficiency...  
 \end{enumerate} 
 
-The paper is structured as follows: 
+The paper is structured as follows: In Section~\ref{sec.example}, we present a motivating example illustrating the challenges of generating test data for JS. The architecture of the \emph{JEDI} testing framework is explained in Section~\ref{sec.framework}. Section~\ref{sec.evaluation} present empirical validation, whereas Section~\ref{sec.disc} discusses future work and validity threats. We discuss related work in Section~\ref{sec:related.work} and conclude the paper in Section~\ref{sec:concl}.  
 
 Another empirical work~\cite{richards2010analysis}.
 
@@ -720,7 +720,7 @@ The approach level is an integer value that indicates how many conditions should
 \label{sec.evaluation}
 %% --------------------------------------------------------------------
 
-In order to evaluate the feasibility of our test framework adoption in practice, we conducted an empirical evaluation on a set of case-studies described in Section~\ref{sub.sec.case.studies}. All experiments were submitted as a batch mode job on a cluster machine with 32 HT Cores and 256 GB RAM running under Scientific Linux 7.3. We have created three different instances of the JS testing framework --- each is based on a slight variation of the underlying genetic search algorithm. The first version, which play the role of our baseline, is \emph{Random} ($R$). Instead of applying crossover and mutation to evolve the population, this algorithm regenerates the new population randomly from scratch. It is worth to notice, that the random version also benefits from both preliminary static analysis phase and dynamic constant propagation as part of the fitness evaluation. The second version is \emph{Genetic}~($G$) --- it literally follows all of the steps prescribed by the genetic framework in Figure~\ref{fig.framework.architect}. The last version is the \emph{Genetic with Restart} ($G10$). It is based on the genetic algorithm~\ref{alg.gen} where the search is restarted after the archives are converged within a certain history window. On one hand, the smaller window size forces the GA to converge faster and early discovers the stagnation on a flat space. On the other hand, the small window can lead to a premature archive convergence, which prevents the right genetic combination from been triggered. We have experimented with two different windows of size 5 and 10. But since the latter one ($G10$) showed the best performance over all, we chose it to report in the paper. Table~\ref{tbl.gen.config} summarizes the configuration parameters for all three versions of the testing framework. The initial setup for genetic algorithm is similar to other frameworks, e.g. \emph{EvoSuite}~\cite{evosuite}. 
+In order to evaluate the feasibility of our test framework adoption in practice, we conducted an empirical evaluation on a set of case-studies described in Section~\ref{sub.sec.case.studies}. All experiments were submitted as a batch mode job on a cluster machine with 32 HT Cores and 256 GB RAM running under Scientific Linux 7.3. We have created three different instances of the JS testing framework --- each is based on a slight variation of the underlying genetic search algorithm. The first version, which play the role of our baseline, is \emph{Random} ($\Random$). Instead of applying crossover and mutation to evolve the population, this algorithm regenerates the new population randomly from scratch. It is worth to notice, that the random version also benefits from both preliminary static analysis phase and dynamic constant propagation as part of the fitness evaluation. The second version is \emph{Genetic}~($\Genetic$) --- it literally follows all of the steps prescribed by the genetic framework in Figure~\ref{fig.framework.architect}. The last version is the \emph{Genetic with Restart} ($\RGenetic$). It is based on the genetic algorithm~\ref{alg.gen} where the search is restarted after the archives are converged within a certain history window. On one hand, the smaller window size forces the GA to converge faster and early discovers the stagnation on a flat space. On the other hand, the small window can lead to a premature archive convergence, which prevents the right genetic combination from been triggered. We have experimented with two different windows of size 5 and 10. But since the latter one ($\RGenetic$) showed the best performance over all, we chose it to report in the paper. Table~\ref{tbl.gen.config} summarizes the configuration parameters for all three versions of the testing framework. The initial setup for genetic algorithm is similar to other frameworks, e.g. \emph{EvoSuite}~\cite{evosuite}. 
 
 \begin{table}
   \caption{Genetic Algorithm Configurations}
@@ -742,10 +742,9 @@ In order to evaluate the feasibility of our test framework adoption in practice,
 
 By carrying the evaluation, we would like to address the following research questions:
 \begin{description}
-\item[\textbf{RQ1 (performance):}] What is the performance of our test generation framework? Is there any difference in performance on examples with DOM and without?  Which algorithm works best random, genetic or genetic with restart?
-\item[\textbf{RQ2 (cost):}] What is the cost of one iteration of each algorithm?
-\item[\textbf{RQ3 (coverage):}] How does the branch coverage progress over time given a fixed budget per branch?
-\item[\textbf{RQ4 (significance):}] What is statistical significance and effect size of our experimental results? 
+\item[\textbf{RQ1 (effectiveness):}] What is the value of branch coverage achieved by our testing framework? Which testing algorithm is the most effective?
+\item[\textbf{RQ2 (efficiency):}] How efficient our testing framework? And which algorithm is the most efficient?
+\item[\textbf{RQ3 (significance):}] What is statistical significance and effect size of our experimental results? 
 \end{description}
 
 
@@ -915,13 +914,60 @@ For the sake of space, we chose to exclude from the follow up presentation the b
 \end{table}
 
 
-\paragraph{\textbf{RQ1 (performance).}} First, we would like to study the performance of our test generation framework, including three test algorithms: Random ($\Random$), Genetic ($\Genetic$) and Genetic with Restart ($\RGenetic$). To address this question, we ran each algorithm against all branches of the functions in Table~\ref{tbl.case.studies}. Due to the probabilistic nature of the test generation process, the experiments were repeated 50 times to achieve statistical significance. 
-%% Functions suffixed with the start (*) symbol indicate reference to DOM.  Column $D$ next to the branch shows its depth. 
-Table~\ref{tbl.stats} contains results of our evaluation. For each algorithm, we computed the following median values per branch: the number of iterations ($i$), time in seconds ($t$), and their ratio ($t/i$). In the table, these values are grouped into three columns $m_{\Random}$, $m_{\Genetic}$ and $m_{\RGenetic}$ according to the algorithm type $\Random$, $\Genetic$ and $\RGenetic$. Next group of columns $t_{\Random}/t_{\Genetic}$, $t_{\Random}/t_{\RGenetic}$ and $t_{\Genetic}/t_{\RGenetic}$ presents the relative performance of each pair of the testing algorithm $(\Random,\Genetic)$, $(\Random,\RGenetic)$, and $(\Genetic,\RGenetic)$ respectively. Inline with the function name, we also present accumulated statistics for the function as a whole. Because of the missing branches, the function's summary may not be equal to the sum of the branches, e.g. see the \emph{toggleInfo} function. At the bottom of the table, we included accumulated data throughout all functions. Let us structure the performance discussion according the three levels of abstraction total, function, and branch.  
+To study the effectiveness and efficiency of our test generation framework, including three test algorithms Random ($\Random$), Genetic ($\Genetic$) and Genetic with Restart ($\RGenetic$), we exercised each algorithm against all branches of the functions in Table~\ref{tbl.case.studies}. Due to the probabilistic nature of the test generation process, the experiments were repeated 50 times to achieve statistical significance. Table~\ref{tbl.stats} contains results of our evaluation. For each algorithm, we computed the following median values per branch: the number of iterations ($i$), time in seconds ($t$), and their ratio ($t/i$). In the table, these values are grouped into three columns $m_{\Random}$, $m_{\Genetic}$ and $m_{\RGenetic}$ according to the algorithm type $\Random$, $\Genetic$ and $\RGenetic$. Next group of columns $t_{\Random}/t_{\Genetic}$, $t_{\Random}/t_{\RGenetic}$ and $t_{\Genetic}/t_{\RGenetic}$ presents the relative performance of each pair of the testing algorithm $(\Random,\Genetic)$, $(\Random,\RGenetic)$, and $(\Genetic,\RGenetic)$ respectively. Inline with the function name, we also present accumulated statistics for the function as a whole. Because of the missing branches, the function's summary may not be equal to the sum of the branches, e.g. see the \emph{toggleInfo} function. At the bottom of the table, we included accumulated data throughout all functions.
 
-Given a fixed limit on the number of test iterations, 200 in our case, a search algorithm can not guarantee finding a solution. That is, the underlined values in Table~\ref{tbl.stats}  ($\underline{200}$) indicate branches, which on average were not covered by the respective algorithms. The main reason for the random generation ($\Random$) to fail is the large size of the search space and the lack of any feedback in the generation process, e.g. branch $(10,11)$ of the \emph{isGameFinished} function. In the case of genetic approach~($\Genetic$), it may get stuck at a plateau because the fitness function does not provide sufficient heuristic information, whereas $\Random$ can escape the plateau by chance. We encountered three of such cases in our study: branches $(10,11)$, $(47,48)$ and $(45,45)$ of the function \emph{doPaddlePower}, \emph{initBricks} and \emph{do_draw}, respectively. Those three examples motivated us to introduce the genetic algorithm with restart ($\RGenetic$) which combines strengths of both algorithms genetic and random. It leverages the genetic search while the fitness continues to improve, and restarts the search with a new target, when the fitness converges. As our evaluation has shown, $\RGenetic$ not only manged to cover the three problematic branches and outperform $\Random$, but it also improved some of the genetic search results, e.g. branch $(69,71)$ of the \emph{do_draw} function.
+\paragraph{\textbf{RQ1 (effectiveness).}} To answer this question, we report on the branch coverage achieved by each testing algorithm in our empirical study. Given a fixed limit on the number of test iterations, 200 in our case, a search algorithm can not guarantee finding a solution. The values in Table~\ref{tbl.stats} highlighted as $\underline{200}$ indicate branches which on average were not covered by the respective algorithms. The main reason for the random generation ($\Random$) to fail is the large size of the search space and the lack of any feedback in the generation process, e.g. branch $(10,11)$ of the \emph{isGameFinished} function. In the case of genetic approach~($\Genetic$), it may get stuck at a plateau because the fitness function does not provide sufficient heuristic information, whereas $\Random$ can escape the plateau by chance. We encountered three of such cases in our study: branches $(10,11)$, $(47,48)$ and $(45,45)$ of the function \emph{doPaddlePower}, \emph{initBricks} and \emph{do_draw}, respectively. Those three examples motivated us to introduce the genetic algorithm with restart ($\RGenetic$) which combines strengths of both algorithms genetic and random. It leverages the genetic search while the fitness continues to improve, and restarts the search with a new target, when the fitness converges. As our evaluation has shown, $\RGenetic$ not only manged to cover the three problematic branches and outperform $\Random$, but it also improved some of the genetic search results, e.g. branch $(69,71)$ of the \emph{do_draw} function.
 
-Figure~\ref{fig.gen.time.branch} shows average generation time per branch for each algorithm. It took maximum upto 26.5 seconds for $\RGenetic$ to cover a branch. This upper bound may service as a rough estimate defining budget for testing a new function with our framework using $\RGenetic$.
+
+According to the industry standard~\cite{bray1997c4}, functions with the CC below 10 are considered easy to test, and above 10 present a reasonable challenge. Three functions at the bottom of Table~\ref{tbl.case.studies}, \emph{initBricks}, \emph{do_daw} and \emph{prob_gamma} with the respective CC 13, 14 and 16 are of the latter category. Because of they complexity, they are recommended to test, but test construction, especially manual, can be difficult. For those functions, $\RGenetic$ managed to provide complete coverage, where other two algorithms failed, and did it in a shortest time.  Across all subjects, the $\RGenetic$ algorithm achieved 100\% branch coverage, with $\Genetic$ in the second place with 95\% coverage, and, finally, $\Random$ with  63\% coverage.
+
+Additionally, we would like to investigate how the coverage progresses with the increase of budget assigned per branch. This experiment models different testing scenarios which are time depended. E.g. running tests inside IDE should be fast; as part of the CI cycle we may afford a large waiting time; regression testing over night may take hours. We define the following budget categories: 5, 10, 30, 60, 90, 120, 150. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $\Genetic$ and $\RGenetic$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $\Genetic$ slightly outperforms $\RGenetic$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $\RGenetic$ starts to transcend $\Genetic$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds). In conclusion, our recommendation is to use $\Genetic$ for rapid testing during development, and later towards integration testing switch to $\RGenetic$ since it is able to reach harder to cover branches.
+
+\begin{figure}[!t]
+  \begin{tikzpicture}[scale=0.5]
+    \begin{axis}[
+        xlabel={Time budget per branch (seconds)},
+        ylabel={Number of covered branches},
+        xmin=0, xmax=150,
+        ymin=10, ymax=58,
+        xtick={0,5,10,30,60,90,120,150,180},
+        ytick={0,10,20,30,40,50},
+        legend pos=south east,
+        ymajorgrids=true,
+        % xmajorgrids=true,
+        grid style=dashed,
+        label style={font=\huge}
+      ]
+      
+      \addplot[
+        color=blue,
+        mark=square*,
+      ] coordinates {
+        (5,13) (10,15) (30,25) (60,28) (90,29) (120,30) (150,31)
+      }; 
+      \addplot[
+        color=red,
+        mark=triangle*,
+      ]  coordinates {
+        (5,27) (10,37) (30,48) (60,52) (90,54) (120,54) (150,54)
+      };
+      \addplot[
+        color=yellow,
+        mark=*,
+      ]   coordinates {
+        (5,27) (10,35) (30,50) (60,54) (90,55) (120,56) (150,58)
+      };
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
+ 
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Progress of the branch coverage given fix time budget per branch}
+    \label{fig:2}
+\end{figure}
+
+
+\paragraph{\textbf{RQ2 (efficiency).}} To answer this question, we compare the actual execution time shown by our test algorithms in the experiments. Based on this information, we suggest an estimate on the execution time of the testing framework.
+
 
 %% \setlength{\fboxsep}{2mm}
 %% \fbox{%
@@ -974,9 +1020,7 @@ Figure~\ref{fig.gen.time.branch} shows average generation time per branch for ea
   \label{fig.gen.time.comp}
 \end{figure}  
 
-The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at a function level. There are only two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%; and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum 40\%~(\emph{newGame}) and maximum 510\%~(\emph{isValidCard}). According to the industry standard~\cite{bray1997c4}, functions with the CC below 10 are easy to test, and above 10 present a reasonable challenge. Three functions at the bottom of Table~\ref{tbl.case.studies}, \emph{initBricks}, \emph{do_daw} and \emph{prob_gamma} with the respective CC 13, 14 and 16 are of the latter category. Because of they complexity, they are recommended to test, but test construction, especially manual, can be difficult. For those functions, $\RGenetic$ managed to provide complete coverage, where other two algorithms failed, and did it in a shortest time.
-
-In total, $\RGenetic$ outperformed $\Random$ and $\Genetic$ by 4.66 and 2.05 times, respectively; and $\Genetic$ outperformed $\Random$ by 2.27 times. Moreover, $\RGenetic$ was not only the fastest, but also the most effective algorithm reaching 100\% of branch coverage, with $\Genetic$ coming second 95\%, and $\Random$ third 63\%. On average, one algorithm iteration took one second for $\Random$ and $\RGenetic$, with $\Genetic$ performing worse 1.4 seconds. 
+The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at the function level. There are only two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%, and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum 40\%~(\emph{newGame}) and maximum 510\%~(\emph{isValidCard}). 
 
 \begin{figure}[t]
   \begin{tikzpicture}[scale=0.8]
@@ -1012,9 +1056,10 @@ In total, $\RGenetic$ outperformed $\Random$ and $\Genetic$ by 4.66 and 2.05 tim
     \label{fig.gen.time.branch}
 \end{figure}
 
-\paragraph{\textbf{RQ2 (cost).}} This question is supposed to shed some light on the cost of one iteration of our framework. This information is useful when setting up the maximal generation limit. The cost, shown in column $t/i$ in Table~\ref{tbl.stats}, is calculated as the relation between the execution time and the number of generations, i.e. it measures time of one iteration. Figure~\ref{fig.get.cost} presents the cost comparison of three algorithms across all functions in our study. On one hand, the cost of one iteration depends on the population size, in our case 50 candidates. On the other hand, the cost also depends on the length of the execution trace produced during the evaluation of a candidate, because longer traces increase the computation cost the fitness function. 
-....
-Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. The \emph{do_draw} examples illustrates the latter case, it consists of 40 LOC and operates only with primitive type which do not case any exception. In our evaluation we observed that the iteration cost varied between 0.25 and 3.38 seconds. 
+Figure~\ref{fig.gen.time.branch} shows average generation time per branch for each algorithm. It took maximum upto 26.5 seconds for $\RGenetic$ to cover a branch. This upper bound may service as a rough estimate defining budget for testing a new function with our framework using $\RGenetic$.
+
+In total, $\RGenetic$ outperformed $\Random$ and $\Genetic$ by 4.66 and 2.05 times, respectively; and $\Genetic$ outperformed $\Random$ by 2.27 times. 
+
 
 \begin{figure}[t]
   \begin{tikzpicture}[scale=0.8]
@@ -1048,56 +1093,15 @@ Premature program termination due to exceptions leads to short traces, whereas l
     \label{fig.get.cost}
 \end{figure}
 
+This question is supposed to shed some light on the cost of one iteration of our framework. This information is useful when setting up the maximal generation limit. The cost, shown in column $t/i$ in Table~\ref{tbl.stats}, is calculated as the relation between the execution time and the number of generations, i.e. it measures time of one iteration. Figure~\ref{fig.get.cost} presents the cost comparison of three algorithms across all functions in our study. On one hand, the cost of one iteration depends on the population size, in our case 50 candidates. On the other hand, the cost also depends on the length of the execution trace produced during the evaluation of a candidate, because longer traces increase the computation cost the fitness function. 
+....
+Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. The \emph{do_draw} examples illustrates the latter case, it consists of 40 LOC and operates only with primitive type which do not case any exception. In our evaluation we observed that the iteration cost varied between 0.25 and 3.38 seconds. On average, one algorithm iteration took one second for $\Random$ and $\RGenetic$, with $\Genetic$ performing worse 1.4 seconds.  
+
 TODO: discuss why cost of one genetic iteration for \emph{do_draw} is higher than random.
 
 TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
 
-\paragraph{\textbf{RQ3 (coverage).}} In this research question we want to compare how coverage progresses with the increase of budget assigned per branch. We chose the following budget categories: 5, 10, 30 etc. up to 150 seconds per branch. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $G$ and $G10$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $G$ slightly outperforms $G10$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $G10$ starts to transcend $G$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds).  
-
-\begin{figure}[!t]
-  \begin{tikzpicture}[scale=0.5]
-    \begin{axis}[
-        xlabel={Time budget per branch (seconds)},
-        ylabel={Number of covered branches},
-        xmin=0, xmax=150,
-        ymin=10, ymax=58,
-        xtick={0,5,10,30,60,90,120,150,180},
-        ytick={0,10,20,30,40,50},
-        legend pos=south east,
-        ymajorgrids=true,
-        % xmajorgrids=true,
-        grid style=dashed,
-        label style={font=\huge}
-      ]
-      
-      \addplot[
-        color=blue,
-        mark=square*,
-      ] coordinates {
-        (5,13) (10,15) (30,25) (60,28) (90,29) (120,30) (150,31)
-      }; 
-      \addplot[
-        color=red,
-        mark=triangle*,
-      ]  coordinates {
-        (5,27) (10,37) (30,48) (60,52) (90,54) (120,54) (150,54)
-      };
-      \addplot[
-        color=yellow,
-        mark=*,
-      ]   coordinates {
-        (5,27) (10,35) (30,50) (60,54) (90,55) (120,56) (150,58)
-      };
-      \legend{$\Random$,$\Genetic$,$\RGenetic$}
- 
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Progress of the branch coverage given fix time budget per branch}
-    \label{fig:2}
-\end{figure}
-
-
-\paragraph{\textbf{RQ4 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $R$, $G$ and $G10$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values, where it was significant (otherwise '-'), for all three pairs of the test algorithm: $R$ against $G$ ($r/g$), $R$ against $G10$ ($r/g10$), and $G$ against $G10$ ($g/g10$). Depends on the actually exceeded value, the effect size can be small (0.56), medium (0.64), and large (0.71). Both genetic versions ($G$ and $G10$) outperform random ($R$) with the large (medium and small) effect in 33 (37 and 39) subjects, respectively, out of total 57. 
+\paragraph{\textbf{RQ3 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $R$, $G$ and $G10$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values, where it was significant (otherwise '-'), for all three pairs of the test algorithm: $R$ against $G$ ($r/g$), $R$ against $G10$ ($r/g10$), and $G$ against $G10$ ($g/g10$). Depends on the actually exceeded value, the effect size can be small (0.56), medium (0.64), and large (0.71). Both genetic versions ($G$ and $G10$) outperform random ($R$) with the large (medium and small) effect in 33 (37 and 39) subjects, respectively, out of total 57. 
 
 % \input{summary_statistics}
 
