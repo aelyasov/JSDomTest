@@ -753,7 +753,8 @@ By carrying the evaluation, we would like to address the following research ques
 
 Being one of the most popular programming languages of the modern time, there are ample open source JS projects on the Web. JS applications are written with the help of countless number of specialized libraries, and greatly vary in size, complexity and coding style. Moreover, some popular JS web-frameworks, such as jQuery and React\footnote{\url{http://todomvc.com/}}, offer an alternative approach to the native DOM manipulation. Before selection, the source code of a potential case-study has to be scrutinized which is time consuming and labor intensive process. Therefore, we decided to primarily focus on the evaluation of the JS subjects well-established in the related research literature such as \emph{Confix}~\cite{amin:ase15} and \emph{TAJS}\footnote{\url{http://www.brics.dk/TAJS/dom-benchmarks/}}~\cite{dom2011}. Both of these works address the problem of testing of JS application with the reference to the browser DOM. We introduced two additional case-studies \emph{mathjs}\footnote{\url{https://github.com/josdejong/mathjs/}} and \emph{cs-in-js}\footnote{\url{https://github.com/nzakas/computer-science-in-javascript}} to increase the presence of primitive (browserless) JS code. For each case-study application, we identified several JS functions that are suitable for our testing framework. In the end, our evaluation set included both primitive and DOM related JS functions.
 
-For the sake of space, we chose to exclude from the follow up presentation the branches and functions which coverage time was less than two seconds. In all those cases, the three algorithms studied here have shown equally good results by finding a solution within the first iteration --- random generation. This left us with only 7 case studies contributing to the total number of 14 functions  shown in~Table~\ref{tbl.case.studies}. For each function, we reported the following software metrics\footnote{\url{http://jsmeter.info/} is the tool used for measuring JS code statistics}: lines of code~(\textbf{LOC}), number of branches~(\textbf{BR}), depth~(\textbf{D}), and cyclomatic complexity~(\textbf{CC}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulate with \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively. To answer the research questions posed in the beginning of Section~\ref{sec.evaluation}, we evaluated our test generation framework on the aforementioned case studies with the results presented in Section~\ref{sub.sec.eval.results}.  
+For the sake of space, we chose to exclude from the follow up presentation the branches and functions which coverage time was less than two seconds. In all those cases, the three algorithms studied here have shown equally good results by finding a solution within the first iteration --- random generation. This left us with only 7 case studies contributing to the total number of 14 functions  shown in~Table~\ref{tbl.case.studies}. For each function, we reported the following software metrics\footnote{\url{http://jsmeter.info/} is the tool used for measuring JS code statistics}: lines of code~(\textbf{LOC}), number of branches~(\textbf{BR}), depth~(\textbf{D}), and cyclomatic complexity~(\textbf{CC}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulate with \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively. To answer the research questions posed in the beginning of Section~\ref{sec.evaluation}, we evaluated our test generation framework on the aforementioned case studies with the results presented in Section~\ref{sub.sec.eval.results}.
+ 
        
 \setlength\tabcolsep{0.6pt}
 \begin{table}[t]
@@ -812,10 +813,10 @@ For the sake of space, we chose to exclude from the follow up presentation the b
 
 \setlength\tabcolsep{.98pt}
 \begin{table}[!t]
-  \caption{Branch coverage statistics for three variations of the JS test generation framework}
+  \caption{Statistics of experimental results for three testing algorithms $\Random$, $\Genetic$ and $\RGenetic$ (time $t$ is in seconds; \underline{200} indicates branch is not covered; (-) means the data is insignificant).}
   \label{tbl.stats}
     \scriptsize
-    \begin{tabular}{l|rrr|rrr|rrr|rrr|rrr}
+    \begin{tabular}{l|ccc|ccc|ccc|ccc|ccc}
       \toprule
       \multirow{2}{*}{\textbf{NAME}} &   \multicolumn{3}{c|}{$m_{\Random}$} & \multicolumn{3}{c|}{$m_{\Genetic}$} & \multicolumn{3}{c|}{$m_{\RGenetic}$} & \multirow{2}{*}{$\frac{t_{\Random}}{t_{\Genetic}}$} &  \multirow{2}{*}{$\frac{t_{\Random}}{t_{\RGenetic}}$} & \multirow{2}{*}{$\frac{t_{\Genetic}}{t_{\RGenetic}}$}   & \multirow{2}{*}{\hfil $_{\Genetic}^{\Random}$} &  \multirow{2}{*}{\hfil $_{\RGenetic}^{\Random}$} & \multirow{2}{*}{\hfil $_{\RGenetic}^{\Genetic}$} \\
       \cline{2-10} % \!:\!
@@ -868,7 +869,9 @@ For the sake of space, we chose to exclude from the follow up presentation the b
     \hline
    \textbf{doPaddlePower}*   & 19       & 15   & 0.79      & 204  & 140 & 0.69          & 25 & 16  & 0.64              & 0.11   & 0.94 & 8.75   &       &      &      \\
     $(10,11,\thenBr)$        & 16       & 12   & 0.75      & \un{200} & 136 & 0.68      & 22 & 13  & 0.59              & 0.09   & 0.92 & 10.46  &  0.02 & - & 0.94 \\
-    \hline
+   \midrule
+    \textbf{TOTAL (simple)}          & 1816      & 1226 & 0.68      & 415 & 323 & 0.78          & 252 & 231 & 0.92              & 3.8    & 5.31  & 1.4       &   &   &    \\  
+    \bottomrule
    \textbf{initBricks}*      & 1418     & 2379 & 1.68      & 593  & 474 & 0.8           & 422 & 415 & 0.98             & 5.02   & 5.73  & 1.14   &      &      &       \\
     $(6,7,\thenBr)$          & 2        & 3    & 1.5       & 5    & 4   & 0.8           & 3   & 3   & 1                & 0.75   & 1     & 1.33   & - & -  & -   \\
     $(6,10,\elseBr)$         & 15       & 23   & 1.53      & 6    & 6   & 1             & 6   & 6   & 1                & 3.83   & 3.83  & 1      & 0.87 & 0.83 & -   \\
@@ -908,20 +911,48 @@ For the sake of space, we chose to exclude from the follow up presentation the b
     $(30,31,\thenBr)$        & \un{200} & 72   & 0.36      & 53  & 23   & 0.43          & 52  & 22  & 0.42             & 3.13   & 3.27  & 1.05   & 1 & 1 &  -  \\
     $(34,35,\thenBr)$        & \un{200} & 72   & 0.36      & 24  & 10   & 0.42          & 25  & 10  & 0.4              & 7.2    & 7.2   & 1      & 1 & 1 &  -  \\
     \midrule
-    \textbf{TOTAL} & 5507      & 4940 & 0.9       & 1554 & 2176 & 1.4          & 966 & 1061 & 1.1             & 2.27   & 4.66  & 2.05       &   &   &    \\  
+    \textbf{TOTAL (diff.)}           & 3692     & 3714 & 1         & 1139 & 1853 & 1.63         & 708 & 830 & 1.17             & 2      & 4.47  & 2.23   &   &   &    \\
+    %% \midrule
+    %% \midrule
+    \bottomrule
+    \bottomrule  
+    \textbf{TOTAL (global)} & 5507      & 4940 & 0.9       & 1554 & 2176 & 1.4          & 966 & 1061 & 1.1             & 2.27   & 4.66  & 2.05       &   &   &    \\  
     \bottomrule
     \end{tabular}
 \end{table}
 
+To study the effectiveness and efficiency of our test generation framework, including three test algorithms Random~($\Random$), Genetic~($\Genetic$) and Genetic with Restart~($\RGenetic$), we exercised each algorithm against all branches of the functions in Table~\ref{tbl.case.studies}. Due to the probabilistic nature of the test generation process, the experiments were repeated 50 times to achieve statistical significance. Table~\ref{tbl.stats} contains results of our evaluation. For each algorithm, we computed the following median values per branch: the number of iterations~($i$), time in seconds~($t$), and their ratio~($t/i$). In the table, these values are grouped into three columns $m_{\Random}$, $m_{\Genetic}$ and $m_{\RGenetic}$ according to the algorithm type $\Random$, $\Genetic$ and $\RGenetic$. Next group of columns $t_{\Random}/t_{\Genetic}$, $t_{\Random}/t_{\RGenetic}$ and $t_{\Genetic}/t_{\RGenetic}$ presents the relative performance of each pair of the testing algorithm $(\Random,\Genetic)$, $(\Random,\RGenetic)$, and $(\Genetic,\RGenetic)$ respectively. Inline with the function name, we also present accumulated statistics for the function as a whole. Because of the missing branches, the function's summary may not be equal to the sum of the branches, e.g. see the \emph{toggleInfo} function. 
 
-To study the effectiveness and efficiency of our test generation framework, including three test algorithms Random ($\Random$), Genetic ($\Genetic$) and Genetic with Restart ($\RGenetic$), we exercised each algorithm against all branches of the functions in Table~\ref{tbl.case.studies}. Due to the probabilistic nature of the test generation process, the experiments were repeated 50 times to achieve statistical significance. Table~\ref{tbl.stats} contains results of our evaluation. For each algorithm, we computed the following median values per branch: the number of iterations ($i$), time in seconds ($t$), and their ratio ($t/i$). In the table, these values are grouped into three columns $m_{\Random}$, $m_{\Genetic}$ and $m_{\RGenetic}$ according to the algorithm type $\Random$, $\Genetic$ and $\RGenetic$. Next group of columns $t_{\Random}/t_{\Genetic}$, $t_{\Random}/t_{\RGenetic}$ and $t_{\Genetic}/t_{\RGenetic}$ presents the relative performance of each pair of the testing algorithm $(\Random,\Genetic)$, $(\Random,\RGenetic)$, and $(\Genetic,\RGenetic)$ respectively. Inline with the function name, we also present accumulated statistics for the function as a whole. Because of the missing branches, the function's summary may not be equal to the sum of the branches, e.g. see the \emph{toggleInfo} function. At the bottom of the table, we included accumulated data throughout all functions.
+According to the industry standard~\cite{bray1997c4}, functions with the CC below 10 are considered easy to test, and above 10 present a reasonable challenge. We call the functions of the first type ``simple'', and ``difficult'' otherwise. The three functions \emph{initBricks}, \emph{do_draw} and \emph{prob_gamma} at the bottom of Table~\ref{tbl.case.studies} are difficult with the respective the CC 13, 14 and 16. Table~\ref{tbl.stats.sum} summarizes the total results of the experiment such as coverage, execution time per branch and significance.
 
-\paragraph{\textbf{RQ1 (effectiveness).}} To answer this question, we report on the branch coverage achieved by each testing algorithm in our empirical study. Given a fixed limit on the number of test iterations, 200 in our case, a search algorithm can not guarantee finding a solution. The values in Table~\ref{tbl.stats} highlighted as $\underline{200}$ indicate branches which on average were not covered by the respective algorithms. The main reason for the random generation ($\Random$) to fail is the large size of the search space and the lack of any feedback in the generation process, e.g. branch $(10,11)$ of the \emph{isGameFinished} function. In the case of genetic approach~($\Genetic$), it may get stuck at a plateau because the fitness function does not provide sufficient heuristic information, whereas $\Random$ can escape the plateau by chance. We encountered three of such cases in our study: branches $(10,11)$, $(47,48)$ and $(45,45)$ of the function \emph{doPaddlePower}, \emph{initBricks} and \emph{do_draw}, respectively. Those three examples motivated us to introduce the genetic algorithm with restart ($\RGenetic$) which combines strengths of both algorithms genetic and random. It leverages the genetic search while the fitness continues to improve, and restarts the search with a new target, when the fitness converges. As our evaluation has shown, $\RGenetic$ not only manged to cover the three problematic branches and outperform $\Random$, but it also improved some of the genetic search results, e.g. branch $(69,71)$ of the \emph{do_draw} function.
+\begin{table}[!t]
+  \caption{Result Summary (L - large, M - medium, S - small)}
+  \label{tbl.stats.sum}
+    \footnotesize
+    \begin{tabular}{l|ccc|ccc|p{3mm}p{3mm}p{3mm}|p{3mm}p{3mm}p{3mm}|p{3mm}p{3mm}p{3mm}}
+      \toprule
+      \multirow{3}{*}{\textbf{TYPE}} &  \multicolumn{3}{c|}{\textbf{coverage (\%)}} & \multicolumn{3}{c|}{\textbf{time (sec.)}} & \multicolumn{9}{c}{\textbf{significance}}\\
+      \cline{2-16}
+                                     & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multicolumn{3}{p{1cm}|}{\hfil $\Random : \Genetic$} & \multicolumn{3}{p{1cm}|}{\hfil $\Random : \RGenetic$} & \multicolumn{3}{p{1cm}}{\hfil $\Genetic : \RGenetic$} \\
+      \cline{8-16}
+                         & & & & & &                     & L  & M  & S  & L  & M  & S  & L & M & S \\
+      \midrule
+      \textbf{simple (33)}    & 79 & 97 & 100 & 37  & 9  & 7  & 11 & 12 & 13 & 11 & 13 & 13 & 1 & 1 & 1 \\
+      \textbf{difficult (33)} & 58 & 94 & 100 & 112 & 56 & 25 & 22 & 24 & 26 & 22 & 23 & 26 & 2 & 2 & 4 \\
+      \midrule
+      \textbf{global (56)}    & 63 & 95 & 100 & 88  & 39 & 19 & 33 & 36 & 39 & 33 & 36 & 39 & 3 & 3 & 5 \\
+      \bottomrule
+    \end{tabular}
+\end{table}
 
 
-According to the industry standard~\cite{bray1997c4}, functions with the CC below 10 are considered easy to test, and above 10 present a reasonable challenge. Three functions at the bottom of Table~\ref{tbl.case.studies}, \emph{initBricks}, \emph{do_daw} and \emph{prob_gamma} with the respective CC 13, 14 and 16 are of the latter category. Because of they complexity, they are recommended to test, but test construction, especially manual, can be difficult. For those functions, $\RGenetic$ managed to provide complete coverage, where other two algorithms failed, and did it in a shortest time.  Across all subjects, the $\RGenetic$ algorithm achieved 100\% branch coverage, with $\Genetic$ in the second place with 95\% coverage, and, finally, $\Random$ with  63\% coverage.
-
-Additionally, we would like to investigate how the coverage progresses with the increase of budget assigned per branch. This experiment models different testing scenarios which are time depended. E.g. running tests inside IDE should be fast; as part of the CI cycle we may afford a large waiting time; regression testing over night may take hours. We define the following budget categories: 5, 10, 30, 60, 90, 120, 150. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $\Genetic$ and $\RGenetic$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $\Genetic$ slightly outperforms $\RGenetic$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $\RGenetic$ starts to transcend $\Genetic$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds). In conclusion, our recommendation is to use $\Genetic$ for rapid testing during development, and later towards integration testing switch to $\RGenetic$ since it is able to reach harder to cover branches.
+\paragraph{\textbf{RQ1 (effectiveness).}} To answer this question, we report on the branch coverage achieved by each testing algorithm in our empirical study. Given a fixed limit on the number of test iterations, 200 in our case, a search algorithm can not guarantee finding a solution. The values in Table~\ref{tbl.stats} highlighted as $\underline{200}$ indicate branches which on average were not covered by the respective algorithms. The main reason for the random generation ($\Random$) to fail is the large size of the search space and the lack of any feedback in the generation process, e.g. branch $(10,11)$ of the \emph{isGameFinished} function. In the case of genetic approach~($\Genetic$), it may get stuck at a plateau because the fitness function does not provide sufficient heuristic information, whereas $\Random$ can escape the plateau by chance. We encountered three of such cases in our study: branches $(10,11)$, $(47,48)$ and $(45,45)$ of the function \emph{doPaddlePower}, \emph{initBricks} and \emph{do_draw}, respectively. Those three examples motivated us to introduce the genetic algorithm with restart ($\RGenetic$) which combines strengths of both algorithms genetic and random. It leverages the genetic search while the fitness continues to improve, and restarts the search with a new target, when the fitness suboptimally converges. As our evaluation has shown, $\RGenetic$ not only manged to cover the three problematic branches and outperform $\Random$, but it also improved some of the genetic search results, e.g. branch $(69,71)$ of the \emph{initBricks} function.\\ 
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+Across all subjects, the $\RGenetic$ algorithm achieved 100\% branch coverage, with $\Genetic$ in the second place with 95\% coverage, and, finally, $\Random$ with  63\% coverage.
+  }
+}
 
 \begin{figure}[!t]
   \begin{tikzpicture}[scale=0.5]
@@ -962,23 +993,18 @@ Additionally, we would like to investigate how the coverage progresses with the 
     \end{axis}
   \end{tikzpicture}
   \caption{Progress of the branch coverage given fix time budget per branch}
-    \label{fig:2}
+    \label{fig.budget.progress}
 \end{figure}
 
+Additionally, we would like to investigate how the coverage progresses with the increase of budget assigned per branch. This experiment models different testing scenarios, used in practice, which are time depended. E.g. running tests inside IDE should be fast; as part of the CI cycle we may afford a large waiting time; regression testing over night may take hours. Figure~\ref{fig.budget.progress} illustrates the progress of algorithms across various budget categories from 5 to 150 seconds per branch. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $\Genetic$ and $\RGenetic$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $\Genetic$ slightly outperforms $\RGenetic$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $\RGenetic$ starts to transcend $\Genetic$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds).\\ 
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+Our recommendation is to use $\Genetic$ for rapid testing during development, and later in integration testing switch to $\RGenetic$ since it is able to reach harder to cover branches.
+  }
+}
 
-\paragraph{\textbf{RQ2 (efficiency).}} To answer this question, we compare the actual execution time shown by our test algorithms in the experiments. Based on this information, we suggest an estimate on the execution time of the testing framework.
-
-
-%% \setlength{\fboxsep}{2mm}
-%% \fbox{%
-%%   \parbox{8cm}{
-%%     Three testing strategies $\Random$, $\Genetic$ and $\RGenetic$ covered respectively 63\%, 95\% and 100\% of branches.
-%%   }
-%% }
-
-%% TODO: Maybe discuss examples where $\Random$ outperformed $\RGenetic$
-%% TODO: consider further branch discrimination
-
+\paragraph{\textbf{RQ2 (efficiency).}} To answer this question, we compare the actual execution time shown by our test algorithms in the experiments. Based on this information, we suggest an estimate on the execution time of the testing framework. The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at the function level. There are only two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%, and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum 40\%~(\emph{newGame}) and maximum 510\%~(\emph{isValidCard}). 
 
 \begin{figure}[t]
   \centering
@@ -1020,46 +1046,47 @@ Additionally, we would like to investigate how the coverage progresses with the 
   \label{fig.gen.time.comp}
 \end{figure}  
 
-The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at the function level. There are only two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%, and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum 40\%~(\emph{newGame}) and maximum 510\%~(\emph{isValidCard}). 
-
-\begin{figure}[t]
-  \begin{tikzpicture}[scale=0.8]
-    \begin{axis}[
-        every axis plot post/.style={/pgf/number format/fixed},
-        ybar,
-        ymin=0,ymax=135,
-        width=11cm,height=3.3cm,
-        bar width=3pt,
-        enlarge x limits=0.05,
-        legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
-        legend cell align={left},
-        ylabel={time (sec.)},
-        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
-        xtick=data,
-        nodes near coords,
-        every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
-        % every node near coord/.append style={font=\footnotesize},
-        axis lines*=left,
-        clip=false,
-        x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
-        y tick label style={font=\footnotesize}
-      ]
-      \addplot[fill=blue] coordinates {(helpMe*,54) (isGameFinished*,44) (newGame*,4.7) (revealAll*,25) (shuffleBoard*,3.6) (toggleInfo*,1.5) (isValidCard,85.7) (isValidVISA,47.5) (initShields*,5) (brickJiggler*,4) (doPaddlePower*,3.75)  (initBricks*,132.16) (do\_draw,28.5) (prob\_gamma,44.4)};
+%% \begin{figure}[t]
+%%   \begin{tikzpicture}[scale=0.8]
+%%     \begin{axis}[
+%%         every axis plot post/.style={/pgf/number format/fixed},
+%%         ybar,
+%%         ymin=0,ymax=135,
+%%         width=11cm,height=3.3cm,
+%%         bar width=3pt,
+%%         enlarge x limits=0.05,
+%%         legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
+%%         legend cell align={left},
+%%         ylabel={time (sec.)},
+%%         symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
+%%         xtick=data,
+%%         nodes near coords,
+%%         every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
+%%         % every node near coord/.append style={font=\footnotesize},
+%%         axis lines*=left,
+%%         clip=false,
+%%         x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
+%%         y tick label style={font=\footnotesize}
+%%       ]
+%%       \addplot[fill=blue] coordinates {(helpMe*,54) (isGameFinished*,44) (newGame*,4.7) (revealAll*,25) (shuffleBoard*,3.6) (toggleInfo*,1.5) (isValidCard,85.7) (isValidVISA,47.5) (initShields*,5) (brickJiggler*,4) (doPaddlePower*,3.75)  (initBricks*,132.16) (do\_draw,28.5) (prob\_gamma,44.4)};
       
-      \addplot[fill=red] coordinates {(helpMe*,9.4)  (isGameFinished*,6)  (newGame*,3)  (revealAll*,22) (shuffleBoard*,3.25) (toggleInfo*,1.75) (isValidCard,1.33)   (isValidVISA,1.5)  (initShields*,4) (brickJiggler*,2) (doPaddlePower*,35) (initBricks*,26.33) (do\_draw,58.9) (prob\_gamma,5.25)};
+%%       \addplot[fill=red] coordinates {(helpMe*,9.4)  (isGameFinished*,6)  (newGame*,3)  (revealAll*,22) (shuffleBoard*,3.25) (toggleInfo*,1.75) (isValidCard,1.33)   (isValidVISA,1.5)  (initShields*,4) (brickJiggler*,2) (doPaddlePower*,35) (initBricks*,26.33) (do\_draw,58.9) (prob\_gamma,5.25)};
       
-      \addplot[fill=yellow] coordinates {(helpMe*,11.2)  (isGameFinished*,8.6)  (newGame*,3.3) (revealAll*,26.5) (shuffleBoard*,3.6) (toggleInfo*,1.5) (isValidCard,1.66)  (isValidVISA,1)  (initShields*,3) (brickJiggler*,1.5) (doPaddlePower*,4) (initBricks*,23.1) (do\_draw,15.18) (prob\_gamma,5.1)}; 
-      \legend{$\Random$,$\Genetic$,$\RGenetic$}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Average generation time per branch}
-    \label{fig.gen.time.branch}
-\end{figure}
+%%       \addplot[fill=yellow] coordinates {(helpMe*,11.2)  (isGameFinished*,8.6)  (newGame*,3.3) (revealAll*,26.5) (shuffleBoard*,3.6) (toggleInfo*,1.5) (isValidCard,1.66)  (isValidVISA,1)  (initShields*,3) (brickJiggler*,1.5) (doPaddlePower*,4) (initBricks*,23.1) (do\_draw,15.18) (prob\_gamma,5.1)}; 
+%%       \legend{$\Random$,$\Genetic$,$\RGenetic$}
+%%     \end{axis}
+%%   \end{tikzpicture}
+%%   \caption{Average generation time per branch}
+%%     \label{fig.gen.time.branch}
+%% \end{figure}
 
-Figure~\ref{fig.gen.time.branch} shows average generation time per branch for each algorithm. It took maximum upto 26.5 seconds for $\RGenetic$ to cover a branch. This upper bound may service as a rough estimate defining budget for testing a new function with our framework using $\RGenetic$.
-
-In total, $\RGenetic$ outperformed $\Random$ and $\Genetic$ by 4.66 and 2.05 times, respectively; and $\Genetic$ outperformed $\Random$ by 2.27 times. 
-
+Looking separately at the average execution time for \emph{simple} and \emph{difficult} functions in Table~\ref{tbl.stats.sum}, we conclude that $\RGenetic$ was the fastest algorithm in both cases with the 7 and 25 seconds per branch. For simple functions, the $\Genetic$'s performance was quite close to $\RGenetic$, only 9 seconds, but was two times slower for difficult functions. In all categories, $\Random$ was much slower than both genetic alternatives.\\
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+    Globally, $\RGenetic$ outperformed both $\Genetic$ and $\Random$ with an average execution time per branch 19, 39 and 88 seconds, respectively. 
+  }
+}
 
 \begin{figure}[t]
   \begin{tikzpicture}[scale=0.8]
@@ -1093,15 +1120,23 @@ In total, $\RGenetic$ outperformed $\Random$ and $\Genetic$ by 4.66 and 2.05 tim
     \label{fig.get.cost}
 \end{figure}
 
-This question is supposed to shed some light on the cost of one iteration of our framework. This information is useful when setting up the maximal generation limit. The cost, shown in column $t/i$ in Table~\ref{tbl.stats}, is calculated as the relation between the execution time and the number of generations, i.e. it measures time of one iteration. Figure~\ref{fig.get.cost} presents the cost comparison of three algorithms across all functions in our study. On one hand, the cost of one iteration depends on the population size, in our case 50 candidates. On the other hand, the cost also depends on the length of the execution trace produced during the evaluation of a candidate, because longer traces increase the computation cost the fitness function. 
-....
-Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. The \emph{do_draw} examples illustrates the latter case, it consists of 40 LOC and operates only with primitive type which do not case any exception. In our evaluation we observed that the iteration cost varied between 0.25 and 3.38 seconds. On average, one algorithm iteration took one second for $\Random$ and $\RGenetic$, with $\Genetic$ performing worse 1.4 seconds.  
+Another question, related to the efficiency of our framework, is the computational cost of one iteration of the algorithm. This information is useful when configuring the maximal generation limit. The cost, shown in column $t/i$ in Table~\ref{tbl.stats}, is calculated as the relation between the execution time and the number of generations, i.e. it measures the speed of one iteration. Figure~\ref{fig.get.cost} presents the cost comparison of three algorithms across all functions in our study. On the one hand, the cost of one iteration depends on the population size, 50 candidates in our case. On the other hand, it also depends on the length of the execution trace produced during the evaluation of a candidate, because longer traces increase the computation cost the fitness function.  Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. For example, the \emph{do_draw} function produces long traces because it only operates with the primitive types thus not rising exceptions, and at the same time, it consists of 40 LOC. In our evaluation we observed that the iteration cost varied between 0.25 and 3.59 seconds.\\
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+    Globally, one algorithm iteration took one second for $\Random$ and $\RGenetic$, with $\Genetic$ performing worse 1.4 seconds.
+  }
+} 
+  
 
-TODO: discuss why cost of one genetic iteration for \emph{do_draw} is higher than random.
+\paragraph{\textbf{RQ3 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} of our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $\Random$, $\Genetic$ and $\RGenetic$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use the non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values for all algorithm combinations, where this value is significant and '-' otherwise. For example, the higher the value in the $_{\Genetic}^{\Random}$ column, the slower $\Random$ performs comparing to $\Genetic$. Depends on the actual $\hat{A}_{12}$ value, the effect size can be small (0.56), medium (0.64), and large (0.71).\\
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+    Both $\Genetic$ and $\RGenetic$ largely outperform $\Random$ in 50\% cases globally and 67\% on the difficult functions.  
+  }
+}  
 
-TODO: discuss if costs of $R$, $G$ and $G5$ vary between each other and why.
-
-\paragraph{\textbf{RQ3 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $R$, $G$ and $G10$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values, where it was significant (otherwise '-'), for all three pairs of the test algorithm: $R$ against $G$ ($r/g$), $R$ against $G10$ ($r/g10$), and $G$ against $G10$ ($g/g10$). Depends on the actually exceeded value, the effect size can be small (0.56), medium (0.64), and large (0.71). Both genetic versions ($G$ and $G10$) outperform random ($R$) with the large (medium and small) effect in 33 (37 and 39) subjects, respectively, out of total 57. 
 
 % \input{summary_statistics}
 
