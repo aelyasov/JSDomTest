@@ -14,6 +14,7 @@
 \usepackage{listings}
 \usepackage{lsthaskell}
 \usepackage{xspace}
+\usepackage{enumitem}
 \usepackage{mdframed}
 \usepackage{algorithmic}
 \usepackage{longtable}
@@ -199,7 +200,7 @@
 %% \acmPrice{15.00}
 
 \begin{document}
-\title{Search-Based Test Data Generation for JavaScript Functions with DOM}
+\title[Search-Based Test Data Generation for JavaScript Functions...]{Search-Based Test Data Generation for JavaScript Functions that Interact with the DOM}
 
 
 \author{Alexander Elyasov}
@@ -223,7 +224,8 @@
 
 
 \begin{abstract}
-As of 2017 JavaScript and Node.js continue to stay the most prevalent technologies according to the Stack Overflow developers survey. Nevertheless, existing JS testing frameworks are still lacking any support for such a vital step in test automation as the generation of input data. To address this problem, we present a novel \textbf{J}avascript \textbf{E}volutionary-based testing framework with \textbf{D}OM as an \textbf{I}input, called \textbf{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function including global DOM state. The \emph{genetic with restart} algorithm, proposed in this paper, was able to achieve complete branch coverage in our empirical evaluation with the average execution time 7.7 sec. per branch 
+As of 2017 JavaScript and Node.js continue to stay the most prevalent technologies according to the Stack Overflow developers survey. Nevertheless, existing JS testing frameworks are still lacking any support for such a vital step in test automation as the generation of input data. To address this problem, we present a novel \textbf{J}avascript \textbf{E}volutionary-based testing framework with \textbf{D}OM as an \textbf{I}input, called \textbf{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function including global DOM state. We conducted an empirical evaluation to study the effectiveness and efficiency of our testing framework.
+ It has shown that the \emph{genetic with restart} algorithm, proposed in this paper, was able to achieve complete branch coverage on all experimental subjects with the average 19 seconds of execution time per branch.
 \end{abstract}
 
 %
@@ -266,8 +268,8 @@ According to a Stack Overflow survey\footnote{\url{https://insights.stackoverflo
 
 The state of JS 2017 survey~\footnote{\url{https://stateofjs.com/}} contains an extensive list of testing frameworks including Mocha, Jasmine, Jest, Enzyme, Tape, Ava, Karma and QUnit. These frameworks support testing at various levels: unit, integration and functional. The survey also indicated relatively low satisfaction rate of the current state of JS testing tools, scoring only 3.2 out of 5. As result, new testing frameworks such as Cypress and Storybook are constantly appearing to improve the situation. But despite of this effort, test data generation continues to be not properly addressed by any of the widely used testing frameworks. The research community has actively been working towards making progress in this direction introducing such tools as Artemis~\cite{artemis2011}, JSConTest~\cite{heidegger2010contract}, Crawljax~\cite{mesbah2012crawling}, JSeft~\cite{mirshokraie2015jseft} and Jalangi~\cite{sen2013jalangi}. A recent study of client-side JS bugs~\cite{ocariza2017study} has shown that the majority (68\%) of JS faults are DOM-related and occur in JS code, and not in HTML or CSS. This fact indicates that yet a better testing approach is needed when it comes to unit testing of JS.
 
-Over the past two decades search-based test data generation has proven to be one of the most effective solutions for a wide range of technologies including object-oriented~\cite{paper}, web~\cite{paper} and mobile~\cite{paper}. In recent years, some effort was made to apply search-based testing to dynamic languages such as Python~\cite{paper}, Ruby~\cite{paper} (maybe mention Go and Lua), but to the best of our knowledge search-based testing approach has never been applied to JavaScript. Our work makes the following contributions:
-\begin{enumerate}
+Over the past two decades search-based test data generation has proven to be one of the most effective solutions for a wide range of technologies including object-oriented~\cite{paper}, web~\cite{paper} and mobile~\cite{mao2016sapienz}. In recent years, some effort was made to apply search-based testing to dynamic languages such as Python~\cite{paper}, Ruby~\cite{paper} (maybe mention Go and Lua), but to the best of our knowledge search-based testing approach has never been applied to JavaScript. Our work makes the following contributions:
+\begin{enumerate}[leftmargin=5mm]
 \item The \emph{JEDI} framework is a novel JS unit testing tool using search-based techniques for generating test data. Notably, our testing framework is able to generate an arbitrary DOM input, which is syntactically valid and compliant with the recent HTML5 specification.   
 \item We propose a novel test generation algorithm, called ``genetic with restart'', combining the benefits of systematic fitness improvement with the genetic search and the ability of escaping plateau by restarting search with a new target.
 \item Based on the case studies found in two related works~\emph{Confix}~\cite{amin:ase15} and \emph{TAJS}~\cite{dom2011}, we conduced an empirical validation of our framework and performed a significance study of the results. The validation has shown the effectiveness of the framework in covering target branches with a reasonable efficiency...  
@@ -414,11 +416,6 @@ Given a JS function $f$ and a set of branches $\mathbb{B}_f$, the ultimate goal 
 
 Each newly constructed HTML document has to be processed by the \Validator\footnote{\url{https://validator.w3.org/nu/}} which checks its syntactic correctness and reports back the set of identified errors. \Server rejects the document if any errors were revealed and generates a new one until the generated document has no errors anymore. \Client is a \emph{Node.js}\footnote{\url{https://nodejs.org/en/}} application that is mainly responsible for the execution of the JS code. We use the \emph{jsdom}\footnote{\url{https://github.com/tmpvar/jsdom}} library to model the virtual DOM and simulate the native browser API calls.   
 
-Let us give a closer look at the sequence of interactions in Figure~\ref{fig.framework.architect}. As an input for our testing framework, \User has to provide the JS file \emph{fun.js} that contains the function under test (FUT) \emph{fun} annotated with the type signature. Additionally, \User specifies a configuration file \emph{config} that defines various parameters for random data generation, genetic phase, logging etc. Experimentally, we have found an optimal set of input configurations that was used across all experimental objects in Section~\ref{sec.evaluation}. This data is processed by the \Server during the \emph{Initialization Phase}. As an output, we get back the following information about \emph{fun}: the control flow graph (\emph{cfg}), the complete list of its branches (\emph{branches}), the constant info (\emph{cinfo}), the instrumented version \emph{ifun}, and the signature (\emph{sig}). \Server sends a \texttt{POST} request with \emph{ifun} and \emph{sig} to the \Client. Depends on the configured execution mode, the \Server either asks the \User to select a \emph{target} branch or covers all branches one by one in a fixed order. For each branch, our framework enters the \emph{Genetic Loop (Phase)}. Inside of this phase, the framework starts with a randomly generated population (\emph{Random Loop}), and continues to evolve that population (\emph{Fitness Loop}) until either a perfect entity is found or a certain termination criteria is achieved, e.g. the limit on the number of generation attempts. Each candidate in the population has to be evaluated in \emph{Evaluation Loop} by \Client. It matches the candidate $p$ according to the type signature \emph{sig} and invokes the instrumented JS function on it: \emph{ifun(p)}. The execution trace along with some supplementary information about the execution are sent back to the \Server, where the final \emph{fitness value} is computed. The new population is constructed by combining the results of the \emph{Crossover} and \emph{Mutation Loops}. If a new HTML document is produced somewhere in the genetic phase, it has to be first approved by the \Validator. At the end of the \emph{Fitness Loop}, the candidate with the ``best'' fitness value is reported back to the \User. Once all the branches are exercised, the algorithm reaches the end. In the follow up two sections, we elaborate on the details of each individual phase of our test generation framework.
-
-\subsection{Initialization Phase}
-\label{sub.sec.init.phase}
-
 \begin{algorithm}[t!]
   \caption{Initialization Phase}
   \label{alg.init}
@@ -444,13 +441,18 @@ Let us give a closer look at the sequence of interactions in Figure~\ref{fig.fra
     }
 \end{algorithm}
 
+Let us give a closer look at the sequence of interactions in Figure~\ref{fig.framework.architect}. As an input for our testing framework, \User has to provide the JS file \emph{fun.js} that contains the function under test (FUT) \emph{fun} annotated with the type signature. Additionally, \User specifies a configuration file \emph{config} that defines various parameters for random data generation, genetic phase, logging etc. Experimentally, we have found an optimal set of input configurations that was used across all experimental objects in Section~\ref{sec.evaluation}. This data is processed by the \Server during the \emph{Initialization Phase}. As an output, we get back the following information about \emph{fun}: the control flow graph (\emph{cfg}), the complete list of its branches (\emph{branches}), the constant info (\emph{cinfo}), the instrumented version \emph{ifun}, and the signature (\emph{sig}). \Server sends a \texttt{POST} request with \emph{ifun} and \emph{sig} to the \Client. Depends on the configured execution mode, the \Server either asks the \User to select a \emph{target} branch or covers all branches one by one in a fixed order. For each branch, our framework enters the \emph{Genetic Loop (Phase)}. Inside of this phase, the framework starts with a randomly generated population (\emph{Random Loop}), and continues to evolve that population (\emph{Fitness Loop}) until either a perfect entity is found or a certain termination criteria is achieved, e.g. the limit on the number of generation attempts. Each candidate in the population has to be evaluated in \emph{Evaluation Loop} by \Client. It matches the candidate $p$ according to the type signature \emph{sig} and invokes the instrumented JS function on it: \emph{ifun(p)}. The execution trace along with some supplementary information about the execution are sent back to the \Server, where the final \emph{fitness value} is computed. The new population is constructed by combining the results of the \emph{Crossover} and \emph{Mutation Loops}. If a new HTML document is produced somewhere in the genetic phase, it has to be first approved by the \Validator. At the end of the \emph{Fitness Loop}, the candidate with the ``best'' fitness value is reported back to the \User. Once all the branches are exercised, the algorithm reaches the end. In the follow up two sections, we elaborate on the details of each individual phase of our test generation framework.
+
+\subsection{Initialization Phase}
+\label{sub.sec.init.phase}
+
 During the \emph{Initialization Phase} we analyze the FUN in order to retrieve the data required for the consecutive genetic testing. The main steps of this phase are illustrated by Algorithm~\ref{alg.init}. Given a FUT \emph{fun.js} as an input, we parse the function and its type signature in line~\ref{alg.init.parse.fun.sig}. In order to maximize the chances of generating the fittest candidate in the genetic phase, in line~\ref{alg.init.collect.info} we perform static analysis of the FUT with the purpose to collect constant info. Such constants include the numeric and string literals, as well as the arguments to the following DOM API methods \texttt{getElementsByTagName}, \texttt{getElementById}, \texttt{getElementsByClassName}, and \texttt{getElementsByName},
 which respectively signify the reference to the \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} encountered in the FUT. Next step is normalizing the FUT before applying any instrumentation (line~\ref{alg.init.transform.ast}), e.g. transform \emph{if-then} branches into \emph{if-then-else}. We instrument the FUT (line~\ref{alg.init.instr}) in order to collect the run-time data such as the execution trace, the approach level, the branch and loop distances, and the constants. Upon the $ifun$ execution this information is gathered and fed back to the fitness evaluation procedure. Finally, we construct the control-flow graph (line~\ref{alg.init.build.cfg}) and identify all branches of the FUT (line~\ref{alg.init.get.branches}).
 
 \subsubsection{Supported Types}
 \label{sub.sec.sup.types}
 
-\begin{figure}[t]
+\begin{figure}[t!]
 \setlength{\grammarparsep}{3pt}
 \small
 \begin{grammar}
@@ -472,6 +474,7 @@ which respectively signify the reference to the \emph{tags}, \emph{ids}, \emph{c
 \caption{Grammar of supported JS type annotations}
 \label{fig.js.type.annot}
 \end{figure}
+One assumption made in the paper is the availability of type signatures for JS functions. We believe in the legitimacy of such a request due to the following observations. First, typed variants of JS such as \emph{TypeScript}\footnote{\url{https://www.typescriptlang.org/}} are rising in popularity. Second, there has been an active work on the JS type inference done both in academia~\cite{paper} and industry, e.g. Facebook's tool \emph{Flow}\footnote{\url{https://flow.org/}}. 
 
 The grammar of the JS type annotations supported by our test generation framework is shown in Figure~\ref{fig.js.type.annot}. Each type annotation is a signature embedded into a specialized JS type comment (\texttt{/*t...*/}). We distinguish between two kinds of signatures those which refer to the global DOM and the ``ordinary'' JS type signatures. The functions of the former signature expect some \texttt{dom} argument to be passed as the first implicit parameter for the function call. Whereas ordinary JS signature is a non-zero sequence of the JS types. The type can be \emph{Void}, \emph{Primitive} (\texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string}) or \emph{Array} (recursive homogeneous array type).  
 
@@ -720,7 +723,7 @@ The approach level is an integer value that indicates how many conditions should
 \label{sec.evaluation}
 %% --------------------------------------------------------------------
 
-In order to evaluate the feasibility of our test framework adoption in practice, we conducted an empirical evaluation on a set of case-studies described in Section~\ref{sub.sec.case.studies}. All experiments were submitted as a batch mode job on a cluster machine with 32 HT Cores and 256 GB RAM running under Scientific Linux 7.3. We have created three different instances of the JS testing framework --- each is based on a slight variation of the underlying genetic search algorithm. The first version, which play the role of our baseline, is \emph{Random} ($\Random$). Instead of applying crossover and mutation to evolve the population, this algorithm regenerates the new population randomly from scratch. It is worth to notice, that the random version also benefits from both preliminary static analysis phase and dynamic constant propagation as part of the fitness evaluation. The second version is \emph{Genetic}~($\Genetic$) --- it literally follows all of the steps prescribed by the genetic framework in Figure~\ref{fig.framework.architect}. The last version is the \emph{Genetic with Restart} ($\RGenetic$). It is based on the genetic algorithm~\ref{alg.gen} where the search is restarted after the archives are converged within a certain history window. On one hand, the smaller window size forces the GA to converge faster and early discovers the stagnation on a flat space. On the other hand, the small window can lead to a premature archive convergence, which prevents the right genetic combination from been triggered. We have experimented with two different windows of size 5 and 10. But since the latter one ($\RGenetic$) showed the best performance over all, we chose it to report in the paper. Table~\ref{tbl.gen.config} summarizes the configuration parameters for all three versions of the testing framework. The initial setup for genetic algorithm is similar to other frameworks, e.g. \emph{EvoSuite}~\cite{evosuite}. 
+In order to evaluate the feasibility of our test framework adoption in practice, we conducted an empirical evaluation on a set of case-studies described in Section~\ref{sub.sec.case.studies}. All experiments were submitted as a batch mode job on a cluster machine with 32 HT Cores and 256 GB RAM running under Scientific Linux 7.3. We have created three different instances of the JS testing framework --- each is based on a slight variation of the underlying genetic search algorithm. The first version, which play the role of our baseline, is \emph{Random} ($\Random$). Instead of applying crossover and mutation to evolve the population, this algorithm regenerates the new population randomly from scratch. It is worth to notice, that the random version also benefits from both preliminary static analysis phase and dynamic constant propagation as part of the fitness evaluation. The second version is \emph{Genetic}~($\Genetic$) --- it literally follows all of the steps prescribed by the genetic framework in Figure~\ref{fig.framework.architect}. The last version is the \emph{Genetic with Restart} ($\RGenetic$). It is based on the genetic algorithm~\ref{alg.gen} where the search is restarted after the archives are converged within a certain history window. On one hand, the smaller window size forces the GA to converge faster and early discovers the stagnation on a flat space. On the other hand, the small window can lead to a premature archive convergence, which prevents the right genetic combination from been triggered. We have experimented with two different windows of size 5 and 10. But since the latter one ($\RGenetic$) showed the best performance over all, we chose it to report in the paper. Table~\ref{tbl.gen.config} summarizes the configuration parameters for all three versions of the testing framework. The initial setup for genetic algorithm is similar to other frameworks, e.g. \emph{EvoSuite}~\cite{fraser2011evosuite}. 
 
 \begin{table}
   \caption{Genetic Algorithm Configurations}
@@ -742,9 +745,9 @@ In order to evaluate the feasibility of our test framework adoption in practice,
 
 By carrying the evaluation, we would like to address the following research questions:
 \begin{description}
-\item[\textbf{RQ1 (effectiveness):}] What is the value of branch coverage achieved by our testing framework? Which testing algorithm is the most effective?
-\item[\textbf{RQ2 (efficiency):}] How efficient our testing framework? And which algorithm is the most efficient?
-\item[\textbf{RQ3 (significance):}] What is statistical significance and effect size of our experimental results? 
+\item[\textbf{RQ1 (effectiveness):}] What is the value of branch coverage achieved by our testing framework? Which testing algorithm is the most effective? How the effectiveness changes with the budget per branch?
+\item[\textbf{RQ2 (efficiency):}] How much time is needed to cover a branch? What is the cost of one iteration?
+\item[\textbf{RQ3 (significance):}] What is the statistical significance and effect size of our experimental results? 
 \end{description}
 
 
@@ -933,7 +936,7 @@ According to the industry standard~\cite{bray1997c4}, functions with the CC belo
       \toprule
       \multirow{3}{*}{\textbf{TYPE}} &  \multicolumn{3}{c|}{\textbf{coverage (\%)}} & \multicolumn{3}{c|}{\textbf{time (sec.)}} & \multicolumn{9}{c}{\textbf{significance}}\\
       \cline{2-16}
-                                     & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multicolumn{3}{p{1cm}|}{\hfil $\Random : \Genetic$} & \multicolumn{3}{p{1cm}|}{\hfil $\Random : \RGenetic$} & \multicolumn{3}{p{1cm}}{\hfil $\Genetic : \RGenetic$} \\
+                                     & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multicolumn{3}{p{1cm}|}{\hfil $_{\Genetic}^{\Random}$} & \multicolumn{3}{p{1cm}|}{\hfil $_{\RGenetic}^{\Random}$} & \multicolumn{3}{p{1cm}}{\hfil $_{\RGenetic}^{\Genetic}$} \\
       \cline{8-16}
                          & & & & & &                     & L  & M  & S  & L  & M  & S  & L & M & S \\
       \midrule
@@ -1004,7 +1007,9 @@ Our recommendation is to use $\Genetic$ for rapid testing during development, an
   }
 }
 
-\paragraph{\textbf{RQ2 (efficiency).}} To answer this question, we compare the actual execution time shown by our test algorithms in the experiments. Based on this information, we suggest an estimate on the execution time of the testing framework. The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at the function level. There are only two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%, and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum 40\%~(\emph{newGame}) and maximum 510\%~(\emph{isValidCard}). 
+
+\paragraph{\textbf{RQ2 (efficiency).}}
+ To answer this question, we compare the actual execution time shown by our test algorithms in the experiments. Based on this information, we suggest an estimate on the execution time of the testing framework. The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at the function level. There are only two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%, and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum 40\%~(\emph{newGame}) and maximum 510\%~(\emph{isValidCard}). 
 
 \begin{figure}[t]
   \centering
@@ -1045,6 +1050,38 @@ Our recommendation is to use $\Genetic$ for rapid testing during development, an
   \caption{Overall test generation time per function.}
   \label{fig.gen.time.comp}
 \end{figure}  
+
+\begin{figure}[t]
+  \begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        every axis plot post/.style={/pgf/number format/fixed},
+        ybar,
+        ymin=0,ymax=4,
+        width=11cm,height=3.3cm,
+        bar width=3pt,
+        enlarge x limits=0.05,
+        legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
+        legend cell align={left},
+        ylabel={time (sec.)},
+        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
+        xtick=data,
+        nodes near coords,
+        every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
+        % every node near coord/.append style={font=\footnotesize},
+        axis lines*=left,
+        clip=false,
+        x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
+        y tick label style={font=\footnotesize}
+      ]
+      \addplot[fill=blue] coordinates {(helpMe*,1.24) (isGameFinished*,0.83) (newGame*,0.78) (revealAll*,0.83) (shuffleBoard*,1.93) (toggleInfo*,1) (isValidCard,0.51) (isValidVISA,0.47) (initShields*,0.83) (brickJiggler*,1.14) (doPaddlePower*,0.79)  (initBricks*,1.68) (do\_draw,2.33) (prob\_gamma,0.35)};
+      \addplot[fill=red] coordinates {(helpMe*,0.77)  (isGameFinished*,0.94)  (newGame*,0.81)  (revealAll*,1) (shuffleBoard*,1.73) (toggleInfo*,1) (isValidCard,0.38)   (isValidVISA,0.38)  (initShields*,0.83) (brickJiggler*,0.67) (doPaddlePower*,0.69) (initBricks*,0.8) (do\_draw,3.38) (prob\_gamma,0.52)};
+      \addplot[fill=yellow] coordinates {(helpMe*,0.9)  (isGameFinished*,1)  (newGame*,1) (revealAll*,1.13) (shuffleBoard*,1.71) (toggleInfo*,0.66) (isValidCard,0.48)  (isValidVISA,0.25)  (initShields*,0.5) (brickJiggler*,0.75) (doPaddlePower*,0.64) (initBricks*,0.98) (do\_draw,2.69) (prob\_gamma,0.5)}; 
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Speed of test generation measured as $t/i$}
+    \label{fig.get.cost}
+\end{figure}
 
 %% \begin{figure}[t]
 %%   \begin{tikzpicture}[scale=0.8]
@@ -1088,38 +1125,6 @@ Looking separately at the average execution time for \emph{simple} and \emph{dif
   }
 }
 
-\begin{figure}[t]
-  \begin{tikzpicture}[scale=0.8]
-    \begin{axis}[
-        every axis plot post/.style={/pgf/number format/fixed},
-        ybar,
-        ymin=0,ymax=4,
-        width=11cm,height=3.3cm,
-        bar width=3pt,
-        enlarge x limits=0.05,
-        legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
-        legend cell align={left},
-        ylabel={time (sec.)},
-        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
-        xtick=data,
-        nodes near coords,
-        every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
-        % every node near coord/.append style={font=\footnotesize},
-        axis lines*=left,
-        clip=false,
-        x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
-        y tick label style={font=\footnotesize}
-      ]
-      \addplot[fill=blue] coordinates {(helpMe*,1.24) (isGameFinished*,0.83) (newGame*,0.78) (revealAll*,0.83) (shuffleBoard*,1.93) (toggleInfo*,1) (isValidCard,0.51) (isValidVISA,0.47) (initShields*,0.83) (brickJiggler*,1.14) (doPaddlePower*,0.79)  (initBricks*,1.68) (do\_draw,2.33) (prob\_gamma,0.35)};
-      \addplot[fill=red] coordinates {(helpMe*,0.77)  (isGameFinished*,0.94)  (newGame*,0.81)  (revealAll*,1) (shuffleBoard*,1.73) (toggleInfo*,1) (isValidCard,0.38)   (isValidVISA,0.38)  (initShields*,0.83) (brickJiggler*,0.67) (doPaddlePower*,0.69) (initBricks*,0.8) (do\_draw,3.38) (prob\_gamma,0.52)};
-      \addplot[fill=yellow] coordinates {(helpMe*,0.9)  (isGameFinished*,1)  (newGame*,1) (revealAll*,1.13) (shuffleBoard*,1.71) (toggleInfo*,0.66) (isValidCard,0.48)  (isValidVISA,0.25)  (initShields*,0.5) (brickJiggler*,0.75) (doPaddlePower*,0.64) (initBricks*,0.98) (do\_draw,2.69) (prob\_gamma,0.5)}; 
-      \legend{$\Random$,$\Genetic$,$\RGenetic$}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Speed of test generation measured as $t/i$}
-    \label{fig.get.cost}
-\end{figure}
-
 Another question, related to the efficiency of our framework, is the computational cost of one iteration of the algorithm. This information is useful when configuring the maximal generation limit. The cost, shown in column $t/i$ in Table~\ref{tbl.stats}, is calculated as the relation between the execution time and the number of generations, i.e. it measures the speed of one iteration. Figure~\ref{fig.get.cost} presents the cost comparison of three algorithms across all functions in our study. On the one hand, the cost of one iteration depends on the population size, 50 candidates in our case. On the other hand, it also depends on the length of the execution trace produced during the evaluation of a candidate, because longer traces increase the computation cost the fitness function.  Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. For example, the \emph{do_draw} function produces long traces because it only operates with the primitive types thus not rising exceptions, and at the same time, it consists of 40 LOC. In our evaluation we observed that the iteration cost varied between 0.25 and 3.59 seconds.\\
 \setlength{\fboxsep}{1mm}
 \fbox{%
@@ -1137,9 +1142,14 @@ Another question, related to the efficiency of our framework, is the computation
   }
 }  
 
+\paragraph{\textbf{Threats to Validity}}
+The \emph{construct validity} threat comes from the measurements we use in our evaluation: branch coverage and execution time. Though, the branch coverage is a common criteria used in practice, the actual fault finding capability is considered a stronger indication of testing adequacy. Reaching a target branch is only part of the problem, we also need an oracle to discriminate the program's output. In this paper, we strike for so called ``natural'' oracles disseminating in exceptions. Using a stronger oracle for validation is future work. Another practical aspect of the test generation is the test case size, since it can both complicate the readability and increase the execution time. To mitigate this issue we configured the GA to start evolution with the candidates of small sizes, which helps to prevent unnecessary data explosion. Additional measure that could be taken is applying a minimization procedure, aka \emph{delta debugging}, to the GA result.
 
-% \input{summary_statistics}
+Initial GA configuration introduces the threat to the \emph{internal validity} of our empirical evaluation. The parameters we used are quite standard for similar SBST frameworks, e.g. EvoSuite. Though, not reported in the paper, we performed preliminary assessment of various GA configurations, which confirmed our final decision.
 
+The threat of \emph{conclusion validity} can be affected by the GA stochastic nature. This risk was addressed by repeating the experiment 50 times and performing statistical analysis of the significance and effect size. We used the confidence level of 95\% measured by the Vargha-Delaney statistic and Mann-Whitney U-test. 
+
+The \emph{external validity} deals with the threat of generalization of our results due to manual selection of the experimental subjects. To mitigate this fact, we picked the subjects either from previously used in related research or found in open source. Of course, those subjects still have to met the constrains of our testing approach. So, further research is required in both increasing the power of our framework and extending the validation set.
 
 \section{Discussion}
 \label{sec.disc}
@@ -1165,17 +1175,38 @@ Multi-objective test suite generation. DOM reduction by means of hierarchical de
 
 Our framework imposes certain constraints on the structure of JS programs:
 
-
-
 \subsection{Threats to Validity}
 \label{sub.sec.thhreats}
+
+
+
 
 %% --------------------------------------------------------------------
 \section{Related Work}
 \label{sec:related.work}
 %% --------------------------------------------------------------------
 
+There are several ways how to address the problem of input data generation for JS functions: static and dynamic analysis, symbolic execution, SBST, formal reasoning, the whole web application testing.
+
+
 \subsection{Search-Based Test Case Generation}
+
+Despite of the practical popularity of JavaScript, the only recorded in the literature attempt of adopting search-based testing for JS unit testing was done by Alshraideh~\cite{alshraideh2008complete}. It uses GA for branch and mutation coverage, but only deals with the limited input types booleans, integers and strings; and provides validation based on one trivial example --- \emph{the triangle program}. On the contrary, our work additionally supports array and DOM types, with suggest reasonable validation with the discussion of significance and effect size. Recently, SBST was applied to other dynamic languages such as Ruby~\cite{mairhofer2011search}, Lua~\cite{wibowo2015unit} and Go~\cite{irawan2016test}, but the treatment of DOM still makes our approach unique.
+
+One likely direction for the future extension of \emph{JEDI} is the whole test suite generation. Most of the time, instead of searching for a test reaching a separate branch, we would like to have a set of tests maximizing the program coverage. That is, our solution is the vector of candidates has the best fitness score in terms of the branch coverage. Usually, such problems incur multi-objective optimization, e.g. coverage vs. test-suite length.
+ 
+In this paper we dealt with the generation and evolution of DOM which is an example of tree-like data structure. \emph{XMLMATE}~\cite{havrikov2014xmlmate} is a XML test generation tool build on top \emph{EvoSuite} with the aim to improve test coverage of the XML-aware Java programs. To generate random document, it may rely on existing XML schema, or generate document from scratch. In some sense, DOM specification can be thought of a complex XML schema, which is difficult to comply. One distinction of our approach is the use of program analysis for data generation. Both tools have similar philosophy for mutation and crossover. Jan et al.~\cite{jan2016automated} suggest to use XML fuzzing for identifying vulnerabilities in web services. 
+
+The \emph{JSContest}~\cite{heidegger2010contract} proposes to annotates JS functions with type-contracts which can guide random test generation. Though the contract language supports the complex objects types, it mostly suitable for primitive inputs, but not DOM. It performs static analysis to collect constant info and feed it to the random generation. We use genetic approach and additionally to collecting static info also perform dynamic analysis during the program execution. Further \emph{JSContest} was extended with the monitoring of \emph{access permission} contracts in~\cite{heidegger2012jscontest}, and the support of reusable DOM fixtures in~\cite{heidegger2010dom}. 
+
+Mobile
+
+Object-oriented: EvoSuite~\cite{fraser2011evosuite}
+
+Structural
+
+TODO: discuss multi-objective works and hyper-heuristics search
+
 \label{sub.sec.search.based}
 
 \cite{wegener2001evolutionary} evolutionary test generation for structural coverage.
@@ -1196,13 +1227,9 @@ Our framework imposes certain constraints on the structure of JS programs:
 
 \cite{fraser2012mutation} mutation-driven generation of unit tests and oracles
 
-\cite{havrikov2014xmlmate} XMLMate: evolutionary XML test generation.
-
 \cite{mcminn2004search} seminal survey of search-based test data generation techniques.
 
 \cite{mcminn2011search} recent overview of search-based testing.
-
-\cite{mairhofer2011search} search-based testing for dynamic languages (Ruby)
 
 \cite{baars2011symbolic} combines dynamic analysis with symbolic information to improve search-based testing
 
@@ -1262,6 +1289,8 @@ Flycatcher~\cite{deautomatic}
 \label{sub.sec.misc.test.tech}
 
 Discover patterns from bug fixes and imposing them as potential bugs in the future~\cite{quinn:fse16}. 
+
+NodEO, a multi-paradigm distributed evolutionary algorithm platform in JavaScript~\cite{merelo2014nodeo}.
 
 \section{Conclusions}
 \label{sec:concl}
