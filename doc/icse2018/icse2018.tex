@@ -475,7 +475,7 @@ which respectively signify the reference to the \emph{tags}, \emph{ids}, \emph{c
 \caption{Grammar of supported JS type annotations}
 \label{fig.js.type.annot}
 \end{figure}
-One assumption made in the paper is the availability of type signatures for JS functions. We believe in the legitimacy of such a request due to the following observations. First, typed variants of JS such as \emph{TypeScript}\footnote{\url{https://www.typescriptlang.org/}} are rising in popularity. Second, there has been an active work on the JS type inference done both in academia~\cite{paper} and industry, e.g. Facebook's tool \emph{Flow}\footnote{\url{https://flow.org/}}. 
+One assumption made in the paper is the availability of type signatures for JS functions. We believe in the legitimacy of such a request due to the following observations. First, typed variants of JS such as \emph{TypeScript}\footnote{\url{https://www.typescriptlang.org/}} are rising in popularity. Second, there has been an active work on the JS type inference done both in academia~\cite{kristensen2017type} and industry, e.g. Facebook's tool \emph{Flow}\footnote{\url{https://flow.org/}}. 
 
 The grammar of the JS type annotations supported by our test generation framework is shown in Figure~\ref{fig.js.type.annot}. Each type annotation is a signature embedded into a specialized JS type comment (\texttt{/*t...*/}). We distinguish between two kinds of signatures those which refer to the global DOM and the ``ordinary'' JS type signatures. The functions of the former signature expect some \texttt{dom} argument to be passed as the first implicit parameter for the function call. Whereas ordinary JS signature is a non-zero sequence of the JS types. The type can be \emph{Void}, \emph{Primitive} (\texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string}) or \emph{Array} (recursive homogeneous array type).  
 
@@ -1172,7 +1172,7 @@ The \emph{external validity} deals with the threat of generalization of our resu
 \label{sec:related.work}
 %% --------------------------------------------------------------------
 
-The last two decades were fruitful in the amount of work dedicates to the analysis and web applications and JavaScript, in particular. The state-of-the-art in this field including JS static and dynamic analysis, as well as test generation is captured by the two recent surveys~\cite{andreasen2017survey, sun2017analysis}. Therefore, we would like to organize our discussion of related work around two main questions: 
+The last two decades were fruitful in the amount of work dedicates to the analysis and web applications and JavaScript, in particular. The state-of-the-art in this field including JS static and dynamic analysis, as well as test generation is captured by the following surveys~\cite{andreasen2017survey, sun2017analysis, mesbah2015advances}. Therefore, we would like to organize our discussion of related work around two main questions: 
 \begin{enumerate*}
 \item test data generation for JS functions interacting with the DOM, and
 \item the application of search-based techniques for that problem.
@@ -1180,56 +1180,17 @@ The last two decades were fruitful in the amount of work dedicates to the analys
 
 \subsection{Test Data Generation for JavaScript}
 
-The \emph{JSContest}~\cite{heidegger2010contract} proposes to annotates JS functions with type-contracts which can guide random test generation. Though the contract language supports the complex objects types, it mostly suitable for primitive inputs, but not DOM. It performs static analysis to collect constant info and feed it to the random generation. We use genetic approach and additionally to collecting static info also perform dynamic analysis during the program execution. Further \emph{JSContest} was extended with the monitoring of \emph{access permission} contracts in~\cite{heidegger2012jscontest}, and the support of reusable DOM fixtures in~\cite{heidegger2010dom}. 
+The \emph{JSContest}~\cite{heidegger2010contract} proposes to annotates JS functions with type-contracts which can guide random test generation. Though the contract language supports the complex objects types, it mostly suitable for primitive inputs, but not DOM. It performs static analysis to collect constant info and feed it to the random generation. We use genetic approach and additionally to collecting static info also perform dynamic analysis during the program execution. Further \emph{JSContest} was extended with the monitoring of \emph{access permission} contracts in~\cite{heidegger2012jscontest}, and the support of reusable DOM fixtures in~\cite{heidegger2010dom}. More recently, Kristensen et al.~\cite{kristensen2017type} proposes to use feedback-directed random testing for generating TypeScript tests based on the provided type annotations. 
 
-\emph{Jalangi}~\cite{sen2013jalangi} is a JS dynamic analysis framework which can be employed, for example, for implementing concolic testing or type inconsistency analysis~\cite{pradel2015typedevil}. It suffers from typical for the symbolic analysis problems such as the handing of arrays and loops. \emph{Confix}~\cite{amin:ase15} translates DOM-related statements into XPath expressions, and feeds them to a constrain solver in order to obtains DOM fixtures for the FUT. Combined with Jalangi it can be used for both primitive and DOM test data generation. As it has been shown early by Baars et al.~\cite{baars2011symbolic}, search-based testing can greatly benefit from symbolic analysis. Following this approach, we could try to combine \emph{JEDI} with \emph{Confix} to achieve better results.
+\emph{Jalangi}~\cite{sen2013jalangi} is a JS dynamic analysis framework which can be employed, for example, for implementing concolic testing or type inconsistency analysis~\cite{pradel2015typedevil}. It suffers from typical for the symbolic analysis problems such as the handing of arrays and loops. \emph{Confix}~\cite{amin:ase15} translates DOM-related statements into XPath expressions, and feeds them to a constrain solver in order to obtains DOM fixtures for the FUT. Combined with Jalangi it can be used for both primitive and DOM test data generation. As it has been shown early by Baars et al.~\cite{baars2011symbolic}, search-based testing can greatly benefit from symbolic analysis. Following this approach, we could try to combine \emph{JEDI} with \emph{Confix} to achieve better results. Tanida~\cite{tanida2014automatic} implemented pure symbolic test generation for JS without the DOM interaction.
 
-Static analysis is a powerful technique commonly used as solid alternative for program testing. In fact both techniques can benefit from one another. For such weakly typed and dynamic languages as JavaScript employing static analysis to infer types can be an invaluable source of information to identify potential bugs or even guarantee their absence. Jensen et al.~\cite{tajs2009} presented such an analysis for JavaScript using abstract interpretation. In the follow-up work~\cite{dom2011} they extended the analysis with the abstractions to reason about HTML DOM and browser API. Given step let the authors to carry static analysis at the level of complete web application (JavaScript + HTML).
+Static analysis is a powerful technique commonly used as solid alternative for program testing. In fact both techniques can benefit from one another. For such weakly typed and dynamic languages as JavaScript employing static analysis to infer types can be an invaluable source of information to identify potential bugs or even guarantee their absence. Jensen et al.~\cite{tajs2009} presented such an analysis for JavaScript using abstract interpretation. In the follow-up work~\cite{dom2011} they extended the analysis with the abstractions to reason about HTML DOM and browser API. Given step let the authors to carry static analysis at the level of complete web application (JavaScript + HTML). Artemis~\cite{artemis2011} is a feedback-directed random testing tool for JavaScript web application. It discoverers new tests by generating sequences of executable events and monitoring they effect on the state of the application.
 
-\emph{$JS_{DEP}$}~\cite{sung2016static} proposes a constraint-based static analysis for learning dependencies between DOM-events, which can help to prune the sequence of tests consisting of the web-application events.
+\emph{Atrina}~\cite{icst16} uses existing DOM-dependent assertions complemented with the inferred ones to accompany unit tests generated by \emph{JSEFT}~\cite{mirshokraie2015jseft}. 
 
-\subsection{Search-Based Test Data Generation}
+\emph{Flycatcher}~\cite{de2012automatic} generates tests by instrumenting a program with the JS \emph{Proxies} in order to collect type related information.
 
-Despite of the practical popularity of JavaScript, the only recorded in the literature attempt of adopting search-based testing for JS unit testing was done by Alshraideh~\cite{alshraideh2008complete}. It uses GA for branch and mutation coverage, but only deals with the limited input types booleans, integers and strings; and provides validation based on one trivial example --- \emph{the triangle program}. On the contrary, our work additionally supports array and DOM types, with suggest reasonable validation with the discussion of significance and effect size. Recently, SBST was applied to other dynamic languages such as Ruby~\cite{mairhofer2011search}, Lua~\cite{wibowo2015unit} and Go~\cite{irawan2016test}, but the treatment of DOM still makes our approach unique.
-
-One likely direction for the future extension of \emph{JEDI} is the whole test suite generation. Most of the time, instead of searching for a test reaching a separate branch, we would like to have a set of tests maximizing the program coverage. That is, our solution is the vector of candidates has the best fitness score in terms of the branch coverage. Usually, such problems incur multi-objective optimization, e.g. coverage vs. test-suite length.
- 
-In this paper we dealt with the generation and evolution of DOM which is an example of tree-like data structure. \emph{XMLMATE}~\cite{havrikov2014xmlmate} is a XML test generation tool build on top \emph{EvoSuite} with the aim to improve test coverage of the XML-aware Java programs. To generate random document, it may rely on existing XML schema, or generate document from scratch. In some sense, DOM specification can be thought of a complex XML schema, which is difficult to comply. One distinction of our approach is the use of program analysis for data generation. Both tools have similar philosophy for mutation and crossover. Jan et al.~\cite{jan2016automated} suggest to use XML fuzzing for identifying vulnerabilities in web services. 
-
-
-Mobile
-
-Object-oriented: EvoSuite~\cite{fraser2011evosuite}
-
-Structural
-
-TODO: discuss multi-objective works and hyper-heuristics search
-
-\label{sub.sec.search.based}
-
-\cite{wegener2001evolutionary} evolutionary test generation for structural coverage.
-
-\cite{tonella2004evolutionary} evolutionary testing of classes
-
-\cite{wappler2005using} evolutionary testing of object-oriented software.
-
-\cite{wappler2006evolutionary} uses strongly-typed genetic programming and deals with the runtime exceptions.
-
-\cite{lakhotia2007multi} multi-objective search-based test data generation 
-
-\cite{cao2009search} multi-path search-based test data generation
-
-\cite{awedikian2009mc} MC/DC test input generation 
-
-\cite{shahbazi2016black} generation of string test data
-
-\cite{fraser2012mutation} mutation-driven generation of unit tests and oracles
-
-\cite{mcminn2004search} seminal survey of search-based test data generation techniques.
-
-\cite{mcminn2011search} recent overview of search-based testing.
-
-\cite{baars2011symbolic} combines dynamic analysis with symbolic information to improve search-based testing
+\emph{$JS_{DEP}$}~\cite{sung2016static} proposes a constraint-based static analysis for learning dependencies between DOM-events, which can help to prune the sequence of tests consisting of the web-application events. Lerner~\cite{lerner2012modeling} define formal model of event behavior in the DOM to establish testing oracles.
 
 \cite{alshahwan2011automated} automated web application testing using search based software techniques.
 
@@ -1237,24 +1198,15 @@ TODO: discuss multi-objective works and hyper-heuristics search
 
 \cite{mao2016sapienz} Multi-objective automated testing for Android application
 
-
 \cite{jquery2014}
 
 
 ACTARUS is a static taint analysis of JS\cite{guarnieri2011saving}.
 
-Jalangi is dynamic analysis framework for JavaScript \cite{sen2013jalangi}.
-
-Dynamic type inconsistency analysis (implemented on top Jalangi) for JavaScript\cite{pradel2015typedevil}.
 
 Salable dynamic analysis framework for JS based on shadow executions~\cite{create.citation}.
 
 Information-flow security for JS~\cite{hedin2012information}.
-
-\subsection{Whole Web Application Testing}
-\label{sub.sec.web.app.test}
-
-Artemis~\cite{artemis2011} is a feedback-directed random testing tool for JavaScript web application. It discoverers new tests by generating sequences of executable events and monitoring they effect on the state of the application. \cite{ail2013}
 
 Testing of AJAX application by means of crawling of the application to infer state-flow graph~\cite{mesbah2012crawling} ATUSA ~\cite{mesbah2012invariant}
 
@@ -1266,30 +1218,23 @@ Combining human written test cases with the automatically generated once by craw
 
 DOM-aware JavaScript code completion~\cite{bajaj2014dompletion}. 
 
-\subsection{Formal Techniques}
-\label{sub.sec.formal}
 
-Modeling and reasoning about DOM events~\cite{lerner2012modeling}.
+\subsection{Search-Based Test Data Generation}
+\label{sub.sec.search.based}
 
-\subsection{JavaScript Unit Testing}
-\label{sub.sec.js.unit.test}
+Despite of the practical popularity of JavaScript, the only recorded in the literature attempt of adopting search-based testing for JS unit testing was done by Alshraideh~\cite{alshraideh2008complete}. It uses GA for branch and mutation coverage, but only deals with the limited input types booleans, integers and strings; and provides validation based on one trivial example --- \emph{the triangle program}. On the contrary, our work additionally supports array and DOM types, with suggest reasonable validation with the discussion of significance and effect size. Recently, SBST was applied to other dynamic languages such as Ruby~\cite{mairhofer2011search}, Lua~\cite{wibowo2015unit} and Go~\cite{irawan2016test}, but the treatment of DOM still makes our approach unique.
+ 
+In this paper we dealt with the generation and evolution of DOM which is an example of tree-like data structure. \emph{XMLMATE}~\cite{havrikov2014xmlmate} is a XML test generation tool build on top \emph{EvoSuite} with the aim to improve test coverage of the XML-aware Java programs. To generate random document, it may rely on existing XML schema, or generate document from scratch. In some sense, DOM specification can be thought of a complex XML schema, which is difficult to comply. One distinction of our approach is the use of program analysis for data generation. Both tools have similar philosophy for mutation and crossover. Jan et al.~\cite{jan2016automated} suggest to use XML fuzzing for identifying vulnerabilities in web services. 
 
-Generating fixture for JavaScript unit tests by means of concolic execution~\cite{amin:ase15}. Inference of UI oracles to complement JS unit tests~\cite{icst16}.
+Starting from the seminal survey of search-based test data generation~\cite{mcminn2004search}, there has been an active growth in the number of SBST research~\cite{mcminn2011search}. Powered by the works of Wegener et at.~\cite{wegener2001evolutionary} on structural test generation, and Tonella~\cite{tonella2004evolutionary} on evolutionary class testing, it resulted in the development of EvoSuite~\cite{fraser2011evosuite} --- evolutionary framework for Java test generation.
 
-JS unit test generation by means of symbolic execution~\cite{tanida2014automatic}.
+One likely direction for the future extension of \emph{JEDI} is the whole test suite generation. Most of the time, instead of searching for a test reaching a separate branch, we would like to have a set of tests maximizing the program coverage. That is, our solution is the vector of candidates has the best fitness score in terms of the branch coverage. Usually, such problems incur multi-objective optimization~\cite{lakhotia2007multi}, e.g. coverage vs. test-suite length. Another direction of future work is adjusting out tool for mutation-driven generation of unit tests and oracles, similar to the line of work~\cite{fraser2012mutation}. That would also help us to judge about the fault revealing ability of \emph{JEDI} based on the number of killed mutants. As we said early in this section, SBST techniques can benefit from symbolic analysis~\cite{baars2011symbolic}.
 
-Flycatcher~\cite{deautomatic}
 
-\subsection{Misc JavaScript Testing Techniques}
-\label{sub.sec.misc.test.tech}
-
-Discover patterns from bug fixes and imposing them as potential bugs in the future~\cite{quinn:fse16}. 
-
-NodEO, a multi-paradigm distributed evolutionary algorithm platform in JavaScript~\cite{merelo2014nodeo}.
 
 \section{Conclusions}
 \label{sec:concl}
-1 page.
+This paper 
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{icse2018.bib} 
