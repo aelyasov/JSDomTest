@@ -1,5 +1,6 @@
 \documentclass[sigconf,review,anonymous]{acmart}
 
+\usepackage[inline]{enumitem}
 \usepackage{tablefootnote}
 \usepackage{syntax}
 \usepackage{multirow}
@@ -483,7 +484,7 @@ The grammar of the JS type annotations supported by our test generation framewor
 
 Figure~\ref{code.isGameFinished.instr} presents the \texttt{isGameFinished} function after instrumentation. The global variable \emph{trace} in line~\ref{isGameFinished.instr.trace} is an array of labels corresponding to the sequence of executed program statements. All statements have to be traced because each one, in theory, can rise an exception. The \texttt{loopMap} variable in line~\ref{isGameFinished.instr.loopMap} approximates the potential number of iterations for the consecutive for-loop. If no exact bound can be computed, we set it to one. The \texttt{branchDistance} map tracks the distances to the deviated branches according to the translation formulae~\cite{tracey1998automated}.  
 
-TODO: maybe expand this section with the JS type casting for branch distance computation 
+%TODO: maybe expand this section with the JS type casting for branch distance computation 
 
 \begin{figure}[t]
   \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
@@ -718,6 +719,20 @@ Similarly, this definition can be extended to an arbitrary sequence of CFG nodes
 
 The approach level is an integer value that indicates how many conditions should be met in order to reach the \emph{problem node}, i.e. the node caused the deviation. Since any node can potentially be exceptional, they all contribute to the approach level in addition to the conditional branches. Loops have to treated in a special way because we need to estimate the maximum number of iterations. In the case of for-loop, at run-time we can always provide an exact bound. For while-loops, we assume that it has to be passed at least once. The branch condition is a rational value from 0 to 1, which measures the deviation explicitly in the problem node and it is computed according to the formulae~\cite{tracey1998automated}.
  
+\subsubsection{Limitations}
+\label{sub.sub.sec.limit}
+
+Currently, our framework imposes certain explicit constraints on the kind of JS functions it is able to process: 
+\begin{enumerate}
+\item ability to assign static types to input parameters 
+\item no support for the \emph{Object} type, heterogeneous arrays and high-order functions
+\item no support for recursion
+\item doesn't perform inter-procedural analysis
+\item no support for JS frameworks
+\item no reference to global variables and functions
+\item limited support of DOM API     
+\end{enumerate}
+
 %% --------------------------------------------------------------------
 \section{Empirical Evaluation}
 \label{sec.evaluation}
@@ -1151,45 +1166,29 @@ The threat of \emph{conclusion validity} can be affected by the GA stochastic na
 
 The \emph{external validity} deals with the threat of generalization of our results due to manual selection of the experimental subjects. To mitigate this fact, we picked the subjects either from previously used in related research or found in open source. Of course, those subjects still have to met the constrains of our testing approach. So, further research is required in both increasing the power of our framework and extending the validation set.
 
-\section{Discussion}
-\label{sec.disc}
-
-\subsection{Future Work}
-\label{sub.sec.fut.work}
-
-We would like to open source our test generation framework and introduce a web service allowing developers to submit their JS code for automated testing. One benefit of such service from the perspective of future research is an ability to learn about programming style and the use of JS libraries. Being dynamic language, JS supports various programming styles, which is, as was widely admitted~\cite{paper}, hindrance the complete analysis of JS programs. By gathering feedback about JS programs on which our framework performed poorly, we can identify and prioritize language constructs and programming patterns that should be adequately addressed. Currently, our framework imposes certain explicit constraints on the kind of JS functions it is able to process: 
-\begin{enumerate}
-\item ability to assign static types to input parameters 
-\item no support for the \emph{Object} type, heterogeneous arrays and high-order functions
-\item no support for recursion
-\item doesn't perform inter-procedural analysis
-\item no support for JS frameworks
-\item no reference to global variables and functions
-\item limited support of DOM API     
-\end{enumerate}
-
-Multi-objective test suite generation. DOM reduction by means of hierarchical delta-debugging.
-
-\subsection{Limitations}
-\label{sub.sec.eval.limit}
-
-Our framework imposes certain constraints on the structure of JS programs:
-
-\subsection{Threats to Validity}
-\label{sub.sec.thhreats}
-
-
-
 
 %% --------------------------------------------------------------------
-\section{Related Work}
+\section{Related and Future Work}
 \label{sec:related.work}
 %% --------------------------------------------------------------------
 
-There are several ways how to address the problem of input data generation for JS functions: static and dynamic analysis, symbolic execution, SBST, formal reasoning, the whole web application testing.
+The last two decades were fruitful in the amount of work dedicates to the analysis and web applications and JavaScript, in particular. The state-of-the-art in this field including JS static and dynamic analysis, as well as test generation is captured by the two recent surveys~\cite{andreasen2017survey, sun2017analysis}. Therefore, we would like to organize our discussion of related work around two main questions: 
+\begin{enumerate*}
+\item test data generation for JS functions interacting with the DOM, and
+\item the application of search-based techniques for that problem.
+\end{enumerate*}  
 
+\subsection{Test Data Generation for JavaScript}
 
-\subsection{Search-Based Test Case Generation}
+The \emph{JSContest}~\cite{heidegger2010contract} proposes to annotates JS functions with type-contracts which can guide random test generation. Though the contract language supports the complex objects types, it mostly suitable for primitive inputs, but not DOM. It performs static analysis to collect constant info and feed it to the random generation. We use genetic approach and additionally to collecting static info also perform dynamic analysis during the program execution. Further \emph{JSContest} was extended with the monitoring of \emph{access permission} contracts in~\cite{heidegger2012jscontest}, and the support of reusable DOM fixtures in~\cite{heidegger2010dom}. 
+
+\emph{Jalangi}~\cite{sen2013jalangi} is a JS dynamic analysis framework which can be employed, for example, for implementing concolic testing or type inconsistency analysis~\cite{pradel2015typedevil}. It suffers from typical for the symbolic analysis problems such as the handing of arrays and loops. \emph{Confix}~\cite{amin:ase15} translates DOM-related statements into XPath expressions, and feeds them to a constrain solver in order to obtains DOM fixtures for the FUT. Combined with Jalangi it can be used for both primitive and DOM test data generation. As it has been shown early by Baars et al.~\cite{baars2011symbolic}, search-based testing can greatly benefit from symbolic analysis. Following this approach, we could try to combine \emph{JEDI} with \emph{Confix} to achieve better results.
+
+Static analysis is a powerful technique commonly used as solid alternative for program testing. In fact both techniques can benefit from one another. For such weakly typed and dynamic languages as JavaScript employing static analysis to infer types can be an invaluable source of information to identify potential bugs or even guarantee their absence. Jensen et al.~\cite{tajs2009} presented such an analysis for JavaScript using abstract interpretation. In the follow-up work~\cite{dom2011} they extended the analysis with the abstractions to reason about HTML DOM and browser API. Given step let the authors to carry static analysis at the level of complete web application (JavaScript + HTML).
+
+\emph{$JS_{DEP}$}~\cite{sung2016static} proposes a constraint-based static analysis for learning dependencies between DOM-events, which can help to prune the sequence of tests consisting of the web-application events.
+
+\subsection{Search-Based Test Data Generation}
 
 Despite of the practical popularity of JavaScript, the only recorded in the literature attempt of adopting search-based testing for JS unit testing was done by Alshraideh~\cite{alshraideh2008complete}. It uses GA for branch and mutation coverage, but only deals with the limited input types booleans, integers and strings; and provides validation based on one trivial example --- \emph{the triangle program}. On the contrary, our work additionally supports array and DOM types, with suggest reasonable validation with the discussion of significance and effect size. Recently, SBST was applied to other dynamic languages such as Ruby~\cite{mairhofer2011search}, Lua~\cite{wibowo2015unit} and Go~\cite{irawan2016test}, but the treatment of DOM still makes our approach unique.
 
@@ -1197,7 +1196,6 @@ One likely direction for the future extension of \emph{JEDI} is the whole test s
  
 In this paper we dealt with the generation and evolution of DOM which is an example of tree-like data structure. \emph{XMLMATE}~\cite{havrikov2014xmlmate} is a XML test generation tool build on top \emph{EvoSuite} with the aim to improve test coverage of the XML-aware Java programs. To generate random document, it may rely on existing XML schema, or generate document from scratch. In some sense, DOM specification can be thought of a complex XML schema, which is difficult to comply. One distinction of our approach is the use of program analysis for data generation. Both tools have similar philosophy for mutation and crossover. Jan et al.~\cite{jan2016automated} suggest to use XML fuzzing for identifying vulnerabilities in web services. 
 
-The \emph{JSContest}~\cite{heidegger2010contract} proposes to annotates JS functions with type-contracts which can guide random test generation. Though the contract language supports the complex objects types, it mostly suitable for primitive inputs, but not DOM. It performs static analysis to collect constant info and feed it to the random generation. We use genetic approach and additionally to collecting static info also perform dynamic analysis during the program execution. Further \emph{JSContest} was extended with the monitoring of \emph{access permission} contracts in~\cite{heidegger2012jscontest}, and the support of reusable DOM fixtures in~\cite{heidegger2010dom}. 
 
 Mobile
 
@@ -1239,10 +1237,7 @@ TODO: discuss multi-objective works and hyper-heuristics search
 
 \cite{mao2016sapienz} Multi-objective automated testing for Android application
 
-\subsection{Static and Dynamic Analysis of JavaScript}
-\label{sub.sec.js.static.anal}
 
-Static analysis is a powerful technique commonly used as solid alternative for program testing. In fact both techniques can benefit from one another. For such weakly typed and dynamic languages as JavaScript employing static analysis to infer types can be an invaluable source of information to identify potential bugs or even guarantee their absence. Jensen et al.~\cite{tajs2009} presented such an analysis for JavaScript using abstract interpretation. In the follow-up work~\cite{dom2011} they extended the analysis with the abstractions to reason about HTML DOM and browser API. Given step let the authors to carry static analysis at the level of complete web application (JavaScript + HTML).
 \cite{jquery2014}
 
 
