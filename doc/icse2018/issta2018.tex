@@ -1,0 +1,1254 @@
+\documentclass[sigconf,review]{acmart}
+
+\usepackage[inline]{enumitem}
+\usepackage{tablefootnote}
+\usepackage{syntax}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs} % For formal tables
+\usepackage{tikz}
+\usetikzlibrary{arrows,shadows,positioning,decorations.pathmorphing}
+\usepackage{pgf-umlsd}
+\usepackage{tikz-uml}
+\usepackage{hyperref}
+\usepackage{upquote}
+\usepackage{listings}
+\usepackage{lsthaskell}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{algorithmic}
+\usepackage{longtable}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage[titlenotnumbered, linesnumbered, ruled]{algorithm2e} % language for algorithm description
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = red, %Colour of internal links
+  citecolor    = green %Colour of citations
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ltblue}{rgb}{0,0.4,0.4}
+\definecolor{dkblue}{rgb}{0,0.1,0.6}
+\definecolor{dkgreen}{rgb}{0,0.4,0}
+\definecolor{dkviolet}{rgb}{0.3,0,0.5}
+\definecolor{dkred}{rgb}{0.5,0,0}
+
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\definecolor{orange}{rgb}{1,0.45,0.13}		
+\definecolor{olive}{rgb}{0.17,0.59,0.20}
+\definecolor{brown}{rgb}{0.69,0.31,0.31}
+\definecolor{purple}{rgb}{0.38,0.18,0.81}
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}
+\definecolor{lightred}{rgb}{1,0.4,0.5}
+% CSS
+\lstdefinelanguage{CSS}{
+  keywords={color,background-image:,margin,padding,font,weight,display,position,top,left,right,bottom,list,style,border,size,white,space,min,width, transition:, transform:, transition-property, transition-duration, transition-timing-function},	
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  alsoletter={:},
+  alsodigit={-}
+}
+
+% JavaScript
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, for},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,	
+  alsoletter={<>=-},	
+  morecomment=[s]{<!-}{-->},
+  morestring=[b]'
+  tag=[s],
+  otherkeywords={
+  % General
+  >,
+  % Standard tags
+	<!DOCTYPE,
+  </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+	% body
+	</body, <body,
+	% Divs
+	</div, <div, </div>, 
+	% Paragraphs
+	</p, <p, </p>,
+	% scripts
+	</script, <script,
+  % More tags...
+  <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article
+  },
+  ndkeywords={
+  % General
+  =,
+  % HTML attributes
+  charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+  % SVG attributes
+  fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+  % properties
+  margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
+	% CSS3 properties
+  transform:, -moz-transform:, -webkit-transform:,
+  animation:, -webkit-animation:,
+  transition:,  transition-duration:, transition-property:, transition-timing-function:,
+  }
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  tagstyle=\color{blue},
+  markfirstintag=true,
+  sensitive=true,
+  alsoletter={<>=-},	
+  morecomment=[s]{<!--}{-->},
+  % tag=[s],
+  %% morestring=[b]'',
+  morestring=[b]',
+  ndkeywords={
+    % General
+    =,
+    % HTML attributes
+    id=, class= 
+  }
+}
+
+
+\lstdefinestyle{htmlcssjs} {%
+  % General design
+  backgroundcolor=\color{editorGray},
+  basicstyle={\scriptsize\ttfamily},   
+  frame=tb,
+  % line-numbers
+  xleftmargin={0.75cm},
+  numbers=left,
+  stepnumber=1,
+  firstnumber=1,
+  numberfirstline=true,	
+  % Code design
+  identifierstyle=\color{black},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{editorGreen}\bfseries,
+  stringstyle=\color{editorOcher}\ttfamily,
+  commentstyle=\color{brown}\ttfamily,
+  % Code
+  language=JavaScript,
+  alsolanguage=HTML5,
+  alsodigit={.:;},	
+  tabsize=2,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  extendedchars=true,
+  breaklines=true,
+  escapechar=|c
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\listfiles % used to output the versions of all files being used by the late
+
+\newcommand{\Server}{\emph{Server}\xspace}
+\newcommand{\Client}{\emph{Client}\xspace}
+\newcommand{\User}{\emph{User}\xspace}
+\newcommand{\Validator}{\emph{Validator}\xspace}
+\newcommand{\thenBr}{\text{then}}
+\newcommand{\elseBr}{\text{else}}
+\newcommand{\inFor}{\text{inFor}}
+\newcommand{\inWhile}{\text{while}}
+\newcommand{\un}[1]{\underline{#1}}
+\newcommand{\Random}{\mathbb{R}}
+\newcommand{\Genetic}{\mathbb{G}}
+\newcommand{\RGenetic}{\mathbb{G}_{10}}
+
+% Copyright
+\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+%\acmDOI{10.475/123_4}
+
+% ISBN
+%\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+\acmConference[ISSTA 2018]{ACM SIGSOFT International Symposium on Software Testing and Analysis}{16-22 July, 2018}{Amsterdam, The Netherlands}
+%% \acmYear{1997}                  
+%% \copyrightyear{2016}
+
+%% \acmPrice{15.00}
+
+\begin{document}
+\title[Search-Based Test Data Generation for JavaScript Functions...]{Search-Based Test Data Generation for JavaScript Functions that Interact with the DOM}
+
+
+\author{Alexander Elyasov}
+\affiliation{%
+  \institution{Utrecht University, The Netherlands} 
+}
+\email{a.elyasov@uu.nl}
+
+\author{Wishnu Prasetya}
+\affiliation{%
+  \institution{Utrecht University, The Netherlands}
+}
+\email{s.w.b.prasetya@uu.nl}
+
+\author{Jurriaan Hage}
+\affiliation{%
+  \institution{Utrecht University, The Netherlands}
+}
+\email{j.hage@uu.nl}
+
+
+\begin{abstract}
+The popularity of JavaScript is continuously growing. Together with HTML and CSS, it forms the core technology stack for web development. Because of the dynamic nature and complex interplay with HTML, JS applications are still error-prone and vulnerable. Despite the active research efforts to devise intricate static and dynamic analyses to facilitate JS testing, the problem of test data generation for JS applications interacting with the DOM has not yet been addressed. In this paper, we present a novel \textbf{J}avascript \textbf{E}volution-based testing framework with \textbf{D}OM as an \textbf{I}nput, called \emph{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function including the global DOM state. We conducted an empirical evaluation to study the effectiveness and efficiency of our testing framework. It shows that the \emph{genetic with restart} algorithm, proposed in this paper, is able to achieve complete branch coverage for all experimental subjects, taking on average 19 seconds per branch.
+\end{abstract}
+
+%
+% The code below should be generated by the tool at
+% http://dl.acm.org/ccs.cfm
+% Please copy and paste the code instead of the example below. 
+%
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10011007.10011074.10011099.10011102.10011103</concept_id>
+<concept_desc>Software and its engineering~Software testing and debugging</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+<concept>
+<concept_id>10011007.10011074.10011784</concept_id>
+<concept_desc>Software and its engineering~Search-based software engineering</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[300]{Software and its engineering~Software testing and debugging}
+\ccsdesc[300]{Software and its engineering~Search-based software engineering}
+
+\keywords{JavaScript, search-based testing, branch coverage}
+
+
+\maketitle
+
+%% ------------------------------------------------------------------------
+\section{Introduction}
+\label{sec.intro}
+%% ------------------------------------------------------------------------
+
+According to the \emph{StackOverflow} Developer Survey 2018 \cite{stackoverflow2018}, JavaScript has been recognized for the sixth time in row as the most commonly used programming language. It is also the most popular language on \emph{GitHub}~\cite{guthub2017} based on the number of opened pull requests (2.3 million). Such an ever increasing JS success can be explained by its native browsers support, and the rise in popularity of the JS run-time environment \emph{Node.js}. On the other hand, due to of implicit type conversion, lack of static types, and extensive support of dynamic language constructs~\cite{richards2010analysis}, JS applications are often error-prone~\cite{frolin:TSE16}, hard to analyze~\cite{andreasen2017survey, sun2017analysis} and test~\cite{mesbah2015advances}. Thus, it is not surprising that once in a while critical bugs manage to break through~\cite{bugstories2017} into the web applications by Facebook, Twitter etc.
+
+Systematic unit testing is basic and, at the same time, the most effective technique for improving software quality. In practice, there are numerous of JS frameworks --- Mocha, Jasmine, Jest, Enzyme, Tape, Ava, Karma, QUnit etc. --- intended to assist developers with the automation of various unit testing activities such as design, execution and monitoring. Despite the apparent abundance of the JS testing tools, the developers' satisfaction rate is still relative low~\cite{stateJS2017} (3.2 out of 5), suggesting the need for improvements. One of such areas is \emph{test data generation}. It pursues the goal of maximizing the test coverage by exercising the function under test (FUT) with different input parameters. Moreover, if a FUT interacts with the DOM of a web application, a \emph{test fixture} is expected as an additional input. 
+
+Generally, the problem of test data generation has been under an active study for the past three decades. In particular for JS, researchers have proposed several solutions based on: concolic execution (\emph{Jalangi}~\cite{sen2013jalangi}, \emph{Confix}~\cite{amin:ase15}), random generation (\emph{JSContest}~\cite{heidegger2010contract}), and the analysis of the whole web application (\emph{Artemis}~\cite{artemis2011}, Crawljax~\cite{mesbah2012crawling}). Out of those tools, only \emph{Confix} tries to construct a sufficient DOM fixture by translating native browser API calls into logical constraints. However, in the empirical evaluation~\cite{amin:ase15}, Confix only reached about 50\% in \emph{branch coverage} on the selected subjects. At the same time, search-based techniques have shown prominent results in achieving high branch coverage for imperative~\cite{wegener2001evolutionary}, object-oriented~\cite{fraser2011evosuite} and dynamic languages~\cite{irawan2016test, wibowo2015unit}, as well as for web~\cite{alshahwan2011automated} and mobile~\cite{mao2016sapienz} applications. But to the best of our knowledge, the problem of test data generation has never been tackled for JS with the help of the search-based approach. In this paper we are breaching this gap by introducing a \textbf{J}avascript \textbf{E}volution-based testing framework with \textbf{D}OM as an \textbf{I}nput, called \emph{JEDI}. We can summarize our contributions as follows: 
+\begin{enumerate}[leftmargin=5mm]
+\item The \emph{JEDI} framework is a novel JS unit testing tool using search-based techniques for generating test data. Notably, our testing framework is able to generate an arbitrary DOM input (both tags and attributes), which is syntactically valid and compliant with the recent HTML5 specification.   
+\item Our test generation algorithm, called ``genetic with restart'', is trying to escape search plateau by restarting GA with a new target. Because the full-fledged JS data flow analysis~\cite{jang2009points} is hard to reach, the new target is chosen purely based on the preceding control flow behaviour in contrast with more popular techniques~\cite{ferguson1996chaining}.  
+\item Based on the case studies found in two related works~\emph{Confix}~\cite{amin:ase15} and \emph{TAJS}~\cite{dom2011}, we conducted an empirical validation of our framework and performed a significance study of the results. The validation has shown the effectiveness of the framework in covering target branches with a reasonable efficiency. Moreover, we showed that on the selected subjects \emph{JEDI} outperforms \emph{Confix} ....  
+\end{enumerate} 
+
+The paper is structured as follows: In Section~\ref{sec.example}, we present a motivating example illustrating the challenges of generating test data for JS. The architecture of the \emph{JEDI} testing framework is explained in Section~\ref{sec.framework}. Section~\ref{sec.evaluation} presents empirical validation and indicates the validity threats. Related and future work are discussed in Section~\ref{sec:related.work}. Section~\ref{sec:concl} concludes the paper.  
+ 
+
+%% The state of JS 2017 survey~\footnote{\url{https://stateofjs.com/}} contains an extensive list of testing frameworks including Mocha, Jasmine, Jest, Enzyme, Tape, Ava, Karma and QUnit. These frameworks support testing at various levels: unit, integration and functional. The survey also indicated a relatively low satisfaction rate of the current state of JS testing tools, scoring only 3.2 out of 5. As result, new testing frameworks such as Cypress and Storybook are constantly appearing to improve the situation. But despite this effort, test data generation continues to be poorly addressed by any of the widely used testing frameworks. The research community has actively been working towards making progress in this direction introducing such tools as Artemis~\cite{artemis2011}, JSConTest~\cite{heidegger2010contract}, Crawljax~\cite{mesbah2012crawling}, JSeft~\cite{mirshokraie2015jseft} and Jalangi~\cite{sen2013jalangi}. A recent study of client-side JS bugs~\cite{ocariza2017study} has shown that the majority (68\%) of web application faults are DOM-related and introduced in the JS code, and not in other components such as HTML or CSS. This fact indicates that yet a better testing approach is needed when it comes to unit testing of JS.
+
+%% --------------------------------------------------------------------
+\section{Motivating Example}
+\label{sec.example}
+%% --------------------------------------------------------------------
+
+\begin{figure}[t]
+  \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
+/*t dom */
+function isGameFinished() {
+  var obj = document.getElementById('sudoku'); |c \label{isGameFinished.getSudoku} |c
+  var subDivs = obj.getElementsByTagName('DIV'); |c \label{isGameFinished.getDivs} |c
+  var allOk = true;
+  for (var no = 0; no < subDivs.length; no++) { |c \label{isGameFinished.inFor.begin} |c
+    if (subDivs[no].className.indexOf('sudokuSquare') >= 0 |c \label{isGameFinished.if1.begin} |c 
+        && !subDivs[no].style.backgroundColor) { 
+      var spans = subDivs[no].getElementsByTagName('SPAN');
+      if (spans[0].innerHTML != spans[1].innerHTML) { |c \label{isGameFinished.if2.begin} |c
+        allOk = false; |c \label{isGameFinished.unfinished} |c
+        break; 
+      }
+    }
+  } |c \label{isGameFinished.outFor} |c
+}
+\end{lstlisting}
+  \caption{JS function \texttt{isGameFinished.js} from sudoku}
+  \label{code.isGameFinished}
+\end{figure}
+
+\begin{figure}[t]
+  \begin{lstlisting}[style=htmlcssjs, language=HTML5]
+<!-- T1: (5,5) -->            <!-- T2: (5,6), (7,15) -->
+<html>                        <html>
+ <body>                        <body>
+  <div id='sudoku'>             <div id='sudoku'>
+                                 <div></div>                           
+  </div>                        </div> 
+ </body>                       </body>    
+</html>                       </html>  
+
+<!-- T3: (7,8), (10,14) -->   <!-- T4: (7,8), (10,11) -->
+<html>                        <html>
+ <body>                        <body>
+  <div id='sudoku'>             <div id='sudoku'>
+   <div class='sudokuSquare'>    <div class='sudokuSquare'>
+    <span></span>                 <span></span> 
+    <span></span>                 <span>TEST</span>
+   </div>                        </div> 
+  </div>                        </div>
+ </body>                       </body>
+</html>                       </html>
+  \end{lstlisting}
+  \caption{Input DOM arguments for \texttt{isGameFinished.js}}
+  \label{fig.isGameFinished.tests}
+\end{figure}
+
+Let us consider the JS function \texttt{isGameFinished} in Figure~\ref{code.isGameFinished} taken from the web game \emph{sudoku}\footnote{\url{http://www.dhtmlgoodies.com/scripts/game_sudoku/game_sudoku.html}}. This function checks the validity of a sudoku solution given by a user. First, we find the DOM element representing the game field (line~\ref{isGameFinished.getSudoku}). Then, we collect all its child DIVs (line~\ref{isGameFinished.getDivs}). Each DIV element corresponds to a sudoku input square (line~\ref{isGameFinished.if1.begin}) and consists of two SPANs. The first span contains a user input, whereas the second one, which is hidden by default, stores the expected value for that sudoku square. Inside of a for-loop in lines~\ref{isGameFinished.inFor.begin}-\ref{isGameFinished.outFor}, we iterate over the whole collection of input squares. Once, we find a square with two unequal SPAN values (line~\ref{isGameFinished.if2.begin}), the loop is terminated and the game is considered unfinished (line~\ref{isGameFinished.unfinished}) and finished otherwise.
+
+Suppose now that we would like to unit test this function in isolation to the rest of the application. We aim to maximize the branch coverage as a common testing criteria~\cite{zhu1997software}. That is, for each individual branch of the function under test (FUT) \texttt{isGameFinished}, we need to construct a test input that covers the branch and leads to the normal termination of the FUT. The JS function takes \emph{explicit} input arguments (in our case none), but it can also accept \emph{implicit} arguments such as the DOM state. Henceforth, we assume that DOM is the only global variable that is allowed to be referred to in the body of the FUT. In general, in order to produce a complete test for our function we have to construct both an appropriate DOM and input arguments.   
+
+%Our program has the following branches: $(6,15)$, $(6,7)$, $(7,9)$, $(7,14)$, $(10,11)$, $(10,13)$, $(16,17)$, $(16,18)$. Four tests in 
+
+Figure~\ref{fig.isGameFinished.tests} presents four tests that together provide the full coverage of the FUT. Let us look now at how following the structure of the FUT in Figure~\ref{code.isGameFinished}, we can construct the $T4$ test covering the $(10,11)$ branch. Line~\ref{isGameFinished.getSudoku} expects the input DOM to have an element with the id \textquotesingle\texttt{sudoku}\textquotesingle. In order to enter the for-loop in line~\ref{isGameFinished.inFor.begin}, that element should have at least one child \emph{DIV} tag. The first if-condition in line~\ref{isGameFinished.if1.begin} requires this $div$ to be of the class \textquotesingle\texttt{sudokuSquare}\textquotesingle\ and also have no background color. The second if-condition (line~\ref{isGameFinished.if2.begin}) expects that the $div$ consists of two \emph{SPAN} elements whose \emph{innerHtml} values are not equal. The resulting test $T4$ is shown in Figure~\ref{fig.isGameFinished.tests} and meets all the above conditions. 
+
+As we have just seen, even for such a relatively simple example, the construction procedure of a test input is far from trivial because it requires the deep understanding of the program semantics. In practice, web developers often have to deal with a large number of the JS frameworks and libraries freely available on the GitHub whose code is commonly untested and poorly documented. At the same time, unit testing is the most fundamental level of testing and the easiest to implement. It saves the developers from unexpected regressions and often documents the desired behavior of a program.
+
+%% --------------------------------------------------------------------
+\section{Test Generation Framework}
+\label{sec.framework}
+%% --------------------------------------------------------------------
+
+\begin{figure}[t!]
+  \centering 
+  \begin{sequencediagram}[font=\scriptsize]
+
+    \renewcommand\unitfactor{0.35}
+    \newinst{user}{\textbf{User}}
+    \newinst{server}{\textbf{Server}}
+    \newinst[1]{validator}{\textbf{Validator}}
+    \newinst{client}{\textbf{Client}}
+    
+    \begin{call}{user}{fun.js + config}{server}{\textbf{end}}
+      \begin{call}{server}{Initialize(fun.js)}{server}{(cfg, branches, cinfo, ifun, sig)}
+      \end{call}
+      
+      \begin{call}{server}{POST /init \{ifun, sig\}}{client}{status}
+      \end{call}
+      
+      \begin{call}{server}{Select(branches)}{user}{$\text{branches}'$}       
+      \end{call}
+      
+      \begin{sdblock}{\textbf{Genetic Loop}}{\scriptsize \hspace{8mm}$\text{branch} \in \text{branches}'$}
+        \begin{sdblock}{\textbf{Random Loop}}{\scriptsize errors > 0}
+          \begin{call}{server}{pop = Random(cinfo, config)}{validator}{errors}
+          \end{call}
+          \prelevel
+        \end{sdblock}
+        
+        \begin{sdblock}{\textbf{Fitness Loop}}{\scriptsize (fitness $\neq$ 0) $\vee$ gen.limit}
+
+          \begin{sdblock}{\textbf{Evaluation Loop}}{\scriptsize p $\in$ pop}
+            \begin{call}{server}{POST /genetic \{p\}}{client}{response = ifun(p: sig)}
+            \end{call}
+            
+            \begin{callself}{server}{Evaluate(branch, cfg, response)}{fitness}
+            \end{callself}
+            \prelevel
+          \end{sdblock}
+          
+          \begin{sdblock}{\textbf{Crossover Loop}}{\scriptsize errors > 0}
+            \begin{call}{server}{cross = Crossover(cinfo, pop)}{validator}{errors}
+            \end{call}
+            \prelevel
+          \end{sdblock}
+
+          \begin{sdblock}{\textbf{Mutation Loop}}{\scriptsize errors > 0}
+            \begin{call}{server}{mut = Mutation(cinfo, pop)}{validator}{errors}
+            \end{call}
+            \prelevel
+          \end{sdblock}
+         
+          \begin{callself}{server}{pop = cross $\cup$ mut}{pop}
+          \end{callself}
+          \prelevel
+        \end{sdblock}
+        \mess{server}{best fitness}{user}
+        
+      \end{sdblock}
+    \end{call}
+  \end{sequencediagram}
+  \caption{The architecture of the test framework}
+  \label{fig.framework.architect} 
+\end{figure}
+
+Given a JS function $f$ and a set of branches $\mathbb{B}_f$, the ultimate goal of the testing framework is to find input arguments for $f$ that cover all branches from $\mathbb{B}_f$. Our JS testing framework, called \emph{JEDI}, is a client-server application which under the hood uses a genetic engine for test generation. The general workflow of the framework is depicted as a sequence diagram in Figure~\ref{fig.framework.architect}. The diagram consists of the four interacting components \User, \Server, \Validator, and \Client. The \Server is the key component of the  framework. It is responsible for the \emph{Initialization Phase} and the \emph{Genetic Phase}. Both phases will be covered in detail in Section~\ref{sub.sec.init.phase} and \ref{sub.sec.genetic.phase} respectively.
+
+Each newly constructed HTML document has to be processed by the \Validator\footnote{\url{https://validator.w3.org/nu/}} which checks its syntactic correctness and reports back the set of identified errors. \Server rejects the document if any errors were revealed and generates a new one until the generated document has no more errors. \Client is a \emph{Node.js}\footnote{\url{https://nodejs.org/en/}} application that is mainly responsible for the execution of the JS code. We use the \emph{jsdom}\footnote{\url{https://github.com/tmpvar/jsdom}} library to model the virtual DOM and simulate the native browser API calls.   
+
+\begin{algorithm}[t!]
+  \caption{Initialization Phase}
+  \label{alg.init}
+  \algsetup{linenosize=\tiny}
+  \scriptsize
+  \DontPrintSemicolon
+  \SetAlgoVlined
+  \SetKwInOut{Input}{Input}
+  \SetKwInOut{Output}{Output}
+  \SetKwInOut{Require}{Require}
+  \SetKwProg{Fn}{Function}{}{}
+  \Input{JS file $fun.js$ with FUT and type annotation }
+  \Output{Tuple $(cfg, branches, cinfo, ifun, sig)$}
+  \Fn{$Initialize(fun.js)$}{
+ 
+    $(ast, sig) \longleftarrow ParseFuncAndSig(fun.js)$\label{alg.init.parse.fun.sig}\;
+    $cinfo \longleftarrow GetConstantInfo(ast)$\label{alg.init.collect.info}\;
+    $nast \longleftarrow NormalizeAST(ast)$\label{alg.init.transform.ast}\;
+    $ifun \longleftarrow Instrument(nast)$\label{alg.init.instr}\;
+    $cfg \longleftarrow BuildCFG(nast)$\label{alg.init.build.cfg}\;
+    $branches \longleftarrow GetBranches(cfg)$\label{alg.init.get.branches}\;
+    \Return{$(cfg, branches, cinfo, ifun, sig)$}
+    }
+\end{algorithm}
+
+Let us take a closer look at the sequence of interactions in Figure~\ref{fig.framework.architect}. As an input for our testing framework, \User has to provide the JS file \emph{fun.js} that contains the function under test (FUT) \emph{fun} annotated with a type signature. Additionally, \User specifies a configuration file \emph{config} that defines various parameters for random and genetic phases, logging etc. Experimentally, we have found an optimal set of input configurations that was used across all experimental objects in Section~\ref{sec.evaluation}. This data is processed by the \Server during the \emph{Initialization Phase}. As an output, we get back the following information about \emph{fun}: the control flow graph (\emph{cfg}), the complete list of its branches (\emph{branches}), the constant info (\emph{cinfo}), the instrumented version \emph{fun} (\emph{ifun}), and the signature (\emph{sig}). The \Server sends a \texttt{POST} request with \emph{ifun} and \emph{sig} to the \Client. Depending on the configured execution mode, the \Server either asks the \User to select a \emph{target} branch or covers all branches one by one in a fixed order. For each branch, our framework enters the \emph{Genetic Loop (Phase)}. Inside of this phase, the framework starts with a randomly generated population (\emph{Random Loop}), and continues to evolve that population (\emph{Fitness Loop}) until either a perfect entity is found or a certain termination criteria is achieved, e.g. the limit on the number of generation attempts. Each candidate in the population has to be evaluated in \emph{Evaluation Loop} by \Client. It matches the candidate $p$ with the type signature \emph{sig} and invokes the instrumented JS function on it: \emph{ifun(p)}. The execution trace along with some supplementary information about the execution are sent back to the \Server, where the \emph{fitness value} is computed. The new population is constructed by combining the results of the \emph{Crossover} and \emph{Mutation Loops}. If a new HTML document is produced somewhere in the genetic phase, it has to be first approved by the \Validator. At the end of the \emph{Fitness Loop}, the candidate with the ``best'' fitness value is reported back to the \User. Once all the branches are covered, the algorithm reaches the end. Below, we elaborate on the details of each individual phase of our test generation framework.
+
+\subsection{Initialization Phase}
+\label{sub.sec.init.phase}
+
+During the \emph{Initialization Phase} we analyze the FUT in order to retrieve the data required for the subsequent genetic testing. The main steps of this phase are described in Algorithm~\ref{alg.init}. Given a FUT \emph{fun.js} as an input, we parse the function and its type signature in line~\ref{alg.init.parse.fun.sig}. In order to maximize the chances of generating the fittest candidate in the genetic phase, in line~\ref{alg.init.collect.info} we perform static analysis of the FUT with the purpose to collect information about constants. Such constants include the numeric and string literals, as well as the arguments to the following DOM API methods: \texttt{getElementsByTagName}, \texttt{getElementById}, \texttt{getElementsByClassName}, and \texttt{getElementsByName}
+These methods provide the information about \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} referred from the FUT. The next step is to normalize the FUT before applying any instrumentation (line~\ref{alg.init.transform.ast}), e.g. transform \emph{if-then} branches into \emph{if-then-else}. We instrument the FUT (line~\ref{alg.init.instr}) in order to collect the run-time data such as the execution trace, \emph{the approach level}, \emph{the branch and loop distances} (explained later), and the constants. Upon the \emph{ifun} execution this information is gathered and fed back to the fitness evaluation procedure. Finally, we construct the control-flow graph (line~\ref{alg.init.build.cfg}) and identify all branches of the FUT (line~\ref{alg.init.get.branches}).
+
+\subsubsection{Supported Types}
+\label{sub.sec.sup.types}
+
+\begin{figure}[t!]
+\setlength{\grammarparsep}{3pt}
+\footnotesize
+\begin{grammar}
+
+<JS Type Annotation> ::= /*t <Signature> */
+
+<Signature> ::= <DOM> : <Type Signature> | <Type Signature>
+
+<DOM> ::= \texttt{dom}
+
+<Type Signature> ::= <Type> | <Type> : <Type Signature>
+
+<Type> ::= <Void Type> | <Primitive Type> | <Array Type>
+
+<Primitive Type> ::= \texttt{bool} | \texttt{int} | \texttt{float} | \texttt{string}
+
+<Array Type> ::= [ <Primitive Type> ] | [ <Array Type> ]
+\end{grammar}
+\caption{Grammar of supported JS type annotations}
+\label{fig.js.type.annot}
+\end{figure}
+One assumption made in the paper is the availability of type signatures for JS functions. We believe in the legitimacy of such a request due to the following observations. First, typed variants of JS such as \emph{TypeScript}\footnote{\url{https://www.typescriptlang.org/}} are rising in popularity. Second, there has been an active work on the JS type inference done both in academia~\cite{kristensen2017type} and industry, e.g. Facebook's tool \emph{Flow}\footnote{\url{https://flow.org/}}. 
+
+The grammar of the JS type annotations supported by our test generation framework is shown in Figure~\ref{fig.js.type.annot}. Each type annotation is a signature embedded into a specialized JS type comment (\texttt{/*t...*/}). We distinguish between two kinds of signatures: those which refer to the global DOM and ``ordinary'' JS type signatures. The functions with the former kind expect some \texttt{dom} argument to be passed as the first implicit parameter of the function call. Whereas ordinary JS signature is a non-empty sequence of the JS types. The type can be \emph{Void}, \emph{Primitive} (\texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string}) or \emph{Array} (recursive homogeneous array type).  
+
+\subsubsection{Instrumentation}
+\label{sub.sec.instrument}
+
+Figure~\ref{code.isGameFinished.instr} presents the \texttt{isGameFinished} function after instrumentation. The global variable \emph{trace} in line~\ref{isGameFinished.instr.trace} is an array of labels corresponding to the sequence of executed program statements. All statements have to be traced because each one, in theory, can raise an exception. The \texttt{loopMap} map in line~\ref{isGameFinished.instr.loopMap} approximates the potential number of iterations of the respective for-loop. If no exact bound can be computed, we set it to one. The \texttt{branchDistance} map records the conditional distance~\cite{tracey1998automated} on the branch where the deviation from the target branch has happened.  
+
+%TODO: maybe expand this section with the JS type casting for branch distance computation 
+
+\begin{figure}[t]
+  \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
+function isGameFinished() {
+ trace.push(2); |c \label{isGameFinished.instr.trace} |c
+ var obj = document.getElementById("sudoku");
+ trace.push(3);
+ var subDivs = obj.getElementsByTagName("DIV");
+ trace.push(4);
+ var allOk = true;
+ loopMap[5] = function () { |c \label{isGameFinished.instr.loopMap} |c
+   var no = 0;
+   if (subDivs.length || subDivs.length == 0) {
+     return Math.abs(no - subDivs.length);
+   }
+   return 1;
+ }();
+ trace.push(5);
+ for (var no = 0; no < subDivs.length; no++) {
+  trace.push(6);
+  trace.push(7);
+  if (subDivs[no].className.indexOf("sudokuSquare") >= 0 &&
+      !subDivs[no].style.backgroundColor) {
+   trace.push(8);
+   branchDistance.push({ 
+    label: 7, 
+    distance: Math.min(
+     abs(subDivs[no].className.indexOf("sudokuSquare"), 0) + _K_, 
+     absZero(subDivs[no].style.backgroundColor))
+   });
+   trace.push(9);
+   var spans = subDivs[no].getElementsByTagName("SPAN");
+   trace.push(10);
+   if (spans[0].innerHTML != spans[1].innerHTML) {
+    trace.push(11);
+    branchDistance.push({
+     label: 10,
+     distance: abs(spans[0].innerHTML, spans[1].innerHTML)
+    });
+    trace.push(12);
+    allOk = false;
+    break;
+   } else {
+     trace.push(14);
+     branchDistance.push({label: 10,distance: _K_});
+   }
+  } else {
+   trace.push(15);
+   branchDistance.push({
+    label: 7,
+    distance: 
+     abs(subDivs[no].className.indexOf("sudokuSquare"), 0) + 
+     absNegZero(subDivs[no].style.backgroundColor)
+   });
+  }
+ }
+ trace.push(5);
+ trace.push(-1);
+}
+\end{lstlisting}
+  \caption{Instrumented version of \texttt{isGameFinished.js} }
+  \label{code.isGameFinished.instr}
+\end{figure}
+
+\subsection{Genetic Phase}
+\label{sub.sec.genetic.phase}
+
+\begin{algorithm}[!t]
+  \caption{Genetic Phase}
+  \label{alg.gen}
+  \algsetup{linenosize=\tiny}
+  \scriptsize
+  \DontPrintSemicolon
+  \SetAlgoVlined
+  \SetKwInOut{Input}{Input}
+  \SetKwInOut{Output}{Output}
+  \SetKwInOut{Require}{Require}
+  \SetKwProg{Fn}{Function}{}{}
+  \Input{
+    $config$ is a GA configuration file\\
+    $b_n$ is a target branch of FUT\\
+    $(cfg, branches, cinfo, ifun, sig)$ output of Algorithm~\ref{alg.init}
+  }
+  \Output{
+     $(f^*, p^*)$ the best population candidate and its fitness score
+  }
+  \Fn{$Genetic(b_n, cfg, cinfo, config, ifun, sig)$}{
+    $(size_P, size_A, size_G, rate_C, rate_M,size_{H}) \longleftarrow Read(config)$\label{alg.gen.read.config}\;
+    $target \longleftarrow b_n$\label{alg.gen.init.target}\; 
+    $i \longleftarrow 0 $\label{alg.gen.iter.count}\;
+    $historyConverged \longleftarrow true$\;
+    \Repeat{$\neg historyConverged \vee (i > size_G)$}{\label{alg.gen.converged.loop.begin}
+      $archive \longleftarrow \emptyset$\label{alg.gen.init.archive}\; 
+      $history \longleftarrow \emptyset$\label{alg.gen.init.history}\; 
+      $pop \longleftarrow Random(cinfo, size_P)$\label{alg.gen.random.gen}\;
+      \Repeat{$isPerfect(f^*) \vee historyConverged \vee (i > size_G)$}{\label{alg.gen.loop.begin}
+        $scoredPop \longleftarrow \emptyset$\;
+        $history \longleftarrow history \cup archive$\;
+        \ForAll{$p \in pop$}{\label{alg.gen.eval.begin}
+          $args \longleftarrow CoerceArguments(p, sig)$\label{alg.gen.make.args}\;
+          $(tr, d_B, d_L, dyncinfo) \longleftarrow ifun(args)$\label{alg.gen.call.ifun}\;
+          $f \longleftarrow Score(target, cfg, tr, d_B, d_L)$\label{alg.gen.eval}\;
+          $cinfo \longleftarrow cinfo \cup dyncinfo$\label{alg.gen.eval.end}\;
+          $scoredPop \longleftarrow (f, p) \cup scoredPop$\;
+        }
+        $combo \longleftarrow scoredPop \cup archive$\label{alg.gen.get.combo}\;
+        $cross \longleftarrow Crossover(combo, rate_C)$\label{alg.gen.cross}\;
+        $mut \longleftarrow Mutation(combo, cinfo, rate_M)$\label{alg.gen.mut}\;
+        $pop \longleftarrow cross \cup mut$\label{alg.gen.new.pop}\;
+        $archive \longleftarrow SortArchive(combo, size_A)$\label{alg.gen.new.archive}\;
+        $(f^*, p^*) \longleftarrow head(archive)$\label{alg.gen.archive.head}\;
+        $i \longleftarrow i + 1$\;
+        $historyConverged \longleftarrow hasConverged(history, size_H)$\label{alg.gen.has.converged}\;
+      }\label{alg.gen.loop.end}
+      $target \longleftarrow NewTarget(branches, b_n)$\label{alg.gen.new.target}\;
+    }\label{alg.gen.converged.loop.end}
+    \Return{$(f^*, p^*)$}\label{alg.gen.return} 
+  }
+\end{algorithm} 
+
+The heart of our test data generation framework is in the \emph{Genetic Phase}. Although, the main workflow of the underlying genetic algorithm (GA) is fairly standard~\cite{poli2008field}, it has been extended with the concept of  \emph{archive convergence} (Algorithm~\ref{alg.gen}). As an input, we take a configuration file \emph{config}, a target branch $b_n$ of the FUT (which we would like to cover), and a tuple of supplementary parameters computed by Algorithm~\ref{alg.init}. The output consists of the ``best'' fitness score $f^*$ achieved by the population candidate $p^*$.
+
+First, we read the \emph{config} file (line~\ref{alg.gen.read.config}) and retrieve the following GA configuration parameters: a population size  ($size_P$), an archive size ($size_A$), the number of generations ($size_G$), crossover ($rate_C$) and mutation ($rate_M$) rates respectively, and a history window size ($size_H$). We start with the initial target $b_n$ (line~\ref{alg.gen.init.target}) and the iteration counter $i$ equal to 0 (line~\ref{alg.gen.iter.count}). We run the genetic search for the target branch (lines~\ref{alg.gen.converged.loop.begin}-\ref{alg.gen.converged.loop.end}) until either the history has not converged, or the generations limit has not been reached. The \emph{archive} variable stores the most fit population candidates observed so far, and the \emph{history} variable records all archives during the generation process. These variables both are empty at the beginning of the evolution (line~\ref{alg.gen.init.archive} and~\ref{alg.gen.init.history} respectively). 
+
+The initial population has $size_P$ elements, and it is randomly generated out of the constants from \emph{cinfo} (line~\ref{alg.gen.random.gen}). In the loop~\ref{alg.gen.loop.begin}-\ref{alg.gen.loop.end}, this population is evolved until either a perfect candidate has been found, or the history has converged, or the generation limit $size_G$ has been reached. But first, we need to score the current population (lines~\ref{alg.gen.eval.begin}-\ref{alg.gen.eval.end}). Each candidate $p$ of the population $pop$ represents a concrete substitution for the arguments of the FUT. Thus, it should to be coerced respectively to the type signature $sig$ (line~\ref{alg.gen.make.args}). Afterwards, the instrumented function \emph{ifun} can be called with the coerced arguments $args$ (line~\ref{alg.gen.call.ifun}). This gives us a 4-tuple consisting of an execution trace ($tr$), branch ($d_B$), loop distances ($d_L$), and the set of dynamic constants (\emph{dyncinfo}) collected at the run-time. The next step is actually computing the fitness value for $p$ (line~\ref{alg.gen.eval}). Collected dynamic constants \emph{dyncinfo} are merged with the existing constant pool (line~\ref{alg.gen.eval.end}). Eventually, the scored population is combined with the archive (line~\ref{alg.gen.get.combo}) in $combo$. And it is used for crossover (line~\ref{alg.gen.cross}) and mutation (line~\ref{alg.gen.mut}) steps in order to form the new population (line~\ref{alg.gen.new.pop}). Then, the scored population together with the current archive are sorted by fitness value, and the best $size_A$ elements form the new archive (line~\ref{alg.gen.new.archive}). The element at the top of the archive is the fittest candidate (line~\ref{alg.gen.archive.head}) of the current population. If $f^*$ is a \emph{perfect} candidate, the solution is found (line~\ref{alg.gen.loop.end}). Eventually, the tuple $(f^*, p^*)$ is returned by the algorithm (line~\ref{alg.gen.return}) as solution.
+
+In some cases, when we do not get enough guidance from a fitness function, the genetic algorithm converges to a local minimum~\cite{mcminn2004search}. For example, if one branch is dominated by another, the coverage of the former depends on the coverage of the latter. Unless this relation is encoded in the fitness function somehow, we can not learn about it accidentally. In such a situation, we find ourselves being trapped on a flat space, with a small chance to escape. In order to overcome this problem, we propose a novel --- to the best of our knowledge --- solution based on the idea of \emph{archive convergence}. If during a certain history window, the fitness values of the respective archives have converged to a fixed point, we deem the whole history converged and restart the genetic search with a new search target. At the end of the evolution loop (line~\ref{alg.gen.has.converged}), we verify the convergence of the history within the window of $size_H$. If that condition is true (line~\ref{alg.gen.loop.end}), the genetic algorithm is restarted with a new search target. It consists of the original branch $b_n$ prefixed with a new branch $b$ from which $b_n$ depends on (line~\ref{alg.gen.new.target}). Every time the history converges, we produce a new search target by eventually exhausting all possible executions leading to $b_n$. In practice, we only consider extensions upto length two.
+
+The genetic operations used for the primitive JS types and arrays are summarized in Table~\ref{tbl.gen.oper.js.types}. In the rest of this section, we provide implementation details of random generation in Section~\ref{sub.sub.sec.random.html}, crossover and mutation in Section~\ref{sub.sub.sec.genetic.oper}, and the fitness function in Section~\ref{sub.sub.sec.fitness.fun}. Our main focus here is on the generation and transformation of HTML documents. 
+
+\begin{table}
+  \caption{Genetic Operation for the JS Types}
+  \label{tbl.gen.oper.js.types}
+    \footnotesize
+  \begin{tabular}{p{1cm}|p{5mm}|p{6cm}}
+    \toprule
+    \textbf{Operation} & \textbf{Type} & \textbf{Description} \\
+    \hline
+    Random    & Bool   & choose at random \{\texttt{true}, \texttt{false}\} \\
+    Random    & Int    & choose at random [-10, 10] or constants with the ratio 4:1\\
+    Random    & Float  & choose at random [-10.0, 10.0] or constants with the ratio 4:1\\
+    Random    & String & >5 chars from $\texttt{[a-zA-Z0-9]}$ or constants with the ratio 4:1\\
+    Random    & Array  & array of a respective type upto length five\\
+    \hline
+    Crossover & Bool   & pick at random one out of two given booleans \\
+    Crossover & Int    & pick at random one out of two given integers\\
+    Crossover & Float  & pick at random one out of two given floats\\
+    Crossover & String & pick at random one out of two single point crossovers\\
+    Crossover & Array  & similar crossover operator as for strings\\
+    \hline
+    Mutation  & Bool   & flip the boolean constant\\
+    Mutation  & Int    & random integer, $\pm 1$ or $\pm 10$\\
+    Mutation  & Float  & random float, $\pm 0.1$, $\pm 1$ or $\pm 10$\\
+    Mutation  & String & random string, remove char or apply pred(suc) char\\
+    Mutation  & Array  & Mutate a random element in array according to its type\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Random HTML Generation}
+\label{sub.sub.sec.random.html}
+
+\begin{figure}[t]
+  \begin{haskell}
+instance Arbitrary Html where
+  arbitrary = evalStateT generateHTML defaultState
+
+generateHTML :: GenHtmlState |c \label{ref.generateHTML.begin} |c
+generateHTML = do
+  state <- get |c \label{ref.generateHTML.getState} |c   
+  let d = getDepth state |c \label{ref.generateHTML.getDepth} |c
+  if d == 0
+  then lift \dollar return \dollar toHtml "HTML" |c \label{ref.generateHTML.returnString} |c
+  else do put state{depth = d - 1} |c \label{ref.generateHTML.updateState} |c
+           head <- generateHEAD |c \label{ref.generateHTML.newHead} |c
+           body <- generateBODY |c \label{ref.generateHTML.newBody} |c
+           lift\dollar return \dollar docTypeHtml \dollar head >> body |c \label{ref.generateHTML.end} |c
+
+data Tag = HTML | HEAD | BODY | ...
+type Context = CFlow | CMetadata | ...
+data HtmlState = |c \label{ref.HtmlState.begin} |c
+  HtmlState { depth    :: Int,           degree  :: Int    
+             , ctx     :: Stack Context, tagFreq :: [(Int, Tag)] 
+             , tags    :: [Tag],         ids     :: [String]
+             , classes :: [String] } |c \label{ref.HtmlState.end} |c
+type GenState s = StateT s Gen |c \label{ref.GenState} |c
+type GenHtmlState = GenState HtmlState Html |c \label{ref.GenHtmlState} |c
+  \end{haskell}
+  \caption{The \texttt{Arbitrary} instance for the \texttt{Html} data type}
+  \label{fig.html.arb.def}
+\end{figure}
+
+We want to generate HTML according to the WHATWG\footnote{\url{https://html.spec.whatwg.org}} specification. HTML is an XML-family markup language that uses special tags and attributes to describe document structures on the Web. The recent HTML5 standard defines more than a hundred of tags and attributes which both have to comply with extremely complex logic to constitute  syntactically valid HTML. Browsers are usually tolerant to syntactic errors in HTML. They will silently fix them and display the page anyway.
+
+In order to support the variability of HTML content, we have developed an eDSL that prescribes the generation of syntactically valid HTML. This was a challenge on its own because the complexity of HTML and the lack of formal specification. Our language is inspired by QuickCheck~\cite{claessen2011quickcheck} and essentially employs it to define an \texttt{Arbitrary} instance for the \texttt{Html} data type. With some technical details left out for the sake of simplicity, Figure~\ref{fig.html.arb.def} shows that definition. The data type \texttt{HtmlState} (lines~\ref{ref.HtmlState.begin}--\ref{ref.HtmlState.end}) represents the internal state of \texttt{Html}. The state is composed of the following components:
+\begin{itemize}
+\item \texttt{depth} and \texttt{degree} specify respectively the maximum depth and node degree of the generated HTML 
+\item \texttt{ctx} is the current value of the HTML content model stack 
+\item \texttt{tagFreq} provides statistical information about the frequency of tags in HTML
+\item \texttt{tags}, \texttt{ids} and \texttt{classes} are the initial set of respective HTML elements used for random generation.
+\end{itemize}
+Combined with the random generation monad \texttt{Gen}, this state is wrapped into a state monad transformer~\cite{jones1995functional} (line~\ref{ref.GenState}) which returns the randomly generated \texttt{Html} (line~\ref{ref.GenHtmlState}). Each HTML tag is the value of the \texttt{GenHtmlState} type. Lines~\ref{ref.generateHTML.begin}--\ref{ref.generateHTML.end} give an example of the content generation for the \texttt{<html>} tag. According to its specification\footnote{\url{https://html.spec.whatwg.org/multipage/semantics.html\#the-html-element}}, the tag is composed of the \texttt{<head>} tag followed by the \texttt{<body>} tag. First, we store the state of HTML generation and retrieve the current the depth (lines~\ref{ref.generateHTML.getState} and \ref{ref.generateHTML.getDepth} respectively). Then, if the depth is zero, we immediately return a string literal (line~\ref{ref.generateHTML.returnString}). Otherwise, we decrease the current depth by one (line~\ref{ref.generateHTML.updateState}), generate the contents for \texttt{head} (line~\ref{ref.generateHTML.newHead}) and \texttt{body} (line~\ref{ref.generateHTML.newBody}), and return, finally, their combination (line~\ref{ref.generateHTML.end}).
+
+\subsubsection{Genetic HTML Operations}
+\label{sub.sub.sec.genetic.oper}
+
+In essence, an HTML document is a labeled tree with \emph{tags} instead of nodes and \emph{attributes} as labels. Therefore, the crossover and mutations are defined similar to those operators for \emph{expression trees} in genetic programming.  
+
+\textbf{HTML Crossover} takes two HTML tree candidates, randomly picks a node in the first one, and replaces the respective sub-tree by a randomly selected sub-tree from the second candidate.
+
+\textbf{HTML Mutations} belong to one of the three categories: \emph{NewTree}, \emph{DropTree}, and \emph{ShuffleAttributes}. The \emph{NewTree} mutation simply generates a new tree based on a given state of the constant pool. The \emph{DropTree} mutation removes the whole sub-tree at a randomly chosen node. \emph{ShuffleAttributes} re-assigns all attributes of a given type on a tree. Currently, we instantiated the \emph{ShuffleAttributes} mutation only for the types \emph{class} and \emph{id}. In total, this gives us four mutations to choose from in order to evolve an HTML document.
+
+\subsubsection{Fitness Function}
+\label{sub.sub.sec.fitness.fun}
+
+The success of any search-based algorithm heavily relies on the right choice of the fitness function (FF) that guides the evolution process. Our search target is a specific branch of the function under test that we want to cover by generating valid input data. The input is \emph{valid} only if it leads the program to a \emph{normal termination}, i.e. without premature exception. Our initial search target is an ordered pair of the CFG nodes $(n_b, n_x)$ where $n_b$ is the label of the target branch, and $n_x$ is the normal exit node. The FF for a CFG node is traditionally defined as a combination of the \emph{approach level} and normalized \emph{branch distance}\cite{arcuri2010does}. 
+\[
+\textit{fit}(n) = \text{approach level} +
+\begin{cases}
+ 1/2 * (\frac{\text{branch distance}}{1 + \text{branch distance}}) & \text{if no exception}\\
+ 1                                  &  \text{otherwise}
+\end{cases}
+\]
+The final FF ($\textit{fit}^*$) is an ordered pair of the FFs of the respective nodes.   
+\[
+\textit{fit}^*(n_b, n_x) = (\textit{fit}(n_b), \textit{fit}(n_x))
+\]
+Similarly, this definition can be extended to an arbitrary sequence of CFG nodes $(n_1, n_2, \ldots, n_k)$:
+ \[
+\textit{fit}^*(n_1, n_2, \ldots, n_k) = (\textit{fit}(n_1), \textit{fit}(n_2), \ldots, \textit{fit}(n_k))
+\]
+
+The approach level is an integer value that indicates how many conditions should be met in order to reach the \emph{problem node}, i.e. the node causing the deviation. Since any node can potentially be exceptional, they all contribute to the approach level, in addition to the conditional branches. Loops have to be treated in a special way because we need to estimate the maximum number of iterations. In the case of a for-loop, at run-time we can always provide an exact bound. For while-loops, we assume that it has to be passed at least once. The branch condition is a rational value from 0 to 1, which measures the deviation explicitly in the problem node and it is computed according to the formulae~\cite{tracey1998automated}.
+ 
+\subsubsection{Limitations}
+\label{sub.sub.sec.limit}
+
+Currently, our framework imposes certain explicit constraints on the kind of JS functions it is able to process: 
+\begin{enumerate}
+\item ability to assign static types to input parameters 
+\item no support for the \emph{Object} type, heterogeneous arrays and high-order functions
+\item no support for recursion
+\item doesn't perform inter-procedural analysis
+\item no support for JS frameworks
+\item no reference to global variables and functions
+\item limited support of DOM API     
+\end{enumerate}
+
+%% --------------------------------------------------------------------
+\section{Empirical Evaluation}
+\label{sec.evaluation}
+%% --------------------------------------------------------------------
+
+In order to evaluate the feasibility of our test framework, we conducted an empirical evaluation on a set of case-studies (see Section~\ref{sub.sec.case.studies}). All experiments were submitted as a batch mode job on a cluster machine with 32 HT Cores and 256 GB RAM running under Scientific Linux 7.3. We have created three different instances of the JS testing framework --- each is based on a slight variation of the underlying genetic search algorithm. The first version, which plays the role of our baseline, is \emph{Random} ($\Random$). Instead of applying crossover and mutation to evolve the population, this algorithm regenerates the new population randomly from scratch. It is important to note  that the random version also benefits from both preliminary static analysis phase and dynamic constant propagation as part of the fitness evaluation. The second version is \emph{Genetic}~($\Genetic$) --- it literally follows all of the steps prescribed by the genetic framework in Figure~\ref{fig.framework.architect}. The last version is \emph{Genetic with Restart} ($\RGenetic$). It is based on the genetic Algorithm~\ref{alg.gen} where the search is restarted after the archives are converged within a certain history window. On the one hand, the smaller window size forces the GA to converge faster and quickly discovers stagnation on a flat space. On the other hand, the small window can lead to premature archive convergence, which prevents the right genetic combination from being triggered. We have experimented with two different windows of size 5 and 10. But since the latter one ($\RGenetic$) showed the best performance over all, we chose to report only that case in the paper. Table~\ref{tbl.gen.config} summarizes the configuration parameters for all three versions of the testing framework. The initial setup for genetic algorithm is similar to other frameworks, e.g. \emph{EvoSuite}~\cite{fraser2011evosuite}. 
+
+\begin{table}
+  \caption{Genetic Algorithm Configurations}
+  \label{tbl.gen.config}
+    \scriptsize
+  \begin{tabular}{l|r|r|r}
+    \toprule
+    \textbf{Parameter Name} &$\Random$&$\Genetic$ &$\RGenetic$ \\
+    \hline
+    Population size                   & 50  & 50  & 50  \\
+    Archive size                      & 1   & 25  & 25  \\
+    Maximum number of generations     & 200 & 200 & 200 \\
+    Crossover rate                    & 0   & 0.5 & 0.5 \\
+    Mutation rate                     & 0   & 0.5 & 0.5 \\
+    History window size               & -   & -   & 10  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+By carrying the evaluation, we would like to answer the following research questions:
+\begin{description}
+\item[\textbf{RQ1 (effectiveness):}] What is the value of branch coverage achieved by our testing framework? Which testing algorithm is the most effective? How does effectiveness change with the budget per branch?
+\item[\textbf{RQ2 (efficiency):}] How much time is needed to cover a branch? What is the cost per iteration?
+\item[\textbf{RQ3 (significance):}] What is the statistical significance and effect size of our experimental results? 
+\item[\textbf{RQ4 (comparison):}] What is the branch coverage of \emph{Confix}?
+\end{description}
+
+
+\subsection{Case Studies}
+\label{sub.sec.case.studies}
+
+Being one of the most popular programming languages of the modern time, there are ample open source JS projects on the Web. JS applications are written with the help of countless numbers of specialized libraries, and greatly vary in size, complexity and coding style. Moreover, some popular JS web-frameworks, such as jQuery and React\footnote{\url{http://todomvc.com/}}, offer an alternative approach to native DOM manipulation. Before selection, the source code of a potential case-study has to be scrutinized which is a time consuming and labor intensive process. Therefore, we decided to primarily focus on the evaluation of the JS subjects well-established in the related research literature such as \emph{Confix}~\cite{amin:ase15} and \emph{TAJS}\footnote{\url{http://www.brics.dk/TAJS/dom-benchmarks/}}~\cite{dom2011}. Both of these works address the problem of testing of JS application with the reference to the browser DOM. We added additional case-study \emph{mathjs}\footnote{\url{https://github.com/josdejong/mathjs/}} to increase the presence of primitive (browserless) JS code. For each case-study application, we identified several JS functions that are suitable for our testing framework. In the end, our evaluation set included both primitive and DOM related JS functions.
+
+For the sake of space, we chose to exclude from the following presentation the branches and functions the coverage time of which was less than two seconds. In all those cases, the three algorithms studied here have shown equally good results by finding a solution within the first iteration --- random generation. This left us with only 7 case studies contributing to the total number of 14 functions  shown in~Table~\ref{tbl.case.studies}. For each function, we reported the following software metrics\footnote{\url{http://jsmeter.info/} is the tool used for measuring JS code statistics}: lines of code~(\textbf{LOC}), number of branches~(\textbf{BR}), depth~(\textbf{D}), and cyclomatic complexity~(\textbf{CC}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulate with \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively. To answer the research questions posed in the beginning of Section~\ref{sec.evaluation}, we evaluated our test generation framework on the case studies in ~Table~\ref{tbl.case.studies}. 
+       
+\setlength\tabcolsep{0.6pt}
+\begin{table}[t]
+  \caption{Summary of the Case-Studies}
+  \label{tbl.case.studies}
+  %\resizebox{\textwidth}{!}{
+    \scriptsize
+  \begin{tabular}{l|l|p{3.1cm}|c|c|c|c|c|c|c|c}
+    \toprule
+    \textbf{case-study} & \textbf{function} & \textbf{type signature} & \textbf{LOC} & \textbf{BR} & \textbf{D} & \textbf{CC} & \textbf{DOM} & \textbf{id} & \textbf{tag} & \textbf{class} \\
+    \hline
+    sudoku     & helpMe & (dom,int,int)    & 14 & 2 & 3 & 3 & + & + & + & - \\
+    sudoku     & isGameFinished & (dom)    & 10 & 3 & 3 & 4 & + & + & + & + \\
+    sudoku     & newGame & (dom)           & 9  & 1 & 2 & 2 & + & + & + & + \\
+    sudoku     & revealAll & (dom)         & 8  & 0 & 2 & 1 & + & + & + & - \\
+    %% sudoku     & - & showCell & (dom)          & 8  & 0 & 0 & 1 & + & + & + & - \\
+    sudoku     & shuffleBoard & (dom)      & 23 & 2 & 3 & 3 & + & - & + & - \\
+    %% sudoku     & - & switchLevel & (dom,bool)  & 10 & 1 & 2 & 2 & + & - & + & - \\
+    \hline
+    phormer    & toggleInfo & (dom,string)                                                     & 16 & 3 & 1 & 4 & + & + & - & - \\
+    %% \multirow{2}{*}{phormer}    & \multirow{2}{*}{-} & \multirow{2}{*}{update} & (dom,int,[string],bool,[string],[string],bool,[string],[string],int) &    &   &   &   &   &   &   & \\
+    %%            &   &        &                                                                      & 35 & 5 & 3 & 6 & + & + & - & - \\
+    %% phormer    & - & updateIndic & (dom,bool)                                                      & 16 & 3 & 1 & 4 & + & + & - & - \\
+    \hline
+    %% hotel RS   & - & RequiredField & (dom,[string])  & 11 & 2 & 2 & 5 & + & + & - & - \\
+    hotel RS   & isValidCard & ([int])           & 17 & 2 & 2 & 5 & - & - & - & - \\
+    %% hotel RS   & - & isValidMasterCard & ([int])     & 5  & 4 & 1 & 7 & - & - & - & - \\
+    hotel RS   & isValidVISA & ([int])           & 6  & 3 & 1 & 6 & - & - & - & - \\
+    %% hotel RS   & - & validateNumber & (dom,string)   & 7  & 1 & 1 & 4 & + & + & - & - \\
+    \hline
+    %% apophis    & - & doRain & (dom,string,int,int,int,int,int,int)                                  & 10 & 3 & 2 & 4 & + & + & - & -\\
+    %% apophis    & - & drawShields & (dom,[int])                                                      & 6  & 1 & 2 & 2 & + & + & - & - \\
+    %% apophis    & - & fireMeteor & (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) & 15 & 3 & 2 & 4 & - & - & - & - \\
+    %% apophis    & - & getReady & (dom,int,int,int,int,int,int)                                       & 16 & 2 & 2 & 3 & + & + & - & - \\
+    apophis    & initShields & (dom,[int],int,int)                                              & 6  & 0 & 1 & 1 & + & + & - & -\\
+    \hline
+    bingbong   & brickJiggler & (dom,int,int,int,[int],[int],[int],[int]) & 7  & 1  & 1 & 2  & + & + & - & - \\
+    bingbong   & doPaddlePower & (dom,int,int)                            & 15 & 2  & 1 & 3  & + & + & - & - \\
+    bingbong   & initBricks & (dom,[int],int,int)                         & 70 & 12 & 4 & 13 & + & + & - & - \\
+    %% bingbong   & - & drawLevel & (dom,int,int,int,int)                        & 22 & 2  & 3 & 3  & + & + & - & - \\
+    %% bingbong   & - & goPing & (dom,int,int,int)                               & 12 & 2  & 2 & 3  & + & + & - & - \\
+    \hline
+    burncanvas & do\_draw & (int,int,int,int,int,int,int)                 & 40 & 12 & 2 & 14 & - & - & - & - \\
+    %% \hline
+    %% cs-in-js   & - & luhn-algorithm & (string,bool)                          & 20 & 3 & 2 & 6 & -  & -  & - & - \\
+    %% cs-in-js   & - & quicksort-partition & ([int],int,int)                   & 21 & 1 & 1 & 3 & -  & -  & - & - \\ 
+    \hline
+    mathjs     & prob\_gamma & (float)                                   & 57 & 8  & 2 & 16 & - & - & - & - \\
+    \bottomrule
+  \end{tabular}
+%}
+\end{table}
+
+\subsection{Results}
+\label{sub.sec.eval.results}
+
+\setlength\tabcolsep{.98pt}
+\begin{table}[!t]
+  \caption{Statistics of experimental results for three testing algorithms $\Random$, $\Genetic$ and $\RGenetic$ (time $t$ is in seconds; \underline{200} indicates branch is not covered; (-) means the data is insignificant).}
+  \label{tbl.stats}
+    \scriptsize
+    \begin{tabular}{l|ccc|ccc|ccc|ccc|ccc}
+      \toprule
+      \multirow{2}{*}{\textbf{NAME}} &   \multicolumn{3}{c|}{$m_{\Random}$} & \multicolumn{3}{c|}{$m_{\Genetic}$} & \multicolumn{3}{c|}{$m_{\RGenetic}$} & \multirow{2}{*}{$\frac{t_{\Random}}{t_{\Genetic}}$} &  \multirow{2}{*}{$\frac{t_{\Random}}{t_{\RGenetic}}$} & \multirow{2}{*}{$\frac{t_{\Genetic}}{t_{\RGenetic}}$}   & \multirow{2}{*}{\hfil $_{\Genetic}^{\Random}$} &  \multirow{2}{*}{\hfil $_{\RGenetic}^{\Random}$} & \multirow{2}{*}{\hfil $_{\RGenetic}^{\Genetic}$} \\
+      \cline{2-10} % \!:\!
+                             & $i$      & $t$  & $t/i$     & $i$& $t$&$t/i$             &$i$ &$t$ &$t/i$               &      &       &        &      &       &      \\
+      \midrule
+    \textbf{helpMe}*         & 218      & 270  & 1.24      & 61 & 47 & 0.77             & 62 & 56 & 0.9                & 5.74 & 4.82  & 0.84   &      &      &       \\
+    $(3,4,\inFor)$           & 4        & 4    & 1         & 5  & 3  & 0.6              & 8  & 6  & 0.75               & 1.33 & 0.67  & 0.5    & - & 0.39 & 0.37  \\
+    $(5,6,\thenBr)$          & 4        & 5    & 1.25      & 8  & 6  & 0.75             & 7  & 5  & 0.71               & 0.83 & 1     & 1.2    & - & -  & -  \\
+    $(5,15,\elseBr)$         & 121      & 156  & 1.29      & 24 & 21 & 0.86             & 23 & 24 & 1.04               & 7.43 & 6.5   & 0.88   & 0.87 & 0.86 & -  \\
+    $(9,10,\thenBr)$         & 85       & 101  & 1.19      & 18 & 14 & 0.78             & 19 & 17 & 0.89               & 7.21 & 5.94  & 0.82   & 0.98 & 0.95 & -  \\
+    $(9,14,\elseBr)$         & 4        & 4    & 1         & 6  & 4  & 0.67             & 5  & 4  & 0.8                & 1    & 1     & 1      & - & - & -  \\
+    \hline                                                                                                          
+    \textbf{isGameFinished}* & 264      & 220  & 0.83      & 32 & 30 & 0.94             & 43 & 43 & 1                  & 7.33 & 5.12  & 0.7    &      &      &        \\
+    $(7,8,\thenBr)$          & 37       & 30   & 0.81      & 8  & 8  & 1                & 12 & 13 & 1.08               & 3.75 & 2.31  & 0.62   & -  & 0.66 & -   \\
+    $(10,11,\thenBr)$        & \un{200} & 167  & 0.84      & 11 & 10 & 0.91             & 10 & 11 & 1.1                & 16.7 & 15.18 & 0.91   & 0.88 & 0.96 & -   \\
+    $(10,14,\elseBr)$        & 25       & 21   & 0.84      & 11 & 11 & 1                & 19 & 18 & 0.95               & 1.91 & 1.17  & 0.61   & - & - & -   \\
+    \hline
+    \textbf{newGame}*   
+                             & 18       & 14   & 0.78      & 11 & 9  & 0.81             & 10 & 10 & 1                  & 1.56 & 1.4   & 0.9    &      &      &      \\
+    $(6,7,\thenBr)$          & 16       & 12   & 0.75      & 9  & 7  & 0.78             & 8  & 8  & 1                  & 1.71 & 1.5   & 0.88   & 0.64 & 0.65 & -  \\
+    \hline
+    \textbf{revealAll}*  
+                             & 60       & 50   & 0.83      & 44 & 44 & 1                & 47 & 53 & 1.13               & 1.14 & 0.94  & 0.83   &      &      &        \\
+    $(2,3,\inFor)$           & 25       & 20   & 0.8       & 24 & 24 & 1                & 24 & 27 & 1.13               & 0.83 & 0.74  & 0.89   & - & - & -  \\
+    $(4,5,\inFor)$           & 35       & 30   & 0.86      & 20 & 20 & 1                & 23 & 26 & 1.13               & 1.5  & 1.15  & 0.77   & 0.62 & -   &  0.37  \\
+    \hline
+    \textbf{shuffleBoard}*   
+                             & 15       & 29   & 1.93      & 15 & 26 & 1.73             & 17 & 29 & 1.71               & 1.12 & 1     & 0.9    &      &      &       \\
+    $(13,14,\thenBr)$        & 5        & 10   & 2         & 5  & 9  & 1.8              & 6  & 10 & 1.67               & 1.11 & 1     & 0.9    & - & - & -  \\
+    $(17,18,\thenBr)$        & 5        & 10   & 2         & 5  & 10 & 2                & 6  & 11 & 1.83               & 1    & 0.91  & 0.91   & - & - & -   \\
+    \hline
+   \textbf{toggleInfo}*      & 6        & 6    & 1         & 7  & 7 & 1                 & 9 & 6   & 0.66               & 0.86  & 1     & 1.17  &    &      &       \\
+    $(6,7,\thenBr)$          & 2        & 2    & 1         & 3  & 3 & 1                 & 5 & 3   & 0.6                & 0.67  & 0.67  & 1     & 0.37 & 0.36 & -  \\
+    \hline
+   \textbf{isValidCard}      & 1001     & 514  & 0.51      & 21 & 8 & 0.38              & 21 & 10 & 0.48               & 64.25 & 51.4  & 0.8    &   &   &       \\
+    $(3,6,\elseBr)$          & \un{200} & 103  & 0.52      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51.5  & 51.5  & 1      & 1 & 1 & -   \\
+    $(7,8,\inFor)$           & \un{200} & 103  & 0.52      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 103   & 51.5  & 0.5    & 1 & 1 & -  \\
+    $(10,11,\thenBr)$        & \un{200} & 102  & 0.51      & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 51    & 51    & 1      & 1 & 1 & -  \\
+    $(10,13,\elseBr)$        & \un{200} & 106  & 0.53      & 4  & 1 & 0.25              & 4  & 2  & 0.5                & 106   & 53    & 0.5    & 1 & 1 & -  \\
+    $(14,15,\inFor)$         & \un{200} & 100  & 0.5       & 4  & 2 & 0.5               & 4  & 2  & 0.5                & 50    & 50    & 1      & 1 & 1 & -  \\
+    \hline
+   \textbf{isValidVISA}      & 201      & 95   & 0.47      & 8  & 3 & 0.38              & 8  & 2  & 0.25               & 31.67 & 47.5  & 1.5    &   &   &       \\
+    $(2,3,\thenBr)$          & \un{200} & 95   & 0.48      & 7  & 3 & 0.43              & 7  & 2  & 0.29               & 31.67 & 47.5  & 1.5    & 1 & 1 & -  \\
+    \hline
+   \textbf{initShields}*     & 6        & 5    & 0.83      & 6  & 5 & 0.83              & 6  & 3  & 0.5                & 1      & 1.67 & 1.67   &      &      &       \\
+    $(2,3,\inFor)$           & 6        & 5    & 0.83      & 6  & 4 & 0.67              & 6  & 3  & 0.5                & 1.25   & 1.67 & 1.33   & 0.83 & 0.84 & -  \\
+    \hline
+   \textbf{brickJiggler}*    & 7        & 8    & 1.14      & 6  & 4 & 0.67              & 4  & 3  & 0.75               & 2      & 2.67 & 1.33   &      &      &       \\
+    $(2,3,\thenBr)$          & 6        & 7    & 1.17      & 5  & 3 & 0.6               & 3  & 2  & 0.67               & 2.33   & 3.5  & 1.5    & 0.83 & 0.85 & -  \\
+    \hline
+   \textbf{doPaddlePower}*   & 19       & 15   & 0.79      & 204  & 140 & 0.69          & 25 & 16  & 0.64              & 0.11   & 0.94 & 8.75   &       &      &      \\
+    $(10,11,\thenBr)$        & 16       & 12   & 0.75      & \un{200} & 136 & 0.68      & 22 & 13  & 0.59              & 0.09   & 0.92 & 10.46  &  0.02 & - & 0.94 \\
+   \midrule
+    \textbf{TOTAL (simple)}          & 1816      & 1226 & 0.68      & 415 & 323 & 0.78          & 252 & 231 & 0.92              & 3.8    & 5.31  & 1.4       &   &   &    \\  
+    \bottomrule
+   \textbf{initBricks}*      & 1418     & 2379 & 1.68      & 593  & 474 & 0.8           & 422 & 415 & 0.98             & 5.02   & 5.73  & 1.14   &      &      &       \\
+    $(6,7,\thenBr)$          & 2        & 3    & 1.5       & 5    & 4   & 0.8           & 3   & 3   & 1                & 0.75   & 1     & 1.33   & - & -  & -   \\
+    $(6,10,\elseBr)$         & 15       & 23   & 1.53      & 6    & 6   & 1             & 6   & 6   & 1                & 3.83   & 3.83  & 1      & 0.87 & 0.83 & -   \\
+    $(11,12,\thenBr)$        & \un{200} & 317  & 1.59      & 14   & 12  & 0.86          & 17  & 15  & 0.88             & 26.41  & 21.13 & 0.8    & 0.93 & 0.91 & -  \\
+    $(11,15,\elseBr)$        & 18       & 30   & 1.67      & 6    & 6   & 1             & 6   & 6   & 1                & 5      & 5     & 1      & 0.89 & 0.86 & -  \\
+    $(16,17,\thenBr)$        & \un{200} & 324  & 1.62      & 17   & 14  & 0.82          & 17  & 16  & 0.94             & 23.14  & 20.25 & 0.88   & 0.96 & 0.96 & -  \\
+    $(16,20,\elseBr)$        & 25       & 40   & 1.6       & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.71   & 5.71  & 1      & 0.89 & 0.86 & -  \\
+    $(21,22,\thenBr)$        & \un{200} & 310  & 1.55      & 14   & 13  & 0.93          & 17  & 17  & 1                & 23.85  & 18.24 & 0.76   & 0.94 & 0.9  & 0.36  \\
+    $(21,25,\elseBr)$        & 26       & 41   & 1.58      & 7    & 7   & 1             & 8   & 7   & 0.88             & 5.86   & 5.86  & 1      & 0.94 & 0.87 & -  \\
+    $(29,30,\thenBr)$        & \un{200} & 330  & 1.65      & 66   & 58  & 0.88          & 74  & 70  & 0.95             & 5.69   & 4.71  & 0.83   & 0.82 & 0.88 & -   \\
+    $(29,37,\elseBr)$        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & - & - & -  \\
+    $(38,39,\thenBr)$        & 185      & 328  & 1.77      & 85   & 67  & 0.79          & 48  & 44  & 0.92             & 4.9    & 7.45  & 1.52   & 0.87 & 0.88 & -  \\
+    $(38,46,\elseBr)$        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & 0.64 & - & -  \\
+    $(47,48,\thenBr)$        & 187      & 336  & 1.8       & \un{200} & 141 & 0.7       & 127 & 131 & 1.03             & 2.38   & 2.56  & 1.08   & 0.8  & 0.8  & -  \\
+    $(47,55,\elseBr)$        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.66 & 0.61 & -  \\
+    $(56,57,\thenBr)$        & 109      & 198  & 1.82      & 50   & 43  & 0.86          & 49  & 47  & 0.96             & 4.6    & 4.21  & 0.91   & 0.76 & 0.75 & -   \\
+    $(56,64,\elseBr)$        & 2        & 4    & 2         & 3    & 3   & 1             & 3   & 4   & 1.33             & 1.33   & 1     & 0.75   & 0.64 & 0.61 & -  \\
+    $(69,70,\thenBr)$        & 2        & 4    & 2         & 3    & 4   & 1.33          & 3   & 4   & 1.33             & 1      & 1     & 1      & - & - & -  \\
+    $(69,71,\elseBr)$        & 41       & 81   & 1.98      & 95   & 84  & 0.88          & 27  & 26  & 0.96             & 0.96   & 3.12  & 3.23   & - & 0.68 & 0.61  \\
+    \hline
+    \textbf{do\_draw}        & 268      & 625  & 2.33      & 383  & 1295 & 3.38         & 124 & 334 & 2.69             & 0.48   & 1.87  & 3.88   &      &      &       \\
+    $(6,7,\thenBr)$          & 8        & 19   & 2.38      & 6    & 25   & 4.1          & 7   & 20  & 2.86             & 0.76   & 0.95  & 1.25   & - & -  &  0.62 \\
+    $(8,9,\thenBr)$          & 10       & 23   & 2.3       & 6    & 17   & 2.83         & 7   & 21  & 3                & 1.35   & 1.1   & 0.81   & 0.63 & 0.62 &  - \\
+    $(8,11,\elseBr)$         & 144      & 343  & 2.39      & 17   & 51   & 3            & 19  & 57  & 3                & 6.73   & 6.02  & 0.89   & 0.91 & 0.91 &  - \\
+    $(44,45,\thenBr)$        & 57       & 144  & 2.5       & \un{200} & 681  & 3.4      & 40  & 111 & 2.78             & 0.21   & 1.3   & 6.14   & 0.16 & - &  0.89 \\
+    $(48,49,\thenBr)$        & 26       & 68   & 2.61      & 137  & 492  & 3.59         & 34  & 97  & 2.85             & 0.14   & 0.7   & 5.07   & 0.24 & - &  0.74 \\
+    \hline
+    \textbf{prob\_gamma}     & 2006     & 710  & 0.35      & 163 & 84   & 0.52          & 162 & 81  & 0.5              & 8.45   & 8.77  & 1.04   &  &   &        \\
+    $(4,5,\thenBr)$          & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(6,7,\thenBr)$          & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(6,9,\elseBr)$          & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
+    $(10,11,\thenBr)$        & \un{200} & 72   & 0.36      & 62  & 42   & 0.68          & 61  & 40  & 0.66             & 1.71   & 1.8   & 1.05   & 1 & 1 &  -  \\
+    $(10,13,\elseBr)$        & \un{200} & 71   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 71     & 71    & 1      & 1 & 1 &  -  \\
+    $(16,17,\inWhile)$       & \un{200} & 70   & 0.35      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 70     & 70    & 1      & 1 & 1 &  -  \\
+    $(20,21,\thenBr)$        & \un{200} & 70   & 0.35      & 6   & 2    & 0.33          & 6   & 3   & 0.5              & 35     & 23.33 & 0.67   & 1 & 1 &  -  \\
+    $(20,23,\elseBr)$        & \un{200} & 72   & 0.36      & 2   & 1    & 0.5           & 2   & 1   & 0.5              & 72     & 72    & 1      & 1 & 1 &  -  \\
+    $(30,31,\thenBr)$        & \un{200} & 72   & 0.36      & 53  & 23   & 0.43          & 52  & 22  & 0.42             & 3.13   & 3.27  & 1.05   & 1 & 1 &  -  \\
+    $(34,35,\thenBr)$        & \un{200} & 72   & 0.36      & 24  & 10   & 0.42          & 25  & 10  & 0.4              & 7.2    & 7.2   & 1      & 1 & 1 &  -  \\
+    \midrule
+    \textbf{TOTAL (diff.)}           & 3692     & 3714 & 1         & 1139 & 1853 & 1.63         & 708 & 830 & 1.17             & 2      & 4.47  & 2.23   &   &   &    \\
+    %% \midrule
+    %% \midrule
+    \bottomrule
+    \bottomrule  
+    \textbf{TOTAL (global)} & 5507      & 4940 & 0.9       & 1554 & 2176 & 1.4          & 966 & 1061 & 1.1             & 2.27   & 4.66  & 2.05       &   &   &    \\  
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+To study the effectiveness and efficiency of our test generation framework ($\Random$, $\Genetic$ and $\RGenetic$), we exercised each algorithm against all branches of the functions in Table~\ref{tbl.case.studies}. Due to the probabilistic nature of the test generation process, the experiments were repeated 50 times to achieve statistical significance. Table~\ref{tbl.stats} contains results of our evaluation. For each algorithm, we computed the following median values per branch: the number of iterations~($i$), time in seconds~($t$), and their ratio~($t/i$). In the table, these values are grouped into three columns $m_{\Random}$, $m_{\Genetic}$ and $m_{\RGenetic}$ one for each algorithm. The next group of columns $t_{\Random}/t_{\Genetic}$, $t_{\Random}/t_{\RGenetic}$ and $t_{\Genetic}/t_{\RGenetic}$ presents the relative performance of each pair of the testing algorithm $(\Random,\Genetic)$, $(\Random,\RGenetic)$, and $(\Genetic,\RGenetic)$ respectively. To the right of the function name, we also present accumulated statistics for the function as a whole. Because of the missing branches, the function's summary may not be equal to the sum of the branches, e.g. see the \emph{toggleInfo} function. 
+
+According to the industry standard~\cite{bray1997c4}, functions with a CC below 10 are considered easy to test, and above 10 present a reasonable challenge. We call the functions of the first type ``simple'', and ``difficult'' otherwise. The three functions \emph{initBricks}, \emph{do_draw} and \emph{prob_gamma} at the bottom of Table~\ref{tbl.case.studies} are difficult with CC's of 13, 14 and 16 respectively. Table~\ref{tbl.stats.sum} summarizes the results of the experiment such as coverage, execution time per branch and significance.
+
+\begin{table}[!t]
+  \caption{Result Summary (L - large, M - medium, S - small)}
+  \label{tbl.stats.sum}
+    \footnotesize
+    \begin{tabular}{l|ccc|ccc|p{3mm}p{3mm}p{3mm}|p{3mm}p{3mm}p{3mm}|p{3mm}p{3mm}p{3mm}}
+      \toprule
+      \multirow{3}{*}{\textbf{TYPE}} &  \multicolumn{3}{c|}{\textbf{coverage (\%)}} & \multicolumn{3}{c|}{\textbf{time (sec.)}} & \multicolumn{9}{c}{\textbf{significance}}\\
+      \cline{2-16}
+                                     & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multirow{2}{*}{$\Random$}  & \multirow{2}{*}{$\Genetic$} & \multirow{2}{*}{$\RGenetic$} & \multicolumn{3}{p{1cm}|}{\hfil $_{\Genetic}^{\Random}$} & \multicolumn{3}{p{1cm}|}{\hfil $_{\RGenetic}^{\Random}$} & \multicolumn{3}{p{1cm}}{\hfil $_{\RGenetic}^{\Genetic}$} \\
+      \cline{8-16}
+                         & & & & & &                     & L  & M  & S  & L  & M  & S  & L & M & S \\
+      \midrule
+      \textbf{simple (33)}    & 79 & 97 & 100 & 37  & 9  & 7  & 11 & 12 & 13 & 11 & 13 & 13 & 1 & 1 & 1 \\
+      \textbf{difficult (33)} & 58 & 94 & 100 & 112 & 56 & 25 & 22 & 24 & 26 & 22 & 23 & 26 & 2 & 2 & 4 \\
+      \midrule
+      \textbf{global (56)}    & 63 & 95 & 100 & 88  & 39 & 19 & 33 & 36 & 39 & 33 & 36 & 39 & 3 & 3 & 5 \\
+      \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\paragraph{\textbf{RQ1 (effectiveness).}} To answer this question, we report on the branch coverage achieved by each testing algorithm in our empirical study. Given a fixed limit on the number of test iterations, 200 in our case, a search algorithm can not guarantee finding a solution. The underlined values in Table~\ref{tbl.stats} like $\underline{200}$ indicate branches which on average were not covered by the respective algorithms. The main reason for the random generation ($\Random$) to fail is the large size of the search space and the lack of any feedback in the generation process, e.g. branch $(10,11)$ of the \emph{isGameFinished} function. In the case of the genetic approach, $\Genetic$ may get stuck at a plateau because the fitness function does not provide sufficient heuristic information, whereas $\Random$ can escape the plateau by chance. We encountered three such cases in our study: branches $(10,11)$, $(47,48)$ and $(45,45)$ of the function \emph{doPaddlePower}, \emph{initBricks} and \emph{do_draw}, respectively. Those three examples motivated us to introduce the genetic algorithm with restart ($\RGenetic$) which combines the strengths of both $\Random$ and $\Genetic$. It leverages the genetic search while the fitness continues to improve, and restarts the search with a new target, when the fitness suboptimally converges. As our evaluation has shown, $\RGenetic$ not only managed to cover the three problematic branches and outperform $\Random$, but it also improved some of the genetic search results, e.g. branch $(69,71)$ of the \emph{initBricks} function.\\ 
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+Across all subjects, the $\RGenetic$ algorithm achieved 100\% branch coverage, with $\Genetic$ in the second place with 95\% coverage, and, finally, $\Random$ with  63\% coverage.
+  }
+}
+
+\begin{figure}[!t]
+  \begin{tikzpicture}[scale=0.5]
+    \begin{axis}[
+        xlabel={Time budget per branch (seconds)},
+        ylabel={Number of covered branches},
+        xmin=0, xmax=150,
+        ymin=10, ymax=58,
+        xtick={0,5,10,30,60,90,120,150,180},
+        ytick={0,10,20,30,40,50},
+        legend pos=south east,
+        ymajorgrids=true,
+        % xmajorgrids=true,
+        grid style=dashed,
+        label style={font=\huge}
+      ]
+      
+      \addplot[
+        color=blue,
+        mark=square*,
+      ] coordinates {
+        (5,13) (10,15) (30,25) (60,28) (90,29) (120,30) (150,31)
+      }; 
+      \addplot[
+        color=red,
+        mark=triangle*,
+      ]  coordinates {
+        (5,27) (10,37) (30,48) (60,52) (90,54) (120,54) (150,54)
+      };
+      \addplot[
+        color=yellow,
+        mark=*,
+      ]   coordinates {
+        (5,27) (10,35) (30,50) (60,54) (90,55) (120,56) (150,58)
+      };
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
+ 
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Progress of the branch coverage given fix time budget per branch}
+    \label{fig.budget.progress}
+\end{figure}
+
+Additionally, we have investigated how the coverage progresses with the increase of budget assigned per branch. This experiment models different testing scenarios, used in practice, which are time dependent. E.g. running tests inside an IDE should be fast; as part of the CI cycle we may afford a larger waiting time; regression testing over night may take hours. Figure~\ref{fig.budget.progress} illustrates the progress of algorithms across various budget categories from 5 to 150 seconds per branch. Random test generation consistently underperforms the genetic one across all budget categories by at least factor of two. Eventually, it converges around 52\% coverage. Given 5 seconds per branch, both $\Genetic$ and $\RGenetic$ equally perform at the rate of 45\%. When the budget increases towards 10 seconds, $\Genetic$ slightly outperforms $\RGenetic$, 60\% against 63\% respectively. But when the budget rises to 30 seconds, $\RGenetic$ overtakes $\Genetic$ and the distance between them keeps growing further with the budget increase (starting from 120 seconds).\\ 
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+Our recommendation is to use $\Genetic$ for rapid testing during development, and later in integration testing switch to $\RGenetic$ since it is able to reach harder to cover branches.
+  }
+}
+
+
+\paragraph{\textbf{RQ2 (efficiency).}}
+ To answer this question, we compare the actual execution time shown by our test algorithms in the experiments. Based on this information, we suggest an estimate on the execution time of the testing framework. The bar chart in Figure~\ref{fig.gen.time.comp} illustrates how the median coverage time varies for each algorithm at the function level. There are two cases, \emph{revealAll} and \emph{doPaddlePower} out of 14, where $\Random$ just slightly outperformed $\RGenetic$ by 6\%, and two more cases \emph{shuffleBoard} and \emph{toggleInfo}, where they performed equally. In all other cases, $\RGenetic$ significantly outperformed $\Random$ by minimum of 40\%~(\emph{newGame}) and a maximum of 510\%~(\emph{isValidCard}). 
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        every axis plot post/.style={/pgf/number format/fixed},
+        ybar,
+        ymin=0,ymax=950,
+        width=11cm,height=3.3cm,
+        bar width=3pt,
+        enlarge x limits=0.05,
+        legend style={at={(0.05,1.1)},anchor=north west,font=\footnotesize,legend columns=-1},
+        legend cell align={left},
+        ylabel={time (sec.)},
+        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
+        xtick=data,
+        restrict y to domain*=0:1350, % Cut values off at 14
+        visualization depends on=rawy\as\rawy, % Save the unclipped values
+        after end axis/.code={ % Draw line indicating break
+          \draw [ultra thick, white, decoration={snake, amplitude=1pt}, decorate] (rel axis cs:0,1.05) -- (rel axis cs:1,1.05);
+        },
+        nodes near coords={%
+          \pgfmathprintnumber{\rawy}% Print unclipped values
+        },
+        every node near coord/.append style={rotate=90,anchor=west,font=\footnotesize},
+        % every node near coord/.append style={font=\footnotesize},
+        axis lines*=left,
+        clip=false,
+        x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
+        y tick label style={font=\footnotesize}
+      ]
+      \addplot[fill=blue] coordinates {(helpMe*,270) (isGameFinished*,220) (newGame*,14) (revealAll*,50) (shuffleBoard*,29) (toggleInfo*,6) (isValidCard,514) (isValidVISA,95) (initShields*,5) (brickJiggler*,8) (doPaddlePower*,15)  (initBricks*,2379) (do\_draw,625) (prob\_gamma,710)};
+      \addplot[fill=red] coordinates {(helpMe*,47)  (isGameFinished*,30)  (newGame*,9)  (revealAll*,44) (shuffleBoard*,26) (toggleInfo*,7) (isValidCard,8)   (isValidVISA,3)  (initShields*,5) (brickJiggler*,4) (doPaddlePower*,140) (initBricks*,474) (do\_draw,1295) (prob\_gamma,84)};
+      \addplot[fill=yellow] coordinates {(helpMe*,56)  (isGameFinished*,43)  (newGame*,10) (revealAll*,53) (shuffleBoard*,29) (toggleInfo*,6) (isValidCard,10)  (isValidVISA,2)  (initShields*,3) (brickJiggler*,3) (doPaddlePower*,16) (initBricks*,415) (do\_draw,334) (prob\_gamma,81)}; 
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Overall test generation time per function.}
+  \label{fig.gen.time.comp}
+\end{figure}  
+
+\begin{figure}[t]
+  \begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        every axis plot post/.style={/pgf/number format/fixed},
+        ybar,
+        ymin=0,ymax=4,
+        width=11cm,height=3.3cm,
+        bar width=3pt,
+        enlarge x limits=0.05,
+        legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
+        legend cell align={left},
+        ylabel={time (sec.)},
+        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
+        xtick=data,
+        nodes near coords,
+        every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
+        % every node near coord/.append style={font=\footnotesize},
+        axis lines*=left,
+        clip=false,
+        x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
+        y tick label style={font=\footnotesize}
+      ]
+      \addplot[fill=blue] coordinates {(helpMe*,1.24) (isGameFinished*,0.83) (newGame*,0.78) (revealAll*,0.83) (shuffleBoard*,1.93) (toggleInfo*,1) (isValidCard,0.51) (isValidVISA,0.47) (initShields*,0.83) (brickJiggler*,1.14) (doPaddlePower*,0.79)  (initBricks*,1.68) (do\_draw,2.33) (prob\_gamma,0.35)};
+      \addplot[fill=red] coordinates {(helpMe*,0.77)  (isGameFinished*,0.94)  (newGame*,0.81)  (revealAll*,1) (shuffleBoard*,1.73) (toggleInfo*,1) (isValidCard,0.38)   (isValidVISA,0.38)  (initShields*,0.83) (brickJiggler*,0.67) (doPaddlePower*,0.69) (initBricks*,0.8) (do\_draw,3.38) (prob\_gamma,0.52)};
+      \addplot[fill=yellow] coordinates {(helpMe*,0.9)  (isGameFinished*,1)  (newGame*,1) (revealAll*,1.13) (shuffleBoard*,1.71) (toggleInfo*,0.66) (isValidCard,0.48)  (isValidVISA,0.25)  (initShields*,0.5) (brickJiggler*,0.75) (doPaddlePower*,0.64) (initBricks*,0.98) (do\_draw,2.69) (prob\_gamma,0.5)}; 
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Speed of test generation measured as $t/i$}
+    \label{fig.get.cost}
+\end{figure}
+
+%% \begin{figure}[t]
+%%   \begin{tikzpicture}[scale=0.8]
+%%     \begin{axis}[
+%%         every axis plot post/.style={/pgf/number format/fixed},
+%%         ybar,
+%%         ymin=0,ymax=135,
+%%         width=11cm,height=3.3cm,
+%%         bar width=3pt,
+%%         enlarge x limits=0.05,
+%%         legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
+%%         legend cell align={left},
+%%         ylabel={time (sec.)},
+%%         symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
+%%         xtick=data,
+%%         nodes near coords,
+%%         every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
+%%         % every node near coord/.append style={font=\footnotesize},
+%%         axis lines*=left,
+%%         clip=false,
+%%         x tick label style={rotate=45,anchor=east,font=\footnotesize\bfseries},
+%%         y tick label style={font=\footnotesize}
+%%       ]
+%%       \addplot[fill=blue] coordinates {(helpMe*,54) (isGameFinished*,44) (newGame*,4.7) (revealAll*,25) (shuffleBoard*,3.6) (toggleInfo*,1.5) (isValidCard,85.7) (isValidVISA,47.5) (initShields*,5) (brickJiggler*,4) (doPaddlePower*,3.75)  (initBricks*,132.16) (do\_draw,28.5) (prob\_gamma,44.4)};
+      
+%%       \addplot[fill=red] coordinates {(helpMe*,9.4)  (isGameFinished*,6)  (newGame*,3)  (revealAll*,22) (shuffleBoard*,3.25) (toggleInfo*,1.75) (isValidCard,1.33)   (isValidVISA,1.5)  (initShields*,4) (brickJiggler*,2) (doPaddlePower*,35) (initBricks*,26.33) (do\_draw,58.9) (prob\_gamma,5.25)};
+      
+%%       \addplot[fill=yellow] coordinates {(helpMe*,11.2)  (isGameFinished*,8.6)  (newGame*,3.3) (revealAll*,26.5) (shuffleBoard*,3.6) (toggleInfo*,1.5) (isValidCard,1.66)  (isValidVISA,1)  (initShields*,3) (brickJiggler*,1.5) (doPaddlePower*,4) (initBricks*,23.1) (do\_draw,15.18) (prob\_gamma,5.1)}; 
+%%       \legend{$\Random$,$\Genetic$,$\RGenetic$}
+%%     \end{axis}
+%%   \end{tikzpicture}
+%%   \caption{Average generation time per branch}
+%%     \label{fig.gen.time.branch}
+%% \end{figure}
+
+Looking separately at the average execution time for \emph{simple} and \emph{difficult} functions in Table~\ref{tbl.stats.sum}, we conclude that $\RGenetic$ was the fastest algorithm in both cases with  7 and 25 seconds per branch. For simple functions, $\Genetic$'s performance was quite close to $\RGenetic$, only 9 seconds, but was two times slower for difficult functions. In all categories, $\Random$ was much slower than both genetic alternatives.\\
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+    Globally, $\RGenetic$ outperformed both $\Genetic$ and $\Random$ with an average execution time per branch of 19, 39 and 88 seconds, respectively. 
+  }
+}
+
+Another question, related to the efficiency of our framework, is the computational cost of one iteration of the algorithm. This information is useful when configuring the maximal generation limit. The cost, shown in column $t/i$ in Table~\ref{tbl.stats}, is calculated as the relation between the execution time and the number of generations, i.e. it measures the speed of one iteration. Figure~\ref{fig.get.cost} presents the cost comparison of three algorithms across all functions in our study. On the one hand, the cost of one iteration depends on the population size, 50 candidates in our case. On the other hand, it also depends on the length of the execution trace produced during the evaluation of a candidate, because longer traces increase the computation cost of the fitness function.  Premature program termination due to exceptions leads to short traces, whereas loops and program size in the general contribute to the longer traces. For example, the \emph{do_draw} function produces long traces because it only operates with the primitive types thus never rising exceptions, and at the same time, it consists of 40 LOC. In our evaluation we observed that the iteration cost varied between 0.25 and 3.59 seconds.\\
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+    Globally, one algorithm iteration took one second on average for $\Random$ and $\RGenetic$, $\Genetic$ performed somewhat worse 1.4 seconds.
+  }
+} 
+  
+
+\paragraph{\textbf{RQ3 (significance).}} Because our testing framework is randomized by nature, we need to conduct statistical analysis to test the \emph{significance} and \emph{effect size} of our the performance results. This analysis is based on the coverage time in 50 executions, produced by each test algorithm $\Random$, $\Genetic$ and $\RGenetic$. Following recommendations on the assessment of randomized algorithms~\cite{arcuri2011practical}, we use the non-parametric Mann-Whitney U-test~\cite{mann1947test} and the Vargha-Delaney $\hat{A}_{12}$ statistics~\cite{vargha2000critique} for measuring statistical significance ($\alpha=0.05$) and effect size, respectively. In Table~\ref{tbl.stats} the three columns to the right show the $\hat{A}_{12}$ values for all algorithm combinations, where this value is significant and '-' otherwise. For example, the higher the value in the $_{\Genetic}^{\Random}$ column, the slower $\Random$ performs relative to $\Genetic$. Depends on the actual $\hat{A}_{12}$ value, the effect size can be small (0.56), medium (0.64), and large (0.71).\\
+\setlength{\fboxsep}{1mm}
+\fbox{%
+  \parbox{8.2cm}{
+    Both $\Genetic$ and $\RGenetic$ largely outperform $\Random$ in 50\% cases generally across the board and 67\% on the difficult functions.  
+  }
+}  
+
+\paragraph{\textbf{RQ4 (comparison).}} Authors of \emph{Confix}~\cite{amin:ase15} have proposed three test generation strategies: 
+\begin{enumerate*}[label=(\roman*)]
+  \item only use \emph{Confix},
+  \item combine with \emph{Jalangi}~\cite{sen2013jalangi}, and
+  \item combine with manual input. 
+\end{enumerate*}
+They reported a relative increase of 2\% and 19\% in branch coverage of the second and third strategies, respectively, over the first one. Even though, 
+
+The mix with manual showed 19\% increase  the best result, it is not objectively suitable for the comparison with the fully automated technique, like \emph{JEDI}. Unfortunately, the open source version of the \emph{Confix} we found~\footnote{\url{confix}} online does not provide actual integration with \emph{Jalangi}. Neither, the paper~\cite{amin:ase15} highlights any technical details of the integration. Also it only gave 2\% of improvement relative to  
+
+\paragraph{\textbf{Threats to Validity}}
+The \emph{construct validity} threat comes from the measurements we use in our evaluation: branch coverage and execution time. Although, the branch coverage is a common criterion used in practice, the actual fault finding capability is considered a stronger indication of testing adequacy. Reaching a target branch is only part of the problem: we also need an oracle to discriminate the program's output. In this paper, we strike for so called ``natural'' oracles leading to exceptions. Using a stronger oracle for validation is future work. Another practical aspect of the test generation is the test case size, since it can both complicate the readability and increase the execution time. To mitigate this issue we configured the GA to start evolution with the candidates of small sizes, which helps to prevent on unnecessary data explosion. Additional measures that could be applied is a minimization procedure, aka \emph{delta debugging}~\cite{misherghi2006hdd}, to the GA result.
+
+Initial GA configuration introduces a threat to the \emph{internal validity} of our empirical evaluation. The parameters we used are quite standard for similar SBST frameworks, e.g. EvoSuite. Although, not reported in the paper, we did perform a preliminary assessment of various GA configurations, which confirmed our final decision.
+
+The threat of \emph{conclusion validity} can be affected by the stochastic nature. This risk was addressed by repeating the experiment of GA 50 times and performing a statistical analysis of the significance and effect size. We used the confidence level of 95\% measured by the Vargha-Delaney statistic and Mann-Whitney U-test. 
+
+The \emph{external validity} deals with the threat of generalization of our results due to the manual selection of the experimental subjects. To mitigate this fact, we selected the subjects either from previous  related research or found in open source. Of course, those subjects still have to meet the constraints of our testing approach. So, further research is required in both increasing the power of our framework and extending the validation set.
+
+
+%% --------------------------------------------------------------------
+\section{Related and Future Work}
+\label{sec:related.work}
+%% --------------------------------------------------------------------
+
+The last two decades have been fruitful in the amount of work dedicates to the analysis of web applications and JavaScript, in particular. The state-of-the-art in this field including static and dynamic analysis of JS, as well as the test generation is captured by the following surveys~\cite{andreasen2017survey, sun2017analysis, mesbah2015advances}. Therefore, we would like to organize our discussion of related work around the two main questions: 
+\begin{enumerate*}
+\item test data generation for JS functions interacting with the DOM, and
+\item the application of search-based techniques for that problem.
+\end{enumerate*}  
+
+\subsection{Test Data Generation for JavaScript}
+
+The \emph{JSContest}~\cite{heidegger2010contract} proposes to annotates JS functions with type-contracts which can guide random test generation. Though the contract language supports the complex objects types, it mostly suitable for primitive inputs, but not DOM. It performs static analysis to collect info about constant and feeds this data to the random generation. In comparison, our approach is the genetic generation. Additionally, we not only rely on the static information but also perform dynamic analysis to collect the run-time data. Further \emph{JSContest} was extended with the monitoring of \emph{access permission} contracts in~\cite{heidegger2012jscontest}, and the support of reusable DOM fixtures in~\cite{heidegger2010dom}. More recently, Kristensen et al.~\cite{kristensen2017type} propose to use feedback-directed random testing for generation of TypeScript tests based on the provided type annotations. 
+
+\emph{Jalangi}~\cite{sen2013jalangi} is a JS dynamic analysis framework which can be employed, for example, for implementing \emph{concolic testing} or {type inconsistency} analysis~\cite{pradel2015typedevil}. It suffers from common for the symbolic analysis problems such reasoning about arrays and loops. \emph{Confix}~\cite{amin:ase15} translates DOM-related statements into XPath expressions, and feeds them to a constrain solver in order to obtain DOM fixtures for the FUT. Combined with Jalangi, it can be used both for the generation of primitive data and DOM. As it has been shown early by Baars et al.~\cite{baars2011symbolic}, search-based testing can greatly benefit from symbolic analysis. Following this approach, we could try to combine \emph{JEDI} with \emph{Confix} to achieve better results. Tanida~\cite{tanida2014automatic} implemented pure symbolic test generation for JS functions without the DOM interaction.
+
+Static analysis is a powerful technique commonly used as a solid alternative for program testing. In fact, both techniques can benefit from one another. For such weakly typed and dynamic languages as JavaScript employing static analysis to infer types can be an invaluable source of information for identifying potential bugs or even guarantee their absence. Jensen et al.~\cite{tajs2009} presented such an analysis for JavaScript using abstract interpretation. In the follow-up work~\cite{dom2011}, they extended the analysis with the abstractions able reason about HTML DOM and browser API. Given step let the authors to carry static analysis at the level of complete web application (JavaScript + HTML). Artemis~\cite{artemis2011} is a feedback-directed random testing tool for JavaScript web application. It discovers new tests by generating sequences of executable events and monitoring they effect on the state of the application.
+
+\emph{Atrina}~\cite{icst16} uses existing DOM-dependent assertions complemented with the inferred ones to accompany unit tests generated by \emph{JSEFT}~\cite{mirshokraie2015jseft}. \emph{Flycatcher}~\cite{de2012automatic} generates tests by instrumenting a program with the help the JS \emph{Proxies} in order to collect type related information.
+
+\emph{$JS_{DEP}$}~\cite{sung2016static} proposes a constraint-based static analysis for learning dependencies between DOM-events, which can help to prune the sequence of tests consisting of the web-application events. Lerner~\cite{lerner2012modeling} define formal model of event behavior in the DOM to establish testing oracles.
+
+%% \cite{alshahwan2011automated} automated web application testing using search based software techniques.
+
+%% \cite{ma2015grt} guided random testing
+
+%% \cite{mao2016sapienz} Multi-objective automated testing for Android application
+
+%% \cite{jquery2014}
+
+
+%% ACTARUS is a static taint analysis of JS\cite{guarnieri2011saving}.
+
+
+%% Salable dynamic analysis framework for JS based on shadow executions~\cite{create.citation}.
+
+%% Information-flow security for JS~\cite{hedin2012information}.
+
+%% Testing of AJAX application by means of crawling of the application to infer state-flow graph~\cite{mesbah2012crawling} ATUSA ~\cite{mesbah2012invariant}
+
+%% Learning DOM invariants from multiple executions of the application~\cite{pattabiraman2010dodom}.
+
+%% Measuring test adequacy for web application based on the DOM state coverage~\cite{mirzaaghaei2014dom}.
+
+%% Combining human written test cases with the automatically generated once by crawling in order to extend test coverage~\cite{milani2014leveraging}.
+
+%% DOM-aware JavaScript code completion~\cite{bajaj2014dompletion}. 
+
+
+\subsection{Search-Based Test Data Generation}
+\label{sub.sec.search.based}
+
+Despite of the practical popularity of JavaScript, we have only encountered one work by Alshraideh~\cite{alshraideh2008complete} attempting to apply SBST to JavaScript. It uses GA for test generation with the goal cover all branches or kill all mutants, but it only deals with the limited input types such as booleans, integers and strings; and the provided validation is only based on one trivial example --- \emph{the triangle program}. On the contrary, our work additionally supports \emph{array} and \emph{DOM}, and conducts reasonable empirical validation with the discussion of significance and effect size. Recently, SBST was applied to other dynamic languages such as Ruby~\cite{mairhofer2011search}, Lua~\cite{wibowo2015unit} and Go~\cite{irawan2016test}, but the treatment of DOM still makes our approach unique.
+ 
+In this paper we deal with the generation and evolution of DOM which is an example of \emph{tree-like} data structure. \emph{XMLMATE}~\cite{havrikov2014xmlmate} is a XML test generation tool build on top \emph{EvoSuite} with the aim of improving test coverage of the XML-aware Java programs. To generate a random document, it may either rely on the  existing XML schema, or generate the document from scratch. In some sense, DOM specification can be thought of a complex XML schema, with extensive validation requirements. One distinction of our approach is the use of program analysis for data generation. Both tools have similar philosophy for the mutation and crossover. Jan et al.~\cite{jan2016automated} suggest to use XML fuzzing for identifying vulnerabilities in web services. 
+
+Starting from the seminal survey of search-based test data generation~\cite{mcminn2004search}, there has been an active growth in the number of the SBST research~\cite{mcminn2011search}. Powered by the works of Wegener et at.~\cite{wegener2001evolutionary} on structural test generation, and Tonella~\cite{tonella2004evolutionary} on evolutionary class testing, it resulted in the development of EvoSuite~\cite{fraser2011evosuite} --- evolutionary framework for Java test generation.
+
+One likely direction for the future extension of \emph{JEDI} is the whole test suite generation. Most of the time, instead of searching for a test reaching a particular branch, we would like to have the set of tests maximizing the program coverage. That is, our solution is a vector of candidates which has the best fitness score in terms of the branch coverage. Usually, such problems incur multi-objective optimization~\cite{lakhotia2007multi}, e.g. coverage vs. test-suite length. Another direction of future work is re-targeting out tool towards mutation-driven generation of unit tests and oracles, similar to the line of work~\cite{fraser2012mutation}. That should also help to evaluate fault revealing capability of \emph{JEDI} as the number of killed mutants. 
+
+% -----------------------
+Our test generation strategy is \emph{goal-oriented}~\cite{korel1992dynamic}, i.e. it tries to find an execution leading to a goal (statement) regardless of a concrete path taken. We uses control flow graph to identify implicit dependencies between nodes. 
+
+The \emph{chaining approach}~\cite{ferguson1996chaining} uses data dependency to form the sequences of statements preceding the execution of a search target. 
+% -----------------------
+
+
+
+\section{Conclusions}
+\label{sec:concl}
+
+In this paper we have introduced a novel JS unit testing framework, called \emph{JEDI}, which uses search-based techniques for generating test data. Notably, our testing framework is able to generate an arbitrary DOM input, which is syntactically valid and compliant with the recent HTML5 specification. We propose a novel test generation algorithm, called ``genetic with restart'', combining the benefits of systematic fitness improvement with the genetic search and the ability of escaping plateau by restarting search with a new target. Based on the case studies found in two related works~\emph{Confix}~\cite{amin:ase15} and \emph{TAJS}~\cite{dom2011}, we conduced an empirical validation of our framework and performed a significance study of the results. The validation has shown the effectiveness of the framework in covering target branches with a reasonable efficiency.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{icse2018.bib} 
+
+
+\end{document}
