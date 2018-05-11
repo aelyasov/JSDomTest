@@ -175,6 +175,9 @@
 \newcommand{\Random}{\mathbb{R}}
 \newcommand{\Genetic}{\mathbb{G}}
 \newcommand{\RGenetic}{\mathbb{G}_{10}}
+\newcommand{\Confix}{\emph{Confix}}
+\newcommand{\Jalangi}{\emph{Jalangi}}
+\newcommand{\Jedi}{\emph{JEDI}}
 
 % Copyright
 \setcopyright{none}
@@ -224,7 +227,7 @@
 
 
 \begin{abstract}
-The popularity of JavaScript is continuously growing. Together with HTML and CSS, it forms the core technology stack for web development. Because of the dynamic nature and complex interplay with HTML, JS applications are still error-prone and vulnerable. Despite the active research efforts to devise intricate static and dynamic analyses to facilitate JS testing, the problem of test data generation for JS applications interacting with the DOM has not yet been addressed. In this paper, we present a novel \textbf{J}avascript \textbf{E}volution-based testing framework with \textbf{D}OM as an \textbf{I}nput, called \emph{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function including the global DOM state. We conducted an empirical evaluation to study the effectiveness and efficiency of our testing framework. It shows that the \emph{genetic with restart} algorithm, proposed in this paper, is able to achieve complete branch coverage for all experimental subjects, taking on average 19 seconds per branch.
+The popularity of JavaScript is continuously growing. Together with HTML and CSS, it forms the core technology stack for web development. Because of the dynamic nature and complex interplay with HTML, JS applications are often error-prone and vulnerable. Despite the active research efforts to devise intricate static and dynamic analyses to facilitate JS testing, the problem of test data generation for JS applications interacting with the DOM has not yet been addressed. In this paper, we present a novel \textbf{J}avascript \textbf{E}volution-based testing framework with \textbf{D}OM as an \textbf{I}nput, called \emph{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function including the global DOM state. We conducted an empirical evaluation to study the effectiveness and efficiency of our testing framework. It shows that the \emph{genetic with restart} algorithm, proposed in this paper, is able to achieve complete branch coverage for all experimental subjects, taking on average 19 seconds per branch.
 \end{abstract}
 
 %
@@ -272,7 +275,6 @@ Generally, the problem of test data generation has been under an active study fo
 \end{enumerate} 
 
 The paper is structured as follows: In Section~\ref{sec.example}, we present a motivating example illustrating the challenges of generating test data for JS. The architecture of the \emph{JEDI} testing framework is explained in Section~\ref{sec.framework}. Section~\ref{sec.evaluation} presents empirical validation and indicates the validity threats. Related and future work are discussed in Section~\ref{sec:related.work}. Section~\ref{sec:concl} concludes the paper.  
- 
 
 %% The state of JS 2017 survey~\footnote{\url{https://stateofjs.com/}} contains an extensive list of testing frameworks including Mocha, Jasmine, Jest, Enzyme, Tape, Ava, Karma and QUnit. These frameworks support testing at various levels: unit, integration and functional. The survey also indicated a relatively low satisfaction rate of the current state of JS testing tools, scoring only 3.2 out of 5. As result, new testing frameworks such as Cypress and Storybook are constantly appearing to improve the situation. But despite this effort, test data generation continues to be poorly addressed by any of the widely used testing frameworks. The research community has actively been working towards making progress in this direction introducing such tools as Artemis~\cite{artemis2011}, JSConTest~\cite{heidegger2010contract}, Crawljax~\cite{mesbah2012crawling}, JSeft~\cite{mirshokraie2015jseft} and Jalangi~\cite{sen2013jalangi}. A recent study of client-side JS bugs~\cite{ocariza2017study} has shown that the majority (68\%) of web application faults are DOM-related and introduced in the JS code, and not in other components such as HTML or CSS. This fact indicates that yet a better testing approach is needed when it comes to unit testing of JS.
 
@@ -289,16 +291,12 @@ function isGameFinished() {
   var subDivs = obj.getElementsByTagName('DIV'); |c \label{isGameFinished.getDivs} |c
   var allOk = true;
   for (var no = 0; no < subDivs.length; no++) { |c \label{isGameFinished.inFor.begin} |c
-    if (subDivs[no].className.indexOf('sudokuSquare') >= 0 |c \label{isGameFinished.if1.begin} |c 
+    if (subDivs[no].className.indexOf('square') >= 0 |c \label{isGameFinished.if1.begin} |c 
         && !subDivs[no].style.backgroundColor) { 
       var spans = subDivs[no].getElementsByTagName('SPAN');
       if (spans[0].innerHTML != spans[1].innerHTML) { |c \label{isGameFinished.if2.begin} |c
-        allOk = false; |c \label{isGameFinished.unfinished} |c
-        break; 
-      }
-    }
-  } |c \label{isGameFinished.outFor} |c
-}
+        allOk = false; //target |c \label{isGameFinished.unfinished} |c
+        break;}}}} |c \label{isGameFinished.outFor} |c
 \end{lstlisting}
   \caption{JS function \texttt{isGameFinished.js} from sudoku}
   \label{code.isGameFinished}
@@ -319,7 +317,7 @@ function isGameFinished() {
 <html>                        <html>
  <body>                        <body>
   <div id='sudoku'>             <div id='sudoku'>
-   <div class='sudokuSquare'>    <div class='sudokuSquare'>
+   <div class='square'>          <div class='square'>
     <span></span>                 <span></span> 
     <span></span>                 <span>TEST</span>
    </div>                        </div> 
@@ -331,15 +329,15 @@ function isGameFinished() {
   \label{fig.isGameFinished.tests}
 \end{figure}
 
-Let us consider the JS function \texttt{isGameFinished} in Figure~\ref{code.isGameFinished} taken from the web game \emph{sudoku}\footnote{\url{http://www.dhtmlgoodies.com/scripts/game_sudoku/game_sudoku.html}}. This function checks the validity of a sudoku solution given by a user. First, we find the DOM element representing the game field (line~\ref{isGameFinished.getSudoku}). Then, we collect all its child DIVs (line~\ref{isGameFinished.getDivs}). Each DIV element corresponds to a sudoku input square (line~\ref{isGameFinished.if1.begin}) and consists of two SPANs. The first span contains a user input, whereas the second one, which is hidden by default, stores the expected value for that sudoku square. Inside of a for-loop in lines~\ref{isGameFinished.inFor.begin}-\ref{isGameFinished.outFor}, we iterate over the whole collection of input squares. Once, we find a square with two unequal SPAN values (line~\ref{isGameFinished.if2.begin}), the loop is terminated and the game is considered unfinished (line~\ref{isGameFinished.unfinished}) and finished otherwise.
+Let us consider the JS function \texttt{isGameFinished} in Figure~\ref{code.isGameFinished} taken from the web game \emph{sudoku}~\cite{sudoku}. This function validates a sudoku solution given by a user. First, it finds a DOM element representing the game field (line~\ref{isGameFinished.getSudoku}). Then, it collects all the child \emph{divs} (line~\ref{isGameFinished.getDivs}). Each \emph{div} element corresponds to a sudoku input square (line~\ref{isGameFinished.if1.begin}), and consists of two \emph{spans}. The first \emph{span} contains a user input, whereas the second one (hidden by default) stores an expected value for that sudoku square. Inside of a for-loop in lines~\ref{isGameFinished.inFor.begin}-\ref{isGameFinished.outFor}, we iterate over the whole collection of input squares. Once, we find a square with two unequal values (line~\ref{isGameFinished.if2.begin}), the loop is terminated and the game is considered unfinished (line~\ref{isGameFinished.unfinished}) and finished otherwise.
 
-Suppose now that we would like to unit test this function in isolation to the rest of the application. We aim to maximize the branch coverage as a common testing criteria~\cite{zhu1997software}. That is, for each individual branch of the function under test (FUT) \texttt{isGameFinished}, we need to construct a test input that covers the branch and leads to the normal termination of the FUT. The JS function takes \emph{explicit} input arguments (in our case none), but it can also accept \emph{implicit} arguments such as the DOM state. Henceforth, we assume that DOM is the only global variable that is allowed to be referred to in the body of the FUT. In general, in order to produce a complete test for our function we have to construct both an appropriate DOM and input arguments.   
+Suppose now that we would like to unit test this function in isolation to the rest of the application. We aim to maximize the branch coverage as a common testing criteria~\cite{zhu1997software}. That is, for each individual branch of the function under test (FUT) \texttt{isGameFinished}, we need to construct a test input that covers the branch and leads to the normal termination of the FUT. A JS function can take \emph{explicit} input arguments (in our case none), but it can also accept \emph{implicit} arguments such as a DOM state. In general, in order to produce a complete test for our function we have to construct both an appropriate DOM and input arguments.   
 
 %Our program has the following branches: $(6,15)$, $(6,7)$, $(7,9)$, $(7,14)$, $(10,11)$, $(10,13)$, $(16,17)$, $(16,18)$. Four tests in 
 
-Figure~\ref{fig.isGameFinished.tests} presents four tests that together provide the full coverage of the FUT. Let us look now at how following the structure of the FUT in Figure~\ref{code.isGameFinished}, we can construct the $T4$ test covering the $(10,11)$ branch. Line~\ref{isGameFinished.getSudoku} expects the input DOM to have an element with the id \textquotesingle\texttt{sudoku}\textquotesingle. In order to enter the for-loop in line~\ref{isGameFinished.inFor.begin}, that element should have at least one child \emph{DIV} tag. The first if-condition in line~\ref{isGameFinished.if1.begin} requires this $div$ to be of the class \textquotesingle\texttt{sudokuSquare}\textquotesingle\ and also have no background color. The second if-condition (line~\ref{isGameFinished.if2.begin}) expects that the $div$ consists of two \emph{SPAN} elements whose \emph{innerHtml} values are not equal. The resulting test $T4$ is shown in Figure~\ref{fig.isGameFinished.tests} and meets all the above conditions. 
+Figure~\ref{fig.isGameFinished.tests} presents four tests that together provide the full coverage of the FUT. Let us take a look at how to construct the \texttt{T4} test, which covers the branch $(10,11)$, by following the structure of the FUT. Line~\ref{isGameFinished.getSudoku} expects the input DOM to have an element with an id \textquotesingle\texttt{sudoku}\textquotesingle. In order to enter the for-loop in line~\ref{isGameFinished.inFor.begin}, that element should have at least one child \emph{div} tag. The first if-condition in line~\ref{isGameFinished.if1.begin} requires this \emph{div} to be of the class \textquotesingle\texttt{square}\textquotesingle\ and also have no background color. The second if-condition (line~\ref{isGameFinished.if2.begin}) expects that the \emph{div} consists of two \emph{span} elements whose \emph{innerHtml} values are not equal. The resulting test \texttt{T4} in Figure~\ref{fig.isGameFinished.tests} meets all the above conditions. 
 
-As we have just seen, even for such a relatively simple example, the construction procedure of a test input is far from trivial because it requires the deep understanding of the program semantics. In practice, web developers often have to deal with a large number of the JS frameworks and libraries freely available on the GitHub whose code is commonly untested and poorly documented. At the same time, unit testing is the most fundamental level of testing and the easiest to implement. It saves the developers from unexpected regressions and often documents the desired behavior of a program.
+As we have just observed, even for such a relatively simple example, the test data generation can be far from trivial procedure because it requires the deep understanding of the program semantics. In practice, web developers often have to deal with a large number of the JS frameworks and libraries freely available on the GitHub whose code is commonly untested and poorly documented. At the same time, unit testing is the most fundamental level of testing and the easiest to implement. It saves the developers from unexpected regressions and often documents the desired behavior of a program.
 
 %% --------------------------------------------------------------------
 \section{Test Generation Framework}
@@ -348,6 +346,15 @@ As we have just seen, even for such a relatively simple example, the constructio
 
 \begin{figure}[t!]
   \centering 
+\tikzset{
+  % add this style to all tikzpicture environments
+  every picture/.append style={
+    % enable scaling of nodes
+    transform shape,
+    % set scale factor
+    scale=1
+  }
+}
   \begin{sequencediagram}[font=\scriptsize]
 
     \renewcommand\unitfactor{0.35}
@@ -409,9 +416,9 @@ As we have just seen, even for such a relatively simple example, the constructio
   \label{fig.framework.architect} 
 \end{figure}
 
-Given a JS function $f$ and a set of branches $\mathbb{B}_f$, the ultimate goal of the testing framework is to find input arguments for $f$ that cover all branches from $\mathbb{B}_f$. Our JS testing framework, called \emph{JEDI}, is a client-server application which under the hood uses a genetic engine for test generation. The general workflow of the framework is depicted as a sequence diagram in Figure~\ref{fig.framework.architect}. The diagram consists of the four interacting components \User, \Server, \Validator, and \Client. The \Server is the key component of the  framework. It is responsible for the \emph{Initialization Phase} and the \emph{Genetic Phase}. Both phases will be covered in detail in Section~\ref{sub.sec.init.phase} and \ref{sub.sec.genetic.phase} respectively.
+Given a JS function $f$ and a set of branches $\mathbb{B}_f$, the ultimate goal of the testing framework is to find input arguments for $f$ that cover all branches from $\mathbb{B}_f$. Our JS testing framework, called \emph{JEDI}, is a client-server application, which uses under the hood a genetic engine, for test generation. The general workflow of the framework is depicted as a sequence diagram in Figure~\ref{fig.framework.architect}. The diagram consists of the four interacting components \User, \Server, \Validator, and \Client. The \Server is the key component of the  framework, responsible for the \emph{Initialization} and \emph{Genetic Phases}, covered in detail in Section~\ref{sub.sec.init.phase} and \ref{sub.sec.genetic.phase} respectively.
 
-Each newly constructed HTML document has to be processed by the \Validator\footnote{\url{https://validator.w3.org/nu/}} which checks its syntactic correctness and reports back the set of identified errors. \Server rejects the document if any errors were revealed and generates a new one until the generated document has no more errors. \Client is a \emph{Node.js}\footnote{\url{https://nodejs.org/en/}} application that is mainly responsible for the execution of the JS code. We use the \emph{jsdom}\footnote{\url{https://github.com/tmpvar/jsdom}} library to model the virtual DOM and simulate the native browser API calls.   
+Each newly constructed HTML document has to be assessed by the \Validator~\cite{htmlvalidator} that checks its syntactic correctness and reports back any identified errors. The document generation process is repeated by the \Server until there are no errors revealed. \Client is a \emph{Node.js}~\cite{nodejs} application that is mainly responsible for the execution of the JS code. We use the \emph{jsdom}~\cite{jsdom} library to model the virtual DOM and simulate the native browser API calls.   
 
 \begin{algorithm}[t!]
   \caption{Initialization Phase}
@@ -438,13 +445,12 @@ Each newly constructed HTML document has to be processed by the \Validator\footn
     }
 \end{algorithm}
 
-Let us take a closer look at the sequence of interactions in Figure~\ref{fig.framework.architect}. As an input for our testing framework, \User has to provide the JS file \emph{fun.js} that contains the function under test (FUT) \emph{fun} annotated with a type signature. Additionally, \User specifies a configuration file \emph{config} that defines various parameters for random and genetic phases, logging etc. Experimentally, we have found an optimal set of input configurations that was used across all experimental objects in Section~\ref{sec.evaluation}. This data is processed by the \Server during the \emph{Initialization Phase}. As an output, we get back the following information about \emph{fun}: the control flow graph (\emph{cfg}), the complete list of its branches (\emph{branches}), the constant info (\emph{cinfo}), the instrumented version \emph{fun} (\emph{ifun}), and the signature (\emph{sig}). The \Server sends a \texttt{POST} request with \emph{ifun} and \emph{sig} to the \Client. Depending on the configured execution mode, the \Server either asks the \User to select a \emph{target} branch or covers all branches one by one in a fixed order. For each branch, our framework enters the \emph{Genetic Loop (Phase)}. Inside of this phase, the framework starts with a randomly generated population (\emph{Random Loop}), and continues to evolve that population (\emph{Fitness Loop}) until either a perfect entity is found or a certain termination criteria is achieved, e.g. the limit on the number of generation attempts. Each candidate in the population has to be evaluated in \emph{Evaluation Loop} by \Client. It matches the candidate $p$ with the type signature \emph{sig} and invokes the instrumented JS function on it: \emph{ifun(p)}. The execution trace along with some supplementary information about the execution are sent back to the \Server, where the \emph{fitness value} is computed. The new population is constructed by combining the results of the \emph{Crossover} and \emph{Mutation Loops}. If a new HTML document is produced somewhere in the genetic phase, it has to be first approved by the \Validator. At the end of the \emph{Fitness Loop}, the candidate with the ``best'' fitness value is reported back to the \User. Once all the branches are covered, the algorithm reaches the end. Below, we elaborate on the details of each individual phase of our test generation framework.
+Let us take a closer look at the sequence of interactions in Figure~\ref{fig.framework.architect}. As an input for our testing framework, \User has to provide a JS file \emph{fun.js} that contains a FUT \emph{fun} annotated with the type signature. Additionally, \User specifies a configuration file \emph{config} that sets various control parameters for the random and genetic phases, logging etc. Experimentally, we have found an optimal configuration that was consistently used in the experimental evaluation in Section~\ref{sec.evaluation}. Once all the data are processed by the \Server in \emph{Initialization Phase}, we get back the following information about \emph{fun}: the control flow graph (\emph{cfg}), the complete list of its branches (\emph{branches}), the constant info (\emph{cinfo}), the instrumented version \emph{fun} (\emph{ifun}), and the signature (\emph{sig}). Then, the \Server sends a \texttt{POST} request with \emph{ifun} and \emph{sig} to the \Client. Depending on the configured execution mode, the \Server either asks the \User to select a \emph{target} branch or covers all branches one by one in a fixed order. For each branch, our framework triggers the \emph{Genetic Loop (Phase)}. Inside of this phase, the framework begins with a randomly generated population (\emph{Random Loop}), and continues to evolve that population (\emph{Fitness Loop}) until either a perfect entity is found or a termination criteria is achieved, e.g. the limit on the number of generation attempts. Any HTML document produced during the genetic phase has to be first approved by the \Validator. Each candidate in the population has to be evaluated in \emph{Evaluation Loop} by \Client. It matches the candidate solution $p$ with the type signature \emph{sig}, and invokes the instrumented JS function as \emph{ifun(p)}. The execution trace along with some auxiliary information is sent back to the \Server, where the final \emph{fitness value} is computed. A new population is constructed by combining the results of the \emph{Crossover} and \emph{Mutation Loops}. At the end of the \emph{Fitness Loop}, the candidate with the ``best'' fitness value is reported back to the \User. Once all the branches are covered, the algorithm terminates. Below, we elaborate on the details of each individual phase of our test generation framework.
 
 \subsection{Initialization Phase}
 \label{sub.sec.init.phase}
 
-During the \emph{Initialization Phase} we analyze the FUT in order to retrieve the data required for the subsequent genetic testing. The main steps of this phase are described in Algorithm~\ref{alg.init}. Given a FUT \emph{fun.js} as an input, we parse the function and its type signature in line~\ref{alg.init.parse.fun.sig}. In order to maximize the chances of generating the fittest candidate in the genetic phase, in line~\ref{alg.init.collect.info} we perform static analysis of the FUT with the purpose to collect information about constants. Such constants include the numeric and string literals, as well as the arguments to the following DOM API methods: \texttt{getElementsByTagName}, \texttt{getElementById}, \texttt{getElementsByClassName}, and \texttt{getElementsByName}
-These methods provide the information about \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} referred from the FUT. The next step is to normalize the FUT before applying any instrumentation (line~\ref{alg.init.transform.ast}), e.g. transform \emph{if-then} branches into \emph{if-then-else}. We instrument the FUT (line~\ref{alg.init.instr}) in order to collect the run-time data such as the execution trace, \emph{the approach level}, \emph{the branch and loop distances} (explained later), and the constants. Upon the \emph{ifun} execution this information is gathered and fed back to the fitness evaluation procedure. Finally, we construct the control-flow graph (line~\ref{alg.init.build.cfg}) and identify all branches of the FUT (line~\ref{alg.init.get.branches}).
+During the \emph{Initialization Phase} we analyze the FUT in order to facilitate the subsequent genetic testing. The main steps of this phase are described in Algorithm~\ref{alg.init}. Given a FUT \emph{fun.js} as an input, we parse the function and its type signature in line~\ref{alg.init.parse.fun.sig}. In order to maximize the chances of generating the fittest candidate, in line~\ref{alg.init.collect.info} we perform static analysis of the FUT with the purpose to collect information about constants, e.g. numeric and string literals. Additionally, we monitor the calls to such DOM API methods as \texttt{getElementsByTagName}, \texttt{getElementById}, and \texttt{getElementsByClassName}. These methods provide the information about \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} referred from the FUT. The next step is to normalize the FUT before applying any instrumentation (line~\ref{alg.init.transform.ast}), e.g. transform \emph{if-then} branches into \emph{if-then-else}. We instrument the FUT (line~\ref{alg.init.instr}) for run-time data collection about the execution trace, \emph{the approach level}, \emph{the branch and loop distances} (explained later), and the constants. Upon the \emph{ifun} execution this information is gathered and fed back to the fitness evaluation procedure. Finally, we construct the control-flow graph (line~\ref{alg.init.build.cfg}) and identify all branches of the FUT (line~\ref{alg.init.get.branches}).
 
 \subsubsection{Supported Types}
 \label{sub.sec.sup.types}
@@ -453,12 +459,9 @@ These methods provide the information about \emph{tags}, \emph{ids}, \emph{class
 \setlength{\grammarparsep}{3pt}
 \footnotesize
 \begin{grammar}
+<JS Type Annotation> ::= /*t <Signature> */ 
 
-<JS Type Annotation> ::= /*t <Signature> */
-
-<Signature> ::= <DOM> : <Type Signature> | <Type Signature>
-
-<DOM> ::= \texttt{dom}
+<Signature> ::= \texttt{dom} : <Type Signature> | <Type Signature>
 
 <Type Signature> ::= <Type> | <Type> : <Type Signature>
 
@@ -471,73 +474,53 @@ These methods provide the information about \emph{tags}, \emph{ids}, \emph{class
 \caption{Grammar of supported JS type annotations}
 \label{fig.js.type.annot}
 \end{figure}
-One assumption made in the paper is the availability of type signatures for JS functions. We believe in the legitimacy of such a request due to the following observations. First, typed variants of JS such as \emph{TypeScript}\footnote{\url{https://www.typescriptlang.org/}} are rising in popularity. Second, there has been an active work on the JS type inference done both in academia~\cite{kristensen2017type} and industry, e.g. Facebook's tool \emph{Flow}\footnote{\url{https://flow.org/}}. 
 
-The grammar of the JS type annotations supported by our test generation framework is shown in Figure~\ref{fig.js.type.annot}. Each type annotation is a signature embedded into a specialized JS type comment (\texttt{/*t...*/}). We distinguish between two kinds of signatures: those which refer to the global DOM and ``ordinary'' JS type signatures. The functions with the former kind expect some \texttt{dom} argument to be passed as the first implicit parameter of the function call. Whereas ordinary JS signature is a non-empty sequence of the JS types. The type can be \emph{Void}, \emph{Primitive} (\texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string}) or \emph{Array} (recursive homogeneous array type).  
+We assume the FUT is equipped with the type signature. The legitimacy of such a requirement can be confirmed by the popularity of \emph{TypeScript}~\cite{typescript}, and advances in the JS type inference \emph{Flow}~\cite{flow}. The supported grammar of type annotations is shown in Figure~\ref{fig.js.type.annot}. Each type annotation is a signature embedded into a specialized JS type comment (\texttt{/*t...*/}). We distinguish between two kinds of signatures: with the reference to the global DOM and ``ordinary'' JS type signatures. The former kind expects the \texttt{dom} terminal to be in place of the first parameter of the function call. Whereas an ordinary JS signature is a non-empty sequence of the JS types. The type can be \emph{Void}, \emph{Primitive} (\texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string}) or \emph{Array} (recursive homogeneous array type).  
 
 \subsubsection{Instrumentation}
 \label{sub.sec.instrument}
 
-Figure~\ref{code.isGameFinished.instr} presents the \texttt{isGameFinished} function after instrumentation. The global variable \emph{trace} in line~\ref{isGameFinished.instr.trace} is an array of labels corresponding to the sequence of executed program statements. All statements have to be traced because each one, in theory, can raise an exception. The \texttt{loopMap} map in line~\ref{isGameFinished.instr.loopMap} approximates the potential number of iterations of the respective for-loop. If no exact bound can be computed, we set it to one. The \texttt{branchDistance} map records the conditional distance~\cite{tracey1998automated} on the branch where the deviation from the target branch has happened.  
+Figure~\ref{code.isGameFinished.instr} presents the \texttt{isGameFinished} function after instrumentation. The global variable \texttt{trace} in line~\ref{isGameFinished.instr.trace} records the sequence of executed statements of the FUT. We have to trace all the statements because each one, in theory, can rise an exception. The \texttt{loopMap} variable in line~\ref{isGameFinished.instr.loopMap} captures the upper bound for the number for-loop iterations. If the exact bound is unknown, it is set to one. The \texttt{branchDistance} variable, computed for the \emph{problem node}, contains the distance~\cite{tracey1998automated} from the target branch.
 
 %TODO: maybe expand this section with the JS type casting for branch distance computation 
 
 \begin{figure}[t]
   \begin{lstlisting}[style=htmlcssjs,language=JavaScript]
 function isGameFinished() {
- trace.push(2); |c \label{isGameFinished.instr.trace} |c
- var obj = document.getElementById("sudoku");
- trace.push(3);
- var subDivs = obj.getElementsByTagName("DIV");
- trace.push(4);
+ trace.push(1);var obj = document.getElementById("sudoku"); |c \label{isGameFinished.instr.trace} |c
+ trace.push(2);var subDivs = obj.getElementsByTagName("DIV");
  var allOk = true;
- loopMap[5] = function () { |c \label{isGameFinished.instr.loopMap} |c
+ loopMap[3] = function () { |c \label{isGameFinished.instr.loopMap} |c
    var no = 0;
    if (subDivs.length || subDivs.length == 0) {
      return Math.abs(no - subDivs.length);
-   }
-   return 1;
- }();
- trace.push(5);
+   }; return 1}();
+ trace.push(3);
  for (var no = 0; no < subDivs.length; no++) {
-  trace.push(6);
-  trace.push(7);
-  if (subDivs[no].className.indexOf("sudokuSquare") >= 0 &&
+  trace.push(4);
+  if (subDivs[no].className.indexOf("square") >= 0 &&
       !subDivs[no].style.backgroundColor) {
-   trace.push(8);
-   branchDistance.push({ 
-    label: 7, 
+   trace.push(5); branchDistance.push({ label: 3, 
     distance: Math.min(
-     abs(subDivs[no].className.indexOf("sudokuSquare"), 0) + _K_, 
+     abs(subDivs[no].className.indexOf("square"),0)+_K_ 
      absZero(subDivs[no].style.backgroundColor))
    });
-   trace.push(9);
-   var spans = subDivs[no].getElementsByTagName("SPAN");
-   trace.push(10);
+   trace.push(6);var spans=subDivs[no].getElementsByTagName("SPAN");
+   trace.push(7);
    if (spans[0].innerHTML != spans[1].innerHTML) {
-    trace.push(11);
-    branchDistance.push({
-     label: 10,
+    trace.push(8); branchDistance.push({ label: 7, 
      distance: abs(spans[0].innerHTML, spans[1].innerHTML)
     });
-    trace.push(12);
-    allOk = false;
-    break;
+    allOk = false; break;
    } else {
-     trace.push(14);
-     branchDistance.push({label: 10,distance: _K_});
+   trace.push(9);branchDistance.push({label:7,distance:_K_});
    }
   } else {
-   trace.push(15);
-   branchDistance.push({
-    label: 7,
+   trace.push(10); branchDistance.push({ label: 3,
     distance: 
-     abs(subDivs[no].className.indexOf("sudokuSquare"), 0) + 
+     abs(subDivs[no].className.indexOf("square"), 0) + 
      absNegZero(subDivs[no].style.backgroundColor)
-   });
-  }
- }
- trace.push(5);
+   });}}
  trace.push(-1);
 }
 \end{lstlisting}
@@ -601,11 +584,11 @@ function isGameFinished() {
   }
 \end{algorithm} 
 
-The heart of our test data generation framework is in the \emph{Genetic Phase}. Although, the main workflow of the underlying genetic algorithm (GA) is fairly standard~\cite{poli2008field}, it has been extended with the concept of  \emph{archive convergence} (Algorithm~\ref{alg.gen}). As an input, we take a configuration file \emph{config}, a target branch $b_n$ of the FUT (which we would like to cover), and a tuple of supplementary parameters computed by Algorithm~\ref{alg.init}. The output consists of the ``best'' fitness score $f^*$ achieved by the population candidate $p^*$.
+The heart of our test data generation framework is in the \emph{Genetic Phase}. Although, the main workflow of the underlying genetic algorithm (GA) is fairly standard~\cite{poli2008field}, it has been extended with the concept of \emph{archive convergence} (Algorithm~\ref{alg.gen}). As an input, we specify a configuration file \emph{config}, a target branch $b_n$ of the FUT, and a tuple of supplementary parameters computed by Algorithm~\ref{alg.init}. The output consists of the ``best'' fitness score $f^*$ achieved by the population candidate $p^*$.
 
-First, we read the \emph{config} file (line~\ref{alg.gen.read.config}) and retrieve the following GA configuration parameters: a population size  ($size_P$), an archive size ($size_A$), the number of generations ($size_G$), crossover ($rate_C$) and mutation ($rate_M$) rates respectively, and a history window size ($size_H$). We start with the initial target $b_n$ (line~\ref{alg.gen.init.target}) and the iteration counter $i$ equal to 0 (line~\ref{alg.gen.iter.count}). We run the genetic search for the target branch (lines~\ref{alg.gen.converged.loop.begin}-\ref{alg.gen.converged.loop.end}) until either the history has not converged, or the generations limit has not been reached. The \emph{archive} variable stores the most fit population candidates observed so far, and the \emph{history} variable records all archives during the generation process. These variables both are empty at the beginning of the evolution (line~\ref{alg.gen.init.archive} and~\ref{alg.gen.init.history} respectively). 
+First, we read the \emph{config} file (line~\ref{alg.gen.read.config}) to retrieve the following GA settings: a population size  ($size_P$), an archive size ($size_A$), the number of generations ($size_G$), crossover ($rate_C$) and mutation ($rate_M$) rates respectively, and a history window size ($size_H$). We start with the initial target $b_n$ (line~\ref{alg.gen.init.target}) and the iteration counter $i$ set to 0 (line~\ref{alg.gen.iter.count}). We run the genetic search for the target branch (lines~\ref{alg.gen.converged.loop.begin}-\ref{alg.gen.converged.loop.end}) until either the history has not converged, or the generations limit has not been exceeded. The \emph{archive} variable stores the most fit population candidates observed so far, and the \emph{history} variable records all the archives during the generation process. The two variables are empty at the beginning of the evolution (line~\ref{alg.gen.init.archive} and~\ref{alg.gen.init.history} respectively). 
 
-The initial population has $size_P$ elements, and it is randomly generated out of the constants from \emph{cinfo} (line~\ref{alg.gen.random.gen}). In the loop~\ref{alg.gen.loop.begin}-\ref{alg.gen.loop.end}, this population is evolved until either a perfect candidate has been found, or the history has converged, or the generation limit $size_G$ has been reached. But first, we need to score the current population (lines~\ref{alg.gen.eval.begin}-\ref{alg.gen.eval.end}). Each candidate $p$ of the population $pop$ represents a concrete substitution for the arguments of the FUT. Thus, it should to be coerced respectively to the type signature $sig$ (line~\ref{alg.gen.make.args}). Afterwards, the instrumented function \emph{ifun} can be called with the coerced arguments $args$ (line~\ref{alg.gen.call.ifun}). This gives us a 4-tuple consisting of an execution trace ($tr$), branch ($d_B$), loop distances ($d_L$), and the set of dynamic constants (\emph{dyncinfo}) collected at the run-time. The next step is actually computing the fitness value for $p$ (line~\ref{alg.gen.eval}). Collected dynamic constants \emph{dyncinfo} are merged with the existing constant pool (line~\ref{alg.gen.eval.end}). Eventually, the scored population is combined with the archive (line~\ref{alg.gen.get.combo}) in $combo$. And it is used for crossover (line~\ref{alg.gen.cross}) and mutation (line~\ref{alg.gen.mut}) steps in order to form the new population (line~\ref{alg.gen.new.pop}). Then, the scored population together with the current archive are sorted by fitness value, and the best $size_A$ elements form the new archive (line~\ref{alg.gen.new.archive}). The element at the top of the archive is the fittest candidate (line~\ref{alg.gen.archive.head}) of the current population. If $f^*$ is a \emph{perfect} candidate, the solution is found (line~\ref{alg.gen.loop.end}). Eventually, the tuple $(f^*, p^*)$ is returned by the algorithm (line~\ref{alg.gen.return}) as solution.
+The initial population of $size_P$ is randomly generated out of the constants from \emph{cinfo} (line~\ref{alg.gen.random.gen}). In the loop~\ref{alg.gen.loop.begin}-\ref{alg.gen.loop.end}, this population is evolved until either a perfect candidate is found, or the history is converged, or the generation limit $size_G$ is reached. But first, we need to score the current population (lines~\ref{alg.gen.eval.begin}-\ref{alg.gen.eval.end}). Each candidate $p$ of the population $pop$ represents a concrete substitution for the arguments of the FUT. Thus, it should to be coerced respectively to the type signature $sig$ (line~\ref{alg.gen.make.args}). Afterwards, the instrumented function \emph{ifun} can be called with the coerced arguments $args$ (line~\ref{alg.gen.call.ifun}). This gives us a 4-tuple consisting of an execution trace ($tr$), branch ($d_B$), loop distances ($d_L$), and the set of dynamic constants (\emph{dyncinfo}) collected at the run-time. The next step is actually computing the fitness value for $p$ (line~\ref{alg.gen.eval}). Collected dynamic constants \emph{dyncinfo} are merged into the existing constant pool (line~\ref{alg.gen.eval.end}). Eventually, the scored population is combined with the archive (line~\ref{alg.gen.get.combo}) in $combo$. It is used for crossover (line~\ref{alg.gen.cross}) and mutation (line~\ref{alg.gen.mut}) steps in order to form the new population (line~\ref{alg.gen.new.pop}). Then, the scored population together with the current archive are sorted by fitness value, and the best $size_A$ elements form the new archive (line~\ref{alg.gen.new.archive}). The element at the top of the archive is the fittest candidate (line~\ref{alg.gen.archive.head}) of the current population. If $f^*$ is a \emph{perfect} candidate, the solution is found (line~\ref{alg.gen.loop.end}). Eventually, the tuple $(f^*, p^*)$ is returned by the algorithm (line~\ref{alg.gen.return}) as solution.
 
 In some cases, when we do not get enough guidance from a fitness function, the genetic algorithm converges to a local minimum~\cite{mcminn2004search}. For example, if one branch is dominated by another, the coverage of the former depends on the coverage of the latter. Unless this relation is encoded in the fitness function somehow, we can not learn about it accidentally. In such a situation, we find ourselves being trapped on a flat space, with a small chance to escape. In order to overcome this problem, we propose a novel --- to the best of our knowledge --- solution based on the idea of \emph{archive convergence}. If during a certain history window, the fitness values of the respective archives have converged to a fixed point, we deem the whole history converged and restart the genetic search with a new search target. At the end of the evolution loop (line~\ref{alg.gen.has.converged}), we verify the convergence of the history within the window of $size_H$. If that condition is true (line~\ref{alg.gen.loop.end}), the genetic algorithm is restarted with a new search target. It consists of the original branch $b_n$ prefixed with a new branch $b$ from which $b_n$ depends on (line~\ref{alg.gen.new.target}). Every time the history converges, we produce a new search target by eventually exhausting all possible executions leading to $b_n$. In practice, we only consider extensions upto length two.
 
@@ -673,7 +656,7 @@ type GenHtmlState = GenState HtmlState Html |c \label{ref.GenHtmlState} |c
   \label{fig.html.arb.def}
 \end{figure}
 
-We want to generate HTML according to the WHATWG\footnote{\url{https://html.spec.whatwg.org}} specification. HTML is an XML-family markup language that uses special tags and attributes to describe document structures on the Web. The recent HTML5 standard defines more than a hundred of tags and attributes which both have to comply with extremely complex logic to constitute  syntactically valid HTML. Browsers are usually tolerant to syntactic errors in HTML. They will silently fix them and display the page anyway.
+We want to generate HTML according to the WHATWG~\cite{htmlspec} specification. HTML is an XML-family markup language that uses special tags and attributes to describe document structures on the Web. The recent HTML5 standard defines more than a hundred of tags and attributes which both have to comply with extremely complex logic to constitute  syntactically valid HTML. Browsers are usually tolerant to syntactic errors in HTML. They will silently fix them and display the page anyway.
 
 In order to support the variability of HTML content, we have developed an eDSL that prescribes the generation of syntactically valid HTML. This was a challenge on its own because the complexity of HTML and the lack of formal specification. Our language is inspired by QuickCheck~\cite{claessen2011quickcheck} and essentially employs it to define an \texttt{Arbitrary} instance for the \texttt{Html} data type. With some technical details left out for the sake of simplicity, Figure~\ref{fig.html.arb.def} shows that definition. The data type \texttt{HtmlState} (lines~\ref{ref.HtmlState.begin}--\ref{ref.HtmlState.end}) represents the internal state of \texttt{Html}. The state is composed of the following components:
 \begin{itemize}
@@ -682,7 +665,7 @@ In order to support the variability of HTML content, we have developed an eDSL t
 \item \texttt{tagFreq} provides statistical information about the frequency of tags in HTML
 \item \texttt{tags}, \texttt{ids} and \texttt{classes} are the initial set of respective HTML elements used for random generation.
 \end{itemize}
-Combined with the random generation monad \texttt{Gen}, this state is wrapped into a state monad transformer~\cite{jones1995functional} (line~\ref{ref.GenState}) which returns the randomly generated \texttt{Html} (line~\ref{ref.GenHtmlState}). Each HTML tag is the value of the \texttt{GenHtmlState} type. Lines~\ref{ref.generateHTML.begin}--\ref{ref.generateHTML.end} give an example of the content generation for the \texttt{<html>} tag. According to its specification\footnote{\url{https://html.spec.whatwg.org/multipage/semantics.html\#the-html-element}}, the tag is composed of the \texttt{<head>} tag followed by the \texttt{<body>} tag. First, we store the state of HTML generation and retrieve the current the depth (lines~\ref{ref.generateHTML.getState} and \ref{ref.generateHTML.getDepth} respectively). Then, if the depth is zero, we immediately return a string literal (line~\ref{ref.generateHTML.returnString}). Otherwise, we decrease the current depth by one (line~\ref{ref.generateHTML.updateState}), generate the contents for \texttt{head} (line~\ref{ref.generateHTML.newHead}) and \texttt{body} (line~\ref{ref.generateHTML.newBody}), and return, finally, their combination (line~\ref{ref.generateHTML.end}).
+Combined with the random generation monad \texttt{Gen}, this state is wrapped into a state monad transformer~\cite{jones1995functional} (line~\ref{ref.GenState}) which returns the randomly generated \texttt{Html} (line~\ref{ref.GenHtmlState}). Each HTML tag is the value of the \texttt{GenHtmlState} type. Lines~\ref{ref.generateHTML.begin}--\ref{ref.generateHTML.end} give an example of the content generation for the \texttt{<html>} tag. According to the specification~\cite{htmlspec}, the tag is composed of the \texttt{<head>} tag followed by the \texttt{<body>} tag. First, we store the state of HTML generation and retrieve the current the depth (lines~\ref{ref.generateHTML.getState} and \ref{ref.generateHTML.getDepth} respectively). Then, if the depth is zero, we immediately return a string literal (line~\ref{ref.generateHTML.returnString}). Otherwise, we decrease the current depth by one (line~\ref{ref.generateHTML.updateState}), generate the contents for \texttt{head} (line~\ref{ref.generateHTML.newHead}) and \texttt{body} (line~\ref{ref.generateHTML.newBody}), and return, finally, their combination (line~\ref{ref.generateHTML.end}).
 
 \subsubsection{Genetic HTML Operations}
 \label{sub.sub.sec.genetic.oper}
@@ -766,29 +749,29 @@ By carrying the evaluation, we would like to answer the following research quest
 \subsection{Case Studies}
 \label{sub.sec.case.studies}
 
-Being one of the most popular programming languages of the modern time, there are ample open source JS projects on the Web. JS applications are written with the help of countless numbers of specialized libraries, and greatly vary in size, complexity and coding style. Moreover, some popular JS web-frameworks, such as jQuery and React\footnote{\url{http://todomvc.com/}}, offer an alternative approach to native DOM manipulation. Before selection, the source code of a potential case-study has to be scrutinized which is a time consuming and labor intensive process. Therefore, we decided to primarily focus on the evaluation of the JS subjects well-established in the related research literature such as \emph{Confix}~\cite{amin:ase15} and \emph{TAJS}\footnote{\url{http://www.brics.dk/TAJS/dom-benchmarks/}}~\cite{dom2011}. Both of these works address the problem of testing of JS application with the reference to the browser DOM. We added additional case-study \emph{mathjs}\footnote{\url{https://github.com/josdejong/mathjs/}} to increase the presence of primitive (browserless) JS code. For each case-study application, we identified several JS functions that are suitable for our testing framework. In the end, our evaluation set included both primitive and DOM related JS functions.
+Being one of the most popular programming languages of the modern time, there are ample open source JS projects on the Web. JS applications are written with the help of countless numbers of specialized libraries, and greatly vary in size, complexity and coding style. Moreover, some popular JS web-frameworks, such as jQuery and React~\cite{todomvc}, offer an alternative approach to native DOM manipulation. Before selection, the source code of a potential case-study has to be scrutinized which is a time consuming and labor intensive process. Therefore, we decided to primarily focus on the evaluation of the JS subjects well-established in the related research literature such as \emph{Confix}~\cite{amin:ase15} and \emph{TAJS}~\cite{dom2011, tajsbenchmarks}. Both of these works address the problem of testing of JS application with the reference to the browser DOM. We added additional case-study \emph{mathjs}~\cite{mathjs} to increase the presence of primitive (browserless) JS code. For each case-study application, we identified several JS functions that are suitable for our testing framework. In the end, our evaluation set included both primitive and DOM related JS functions.
 
-For the sake of space, we chose to exclude from the following presentation the branches and functions the coverage time of which was less than two seconds. In all those cases, the three algorithms studied here have shown equally good results by finding a solution within the first iteration --- random generation. This left us with only 7 case studies contributing to the total number of 14 functions  shown in~Table~\ref{tbl.case.studies}. For each function, we reported the following software metrics\footnote{\url{http://jsmeter.info/} is the tool used for measuring JS code statistics}: lines of code~(\textbf{LOC}), number of branches~(\textbf{BR}), depth~(\textbf{D}), and cyclomatic complexity~(\textbf{CC}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulate with \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively. To answer the research questions posed in the beginning of Section~\ref{sec.evaluation}, we evaluated our test generation framework on the case studies in ~Table~\ref{tbl.case.studies}. 
+For the sake of space, we chose to exclude from the following presentation the branches and functions the coverage time of which was less than two seconds. In all those cases, the three algorithms studied here have shown equally good results by finding a solution within the first iteration --- random generation. This left us with only 7 case studies contributing to the total number of 14 functions  shown in~Table~\ref{tbl.case.studies}. For each function, we reported the following software metrics~\cite{jsmeter} is the tool used for measuring JS code statistics: lines of code~(\textbf{LOC}), number of branches~(\textbf{BR}), depth~(\textbf{D}), and cyclomatic complexity~(\textbf{CC}). The four rightmost columns \textbf{DOM}, \textbf{id}, \textbf{tag} and \textbf{class} indicate if the function manipulate with \emph{dom}, \emph{id}, \emph{tag} or \emph{class} respectively. To answer the research questions posed in the beginning of Section~\ref{sec.evaluation}, we evaluated our test generation framework on the case studies in ~Table~\ref{tbl.case.studies}. 
        
-\setlength\tabcolsep{0.6pt}
-\begin{table}[t]
+\setlength\tabcolsep{1pt}
+\begin{table}[!t]
   \caption{Summary of the Case-Studies}
   \label{tbl.case.studies}
   %\resizebox{\textwidth}{!}{
     \scriptsize
-  \begin{tabular}{l|l|p{3.1cm}|c|c|c|c|c|c|c|c}
+  \begin{tabular}{l|l|p{2.7cm}|c|c|c|c|c|c|c|c}
     \toprule
     \textbf{case-study} & \textbf{function} & \textbf{type signature} & \textbf{LOC} & \textbf{BR} & \textbf{D} & \textbf{CC} & \textbf{DOM} & \textbf{id} & \textbf{tag} & \textbf{class} \\
     \hline
-    sudoku     & helpMe & (dom,int,int)    & 14 & 2 & 3 & 3 & + & + & + & - \\
-    sudoku     & isGameFinished & (dom)    & 10 & 3 & 3 & 4 & + & + & + & + \\
-    sudoku     & newGame & (dom)           & 9  & 1 & 2 & 2 & + & + & + & + \\
-    sudoku     & revealAll & (dom)         & 8  & 0 & 2 & 1 & + & + & + & - \\
+    sudoku     & helpMe & (int,int)    & 14 & 2 & 3 & 3 & + & + & + & - \\
+    sudoku     & isGameFinished & ()    & 10 & 3 & 3 & 4 & + & + & + & + \\
+    sudoku     & newGame & ()           & 9  & 1 & 2 & 2 & + & + & + & + \\
+    sudoku     & revealAll & ()         & 8  & 0 & 2 & 1 & + & + & + & - \\
     %% sudoku     & - & showCell & (dom)          & 8  & 0 & 0 & 1 & + & + & + & - \\
-    sudoku     & shuffleBoard & (dom)      & 23 & 2 & 3 & 3 & + & - & + & - \\
+    sudoku     & shuffleBoard & (int,int)      & 23 & 2 & 3 & 3 & + & - & + & - \\
     %% sudoku     & - & switchLevel & (dom,bool)  & 10 & 1 & 2 & 2 & + & - & + & - \\
     \hline
-    phormer    & toggleInfo & (dom,string)                                                     & 16 & 3 & 1 & 4 & + & + & - & - \\
+    phormer    & toggleInfo & (string)                                                     & 16 & 3 & 1 & 4 & + & + & - & - \\
     %% \multirow{2}{*}{phormer}    & \multirow{2}{*}{-} & \multirow{2}{*}{update} & (dom,int,[string],bool,[string],[string],bool,[string],[string],int) &    &   &   &   &   &   &   & \\
     %%            &   &        &                                                                      & 35 & 5 & 3 & 6 & + & + & - & - \\
     %% phormer    & - & updateIndic & (dom,bool)                                                      & 16 & 3 & 1 & 4 & + & + & - & - \\
@@ -803,11 +786,11 @@ For the sake of space, we chose to exclude from the following presentation the b
     %% apophis    & - & drawShields & (dom,[int])                                                      & 6  & 1 & 2 & 2 & + & + & - & - \\
     %% apophis    & - & fireMeteor & (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) & 15 & 3 & 2 & 4 & - & - & - & - \\
     %% apophis    & - & getReady & (dom,int,int,int,int,int,int)                                       & 16 & 2 & 2 & 3 & + & + & - & - \\
-    apophis    & initShields & (dom,[int],int,int)                                              & 6  & 0 & 1 & 1 & + & + & - & -\\
+    apophis    & initShields & ([int],int,int)                                              & 6  & 0 & 1 & 1 & + & + & - & -\\
     \hline
-    bingbong   & brickJiggler & (dom,int,int,int,[int],[int],[int],[int]) & 7  & 1  & 1 & 2  & + & + & - & - \\
-    bingbong   & doPaddlePower & (dom,int,int)                            & 15 & 2  & 1 & 3  & + & + & - & - \\
-    bingbong   & initBricks & (dom,[int],int,int)                         & 70 & 12 & 4 & 13 & + & + & - & - \\
+    bingbong   & brickJiggler & (int,int,int,[int],[int],[int],[int]) & 7  & 1  & 1 & 2  & + & + & - & - \\
+    bingbong   & doPaddlePower & (int,int)                            & 15 & 2  & 1 & 3  & + & + & - & - \\
+    bingbong   & initBricks & ([int],int,int)                         & 70 & 12 & 4 & 13 & + & + & - & - \\
     %% bingbong   & - & drawLevel & (dom,int,int,int,int)                        & 22 & 2  & 3 & 3  & + & + & - & - \\
     %% bingbong   & - & goPing & (dom,int,int,int)                               & 12 & 2  & 2 & 3  & + & + & - & - \\
     \hline
@@ -1153,15 +1136,41 @@ Another question, related to the efficiency of our framework, is the computation
   }
 }  
 
-\paragraph{\textbf{RQ4 (comparison).}} Authors of \emph{Confix}~\cite{amin:ase15} have proposed three test generation strategies: 
+\paragraph{\textbf{RQ4 (comparison).}} Authors of \emph{Confix}~\cite{amin:ase15} have proposed three strategies for test generation based on: 
 \begin{enumerate*}[label=(\roman*)]
-  \item only use \emph{Confix},
-  \item combine with \emph{Jalangi}~\cite{sen2013jalangi}, and
-  \item combine with manual input. 
+  \item \emph{Confix} entirely,
+  \item combination with \emph{Jalangi}~\cite{sen2013jalangi}, and
+  \item combination with a manual input. 
 \end{enumerate*}
-They reported a relative increase of 2\% and 19\% in branch coverage of the second and third strategies, respectively, over the first one. Even though, 
+They reported a relative increase of 2\% and 19\% in branch coverage of the second and third strategies, respectively, over the first one. Even though, the third strategy performed the best, due to a manually enhanced data set, it is not objectively comparable with a fully automated technique, like \emph{JEDI}. Unfortunately, the open source version of \emph{Confix} we found online~\cite{confixgit} does not support an actual integration with \emph{Jalangi}. Neither, the paper~\cite{amin:ase15} highlights any implementation details of it. Thus in our evaluation Figure~\ref{tbl.confix.compare}, we had to fall back on the plain \emph{Confix} test generation. \Jedi seeks for a normal program termination during test generation, which is a stronger coverage criterion in comparison with only reaching a target branch provided by \Confix. Although, \Confix performs much faster (under 10 seconds), it is unable to discover hard to cover branches especially in terms of strong coverage.
 
-The mix with manual showed 19\% increase  the best result, it is not objectively suitable for the comparison with the fully automated technique, like \emph{JEDI}. Unfortunately, the open source version of the \emph{Confix} we found~\footnote{\url{confix}} online does not provide actual integration with \emph{Jalangi}. Neither, the paper~\cite{amin:ase15} highlights any technical details of the integration. Also it only gave 2\% of improvement relative to  
+ 
+\begin{table}[!t]
+  \caption{Evaluation of \emph{Confix} (\#BR - total branches, \#BRC weak/strong - covered branches with exceptional/normal termination)}
+  \label{tbl.confix.compare}
+    \footnotesize
+    \centering
+    \begin{tabular}{l|l|c|c|c|c|c}
+      \toprule
+      \textbf{case-study} & \textbf{function} & \textbf{\#BR} & \textbf{\#C (weak)} & \textbf{\#C strong} & \textbf{\#tests} & \textbf{time (sec.)} \\
+      \hline
+      sudoku & helpMe          & 5  & 4 (80\%)  & 4 (80\%)  & 2 & 5 \\
+      sudoku & isGameFinished  & 5  & 2 (40\%)  & 2 (40\%)  & 2 & 5 \\
+      sudoku & newGame         & 3  & 3 (100\%) & 3 (100\%) & 4 & 6 \\
+      sudoku & revealAll       & 2  & 2 (100\%) & 0 (0\%)   & 6 & 11 \\
+      sudoku & shuffleBoard    & 7  & 5 (71\%)  & 0 (0\%)   & 2 & 5  \\
+      \hline
+      phormer & toogleInfo     & 4  & 2 (50\%)  & 2 (50\%)  & 3 & 5 \\
+      \hline
+      apophis & initShields    & 1  & 0 (0\%)   & 0 (0\%)   & 1 & 6 \\
+      \hline
+      bingbong & brickJiggler  & 2  & 0 (0\%)   & 0 (0\%)   & 1  & 3 \\
+      bingbong & doPaddlePower & 4  & 2 (50\%)  & 2 (50\%)  & 1  & 4 \\
+      bingbong & initBricks    & 18 & 3 (17\%)  & 0 (0\%) & 1  & 3 \\
+      \bottomrule
+    \end{tabular}
+\end{table}
+
 
 \paragraph{\textbf{Threats to Validity}}
 The \emph{construct validity} threat comes from the measurements we use in our evaluation: branch coverage and execution time. Although, the branch coverage is a common criterion used in practice, the actual fault finding capability is considered a stronger indication of testing adequacy. Reaching a target branch is only part of the problem: we also need an oracle to discriminate the program's output. In this paper, we strike for so called ``natural'' oracles leading to exceptions. Using a stronger oracle for validation is future work. Another practical aspect of the test generation is the test case size, since it can both complicate the readability and increase the execution time. To mitigate this issue we configured the GA to start evolution with the candidates of small sizes, which helps to prevent on unnecessary data explosion. Additional measures that could be applied is a minimization procedure, aka \emph{delta debugging}~\cite{misherghi2006hdd}, to the GA result.

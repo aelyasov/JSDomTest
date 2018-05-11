@@ -1,0 +1,245 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%\usepackage{cite}
+\usepackage[noadjust]{cite}
+\renewcommand{\citepunct}{,\penalty\citepunctpenalty\,}
+\renewcommand{\citedash}{--}% optionally
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{tablefootnote}
+\usepackage{syntax}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs} % For formal tables
+\usepackage{tikz}
+\usetikzlibrary{arrows,shadows,positioning,decorations.pathmorphing}
+\usepackage{pgf-umlsd}
+\usepackage{tikz-uml}
+\usepackage{hyperref}
+\usepackage{upquote}
+\usepackage{listings}
+\usepackage{lsthaskell}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{algorithmic}
+\usepackage{longtable}
+% \usepackage{subcaption}
+% \usepackage{subfig}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage[titlenotnumbered, linesnumbered, ruled]{algorithm2e} % language for algorithm description
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = red, %Colour of internal links
+  citecolor    = green %Colour of citations
+}
+
+
+\ifCLASSOPTIONcompsoc 
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\else
+\usepackage[caption=false,font=footnotesize]{subfig}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ltblue}{rgb}{0,0.4,0.4}
+\definecolor{dkblue}{rgb}{0,0.1,0.6}
+\definecolor{dkgreen}{rgb}{0,0.4,0}
+\definecolor{dkviolet}{rgb}{0.3,0,0.5}
+\definecolor{dkred}{rgb}{0.5,0,0}
+
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\definecolor{orange}{rgb}{1,0.45,0.13}		
+\definecolor{olive}{rgb}{0.17,0.59,0.20}
+\definecolor{brown}{rgb}{0.69,0.31,0.31}
+\definecolor{purple}{rgb}{0.38,0.18,0.81}
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}
+\definecolor{lightred}{rgb}{1,0.4,0.5}
+% CSS
+\lstdefinelanguage{CSS}{
+  keywords={color,background-image:,margin,padding,font,weight,display,position,top,left,right,bottom,list,style,border,size,white,space,min,width, transition:, transform:, transition-property, transition-duration, transition-timing-function},	
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  alsoletter={:},
+  alsodigit={-}
+}
+
+% JavaScript
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, for},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,	
+  alsoletter={<>=-},	
+  morecomment=[s]{<!-}{-->},
+  morestring=[b]'
+  tag=[s],
+  otherkeywords={
+  % General
+  >,
+  % Standard tags
+	<!DOCTYPE,
+  </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+	% body
+	</body, <body,
+	% Divs
+	</div, <div, </div>, 
+	% Paragraphs
+	</p, <p, </p>,
+	% scripts
+	</script, <script,
+  % More tags...
+  <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article
+  },
+  ndkeywords={
+  % General
+  =,
+  % HTML attributes
+  charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+  % SVG attributes
+  fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+  % properties
+  margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
+	% CSS3 properties
+  transform:, -moz-transform:, -webkit-transform:,
+  animation:, -webkit-animation:,
+  transition:,  transition-duration:, transition-property:, transition-timing-function:,
+  }
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  tagstyle=\color{blue},
+  markfirstintag=true,
+  sensitive=true,
+  alsoletter={<>=-},	
+  morecomment=[s]{<!--}{-->},
+  % tag=[s],
+  %% morestring=[b]'',
+  morestring=[b]',
+  ndkeywords={
+    % General
+    =,
+    % HTML attributes
+    id=, class= 
+  }
+}
+
+
+\lstdefinestyle{htmlcssjs} {%
+  % General design
+  backgroundcolor=\color{editorGray},
+  basicstyle={\scriptsize\ttfamily},   
+  frame=tb,
+  % line-numbers
+  xleftmargin={0.75cm},
+  numbers=left,
+  stepnumber=1,
+  firstnumber=1,
+  numberfirstline=true,	
+  % Code design
+  identifierstyle=\color{black},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{editorGreen}\bfseries,
+  stringstyle=\color{editorOcher}\ttfamily,
+  commentstyle=\color{brown}\ttfamily,
+  % Code
+  language=JavaScript,
+  alsolanguage=HTML5,
+  alsodigit={.:;},	
+  tabsize=2,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  extendedchars=true,
+  breaklines=true,
+  escapechar=|c
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\listfiles % used to output the versions of all files being used by the late
+
+\newcommand{\Server}{\emph{Server}\xspace}
+\newcommand{\Client}{\emph{Client}\xspace}
+\newcommand{\User}{\emph{User}\xspace}
+\newcommand{\Validator}{\emph{Validator}\xspace}
+\newcommand{\thenBr}{\text{then}}
+\newcommand{\elseBr}{\text{else}}
+\newcommand{\inFor}{\text{inFor}}
+\newcommand{\inWhile}{\text{while}}
+\newcommand{\un}[1]{\underline{#1}}
+\newcommand{\Random}{\mathbb{R}}
+\newcommand{\Genetic}{\mathbb{G}}
+\newcommand{\RGenetic}{\mathbb{G}_{10}}
+\newcommand{\Confix}{\emph{Confix}\xspace}
+\newcommand{\Jalangi}{\emph{Jalangi}\xspace}
+\newcommand{\Jedi}{\emph{JEDI}\xspace}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Search-Based Test Data Generation for JavaScript Functions that Interact with the DOM
+\thanks{Identify applicable funding agency here. If none, delete this.}
+}
+
+\author{
+\IEEEauthorblockN{Alexander Elyasov}
+\IEEEauthorblockA{\textit{Utrecht University} \\
+Utrecht, The Netherlands \\
+a.elyasov@uu.nl}
+\and
+\IEEEauthorblockN{Wishnu Prasetya}
+\IEEEauthorblockA{\textit{Utrecht University} \\
+Utrecht, The Netherlands \\
+s.w.b.prasetya@uu.nl}
+\and
+\IEEEauthorblockN{Jurriaan Hage}
+\IEEEauthorblockA{\textit{Utrecht University} \\
+Utrecht, The Netherlands \\
+j.hage@uu.nl}
+}
+
+\maketitle
+
+\begin{abstract}
+The popularity of JavaScript is continuously growing. Together with HTML and CSS, it forms the core technology stack for web development. Because of the dynamic nature and complex interplay with HTML, JS applications are often error-prone and vulnerable. Despite the active research efforts to devise intricate static and dynamic analyses to facilitate JS testing, the problem of test data generation for JS applications interacting with the DOM has not yet been addressed. In this paper, we present a novel \textbf{J}avascript \textbf{E}volution-based testing framework with \textbf{D}OM as an \textbf{I}nput, called \emph{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function including the global DOM state. We conducted an empirical evaluation to study the effectiveness and efficiency of our testing framework. It shows that the \emph{genetic with restart} algorithm, proposed in this paper, is able to achieve complete branch coverage for all experimental subjects, taking on average 19 seconds per branch.
+\end{abstract}
+
+\begin{IEEEkeywords}
+JavaScript, search-based testing, branch coverage
+\end{IEEEkeywords}
+
+\input{introduction}
+\input{example}
+\input{framework}
+\input{evaluation}
+\input{related-work}
+\input{conclusions}
+
+\bibliographystyle{IEEEtran}
+\bibliography{issre2018} 
+
+
+\end{document}

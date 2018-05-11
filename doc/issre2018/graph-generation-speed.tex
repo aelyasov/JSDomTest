@@ -1,0 +1,28 @@
+  \begin{tikzpicture}[scale=0.9,rotate=-90]
+    \begin{axis}[
+        every axis plot post/.style={/pgf/number format/fixed},
+        ybar,
+        ymin=0,ymax=4,
+        width=11cm,height=3.3cm,
+        bar width=4pt,
+        enlarge x limits=0.05,
+        legend style={at={(0.05,1.2)},anchor=north west,font=\footnotesize,legend columns=-1},
+        legend cell align={left},
+        ylabel={time (sec.)},
+        symbolic x coords={helpMe*,isGameFinished*,newGame*,revealAll*,shuffleBoard*,toggleInfo*,isValidCard,isValidVISA,initShields*,brickJiggler*,doPaddlePower*,initBricks*,do\_draw,prob\_gamma},
+        %xtick=data,
+        nodes near coords,
+        every node near coord/.append style={rotate=90, anchor=west, font=\footnotesize},
+        % every node near coord/.append style={font=\footnotesize},
+        axis lines*=left,
+        clip=false,
+        % x tick label style={rotate=90,anchor=east,font=\footnotesize\bfseries},
+        xticklabels={,,},
+        y tick label style={font=\footnotesize}
+      ]
+      \addplot[fill=blue] coordinates {(helpMe*,1.24) (isGameFinished*,0.83) (newGame*,0.78) (revealAll*,0.83) (shuffleBoard*,1.93) (toggleInfo*,1) (isValidCard,0.51) (isValidVISA,0.47) (initShields*,0.83) (brickJiggler*,1.14) (doPaddlePower*,0.79)  (initBricks*,1.68) (do\_draw,2.33) (prob\_gamma,0.35)};
+      \addplot[fill=red] coordinates {(helpMe*,0.77)  (isGameFinished*,0.94)  (newGame*,0.81)  (revealAll*,1) (shuffleBoard*,1.73) (toggleInfo*,1) (isValidCard,0.38)   (isValidVISA,0.38)  (initShields*,0.83) (brickJiggler*,0.67) (doPaddlePower*,0.69) (initBricks*,0.8) (do\_draw,3.38) (prob\_gamma,0.52)};
+      \addplot[fill=yellow] coordinates {(helpMe*,0.9)  (isGameFinished*,1)  (newGame*,1) (revealAll*,1.13) (shuffleBoard*,1.71) (toggleInfo*,0.66) (isValidCard,0.48)  (isValidVISA,0.25)  (initShields*,0.5) (brickJiggler*,0.75) (doPaddlePower*,0.64) (initBricks*,0.98) (do\_draw,2.69) (prob\_gamma,0.5)};
+      \legend{$\Random$,$\Genetic$,$\RGenetic$}
+    \end{axis}
+  \end{tikzpicture}
