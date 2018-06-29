@@ -17,13 +17,19 @@ import Analysis.CFG.Label (assignUniqueIdsSt)
 import System.Process (system)
 import System.FilePath.Posix (takeDirectory, (</>))
 import Debug.Trace (trace)
+import Data.Either (either)
+
+-- import Analysis.CFG.Fitness -- remove import after tests
+-- import Data.Graph.Analysis.Algorithms.Common
 
 
 
-getAllBranches :: Gr NLab ELab -> [[LEdge ELab]]
-getAllBranches gr = foldr (\nd edges -> if (outdeg gr nd > 1) then (out gr nd):edges else edges ) [] [minNode .. maxNode]
+getAllBranches :: Gr NLab ELab -> [LEdge ELab]
+getAllBranches gr = if null branches then [(-1, -1, "")] else branches
   where
+    filterOnlyIfBranches = filter (\(_,_,lab) -> lab == "then" || lab == "else" || lab == "inFor" || lab == "inWhile")
     (minNode, maxNode) = nodeRange gr
+    branches = filterOnlyIfBranches $ foldr (\nd edges -> if (outdeg gr nd > 1) then (out gr nd) ++ edges else edges ) [] [minNode .. maxNode]
 
 ppCFG :: FilePath -> IO ()
 ppCFG fp = do
@@ -50,7 +56,7 @@ mkTestCFG fp = do
   stms <- liftM (unJavaScript . fst . flip runState 0 . assignUniqueIdsSt) $ parseFromFile fp
   -- print stms
   let coll@(nodes', edges') = collectEdges stms (0,-1,[]) (-1)
-      nodes = (0, "entry"):(-1, "exit"):nodes'
+      nodes = (0, "0: entry"):(-1, "-1: exit"):nodes'
       edges = (0, 1, ""):edges'
       graph = mkGraph nodes edges :: Gr NLab ELab
   return graph
@@ -58,7 +64,7 @@ mkTestCFG fp = do
 enrichCollectedEdges :: [Statement (SourcePos, SLab)] -> ([LNode NLab], [LEdge ELab])
 enrichCollectedEdges stms = 
     let (nodes', edges') = collectEdges stms (0,-1,[]) (-1)
-    in  ((0, "entry"):(-1, "exit"):nodes', (0, 1, ""):edges')
+    in  ((0, "0: entry"):(-1, "-1: exit"):nodes', (0, 1, ""):edges')
 
 
 -- | the function collectEdges takes the list of statements, pair of labels (block entry and exit), end label and returns edges together with the nodes of the CFG graph

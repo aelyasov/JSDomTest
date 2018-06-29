@@ -30,6 +30,7 @@ import Data.Monoid
 import Test.QuickCheck
 import Test.QuickCheck.Monadic
 import Safe (fromJustNote)
+import Debug.Trace
 
 
 checkErrorsInResponse :: ByteString -> Maybe Text

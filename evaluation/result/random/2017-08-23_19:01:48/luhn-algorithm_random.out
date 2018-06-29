@@ -1,0 +1,708 @@
+[2017-08-24 08:43:04 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:04 CEST  CRITICAL] Started iteration #1 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:05 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["mYku",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:05 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:05 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:05 CEST  CRITICAL] Best entity (GA): ["mYku",True]
+[2017-08-24 08:43:05 CEST  CRITICAL] Completed iteration #1 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:05 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:05 CEST  CRITICAL] Started iteration #1 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:05 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["8q",False]
+string: 2
+boolean: False
+[2017-08-24 08:43:05 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:05 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:05 CEST  CRITICAL] Best entity (GA): ["8q",False]
+[2017-08-24 08:43:05 CEST  CRITICAL] Completed iteration #1 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:05 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:05 CEST  CRITICAL] Started iteration #1 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:06 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["OL2",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:06 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:06 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:06 CEST  CRITICAL] Best entity (GA): ["OL2",True]
+[2017-08-24 08:43:06 CEST  CRITICAL] Completed iteration #1 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:06 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:06 CEST  CRITICAL] Started iteration #1 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:06 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["7",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:06 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:06 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:06 CEST  CRITICAL] Best entity (GA): ["7",True]
+[2017-08-24 08:43:06 CEST  CRITICAL] Completed iteration #1 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:06 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:06 CEST  CRITICAL] Started iteration #1 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:06 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["Xf5",False]
+string: 3
+boolean: False
+[2017-08-24 08:43:06 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:06 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:06 CEST  CRITICAL] Best entity (GA): ["Xf5",False]
+[2017-08-24 08:43:06 CEST  CRITICAL] Completed iteration #1 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:06 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:06 CEST  CRITICAL] Started iteration #1 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:07 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["cO6",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:07 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:07 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:07 CEST  CRITICAL] Best entity (GA): ["cO6",True]
+[2017-08-24 08:43:07 CEST  CRITICAL] Completed iteration #1 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:07 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:07 CEST  CRITICAL] Started iteration #1 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:07 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["4",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:07 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:07 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:07 CEST  CRITICAL] Best entity (GA): ["4",True]
+[2017-08-24 08:43:07 CEST  CRITICAL] Completed iteration #1 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:07 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:07 CEST  CRITICAL] Started iteration #2 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:08 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["Qxre",False]
+string: 4
+boolean: False
+[2017-08-24 08:43:08 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:08 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:08 CEST  CRITICAL] Best entity (GA): ["Qxre",False]
+[2017-08-24 08:43:08 CEST  CRITICAL] Completed iteration #2 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:08 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:08 CEST  CRITICAL] Started iteration #2 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:08 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["0wfKY",False]
+string: 5
+boolean: False
+[2017-08-24 08:43:08 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:08 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:08 CEST  CRITICAL] Best entity (GA): ["0wfKY",False]
+[2017-08-24 08:43:08 CEST  CRITICAL] Completed iteration #2 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:08 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:08 CEST  CRITICAL] Started iteration #2 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:08 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["2",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:08 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:08 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:08 CEST  CRITICAL] Best entity (GA): ["2",True]
+[2017-08-24 08:43:08 CEST  CRITICAL] Completed iteration #2 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:08 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:08 CEST  CRITICAL] Started iteration #2 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:09 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["VT7",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:09 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:09 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:09 CEST  CRITICAL] Best entity (GA): ["VT7",True]
+[2017-08-24 08:43:09 CEST  CRITICAL] Completed iteration #2 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:09 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:09 CEST  CRITICAL] Started iteration #2 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:09 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["9Oyb9",False]
+string: 5
+boolean: False
+[2017-08-24 08:43:09 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:09 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:09 CEST  CRITICAL] Best entity (GA): ["9Oyb9",False]
+[2017-08-24 08:43:09 CEST  CRITICAL] Completed iteration #2 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:09 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:09 CEST  CRITICAL] Started iteration #2 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:10 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["mcEs9",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:10 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:10 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:10 CEST  CRITICAL] Best entity (GA): ["mcEs9",True]
+[2017-08-24 08:43:10 CEST  CRITICAL] Completed iteration #2 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:10 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:10 CEST  CRITICAL] Started iteration #2 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:10 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4166666666666667,0.0,0)
+["78",False]
+string: 2
+boolean: False
+[2017-08-24 08:43:10 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,0.0,0)
+["YQ662",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:10 CEST  CRITICAL] Perfect entity found, finished after 1 generations!
+[2017-08-24 08:43:10 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:10 CEST  CRITICAL] Best entity (GA): ["YQ662",True]
+[2017-08-24 08:43:10 CEST  CRITICAL] Completed iteration #2 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:10 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:10 CEST  CRITICAL] Started iteration #3 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:11 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["JtO",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:11 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:11 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:11 CEST  CRITICAL] Best entity (GA): ["JtO",True]
+[2017-08-24 08:43:11 CEST  CRITICAL] Completed iteration #3 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:11 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:11 CEST  CRITICAL] Started iteration #3 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:11 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["x",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:11 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:11 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:11 CEST  CRITICAL] Best entity (GA): ["x",True]
+[2017-08-24 08:43:11 CEST  CRITICAL] Completed iteration #3 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:11 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:11 CEST  CRITICAL] Started iteration #3 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:12 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["1",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:12 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:12 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:12 CEST  CRITICAL] Best entity (GA): ["1",True]
+[2017-08-24 08:43:12 CEST  CRITICAL] Completed iteration #3 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:12 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:12 CEST  CRITICAL] Started iteration #3 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:12 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["xy21",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:12 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:12 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:12 CEST  CRITICAL] Best entity (GA): ["xy21",True]
+[2017-08-24 08:43:12 CEST  CRITICAL] Completed iteration #3 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:12 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:12 CEST  CRITICAL] Started iteration #3 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:12 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["K4",False]
+string: 2
+boolean: False
+[2017-08-24 08:43:12 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:12 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:12 CEST  CRITICAL] Best entity (GA): ["K4",False]
+[2017-08-24 08:43:12 CEST  CRITICAL] Completed iteration #3 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:12 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:12 CEST  CRITICAL] Started iteration #3 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:13 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["Fa6",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:13 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:13 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:13 CEST  CRITICAL] Best entity (GA): ["Fa6",True]
+[2017-08-24 08:43:13 CEST  CRITICAL] Completed iteration #3 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:13 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:13 CEST  CRITICAL] Started iteration #3 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:13 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["NMsl2",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:13 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:13 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:13 CEST  CRITICAL] Best entity (GA): ["NMsl2",True]
+[2017-08-24 08:43:13 CEST  CRITICAL] Completed iteration #3 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:13 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:13 CEST  CRITICAL] Started iteration #4 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:14 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["c",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:14 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:14 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:14 CEST  CRITICAL] Best entity (GA): ["c",True]
+[2017-08-24 08:43:14 CEST  CRITICAL] Completed iteration #4 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:14 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:14 CEST  CRITICAL] Started iteration #4 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:14 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["Manj",False]
+string: 4
+boolean: False
+[2017-08-24 08:43:14 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:14 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:14 CEST  CRITICAL] Best entity (GA): ["Manj",False]
+[2017-08-24 08:43:14 CEST  CRITICAL] Completed iteration #4 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:14 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:14 CEST  CRITICAL] Started iteration #4 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:14 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["FkHK7",False]
+string: 5
+boolean: False
+[2017-08-24 08:43:14 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:14 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:14 CEST  CRITICAL] Best entity (GA): ["FkHK7",False]
+[2017-08-24 08:43:14 CEST  CRITICAL] Completed iteration #4 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:14 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:14 CEST  CRITICAL] Started iteration #4 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:15 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["iHa5",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:15 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:15 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:15 CEST  CRITICAL] Best entity (GA): ["iHa5",True]
+[2017-08-24 08:43:15 CEST  CRITICAL] Completed iteration #4 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:15 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:15 CEST  CRITICAL] Started iteration #4 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:15 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["M0",False]
+string: 2
+boolean: False
+[2017-08-24 08:43:15 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:15 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:15 CEST  CRITICAL] Best entity (GA): ["M0",False]
+[2017-08-24 08:43:15 CEST  CRITICAL] Completed iteration #4 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:15 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:15 CEST  CRITICAL] Started iteration #4 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:15 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["7",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:15 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:15 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:15 CEST  CRITICAL] Best entity (GA): ["7",True]
+[2017-08-24 08:43:15 CEST  CRITICAL] Completed iteration #4 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:15 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:15 CEST  CRITICAL] Started iteration #4 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:16 CEST  CRITICAL] Best entity (gen. 0) fitness: (4.25,0.0,0)
+["a8",False]
+string: 2
+boolean: False
+[2017-08-24 08:43:16 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,0.0,0)
+["0",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:16 CEST  CRITICAL] Perfect entity found, finished after 1 generations!
+[2017-08-24 08:43:16 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:16 CEST  CRITICAL] Best entity (GA): ["0",True]
+[2017-08-24 08:43:16 CEST  CRITICAL] Completed iteration #4 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:16 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:16 CEST  CRITICAL] Started iteration #5 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:17 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["nec",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:17 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:17 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:17 CEST  CRITICAL] Best entity (GA): ["nec",True]
+[2017-08-24 08:43:17 CEST  CRITICAL] Completed iteration #5 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:17 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:17 CEST  CRITICAL] Started iteration #5 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:17 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["O7E",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:17 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:17 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:17 CEST  CRITICAL] Best entity (GA): ["O7E",True]
+[2017-08-24 08:43:17 CEST  CRITICAL] Completed iteration #5 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:17 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:17 CEST  CRITICAL] Started iteration #5 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:17 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["I83",False]
+string: 3
+boolean: False
+[2017-08-24 08:43:17 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:17 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:17 CEST  CRITICAL] Best entity (GA): ["I83",False]
+[2017-08-24 08:43:17 CEST  CRITICAL] Completed iteration #5 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:17 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:17 CEST  CRITICAL] Started iteration #5 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:18 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["dSz8",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:18 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:18 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:18 CEST  CRITICAL] Best entity (GA): ["dSz8",True]
+[2017-08-24 08:43:18 CEST  CRITICAL] Completed iteration #5 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:18 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:18 CEST  CRITICAL] Started iteration #5 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:18 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["3tCF3",False]
+string: 5
+boolean: False
+[2017-08-24 08:43:18 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:18 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:18 CEST  CRITICAL] Best entity (GA): ["3tCF3",False]
+[2017-08-24 08:43:18 CEST  CRITICAL] Completed iteration #5 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:18 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:18 CEST  CRITICAL] Started iteration #5 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:19 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["VpXl8",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:19 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:19 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:19 CEST  CRITICAL] Best entity (GA): ["VpXl8",True]
+[2017-08-24 08:43:19 CEST  CRITICAL] Completed iteration #5 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:19 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:19 CEST  CRITICAL] Started iteration #5 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:19 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["rW3",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:19 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:19 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:19 CEST  CRITICAL] Best entity (GA): ["rW3",True]
+[2017-08-24 08:43:19 CEST  CRITICAL] Completed iteration #5 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:19 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:19 CEST  CRITICAL] Started iteration #6 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:19 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["o",False]
+string: 1
+boolean: False
+[2017-08-24 08:43:19 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:19 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:19 CEST  CRITICAL] Best entity (GA): ["o",False]
+[2017-08-24 08:43:19 CEST  CRITICAL] Completed iteration #6 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:19 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:19 CEST  CRITICAL] Started iteration #6 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:20 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["lQF",False]
+string: 3
+boolean: False
+[2017-08-24 08:43:20 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:20 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:20 CEST  CRITICAL] Best entity (GA): ["lQF",False]
+[2017-08-24 08:43:20 CEST  CRITICAL] Completed iteration #6 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:20 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:20 CEST  CRITICAL] Started iteration #6 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:20 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["Wl3",False]
+string: 3
+boolean: False
+[2017-08-24 08:43:20 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:20 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:20 CEST  CRITICAL] Best entity (GA): ["Wl3",False]
+[2017-08-24 08:43:20 CEST  CRITICAL] Completed iteration #6 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:20 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:20 CEST  CRITICAL] Started iteration #6 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:21 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["6",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:21 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:21 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:21 CEST  CRITICAL] Best entity (GA): ["6",True]
+[2017-08-24 08:43:21 CEST  CRITICAL] Completed iteration #6 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:21 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:21 CEST  CRITICAL] Started iteration #6 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:21 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["BQ5",False]
+string: 3
+boolean: False
+[2017-08-24 08:43:21 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:21 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:21 CEST  CRITICAL] Best entity (GA): ["BQ5",False]
+[2017-08-24 08:43:21 CEST  CRITICAL] Completed iteration #6 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:21 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:21 CEST  CRITICAL] Started iteration #6 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:21 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["EF8",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:21 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:21 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:21 CEST  CRITICAL] Best entity (GA): ["EF8",True]
+[2017-08-24 08:43:21 CEST  CRITICAL] Completed iteration #6 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:21 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:21 CEST  CRITICAL] Started iteration #6 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:22 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["hzTA4",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:22 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:22 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:22 CEST  CRITICAL] Best entity (GA): ["hzTA4",True]
+[2017-08-24 08:43:22 CEST  CRITICAL] Completed iteration #6 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:22 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:22 CEST  CRITICAL] Started iteration #7 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:22 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["gdnm6",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:22 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:22 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:22 CEST  CRITICAL] Best entity (GA): ["gdnm6",True]
+[2017-08-24 08:43:22 CEST  CRITICAL] Completed iteration #7 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:22 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:22 CEST  CRITICAL] Started iteration #7 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:23 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["Z",False]
+string: 1
+boolean: False
+[2017-08-24 08:43:23 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:23 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:23 CEST  CRITICAL] Best entity (GA): ["Z",False]
+[2017-08-24 08:43:23 CEST  CRITICAL] Completed iteration #7 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:23 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:23 CEST  CRITICAL] Started iteration #7 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:23 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["6",False]
+string: 1
+boolean: False
+[2017-08-24 08:43:23 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:23 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:23 CEST  CRITICAL] Best entity (GA): ["6",False]
+[2017-08-24 08:43:23 CEST  CRITICAL] Completed iteration #7 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:23 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:23 CEST  CRITICAL] Started iteration #7 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:24 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["1",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:24 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:24 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:24 CEST  CRITICAL] Best entity (GA): ["1",True]
+[2017-08-24 08:43:24 CEST  CRITICAL] Completed iteration #7 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:24 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:24 CEST  CRITICAL] Started iteration #7 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:24 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["p7Qk2",False]
+string: 5
+boolean: False
+[2017-08-24 08:43:24 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:24 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:24 CEST  CRITICAL] Best entity (GA): ["p7Qk2",False]
+[2017-08-24 08:43:24 CEST  CRITICAL] Completed iteration #7 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:24 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:24 CEST  CRITICAL] Started iteration #7 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:24 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["J6",True]
+string: 2
+boolean: True
+[2017-08-24 08:43:24 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:24 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:24 CEST  CRITICAL] Best entity (GA): ["J6",True]
+[2017-08-24 08:43:24 CEST  CRITICAL] Completed iteration #7 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:24 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:24 CEST  CRITICAL] Started iteration #7 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:25 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["Ey60",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:25 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:25 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:25 CEST  CRITICAL] Best entity (GA): ["Ey60",True]
+[2017-08-24 08:43:25 CEST  CRITICAL] Completed iteration #7 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:25 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:25 CEST  CRITICAL] Started iteration #8 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:25 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["uZ",False]
+string: 2
+boolean: False
+[2017-08-24 08:43:25 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:25 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:25 CEST  CRITICAL] Best entity (GA): ["uZ",False]
+[2017-08-24 08:43:25 CEST  CRITICAL] Completed iteration #8 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:25 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:25 CEST  CRITICAL] Started iteration #8 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:26 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["LP9",False]
+string: 3
+boolean: False
+[2017-08-24 08:43:26 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:26 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:26 CEST  CRITICAL] Best entity (GA): ["LP9",False]
+[2017-08-24 08:43:26 CEST  CRITICAL] Completed iteration #8 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:26 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:26 CEST  CRITICAL] Started iteration #8 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:26 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["x6",False]
+string: 2
+boolean: False
+[2017-08-24 08:43:26 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:26 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:26 CEST  CRITICAL] Best entity (GA): ["x6",False]
+[2017-08-24 08:43:26 CEST  CRITICAL] Completed iteration #8 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:26 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:26 CEST  CRITICAL] Started iteration #8 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:26 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["zBB5",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:26 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:26 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:26 CEST  CRITICAL] Best entity (GA): ["zBB5",True]
+[2017-08-24 08:43:26 CEST  CRITICAL] Completed iteration #8 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:26 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:26 CEST  CRITICAL] Started iteration #8 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:27 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["N2G78",False]
+string: 5
+boolean: False
+[2017-08-24 08:43:27 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:27 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:27 CEST  CRITICAL] Best entity (GA): ["N2G78",False]
+[2017-08-24 08:43:27 CEST  CRITICAL] Completed iteration #8 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:27 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:27 CEST  CRITICAL] Started iteration #8 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:27 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["4qQ5",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:27 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:27 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:27 CEST  CRITICAL] Best entity (GA): ["4qQ5",True]
+[2017-08-24 08:43:27 CEST  CRITICAL] Completed iteration #8 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:27 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:27 CEST  CRITICAL] Started iteration #8 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:28 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["LPQ1",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:28 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:28 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:28 CEST  CRITICAL] Best entity (GA): ["LPQ1",True]
+[2017-08-24 08:43:28 CEST  CRITICAL] Completed iteration #8 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:28 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:28 CEST  CRITICAL] Started iteration #9 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:28 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["DePl",True]
+string: 4
+boolean: True
+[2017-08-24 08:43:28 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:28 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:28 CEST  CRITICAL] Best entity (GA): ["DePl",True]
+[2017-08-24 08:43:28 CEST  CRITICAL] Completed iteration #9 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:28 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:28 CEST  CRITICAL] Started iteration #9 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:29 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["qEZUE",False]
+string: 5
+boolean: False
+[2017-08-24 08:43:29 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:29 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:29 CEST  CRITICAL] Best entity (GA): ["qEZUE",False]
+[2017-08-24 08:43:29 CEST  CRITICAL] Completed iteration #9 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:29 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:29 CEST  CRITICAL] Started iteration #9 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:29 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["vHV2",False]
+string: 4
+boolean: False
+[2017-08-24 08:43:29 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:29 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:29 CEST  CRITICAL] Best entity (GA): ["vHV2",False]
+[2017-08-24 08:43:29 CEST  CRITICAL] Completed iteration #9 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:29 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:29 CEST  CRITICAL] Started iteration #9 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:29 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["hi1",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:29 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:29 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:29 CEST  CRITICAL] Best entity (GA): ["hi1",True]
+[2017-08-24 08:43:29 CEST  CRITICAL] Completed iteration #9 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:29 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:29 CEST  CRITICAL] Started iteration #9 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:30 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["2",False]
+string: 1
+boolean: False
+[2017-08-24 08:43:30 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:30 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:30 CEST  CRITICAL] Best entity (GA): ["2",False]
+[2017-08-24 08:43:30 CEST  CRITICAL] Completed iteration #9 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:30 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:30 CEST  CRITICAL] Started iteration #9 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:30 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["0T8",True]
+string: 3
+boolean: True
+[2017-08-24 08:43:30 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:30 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:30 CEST  CRITICAL] Best entity (GA): ["0T8",True]
+[2017-08-24 08:43:30 CEST  CRITICAL] Completed iteration #9 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:30 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:30 CEST  CRITICAL] Started iteration #9 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:31 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["okxW3",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:31 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:31 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:31 CEST  CRITICAL] Best entity (GA): ["okxW3",True]
+[2017-08-24 08:43:31 CEST  CRITICAL] Completed iteration #9 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:31 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:31 CEST  CRITICAL] Started iteration #10 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:31 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["4",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:31 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:31 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:31 CEST  CRITICAL] Best entity (GA): ["4",True]
+[2017-08-24 08:43:31 CEST  CRITICAL] Completed iteration #10 to cover branch: #1 -> (3,4,"inWhile")
+[2017-08-24 08:43:31 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:31 CEST  CRITICAL] Started iteration #10 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:31 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["c",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:31 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:31 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:31 CEST  CRITICAL] Best entity (GA): ["c",True]
+[2017-08-24 08:43:31 CEST  CRITICAL] Completed iteration #10 to cover branch: #2 -> (6,7,"then")
+[2017-08-24 08:43:31 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:31 CEST  CRITICAL] Started iteration #10 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:32 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["3",False]
+string: 1
+boolean: False
+[2017-08-24 08:43:32 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:32 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:32 CEST  CRITICAL] Best entity (GA): ["3",False]
+[2017-08-24 08:43:32 CEST  CRITICAL] Completed iteration #10 to cover branch: #3 -> (6,9,"else")
+[2017-08-24 08:43:32 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:32 CEST  CRITICAL] Started iteration #10 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:32 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["LNHV1",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:32 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:32 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:32 CEST  CRITICAL] Best entity (GA): ["LNHV1",True]
+[2017-08-24 08:43:32 CEST  CRITICAL] Completed iteration #10 to cover branch: #4 -> (10,11,"then")
+[2017-08-24 08:43:32 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:32 CEST  CRITICAL] Started iteration #10 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:33 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["6",False]
+string: 1
+boolean: False
+[2017-08-24 08:43:33 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:33 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:33 CEST  CRITICAL] Best entity (GA): ["6",False]
+[2017-08-24 08:43:33 CEST  CRITICAL] Completed iteration #10 to cover branch: #5 -> (10,17,"else")
+[2017-08-24 08:43:33 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:33 CEST  CRITICAL] Started iteration #10 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:33 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["PPsK7",True]
+string: 5
+boolean: True
+[2017-08-24 08:43:33 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:33 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:33 CEST  CRITICAL] Best entity (GA): ["PPsK7",True]
+[2017-08-24 08:43:33 CEST  CRITICAL] Completed iteration #10 to cover branch: #6 -> (13,14,"then")
+[2017-08-24 08:43:33 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-24 08:43:33 CEST  CRITICAL] Started iteration #10 to cover branch: #7 -> (13,16,"else")
+[2017-08-24 08:43:34 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+["4",True]
+string: 1
+boolean: True
+[2017-08-24 08:43:34 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-24 08:43:34 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-24 08:43:34 CEST  CRITICAL] Best entity (GA): ["4",True]
+[2017-08-24 08:43:34 CEST  CRITICAL] Completed iteration #10 to cover branch: #7 -> (13,16,"else")

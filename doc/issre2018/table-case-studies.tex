@@ -1,0 +1,52 @@
+\setlength\tabcolsep{1pt}
+\begin{table}[!t]
+  \caption{Summary of the Case-Studies}
+  \label{tbl.case.studies}
+  %\resizebox{\textwidth}{!}{
+    \scriptsize
+    \centering
+  \begin{tabular}{l|l|c|c|c|c|c|c|c|c}
+    \toprule
+    \textbf{case-study} & \textbf{function} & \textbf{loc} & \textbf{c} & \textbf{d} & \textbf{cc} & \textbf{dom} & \textbf{id} & \textbf{tag} & \textbf{class} \\
+    \hline
+    sudoku     & helpMe(int,int)    & 14 & 2 & 3 & 3 & + & + & + & - \\
+    sudoku     & isGameFinished()    & 10 & 3 & 3 & 4 & + & + & + & + \\
+    sudoku     & newGame()           & 9  & 1 & 2 & 2 & + & + & + & + \\
+    sudoku     & revealAll()         & 8  & 0 & 2 & 1 & + & + & + & - \\
+    %% sudoku     & - & showCell & (dom)          & 8  & 0 & 0 & 1 & + & + & + & - \\
+    sudoku     & shuffleBoard(int,int)      & 23 & 2 & 3 & 3 & + & - & + & - \\
+    %% sudoku     & - & switchLevel & (dom,bool)  & 10 & 1 & 2 & 2 & + & - & + & - \\
+    \hline
+    phormer    & toggleInfo(string)                                                     & 16 & 3 & 1 & 4 & + & + & - & - \\
+    %% \multirow{2}{*}{phormer}    & \multirow{2}{*}{-} & \multirow{2}{*}{update} & (dom,int,[string],bool,[string],[string],bool,[string],[string],int) &    &   &   &   &   &   &   & \\
+    %%            &   &        &                                                                      & 35 & 5 & 3 & 6 & + & + & - & - \\
+    %% phormer    & - & updateIndic & (dom,bool)                                                      & 16 & 3 & 1 & 4 & + & + & - & - \\
+    \hline
+    %% hotel RS   & - & RequiredField & (dom,[string])  & 11 & 2 & 2 & 5 & + & + & - & - \\
+    hotel RS   & isValidCard([int])           & 17 & 2 & 2 & 5 & - & - & - & - \\
+    %% hotel RS   & - & isValidMasterCard & ([int])     & 5  & 4 & 1 & 7 & - & - & - & - \\
+    hotel RS   & isValidVISA([int])           & 6  & 3 & 1 & 6 & - & - & - & - \\
+    %% hotel RS   & - & validateNumber & (dom,string)   & 7  & 1 & 1 & 4 & + & + & - & - \\
+    \hline
+    %% apophis    & - & doRain & (dom,string,int,int,int,int,int,int)                                  & 10 & 3 & 2 & 4 & + & + & - & -\\
+    %% apophis    & - & drawShields & (dom,[int])                                                      & 6  & 1 & 2 & 2 & + & + & - & - \\
+    %% apophis    & - & fireMeteor & (int,[int],int,[int],[int],[int],int,int,[int],[int],int,int,int) & 15 & 3 & 2 & 4 & - & - & - & - \\
+    %% apophis    & - & getReady & (dom,int,int,int,int,int,int)                                       & 16 & 2 & 2 & 3 & + & + & - & - \\
+    apophis    & initShields([int],int,int)                                              & 6  & 0 & 1 & 1 & + & + & - & -\\
+    \hline
+    bingbong   & brickJiggler(int,int,[int],[int],[int],[int]) & 7  & 1  & 1 & 2  & + & + & - & - \\
+    bingbong   & doPaddlePower(int,int)                            & 15 & 2  & 1 & 3  & + & + & - & - \\
+    bingbong   & initBricks(int,[int],[int],[int],[int],int,[string])                         & 70 & 12 & 4 & 13 & + & + & - & - \\
+    %% bingbong   & - & drawLevel & (dom,int,int,int,int)                        & 22 & 2  & 3 & 3  & + & + & - & - \\
+    %% bingbong   & - & goPing & (dom,int,int,int)                               & 12 & 2  & 2 & 3  & + & + & - & - \\
+    \hline
+    burncanvas & do\_draw(int,int,int,int,int,int,int)                 & 40 & 12 & 2 & 14 & - & - & - & - \\
+    %% \hline
+    %% cs-in-js   & - & luhn-algorithm & (string,bool)                          & 20 & 3 & 2 & 6 & -  & -  & - & - \\
+    %% cs-in-js   & - & quicksort-partition & ([int],int,int)                   & 21 & 1 & 1 & 3 & -  & -  & - & - \\
+    \hline
+    mathjs     & prob\_gamma(float)                                   & 57 & 8  & 2 & 16 & - & - & - & - \\
+    \bottomrule
+  \end{tabular}
+%}
+\end{table}

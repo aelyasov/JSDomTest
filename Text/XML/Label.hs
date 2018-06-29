@@ -5,17 +5,18 @@ module Text.XML.Label ( labelXMLElement
                       , findElementInDocumentByLabel
                       , insertElementInDocumentByLabel
                       , deleteNodeInDocumentByLabel
-                      , removeLabelsFromDocument
+                      , removeAttributeFromDocument
+                      , removeAttributeFromElementEverywhere
+                      , assignAttributeToElement
                       ) where
 
-import Data.Generics (extM, everywhere', everything, somewhere, orElse, mkQ, mkMp, mkT)
+import Data.Generics (extM, everywhere', everything, somewhere, orElse, mkQ, mkMp, mkT, gsize)
 import SYB.Data.Generics.Schemes (everywhereM')
 import Text.XML (Element(..), Document (..), Name(..), Node(..))
 import Control.Monad.State (State, runState, get, put)
 import Data.Map.Lazy (insert, lookup, delete, empty)
-import Data.Text (pack)
+import Data.Text (pack, Text)
 import Prelude hiding (lookup)
-
 
 labelXMLElement :: Element -> (Element, Int)
 labelXMLElement el = runState (labelXMLElementState el) 0
@@ -70,6 +71,7 @@ deleteNodeInDocumentByLabel :: Int -> Document -> Maybe Document
 deleteNodeInDocumentByLabel lab = somewhere (mkMp (deleteNodeByLabel lab))
 -- deleteNodeInDocumentByLabel lab doc = insertElementInDocumentByLabel lab (Element "br" empty []) doc  
 
+
 deleteNodeByLabel :: Int -> Node -> Maybe Node
 deleteNodeByLabel lab (NodeElement el) =
   case lookup (Name "label" Nothing Nothing) (elementAttributes el) of
@@ -78,12 +80,35 @@ deleteNodeByLabel lab (NodeElement el) =
    Nothing                          -> Nothing
 deleteNodeByLabel _ node = Nothing
 
-removeLabelsFromDocument :: Document -> Document
-removeLabelsFromDocument = everywhere' (mkT removeLebelFromElement)
 
-removeLebelFromElement :: Element -> Element
-removeLebelFromElement element =
+removeAttributeFromDocument :: String -> Document -> Document
+removeAttributeFromDocument attrName = everywhere' (mkT (removeAttributeFromElement attrName))
+
+
+removeAttributeFromElementEverywhere :: String -> Element -> Element
+removeAttributeFromElementEverywhere attrName = everywhere' (mkT (removeAttributeFromElement attrName))
+
+
+removeAttributeFromElement :: String -> Element -> Element
+removeAttributeFromElement attrName element =
   let attrs = elementAttributes element
-      attrsWithoutLabel = (Name "label" Nothing Nothing) `delete` attrs
-  in  element{elementAttributes = attrsWithoutLabel}  
+      attrsWithoutLabel = (Name (pack attrName) Nothing Nothing) `delete` attrs
+  in  element{elementAttributes = attrsWithoutLabel}
+
+
+assignAttributeToElement :: Int -> String -> String -> Element -> Element
+assignAttributeToElement label attrName attrValue element =
+  case somewhere (mkMp (assignAttrToElem label attrName attrValue)) element of
+    Just elem' -> elem'
+    Nothing    -> error $ "assignAttributeToElement: unable to find label# " ++ (show label) 
+  where
+    assignAttrToElem :: Int -> String -> String -> Element -> Maybe Element
+    assignAttrToElem lab aName aValue el =
+      let attrs = elementAttributes el
+      in  case lookup (Name "label" Nothing Nothing) attrs of
+        Just l | l ==  (pack $ show lab) -> Just el{elementAttributes = insert (Name (pack aName) Nothing Nothing) (pack aValue) attrs }
+        otherwise                        -> Nothing
+
+  
+
 

@@ -1,0 +1,369 @@
+%% --------------------------------------------------------------------
+\section{Test Generation Framework}
+\label{sec.framework}
+%% --------------------------------------------------------------------
+
+\begin{figure}[!t]
+  \centering
+\tikzset{
+  % add this style to all tikzpicture environments
+  every picture/.append style={
+    % enable scaling of nodes
+    transform shape,
+    % set scale factor
+    scale=1
+  }
+}
+  \begin{sequencediagram}[font=\scriptsize]
+
+    \renewcommand\unitfactor{0.35}
+    \newinst{user}{\textbf{User}}
+    \newinst{server}{\textbf{Server}}
+    \newinst[1]{validator}{\textbf{Validator}}
+    \newinst{client}{\textbf{Client}}
+
+    \begin{call}{user}{fun.js + config}{server}{\textbf{end}}
+      \begin{call}{server}{Initialize(fun.js)}{server}{(cfg, branches, cinfo, ifun, sig)}
+      \end{call}
+
+      \begin{call}{server}{POST /init \{ifun, sig\}}{client}{status}
+      \end{call}
+
+      \begin{call}{server}{Select(branches)}{user}{$\text{branches}'$}
+      \end{call}
+
+      \begin{sdblock}{\textbf{Genetic Loop}}{\scriptsize \hspace{8mm}$\text{branch} \in \text{branches}'$}
+        \begin{sdblock}{\textbf{Random Loop}}{\scriptsize errors $>$ 0}
+          \begin{call}{server}{pop = Random(cinfo, config)}{validator}{errors}
+          \end{call}
+          \prelevel
+        \end{sdblock}
+
+        \begin{sdblock}{\textbf{Fitness Loop}}{\scriptsize (fitness $\neq$ 0) $\vee$ gen.limit}
+
+          \begin{sdblock}{\textbf{Evaluation Loop}}{\scriptsize p $\in$ pop}
+            \begin{call}{server}{POST /genetic \{p\}}{client}{response = ifun(p: sig)}
+            \end{call}
+
+            \begin{callself}{server}{Evaluate(branch, cfg, response)}{fitness}
+            \end{callself}
+            \prelevel
+          \end{sdblock}
+
+          \begin{sdblock}{\textbf{Crossover Loop}}{\scriptsize errors $>$ 0}
+            \begin{call}{server}{cross = Crossover(cinfo, pop)}{validator}{errors}
+            \end{call}
+            \prelevel
+          \end{sdblock}
+
+          \begin{sdblock}{\textbf{Mutation Loop}}{\scriptsize errors $>$ 0}
+            \begin{call}{server}{mut = Mutation(cinfo, pop)}{validator}{errors}
+            \end{call}
+            \prelevel
+          \end{sdblock}
+
+          \begin{callself}{server}{pop = cross $\cup$ mut}{pop}
+          \end{callself}
+          \prelevel
+        \end{sdblock}
+        \mess{server}{best fitness}{user}
+
+      \end{sdblock}
+    \end{call}
+  \end{sequencediagram}
+  \caption{The architecture of the test framework}
+  \label{fig.framework.architect}
+\end{figure}
+
+Given a JS function $f$ and a set of branches $\mathbb{B}_f$, the ultimate goal of the testing framework is to find input arguments for $f$ that cover all branches from $\mathbb{B}_f$. Our JS testing framework, called \emph{JEDI}, is a client-server application, which under the hood uses a genetic engine for test generation. The general workflow of the framework is depicted as a sequence diagram in Figure~\ref{fig.framework.architect}. The diagram consists of the four interacting components \User, \Server, \Validator, and \Client. The \Server is the key component of the  framework. It is responsible for the \emph{Initialization} and \emph{Genetic Phases}, which are covered in detail in Section~\ref{sub.sec.init.phase} and \ref{sub.sec.genetic.phase}, respectively.
+
+Each newly constructed HTML document has to be assessed by the \Validator~\cite{htmlvalidator}. It checks the document for syntactic correctness and reports back any identified errors. The document generation process is repeated by the \Server until there are no more errors revealed. \Client is a \emph{Node.js}~\cite{nodejs} application that is mainly responsible for the execution of the JS code. We use the \emph{jsdom}~\cite{jsdom} library to model the virtual DOM and simulate the native browser API calls.
+
+\begin{algorithm}[!t]
+  \caption{Initialization Phase}
+  \label{alg.init}
+  \algsetup{linenosize=\tiny}
+  \scriptsize
+  \DontPrintSemicolon
+  \SetAlgoVlined
+  \SetKwInOut{Input}{Input}
+  \SetKwInOut{Output}{Output}
+  \SetKwInOut{Require}{Require}
+  \SetKwProg{Fn}{Function}{}{}
+  \Input{JS file $fun.js$ with FUT and type annotation }
+  \Output{Tuple $(cfg, branches, cinfo, ifun, sig)$}
+  \Fn{$Initialize(fun.js)$}{
+
+    $(ast, sig) \longleftarrow ParseFuncAndSig(fun.js)$\label{alg.init.parse.fun.sig}\;
+    $cinfo \longleftarrow GetConstantInfo(ast)$\label{alg.init.collect.info}\;
+    $nast \longleftarrow NormalizeAST(ast)$\label{alg.init.transform.ast}\;
+    $ifun \longleftarrow Instrument(nast)$\label{alg.init.instr}\;
+    $cfg \longleftarrow BuildCFG(nast)$\label{alg.init.build.cfg}\;
+    $branches \longleftarrow GetBranches(cfg)$\label{alg.init.get.branches}\;
+    \Return{$(cfg, branches, cinfo, ifun, sig)$}
+    }
+\end{algorithm}
+
+Let us take a closer look at the sequence of interactions in Figure~\ref{fig.framework.architect}. As an input for our testing framework, \User has to provide a JS file \emph{fun.js} that contains a FUT \emph{fun} annotated with the type signature. Additionally, \User specifies a configuration file \emph{config} that sets various control parameters for the random and genetic generation, logging and so on. Experimentally, we have found an optimal configuration that we consistently used in the experimental evaluation in Section~\ref{sec.evaluation}. Once all the data are processed by the \Server in \emph{Initialization Phase}, we get back the following information about \emph{fun}: the control flow graph (\emph{cfg}), the complete list of its branches (\emph{branches}), the constant info (\emph{cinfo}), the instrumented version \emph{fun} (\emph{ifun}), and the signature (\emph{sig}). Then, the \Server sends a \texttt{POST} request with \emph{ifun} and \emph{sig} to the \Client. Depending on the configured execution mode, the \Server either asks the \User to select a \emph{target} branch or covers all branches one by one in a fixed order. For each branch, our framework enters the \emph{Genetic Loop (Phase)}. Inside of this phase, the framework starts with a randomly generated population (\emph{Random Loop}), and continues to evolve that population (\emph{Fitness Loop}) until either a perfect entity is found or a termination criteria is achieved, e.g. the limit on the number of generation attempts. Any HTML document produced during the genetic phase should be approved by the \Validator. Each candidate in the population is evaluated in \emph{Evaluation Loop} by \Client. First, the candidate solution $p$ is matched with the type signature \emph{sig}. Then, the instrumented function \emph{ifun} is called (\emph{ifun(p)}). The execution trace along with some auxiliary information is sent back to the \Server, where the final \emph{fitness value} is computed. A new population is constructed by combining the results of the \emph{Crossover} and \emph{Mutation Loops}. At the end of the \emph{Fitness Loop}, the candidate with the ``best'' fitness value is reported back to the \User. Once all the branches are covered, the algorithm terminates. Below, we elaborate on the details of each individual phase of our test generation framework.
+
+\subsection{Initialization Phase}
+\label{sub.sec.init.phase}
+
+During the \emph{Initialization Phase} we analyze the FUT in order to facilitate the subsequent genetic testing. The main steps of this phase are described in Algorithm~\ref{alg.init}. Given a FUT \emph{fun.js} as an input, we parse the function and its type signature in line~\ref{alg.init.parse.fun.sig}. In order to maximize the chances of generating the fittest candidate, in line~\ref{alg.init.collect.info} we perform static analysis of the FUT with the purpose to collect information about constants such as numeric and string literals. Additionally, we monitor the calls to the functions \texttt{getElementsByTagName}, \texttt{getElementById}, and \texttt{getElementsByClassName} and other DOM API methods. They provide the information about \emph{tags}, \emph{ids}, \emph{classes} and \emph{names} referred from the FUT. The next step is to normalize the FUT before applying any instrumentation (line~\ref{alg.init.transform.ast}), e.g. transform \emph{if-then} branches into \emph{if-then-else}. We instrument the FUT (line~\ref{alg.init.instr}) in order to collect at run-time the values of the execution trace, \emph{the approach level}, \emph{the branch and loop distances} (explained later), and the constants. Upon the \emph{ifun} execution this information will be gathered and fed back to the fitness evaluation procedure. Finally, we construct the control-flow graph (line~\ref{alg.init.build.cfg}) and return all branches of the FUT (line~\ref{alg.init.get.branches}).
+
+\subsubsection{Supported Types}
+\label{sub.sec.sup.types}
+
+\begin{figure}[!t]
+\setlength{\grammarparsep}{3pt}
+\scriptsize
+\begin{grammar}
+<JS Type Annotation> ::= /*t <Signature> */
+
+<Signature> ::= \texttt{dom} : <Type Signature> | <Type Signature>
+
+<Type Signature> ::= <Type> | <Type> : <Type Signature>
+
+<Type> ::= <Void Type> | <Primitive Type> | <Array Type>
+
+<Primitive Type> ::= \texttt{bool} | \texttt{int} | \texttt{float} | \texttt{string}
+
+<Array Type> ::= [ <Primitive Type> ] | [ <Array Type> ]
+\end{grammar}
+\caption{Grammar of supported JS type annotations}
+\label{fig.js.type.annot}
+\end{figure}
+
+We assume the FUT is equipped with the type signature. The legitimacy of such requirement can be confirmed by the popularity of \emph{TypeScript}~\cite{typescript}, and advances in the JS type inference, e.g. \emph{Flow}~\cite{flow}. The supported grammar of type annotations is shown in Figure~\ref{fig.js.type.annot}. Each type annotation is a signature expressed as a specialized JS type comment (\texttt{/*t...*/}). We distinguish between two kinds of signatures: with the reference to the global DOM and ``ordinary'' JS type signatures. The former kind expects the \texttt{dom} terminal to be in place of the first parameter of the function call. Whereas an ordinary JS signature is a non-empty sequence of the JS types. The type can be \emph{Void}, \emph{Primitive} (\texttt{bool}, \texttt{int}, \texttt{float}, \texttt{string}) or \emph{Array} (recursive homogeneous array type).
+
+%% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%%        LEFT OUT DUE TO LACK OF SPACE
+%% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\subsubsection{Instrumentation}
+\label{sub.sec.instrument}
+
+Figure~\ref{code.isGameFinished.instr} presents the \texttt{isGameFinished} function after instrumentation. The global variable \texttt{trace} in line~\ref{isGameFinished.instr.trace} records the sequence of executed statements of the FUT. We have to trace all the statements because each one, in theory, can rise an exception. The \texttt{loopMap} variable in line~\ref{isGameFinished.instr.loopMap} captures the upper bound for the number for-loop iterations. If the exact bound is unknown, it is set to one. The \texttt{branchDistance} variable, computed for the \emph{problem node}, contains the distance~\cite{tracey1998automated} from the target branch.
+
+%TODO: maybe expand this section with the JS type casting for branch distance computation
+
+\begin{figure}[!t]
+  \tiny
+  \begin{lstlisting}[style=htmlcssjs,language=JavaScript,basicstyle={\tiny\ttfamily}]
+function isGameFinished() {
+ trace.push(1);var obj = document.getElementById("sudoku"); |c \label{isGameFinished.instr.trace} |c
+ trace.push(2);var subDivs = obj.getElementsByTagName("DIV");
+ var allOk = true;
+ loopMap[3] = function () { |c \label{isGameFinished.instr.loopMap} |c
+   var no = 0;
+   if (subDivs.length || subDivs.length == 0) {
+     return Math.abs(no - subDivs.length);
+   }; return 1}();
+ trace.push(3);
+ for (var no = 0; no < subDivs.length; no++) {
+  trace.push(4);
+  if (subDivs[no].className.indexOf("square") >= 0 &&
+      !subDivs[no].style.backgroundColor) {
+   trace.push(5); branchDistance.push({ label: 3,
+    distance: Math.min(
+     abs(subDivs[no].className.indexOf("square"),0)+_K_
+     absZero(subDivs[no].style.backgroundColor))
+   });
+   trace.push(6);var spans=subDivs[no].getElementsByTagName("SPAN");
+   trace.push(7);
+   if (spans[0].innerHTML != spans[1].innerHTML) {
+    trace.push(8); branchDistance.push({ label: 7,
+     distance: abs(spans[0].innerHTML, spans[1].innerHTML)
+    });
+    allOk = false; break;
+   } else {
+   trace.push(9);branchDistance.push({label:7,distance:_K_});
+   }
+  } else {
+   trace.push(10); branchDistance.push({ label: 3,
+    distance:
+     abs(subDivs[no].className.indexOf("square"), 0) +
+     absNegZero(subDivs[no].style.backgroundColor)
+   });}}
+ trace.push(-1); return allOK;
+}
+\end{lstlisting}
+  \caption{Instrumented version of \texttt{isGameFinished.js} }
+  \label{code.isGameFinished.instr}
+\end{figure}
+
+\subsection{Genetic Phase}
+\label{sub.sec.genetic.phase}
+
+\begin{algorithm}[!t]
+  \caption{Genetic Phase}
+  \label{alg.gen}
+  \algsetup{linenosize=\tiny}
+  \scriptsize
+  \DontPrintSemicolon
+  \SetAlgoVlined
+  \SetKwInOut{Input}{Input}
+  \SetKwInOut{Output}{Output}
+  \SetKwInOut{Require}{Require}
+  \SetKwProg{Fn}{Function}{}{}
+  \Input{
+    $config$ is a GA configuration file\\
+    $b_n$ is a target branch of FUT\\
+    $(cfg, branches, cinfo, ifun, sig)$ output of Algorithm~\ref{alg.init}
+  }
+  \Output{
+     $(f^*, p^*)$ the best population candidate and its fitness score
+  }
+  \Fn{$Genetic(b_n, cfg, cinfo, config, ifun, sig)$}{
+    $(size_P, size_A, size_G, rate_C, rate_M,size_{H}) \longleftarrow Read(config)$\label{alg.gen.read.config}\;
+    $target \longleftarrow b_n$\label{alg.gen.init.target}\;
+    $i \longleftarrow 0 $\label{alg.gen.iter.count}\;
+    $historyConverged \longleftarrow true$\;
+    \Repeat{$\neg historyConverged \vee (i > size_G)$}{\label{alg.gen.converged.loop.begin}
+      $archive \longleftarrow \emptyset$\label{alg.gen.init.archive}\;
+      $history \longleftarrow \emptyset$\label{alg.gen.init.history}\;
+      $pop \longleftarrow Random(cinfo, size_P)$\label{alg.gen.random.gen}\;
+      \Repeat{$isPerfect(f^*) \vee historyConverged \vee (i > size_G)$}{\label{alg.gen.loop.begin}
+        $scoredPop \longleftarrow \emptyset$\;
+        $history \longleftarrow history \cup archive$\;
+        \ForAll{$p \in pop$}{\label{alg.gen.eval.begin}
+          $args \longleftarrow CoerceArguments(p, sig)$\label{alg.gen.make.args}\;
+          $(tr, d_B, d_L, dyncinfo) \longleftarrow ifun(args)$\label{alg.gen.call.ifun}\;
+          $f \longleftarrow Score(target, cfg, tr, d_B, d_L)$\label{alg.gen.eval}\;
+          $cinfo \longleftarrow cinfo \cup dyncinfo$\label{alg.gen.eval.end}\;
+          $scoredPop \longleftarrow (f, p) \cup scoredPop$\;
+        }
+        $combo \longleftarrow scoredPop \cup archive$\label{alg.gen.get.combo}\;
+        $cross \longleftarrow Crossover(combo, rate_C)$\label{alg.gen.cross}\;
+        $mut \longleftarrow Mutation(combo, cinfo, rate_M)$\label{alg.gen.mut}\;
+        $pop \longleftarrow cross \cup mut$\label{alg.gen.new.pop}\;
+        $archive \longleftarrow SortArchive(combo, size_A)$\label{alg.gen.new.archive}\;
+        $(f^*, p^*) \longleftarrow head(archive)$\label{alg.gen.archive.head}\;
+        $i \longleftarrow i + 1$\;
+        $historyConverged \longleftarrow isConverged(history, size_H)$ \label{alg.gen.has.converged}\;
+      }\label{alg.gen.loop.end}
+      $target \longleftarrow NewTarget(branches, b_n)$\label{alg.gen.new.target}\;
+    }\label{alg.gen.converged.loop.end}
+    \Return{$(f^*, p^*)$}\label{alg.gen.return}
+  }
+\end{algorithm}
+
+The heart of our test data generation framework is in the \emph{Genetic Phase}. Although, the main workflow of the underlying genetic algorithm (GA) is fairly standard~\cite{poli2008field}, it has been extended with the concept of \emph{archive convergence} (Algorithm~\ref{alg.gen}). As an input, we pass a configuration file \emph{config}, a target branch $b_n$ of the FUT, and a tuple of supplementary parameters computed by Algorithm~\ref{alg.init}. The output consists of the ``best'' fitness score $f^*$ achieved by the population candidate $p^*$.
+
+First, we read the \emph{config} file (line~\ref{alg.gen.read.config}) to retrieve the following GA settings: a population size  ($size_P$), an archive size ($size_A$), the number of generations ($size_G$), crossover ($rate_C$) and mutation ($rate_M$) rates respectively, and a history window size ($size_H$). We start with the initial target $b_n$ (line~\ref{alg.gen.init.target}) and the iteration counter $i$ set to 0 (line~\ref{alg.gen.iter.count}). We run the genetic search for the target branch (lines~\ref{alg.gen.converged.loop.begin}-\ref{alg.gen.converged.loop.end}) until either the history has not converged, or the generations limit has not been exceeded. The \emph{archive} variable stores the most fit population candidates observed so far, and the \emph{history} variable records all the archives during the generation process. These variables are empty at the beginning of the evolution (line~\ref{alg.gen.init.archive} and~\ref{alg.gen.init.history} respectively).
+
+The initial population of the $size_P$ elements is randomly generated out of the constants from \emph{cinfo} (line~\ref{alg.gen.random.gen}). In the loop~\ref{alg.gen.loop.begin}-\ref{alg.gen.loop.end}, this population is evolved until either a perfect candidate is found, or the history is converged, or the generation limit $size_G$ is reached. But first, we need to score the current population (lines~\ref{alg.gen.eval.begin}-\ref{alg.gen.eval.end}). Each candidate $p$ of the population $pop$ represents a concrete substitution for the arguments of the FUT. Thus, it should be coerced according to the type signature $sig$ (line~\ref{alg.gen.make.args}). Afterwards, the instrumented function \emph{ifun} can be called with the coerced arguments $args$ (line~\ref{alg.gen.call.ifun}). This gives us a 4-tuple consisting of an execution trace ($tr$), branch ($d_B$), loop distances ($d_L$), and the set of dynamic constants (\emph{dyncinfo}) collected at the run-time. The next step is actually computing the fitness value for $p$ (line~\ref{alg.gen.eval}). Collected dynamic constants \emph{dyncinfo} are merged into the existing constant pool (line~\ref{alg.gen.eval.end}). Eventually, the scored population is combined with the archive (line~\ref{alg.gen.get.combo}) in $combo$. It is used for crossover (line~\ref{alg.gen.cross}) and mutation (line~\ref{alg.gen.mut}) steps in order to form the new population (line~\ref{alg.gen.new.pop}). Then, the scored population together with the current archive are sorted by fitness value, and the top $size_A$ elements form the new archive (line~\ref{alg.gen.new.archive}). The first element of the archive is the fittest candidate (line~\ref{alg.gen.archive.head}) of the current population. If $f^*$ is a \emph{perfect} candidate, the solution is found (line~\ref{alg.gen.loop.end}). Eventually, the tuple $(f^*, p^*)$ is returned by the algorithm (line~\ref{alg.gen.return}) as an output.
+
+At the end of the evolution loop (line~\ref{alg.gen.has.converged}), we verify the convergence of the history within the window of $size_H$. If that condition is true (line~\ref{alg.gen.loop.end}), the genetic algorithm is restarted with a new search target. It consists of the original branch $b_n$ prefixed with a new branch $b$ from which $b_n$ depends on (line~\ref{alg.gen.new.target}). Every time the history converges, we produce a new search target by eventually exhausting all possible executions leading to $b_n$. In practice, we only consider extensions upto length two.
+
+In some cases, we get insufficient guidance from a fitness function because the FUT contains \emph{flag variables}~\cite{baresel2004evolutionary}, nested predicates~\cite{mcminn2005testability}, or unstructured control flow~\cite{hierons2005branch}. Researches have devised several techniques, such as \emph{chaining approach}~\cite{ferguson1996chaining,mcminn2006evolutionary} and \emph{testability transformation}~\cite{korel2005data}, to overcome these problems. The common idea behind of those techniques is to incorporate data dependency into the search. In our case, such an analysis for JS is hard to implement~\cite{jang2009points}. So we decided to build our search algorithm purely on the knowledge of the control flow dependencies. The downside of this approach is the lack of precision, i.e some of the node sequences are fruitless to test. Nevertheless, it was sufficient to find solutions for our experimental subjects.
+
+The genetic operations applied to the primitive JS types and arrays are summarized in Table~\ref{tbl.gen.oper.js.types}. In the rest of this section, we provide implementation details of random generation in Section~\ref{sub.sub.sec.random.html}, crossover and mutation in Section~\ref{sub.sub.sec.genetic.oper}, and the fitness function in Section~\ref{sub.sub.sec.fitness.fun}. Our main focus here is on the generation and transformation of HTML documents.
+
+\begin{table}[!t]
+  \caption{Genetic Operation for the JS Types}
+  \label{tbl.gen.oper.js.types}
+  \scriptsize
+  \centering
+  \begin{tabular}{p{1cm}|p{5mm}|p{6cm}}
+    \toprule
+    \textbf{Operation} & \textbf{Type} & \textbf{Description} \\
+    \hline
+    Random    & Bool   & choose at random \{\texttt{true}, \texttt{false}\} \\
+    Random    & Int    & choose (4:1) at random [-10, 10] or constants\\
+    Random    & Float  & choose (4:1) at random [-10.0, 10.0] or constants\\
+    Random    & String & $>5$ chars from $\texttt{[a-zA-Z0-9]}$ or constants (4:1)\\
+    Random    & Array  & array of a respective type upto length five\\
+    \hline
+    Crossover & Bool   & pick at random one out of two given booleans \\
+    Crossover & Int    & pick at random one out of two given integers\\
+    Crossover & Float  & pick at random one out of two given floats\\
+    Crossover & String & pick at random one out of two single point crossovers\\
+    Crossover & Array  & similar crossover operator as for strings\\
+    \hline
+    Mutation  & Bool   & flip the boolean constant\\
+    Mutation  & Int    & random integer, $\pm 1$ or $\pm 10$\\
+    Mutation  & Float  & random float, $\pm 0.1$, $\pm 1$ or $\pm 10$\\
+    Mutation  & String & random string, remove char or apply pred(suc) char\\
+    Mutation  & Array  & Mutate a random element in array according to its type\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Random HTML Generation}
+\label{sub.sub.sec.random.html}
+
+\begin{figure}[!t]
+  \centering
+  \begin{haskell}
+instance Arbitrary Html where
+  arbitrary = evalStateT generateHTML defaultState
+
+generateHTML :: GenHtmlState |c \label{ref.generateHTML.begin} |c
+generateHTML = do
+  state <- get |c \label{ref.generateHTML.getState} |c
+  let d = getDepth state |c \label{ref.generateHTML.getDepth} |c
+  if d == 0
+  then lift \dollar return \dollar toHtml "HTML" |c \label{ref.generateHTML.returnString} |c
+  else do put state{depth = d - 1} |c \label{ref.generateHTML.updateState} |c
+           head <- generateHEAD |c \label{ref.generateHTML.newHead} |c
+           body <- generateBODY |c \label{ref.generateHTML.newBody} |c
+           lift\dollar return \dollar docTypeHtml \dollar head >> body |c \label{ref.generateHTML.end} |c
+
+data Tag = HTML | HEAD | BODY | ...
+type Context = CFlow | CMetadata | ...
+data HtmlState = |c \label{ref.HtmlState.begin} |c
+  HtmlState { depth    :: Int,           degree  :: Int
+             , ctx     :: Stack Context, tagFreq :: [(Int, Tag)]
+             , tags    :: [Tag],         ids     :: [String]
+             , classes :: [String] } |c \label{ref.HtmlState.end} |c
+type GenState s = StateT s Gen |c \label{ref.GenState} |c
+type GenHtmlState = GenState HtmlState Html |c \label{ref.GenHtmlState} |c
+  \end{haskell}
+  \caption{The \texttt{Arbitrary} instance for the \texttt{Html} data type}
+  \label{fig.html.arb.def}
+\end{figure}
+
+We want to generate HTML according to the WHATWG~\cite{htmlspec} specification. HTML is an XML-family markup language that uses special \emph{tags} and \emph{attributes} to describe document structures on the Web. The recent HTML5 standard defines more than a hundred of tags and attributes which both have to comply with extremely complex logic to constitute  syntactically valid HTML. Browsers are usually tolerant to syntactic errors in HTML. They will silently fix them and display the page anyway.
+
+In order to support the variability of HTML content, we have developed an eDSL that prescribes the generation of syntactically valid HTML. This was a challenge on its own because the complexity of HTML and the lack of formal specification. Our language is inspired by QuickCheck~\cite{claessen2011quickcheck} and essentially employs it to define an \texttt{Arbitrary} instance for the \texttt{Html} data type. With some technical details left out for the sake of simplicity, Figure~\ref{fig.html.arb.def} shows that definition. The data type \texttt{HtmlState} (lines~\ref{ref.HtmlState.begin}--\ref{ref.HtmlState.end}) represents the internal state of \texttt{Html}. The state is composed of the following components:
+\begin{itemize}
+\item \texttt{depth} and \texttt{degree} specify respectively the maximum depth and node degree of the generated HTML
+\item \texttt{ctx} is the current value of the HTML content model stack
+\item \texttt{tagFreq} provides statistical information about the frequency of tags in HTML
+\item \texttt{tags}, \texttt{ids} and \texttt{classes} are the initial set of respective HTML elements used for random generation.
+\end{itemize}
+Combined with the random generation monad \texttt{Gen}, this state is wrapped into a state monad transformer~\cite{jones1995functional} (line~\ref{ref.GenState}) which returns the randomly generated \texttt{Html} (line~\ref{ref.GenHtmlState}). Each HTML tag is the value of the \texttt{GenHtmlState} type. Lines~\ref{ref.generateHTML.begin}--\ref{ref.generateHTML.end} give an example of the content generation for the \texttt{<html>} tag. According to the specification~\cite{htmlspec}, the tag is composed of the \texttt{<head>} tag followed by the \texttt{<body>} tag. First, we store the state of HTML generation and retrieve the current the depth (lines~\ref{ref.generateHTML.getState} and \ref{ref.generateHTML.getDepth} respectively). Then, if the depth is zero, we immediately return a string literal (line~\ref{ref.generateHTML.returnString}). Otherwise, we decrease the current depth by one (line~\ref{ref.generateHTML.updateState}), generate the contents for \texttt{head} (line~\ref{ref.generateHTML.newHead}) and \texttt{body} (line~\ref{ref.generateHTML.newBody}), and return, finally, their combination (line~\ref{ref.generateHTML.end}).
+
+\subsubsection{Genetic HTML Operations}
+\label{sub.sub.sec.genetic.oper}
+
+In essence, an HTML document is a labeled tree with \emph{tags} instead of nodes and \emph{attributes} as labels. Therefore, the crossover and mutations are defined similar to those operators for \emph{expression trees} in genetic programming.
+
+\textbf{HTML Crossover} takes two HTML tree candidates, randomly picks a node in the first one, and replaces the respective sub-tree by a randomly selected sub-tree from the second candidate.
+
+\textbf{HTML Mutations} belong to one of the three categories: \emph{NewTree}, \emph{DropTree}, and \emph{ShuffleAttributes}. The \emph{NewTree} mutation simply generates a new tree based on a given state of the constant pool. The \emph{DropTree} mutation removes the whole sub-tree at a randomly chosen node. \emph{ShuffleAttributes} re-assigns all attributes of a given type on a tree. Currently, we instantiated the \emph{ShuffleAttributes} mutation only for the types \emph{class} and \emph{id}. In total, this gives us four mutations to choose from in order to evolve an HTML document.
+
+\subsubsection{Fitness Function}
+\label{sub.sub.sec.fitness.fun}
+
+The success of any search-based algorithm heavily relies on the right choice of the fitness function (FF) that guides the evolution process. Our search target is a specific branch of the FUT that we want to cover. As a dynamically typed language, JS does not provide any static guarantees that an accessed field or a called method for an object are defined. Thus, such behaviour can only be known at run-time and may eventually rise an exception. Thus, we have to assume that every statement of the FUT, in theory, can rise an exception leading to the deviation from the target. We consider a test input as \emph{valid} only if it leads the FUT to a \emph{normal termination}, i.e. avoids exceptions. This is a ``stronger'' coverage criterion to satisfy then just passing the target branch because it additionally requires to reach an exit. Therefore, our initial search target is an ordered pair of the CFG nodes $(n_b, n_x)$ where $n_b$ is the label of the target branch, and $n_x$ is the normal exit node. The FF for a CFG node is traditionally defined as a combination of the \emph{approach level} and normalized \emph{branch distance}~\cite{arcuri2010does}.
+\begin{equation}
+\footnotesize
+F(n) = \text{approach level} +
+\begin{cases}
+ 1/2 * (\frac{\text{branch distance}}{1 + \text{branch distance}}) & \text{if no exception}\\
+ 1                                  & \text{otherwise}
+\end{cases}
+\end{equation}
+The final FF ($F^*$) is an ordered pair of the FFs of the respective nodes.
+\begin{equation}
+\footnotesize
+F^*(n_b, n_x) = (F(n_b), F(n_x))
+\end{equation}
+Similarly, this definition can be extended to an arbitrary sequence of CFG nodes $(n_1, n_2, \ldots, n_k)$:
+ \begin{equation}
+\footnotesize
+F^*(n_1, n_2, \ldots, n_k) = (F(n_1), F(n_2), \ldots, F(n_k))
+\end{equation}
+
+The approach level is an integer value that indicates how many statements separate the target from the \emph{problem node}, i.e. the node causing the deviation. Since any node can potentially be exceptional, they all contribute to the approach level, in addition to the conditional branches. If on the way to a target there is a loop, we have to estimate its size. For for-loops, we can always provide an exact bound at run-time. Whereas, for while-loops, we assume that the loop has to be passed at least once. The branch condition is a rational value from 0 to 1, which measures the deviation explicitly in the problem node and it is computed according to the formulae~\cite{tracey1998automated}.

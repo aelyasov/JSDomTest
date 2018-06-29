@@ -155,13 +155,20 @@ module GA.GA (Entity(..),
            evolveVerbose,
            randomSearch) where
 
-import Control.Monad (zipWithM)
+import Control.Monad (zipWithM, foldM)
 import Control.Monad.IO.Class (MonadIO, liftIO)
-import Data.List (sortBy, nub, nubBy)
+import Data.List (sortBy, nub, nubBy, intercalate)
 import Data.Maybe (catMaybes, fromJust, isJust)
 import Data.Ord (comparing)
+import Data.Monoid ((<>), mempty, mconcat)
 import System.Directory (createDirectoryIfMissing, doesFileExist)
 import System.Random (StdGen, mkStdGen, random, randoms)
+import System.Log.Logger (rootLoggerName, noticeM, errorM, debugM, criticalM)
+import Data.Maybe (fromMaybe)
+
+import Debug.Trace
+import Safe (headNote, headDef)
+import Text.XML.Statistics
 
 -- |Currify a list of elements into tuples.
 currify :: [a] -- ^ list
@@ -176,7 +183,7 @@ takeAndDrop :: Int -- ^ number of elements to take/drop
             -> ([a],[a]) -- ^ result: taken list element and rest of list
 takeAndDrop n xs
     | n > 0     = let (hs,ts) = takeAndDrop (n-1) (tail xs) 
-                   in (head xs:hs, ts)
+                   in (headNote "takeAndDrop" xs:hs, ts)
     | otherwise = ([],xs)
 
 -- |A scored entity.
@@ -210,8 +217,12 @@ data GAConfig = GAConfig {
     -- |enable/disable built-in checkpointing mechanism
     getWithCheckpointing :: Bool,
     -- |rescore archive in each generation?
-    getRescoreArchive :: Bool
-                }
+    getRescoreArchive :: Bool,
+    -- | defines the size of the archive to be checked for convergence
+    getArchiveConvergenceSize :: Int,
+    -- | should check if archive has already converged
+    checkArchiveConvergence :: Bool
+                } deriving Show
 
 -- |Type class for entities that represent a candidate solution.
 --
@@ -234,8 +245,8 @@ data GAConfig = GAConfig {
 -- The 'isPerfect', 'showGeneration' and 'hasConverged' functions are optional.
 --
 class (Eq e, Ord e, Read e, Show e, 
-       Ord s, Read s, Show s, 
-       Monad m)
+       Ord s, Read s, Show s, Show p, 
+       Monad m, Monoid p, Size e, Depth e)
    => Entity e s d p m 
     | e -> s, e -> d, e -> p, e -> m where
 
@@ -264,7 +275,7 @@ class (Eq e, Ord e, Read e, Show e,
   -- Overridden if score or scorePop are implemented.
   score' :: d -- ^ dataset for scoring entities
          -> e -- ^ entity to score
-         -> (Maybe s) -- ^ entity score
+         -> (Maybe s, p) -- ^ entity score
   score' _ _ = error $ "(GA) score' is not defined, "
                     ++ "nor is score or scorePop!"
 
@@ -274,7 +285,7 @@ class (Eq e, Ord e, Read e, Show e,
   -- overriden if scorePop is implemented.
   score :: d -- ^ dataset for scoring entities
         -> e -- ^ entity to score
-        -> m (Maybe s) -- ^ entity score
+        -> m (Maybe s, p) -- ^ entity score
   score d e = do 
                  return $ score' d e
 
@@ -285,8 +296,8 @@ class (Eq e, Ord e, Read e, Show e,
   scorePop :: d -- ^ dataset to score entities
            -> [e] -- ^ universe of known entities
            -> [e] -- ^ population of entities to score
-           -> m (Maybe [Maybe s]) -- ^ scores for population entities
-  scorePop _ _ _ = return Nothing
+           -> m (Maybe [Maybe s], p) -- ^ scores for population entities
+  scorePop _ _ _ = return (Nothing, mempty)
 
   -- |Determines whether a score indicates a perfect entity. [optional]
   --
@@ -298,14 +309,25 @@ class (Eq e, Ord e, Read e, Show e,
   -- |Show progress made in this generation.
   --
   -- Default implementation shows best entity.
-  showGeneration :: Int -- ^ generation index
+  showGeneration :: Statistics e => Int -- ^ generation index
                -> Generation e s -- ^ generation (population and archive)
                -> String -- ^ string describing this generation
-  showGeneration gi (_,archive) = "best entity (gen. " 
-                                ++ show gi ++ "): " ++ (show e) 
-                                ++ " [fitness: " ++ show fitness ++ "]"
+  -- showGeneration gi (_,archive) = "best entity (gen. " 
+  --                               ++ show gi ++ "): " ++ (show e) 
+  --                               ++ " [fitness: " ++ show fitness ++ "]"
+  showGeneration gi (_,archive) = if null archive
+                                  then "Archive is empty"
+                                  else "best entity (gen. " ++ show gi ++ ") fitness: " ++ show fitness
     where
-      (Just fitness, e) = head archive
+      (Just fitness, e) = headNote "showGeneration" archive
+
+  showArchive :: Statistics e => Archive e s -> String
+  showArchive archive = "Archive Statistics:\n" ++ (intercalate "\n------------\n" $ map showScoredEntity archive)
+    where 
+      showScoredEntity (f, p) = "fitness: " ++ showFitness f ++ "\n" ++ showEntity p
+      showEntity = showStatistics
+      showFitness = show . fromJust
+
 
   -- |Determine whether evolution should continue or not, 
   --  based on lists of archive fitnesses of previous generations.
@@ -313,9 +335,10 @@ class (Eq e, Ord e, Read e, Show e,
   --  Note: most recent archives are at the head of the list.
   --
   --  Default implementation always returns False.
-  hasConverged :: [Archive e s] -- ^ archives so far
+  hasConverged :: Int -- ^ part of the archive to be checked for convergence
+               -> [Archive e s] -- ^ archives so far
                -> Bool -- ^ whether or not convergence was detected
-  hasConverged _ = False
+  hasConverged _ _ = False
 
 -- |Initialize: generate initial population.
 initPop :: (Entity e s d p m) => p -- ^ pool for generating random entities
@@ -376,13 +399,16 @@ performMutation p n seed pool es = do
 scoreAll :: (Entity e s d p m) => d -- ^ dataset for scoring entities
                                -> [e] -- ^ universe of known entities
                                -> [e] -- ^ set of entities to score
-                               -> m [Maybe s]
+                               -> m ([Maybe s], p)
 scoreAll dataset univEnts ents = do
-  scores <- scorePop dataset univEnts ents
+  (scores, pool) <- scorePop dataset univEnts ents
   case scores of
-    (Just ss) -> return ss
+    (Just ss) -> return (ss, pool)
     -- score one by one if scorePop failed
-    Nothing   -> mapM (score dataset) ents
+    Nothing   -> do r <- mapM (score dataset) ents
+                    let (scores, pools) = unzip r
+                    return (scores, mconcat pools)
+    -- foldM (\(pool, scrs) ent -> score dataset ent >>= \(sc, pool1) ->  return (sc:scrs, pool1 <> pool)) ([], mempty) ents
  
 -- |Function to perform a single evolution step:
 --
@@ -395,32 +421,33 @@ scoreAll dataset univEnts ents = do
 -- * create new population using crossover/mutation
 --
 -- * retain best scoring entities in the archive
-evolutionStep :: (Entity e s d p m) => p -- ^ pool for crossover/mutation
-                                  -> d -- ^ dataset for scoring entities
+evolutionStep :: (Entity e s d p m, MonadIO m)
+                                  => d -- ^ dataset for scoring entities
                                   -> (Int,Int,Int) -- ^ # of c/m/a entities
                                   -> (Float,Float) -- ^ c/m parameters
                                   -> Bool -- ^ rescore archive in each step?
+                                  -> p -- ^ pool for crossover/mutation
                                   -> Universe e -- ^ known entities
                                   -> Generation e s -- ^ current generation
                                   -> Int -- ^ seed for next generation
-                                  -> m (Universe e, Generation e s) 
+                                  -> m (Universe e, Generation e s, p, Bool) 
                                      -- ^ renewed universe, next generation
-evolutionStep pool
-              dataset
+evolutionStep dataset
               (cn,mn,an)
               (crossPar,mutPar)
               rescoreArchive
+              pool
               universe
-              (pop,archive)
+              gen@(pop,archive)
               seed = do 
     -- score population
     -- try to score in a single go first
-    scores <- scoreAll dataset universe pop
+    (scores, poolNew) <- scoreAll dataset universe pop
     archive' <- if rescoreArchive
       then return archive
       else do
         let as = map snd archive
-        scores' <- scoreAll dataset universe as
+        (scores', _) <- scoreAll dataset universe as
         return $ zip scores' as
     let scoredPop = zip scores pop
         -- combine with archive for selection
@@ -428,39 +455,50 @@ evolutionStep pool
         -- split seeds for crossover/mutation selection/seeds
         g = mkStdGen seed
         [crossSeed,mutSeed] = take 2 $ randoms g
-    -- apply crossover and mutation
-    crossEnts <- performCrossover crossPar cn crossSeed pool combo
-    mutEnts <- performMutation mutPar mn mutSeed pool combo
-    let -- new population: crossovered + mutated entities
-        newPop = crossEnts ++ mutEnts
+        pool' = pool <> poolNew
         -- new archive: best entities so far
+        compareArchive = comparing fst -- <> comparing (depth . snd) <> comparing (size . snd)
         newArchive = take an 
-                   $ nubBy (\x y -> comparing snd x y == EQ) 
-                   $ sortBy (comparing fst) combo
+                     $ nubBy (\x y -> comparing snd x y == EQ)
+                     $ sortBy compareArchive
+                     combo
         newUniverse = nub $ universe ++ pop
-    return (newUniverse, (newPop,newArchive))
+        (Just fitness, e) = headNote "evolutionStep" newArchive
+
+    -- check if perfect entry is found
+    if (isPerfect (e,fitness))
+      then return (universe, (pop, newArchive), pool, True)
+      else do newPop <- if cn + mn == 0
+                        then initPop pool' (length pop) seed
+                        else do crossEnts <- performCrossover crossPar cn crossSeed pool' combo
+                                mutEnts   <- performMutation mutPar mn mutSeed pool' combo
+                                return $ crossEnts ++ mutEnts -- new population: crossovered + mutated entities
+              return (newUniverse, (newPop,newArchive), pool', False)
 
 -- |Evolution: evaluate generation and continue.
 evolution :: (Entity e s d p m) => GAConfig -- ^ configuration for GA
+                                -> p
                                 -> Universe e -- ^ known entities 
                                 -> [Archive e s] -- ^ previous archives
                                 -> Generation e s -- ^ current generation
-                                -> (   Universe e
+                                -> ( p
+                                    -> Universe e
                                     -> Generation e s 
                                     -> Int 
-                                    -> m (Universe e, Generation e s)
+                                    -> m (Universe e, Generation e s, p, Bool)
                                    ) -- ^ function that evolves a generation
                                 -> [(Int,Int)] -- ^ gen indicies and seeds
                                 -> m (Generation e s) -- ^evolved generation
-evolution cfg universe pastArchives gen step ((_,seed):gss) = do
-    (universe',nextGen) <- step universe gen seed 
-    let (Just fitness, e) = (head $ snd nextGen)
+evolution cfg pool universe pastArchives gen step ((_,seed):gss) = do
+    (universe',nextGen, pool', isPerfect_) <- step pool universe gen seed 
+    let (Just fitness, e) = (headNote "evolution" $ snd nextGen)
         newArchive = snd nextGen
-    if hasConverged pastArchives || isPerfect (e,fitness)
+        convergeSize = getArchiveConvergenceSize cfg 
+    if hasConverged convergeSize pastArchives || isPerfect (e,fitness)
       then return nextGen
-      else evolution cfg universe' (newArchive:pastArchives) nextGen step gss
+      else evolution cfg pool' universe' (newArchive:pastArchives) nextGen step gss
 -- no more gen. indices/seeds => quit
-evolution _ _ _ gen _ [] = return gen
+evolution _ _ _ _ gen _ [] = return gen
 
 -- |Generate file name for checkpoint.
 chkptFileName :: GAConfig -- ^ configuration for generation algorithm
@@ -493,52 +531,62 @@ checkpointGen cfg index seed (pop,archive) = do
     writeFile fn txt
 
 -- |Evolution: evaluate generation, (maybe) checkpoint, continue.
-evolutionVerbose :: (Entity e s d p m, 
-                   MonadIO m) => GAConfig -- ^ configuration for GA
+evolutionVerbose :: (Entity e s d p m, MonadIO m, Statistics e)
+                              => GAConfig -- ^ configuration for GA
+                              -> p
                               -> Universe e -- ^ universe of known entities
                               -> [Archive e s] -- ^ previous archives
                               -> Generation e s -- ^ current generation
-                              -> (   Universe e 
+                              -> ( p
+                                  -> Universe e 
                                   -> Generation e s 
                                   -> Int 
-                                  -> m (Universe e, Generation e s)
+                                  -> m (Universe e, Generation e s, p, Bool)
                                  ) -- ^ function that evolves a generation
                               -> [(Int,Int)] -- ^ gen indicies and seeds
-                              -> m (Generation e s) -- ^ evolved generation
-evolutionVerbose cfg universe pastArchives gen step ((gi,seed):gss) = do
-    (universe',newPa@(_,archive')) <- step universe gen seed
-    let (Just fitness, e) = head archive'
-    -- checkpoint generation if desired
+                              -> m (Generation e s, Bool, Int) -- ^ evolved generation
+evolutionVerbose cfg pool universe pastArchives gen step ((gi,seed):gss) = do
+    liftIO $ errorM rootLoggerName $ showArchive $ headDef [] pastArchives
+    (universe', newPa@(_,archive'), pool', isPerfect_) <- step pool universe gen seed
     liftIO $ if (getWithCheckpointing cfg)
-      then checkpointGen cfg gi seed newPa
-      else return () -- skip checkpoint
-    liftIO $ putStrLn $ showGeneration gi newPa
+             then checkpointGen cfg gi seed newPa
+             else return () -- skip checkpoint
+    liftIO $ criticalM rootLoggerName $ showGeneration gi newPa              
     -- check for perfect entity
-    if hasConverged pastArchives || isPerfect (e,fitness)
-       then do 
-               liftIO $ putStrLn $ if isPerfect (e,fitness)
-                                     then    "perfect entity found, "
-                                          ++ "finished after " ++ show gi 
-                                          ++ " generations!"
-                                     else    "no progress for 3 generations, "
-                                          ++ "stopping after " ++ show gi
-                                          ++ " generations!"
-               return newPa
-       else evolutionVerbose cfg universe' (archive':pastArchives) newPa step gss
+    let convergeSize = getArchiveConvergenceSize cfg 
+    if (hasConverged convergeSize pastArchives && checkArchiveConvergence cfg) || isPerfect_
+      then if isPerfect_
+           then do liftIO $ criticalM rootLoggerName $
+                     "Perfect entity found, " ++
+                     "finished after " ++
+                     show gi ++
+                     " generations!"
+                   return (newPa, False, gi)
+           else do liftIO $ criticalM rootLoggerName $
+                     "No progress for " ++
+                     (show convergeSize) ++
+                     " generations, " ++
+                     "stopping after " ++
+                     show gi ++
+                     " generations!"
+                   return (newPa, True, gi)
+      else evolutionVerbose cfg pool' universe' (archive':pastArchives) newPa step gss
 
 -- no more gen. indices/seeds => quit
-evolutionVerbose _ _ _ gen _ [] = do 
-    liftIO $ putStrLn $ "done evolving!"
-    return gen
+evolutionVerbose _ _ _ _ gen _ [] = do 
+    liftIO $ criticalM rootLoggerName "Perfect entity is not found during evolving!"
+    return (gen, False, -1)
+
 
 -- |Initialize.
-initGA :: (Entity e s d p m) => StdGen  -- ^ random generator
+initGA :: (Entity e s d p m) => Int -- ^ initial generation number
+                           -> StdGen  -- ^ random generator
                            -> GAConfig -- ^ configuration for GA
                            -> p -- ^ pool for generating random entities
                            -> m ([e],Int,Int,Int,
                                  Float,Float,[(Int,Int)]
                                 ) -- ^ initialization result
-initGA g cfg pool = do
+initGA init g cfg pool = do
     -- generate list of random integers
     let (seed:rs) = randoms g :: [Int]
         ps = getPopSize cfg
@@ -553,13 +601,14 @@ initGA g cfg pool = do
         crossPar = getCrossoverParam cfg
         mutPar = getMutationParam cfg
         --  seeds for evolution
-        seeds = take (getMaxGenerations cfg) rs
+        seeds = take (getMaxGenerations cfg - init) rs
         -- seeds per generation
-        genSeeds = zip [0..] seeds
+        genSeeds = zip [init..] seeds
     return (pop, cCnt, mCnt, aSize, crossPar, mutPar, genSeeds)
 
 -- |Do the evolution!
-evolve :: (Entity e s d p m) => StdGen -- ^ random generator
+evolve :: (Entity e s d p m, MonadIO m)
+                             => StdGen -- ^ random generator
                              -> GAConfig -- ^ configuration for GA
                              -> p -- ^ random entities pool
                              -> d -- ^ dataset required to score entities
@@ -568,14 +617,14 @@ evolve g cfg pool dataset = do
     -- initialize
     (pop, cCnt, mCnt, aSize, 
      crossPar, mutPar, genSeeds) <- if not (getWithCheckpointing cfg)
-       then initGA g cfg pool
+       then initGA 0 g cfg pool
        else error $ "(evolve) No checkpointing support " 
                  ++ "(requires liftIO); see evolveVerbose."
     -- do the evolution
     let rescoreArchive = getRescoreArchive cfg
     (_,resArchive) <- evolution 
-                       cfg [] [] (pop,[]) 
-                       (evolutionStep pool dataset 
+                       cfg pool [] [] (pop,[]) 
+                       (evolutionStep dataset 
                                       (cCnt,mCnt,aSize) 
                                       (crossPar,mutPar) 
                                       rescoreArchive   )
@@ -606,16 +655,17 @@ restoreFromChkpt _ [] = return Nothing
 -- Prints progress to stdout, and supports checkpointing. 
 --
 -- Note: requires support for liftIO in monad used.
-evolveVerbose :: (Entity e s d p m, MonadIO m) 
-                             => StdGen -- ^ random generator
+evolveVerbose :: (Entity e s d p m, MonadIO m, Statistics e) 
+                             => Int -- ^ initial generation
+                             -> StdGen -- ^ random generator
                              -> GAConfig -- ^ configuration for GA
                              -> p -- ^ random entities pool
                              -> d -- ^ dataset required to score entities
-                             -> m (Archive e s) -- ^ best entities
-evolveVerbose g cfg pool dataset = do
+                             -> m (Archive e s, Bool, Int) -- ^ best entities
+evolveVerbose init g cfg pool dataset = do
     -- initialize
     (pop, cCnt, mCnt, aSize, 
-     crossPar, mutPar, genSeeds) <- initGA g cfg pool
+     crossPar, mutPar, genSeeds) <- initGA init g cfg pool
     let checkpointing = getWithCheckpointing cfg
     -- (maybe) restore from checkpoint
     restored <- liftIO $ if checkpointing
@@ -630,20 +680,21 @@ evolveVerbose g cfg pool dataset = do
         genSeeds' = filter ((>gi) . fst) genSeeds
         rescoreArchive = getRescoreArchive cfg
     -- do the evolution
-    (_,resArchive) <- evolutionVerbose 
-                        cfg [] [] gen 
-                        (evolutionStep pool dataset 
-                                       (cCnt,mCnt,aSize) 
-                                       (crossPar,mutPar) 
-                                       rescoreArchive)
-                                       genSeeds'
+    ((_, resArchive), hasConverged, gi) <- evolutionVerbose 
+                                             cfg pool [] [] gen 
+                                             (evolutionStep dataset 
+                                              (cCnt,mCnt,aSize) 
+                                              (crossPar,mutPar) 
+                                              rescoreArchive
+                                             )
+                                             genSeeds'
     -- return best entity 
-    return resArchive
+    return (resArchive, hasConverged, gi)
 
 -- |Random searching.
 --
 -- Useful to compare with results from genetic algorithm.
-randomSearch :: (Entity e s d p m) => StdGen -- ^ random generator
+randomSearch :: (Entity e s d p m, MonadIO m) => StdGen -- ^ random generator
                                    -> Int -- ^ number of random entities
                                    -> p -- ^ random entity pool
                                    -> d -- ^ scoring dataset
@@ -651,7 +702,26 @@ randomSearch :: (Entity e s d p m) => StdGen -- ^ random generator
 randomSearch g n pool dataset = do
     let seed = fst $ random g :: Int
     es <- initPop pool n seed
-    scores <- scoreAll dataset [] es
+    (scores, _) <- scoreAll dataset [] es
+    liftIO $ debugM rootLoggerName $ show es
     return $ nubBy (\x y -> comparing snd x y == EQ) 
            $ sortBy (comparing fst)
            $ zip scores es
+
+
+-- |Random searching.
+--
+-- Useful to compare with results from genetic algorithm.
+randomSearchMy :: (Entity e s d p m, MonadIO m) => StdGen -- ^ random generator
+                                   -> Int -- ^ number of random entities
+                                   -> p -- ^ random entity pool
+                                   -> d -- ^ scoring dataset
+                                   -> m (Archive e s) -- ^ scored entities (sorted)
+randomSearchMy g n pool dataset = do
+    let seed = fst $ random g :: Int
+    es <- initPop pool n seed
+    (scores, _) <- scoreAll dataset [] es
+    liftIO $ debugM rootLoggerName $ show es
+    return $ nubBy (\x y -> comparing snd x y == EQ) 
+           $ sortBy (comparing fst)
+           $ zip scores es      

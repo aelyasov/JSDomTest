@@ -6,36 +6,36 @@ var fs         = require('fs'),
     http       = require("http"),
     path       = require("path"),
     jsdom      = require("jsdom"),
+    _          = require('underscore'),
     instrument = require("./instrumentLib.js"),
     winston    = require('winston');
     // logger     = require('./logger.js');    
-    
 
-var jsFun, jsMutFun, jsFunArgs;
-winston.level = 'info';
+var testContext = fs.readFileSync("./globalTestContext.js", "utf-8");
+
+var jsFun, jsMutFun, jsFunArgs, jsSig, jsFunDom, realJSFunArgs;
+ winston.level = 'info';
+//winston.level = 'debug';
 
 http.createServer(function(request, response){
     
-    winston.log("info", "I got kicked");
+    winston.debug("I got kicked");
     
-    var data_ = '{ "jsFun":"function safeAdd(frameid) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {instrument._trace_.push(6);instrument._branchDistance_.push([6,Number(instrument._K_)]);instrument._trace_.push(7);frame.parentNode.removeChild(frame);} else {instrument._trace_.push(6);instrument._branchDistance_.push([6,_Number(K_)]);instrument._trace_.push(9);iframe.appendChild(anchor);}}", "jsMutFun":"var _K_ = 0;var _branchDistance_ = [];var _trace_ = [];function safeAdd(frameid,document) {var iframe = document.createElement(\\"iframe\\");var anchor = document.getElementById(\\"node\\");var frame = document.getElementById(frameid);iframe.setAttribute(\\"id\\",frameid);if (frame) {_branchDistance_.push([6,!_K_]);_trace_.push(7);frame.parentNode.removeChild(frame);} else {_branchDistance_.push([6,_K_]);_trace_.push(9);iframe.appendChild(anchor);}}"}';   
+    var pathname = url.parse(request.url,true).pathname;
 
-    // console.log("data_", JSON.parse(data_));
-    
-    // var my_url = url.parse(request.url);
-    var queryObject = url.parse(request.url,true).query;
-    winston.log("info", "queryObject:", queryObject);
+    winston.debug("pathname: ", pathname);
 
-    if (queryObject.init == "true") {
+    if (pathname == "/init") {
 	request.on('data', function(data) {
-	    winston.log("info", "Received the initial function:", data.toString());
+	    winston.debug("Received the initial function:", data.toString());
 	    
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
-	    winston.log("info", "jsFun before eval:\n", JSON.parse(data).jsFun);
-	    eval(JSON.parse(data).jsFun);
-	    // jsMutFun = eval(JSON.parse(data).jsMutFun);	    
-	    
+	    winston.debug("jsFun before eval:\n", JSON.parse(data).jsFun);
+	    jsSig = JSON.parse(data).jsSig.slice(1);
+	    winston.debug("test function signature:\n", jsSig);
+	    var library = "var instrument = require(\"./instrumentLib.js\");\n"
+	    jsFun = library + JSON.parse(data).jsFun;
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
 	response.write("init response");
@@ -43,14 +43,10 @@ http.createServer(function(request, response){
     }
 
 
-    if (queryObject.mutation == "true") {
+    if (pathname == "/mutation") {
 	request.on('data', function(data) {
-	    winston.log("info", "Received the mutated function:\n", data.toString());
-	    var library = "var instrument = require(\"./instrumentLib.js\");\n"
-	    winston.log("info", "# New mutation iteration: ", JSON.parse(data).mutN);
-	    winston.log("info", "jsMutFun before eval:\n", JSON.parse(data).jsMutFun);
-	    //eval(JSON.parse(data).jsMutFun);
-	    jsMutFun = library + JSON.parse(data).jsMutFun;
+	    winston.debug("Received the mutated function:\n", data.toString());
+	    winston.debug("# New mutation iteration: ", JSON.parse(data).mutN);
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
 	response.write("mutation response");
@@ -58,54 +54,51 @@ http.createServer(function(request, response){
     }
     
 
-    if (queryObject.genetic == "true") {
+    if (pathname == "/genetic") {
 	request.on('data', function(data) {
-	    winston.log("Received arguments which are new population:", data.toString());
+	    winston.debug("Received arguments which are new population:", data.toString());
 
 	    // the function has to be encompassed by parencess to be evaluated by JavaScript
 	    // jsFun     = jsFun ? eval("(" + JSON.parse(data).jsFun + ")") : jsFun,
-	    jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>"),	    
-	    winston.log("jsFunArgs: ", jsFunArgs);
+	    jsFunArgs = JSON.parse(data).jsFunArgs.split("<|>");
+	    jsFunDom = jsFunArgs[0];
+	    realJSFunArgs = _.zip(jsSig, jsFunArgs.slice(1)).map(function(arg) { return instrument.convertArg(arg[0], arg[1])} )
+	    winston.debug("jsFunArgs: ", jsFunArgs);
 
 	    //var intercept = fs.readFileSync("/home/alex/PROJECTS/FITTEST/Software/UtrechtUniv/tools/JSDomTest/js/interceptTest.js", "utf-8");
 
  	    jsdom.env({
-		html: jsFunArgs[0],
-		scripts: ["http://code.jquery.com/jquery.js"], 
-		// __dirname + '/intercept.js'
-		// features: { 
-		//     FetchExternalResources: ["script"], 
-		//     ProcessExternalResources: ["script"]
-		// },\
+		html: jsFunDom,
+		scripts: ["http://code.jquery.com/jquery.js"],
 		done: function (error, window){
 		    
 		    var document = window.document;
-		    var environment = {tags:[], names:[], ids:[], classes:[], selector:[]};
+		    var environment = {tags:[], names:[], ids:[], classes:[], selectors:[]};
 		    
 		    var _getElementById = document.getElementById;
 		    document.getElementById = function() {
-			winston.log("info", "id", arguments[0]);
+			winston.debug("id", arguments[0]);
 			environment.ids = environment.ids.concat(arguments[0]);
 			return _getElementById.apply(this, arguments);
 		    };
 
 		    _getElementsByClassName = document.getElementsByClassName;
 		    document.getElementsByClassName = function() {
-			winston.log("info", "class", arguments[0]);
+			winston.debug("class", arguments[0]);
 			environment.classes = environment.classes.concat(arguments[0].split(" "));
 			return _getElementsByClassName.apply(this, arguments);
 		    };
 		    
 		    _getElementsByName =  document.getElementsByName;
 		    document.getElementsByName = function() {
-			winston.log("info", "name", arguments[0]);
+			winston.debug("name", arguments[0]);
 			environment.names = environment.names.concat(arguments[0]);
 			return _getElementsByName.apply(this, arguments);
 		    };
 		    
 		    _getElementsByTagName = document.getElementsByTagName;
 		    document.getElementsByTagName = function() {
-			winston.log("info", "tag", arguments[0]);
+			winston.debug("tag", arguments[0]);
 			environment.tags = environment.tags.concat(arguments[0]);
 			return _getElementsByTagName.apply(this, arguments);
 		    };
@@ -114,44 +107,47 @@ http.createServer(function(request, response){
 		    // the hook for getElementsByTagNameNS ignores information about namespace
 		    _getElementsByTagNameNS = document.getElementsByTagNameNS;
 		    document.getElementsByTagNameNS = function() {
-			winston.log("info", "tag", arguments[1]);
+			winston.debug("tag", arguments[1]);
 			environment.tags = environment.tags.concat(arguments[1]);
 			return _getElementsByTagNameNS.apply(this, arguments);
 		    };
 
-		    // eval(JSON.parse(data_).jsFun);
 		    var _K_ = 1;
-		    var _branchDistance_ = [];
-		    var _trace_ = [1];
+		    var branchDistance = [];
+		    var trace = [1];
+		    var loopMap = {};
 
-		    winston.log("jsMutFun:\n", jsMutFun);
-		    eval(jsMutFun);
+		    winston.debug("jsFun:\n", jsFun);
+		    eval(jsFun);
 
-		    var old_doc = window.document;
-		    winston.log("info", "old_doc:\n", jsdom.serializeDocument(old_doc));
+		    // Makes the global test context available for the tested code
+		    eval(testContext)
+		    
 		    try {
-			test.call(window, jsFunArgs[1], window, document);
+			// test.call(window, jsFunArgs[1], window, document);
+			test.apply(window, realJSFunArgs, window, document);
 		    } catch (e) {
-			winston.log("info", "Test function is exceptionally terminated with the message: %s", e.stack)
+			trace.push(-100); // label -100 indicates exceptional termination
+			winston.debug("Test function is exceptionally terminated with the message: %s", e.stack)
 		    }
-		    winston.log("info", "_trace_", _trace_);
-		    winston.log("info", " _branchDistance_",  _branchDistance_);
-		    var new_doc = window.document;
-		    winston.log("info", "new_doc:\n", jsdom.serializeDocument(new_doc));
-		    winston.log("info", "environment: ", environment);
+		    
+		    winston.debug("trace", trace);
+		    winston.debug("branchDistance", branchDistance);
+		    winston.debug("loopMap", loopMap);
+		    winston.debug("environment: ", environment);
 		    response.writeHeader(200, {"Content-Type": "text/plain"});
-		    response.write(JSON.stringify({_trace_:_trace_,  _branchDistance_: _branchDistance_}));
+		    response.write(JSON.stringify({trace:trace, branchDistance: branchDistance, loopMap: loopMap, environment: environment}));
 		    response.end();    
 		}
 	    });
 	});
     };
 
-    if (queryObject.execute == "true") {
+    if (pathname == "/execute") {
 	request.on('data', function(data) {
-	    winston.log("info", "Received genetically approved arguments", data.toString()); 
+	    winston.debug("Received genetically approved arguments", data.toString()); 
 	    jsFunArgs = JSON.parse(data).jsArgs.split("<|>"),	    
-	    winston.log("info", "jsFunArgs: ", jsFunArgs);
+	    winston.debug("jsFunArgs: ", jsFunArgs);
 	});
 	response.writeHeader(200, {"Content-Type": "text/plain"});
 	response.write("execution response");
@@ -159,4 +155,4 @@ http.createServer(function(request, response){
     }
     
 }).listen(7777);
-winston.log("info", "Server Running on 7777");
+winston.debug("Server Running on 7777");

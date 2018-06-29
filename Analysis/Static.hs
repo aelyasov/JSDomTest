@@ -1,37 +1,68 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Analysis.Static where
 
-import Data.Generics.Aliases
-import Data.Generics.Schemes
-import Genetic.DataJS
+import Data.Generics.Aliases (mkQ)
+import Data.Generics.Schemes (everything)
+import Genetic.DataJS (JSCPool)
 import Language.ECMAScript3.Syntax
 import Language.ECMAScript3.Parser
 import Data.Monoid
-import Html5C.Tags
+import Html5C.Tags 
 import Data.List (nub)
--- import Data.Data
 import Mutation.Dom.Operators
-
 import Debug.Trace
+import Control.Monad (liftM)
 
 
-collectStaticRefs :: JavaScript SourcePosLab -> JSDoms
+collectStaticRefs :: JavaScript SourcePosLab -> JSCPool
 collectStaticRefs = everything mappend (mempty `mkQ` foldExpr)
 
-foldExpr :: Expression SourcePosLab -> JSDoms
+foldExpr :: Expression SourcePosLab -> JSCPool
 foldExpr (CallExpr _ (DotRef _ _ (Id _ fun)) [StringLit _ arg]) =
   case fun of
-   "createElement"          -> ([str2HtmlTag arg], mempty, mempty, mempty) 
-   "getElementById"         -> (mempty,            [arg],  mempty, mempty)
-   "getElementsByClassName" -> (mempty,            mempty, mempty, [arg])
-   "getElementsByName"      -> (mempty,            mempty, [arg],  mempty)
-   "getElementsByTagName"   -> ([str2HtmlTag arg], mempty, mempty, mempty)
+   "createElement"          -> (mempty, mempty, mempty, (Just [str2HtmlTag arg], mempty, mempty, mempty)) 
+   "getElementById"         -> (mempty, mempty, mempty, (mempty,            Just [arg],  mempty, mempty))
+   "getElementsByClassName" -> (mempty, mempty, mempty, (mempty,            mempty, mempty, Just [arg]))
+   "getElementsByName"      -> (mempty, mempty, mempty, (mempty,            mempty, Just [arg],  mempty))
+   "getElementsByTagName"   -> (mempty, mempty, mempty, (Just [str2HtmlTag  arg], mempty, mempty, mempty))
    _                        -> mempty
+foldExpr (DotRef _ _ (Id _ fun)) | fun == "insertRow" = (mempty, mempty, mempty, (Just [TAG_TABLE], mempty, mempty, mempty))
+                                 | fun == "className" = (mempty, mempty, mempty, (mempty, mempty, mempty, Just []))
+                                 | otherwise          = mempty
+foldExpr (StringLit _ str) = (mempty, mempty, Just [str],  (mempty, mempty, mempty, mempty))
+foldExpr (IntLit _ int)    = (Just [int], mempty, mempty, (mempty, mempty, mempty, mempty))   
+foldExpr (InfixExpr _ infixOp leftExpr rightExpr)
+  | infixOp `elem` [OpEq, OpNEq] = extractClassName leftExpr rightExpr <> extractClassName rightExpr leftExpr
 foldExpr _ = mempty
 
 
+extractClassName :: Expression SourcePosLab -> Expression SourcePosLab -> JSCPool
+extractClassName expr (StringLit _ className)
+  | isExprEndsWithClassName expr = (mempty, mempty, mempty, (mempty, mempty, mempty, Just [className]))
+  | otherwise                    = mempty
+extractClassName _ _ = mempty
+
+      
+isExprEndsWithClassName :: Expression SourcePosLab -> Bool    
+isExprEndsWithClassName (DotRef _ _ (Id _ "className")) = True
+isExprEndsWithClassName _                               = False
+
+                                                          
 -- | TODO: implement integer and string collection
 collectConstantInfoJS :: JavaScript SourcePosLab -> JSCPool
-collectConstantInfoJS js = ([], [], removeDuplicates $ collectStaticRefs js)
+collectConstantInfoJS = removeDuplicates . collectStaticRefs
 
-removeDuplicates :: JSDoms -> JSDoms
-removeDuplicates (tags, ids, names, classes) = (nub tags, nub ids, nub names, nub classes)
+
+removeDuplicates :: JSCPool -> JSCPool
+removeDuplicates (ints, floats, strings, (tags, ids, names, classes)) = ( liftM nub ints
+                                                                , liftM nub floats
+                                                                , liftM nub strings
+                                                                , ( liftM nub tags
+                                                                  , liftM nub ids
+                                                                  , liftM nub names
+                                                                  , liftM nub classes))
+
+
+
+-- CallExpr _ (DotRef _ (DotRef _ (BracketRef _ (VarRef _ (Id _ "subDivs")) (VarRef _ (Id _ "no"))) (Id _ "className")) (Id _ "indexOf")) [StringLit (line 1, column 31) "sudokuSquare"]

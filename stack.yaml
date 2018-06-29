@@ -8,5 +8,9 @@ extra-deps:
 - Graphalyze-0.15.0.0
 - fgl-visualize-0.1.0.1
 - language-ecmascript-analysis-0.9.1
+- language-javascript-0.5.14.7
 - bktrees-0.3.1
 - dotgen-0.4.2
+- http-client-0.5.7.0
+- http-conduit-2.2.3.2
+- http-client-tls-0.3.5.1

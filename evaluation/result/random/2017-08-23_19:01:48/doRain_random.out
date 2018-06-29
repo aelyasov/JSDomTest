@@ -1,0 +1,2829 @@
+[2017-08-23 23:26:58 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:26:58 CEST  CRITICAL] Started iteration #1 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:26:59 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"ns3LF",70,300,1,1,4,-2]
+depth: 6 size: 19
+string: 5
+integer: 70
+integer: 300
+integer: 1
+integer: 1
+integer: 4
+integer: -2
+[2017-08-23 23:26:59 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:26:59 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:26:59 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"ns3LF",70,300,1,1,4,-2]
+[2017-08-23 23:26:59 CEST  CRITICAL] Completed iteration #1 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:26:59 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:26:59 CEST  CRITICAL] Started iteration #1 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:00 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"bhFX",-9,2,-5,-2,3,4]
+depth: 4 size: 8
+string: 4
+integer: -9
+integer: 2
+integer: -5
+integer: -2
+integer: 3
+integer: 4
+[2017-08-23 23:27:00 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:00 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:00 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"bhFX",-9,2,-5,-2,3,4]
+[2017-08-23 23:27:00 CEST  CRITICAL] Completed iteration #1 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:00 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:00 CEST  CRITICAL] Started iteration #1 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:01 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,"ceP0c",1,300,-9,1,9,7]
+depth: 6 size: 18
+string: 5
+integer: 1
+integer: 300
+integer: -9
+integer: 1
+integer: 9
+integer: 7
+[2017-08-23 23:27:01 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:01 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:01 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,"ceP0c",1,300,-9,1,9,7]
+[2017-08-23 23:27:01 CEST  CRITICAL] Completed iteration #1 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:01 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:01 CEST  CRITICAL] Started iteration #1 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:02 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"jJ1t",-8,7,70,1,10,2]
+depth: 6 size: 18
+string: 4
+integer: -8
+integer: 7
+integer: 70
+integer: 1
+integer: 10
+integer: 2
+[2017-08-23 23:27:02 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:02 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:02 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"jJ1t",-8,7,70,1,10,2]
+[2017-08-23 23:27:02 CEST  CRITICAL] Completed iteration #1 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:02 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:02 CEST  CRITICAL] Started iteration #2 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:03 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"hM",-2,300,7,1,-4,-1]
+depth: 4 size: 7
+string: 2
+integer: -2
+integer: 300
+integer: 7
+integer: 1
+integer: -4
+integer: -1
+[2017-08-23 23:27:03 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:03 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:03 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"hM",-2,300,7,1,-4,-1]
+[2017-08-23 23:27:03 CEST  CRITICAL] Completed iteration #2 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:03 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:03 CEST  CRITICAL] Started iteration #2 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:04 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"gn",-8,100,7,100,7,-3]
+depth: 6 size: 11
+string: 2
+integer: -8
+integer: 100
+integer: 7
+integer: 100
+integer: 7
+integer: -3
+[2017-08-23 23:27:04 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:04 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:04 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"gn",-8,100,7,100,7,-3]
+[2017-08-23 23:27:04 CEST  CRITICAL] Completed iteration #2 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:04 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:04 CEST  CRITICAL] Started iteration #2 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:05 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"8W0l",5,10,-1,1,2,-9]
+depth: 4 size: 7
+string: 4
+integer: 5
+integer: 10
+integer: -1
+integer: 1
+integer: 2
+integer: -9
+[2017-08-23 23:27:05 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:05 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:05 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"8W0l",5,10,-1,1,2,-9]
+[2017-08-23 23:27:05 CEST  CRITICAL] Completed iteration #2 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:05 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:05 CEST  CRITICAL] Started iteration #2 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:06 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                DIV2DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,"l3",2,-9,5,1,-2,3]
+depth: 6 size: 13
+string: 2
+integer: 2
+integer: -9
+integer: 5
+integer: 1
+integer: -2
+integer: 3
+[2017-08-23 23:27:06 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:06 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:06 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                DIV2DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,"l3",2,-9,5,1,-2,3]
+[2017-08-23 23:27:06 CEST  CRITICAL] Completed iteration #2 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:06 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:06 CEST  CRITICAL] Started iteration #3 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:06 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"dd1",2,-9,8,1,-2,70]
+depth: 6 size: 14
+string: 3
+integer: 2
+integer: -9
+integer: 8
+integer: 1
+integer: -2
+integer: 70
+[2017-08-23 23:27:06 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:06 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:06 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"dd1",2,-9,8,1,-2,70]
+[2017-08-23 23:27:06 CEST  CRITICAL] Completed iteration #3 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:06 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:06 CEST  CRITICAL] Started iteration #3 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:07 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"Uqu",4,8,-3,-6,100,1]
+depth: 6 size: 22
+string: 3
+integer: 4
+integer: 8
+integer: -3
+integer: -6
+integer: 100
+integer: 1
+[2017-08-23 23:27:07 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:07 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:07 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"Uqu",4,8,-3,-6,100,1]
+[2017-08-23 23:27:07 CEST  CRITICAL] Completed iteration #3 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:07 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:07 CEST  CRITICAL] Started iteration #3 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:08 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"58",1,9,6,1,7,-10]
+depth: 6 size: 29
+string: 2
+integer: 1
+integer: 9
+integer: 6
+integer: 1
+integer: 7
+integer: -10
+[2017-08-23 23:27:08 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:08 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:08 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"58",1,9,6,1,7,-10]
+[2017-08-23 23:27:08 CEST  CRITICAL] Completed iteration #3 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:08 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:08 CEST  CRITICAL] Started iteration #3 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:09 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"bK0a7",-3,3,1,1,7,300]
+depth: 6 size: 19
+string: 5
+integer: -3
+integer: 3
+integer: 1
+integer: 1
+integer: 7
+integer: 300
+[2017-08-23 23:27:09 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:09 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:09 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"bK0a7",-3,3,1,1,7,300]
+[2017-08-23 23:27:09 CEST  CRITICAL] Completed iteration #3 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:09 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:09 CEST  CRITICAL] Started iteration #4 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:10 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,"F",-8,5,7,1,-8,-6]
+depth: 6 size: 15
+string: 1
+integer: -8
+integer: 5
+integer: 7
+integer: 1
+integer: -8
+integer: -6
+[2017-08-23 23:27:10 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:10 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:10 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,"F",-8,5,7,1,-8,-6]
+[2017-08-23 23:27:10 CEST  CRITICAL] Completed iteration #4 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:10 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:10 CEST  CRITICAL] Started iteration #4 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:11 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"mlnK4",-7,10,2,-3,-7,-8]
+depth: 4 size: 6
+string: 5
+integer: -7
+integer: 10
+integer: 2
+integer: -3
+integer: -7
+integer: -8
+[2017-08-23 23:27:11 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:11 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:11 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"mlnK4",-7,10,2,-3,-7,-8]
+[2017-08-23 23:27:11 CEST  CRITICAL] Completed iteration #4 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:11 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:11 CEST  CRITICAL] Started iteration #4 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:12 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"OM",70,100,-3,1,-7,2]
+depth: 4 size: 6
+string: 2
+integer: 70
+integer: 100
+integer: -3
+integer: 1
+integer: -7
+integer: 2
+[2017-08-23 23:27:12 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:12 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:12 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"OM",70,100,-3,1,-7,2]
+[2017-08-23 23:27:12 CEST  CRITICAL] Completed iteration #4 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:12 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:12 CEST  CRITICAL] Started iteration #4 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:13 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"7V",6,2,1,1,6,-3]
+depth: 4 size: 6
+string: 2
+integer: 6
+integer: 2
+integer: 1
+integer: 1
+integer: 6
+integer: -3
+[2017-08-23 23:27:13 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:13 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:13 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"7V",6,2,1,1,6,-3]
+[2017-08-23 23:27:13 CEST  CRITICAL] Completed iteration #4 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:13 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:13 CEST  CRITICAL] Started iteration #5 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:14 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"u",2,5,-2,1,70,7]
+depth: 6 size: 13
+string: 1
+integer: 2
+integer: 5
+integer: -2
+integer: 1
+integer: 70
+integer: 7
+[2017-08-23 23:27:14 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:14 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:14 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"u",2,5,-2,1,70,7]
+[2017-08-23 23:27:14 CEST  CRITICAL] Completed iteration #5 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:14 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:14 CEST  CRITICAL] Started iteration #5 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:15 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"K4e",-1,-7,3,-5,5,-3]
+depth: 6 size: 29
+string: 3
+integer: -1
+integer: -7
+integer: 3
+integer: -5
+integer: 5
+integer: -3
+[2017-08-23 23:27:15 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:15 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:15 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+            <div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"K4e",-1,-7,3,-5,5,-3]
+[2017-08-23 23:27:15 CEST  CRITICAL] Completed iteration #5 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:15 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:15 CEST  CRITICAL] Started iteration #5 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:16 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"Zw",-4,5,-6,1,-1,9]
+depth: 6 size: 26
+string: 2
+integer: -4
+integer: 5
+integer: -6
+integer: 1
+integer: -1
+integer: 9
+[2017-08-23 23:27:16 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:16 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:16 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"Zw",-4,5,-6,1,-1,9]
+[2017-08-23 23:27:16 CEST  CRITICAL] Completed iteration #5 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:16 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:16 CEST  CRITICAL] Started iteration #5 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:17 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"HV41N",300,4,3,1,6,5]
+depth: 4 size: 6
+string: 5
+integer: 300
+integer: 4
+integer: 3
+integer: 1
+integer: 6
+integer: 5
+[2017-08-23 23:27:17 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:17 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:17 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"HV41N",300,4,3,1,6,5]
+[2017-08-23 23:27:17 CEST  CRITICAL] Completed iteration #5 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:17 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:17 CEST  CRITICAL] Started iteration #6 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:18 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"Z",4,300,2,1,-10,-1]
+depth: 6 size: 14
+string: 1
+integer: 4
+integer: 300
+integer: 2
+integer: 1
+integer: -10
+integer: -1
+[2017-08-23 23:27:18 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:18 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:18 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"Z",4,300,2,1,-10,-1]
+[2017-08-23 23:27:18 CEST  CRITICAL] Completed iteration #6 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:18 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:18 CEST  CRITICAL] Started iteration #6 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:19 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2DIV2DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"YLy",70,-3,-9,4,-2,5]
+depth: 6 size: 14
+string: 3
+integer: 70
+integer: -3
+integer: -9
+integer: 4
+integer: -2
+integer: 5
+[2017-08-23 23:27:19 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:19 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:19 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2DIV2DIV2
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"YLy",70,-3,-9,4,-2,5]
+[2017-08-23 23:27:19 CEST  CRITICAL] Completed iteration #6 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:19 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:19 CEST  CRITICAL] Started iteration #6 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:20 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"4",-6,9,6,1,-9,6]
+depth: 6 size: 14
+string: 1
+integer: -6
+integer: 9
+integer: 6
+integer: 1
+integer: -9
+integer: 6
+[2017-08-23 23:27:20 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:20 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:20 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"4",-6,9,6,1,-9,6]
+[2017-08-23 23:27:20 CEST  CRITICAL] Completed iteration #6 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:20 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:20 CEST  CRITICAL] Started iteration #6 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:21 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"W4s",-4,-6,-3,1,-6,1]
+depth: 6 size: 20
+string: 3
+integer: -4
+integer: -6
+integer: -3
+integer: 1
+integer: -6
+integer: 1
+[2017-08-23 23:27:21 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:21 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:21 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"W4s",-4,-6,-3,1,-6,1]
+[2017-08-23 23:27:21 CEST  CRITICAL] Completed iteration #6 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:21 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:21 CEST  CRITICAL] Started iteration #7 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:22 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"TK",6,9,-9,1,1,70]
+depth: 6 size: 19
+string: 2
+integer: 6
+integer: 9
+integer: -9
+integer: 1
+integer: 1
+integer: 70
+[2017-08-23 23:27:22 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:22 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:22 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            DIV2
+        </div>
+        <div>
+            <div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"TK",6,9,-9,1,1,70]
+[2017-08-23 23:27:22 CEST  CRITICAL] Completed iteration #7 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:22 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:22 CEST  CRITICAL] Started iteration #7 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:23 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"8W6",100,7,150,-5,10,10]
+depth: 6 size: 19
+string: 3
+integer: 100
+integer: 7
+integer: 150
+integer: -5
+integer: 10
+integer: 10
+[2017-08-23 23:27:23 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:23 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:23 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"8W6",100,7,150,-5,10,10]
+[2017-08-23 23:27:23 CEST  CRITICAL] Completed iteration #7 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:23 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:23 CEST  CRITICAL] Started iteration #7 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:24 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"6bMS",3,10,70,1,-8,-2]
+depth: 6 size: 16
+string: 4
+integer: 3
+integer: 10
+integer: 70
+integer: 1
+integer: -8
+integer: -2
+[2017-08-23 23:27:24 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:24 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:24 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"6bMS",3,10,70,1,-8,-2]
+[2017-08-23 23:27:24 CEST  CRITICAL] Completed iteration #7 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:24 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:24 CEST  CRITICAL] Started iteration #7 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:25 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4929577464788732,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"wX",-1,-3,-10,1,-4,2]
+depth: 4 size: 6
+string: 2
+integer: -1
+integer: -3
+integer: -10
+integer: 1
+integer: -4
+integer: 2
+[2017-08-23 23:27:26 CEST  CRITICAL] Best entity (gen. 1) fitness: (1.4929577464788732,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+</html>
+,"wX",-1,-3,-10,1,-4,2]
+depth: 4 size: 6
+string: 2
+integer: -1
+integer: -3
+integer: -10
+integer: 1
+integer: -4
+integer: 2
+[2017-08-23 23:27:27 CEST  CRITICAL] Best entity (gen. 2) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="x">
+            <div id="dRl0a">
+                <div id="T7W">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="sYjQq">
+                <div id="mx">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,"Ysd0L",-6,1,-5,1,150,6]
+depth: 6 size: 14
+string: 5
+integer: -6
+integer: 1
+integer: -5
+integer: 1
+integer: 150
+integer: 6
+[2017-08-23 23:27:27 CEST  CRITICAL] Perfect entity found, finished after 2 generations!
+[2017-08-23 23:27:27 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:27 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="x">
+            <div id="dRl0a">
+                <div id="T7W">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="sYjQq">
+                <div id="mx">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+        </div>
+        DIV2
+    </body>
+</html>
+,"Ysd0L",-6,1,-5,1,150,6]
+[2017-08-23 23:27:27 CEST  CRITICAL] Completed iteration #7 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:27 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:27 CEST  CRITICAL] Started iteration #8 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:28 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+    </body>
+</html>
+,"xcJ",70,-6,-1,1,70,-7]
+depth: 4 size: 6
+string: 3
+integer: 70
+integer: -6
+integer: -1
+integer: 1
+integer: 70
+integer: -7
+[2017-08-23 23:27:28 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:28 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:28 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+    </body>
+</html>
+,"xcJ",70,-6,-1,1,70,-7]
+[2017-08-23 23:27:28 CEST  CRITICAL] Completed iteration #8 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:28 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:28 CEST  CRITICAL] Started iteration #8 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:29 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"rx7",-4,-4,10,10,4,-2]
+depth: 6 size: 14
+string: 3
+integer: -4
+integer: -4
+integer: 10
+integer: 10
+integer: 4
+integer: -2
+[2017-08-23 23:27:29 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:29 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:29 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+        <div>
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"rx7",-4,-4,10,10,4,-2]
+[2017-08-23 23:27:29 CEST  CRITICAL] Completed iteration #8 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:29 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:29 CEST  CRITICAL] Started iteration #8 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:30 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"u4",4,300,1,1,-6,2]
+depth: 6 size: 11
+string: 2
+integer: 4
+integer: 300
+integer: 1
+integer: 1
+integer: -6
+integer: 2
+[2017-08-23 23:27:30 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:30 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:30 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"u4",4,300,1,1,-6,2]
+[2017-08-23 23:27:30 CEST  CRITICAL] Completed iteration #8 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:30 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:30 CEST  CRITICAL] Started iteration #8 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:31 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"IqL",0,1,1,1,4,300]
+depth: 6 size: 15
+string: 3
+integer: 0
+integer: 1
+integer: 1
+integer: 1
+integer: 4
+integer: 300
+[2017-08-23 23:27:31 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:31 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:31 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"IqL",0,1,1,1,4,300]
+[2017-08-23 23:27:31 CEST  CRITICAL] Completed iteration #8 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:31 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:31 CEST  CRITICAL] Started iteration #9 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:32 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,"VdzQc",-4,-4,-1,1,1,-1]
+depth: 4 size: 8
+string: 5
+integer: -4
+integer: -4
+integer: -1
+integer: 1
+integer: 1
+integer: -1
+[2017-08-23 23:27:32 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:32 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:32 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </body>
+</html>
+,"VdzQc",-4,-4,-1,1,1,-1]
+[2017-08-23 23:27:32 CEST  CRITICAL] Completed iteration #9 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:32 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:32 CEST  CRITICAL] Started iteration #9 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:32 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"bd",9,300,-1,-8,-9,300]
+depth: 6 size: 9
+string: 2
+integer: 9
+integer: 300
+integer: -1
+integer: -8
+integer: -9
+integer: 300
+[2017-08-23 23:27:32 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:32 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:32 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"bd",9,300,-1,-8,-9,300]
+[2017-08-23 23:27:32 CEST  CRITICAL] Completed iteration #9 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:32 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:32 CEST  CRITICAL] Started iteration #9 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:33 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        DIV2DIV2
+    </body>
+</html>
+,"T",10,3,-2,1,-3,10]
+depth: 6 size: 11
+string: 1
+integer: 10
+integer: 3
+integer: -2
+integer: 1
+integer: -3
+integer: 10
+[2017-08-23 23:27:33 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:33 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:33 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        DIV2DIV2
+    </body>
+</html>
+,"T",10,3,-2,1,-3,10]
+[2017-08-23 23:27:33 CEST  CRITICAL] Completed iteration #9 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:33 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:33 CEST  CRITICAL] Started iteration #9 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:34 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"pe",1,-4,3,1,70,7]
+depth: 4 size: 7
+string: 2
+integer: 1
+integer: -4
+integer: 3
+integer: 1
+integer: 70
+integer: 7
+[2017-08-23 23:27:34 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:34 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:34 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            DIV2
+        </div>
+    </body>
+</html>
+,"pe",1,-4,3,1,70,7]
+[2017-08-23 23:27:34 CEST  CRITICAL] Completed iteration #9 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:34 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:34 CEST  CRITICAL] Started iteration #10 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:35 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"FK",3,8,7,1,-1,100]
+depth: 6 size: 18
+string: 2
+integer: 3
+integer: 8
+integer: 7
+integer: 1
+integer: -1
+integer: 100
+[2017-08-23 23:27:35 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:35 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:35 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"FK",3,8,7,1,-1,100]
+[2017-08-23 23:27:35 CEST  CRITICAL] Completed iteration #10 to cover branch: #1 -> (3,4,"then")
+[2017-08-23 23:27:35 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:35 CEST  CRITICAL] Started iteration #10 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:36 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"8CP4",150,-2,-4,2,-3,1]
+depth: 6 size: 14
+string: 4
+integer: 150
+integer: -2
+integer: -4
+integer: 2
+integer: -3
+integer: 1
+[2017-08-23 23:27:36 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:36 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:36 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+        DIV2
+        <div>
+            <div>
+            </div>
+            <div>
+            </div>
+        </div>
+    </body>
+</html>
+,"8CP4",150,-2,-4,2,-3,1]
+[2017-08-23 23:27:36 CEST  CRITICAL] Completed iteration #10 to cover branch: #2 -> (3,12,"else")
+[2017-08-23 23:27:36 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:36 CEST  CRITICAL] Started iteration #10 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:38 CEST  CRITICAL] Best entity (gen. 0) fitness: (1.4285714285714286,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"yDK",-3,-7,150,1,-2,100]
+depth: 6 size: 12
+string: 3
+integer: -3
+integer: -7
+integer: 150
+integer: 1
+integer: -2
+integer: 100
+[2017-08-23 23:27:38 CEST  CRITICAL] Best entity (gen. 1) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="2ikT">
+            <div id="EW">
+            </div>
+            <div id="71Y2Q">
+            </div>
+            <div id="4IvT">
+            </div>
+        </div>
+        <div id="pwvd">
+            <div id="RrH1f">
+                <div id="XpM">
+                    PHRASING CONTENT
+                </div>
+                <div id="2CvE0">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="804A">
+            <div id="O3I">
+                <div id="44">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="9">
+            </div>
+        </div>
+    </body>
+</html>
+,"JA1",9,4,150,1,-1,7]
+depth: 6 size: 24
+string: 3
+integer: 9
+integer: 4
+integer: 150
+integer: 1
+integer: -1
+integer: 7
+[2017-08-23 23:27:38 CEST  CRITICAL] Perfect entity found, finished after 1 generations!
+[2017-08-23 23:27:38 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:38 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        <div id="2ikT">
+            <div id="EW">
+            </div>
+            <div id="71Y2Q">
+            </div>
+            <div id="4IvT">
+            </div>
+        </div>
+        <div id="pwvd">
+            <div id="RrH1f">
+                <div id="XpM">
+                    PHRASING CONTENT
+                </div>
+                <div id="2CvE0">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            DIV2
+        </div>
+        <div id="804A">
+            <div id="O3I">
+                <div id="44">
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div id="1">
+                    PHRASING CONTENT
+                </div>
+            </div>
+            <div id="9">
+            </div>
+        </div>
+    </body>
+</html>
+,"JA1",9,4,150,1,-1,7]
+[2017-08-23 23:27:38 CEST  CRITICAL] Completed iteration #10 to cover branch: #3 -> (5,6,"then")
+[2017-08-23 23:27:38 CEST  CRITICAL] ----------------------------------------------------------------------
+[2017-08-23 23:27:38 CEST  CRITICAL] Started iteration #10 to cover branch: #4 -> (5,9,"else")
+[2017-08-23 23:27:39 CEST  CRITICAL] Best entity (gen. 0) fitness: (0.0,0.0,0)
+[<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+        </div>
+        <div>
+            DIV2
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"Ke",2,-5,-8,1,-2,4]
+depth: 6 size: 20
+string: 2
+integer: 2
+integer: -5
+integer: -8
+integer: 1
+integer: -2
+integer: 4
+[2017-08-23 23:27:39 CEST  CRITICAL] Perfect entity found, finished after 0 generations!
+[2017-08-23 23:27:39 CEST  CRITICAL] Best fitness value: Just (0.0,0.0,0)
+[2017-08-23 23:27:39 CEST  CRITICAL] Best entity (GA): [<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            Test Title
+        </title>
+    </head>
+    <body>
+        DIV2
+        <div>
+        </div>
+        <div>
+            DIV2
+            <div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+            </div>
+            <div>
+                <div>
+                    PHRASING CONTENT
+                </div>
+                DIV2
+                <div>
+                    PHRASING CONTENT
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+,"Ke",2,-5,-8,1,-2,4]
+[2017-08-23 23:27:39 CEST  CRITICAL] Completed iteration #10 to cover branch: #4 -> (5,9,"else")

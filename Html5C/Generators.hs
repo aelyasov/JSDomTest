@@ -16,6 +16,7 @@ import Control.Monad.Trans.State
 import Control.Monad.Trans.Class
 import Html5C.Context
 import Html5C.Tags
+import Control.Monad.IO.Class (liftIO)
 
 import Test.QuickCheck.Arbitrary
 import Test.QuickCheck.Gen 
@@ -31,9 +32,10 @@ import Text.Blaze.Html.Renderer.Pretty
 
 import Html5C.QuickCheck.Gen
 
-import Util.Debug
+import Util.Debug (debug)
 import Debug.Trace
 import Safe (fromJustNote)
+import System.Log.Logger (rootLoggerName, debugM)
 
 
 fromTag2Gen :: HTML_TAG -> GenHtmlState
@@ -49,6 +51,7 @@ fromTag2Gen TAG_BASE       = genTAG_base
 fromTag2Gen TAG_BDI        = genTAG_bdi
 fromTag2Gen TAG_BDO        = genTAG_bdo
 fromTag2Gen TAG_BLOCKQUOTE = genTAG_blockquote
+fromTag2Gen TAG_BODY       = genTAG_body
 fromTag2Gen TAG_BR         = genTAG_br
 fromTag2Gen TAG_BUTTON     = genTAG_button
 fromTag2Gen TAG_CANVAS     = genTAG_canvas
@@ -162,8 +165,8 @@ context2gens freqTbl tags ctx =
         ctxUni  = (foldl (\\) (foldr1 intersect posCtx) negCtx) ++ concat passCtx
         ctxUniLikely = let ctxUniLikely' = ctxUni `intersect` tags
                        in  if P.null ctxUniLikely'
-                           -- then ctxUni
-                           then ctxUniLikely'     
+                           then ctxUni
+                           -- then ctxUniLikely'     
                            else ctxUniLikely'
         findTag ts x = find (\(i, h) -> x == h) ts
         tagsFreq     = mapMaybe (findTag freqTbl) $ nub ctxUniLikely 
@@ -173,29 +176,31 @@ context2gens freqTbl tags ctx =
              P.map (\(i, t) -> (i, fromTag2Gen t)) tagsFreq
         else P.map (\(i, t) -> (i, fromTag2Gen t)) tagsFreq   
 
+
 arbHtmlDefaultHead :: GenHtmlState
-arbHtmlDefaultHead = return $ H.head $ H.title $ toHtml "Test Title"
+arbHtmlDefaultHead = debug "arbHtmlDefaultHead" $ return $ H.head $ H.title $ toHtml "Test Title"
+
 
 arbHtmlHTML :: GenHtmlState
-arbHtmlHTML = do
+arbHtmlHTML = debug "arbHtmlHTML" $ do
   st <- get
   let n       = getDepth st
       ctx     = getCtx st
       main_   = hasMain st
       hasHead = hasDefHead st    
-  head_ <- put st{ getDepth = iter n, getCtx = push CMetadata ctx}
+  head_ <- put st{ getDepth = n, getCtx = push CMetadata ctx}
            >>
            if hasHead
            then arbHtmlDefaultHead
            else arbHtmlHEAD
-  body_ <- put st{ getDepth = iter n, getCtx = push CFlow ctx} >> arbHtmlBODY
+  body_ <- put st{ getDepth = iter n, getCtx = push CFlow ctx} >> genTAG_body
   if n == 0
   then lift $ return $ toHtml "HTML"
   else lift $ return $ docTypeHtml $ head_ >> body_
 
 
 arbHtmlHEAD :: GenHtmlState
-arbHtmlHEAD = do  
+arbHtmlHEAD = debug "arbHtmlHEAD" $ do  
   st <- get
   let n   = getDepth st
       ctx = getCtx st
@@ -205,6 +210,7 @@ arbHtmlHEAD = do
   if n == 0
   then lift $ return $ toHtml "head"
   else lift $ return $ H.head $ title_ >> base_ >> (mconcat metadata_)
+
 
 genTAG_base :: GenHtmlState
 genTAG_base = debug "genTAG_base" $ lift $ return $ base ! href (toValue ".") ! target (toValue "_blank")
@@ -234,8 +240,10 @@ genTAG_link = debug "genTAG_link" $ do
            | otherwise -> error $ "*** genTAG_link " ++ show c
     Nothing        -> error $ "genTAG_link: there is no right context"
 
+
 genTAG_style :: GenHtmlState
 genTAG_style = debug "genTAG_style" $ lift $ return $ H.style Empty
+
 
 genTAG_meta :: GenHtmlState
 genTAG_meta = debug "genTAG_meta" $ do
@@ -290,19 +298,19 @@ genTAG_template :: GenHtmlState
 genTAG_template = debug "genTAG_template" $ lift $ return $ template $ toHtml "TEMPLATE"
 
 
-arbHtmlBODY :: GenHtmlState
-arbHtmlBODY = debug "arbHtmlBODY" $ do
+genTAG_body :: GenHtmlState
+genTAG_body = debug "genTAG_body" $ do
   st <- get
   let ctx   = getCtx st 
       depth = getDepth st
   if depth == 0
   then lift $ return $ toHtml "BODY"
   else do html_ <- put st{getDepth = iter depth, getCtx = push CFlow ctx} >> arbFlowContent
-          lift $ return $ (body html_) ! itemscope (toValue "") ! itemtype (toValue "http://schema.org/WebPage")
+          lift $ return $ (body html_)
+-- ! itemscope (toValue "") ! itemtype (toValue "http://schema.org/WebPage")
 
 
 arbFlowContent :: GenHtmlState
--- arbFlowContent _  0  = lift $ return $ toHtml $ "FLOW CONTENT"
 arbFlowContent = debug "arbFlowContent" $ do 
   st <- get
   let -- main_   = hasMain    st 
@@ -314,14 +322,13 @@ arbFlowContent = debug "arbFlowContent" $ do
   if depth == 0
   then lift $ return $ toHtml $ "FLOW CONTENT"
   else do flow_ <- resizeState ndegree $ 
-                   listOfState $ 
+                   listOfState1 $ 
                    do st' <- get
                       let main_ = hasMain st'                         
                       if not main_ 
                       then do put st'{getCtx = ctx} 
                               frequencyState $ context2gens freqTbl tags ctx
-                      else 
-                           do put st'{getCtx = push (CExcl [TAG_MAIN]) ctx} 
+                      else do put st'{getCtx = push (CExcl [TAG_MAIN]) ctx} 
                               frequencyState $ context2gens freqTbl tags $ push (CExcl [TAG_MAIN]) ctx
           lift $ return $ mconcat flow_
 
@@ -546,7 +553,7 @@ genTAG_blockquote = debug "genTAG_blockquote" $ do
 
 
 genTAG_br :: GenHtmlState
-genTAG_br = lift $ return $ br
+genTAG_br = debug "genTAG_br" $ lift $ return $ br
 
 
 genTAG_button :: GenHtmlState

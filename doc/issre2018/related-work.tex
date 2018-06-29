@@ -1,0 +1,81 @@
+%% --------------------------------------------------------------------
+\section{Related and Future Work}
+\label{sec:related.work}
+%% --------------------------------------------------------------------
+
+The last two decades have been highly productive for the research in JS testing and analysis~\cite{andreasen2017survey, sun2017analysis, mesbah2015advances}. Discussing the state-of-the-art in JS testing we cluster the works, by the underlying technique, into the following categories: feedback-directed random generation~\cite{heidegger2010contract,heidegger2012jscontest,kristensen2017type}, symbolic~\cite{tanida2014automatic,saxena2010symbolic} and concolic~\cite{sen2013jalangi,amin:ase15} execution, static~\cite{tajs2009,dom2011} and dynamic~\cite{andreasen2017survey} analysis, formal verification~\cite{gardner2008local,lerner2012modeling,gardner2012towards}, search-based generation~\cite{alshraideh2008complete}, and whole web application testing~\cite{alshahwan2011automated,mesbah2012invariant,milani2014leveraging}.
+
+Guided by developer's type annotations, \emph{JSContest} generates random inputs for JS functions with the goal to verify the conformance to the \emph{type}~\cite{heidegger2010contract} and \emph{access permission}~\cite{heidegger2012jscontest} contracts. In comparison with our genetic approach, it does not leverage dynamic information to construct test inputs, only static one, and ignores the DOM interactions. $TS_{TEST}$~\cite{kristensen2017type} employs the feedback-directed random generation for conformance checking of TypeScript declarations with the respective JS libraries. It supports generics, but cannot generate DOM.
+
+%% cite heidegger2010dom
+
+\emph{Jalangi}~\cite{sen2013jalangi} is a JS dynamic analysis framework which can be instantiated for \emph{concolic testing} and \emph{type inconsistency analysis}~\cite{pradel2015typedevil}, but it does not support DOM. \emph{Confix}~\cite{amin:ase15} translates DOM-related statements into XPath expressions, and feeds them to a constraint solver in order to construct a DOM fixture. It can reinforce \Jalangi with the capability of DOM modeling. However, as our evaluation has shown, \Confix cannot resolve hard to cover branches. \emph{SymJS}~\cite{tanida2014automatic} employs symbolic execution for JS unit-test generation but again has no symbolic stubs for the DOM API.
+
+%% Another \cite{saxena2010symbolic} symbolic execution tool
+
+Jensen et al.~\cite{tajs2009} proposed a static analysis framework \emph{TAJS} for JS type inference. Later the analysis was extended to support reasoning about the HTML DOM and browser API~\cite{dom2011}. \emph{TAJS} is able to point to a dead code, type violation and references to \emph{undefined} values. A review of dynamic analysis techniques ofr JS can be found in a recently published survey~\cite{andreasen2017survey} by Andreasen et al.
+
+Lerner~\cite{lerner2012modeling} formally models the event behavior in the DOM to establish testing oracles. Gardener et al.~\cite{gardner2012towards} presents a formal verification framework for JS, which can deal with some parts the DOM specification~\cite{gardner2008local}.
+
+Alshraideh~\cite{alshraideh2008complete} is the first work suggesting to use GA for JS test data generation. But the implementation is limited to primitive types such as numbers and strings, and does not report on empirical validation. Moreover, it does not support the generation of arrays and DOM. Recently, SBST has been applied to other dynamic languages such as Ruby~\cite{mairhofer2011search}, Lua~\cite{wibowo2015unit} and Go~\cite{irawan2016test}, but the treatment of DOM still makes our approach unique. \emph{XMLMATE}~\cite{havrikov2014xmlmate} is the only search-based tool we have encountered that can produce \emph{tree-like} structures such as XML. It is built on top of \emph{EvoSuite} with the aim of improving the test coverage of the XML-aware Java programs. To generate a random document, it either relies on an existing XML schema, or generates the document from scratch. Both tools have a similar approach for the mutation and crossover. One distinguishing feature of our approach is the use of program analysis to facilitate DOM generation. Jan et al.~\cite{jan2016automated} suggest to use XML fuzzing for identifying vulnerabilities in web services.
+
+In contrast with the techniques discussed so far, whole web application testing requires the application to be fully functional. This enables test generation based on crawling~\cite{mesbah2012invariant} and can be combined with the developer's written tests~\cite{milani2014leveraging}. \emph{Artemis}~\cite{artemis2011} is a feedback-directed random testing tool for JavaScript web applications. It discovers new tests by generating the sequences of executable events and monitoring how they effect the application state. Biagiola et al.~\cite{biagiola2017search} propose to use existing \emph{page objects} to produce navigation paths and input data by exploiting the search-based approach. \emph{JSEFT}~\cite{mirshokraie2015jseft} leverages dynamic execution to generate JS unit test including fixtures captured at run-time. The generated test can be complemented with the DOM-dependent assertions produced by \emph{Atrina}~\cite{icst16}.
+
+%% \emph{Flycatcher}~\cite{de2012automatic} generates tests by instrumenting a program with the help the JS \emph{Proxies} in order to collect type related information.
+
+%% \emph{$JS_{DEP}$}~\cite{sung2016static} proposes a constraint-based static analysis for learning dependencies between DOM-events, which can help to prune the sequence of tests consisting of the web-application events.
+
+%% \cite{ma2015grt} guided random testing
+
+%% \cite{mao2016sapienz} Multi-objective automated testing for Android application
+
+%% \cite{jquery2014}
+
+
+%% ACTARUS is a static taint analysis of JS\cite{guarnieri2011saving}.
+
+
+%% Salable dynamic analysis framework for JS based on shadow executions~\cite{create.citation}.
+
+%% Information-flow security for JS~\cite{hedin2012information}.
+
+%% Testing of AJAX application by means of crawling of the application to infer state-flow graph~\cite{mesbah2012crawling} ATUSA ~\cite{mesbah2012invariant}
+
+%% Learning DOM invariants from multiple executions of the application~\cite{pattabiraman2010dodom}.
+
+%% Measuring test adequacy for web application based on the DOM state coverage~\cite{mirzaaghaei2014dom}.
+
+%% Combining human written test cases with the automatically generated once by crawling in order to extend test coverage~\cite{milani2014leveraging}.
+
+%% DOM-aware JavaScript code completion~\cite{bajaj2014dompletion}.
+
+
+%% Starting from the seminal survey of search-based test data generation~\cite{mcminn2004search}, there has been an active growth in the number of the SBST research~\cite{mcminn2011search}. Powered by the works of Wegener et at.~\cite{wegener2001evolutionary} on structural test generation, and Tonella~\cite{tonella2004evolutionary} on evolutionary class testing, it resulted in the development of EvoSuite~\cite{fraser2011evosuite} --- evolutionary framework for Java test generation.
+
+%% % -----------------------
+%% Our test generation strategy is \emph{goal-oriented}~\cite{korel1992dynamic}, i.e. it tries to find an execution leading to a goal (statement) regardless of a concrete path taken. We uses control flow graph to identify implicit dependencies between nodes.
+
+%% The \emph{chaining approach}~\cite{ferguson1996chaining} uses data dependency to form the sequences of statements preceding the execution of a search target.
+% -----------------------
+
+\subsection{Future Work}
+\label{subsec.fut.work}
+
+One likely direction for the future extension of \emph{JEDI} is \emph{whole test suite generation}~\cite{fraser2013whole}. Such problems usually incur multi-objective optimization~\cite{lakhotia2007multi,panichella2017lips}, e.g. a trade-off between coverage and test-suite length.
+
+Another direction of future work is re-targeting our tool towards mutation-driven generation of unit tests and oracles, similar to~\cite{fraser2012mutation}. That should also help to evaluate fault revealing capability of \emph{JEDI} as the number of killed mutants.
+
+Similar to \cite{baars2011symbolic, galeotti2013improving}, it could be worth to combine search-based generation with concolic (symbolic) execution, e.g. investigate the integration of \Jedi with \Jalangi.
+
+We plan to validate \Jedi on a larger set of examples. Towards this goal, we have to extend our framework with the support of such input types as user-defined classes and high-order functions. The first extension is straightforward since any class can be described as the collection of the types of class fields. To generate functions as inputs we could employ approach similar to QuickCheck~\cite{koopman2006automatic}.
+
+%% Currently, our framework imposes certain explicit constraints on the kind of JS functions it is able to process:
+%% \begin{enumerate}
+%% \item ability to assign static types to input parameters
+%% \item no support for the \emph{Object} type, heterogeneous arrays and high-order functions
+%% \item no support for recursion
+%% \item doesn't perform inter-procedural analysis
+%% \item no support for JS frameworks
+%% \item no reference to global variables and functions
+%% \item limited support of DOM API
+%% \end{enumerate}

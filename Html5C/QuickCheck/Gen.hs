@@ -2,6 +2,7 @@
 
 module Html5C.QuickCheck.Gen where
 
+import Data.Text (Text)
 import Text.Blaze.Html5
 import Text.Blaze.Internal
 import Test.QuickCheck.Gen 
@@ -20,13 +21,14 @@ import System.IO.Unsafe (unsafePerformIO)
 
 import Debug.Trace
 import Data.List (sortBy)
+import Control.Monad.IO.Class 
 
 type HasMain = Bool
 
 {-# NOINLINE readRandomConfig #-}
 readRandomConfig :: (Int, Int, Int, Bool)
 readRandomConfig = unsafePerformIO $ do
-  config   <- load [ Required "jsdomtest.cfg"]
+  config   <- load [Required "jsdomtest.cfg"]
   depth    <- require config "generate_html_tree.depth"
   degree   <- require config "generate_html_tree.degree"
   topN     <- require config "generate_html_tree.frequency-table.top"
@@ -44,9 +46,9 @@ defaultState =
                                 -- , tagFreqTbl  = normFreqTblReal defTagFreqTblReal
                 , tagFreqTbl  = filter $ take topN $ sortBy (\i j -> fst j `compare` fst i) defTagFreqTblReal
                 , htmlTags    = []
-                , htmlNames   = []
-                , htmlIds     = []
-                , htmlClasses = []
+                , htmlNames   = Nothing
+                , htmlIds     = Nothing
+                , htmlClasses = Nothing
                 , hasDefHead  = True
                 } 
 
@@ -56,9 +58,9 @@ data HtmlState = HtmlState { hasMain     :: Bool
                            , getCtx      :: Context 
                            , tagFreqTbl  :: [(Int, HTML_TAG)] 
                            , htmlTags    :: [HTML_TAG]
-                           , htmlNames   :: [String]
-                           , htmlIds     :: [String]
-                           , htmlClasses :: [String]
+                           , htmlNames   :: Maybe [String]
+                           , htmlIds     :: Maybe [String]
+                           , htmlClasses :: Maybe [String]
                            , hasDefHead  :: Bool
                            }
                  deriving Show
@@ -67,9 +69,7 @@ data HtmlState = HtmlState { hasMain     :: Bool
 type GenHtmlState = GenState HtmlState Html
 
 type GenState s = StateT s Gen
-
-type GetSHtml = GenState HasMain Html
-
+  
 optional :: GenState s Html -> GenState s Html
 optional st = do html_ <- st
                  lift $ frequency [(1, return html_), (1, return Empty)] 

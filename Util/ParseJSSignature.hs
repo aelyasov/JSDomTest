@@ -5,26 +5,21 @@ module Util.ParseJSSignature where
 import Language.JavaScript.Parser
 import Data.Generics
 
-import qualified Text.Parsec.Prim as P
-import Text.Parsec.Combinator
-import Text.Parsec.Char
 import Data.Functor.Identity
 
 import Data.Maybe
 import Data.Either
+import Data.Char (isSpace)
+import Data.List (isPrefixOf)
 
 import Genetic.DataJS
-
-data ArgJS = JS_Int | JS_String | JS_Bool | JS_Dom | JS_Float
-             deriving Show
-
 
 parseJSSignature :: FilePath -> IO JSSig
 parseJSSignature jsF = do
   jsNode <- parseFile jsF
-  let sigCom = fromJust $ findSignatureComment jsNode  
-      types  = either (const []) id $ P.parse pSigCom "" sigCom
-  return $ foldr (\x xs -> maybe xs (\a -> a:xs)  (str2argJS x)) [] types
+  let sigComment = fromJust $ findSignatureComment jsNode
+      sig = map str2JSType $ splitBy ':' $ removeCommentAnn $ stripSpaces sigComment
+  return sig
 
   
 findSignatureComment :: JSNode -> Maybe String
@@ -36,27 +31,21 @@ findTypeComment (CommentA _ str) | take 3 str == "/*t" = Just str
                                  | otherwise           = Nothing 
 findTypeComment _ = Nothing
 
+str2JSType :: String -> JSType
+str2JSType str | "bool"   `isPrefixOf` str = JS_BOOL
+               | "int"    `isPrefixOf` str = JS_INT
+               | "float"  `isPrefixOf` str = JS_FLOAT
+               | "string" `isPrefixOf` str = JS_STRING
+               | "dom"    `isPrefixOf` str = JS_DOM
+               | "["      `isPrefixOf` str = JS_ARRAY $ str2JSType $ tail str
+               | otherwise = error $ str ++ " type isn't defined"
 
-pSigCom :: P.Stream s Identity Char => P.Parsec s () [String]
-pSigCom = manyTill (choice [ string "/*t"
-                           , string "int"
-                           , string "bool"
-                           , string "string"
-                           , string "float"
-                           , string "dom"
-                           , string " "
-                           , string ":"
-                           ]
-                   ) (string "*/") 
+splitBy :: (Eq a) => a -> [a] -> [[a]]
+splitBy y = foldr (\x (xs:xss) -> if x == y then []:(xs:xss) else (x:xs):xss) [[]]
 
-
-str2argJS :: String -> Maybe JSType
-str2argJS str = case str of
-                  "int"    -> Just JS_INT
-                  "bool"   -> Just JS_BOOL
-                  "string" -> Just JS_STRING
-                  "dom"    -> Just JS_DOM
-                  "float"  -> Just JS_FLOAT
-                  _        -> Nothing
-
-
+removeCommentAnn :: String -> String
+removeCommentAnn str = let strNoOpenComment = drop 3 str
+                       in  take (length strNoOpenComment - 2) strNoOpenComment
+                           
+stripSpaces :: String -> String
+stripSpaces = foldr (\s rest -> if isSpace s then rest else s:rest) [] 
