@@ -15,37 +15,37 @@ Database file #1: issre2018.bib
 Done.
 You've used 78 entries,
             4024 wiz_defined-function locations,
-            1203 strings with 20571 characters,
-and the built_in function-call counts, 55319 in all, are:
-= -- 4370
-> -- 1189
+            1204 strings with 20508 characters,
+and the built_in function-call counts, 55190 in all, are:
+= -- 4358
+> -- 1176
 < -- 440
-+ -- 645
-- -- 194
-* -- 2523
-:= -- 8033
++ -- 639
+- -- 191
+* -- 2511
+:= -- 8013
 add.period$ -- 191
 call.type$ -- 78
-change.case$ -- 77
+change.case$ -- 76
 chr.to.int$ -- 1026
 cite$ -- 78
-duplicate$ -- 4123
-empty$ -- 4917
-format.name$ -- 252
-if$ -- 12932
+duplicate$ -- 4110
+empty$ -- 4922
+format.name$ -- 248
+if$ -- 12908
 int.to.chr$ -- 0
 int.to.str$ -- 78
-missing$ -- 726
+missing$ -- 723
 newline$ -- 257
 num.names$ -- 65
-pop$ -- 1790
+pop$ -- 1783
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 4368
+skip$ -- 4364
 stack$ -- 0
-substring$ -- 2533
-swap$ -- 3185
+substring$ -- 2532
+swap$ -- 3175
 text.length$ -- 98
 text.prefix$ -- 0
 top$ -- 5
@@ -53,4 +53,4 @@ type$ -- 78
 warning$ -- 0
 while$ -- 265
 width$ -- 80
-write$ -- 720
+write$ -- 719

@@ -58,6 +58,11 @@ M.~Grothaus, ``The year that software bugs ate the world,''
   \url{https://www.fastcompany.com/40505226/the-year-that-software-bugs-ate-the-world},
   2017.
 
+\bibitem{martin2009clean}
+R.~C. Martin, \emph{Clean code: a handbook of agile software
+  craftsmanship}.\hskip 1em plus 0.5em minus 0.4em\relax Pearson Education,
+  2009.
+
 \bibitem{stateJS2017}
 ``The state of javascript 2017,'' \url{https://stateofjs.com}, 2017.
 
@@ -122,15 +127,15 @@ K.~Mao, M.~Harman, and Y.~Jia, ``Sapienz: Multi-objective automated testing for
   Symposium on Software Testing and Analysis}.\hskip 1em plus 0.5em minus
   0.4em\relax ACM, 2016, pp. 94--105.
 
-\bibitem{jang2009points}
-D.~Jang and K.-M. Choe, ``Points-to analysis for javascript,'' in
-  \emph{Proceedings of the 2009 ACM symposium on Applied Computing}.\hskip 1em
-  plus 0.5em minus 0.4em\relax ACM, 2009, pp. 1930--1937.
-
 \bibitem{ferguson1996chaining}
 R.~Ferguson and B.~Korel, ``The chaining approach for software test data
   generation,'' \emph{ACM Transactions on Software Engineering and Methodology
   (TOSEM)}, vol.~5, no.~1, pp. 63--86, 1996.
+
+\bibitem{jang2009points}
+D.~Jang and K.-M. Choe, ``Points-to analysis for javascript,'' in
+  \emph{Proceedings of the 2009 ACM symposium on Applied Computing}.\hskip 1em
+  plus 0.5em minus 0.4em\relax ACM, 2009, pp. 1930--1937.
 
 \bibitem{dom2011}
 S.~H. Jensen, M.~Madsen, and A.~M\o{}ller, ``Modeling the {HTML} {DOM} and
@@ -162,6 +167,12 @@ H.~Zhu, P.~A. Hall, and J.~H. May, ``Software unit test coverage and
 
 \bibitem{flow}
 ``Flow,'' \url{https://flow.org/}.
+
+\bibitem{tracey1998automated}
+N.~Tracey, J.~Clark, K.~Mander, and J.~McDermid, ``An automated framework for
+  structural test-data generation,'' in \emph{Automated Software Engineering,
+  1998. Proceedings. 13th IEEE International Conference on}.\hskip 1em plus
+  0.5em minus 0.4em\relax IEEE, 1998, pp. 285--288.
 
 \bibitem{poli2008field}
 R.~Poli, W.~B. Langdon, N.~F. McPhee, and J.~R. Koza, \emph{A field guide to
@@ -216,12 +227,6 @@ A.~Arcuri, ``It does matter how you normalise the branch distance in search
   Validation (ICST), 2010 Third International Conference on}.\hskip 1em plus
   0.5em minus 0.4em\relax IEEE, 2010, pp. 205--214.
 
-\bibitem{tracey1998automated}
-N.~Tracey, J.~Clark, K.~Mander, and J.~McDermid, ``An automated framework for
-  structural test-data generation,'' in \emph{Automated Software Engineering,
-  1998. Proceedings. 13th IEEE International Conference on}.\hskip 1em plus
-  0.5em minus 0.4em\relax IEEE, 1998, pp. 285--288.
-
 \bibitem{todomvc}
 ``Todo mvc,'' \url{http://todomvc.com}.
 
@@ -234,16 +239,16 @@ N.~Tracey, J.~Clark, K.~Mander, and J.~McDermid, ``An automated framework for
 \bibitem{jsmeter}
 ``Jsmeter,'' \url{http://jsmeter.info}.
 
-\bibitem{bray1997c4}
-M.~Bray, K.~Brune, D.~A. Fisher, J.~Foreman, and M.~Gerken, ``C4 software
-  technology reference guide-a prototype.'' Carnegie-Mellon Univ Pittsburgh Pa
-  Software Engineering Inst, Tech. Rep., 1997.
-
 \bibitem{arcuri2011practical}
 A.~Arcuri and L.~Briand, ``A practical guide for using statistical tests to
   assess randomized algorithms in software engineering,'' in \emph{Software
   Engineering (ICSE), 2011 33rd International Conference on}.\hskip 1em plus
   0.5em minus 0.4em\relax IEEE, 2011, pp. 1--10.
+
+\bibitem{bray1997c4}
+M.~Bray, K.~Brune, D.~A. Fisher, J.~Foreman, and M.~Gerken, ``C4 software
+  technology reference guide-a prototype.'' Carnegie-Mellon Univ Pittsburgh Pa
+  Software Engineering Inst, Tech. Rep., 1997.
 
 \bibitem{mann1947test}
 H.~B. Mann and D.~R. Whitney, ``On a test of whether one of two random
@@ -262,6 +267,12 @@ A.~Vargha and H.~D. Delaney, ``A critique and improvement of the cl common
 G.~Misherghi and Z.~Su, ``Hdd: hierarchical delta debugging,'' in
   \emph{Proceedings of the 28th international conference on Software
   engineering}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2006, pp. 142--151.
+
+\bibitem{herfert2017automatically}
+S.~Herfert, J.~Patra, and M.~Pradel, ``Automatically reducing tree-structured
+  test inputs,'' in \emph{Proceedings of the 32nd IEEE/ACM International
+  Conference on Automated Software Engineering}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE Press, 2017, pp. 861--871.
 
 \bibitem{heidegger2012jscontest}
 P.~Heidegger and P.~Thiemann, ``Jscontest: Contract-driven testing and path
@@ -365,16 +376,6 @@ S.~Mirshokraie, A.~Mesbah, and K.~Pattabiraman, ``Jseft: Automated javascript
   \emph{Proceedings of the International Conference on Software Testing,
   Verification, and Validation (ICST)}.\hskip 1em plus 0.5em minus 0.4em\relax
   IEEE Computer Society, 2016, p. 11 pages.
-
-\bibitem{de2012automatic}
-J.~de~Lafargue, S.~Eisenbach, and T.~Allwood, ``Automatic unit test generation
-  for javascript,'' \emph{Imperial College London}, 2012.
-
-\bibitem{sung2016static}
-C.~Sung, M.~Kusano, N.~Sinha, and C.~Wang, ``Static dom event dependency
-  analysis for testing web applications,'' in \emph{Proceedings of the 2016
-  24th ACM SIGSOFT International Symposium on Foundations of Software
-  Engineering}.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 447--459.
 
 \bibitem{fraser2013whole}
 G.~Fraser and A.~Arcuri, ``Whole test suite generation,'' \emph{IEEE
