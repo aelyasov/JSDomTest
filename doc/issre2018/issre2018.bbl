@@ -29,15 +29,15 @@ StackOverflow, ``Developer survey results 2018,''
 GitHub, ``The state of the octoverse 2017,''
   \url{https://octoverse.github.com/}, 2017.
 
-\bibitem{richards2010analysis}
-G.~Richards, S.~Lebresne, B.~Burg, and J.~Vitek, ``An analysis of the dynamic
-  behavior of javascript programs,'' in \emph{ACM Sigplan Notices}, vol.~45,
-  no.~6.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2010, pp. 1--12.
-
 \bibitem{frolin:TSE16}
 F.~Ocariza, K.~Bajaj, K.~Pattabiraman, and A.~Mesbah, ``A study of causes and
   consequences of client-side {JavaScript} bugs,'' \emph{IEEE Transactions on
   Software Engineering (TSE)}, p. 17 pages, 2016.
+
+\bibitem{mesbah2015advances}
+A.~Mesbah, ``Advances in testing javascript-based web applications,'' in
+  \emph{Advances in Computers}.\hskip 1em plus 0.5em minus 0.4em\relax
+  Elsevier, 2015, vol.~97, pp. 201--235.
 
 \bibitem{andreasen2017survey}
 E.~Andreasen, L.~Gong, A.~M{\o}ller, M.~Pradel, M.~Selakovic, K.~Sen, and C.-A.
@@ -48,10 +48,10 @@ E.~Andreasen, L.~Gong, A.~M{\o}ller, M.~Pradel, M.~Selakovic, K.~Sen, and C.-A.
 K.~Sun and S.~Ryu, ``Analysis of javascript programs: Challenges and research
   trends,'' \emph{ACM Computing Surveys (CSUR)}, vol.~50, no.~4, p.~59, 2017.
 
-\bibitem{mesbah2015advances}
-A.~Mesbah, ``Advances in testing javascript-based web applications,'' in
-  \emph{Advances in Computers}.\hskip 1em plus 0.5em minus 0.4em\relax
-  Elsevier, 2015, vol.~97, pp. 201--235.
+\bibitem{richards2010analysis}
+G.~Richards, S.~Lebresne, B.~Burg, and J.~Vitek, ``An analysis of the dynamic
+  behavior of javascript programs,'' in \emph{ACM Sigplan Notices}, vol.~45,
+  no.~6.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2010, pp. 1--12.
 
 \bibitem{bugstories2017}
 M.~Grothaus, ``The year that software bugs ate the world,''

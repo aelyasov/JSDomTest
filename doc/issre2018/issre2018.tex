@@ -19,7 +19,7 @@
 \usetikzlibrary{arrows,shadows,positioning,decorations.pathmorphing}
 \usepackage{pgf-umlsd}
 \usepackage{tikz-uml}
-\usepackage{hyperref}
+\usepackage[bookmarks=false]{hyperref}
 \usepackage{upquote}
 \usepackage{listings}
 \usepackage{lsthaskell}
@@ -180,6 +180,7 @@
 
 \listfiles % used to output the versions of all files being used by the late
 
+\newcommand{\jsID}[1]{\texttt{\small #1}}
 \newcommand{\Server}{\emph{Server}\xspace}
 \newcommand{\Client}{\emph{Client}\xspace}
 \newcommand{\User}{\emph{User}\xspace}
@@ -201,7 +202,7 @@
 \begin{document}
 
 \title{Search-Based Test Data Generation for JavaScript Functions that Interact with the DOM
-\thanks{Identify applicable funding agency here. If none, delete this.}
+%\thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
 \author{
@@ -224,11 +225,11 @@ j.hage@uu.nl}
 \maketitle
 
 \begin{abstract}
-The popularity of JavaScript is enormous. Together with HTML and CSS, it is the core technology for modern web development. Because of the dynamic nature and complex interplay with HTML, JS applications are often error-prone and vulnerable. Despite active research efforts to devise intricate static and dynamic analyses to facilitate JS testing, the problem of test data generation for JS code interacting with the DOM has not yet been addressed. In this paper, we present a \textbf{J}avascript \textbf{E}volution-based testing framework with \textbf{D}OM as an \textbf{I}nput, called \emph{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function in combination with the global DOM state. We conducted an empirical evaluation to study the effectiveness and efficiency of our testing framework. It shows that the \emph{genetic with restart} algorithm, proposed in this paper, is able to achieve complete branch coverage for all experimental subjects, taking on average 19 seconds per branch.
+The popularity of JavaScript (JS) is enormous. Together with HTML and CSS, it is the core technology for modern web development. Because of the dynamic nature and complex interplay with HTML, JS applications are often error-prone and vulnerable. Despite active research efforts to devise intricate static and dynamic analyses to facilitate JS testing, the problem of test data generation for JS code interacting with the DOM has not yet been addressed. In this paper, we present a \textbf{J}avascript \textbf{E}volutionary testing framework with \textbf{D}OM as an \textbf{I}nput, called \emph{JEDI}. In order to reach a target branch, it applies genetic search for relevant input parameters of the JS function in combination with the global DOM state. We conducted an empirical evaluation to study the effectiveness and efficiency of our testing framework. It shows that the \emph{genetic with restart} algorithm, proposed in this paper, is able to achieve complete branch coverage for all experimental subjects, taking on average 19 seconds per branch.
 \end{abstract}
 
 \begin{IEEEkeywords}
-JavaScript, search-based testing, branch coverage
+JavaScript, DOM, search-based testing, branch coverage, genetic algorithm
 \end{IEEEkeywords}
 
 \input{introduction}
