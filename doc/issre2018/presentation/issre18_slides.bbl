@@ -1,0 +1,54 @@
+\begin{thebibliography}{SKBG13}
+
+\bibitem[AB11]{arcuri2011practical}
+Andrea Arcuri and Lionel Briand.
+\newblock A practical guide for using statistical tests to assess randomized
+  algorithms in software engineering.
+\newblock In {\em Software Engineering (ICSE), 2011 33rd International
+  Conference on}, pages 1--10. IEEE, 2011.
+
+\bibitem[CH11]{claessen2011quickcheck}
+Koen Claessen and John Hughes.
+\newblock Quickcheck: a lightweight tool for random testing of haskell
+  programs.
+\newblock {\em Acm sigplan notices}, 46(4):53--64, 2011.
+
+\bibitem[FK96]{ferguson1996chaining}
+Roger Ferguson and Bogdan Korel.
+\newblock The chaining approach for software test data generation.
+\newblock {\em ACM Transactions on Software Engineering and Methodology
+  (TOSEM)}, 5(1):63--86, 1996.
+
+\bibitem[FMW15]{amin:ase15}
+Amin~Milani Fard, Ali Mesbah, and Eric Wohlstadter.
+\newblock Generating fixtures for {JavaScript} unit testing.
+\newblock In {\em Proceedings of the IEEE/ACM International Conference on
+  Automated Software Engineering (ASE)}, page 11 pages. IEEE Computer Society,
+  2015.
+
+\bibitem[FZ12]{fraser2012mutation}
+Gordon Fraser and Andreas Zeller.
+\newblock Mutation-driven generation of unit tests and oracles.
+\newblock {\em IEEE Transactions on Software Engineering}, 38(2):278--292,
+  2012.
+
+\bibitem[PKT17]{panichella2017lips}
+Annibale Panichella, Fitsum~Meshesha Kifetew, and Paolo Tonella.
+\newblock Lips vs mosa: a replicated empirical study on automated test case
+  generation.
+\newblock In {\em International Symposium on Search Based Software
+  Engineering}, pages 83--98. Springer, 2017.
+
+\bibitem[SKBG13]{sen2013jalangi}
+Koushik Sen, Swaroop Kalasapur, Tasneem Brutch, and Simon Gibbs.
+\newblock Jalangi: a selective record-replay and dynamic analysis framework for
+  javascript.
+\newblock In {\em Proceedings of the 2013 9th Joint Meeting on Foundations of
+  Software Engineering}, pages 488--498. ACM, 2013.
+
+\bibitem[SPRT18]{selakovic2018test}
+Marija Selakovic, Michael Pradel, KARIM REZWANA, and Frank Tip.
+\newblock Test generation for higher-order functions in dynamic languages.
+\newblock OOPSLA, 2018.
+
+\end{thebibliography}

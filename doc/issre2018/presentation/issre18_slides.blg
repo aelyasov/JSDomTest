@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: issre18_slides.aux
+The style file: alpha.bst
+Database file #1: issre2018.bib
+Warning--empty booktitle in selakovic2018test
+You've used 8 entries,
+            2543 wiz_defined-function locations,
+            610 strings with 6039 characters,
+and the built_in function-call counts, 3909 in all, are:
+= -- 410
+> -- 188
+< -- 4
++ -- 68
+- -- 66
+* -- 266
+:= -- 615
+add.period$ -- 28
+call.type$ -- 8
+change.case$ -- 54
+chr.to.int$ -- 8
+cite$ -- 9
+duplicate$ -- 164
+empty$ -- 280
+format.name$ -- 74
+if$ -- 835
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 8
+newline$ -- 43
+num.names$ -- 24
+pop$ -- 57
+preamble$ -- 1
+purify$ -- 62
+quote$ -- 0
+skip$ -- 146
+stack$ -- 0
+substring$ -- 212
+swap$ -- 50
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 64
+warning$ -- 1
+while$ -- 40
+width$ -- 10
+write$ -- 109
+(There was 1 warning)

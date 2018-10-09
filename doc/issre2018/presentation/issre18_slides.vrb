@@ -1,0 +1,22 @@
+\frametitle{T4 Explained}
+\begin{adjustbox}{width=10cm}     \begin{lstlisting}[style=htmlcssjs,language=JavaScript,basicstyle={\tiny\ttfamily},mathescape=true]
+/*t dom */
+function isGameFinished() {
+  var obj = document.getElementById('sudoku');   // $\mbox{\leftpointright}$ <div id='sudoku'>
+  var subDivs = obj.getElementsByTagName('DIV'); // $\mbox{\leftpointright}$ <div class='square'>
+  var allOk = true;
+  for (var no = 0; no < subDivs.length; no++) {
+    if (subDivs[no].className.indexOf('square') >= 0  // $\mbox{\leftpointright}$ class='square'
+        && !subDivs[no].style.backgroundColor) {
+      var spans=subDivs[no].getElementsByTagName('SPAN');//$\mbox{\leftpointright}$ <span></span>
+      // $\mbox{\leftpointright}$ <span>TEST</span>
+      if (spans[0].innerHTML != spans[1].innerHTML) {
+       allOk = false; //target
+       break;
+      }
+    }
+  }
+  return allOk;
+}
+  \end{lstlisting}
+  \end{adjustbox}

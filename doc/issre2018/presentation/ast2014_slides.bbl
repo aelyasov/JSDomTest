@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{Elyasov:tool.BAD}
+Balck-box automatic debugger.
+\newblock \url{https//github.com/aelyasov/BAD}.
+
+\bibitem{Elyasov:AlgSpecMin}
+A.~Elyasov, I.~Prasetya, and J.~Hage.
+\newblock Guided algebraic specification mining for failure simplification.
+\newblock In {\em Testing Software and Systems}, LNCS 8254. 2013.
+
+\bibitem{Yu:AutDebugEvol}
+K.~Yu, M.~Lin, J.~Chen, and X.~Zhang.
+\newblock Towards automated debugging in software evolution: Evaluating delta
+  debugging on real regression bugs from the developers' perspectives.
+\newblock {\em Journal of Systems and Software}, 85(10):2305 -- 2317, 2012.
+
+\bibitem{Zeller:SimlAndIsolFail}
+A.~Zeller and R.~Hildebrandt.
+\newblock Simplifying and isolating failure-inducing input.
+\newblock {\em IEEE Trans. Softw. Eng.}, 28(2):183--200, Feb. 2002.
+
+\end{thebibliography}
