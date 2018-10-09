@@ -13,44 +13,44 @@ Database file #1: issre2018.bib
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 78 entries,
+You've used 79 entries,
             4024 wiz_defined-function locations,
-            1204 strings with 20508 characters,
-and the built_in function-call counts, 55190 in all, are:
-= -- 4358
-> -- 1176
+            1207 strings with 20554 characters,
+and the built_in function-call counts, 55453 in all, are:
+= -- 4374
+> -- 1177
 < -- 440
-+ -- 639
++ -- 640
 - -- 191
-* -- 2511
-:= -- 8013
-add.period$ -- 191
-call.type$ -- 78
-change.case$ -- 76
+* -- 2517
+:= -- 8052
+add.period$ -- 193
+call.type$ -- 79
+change.case$ -- 77
 chr.to.int$ -- 1026
-cite$ -- 78
-duplicate$ -- 4110
-empty$ -- 4922
+cite$ -- 79
+duplicate$ -- 4138
+empty$ -- 4956
 format.name$ -- 248
-if$ -- 12908
+if$ -- 12967
 int.to.chr$ -- 0
-int.to.str$ -- 78
-missing$ -- 723
-newline$ -- 257
+int.to.str$ -- 79
+missing$ -- 729
+newline$ -- 260
 num.names$ -- 65
-pop$ -- 1783
+pop$ -- 1802
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 4364
+skip$ -- 4388
 stack$ -- 0
-substring$ -- 2532
-swap$ -- 3175
+substring$ -- 2533
+swap$ -- 3187
 text.length$ -- 98
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 78
+type$ -- 79
 warning$ -- 0
 while$ -- 265
-width$ -- 80
-write$ -- 719
+width$ -- 81
+write$ -- 725

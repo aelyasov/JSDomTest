@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.9)  9 OCT 2018 08:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.9)  9 OCT 2018 08:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2616,7 +2616,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 906.
 Here is how much of TeX's memory you used:
  38971 strings out of 493014
  901453 string characters out of 6133351
- 1320897 words of memory out of 5000000
+ 1320898 words of memory out of 5000000
  41585 multiletter control sequences out of 15000+600000
  18536 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2649,7 +2649,7 @@ sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pf
 b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
 0.pfb>
-Output written on issre18_slides.pdf (41 pages, 1214608 bytes).
+Output written on issre18_slides.pdf (41 pages, 1214191 bytes).
 PDF statistics:
  1290 PDF objects out of 1440 (max. 8388607)
  1165 compressed objects within 12 object streams

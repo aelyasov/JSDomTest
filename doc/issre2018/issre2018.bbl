@@ -127,6 +127,9 @@ K.~Mao, M.~Harman, and Y.~Jia, ``Sapienz: Multi-objective automated testing for
   Symposium on Software Testing and Analysis}.\hskip 1em plus 0.5em minus
   0.4em\relax ACM, 2016, pp. 94--105.
 
+\bibitem{jedi}
+``Jedi,'' \url{https://github.com/aelyasov/JEDI}.
+
 \bibitem{ferguson1996chaining}
 R.~Ferguson and B.~Korel, ``The chaining approach for software test data
   generation,'' \emph{ACM Transactions on Software Engineering and Methodology

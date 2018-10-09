@@ -25,3 +25,9 @@ examples/casestudies/moodle
 /TAGS
 doc/icse2018/acmart-master/
 doc/paper/
+*.aux
+*.blg
+*.vrb
+*.toc
+*.snm
+*.out
